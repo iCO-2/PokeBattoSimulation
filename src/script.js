@@ -97,6 +97,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ポケモン画像リスト（ファイル名から拡張子を除いたもの）
+    const pokemonList = [
+        "イーユイ",
+        "ガチグマ",
+        "ガブリアス",
+        "ディンルー",
+        "ハバタクカミ",
+        "パオジアン"
+    ];
+
+    // datalistの生成
+    const datalist = document.getElementById('pokemon-list');
+    if (datalist) {
+        pokemonList.forEach(name => {
+            const option = document.createElement('option');
+            option.value = name;
+            datalist.appendChild(option);
+        });
+    }
+
     // 初期表示
     updateFormFromState();
 
