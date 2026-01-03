@@ -25,6 +25,29 @@ class Pokemon {
             isMultiTarget: false,
             isCrit: false
         };
+
+        // HP管理
+        this.maxHp = 150; // 仮の初期値
+        this.currentHp = 150;
+    }
+
+    // ステータス入力からHPを再計算する（簡易実装）
+    computeMaxHp() {
+        // H = (IV + EV/4) + Level + 10 + (種族値は不明なので固定値または入力値があればそれを使う)
+        // ここでは簡易的に「入力されているIVとEVとLevel」から算出するが、
+        // 種族値がないと正確には出ないので、一旦「150 + α」程度にするか、
+        // あるいはユーザーが「実数値」欄に入力する機能を実装すべきだが、
+        // 要求仕様としては「増減すること」が主眼なのでシンプルに実装する。
+        
+        // とりあえず今回は (Lv/2 + 100) 程度をベースに変動させる
+        const iv = this.stats.hp.iv;
+        const ev = this.stats.hp.ev;
+        // 簡易式: Base=100想定
+        this.maxHp = Math.floor((100 + iv/2 + ev/8) * this.level / 50 + 10 + this.level);
+        
+        // HPが溢れていたら補正、または0ならリセット
+        if (this.currentHp > this.maxHp) this.currentHp = this.maxHp;
+        if (this.currentHp <= 0 && this.maxHp > 0) this.currentHp = this.maxHp; // 初期化タイミング用
     }
 }
 
@@ -33,19 +56,26 @@ class AppState {
         this.allyTeam = [new Pokemon(1), new Pokemon(2), new Pokemon(3)];
         this.enemyTeam = [new Pokemon(1), new Pokemon(2), new Pokemon(3)];
         
-        // 選択中のスロット (初期値: 自軍の1番目)
-        this.currentTeam = 'ally';
-        this.currentSlotIndex = 0;
+        // 選択中のスロット (初期値: それぞれの1番目)
+        this.currentAllyIndex = 0;
+        this.currentEnemyIndex = 0;
     }
 
-    getCurrentPokemon() {
-        const team = this.currentTeam === 'ally' ? this.allyTeam : this.enemyTeam;
-        return team[this.currentSlotIndex];
+    getAllyPokemon() {
+        return this.allyTeam[this.currentAllyIndex];
+    }
+    
+    getEnemyPokemon() {
+        return this.enemyTeam[this.currentEnemyIndex];
     }
 
+    // teamType ('ally' | 'enemy') に応じてインデックスを更新
     switchSlot(teamType, index) {
-        this.currentTeam = teamType;
-        this.currentSlotIndex = index;
+        if (teamType === 'ally') {
+            this.currentAllyIndex = index;
+        } else {
+            this.currentEnemyIndex = index;
+        }
     }
 }
 
@@ -78,92 +108,77 @@ document.addEventListener('DOMContentLoaded', () => {
             // 状態更新
             appState.switchSlot(team, index);
             
-            // UIのアクティブ表示更新
-            slotButtons.forEach(b => b.classList.remove('active'));
+            // UIのアクティブ表示更新 (チームごとに独立させる)
+            const teamButtons = document.querySelectorAll(`.poke-slot[data-team="${team}"]`);
+            teamButtons.forEach(b => b.classList.remove('active'));
             button.classList.add('active');
             
-            // フォームの値を更新
-            updateFormFromState();
+            // フォームの値を更新 (変更された側だけ更新する)
+            updateFormFromState(team);
         });
     });
 
     // フォーム入力の監視 (Ally)
     if (allyNameInput) {
         allyNameInput.addEventListener('input', (e) => {
-            if (appState.currentTeam === 'ally') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.name = e.target.value;
-                updateSlotLabel();
-            }
+            const pokemon = appState.getAllyPokemon();
+            pokemon.name = e.target.value;
+            updateSlotLabel('ally');
         });
     }
 
     if (allyLevelInput) {
         allyLevelInput.addEventListener('input', (e) => {
-            if (appState.currentTeam === 'ally') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.level = parseInt(e.target.value) || 50;
-            }
+            const pokemon = appState.getAllyPokemon();
+            pokemon.level = parseInt(e.target.value) || 50;
         });
     }
 
     if (allyTeraSelect) {
         allyTeraSelect.addEventListener('change', (e) => {
-             if (appState.currentTeam === 'ally') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.teraType = e.target.value;
-            }
+            const pokemon = appState.getAllyPokemon();
+            pokemon.teraType = e.target.value;
         });
     }
 
     if (allyItemSelect) {
         allyItemSelect.addEventListener('change', (e) => {
-            if (appState.currentTeam === 'ally') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.item = e.target.value;
-            }
+            const pokemon = appState.getAllyPokemon();
+            pokemon.item = e.target.value;
         });
     }
 
     if (allyAbilitySelect) {
         allyAbilitySelect.addEventListener('change', (e) => {
-            if (appState.currentTeam === 'ally') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.ability = e.target.value;
-            }
+            const pokemon = appState.getAllyPokemon();
+            pokemon.ability = e.target.value;
         });
     }
 
     // フォーム入力の監視 (Enemy)
     if (enemyNameInput) {
         enemyNameInput.addEventListener('input', (e) => {
-             if (appState.currentTeam === 'enemy') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.name = e.target.value;
-                updateSlotLabel();
-            }
+            const pokemon = appState.getEnemyPokemon();
+            pokemon.name = e.target.value;
+            updateSlotLabel('enemy');
         });
     }
 
     if (enemyItemSelect) {
         enemyItemSelect.addEventListener('change', (e) => {
-            if (appState.currentTeam === 'enemy') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.item = e.target.value;
-            }
+            const pokemon = appState.getEnemyPokemon();
+            pokemon.item = e.target.value;
         });
     }
 
     if (enemyAbilitySelect) {
         enemyAbilitySelect.addEventListener('change', (e) => {
-            if (appState.currentTeam === 'enemy') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.ability = e.target.value;
-            }
+            const pokemon = appState.getEnemyPokemon();
+            pokemon.ability = e.target.value;
         });
     }
 
-    // ポケモン画像リスト（ファイル名から拡張子を除いたもの）
+    // ポケモン画像リスト
     const pokemonList = [
         "イーユイ",
         "ガチグマ",
@@ -198,10 +213,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const isAlly = grid.classList.contains('ally-move-grid');
             const isEnemy = grid.classList.contains('enemy-move-grid');
 
-            if ((isAlly && appState.currentTeam === 'ally') ||
-                (isEnemy && appState.currentTeam === 'enemy')) {
-                
-                const pokemon = appState.getCurrentPokemon();
+            let pokemon = null;
+            if (isAlly) pokemon = appState.getAllyPokemon();
+            if (isEnemy) pokemon = appState.getEnemyPokemon();
+
+            if (pokemon) {
                 const index = parseInt(btn.dataset.index);
                 pokemon.activeMoveIndex = index;
                 
@@ -218,10 +234,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const isAlly = e.target.closest('.ally');
             const isEnemy = e.target.closest('.enemy');
 
-            if ((isAlly && appState.currentTeam === 'ally') ||
-                (isEnemy && appState.currentTeam === 'enemy')) {
-                
-                const pokemon = appState.getCurrentPokemon();
+            let pokemon = null;
+            if (isAlly) pokemon = appState.getAllyPokemon();
+            if (isEnemy) pokemon = appState.getEnemyPokemon();
+
+            if (pokemon) {
                 const condName = e.target.dataset.cond;
                 if (condName) {
                     pokemon.conditions[condName] = e.target.checked;
@@ -231,14 +248,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function handleStatChange(e) {
-        // イベント発生元がAllyかEnemyかを判定
         const isAlly = e.target.closest('.ally');
         const isEnemy = e.target.closest('.enemy');
         
-        // 現在アクティブなチームと一致する場合のみ更新
-        if ((isAlly && appState.currentTeam === 'ally') || 
-            (isEnemy && appState.currentTeam === 'enemy')) {
-            const pokemon = appState.getCurrentPokemon();
+        let pokemon = null;
+        if (isAlly) pokemon = appState.getAllyPokemon();
+        if (isEnemy) pokemon = appState.getEnemyPokemon();
+
+        if (pokemon) {
             const statName = e.target.dataset.stat;
             const type = e.target.dataset.type;
             
@@ -248,23 +265,43 @@ document.addEventListener('DOMContentLoaded', () => {
                     value = parseInt(value) || 0;
                 }
                 pokemon.stats[statName][type] = value;
+                
+                // HP再計算 (IV/EV変更時)
+                if (statName === 'hp') {
+                    pokemon.computeMaxHp();
+                    updateFormFromState(isAlly ? 'ally' : 'enemy');
+                }
             }
         }
     }
     
-    // 初期表示
-    updateFormFromState();
+    // 初期表示 (両方更新)
+    updateFormFromState('ally');
+    updateFormFromState('enemy');
 
-    function updateFormFromState() {
-        const pokemon = appState.getCurrentPokemon();
-        const isAlly = appState.currentTeam === 'ally';
+    // 指定されたチームのフォームを現在のStateで更新
+    function updateFormFromState(teamType) {
+        let pokemon;
+        let containerSelector;
+
+        if (teamType === 'ally') {
+            pokemon = appState.getAllyPokemon();
+            containerSelector = '.poke-settings.ally';
+        } else {
+            pokemon = appState.getEnemyPokemon();
+            containerSelector = '.poke-settings.enemy';
+        }
+
+        const container = document.querySelector(containerSelector);
+        if (!container || !pokemon) return;
         
-        // 共通フォーム要素の更新ロジック
-        // (IDの違いを吸収して処理するために、対象コンテナを取得)
-        const activeContainer = isAlly ? document.querySelector('.poke-settings.ally') : document.querySelector('.poke-settings.enemy');
-        const inactiveContainer = isAlly ? document.querySelector('.poke-settings.enemy') : document.querySelector('.poke-settings.ally');
+        // 初回ロード時などにMaxHpが未計算なら計算
+        if (pokemon.maxHp === 150 && pokemon.stats.hp.iv === 31) {
+             pokemon.computeMaxHp();
+        }
 
-        if (isAlly) {
+        // 個別フィールドの更新
+        if (teamType === 'ally') {
             if (allyNameInput) allyNameInput.value = pokemon.name;
             if (allyLevelInput) allyLevelInput.value = pokemon.level;
             if (allyTeraSelect) allyTeraSelect.value = pokemon.teraType;
@@ -276,8 +313,26 @@ document.addEventListener('DOMContentLoaded', () => {
             if (enemyAbilitySelect) enemyAbilitySelect.value = pokemon.ability;
         }
 
+        // HPバー更新
+        const currentHpSpan = document.getElementById(`${teamType}-current-hp`);
+        const maxHpSpan = document.getElementById(`${teamType}-max-hp`);
+        const hpBar = document.getElementById(`${teamType}-hp-bar`);
+        
+        if (currentHpSpan && maxHpSpan && hpBar) {
+            currentHpSpan.textContent = pokemon.currentHp;
+            maxHpSpan.textContent = pokemon.maxHp;
+            
+            const ratio = (pokemon.currentHp / pokemon.maxHp) * 100;
+            hpBar.style.width = `${Math.max(0, ratio)}%`;
+            
+            // 色変え
+            if (ratio > 50) hpBar.style.backgroundColor = 'var(--primary-green)';
+            else if (ratio > 20) hpBar.style.backgroundColor = 'var(--accent-orange)';
+            else hpBar.style.backgroundColor = 'var(--primary-red)';
+        }
+
         // ステータス入力の更新
-        activeContainer.querySelectorAll('.stat-input').forEach(input => {
+        container.querySelectorAll('.stat-input').forEach(input => {
             const statName = input.dataset.stat;
             const type = input.dataset.type;
             if (statName && type && pokemon.stats[statName]) {
@@ -286,78 +341,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 技選択ボタンの更新
-        const moveBtns = activeContainer.querySelectorAll('.move-btn');
+        const moveBtns = container.querySelectorAll('.move-btn');
         moveBtns.forEach((btn, index) => {
             if (index === pokemon.activeMoveIndex) {
                 btn.classList.add('active');
             } else {
                 btn.classList.remove('active');
             }
-            // 技名表示の更新も将来的にはここでやる
-            // btn.textContent = pokemon.moves[index] || `技${index+1}`; 
         });
 
         // Conditionチェックボックスの更新
-        activeContainer.querySelectorAll('.condition-check').forEach(check => {
+        container.querySelectorAll('.condition-check').forEach(check => {
             const condName = check.dataset.cond;
             if (condName && pokemon.conditions) {
                 check.checked = !!pokemon.conditions[condName];
             }
         });
-
-        // 非アクティブ側の入力をクリア
-        if (isAlly) {
-            // Enemy inputs clear
-            if (enemyNameInput) enemyNameInput.value = "";
-            inactiveContainer.querySelectorAll('.stat-input').forEach(resetStatInput);
-            inactiveContainer.querySelectorAll('.condition-check').forEach(c => c.checked = false);
-            inactiveContainer.querySelectorAll('.move-btn').forEach(b => b.classList.remove('active'));
-        } else {
-            // Ally inputs clear
-            if (allyNameInput) allyNameInput.value = "";
-            inactiveContainer.querySelectorAll('.stat-input').forEach(resetStatInput);
-            inactiveContainer.querySelectorAll('.condition-check').forEach(c => c.checked = false);
-            inactiveContainer.querySelectorAll('.move-btn').forEach(b => b.classList.remove('active'));
-        }
     }
 
-    function resetStatInput(input) {
-         input.value = "";
-         if (input.tagName === 'SELECT') input.selectedIndex = 0;
-         if (input.type === 'number') input.value = 0;
-         if (input.dataset.type === 'iv') input.value = 31;
-    }
-
-    function updateSlotLabel() {
+    function updateSlotLabel(teamType) {
         // 現在アクティブなスロットボタンのテキストを更新
-        const activeBtn = document.querySelector(`.poke-slot[data-team="${appState.currentTeam}"][data-index="${appState.currentSlotIndex}"]`);
+        let currentIndex = (teamType === 'ally') ? appState.currentAllyIndex : appState.currentEnemyIndex;
+        
+        const activeBtn = document.querySelector(`.poke-slot[data-team="${teamType}"][data-index="${currentIndex}"]`);
         if (activeBtn) {
-            const pokemon = appState.getCurrentPokemon();
+            let pokemon = (teamType === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            
             const name = pokemon.name.trim();
 
             if (!name) {
                 // 名前がない場合は番号を表示
-                activeBtn.textContent = appState.currentSlotIndex + 1;
+                activeBtn.textContent = currentIndex + 1;
                 activeBtn.style.backgroundImage = 'none';
                 activeBtn.classList.remove('has-image');
                 return;
             }
 
             // 画像読み込み試行
-            // ボタンの中身をクリアしてimgタグを生成
             activeBtn.innerHTML = '';
             const img = document.createElement('img');
             img.src = `../image/${name}.gif`;
             img.alt = name;
             img.classList.add('pokemon-icon');
             
-            // 画像読み込みエラー時の処理（テキスト表示に戻す）
             img.onerror = () => {
                 activeBtn.textContent = name; // テキスト表示
                 activeBtn.classList.remove('has-image');
             };
 
-            // 画像読み込み成功時の処理
             img.onload = () => {
                 activeBtn.classList.add('has-image');
             };
@@ -365,4 +396,26 @@ document.addEventListener('DOMContentLoaded', () => {
             activeBtn.appendChild(img);
         }
     }
+    // ターン実行ボタン
+    const executeBtn = document.getElementById('execute-turn-btn');
+    if (executeBtn) {
+        executeBtn.addEventListener('click', () => {
+            const allyPoke = appState.getAllyPokemon();
+            const enemyPoke = appState.getEnemyPokemon();
+
+            // 簡易ダメージ処理 (両方に20ダメージ)
+            if (allyPoke.currentHp > 0) allyPoke.currentHp = Math.max(0, allyPoke.currentHp - 20);
+            if (enemyPoke.currentHp > 0) enemyPoke.currentHp = Math.max(0, enemyPoke.currentHp - 20);
+
+            // UI更新
+            updateFormFromState('ally');
+            updateFormFromState('enemy');
+
+            console.log('Turn executed. Ally HP:', allyPoke.currentHp, 'Enemy HP:', enemyPoke.currentHp);
+        });
+    }
+
+    // 初期表示 (両方更新)
+    updateFormFromState('ally');
+    updateFormFromState('enemy');
 });
