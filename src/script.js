@@ -25,6 +25,29 @@ class Pokemon {
             isMultiTarget: false,
             isCrit: false
         };
+
+        // HP管理
+        this.maxHp = 150; // 仮の初期値
+        this.currentHp = 150;
+    }
+
+    // ステータス入力からHPを再計算する（簡易実装）
+    computeMaxHp() {
+        // H = (IV + EV/4) + Level + 10 + (種族値は不明なので固定値または入力値があればそれを使う)
+        // ここでは簡易的に「入力されているIVとEVとLevel」から算出するが、
+        // 種族値がないと正確には出ないので、一旦「150 + α」程度にするか、
+        // あるいはユーザーが「実数値」欄に入力する機能を実装すべきだが、
+        // 要求仕様としては「増減すること」が主眼なのでシンプルに実装する。
+        
+        // とりあえず今回は (Lv/2 + 100) 程度をベースに変動させる
+        const iv = this.stats.hp.iv;
+        const ev = this.stats.hp.ev;
+        // 簡易式: Base=100想定
+        this.maxHp = Math.floor((100 + iv/2 + ev/8) * this.level / 50 + 10 + this.level);
+        
+        // HPが溢れていたら補正、または0ならリセット
+        if (this.currentHp > this.maxHp) this.currentHp = this.maxHp;
+        if (this.currentHp <= 0 && this.maxHp > 0) this.currentHp = this.maxHp; // 初期化タイミング用
     }
 }
 
@@ -242,6 +265,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     value = parseInt(value) || 0;
                 }
                 pokemon.stats[statName][type] = value;
+                
+                // HP再計算 (IV/EV変更時)
+                if (statName === 'hp') {
+                    pokemon.computeMaxHp();
+                    updateFormFromState(isAlly ? 'ally' : 'enemy');
+                }
             }
         }
     }
@@ -265,6 +294,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const container = document.querySelector(containerSelector);
         if (!container || !pokemon) return;
+        
+        // 初回ロード時などにMaxHpが未計算なら計算
+        if (pokemon.maxHp === 150 && pokemon.stats.hp.iv === 31) {
+             pokemon.computeMaxHp();
+        }
 
         // 個別フィールドの更新
         if (teamType === 'ally') {
@@ -277,6 +311,24 @@ document.addEventListener('DOMContentLoaded', () => {
             if (enemyNameInput) enemyNameInput.value = pokemon.name;
             if (enemyItemSelect) enemyItemSelect.value = pokemon.item;
             if (enemyAbilitySelect) enemyAbilitySelect.value = pokemon.ability;
+        }
+
+        // HPバー更新
+        const currentHpSpan = document.getElementById(`${teamType}-current-hp`);
+        const maxHpSpan = document.getElementById(`${teamType}-max-hp`);
+        const hpBar = document.getElementById(`${teamType}-hp-bar`);
+        
+        if (currentHpSpan && maxHpSpan && hpBar) {
+            currentHpSpan.textContent = pokemon.currentHp;
+            maxHpSpan.textContent = pokemon.maxHp;
+            
+            const ratio = (pokemon.currentHp / pokemon.maxHp) * 100;
+            hpBar.style.width = `${Math.max(0, ratio)}%`;
+            
+            // 色変え
+            if (ratio > 50) hpBar.style.backgroundColor = 'var(--primary-green)';
+            else if (ratio > 20) hpBar.style.backgroundColor = 'var(--accent-orange)';
+            else hpBar.style.backgroundColor = 'var(--primary-red)';
         }
 
         // ステータス入力の更新
@@ -344,4 +396,26 @@ document.addEventListener('DOMContentLoaded', () => {
             activeBtn.appendChild(img);
         }
     }
+    // ターン実行ボタン
+    const executeBtn = document.getElementById('execute-turn-btn');
+    if (executeBtn) {
+        executeBtn.addEventListener('click', () => {
+            const allyPoke = appState.getAllyPokemon();
+            const enemyPoke = appState.getEnemyPokemon();
+
+            // 簡易ダメージ処理 (両方に20ダメージ)
+            if (allyPoke.currentHp > 0) allyPoke.currentHp = Math.max(0, allyPoke.currentHp - 20);
+            if (enemyPoke.currentHp > 0) enemyPoke.currentHp = Math.max(0, enemyPoke.currentHp - 20);
+
+            // UI更新
+            updateFormFromState('ally');
+            updateFormFromState('enemy');
+
+            console.log('Turn executed. Ally HP:', allyPoke.currentHp, 'Enemy HP:', enemyPoke.currentHp);
+        });
+    }
+
+    // 初期表示 (両方更新)
+    updateFormFromState('ally');
+    updateFormFromState('enemy');
 });

@@ -29,6 +29,14 @@
         <!-- 自分側設定 -->
         <section class="poke-settings ally">
             <h2>自分</h2>
+            
+            <div class="hp-status">
+                <div class="hp-text">HP: <span id="ally-current-hp">150</span> / <span id="ally-max-hp">150</span></div>
+                <div class="hp-bar-input-container">
+                    <div class="battle-hp-bar" id="ally-hp-bar" style="width: 100%; background-color: var(--primary-green);"></div>
+                </div>
+            </div>
+
             <input type="text" id="ally-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
             
             <div class="grid-params">
@@ -168,6 +176,10 @@
 
         <!-- 計算結果表示（中央） -->
         <section class="result-display">
+            <div class="action-panel">
+                <button id="execute-turn-btn" class="action-btn">ターン実行</button>
+            </div>
+
             <div class="damage-summary">
                 <div class="hp-bar-container">
                     <div class="hp-bar" style="width: 45%;"></div>
@@ -189,6 +201,14 @@
         <!-- 相手側設定 -->
         <section class="poke-settings enemy">
             <h2>相手</h2>
+            
+            <div class="hp-status">
+                <div class="hp-text">HP: <span id="enemy-current-hp">150</span> / <span id="enemy-max-hp">150</span></div>
+                <div class="hp-bar-input-container">
+                    <div class="battle-hp-bar" id="enemy-hp-bar" style="width: 100%; background-color: var(--primary-green);"></div>
+                </div>
+            </div>
+
             <input type="text" id="enemy-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
             
             <div class="stats-table">
