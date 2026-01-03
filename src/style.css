@@ -95,8 +95,8 @@ header {
     border-top: 5px solid transparent;
 }
 
-.attacker { border-color: var(--primary-red); }
-.defender { border-color: var(--primary-blue); }
+.ally { border-color: var(--primary-red); }
+.enemy { border-color: var(--primary-blue); }
 
 h2 {
     margin-top: 0;

@@ -10,31 +10,31 @@
     <header>
         <h1>ポケモン対戦シミュレーター (3vs3)</h1>
         <div class="party-selector">
-            <div class="team attacker-team">
-                <span>自軍:</span>
-                <button class="poke-slot active" data-team="attacker" data-index="0">1</button>
-                <button class="poke-slot" data-team="attacker" data-index="1">2</button>
-                <button class="poke-slot" data-team="attacker" data-index="2">3</button>
+            <div class="team ally-team">
+                <span>自分:</span>
+                <button class="poke-slot active" data-team="ally" data-index="0">1</button>
+                <button class="poke-slot" data-team="ally" data-index="1">2</button>
+                <button class="poke-slot" data-team="ally" data-index="2">3</button>
             </div>
-            <div class="team defender-team">
-                <span>敵軍:</span>
-                <button class="poke-slot" data-team="defender" data-index="0">1</button>
-                <button class="poke-slot" data-team="defender" data-index="1">2</button>
-                <button class="poke-slot" data-team="defender" data-index="2">3</button>
+            <div class="team enemy-team">
+                <span>相手:</span>
+                <button class="poke-slot" data-team="enemy" data-index="0">1</button>
+                <button class="poke-slot" data-team="enemy" data-index="1">2</button>
+                <button class="poke-slot" data-team="enemy" data-index="2">3</button>
             </div>
         </div>
     </header>
 
     <main class="calc-container">
-        <!-- 攻撃側設定 -->
-        <section class="poke-settings attacker">
-            <h2>攻撃側ポケモン</h2>
-            <input type="text" id="pokemon-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
+        <!-- 自分側設定 -->
+        <section class="poke-settings ally">
+            <h2>自分</h2>
+            <input type="text" id="ally-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
             
             <div class="grid-params">
-                <label>レベル: <input type="number" id="pokemon-level-input" value="50" min="1" max="100"></label>
+                <label>レベル: <input type="number" id="ally-level-input" value="50" min="1" max="100"></label>
                 <label>テラスタル: 
-                    <select id="pokemon-tera-select">
+                    <select id="ally-tera-select">
                         <option>なし</option>
                         <option>一致テラス</option>
                         <option>不一致テラス</option>
@@ -62,11 +62,11 @@
                             <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0"></td>
                             <td>-</td> <!-- HPに性格補正はない -->
-                            <td class="final-stat" id="stat-val-hp">175</td> <!-- 仮の値 -->
+                            <td class="final-stat" id="ally-stat-val-hp">175</td> <!-- 仮の値 -->
                         </tr>
                         <!-- 攻撃 -->
                         <tr>
-                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="attack" value="up"></td>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="attack" value="up"></td>
                             <td>攻撃</td>
                             <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0"></td>
@@ -77,11 +77,11 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="stat-val-attack">150</td>
+                            <td class="final-stat" id="ally-stat-val-attack">150</td>
                         </tr>
                         <!-- 防御 -->
                         <tr>
-                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="defense" value="up"></td>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="defense" value="up"></td>
                             <td>防御</td>
                             <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0"></td>
@@ -92,11 +92,11 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="stat-val-defense">135</td>
+                            <td class="final-stat" id="ally-stat-val-defense">135</td>
                         </tr>
                         <!-- 特攻 -->
                         <tr>
-                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="spAtk" value="up"></td>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="spAtk" value="up"></td>
                             <td>特攻</td>
                             <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0"></td>
@@ -107,11 +107,11 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="stat-val-spAtk">115</td>
+                            <td class="final-stat" id="ally-stat-val-spAtk">115</td>
                         </tr>
                         <!-- 特防 -->
                         <tr>
-                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="spDef" value="up"></td>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="spDef" value="up"></td>
                             <td>特防</td>
                             <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0"></td>
@@ -122,11 +122,11 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="stat-val-spDef">115</td>
+                            <td class="final-stat" id="ally-stat-val-spDef">115</td>
                         </tr>
                         <!-- 素早さ -->
                         <tr>
-                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="speed" value="up"></td>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="speed" value="up"></td>
                             <td>素早さ</td>
                             <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0"></td>
@@ -137,25 +137,32 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="stat-val-speed">122</td>
+                            <td class="final-stat" id="ally-stat-val-speed">122</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="options">
-                <label>特性: <select id="ability-select"><option>てきおうりょく</option></select></label>
-                <label>持ち物: <select id="item-select"><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
+                <label>特性: <select id="ally-ability-select"><option>てきおうりょく</option></select></label>
+                <label>持ち物: <select id="ally-item-select"><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
             </div>
 
             <div class="move-selector">
                 <h3>技選択</h3>
-                <div class="move-grid">
-                    <button class="move-btn active">ストーンエッジ<br><small>威力: 100</small></button>
-                    <button class="move-btn">じしん</button>
-                    <button class="move-btn">テラバースト</button>
-                    <button class="move-btn">わざ4</button>
+                <div class="move-grid ally-move-grid">
+                    <button class="move-btn active" data-index="0">ストーンエッジ<br><small>威力: 100</small></button>
+                    <button class="move-btn" data-index="1">じしん</button>
+                    <button class="move-btn" data-index="2">テラバースト</button>
+                    <button class="move-btn" data-index="3">技4</button>
                 </div>
+            </div>
+
+            <div class="field-conditions ally-conditions">
+                <h3>フィールド・状態</h3>
+                <label><input type="checkbox" class="condition-check" data-cond="isReflector"> リフレクター</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isMultiTarget"> 複数対象攻撃(3/4倍) [5]</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
             </div>
         </section>
 
@@ -179,10 +186,10 @@
             </div>
         </section>
 
-        <!-- 防御側設定 -->
-        <section class="poke-settings defender">
-            <h2>防御側ポケモン</h2>
-            <input type="text" id="defender-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
+        <!-- 相手側設定 -->
+        <section class="poke-settings enemy">
+            <h2>相手</h2>
+            <input type="text" id="enemy-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
             
             <div class="stats-table">
                 <table>
@@ -204,11 +211,11 @@
                             <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0"></td>
                             <td>-</td>
-                            <td class="final-stat" id="def-stat-val-hp">-</td>
+                            <td class="final-stat" id="enemy-stat-val-hp">-</td>
                         </tr>
                         <!-- 攻撃 -->
                         <tr>
-                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="attack" value="up"></td>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="attack" value="up"></td>
                             <td>攻撃</td>
                             <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0"></td>
@@ -219,11 +226,11 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="def-stat-val-attack">-</td>
+                            <td class="final-stat" id="enemy-stat-val-attack">-</td>
                         </tr>
                         <!-- 防御 -->
                         <tr>
-                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="defense" value="up"></td>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="defense" value="up"></td>
                             <td>防御</td>
                             <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0"></td>
@@ -234,11 +241,11 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="def-stat-val-defense">-</td>
+                            <td class="final-stat" id="enemy-stat-val-defense">-</td>
                         </tr>
                         <!-- 特攻 -->
                         <tr>
-                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="spAtk" value="up"></td>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="spAtk" value="up"></td>
                             <td>特攻</td>
                             <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0"></td>
@@ -249,11 +256,11 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="def-stat-val-spAtk">-</td>
+                            <td class="final-stat" id="enemy-stat-val-spAtk">-</td>
                         </tr>
                         <!-- 特防 -->
                         <tr>
-                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="spDef" value="up"></td>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="spDef" value="up"></td>
                             <td>特防</td>
                             <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0"></td>
@@ -264,11 +271,11 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="def-stat-val-spDef">-</td>
+                            <td class="final-stat" id="enemy-stat-val-spDef">-</td>
                         </tr>
                         <!-- 素早さ -->
                         <tr>
-                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="speed" value="up"></td>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="speed" value="up"></td>
                             <td>素早さ</td>
                             <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
                             <td><input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0"></td>
@@ -279,22 +286,32 @@
                                     <option value="down">-</option>
                                 </select>
                             </td>
-                            <td class="final-stat" id="def-stat-val-speed">-</td>
+                            <td class="final-stat" id="enemy-stat-val-speed">-</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="options">
-                <label>特性: <select id="def-ability-select"><option>未設定</option></select></label>
-                <label>持ち物: <select id="def-item-select"><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
+                <label>特性: <select id="enemy-ability-select"><option>未設定</option></select></label>
+                <label>持ち物: <select id="enemy-item-select"><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
             </div>
 
-            <div class="field-conditions">
+            <div class="move-selector">
+                <h3>技選択</h3>
+                <div class="move-grid enemy-move-grid">
+                    <button class="move-btn active" data-index="0">ストーンエッジ<br><small>威力: 100</small></button>
+                    <button class="move-btn" data-index="1">じしん</button>
+                    <button class="move-btn" data-index="2">テラバースト</button>
+                    <button class="move-btn" data-index="3">技4</button>
+                </div>
+            </div>
+
+            <div class="field-conditions enemy-conditions">
                 <h3>フィールド・状態</h3>
-                <label><input type="checkbox"> リフレクター</label>
-                <label><input type="checkbox"> 複数対象攻撃(3/4倍) [5]</label>
-                <label><input type="checkbox"> 急所 [6]</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isReflector"> リフレクター</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isMultiTarget"> 複数対象攻撃(3/4倍) [5]</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
             </div>
         </section>
     </main>

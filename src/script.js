@@ -14,21 +14,32 @@ class Pokemon {
         };
         this.item = "";
         this.ability = "";
+        
+        // 技構成 (簡易版)
+        this.moves = ["技1", "技2", "技3", "技4"]; 
+        this.activeMoveIndex = 0; // 選択中の技インデックス
+        
+        // フィールド・状態
+        this.conditions = {
+            isReflector: false,
+            isMultiTarget: false,
+            isCrit: false
+        };
     }
 }
 
 class AppState {
     constructor() {
-        this.attackerTeam = [new Pokemon(1), new Pokemon(2), new Pokemon(3)];
-        this.defenderTeam = [new Pokemon(1), new Pokemon(2), new Pokemon(3)];
+        this.allyTeam = [new Pokemon(1), new Pokemon(2), new Pokemon(3)];
+        this.enemyTeam = [new Pokemon(1), new Pokemon(2), new Pokemon(3)];
         
         // 選択中のスロット (初期値: 自軍の1番目)
-        this.currentTeam = 'attacker';
+        this.currentTeam = 'ally';
         this.currentSlotIndex = 0;
     }
 
     getCurrentPokemon() {
-        const team = this.currentTeam === 'attacker' ? this.attackerTeam : this.defenderTeam;
+        const team = this.currentTeam === 'ally' ? this.allyTeam : this.enemyTeam;
         return team[this.currentSlotIndex];
     }
 
@@ -41,12 +52,18 @@ class AppState {
 const appState = new AppState();
 
 document.addEventListener('DOMContentLoaded', () => {
-    const nameInput = document.getElementById('pokemon-name-input');
-    const levelInput = document.getElementById('pokemon-level-input');
-    const teraSelect = document.getElementById('pokemon-tera-select');
-    const itemSelect = document.getElementById('item-select');
-    const abilitySelect = document.getElementById('ability-select');
+    // Ally (自分) Inputs
+    const allyNameInput = document.getElementById('ally-name-input');
+    const allyLevelInput = document.getElementById('ally-level-input');
+    const allyTeraSelect = document.getElementById('ally-tera-select');
+    const allyItemSelect = document.getElementById('ally-item-select');
+    const allyAbilitySelect = document.getElementById('ally-ability-select');
     
+    // Enemy (相手) Inputs
+    const enemyNameInput = document.getElementById('enemy-name-input');
+    const enemyAbilitySelect = document.getElementById('enemy-ability-select');
+    const enemyItemSelect = document.getElementById('enemy-item-select');
+
     // スロットボタンの初期化
     const slotButtons = document.querySelectorAll('.poke-slot');
     slotButtons.forEach(btn => {
@@ -70,14 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // フォーム入力の監視
-    const defNameInput = document.getElementById('defender-name-input');
-    const defAbilitySelect = document.getElementById('def-ability-select');
-    const defItemSelect = document.getElementById('def-item-select');
-
-    if (nameInput) {
-        nameInput.addEventListener('input', (e) => {
-            if (appState.currentTeam === 'attacker') {
+    // フォーム入力の監視 (Ally)
+    if (allyNameInput) {
+        allyNameInput.addEventListener('input', (e) => {
+            if (appState.currentTeam === 'ally') {
                 const pokemon = appState.getCurrentPokemon();
                 pokemon.name = e.target.value;
                 updateSlotLabel();
@@ -85,12 +98,67 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (defNameInput) {
-        defNameInput.addEventListener('input', (e) => {
-             if (appState.currentTeam === 'defender') {
+    if (allyLevelInput) {
+        allyLevelInput.addEventListener('input', (e) => {
+            if (appState.currentTeam === 'ally') {
+                const pokemon = appState.getCurrentPokemon();
+                pokemon.level = parseInt(e.target.value) || 50;
+            }
+        });
+    }
+
+    if (allyTeraSelect) {
+        allyTeraSelect.addEventListener('change', (e) => {
+             if (appState.currentTeam === 'ally') {
+                const pokemon = appState.getCurrentPokemon();
+                pokemon.teraType = e.target.value;
+            }
+        });
+    }
+
+    if (allyItemSelect) {
+        allyItemSelect.addEventListener('change', (e) => {
+            if (appState.currentTeam === 'ally') {
+                const pokemon = appState.getCurrentPokemon();
+                pokemon.item = e.target.value;
+            }
+        });
+    }
+
+    if (allyAbilitySelect) {
+        allyAbilitySelect.addEventListener('change', (e) => {
+            if (appState.currentTeam === 'ally') {
+                const pokemon = appState.getCurrentPokemon();
+                pokemon.ability = e.target.value;
+            }
+        });
+    }
+
+    // フォーム入力の監視 (Enemy)
+    if (enemyNameInput) {
+        enemyNameInput.addEventListener('input', (e) => {
+             if (appState.currentTeam === 'enemy') {
                 const pokemon = appState.getCurrentPokemon();
                 pokemon.name = e.target.value;
                 updateSlotLabel();
+            }
+        });
+    }
+
+    if (enemyItemSelect) {
+        enemyItemSelect.addEventListener('change', (e) => {
+            if (appState.currentTeam === 'enemy') {
+                const pokemon = appState.getCurrentPokemon();
+                pokemon.item = e.target.value;
+            }
+        });
+    }
+
+    if (enemyAbilitySelect) {
+        enemyAbilitySelect.addEventListener('change', (e) => {
+            if (appState.currentTeam === 'enemy') {
+                const pokemon = appState.getCurrentPokemon();
+                pokemon.ability = e.target.value;
             }
         });
     }
@@ -115,76 +183,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (levelInput) {
-        levelInput.addEventListener('input', (e) => {
-            // 攻撃側のみレベル設定があると仮定
-            if (appState.currentTeam === 'attacker') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.level = parseInt(e.target.value) || 50;
-            }
-        });
-    }
-
-    if (teraSelect) {
-        teraSelect.addEventListener('change', (e) => {
-             if (appState.currentTeam === 'attacker') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.teraType = e.target.value;
-            }
-        });
-    }
-
-    if (itemSelect) {
-        itemSelect.addEventListener('change', (e) => {
-            if (appState.currentTeam === 'attacker') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.item = e.target.value;
-            }
-        });
-    }
-
-    if (abilitySelect) {
-        abilitySelect.addEventListener('change', (e) => {
-            if (appState.currentTeam === 'attacker') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.ability = e.target.value;
-            }
-        });
-    }
-
-    if (defItemSelect) {
-        defItemSelect.addEventListener('change', (e) => {
-            if (appState.currentTeam === 'defender') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.item = e.target.value;
-            }
-        });
-    }
-
-    if (defAbilitySelect) {
-        defAbilitySelect.addEventListener('change', (e) => {
-            if (appState.currentTeam === 'defender') {
-                const pokemon = appState.getCurrentPokemon();
-                pokemon.ability = e.target.value;
-            }
-        });
-    }
-
     // ステータス入力の監視
     document.querySelectorAll('.stat-input').forEach(input => {
-        // 数値入力はinputイベント、Selectはchangeイベントで拾う
         input.addEventListener('input', handleStatChange);
         input.addEventListener('change', handleStatChange);
     });
 
+    // 技選択ボタンの監視 (Delegation)
+    document.querySelectorAll('.move-grid').forEach(grid => {
+        grid.addEventListener('click', (e) => {
+            const btn = e.target.closest('.move-btn');
+            if (!btn) return;
+
+            const isAlly = grid.classList.contains('ally-move-grid');
+            const isEnemy = grid.classList.contains('enemy-move-grid');
+
+            if ((isAlly && appState.currentTeam === 'ally') ||
+                (isEnemy && appState.currentTeam === 'enemy')) {
+                
+                const pokemon = appState.getCurrentPokemon();
+                const index = parseInt(btn.dataset.index);
+                pokemon.activeMoveIndex = index;
+                
+                // UI更新
+                grid.querySelectorAll('.move-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+        });
+    });
+
+    // フィールド・状態チェックボックスの監視
+    document.querySelectorAll('.condition-check').forEach(check => {
+        check.addEventListener('change', (e) => {
+            const isAlly = e.target.closest('.ally');
+            const isEnemy = e.target.closest('.enemy');
+
+            if ((isAlly && appState.currentTeam === 'ally') ||
+                (isEnemy && appState.currentTeam === 'enemy')) {
+                
+                const pokemon = appState.getCurrentPokemon();
+                const condName = e.target.dataset.cond;
+                if (condName) {
+                    pokemon.conditions[condName] = e.target.checked;
+                }
+            }
+        });
+    });
+
     function handleStatChange(e) {
-        // イベント発生元が攻撃側か防御側かを判定
-        const isAttacker = e.target.closest('.attacker');
-        const isDefender = e.target.closest('.defender');
+        // イベント発生元がAllyかEnemyかを判定
+        const isAlly = e.target.closest('.ally');
+        const isEnemy = e.target.closest('.enemy');
         
         // 現在アクティブなチームと一致する場合のみ更新
-        if ((isAttacker && appState.currentTeam === 'attacker') || 
-            (isDefender && appState.currentTeam === 'defender')) {
+        if ((isAlly && appState.currentTeam === 'ally') || 
+            (isEnemy && appState.currentTeam === 'enemy')) {
             const pokemon = appState.getCurrentPokemon();
             const statName = e.target.dataset.stat;
             const type = e.target.dataset.type;
@@ -204,59 +257,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateFormFromState() {
         const pokemon = appState.getCurrentPokemon();
+        const isAlly = appState.currentTeam === 'ally';
         
-        const isAttacker = appState.currentTeam === 'attacker';
-        
-        if (isAttacker) {
-            // 攻撃側のフォーム更新
-            if (nameInput) nameInput.value = pokemon.name;
-            if (levelInput) levelInput.value = pokemon.level;
-            if (teraSelect) teraSelect.value = pokemon.teraType;
-            if (itemSelect) itemSelect.value = pokemon.item;
-            if (abilitySelect) abilitySelect.value = pokemon.ability;
+        // 共通フォーム要素の更新ロジック
+        // (IDの違いを吸収して処理するために、対象コンテナを取得)
+        const activeContainer = isAlly ? document.querySelector('.poke-settings.ally') : document.querySelector('.poke-settings.enemy');
+        const inactiveContainer = isAlly ? document.querySelector('.poke-settings.enemy') : document.querySelector('.poke-settings.ally');
 
-            document.querySelectorAll('.poke-settings.attacker .stat-input').forEach(input => {
-                const statName = input.dataset.stat;
-                const type = input.dataset.type;
-                if (statName && type && pokemon.stats[statName]) {
-                    input.value = pokemon.stats[statName][type];
-                }
-            });
-
-            // 防御側の入力をクリアするかどうか（今回はクリアせずそのまま、または disable などが望ましいが簡易実装として何もしないか、クリアするか）
-            // ユーザー体験的にはクリアしたほうが「今こっちを編集してる」感が出る
-            if (defNameInput) defNameInput.value = "";
-            document.querySelectorAll('.poke-settings.defender .stat-input').forEach(input => {
-                input.value = ""; // あるいはデフォルト値
-                if (input.tagName === 'SELECT') input.selectedIndex = 0;
-                if (input.type === 'number') input.value = 0; // 簡易リセット
-                // IVは31がデフォルトだと親切かも
-                if (input.dataset.type === 'iv') input.value = 31;
-            });
-
+        if (isAlly) {
+            if (allyNameInput) allyNameInput.value = pokemon.name;
+            if (allyLevelInput) allyLevelInput.value = pokemon.level;
+            if (allyTeraSelect) allyTeraSelect.value = pokemon.teraType;
+            if (allyItemSelect) allyItemSelect.value = pokemon.item;
+            if (allyAbilitySelect) allyAbilitySelect.value = pokemon.ability;
         } else {
-            // 防御側のフォーム更新
-            if (defNameInput) defNameInput.value = pokemon.name;
-            if (defItemSelect) defItemSelect.value = pokemon.item;
-            if (defAbilitySelect) defAbilitySelect.value = pokemon.ability;
-            
-            document.querySelectorAll('.poke-settings.defender .stat-input').forEach(input => {
-                const statName = input.dataset.stat;
-                const type = input.dataset.type;
-                if (statName && type && pokemon.stats[statName]) {
-                    input.value = pokemon.stats[statName][type];
-                }
-            });
-
-            // 攻撃側の入力をクリア
-            if (nameInput) nameInput.value = "";
-            document.querySelectorAll('.poke-settings.attacker .stat-input').forEach(input => {
-                 input.value = "";
-                 if (input.tagName === 'SELECT') input.selectedIndex = 0;
-                 if (input.type === 'number') input.value = 0;
-                 if (input.dataset.type === 'iv') input.value = 31;
-            });
+            if (enemyNameInput) enemyNameInput.value = pokemon.name;
+            if (enemyItemSelect) enemyItemSelect.value = pokemon.item;
+            if (enemyAbilitySelect) enemyAbilitySelect.value = pokemon.ability;
         }
+
+        // ステータス入力の更新
+        activeContainer.querySelectorAll('.stat-input').forEach(input => {
+            const statName = input.dataset.stat;
+            const type = input.dataset.type;
+            if (statName && type && pokemon.stats[statName]) {
+                input.value = pokemon.stats[statName][type];
+            }
+        });
+
+        // 技選択ボタンの更新
+        const moveBtns = activeContainer.querySelectorAll('.move-btn');
+        moveBtns.forEach((btn, index) => {
+            if (index === pokemon.activeMoveIndex) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+            // 技名表示の更新も将来的にはここでやる
+            // btn.textContent = pokemon.moves[index] || `技${index+1}`; 
+        });
+
+        // Conditionチェックボックスの更新
+        activeContainer.querySelectorAll('.condition-check').forEach(check => {
+            const condName = check.dataset.cond;
+            if (condName && pokemon.conditions) {
+                check.checked = !!pokemon.conditions[condName];
+            }
+        });
+
+        // 非アクティブ側の入力をクリア
+        if (isAlly) {
+            // Enemy inputs clear
+            if (enemyNameInput) enemyNameInput.value = "";
+            inactiveContainer.querySelectorAll('.stat-input').forEach(resetStatInput);
+            inactiveContainer.querySelectorAll('.condition-check').forEach(c => c.checked = false);
+            inactiveContainer.querySelectorAll('.move-btn').forEach(b => b.classList.remove('active'));
+        } else {
+            // Ally inputs clear
+            if (allyNameInput) allyNameInput.value = "";
+            inactiveContainer.querySelectorAll('.stat-input').forEach(resetStatInput);
+            inactiveContainer.querySelectorAll('.condition-check').forEach(c => c.checked = false);
+            inactiveContainer.querySelectorAll('.move-btn').forEach(b => b.classList.remove('active'));
+        }
+    }
+
+    function resetStatInput(input) {
+         input.value = "";
+         if (input.tagName === 'SELECT') input.selectedIndex = 0;
+         if (input.type === 'number') input.value = 0;
+         if (input.dataset.type === 'iv') input.value = 31;
     }
 
     function updateSlotLabel() {
