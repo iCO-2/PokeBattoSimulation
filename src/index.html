@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeCalc SV - 3v3 Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ポケモン対戦シミュレーター (3vs3)</h1>
+        <div class="party-selector">
+            <div class="team ally-team">
+                <span>自分:</span>
+                <button class="poke-slot active" data-team="ally" data-index="0">1</button>
+                <button class="poke-slot" data-team="ally" data-index="1">2</button>
+                <button class="poke-slot" data-team="ally" data-index="2">3</button>
+            </div>
+            <div class="team enemy-team">
+                <span>相手:</span>
+                <button class="poke-slot" data-team="enemy" data-index="0">1</button>
+                <button class="poke-slot" data-team="enemy" data-index="1">2</button>
+                <button class="poke-slot" data-team="enemy" data-index="2">3</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="calc-container">
+        <!-- 自分側設定 -->
+        <section class="poke-settings ally">
+            <h2>自分</h2>
+            <input type="text" id="ally-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
+            
+            <div class="grid-params">
+                <label>レベル: <input type="number" id="ally-level-input" value="50" min="1" max="100"></label>
+                <label>テラスタル: 
+                    <select id="ally-tera-select">
+                        <option>なし</option>
+                        <option>一致テラス</option>
+                        <option>不一致テラス</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="stats-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>有効</th>
+                            <th>ステータス</th>
+                            <th>個体値</th>
+                            <th>努力値</th>
+                            <th>性格</th>
+                            <th>実数値</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- HP -->
+                        <tr>
+                            <td>-</td>
+                            <td>HP</td>
+                            <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>-</td> <!-- HPに性格補正はない -->
+                            <td class="final-stat" id="ally-stat-val-hp">175</td> <!-- 仮の値 -->
+                        </tr>
+                        <!-- 攻撃 -->
+                        <tr>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="attack" value="up"></td>
+                            <td>攻撃</td>
+                            <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="attack" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="ally-stat-val-attack">150</td>
+                        </tr>
+                        <!-- 防御 -->
+                        <tr>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="defense" value="up"></td>
+                            <td>防御</td>
+                            <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="defense" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="ally-stat-val-defense">135</td>
+                        </tr>
+                        <!-- 特攻 -->
+                        <tr>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="spAtk" value="up"></td>
+                            <td>特攻</td>
+                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="spAtk" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="ally-stat-val-spAtk">115</td>
+                        </tr>
+                        <!-- 特防 -->
+                        <tr>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="spDef" value="up"></td>
+                            <td>特防</td>
+                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="spDef" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="ally-stat-val-spDef">115</td>
+                        </tr>
+                        <!-- 素早さ -->
+                        <tr>
+                            <td><input type="radio" name="ally-nature-bonus" class="nature-radio" data-stat="speed" value="up"></td>
+                            <td>素早さ</td>
+                            <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="speed" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="ally-stat-val-speed">122</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="options">
+                <label>特性: <select id="ally-ability-select"><option>てきおうりょく</option></select></label>
+                <label>持ち物: <select id="ally-item-select"><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
+            </div>
+
+            <div class="move-selector">
+                <h3>技選択</h3>
+                <div class="move-grid ally-move-grid">
+                    <button class="move-btn active" data-index="0">ストーンエッジ<br><small>威力: 100</small></button>
+                    <button class="move-btn" data-index="1">じしん</button>
+                    <button class="move-btn" data-index="2">テラバースト</button>
+                    <button class="move-btn" data-index="3">技4</button>
+                </div>
+            </div>
+
+            <div class="field-conditions ally-conditions">
+                <h3>フィールド・状態</h3>
+                <label><input type="checkbox" class="condition-check" data-cond="isReflector"> リフレクター</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isMultiTarget"> 複数対象攻撃(3/4倍) [5]</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
+            </div>
+        </section>
+
+        <!-- 計算結果表示（中央） -->
+        <section class="result-display">
+            <div class="damage-summary">
+                <div class="hp-bar-container">
+                    <div class="hp-bar" style="width: 45%;"></div>
+                </div>
+                <p class="damage-range">ダメージ: 85 〜 100 (42.5% 〜 50%)</p>
+                <p class="kill-chance">確定3発 (乱数2発: 6.25%)</p>
+            </div>
+
+            <div class="detailed-log">
+                <h3>16段階乱数テーブル</h3>
+                <ul class="random-list">
+                    <!-- ソースに基づき16段階を表示 -->
+                    <li>0.85: 85</li><li>0.86: 86</li><li>...</li><li>1.00: 100</li>
+                </ul>
+                <p class="calc-hint">※各段階で小数点以下切り捨て処理を行っています [4]。</p>
+            </div>
+        </section>
+
+        <!-- 相手側設定 -->
+        <section class="poke-settings enemy">
+            <h2>相手</h2>
+            <input type="text" id="enemy-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
+            
+            <div class="stats-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>有効</th>
+                            <th>ステータス</th>
+                            <th>個体値</th>
+                            <th>努力値</th>
+                            <th>性格</th>
+                            <th>実数値</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- HP -->
+                        <tr>
+                            <td>-</td>
+                            <td>HP</td>
+                            <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>-</td>
+                            <td class="final-stat" id="enemy-stat-val-hp">-</td>
+                        </tr>
+                        <!-- 攻撃 -->
+                        <tr>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="attack" value="up"></td>
+                            <td>攻撃</td>
+                            <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="attack" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="enemy-stat-val-attack">-</td>
+                        </tr>
+                        <!-- 防御 -->
+                        <tr>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="defense" value="up"></td>
+                            <td>防御</td>
+                            <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="defense" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="enemy-stat-val-defense">-</td>
+                        </tr>
+                        <!-- 特攻 -->
+                        <tr>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="spAtk" value="up"></td>
+                            <td>特攻</td>
+                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="spAtk" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="enemy-stat-val-spAtk">-</td>
+                        </tr>
+                        <!-- 特防 -->
+                        <tr>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="spDef" value="up"></td>
+                            <td>特防</td>
+                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="spDef" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="enemy-stat-val-spDef">-</td>
+                        </tr>
+                        <!-- 素早さ -->
+                        <tr>
+                            <td><input type="radio" name="enemy-nature-bonus" class="nature-radio" data-stat="speed" value="up"></td>
+                            <td>素早さ</td>
+                            <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="speed" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="enemy-stat-val-speed">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="options">
+                <label>特性: <select id="enemy-ability-select"><option>未設定</option></select></label>
+                <label>持ち物: <select id="enemy-item-select"><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
+            </div>
+
+            <div class="move-selector">
+                <h3>技選択</h3>
+                <div class="move-grid enemy-move-grid">
+                    <button class="move-btn active" data-index="0">ストーンエッジ<br><small>威力: 100</small></button>
+                    <button class="move-btn" data-index="1">じしん</button>
+                    <button class="move-btn" data-index="2">テラバースト</button>
+                    <button class="move-btn" data-index="3">技4</button>
+                </div>
+            </div>
+
+            <div class="field-conditions enemy-conditions">
+                <h3>フィールド・状態</h3>
+                <label><input type="checkbox" class="condition-check" data-cond="isReflector"> リフレクター</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isMultiTarget"> 複数対象攻撃(3/4倍) [5]</label>
+                <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
+            </div>
+        </section>
+    </main>
+    <datalist id="pokemon-list"></datalist>
+    <script src="script.js"></script>
+</body>
+</html>
