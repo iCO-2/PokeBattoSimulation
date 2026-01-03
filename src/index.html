@@ -44,15 +44,108 @@
 
             <div class="stats-table">
                 <table>
-                    <tr><th>ステータス</th><th>個体値</th><th>努力値</th><th>性格</th><th>実数値</th></tr>
-                    <tr><td>攻撃</td><td><input type="number" value="31"></td><td><input type="number" value="252"></td><td><select><option>+</option><option selected>-</option></select></td><td class="final-stat">182</td></tr>
-                    <!-- 他のステータスも同様に配置 -->
+                    <thead>
+                        <tr>
+                            <th>有効</th>
+                            <th>ステータス</th>
+                            <th>個体値</th>
+                            <th>努力値</th>
+                            <th>性格</th>
+                            <th>実数値</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- HP -->
+                        <tr>
+                            <td>-</td>
+                            <td>HP</td>
+                            <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>-</td> <!-- HPに性格補正はない -->
+                            <td class="final-stat" id="stat-val-hp">175</td> <!-- 仮の値 -->
+                        </tr>
+                        <!-- 攻撃 -->
+                        <tr>
+                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="attack" value="up"></td>
+                            <td>攻撃</td>
+                            <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="attack" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="stat-val-attack">150</td>
+                        </tr>
+                        <!-- 防御 -->
+                        <tr>
+                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="defense" value="up"></td>
+                            <td>防御</td>
+                            <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="defense" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="stat-val-defense">135</td>
+                        </tr>
+                        <!-- 特攻 -->
+                        <tr>
+                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="spAtk" value="up"></td>
+                            <td>特攻</td>
+                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="spAtk" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="stat-val-spAtk">115</td>
+                        </tr>
+                        <!-- 特防 -->
+                        <tr>
+                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="spDef" value="up"></td>
+                            <td>特防</td>
+                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="spDef" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="stat-val-spDef">115</td>
+                        </tr>
+                        <!-- 素早さ -->
+                        <tr>
+                            <td><input type="radio" name="nature-bonus" class="nature-radio" data-stat="speed" value="up"></td>
+                            <td>素早さ</td>
+                            <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="speed" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="stat-val-speed">122</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
             <div class="options">
-                <label>特性: <select><option>てきおうりょく</option></select></label>
-                <label>持ち物: <select><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
+                <label>特性: <select id="ability-select"><option>てきおうりょく</option></select></label>
+                <label>持ち物: <select id="item-select"><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
             </div>
 
             <div class="move-selector">
@@ -90,10 +183,113 @@
         <section class="poke-settings defender">
             <h2>防御側ポケモン</h2>
             <input type="text" id="defender-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
-            <div class="grid-params">
-                <label>HP実数値: <input type="number" value="200"></label>
-                <label>防御実数値: <input type="number" value="150"></label>
+            
+            <div class="stats-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>有効</th>
+                            <th>ステータス</th>
+                            <th>個体値</th>
+                            <th>努力値</th>
+                            <th>性格</th>
+                            <th>実数値</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- HP -->
+                        <tr>
+                            <td>-</td>
+                            <td>HP</td>
+                            <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>-</td>
+                            <td class="final-stat" id="def-stat-val-hp">-</td>
+                        </tr>
+                        <!-- 攻撃 -->
+                        <tr>
+                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="attack" value="up"></td>
+                            <td>攻撃</td>
+                            <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="attack" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="def-stat-val-attack">-</td>
+                        </tr>
+                        <!-- 防御 -->
+                        <tr>
+                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="defense" value="up"></td>
+                            <td>防御</td>
+                            <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="defense" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="def-stat-val-defense">-</td>
+                        </tr>
+                        <!-- 特攻 -->
+                        <tr>
+                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="spAtk" value="up"></td>
+                            <td>特攻</td>
+                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="spAtk" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="def-stat-val-spAtk">-</td>
+                        </tr>
+                        <!-- 特防 -->
+                        <tr>
+                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="spDef" value="up"></td>
+                            <td>特防</td>
+                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="spDef" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="def-stat-val-spDef">-</td>
+                        </tr>
+                        <!-- 素早さ -->
+                        <tr>
+                            <td><input type="radio" name="def-nature-bonus" class="nature-radio" data-stat="speed" value="up"></td>
+                            <td>素早さ</td>
+                            <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
+                            <td><input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <select class="stat-input" data-stat="speed" data-type="nature">
+                                    <option value="neutral">--</option>
+                                    <option value="up">+</option>
+                                    <option value="down">-</option>
+                                </select>
+                            </td>
+                            <td class="final-stat" id="def-stat-val-speed">-</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+            <div class="options">
+                <label>特性: <select id="def-ability-select"><option>未設定</option></select></label>
+                <label>持ち物: <select id="def-item-select"><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
+            </div>
+
             <div class="field-conditions">
                 <h3>フィールド・状態</h3>
                 <label><input type="checkbox"> リフレクター</label>
