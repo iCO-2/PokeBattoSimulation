@@ -1,0 +1,146 @@
+:root {
+    --primary-red: #ff4444;
+    --primary-blue: #4444ff;
+    --bg-dark: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text-color: #eee;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 10px;
+}
+
+header {
+    text-align: center;
+    border-bottom: 2px solid #444;
+    margin-bottom: 20px;
+}
+
+.party-selector {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.poke-slot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #666;
+    background: #444;
+    color: white;
+    cursor: pointer;
+    overflow: hidden; /* 画像がはみ出ないように */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.poke-slot.active {
+    border-color: #ffde00;
+    box-shadow: 0 0 10px #ffde00;
+}
+
+.poke-slot img.pokemon-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 枠いっぱいに表示 */
+}
+
+/* 画像があるときは背景を少し変更して見やすくする（任意） */
+.poke-slot.has-image {
+    background: #222;
+}
+
+.calc-container {
+    display: grid;
+    grid-template-columns: 1fr 300px 1fr;
+    gap: 15px;
+}
+
+.poke-settings {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border-top: 5px solid transparent;
+}
+
+.attacker { border-color: var(--primary-red); }
+.defender { border-color: var(--primary-blue); }
+
+.stats-table table {
+    width: 100%;
+    font-size: 0.8em;
+    border-collapse: collapse;
+}
+
+.stats-table input {
+    width: 45px;
+    background: #444;
+    color: white;
+    border: 1px solid #555;
+}
+
+.move-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.move-btn {
+    padding: 10px;
+    background: #3d3d3d;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+.move-btn.active {
+    background: #5d5d5d;
+    border-color: #ffde00;
+}
+
+.result-display {
+    text-align: center;
+}
+
+.hp-bar-container {
+    background: #000;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.hp-bar {
+    background: linear-gradient(to right, #4caf50, #8bc34a);
+    height: 100%;
+    transition: width 0.3s;
+}
+
+.random-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    list-style: none;
+    padding: 0;
+    font-size: 0.7em;
+}
+
+.random-list li {
+    background: #333;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1000px) {
+    .calc-container {
+        grid-template-columns: 1fr;
+    }
+}

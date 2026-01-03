@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeCalc SV - 3v3 Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ポケモン対戦シミュレーター (3vs3)</h1>
+        <div class="party-selector">
+            <div class="team attacker-team">
+                <span>自軍:</span>
+                <button class="poke-slot active" data-team="attacker" data-index="0">1</button>
+                <button class="poke-slot" data-team="attacker" data-index="1">2</button>
+                <button class="poke-slot" data-team="attacker" data-index="2">3</button>
+            </div>
+            <div class="team defender-team">
+                <span>敵軍:</span>
+                <button class="poke-slot" data-team="defender" data-index="0">1</button>
+                <button class="poke-slot" data-team="defender" data-index="1">2</button>
+                <button class="poke-slot" data-team="defender" data-index="2">3</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="calc-container">
+        <!-- 攻撃側設定 -->
+        <section class="poke-settings attacker">
+            <h2>攻撃側ポケモン</h2>
+            <h2>攻撃側ポケモン</h2>
+            <input type="text" id="pokemon-name-input" placeholder="ポケモン名入力" class="search-input">
+            
+            <div class="grid-params">
+                <label>レベル: <input type="number" id="pokemon-level-input" value="50" min="1" max="100"></label>
+                <label>テラスタル: 
+                    <select id="pokemon-tera-select">
+                        <option>なし</option>
+                        <option>一致テラス</option>
+                        <option>不一致テラス</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="stats-table">
+                <table>
+                    <tr><th>ステータス</th><th>個体値</th><th>努力値</th><th>性格</th><th>実数値</th></tr>
+                    <tr><td>攻撃</td><td><input type="number" value="31"></td><td><input type="number" value="252"></td><td><select><option>+</option><option selected>-</option></select></td><td class="final-stat">182</td></tr>
+                    <!-- 他のステータスも同様に配置 -->
+                </table>
+            </div>
+
+            <div class="options">
+                <label>特性: <select><option>てきおうりょく</option></select></label>
+                <label>持ち物: <select><option>こだわりハチマキ</option><option>いのちのたま</option></select></label>
+            </div>
+
+            <div class="move-selector">
+                <h3>技選択</h3>
+                <div class="move-grid">
+                    <button class="move-btn active">ストーンエッジ<br><small>威力: 100</small></button>
+                    <button class="move-btn">じしん</button>
+                    <button class="move-btn">テラバースト</button>
+                    <button class="move-btn">わざ4</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 計算結果表示（中央） -->
+        <section class="result-display">
+            <div class="damage-summary">
+                <div class="hp-bar-container">
+                    <div class="hp-bar" style="width: 45%;"></div>
+                </div>
+                <p class="damage-range">ダメージ: 85 〜 100 (42.5% 〜 50%)</p>
+                <p class="kill-chance">確定3発 (乱数2発: 6.25%)</p>
+            </div>
+
+            <div class="detailed-log">
+                <h3>16段階乱数テーブル</h3>
+                <ul class="random-list">
+                    <!-- ソースに基づき16段階を表示 -->
+                    <li>0.85: 85</li><li>0.86: 86</li><li>...</li><li>1.00: 100</li>
+                </ul>
+                <p class="calc-hint">※各段階で小数点以下切り捨て処理を行っています [4]。</p>
+            </div>
+        </section>
+
+        <!-- 防御側設定 -->
+        <section class="poke-settings defender">
+            <h2>防御側ポケモン</h2>
+            <input type="text" id="defender-name-input" placeholder="ポケモン名入力" class="search-input">
+            <div class="grid-params">
+                <label>HP実数値: <input type="number" value="200"></label>
+                <label>防御実数値: <input type="number" value="150"></label>
+            </div>
+            <div class="field-conditions">
+                <h3>フィールド・状態</h3>
+                <label><input type="checkbox"> リフレクター</label>
+                <label><input type="checkbox"> 複数対象攻撃(3/4倍) [5]</label>
+                <label><input type="checkbox"> 急所 [6]</label>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
