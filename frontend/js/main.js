@@ -285,6 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const defName = defender.name.trim() || (isAllyAttacking ? "相手" : "自分");
 
                             const historyEntry = {
+                                type: 'attack',
                                 turnId: currentTurnId,
                                 moveName: moveName,
                                 damage: val,
@@ -356,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
             const defName = defender.name.trim() || (isAllyAttacking ? "相手" : "自分");
             const historyEntry = {
+                type: 'attack',
                 turnId: currentTurnId,
                 moveName: moveName,
                 damage: appliedDamage,
@@ -374,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
             defender.lastTurnId = currentTurnId;
 
             // 全体の対戦ログに追加
-            appState.battleHistory.push(historyEntry);
+            updateBattleLog(historyEntry);
             renderBattleLog();
 
             console.log(`Turn executed (${attackerSide} -> ${defenderSide}). Waiting for manual roll selection.`);
@@ -428,11 +430,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ログ更新ロジック (同じターンIDのアクションを最新の乱数で上書きする)
     function updateBattleLog(entry) {
-        const index = appState.battleHistory.findIndex(h => h.turnId === entry.turnId);
-        if (index !== -1) {
-            appState.battleHistory[index] = entry;
+        if (entry.type === 'attack') {
+            const index = appState.battleHistory.findIndex(h => h.turnId === entry.turnId && h.type === 'attack');
+            if (index !== -1) {
+                appState.battleHistory[index] = entry;
+                // 後続のひんしログの整合性チェック
+                checkFaintLog(entry, index);
+            } else {
+                appState.battleHistory.push(entry);
+                // ひんしログの追加チェック
+                checkFaintLog(entry, appState.battleHistory.length - 1);
+            }
+        }
+    }
+
+    // HPが0になった際にひんしログを追加・削除する
+    function checkFaintLog(attackEntry, attackIndex) {
+        // 同じターンのひんしログを探す
+        const faintIndex = appState.battleHistory.findIndex(h => h.turnId === attackEntry.turnId && h.type === 'faint');
+        
+        if (attackEntry.hpAfter === 0) {
+            const faintEntry = {
+                type: 'faint',
+                turnId: attackEntry.turnId,
+                defenderName: attackEntry.defenderName,
+                attackerSide: attackEntry.attackerSide, // どちら側のポケモンが倒れたかを識別するため（便宜上）
+                snapshot: attackEntry.snapshot
+            };
+            
+            if (faintIndex !== -1) {
+                appState.battleHistory[faintIndex] = faintEntry;
+            } else {
+                // attackログの直後に挿入
+                appState.battleHistory.splice(attackIndex + 1, 0, faintEntry);
+            }
         } else {
-            appState.battleHistory.push(entry);
+            // HPが残っているのにひんしログがある場合は削除（乱数選択し直した場合など）
+            if (faintIndex !== -1) {
+                appState.battleHistory.splice(faintIndex, 1);
+            }
         }
     }
 
@@ -446,19 +482,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         logList.innerHTML = '';
+        let turnDisplayCounter = 0;
+
         appState.battleHistory.forEach((entry, idx) => {
             const li = document.createElement('li');
-            li.classList.add(entry.attackerSide === 'ally' ? 'ally-turn' : 'enemy-turn');
             
-            const perc = (entry.damage / entry.hpBefore * 100).toFixed(1); // 簡易計算 (maxHpがないため現在のHP比)
-            // 実際は防御側のmaxHpを参照したほうが正確だが、entryに含めていないので一旦これで行く
+            if (entry.type === 'attack') {
+                turnDisplayCounter++;
+                li.classList.add(entry.attackerSide === 'ally' ? 'ally-turn' : 'enemy-turn');
+                li.innerHTML = `
+                    <span class="turn-number">#${turnDisplayCounter}</span>
+                    <strong>${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
+                    ${entry.defenderName}に <strong>${entry.damage}</strong> ダメージを与えた<br>
+                    <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 乱数: ${entry.rollLabel}）</span>
+                `;
+            } else if (entry.type === 'faint') {
+                // ひんしログは攻撃された側（defender）の属性で色分け
+                const sideClass = (entry.attackerSide === 'ally') ? 'enemy-turn' : 'ally-turn';
+                li.classList.add(sideClass, 'faint-log');
+                li.innerHTML = `
+                    <span class="turn-number"></span>
+                    <strong style="color: var(--primary-red);">${entry.defenderName}</strong>はたおれた！
+                `;
+            }
             
-            li.innerHTML = `
-                <span class="turn-number">#${idx + 1}</span>
-                <strong>${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
-                ${entry.defenderName}に <strong>${entry.damage}</strong> ダメージを与えた<br>
-                <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 乱数: ${entry.rollLabel}）</span>
-            `;
             logList.appendChild(li);
         });
 
