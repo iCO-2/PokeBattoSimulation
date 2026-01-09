@@ -54,12 +54,16 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     for (let i = 85; i <= 100; i++) {
         let dmg = baseDamage;
         
-        // 乱数以外を適用
+        // 1. 乱数 (0.85 .. 1.00)
+        dmg = Math.floor(dmg * i / 100);
+
+        // 2. タイプ一致 (STAB)
         dmg = Math.floor(dmg * stabMod);
+
+        // 3. タイプ相性
         dmg = Math.floor(dmg * typeMod);
 
-        // 乱数 (0.85 .. 1.00 -> logic is `dmg * i / 100`)
-        dmg = Math.floor(dmg * i / 100);
+        // 4. その他補正（やけど等、今回は未実装だが順序としてはここ）
         
         if (dmg < 1) dmg = 1; // 最低1ダメージ (タイプ無効0倍は別途)
         if (typeMod === 0) dmg = 0;
