@@ -9,6 +9,8 @@
     --input-border: #ccc;
     --slot-bg: #e0e0e0;
     --slot-active-border: #f1c40f;
+    --primary-gray: #95a5a6;
+    --primary-light-gray: #ecf0f1;
 }
 
 body {
@@ -177,6 +179,12 @@ h2 {
     padding: 5px;
     border-bottom: 1px solid var(--border-color);
     text-align: center;
+    overflow: visible;
+}
+
+/* 努力値列の幅を確保 */
+.stats-table td:nth-child(3) {
+    min-width: 100px;
 }
 
 .stats-table input {
@@ -275,6 +283,30 @@ h2 {
     font-weight: bold;
     border-color: #f1c40f;
     box-shadow: 0 0 5px rgba(241, 196, 15, 0.5);
+}
+
+.ev-input-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ev-252-btn {
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    background-color: var(--primary-light-gray);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.ev-252-btn:hover {
+    background-color: var(--primary-blue);
+    color: white;
 }
 
 /* Damage Result Info in Cassette */

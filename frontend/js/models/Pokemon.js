@@ -48,6 +48,11 @@ export class Pokemon {
         this.lastTurnId = null;
     }
 
+    fullReset() {
+        this.currentHp = this.maxHp;
+        this.clearHistory();
+    }
+
     get speciesData() {
         return SPECIES_DEX[this.name] || null;
     }

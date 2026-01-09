@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
     <header>
@@ -67,7 +67,12 @@
                         <tr>
                             <td>HP</td>
                             <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>-</td> <!-- HPに性格補正はない -->
                             <td class="final-stat" id="ally-stat-val-hp">175</td> <!-- 仮の値 -->
                         </tr>
@@ -75,7 +80,12 @@
                         <tr>
                             <td>攻撃</td>
                             <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="attack" data-type="nature">
                                     <option value="neutral">--</option>
@@ -89,7 +99,12 @@
                         <tr>
                             <td>防御</td>
                             <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="defense" data-type="nature">
                                     <option value="neutral">--</option>
@@ -103,7 +118,12 @@
                         <tr>
                             <td>特攻</td>
                             <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="spAtk" data-type="nature">
                                     <option value="neutral">--</option>
@@ -117,7 +137,12 @@
                         <tr>
                             <td>特防</td>
                             <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="spDef" data-type="nature">
                                     <option value="neutral">--</option>
@@ -131,7 +156,12 @@
                         <tr>
                             <td>素早さ</td>
                             <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="speed" data-type="nature">
                                     <option value="neutral">--</option>
@@ -239,7 +269,12 @@
                         <tr>
                             <td>HP</td>
                             <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>-</td>
                             <td class="final-stat" id="enemy-stat-val-hp">-</td>
                         </tr>
@@ -247,7 +282,12 @@
                         <tr>
                             <td>攻撃</td>
                             <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="attack" data-type="nature">
                                     <option value="neutral">--</option>
@@ -261,7 +301,12 @@
                         <tr>
                             <td>防御</td>
                             <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="defense" data-type="nature">
                                     <option value="neutral">--</option>
@@ -275,7 +320,12 @@
                         <tr>
                             <td>特攻</td>
                             <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="spAtk" data-type="nature">
                                     <option value="neutral">--</option>
@@ -289,7 +339,12 @@
                         <tr>
                             <td>特防</td>
                             <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="spDef" data-type="nature">
                                     <option value="neutral">--</option>
@@ -303,7 +358,12 @@
                         <tr>
                             <td>素早さ</td>
                             <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
-                            <td><input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0"></td>
+                            <td>
+                                <div class="ev-input-container">
+                                    <input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0">
+                                    <button type="button" class="ev-252-btn">252</button>
+                                </div>
+                            </td>
                             <td>
                                 <select class="stat-input" data-stat="speed" data-type="nature">
                                     <option value="neutral">--</option>
@@ -356,6 +416,6 @@
         </section>
     </main>
     <datalist id="pokemon-list"></datalist>
-    <script type="module" src="js/main.js?v=18"></script>
+    <script type="module" src="js/main.js?v=20"></script>
 </body>
 </html>

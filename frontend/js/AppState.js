@@ -17,6 +17,12 @@ export class AppState {
         this.battleHistory = [];
     }
 
+    resetAllTeams() {
+        this.clearBattleHistory();
+        this.allyTeam.forEach(p => p.fullReset());
+        this.enemyTeam.forEach(p => p.fullReset());
+    }
+
     getAllyPokemon() {
         return this.allyTeam[this.currentAllyIndex];
     }

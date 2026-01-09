@@ -115,6 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('change', handleStatChange);
     });
 
+    document.querySelectorAll('.ev-252-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const container = e.target.closest('.ev-input-container');
+            const input = container.querySelector('.stat-input[data-type="ev"]');
+            if (input) {
+                input.value = 252;
+                // 手動でchangeイベントを発火させてhandleStatChangeを走らせる
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
+    });
+
     // 技選択ボタン
     document.querySelectorAll('.move-grid').forEach(grid => {
         grid.addEventListener('click', (e) => {
@@ -400,8 +412,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearBattleLogBtn = document.getElementById('clear-battle-log-btn');
     if (clearBattleLogBtn) {
         clearBattleLogBtn.addEventListener('click', () => {
-            if (confirm('対戦ログをすべて消去しますか？')) {
-                appState.clearBattleHistory();
+            if (confirm('ログを消去し、全ポケモンのHPと履歴をリセットしますか？')) {
+                appState.resetAllTeams();
+                updateFormFromState('ally');
+                updateFormFromState('enemy');
                 renderBattleLog();
             }
         });
