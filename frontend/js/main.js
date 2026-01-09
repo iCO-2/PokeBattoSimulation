@@ -541,6 +541,35 @@ document.addEventListener('DOMContentLoaded', () => {
         renderBattleLog();
     }
 
+    function renderBaseStats(side, poke) {
+        const container = document.getElementById(`${side}-base-stats`);
+        if (!container) return;
+
+        if (!poke.speciesData || !poke.name.trim()) {
+            container.innerHTML = '';
+            return;
+        }
+
+        const bs = poke.speciesData.baseStats;
+        const stats = [
+            { label: 'H', val: bs.hp },
+            { label: 'A', val: bs.attack },
+            { label: 'B', val: bs.defense },
+            { label: 'C', val: bs.spAtk },
+            { label: 'D', val: bs.spDef },
+            { label: 'S', val: bs.speed }
+        ];
+
+        const total = Object.values(bs).reduce((a, b) => a + b, 0);
+
+        container.innerHTML = stats.map(s => `
+            <div class="stat-item">
+                <span class="label">${s.label}:</span>
+                <span class="value">${s.val}</span>
+            </div>
+        `).join('') + `<div class="stat-item"><span class="label">計:</span><span class="value">${total}</span></div>`;
+    }
+
     function renderHistory(side, poke) {
         const historyList = document.getElementById(`${side}-damage-history`);
         if (!historyList) return;
@@ -609,6 +638,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // but since the inputs are already handled, I'll skip adding redundant lines here.
         // If the HTML elements for item/ability are *not* the inputs, then this would be needed.
         // Given the context, the existing input updates are sufficient.
+
+        // 種族値の表示
+        renderBaseStats(teamType, pokemon);
 
         // 履歴の更新
         renderHistory(teamType, pokemon);

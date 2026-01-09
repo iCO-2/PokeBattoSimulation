@@ -128,10 +128,35 @@ h2 {
 .search-input {
     width: 100%;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border: 1px solid var(--input-border);
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.base-stats-info {
+    font-size: 0.72em;
+    color: #888;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    min-height: 1.2em;
+    font-family: inherit;
+}
+
+.base-stats-info .stat-item {
+    display: flex;
+    gap: 2px;
+}
+
+.base-stats-info .label {
+    color: #aaa;
+}
+
+.base-stats-info .value {
+    color: #666;
+    font-weight: bold;
 }
 
 .stats-table table {
