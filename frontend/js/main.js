@@ -208,14 +208,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const damageResult = calculateDamage(allyPoke, enemyPoke, move, {});
                 
+                // --- 変更点: 自動適用を行わず、開始時のHPを保持して選択待機する ---
+                // ターン開始時点のHPを記録（乱数選択でここから引く）
+                const turnStartHp = enemyPoke.currentHp;
+                
+                /* 自動適用ロジックは削除
                 let damage = 0;
                 if (damageResult.rolls.length > 0) {
                     damage = damageResult.rolls[Math.floor(Math.random() * damageResult.rolls.length)];
                 }
-                
                 if (enemyPoke.currentHp > 0) {
                     enemyPoke.currentHp = Math.max(0, enemyPoke.currentHp - damage);
                 }
+                */
 
                 // 結果表示更新
                 const rangeText = document.querySelector('.damage-range');
@@ -235,10 +240,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         damageResult.rolls.forEach((val, i) => {
                             const li = document.createElement('li');
                             li.textContent = `${(0.85 + i * 0.01).toFixed(2)}: ${val}`;
-                            if (val === damage) {
-                                li.style.fontWeight = 'bold';
-                                li.style.backgroundColor = '#ffd700'; // 当選した乱数を強調
-                            }
+                            
+                            // Click Listener for Manual Selection
+                            li.addEventListener('click', () => {
+                                // 1. 他の選択解除
+                                randomList.querySelectorAll('li').forEach(l => l.classList.remove('selected'));
+                                // 2. 選択状態にする
+                                li.classList.add('selected');
+                                
+                                // 3. HPをターン開始時の状態から減算して適用
+                                if (turnStartHp > 0) {
+                                    enemyPoke.currentHp = Math.max(0, turnStartHp - val);
+                                }
+                                
+                                // 4. UI更新
+                                updateFormFromState('enemy');
+                                console.log(`Manual damage applied: ${val}. HP: ${turnStartHp} -> ${enemyPoke.currentHp}`);
+                            });
+
                             randomList.appendChild(li);
                         });
                     } else {
@@ -277,10 +296,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     killChanceText.textContent = '-';
                 }
 
-                console.log(`Turn executed. Move: ${moveName}, Damage: ${damage}, EnemyHP: ${enemyPoke.currentHp}`);
+                console.log(`Turn executed. Waiting for manual roll selection.`);
 
+                // Initial UI update (Hp unchanged initially, but text updated)
                 updateFormFromState('ally');
-                updateFormFromState('enemy');
+                updateFormFromState('enemy'); // This will redraw stats, but HP is still startHp
             } catch (e) {
                 console.error(e);
                 alert('エラーが発生しました: ' + e.message);
