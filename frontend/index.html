@@ -178,7 +178,14 @@
                 <h3>ダメージ計算結果</h3>
                 <p class="damage-range">-</p>
                 <p class="kill-chance">-</p>
+                <h4 class="random-table-title">16段階乱数テーブル</h4>
                 <ul class="random-list"></ul>
+                <hr>
+                <div class="history-header">
+                    <h4>被ダメージ履歴</h4>
+                    <button class="clear-history-btn" data-side="ally">クリア</button>
+                </div>
+                <ul class="damage-history" id="ally-damage-history"></ul>
             </div>
         </section>
 
@@ -193,6 +200,18 @@
                 <button id="execute-enemy-attack" class="action-btn">自分 ← <span style="font-weight: bold; font-size: 1.2em;">相手</span></button>
 
             </div>
+            </div>
+
+            <hr>
+            <div class="battle-log-header">
+                <h3>対戦ログ</h3>
+                <button id="clear-battle-log-btn" class="clear-history-btn">ログ消去</button>
+            </div>
+            <div id="battle-log-container" class="battle-log-container">
+                <ul id="battle-log-list" class="battle-log-list">
+                    <!-- 全体のターン履歴が表示される -->
+                    <li class="log-placeholder">攻撃ボタンを押すと対戦の記録がここに表示されます</li>
+                </ul>
             </div>
         </section>
 
@@ -337,11 +356,18 @@
                 <h3>ダメージ計算結果</h3>
                 <p class="damage-range">-</p>
                 <p class="kill-chance">-</p>
+                <h4 class="random-table-title">16段階乱数テーブル ※自身で選択可能</h4>
                 <ul class="random-list"></ul>
+                <hr>
+                <div class="history-header">
+                    <h4>被ダメージ履歴</h4>
+                    <button class="clear-history-btn" data-side="enemy">クリア</button>
+                </div>
+                <ul class="damage-history" id="enemy-damage-history"></ul>
             </div>
         </section>
     </main>
     <datalist id="pokemon-list"></datalist>
-    <script type="module" src="js/main.js?v=5"></script>
+    <script type="module" src="js/main.js?v=13"></script>
 </body>
 </html>

@@ -37,6 +37,15 @@ export class Pokemon {
         this.realStats = {
             hp: 0, attack: 0, defense: 0, spAtk: 0, spDef: 0, speed: 0
         };
+
+        // 被ダメージ履歴
+        this.history = [];
+        this.lastTurnId = null; // 同じターンの連打を統合するため
+    }
+
+    clearHistory() {
+        this.history = [];
+        this.lastTurnId = null;
     }
 
     get speciesData() {

@@ -8,6 +8,13 @@ export class AppState {
         // 選択中のスロット (初期値: それぞれの1番目)
         this.currentAllyIndex = 0;
         this.currentEnemyIndex = 0;
+
+        // 対戦全体の履歴
+        this.battleHistory = [];
+    }
+
+    clearBattleHistory() {
+        this.battleHistory = [];
     }
 
     getAllyPokemon() {

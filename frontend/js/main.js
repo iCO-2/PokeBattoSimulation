@@ -3,8 +3,10 @@ import { SPECIES_DEX } from './data/species.js';
 import { MOVES_DEX } from './data/moves.js';
 import { calculateDamage } from './calc/damage.js';
 
-
 const appState = new AppState();
+
+// ターン管理用ID
+let globalTurnCounter = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Ally (自分) Inputs
@@ -202,6 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const defender = isAllyAttacking ? appState.getEnemyPokemon() : appState.getAllyPokemon();
             const defenderSide = isAllyAttacking ? 'enemy' : 'ally';
 
+            // ターンIDを更新
+            globalTurnCounter++;
+            const currentTurnId = globalTurnCounter;
+
+            // バリデーション: 自分または相手のポケモン名が未入力の場合は警告を出して中断
+            if (!attacker.name.trim() || !defender.name.trim()) {
+                alert('自分と相手の両方のポケモン名を入力してください。');
+                return;
+            }
+
             // ダメージ計算
             const moveName = attacker.moves[attacker.activeMoveIndex];
             const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
@@ -210,6 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // ターン開始時点のHPを記録（乱数選択でここから引く）
             const turnStartHp = defender.currentHp;
+
+            // デフォルト: ランダムに1つ採用して適用
+            let appliedDamage = 0;
+            let initialRollIndex = 0;
+            if (damageResult.rolls.length > 0) {
+                initialRollIndex = Math.floor(Math.random() * damageResult.rolls.length);
+                appliedDamage = damageResult.rolls[initialRollIndex];
+                // HP適用
+                if (turnStartHp > 0) {
+                    defender.currentHp = Math.max(0, turnStartHp - appliedDamage);
+                }
+            }
 
             // 結果表示更新
             // 変更点: calc-container配下ではなく、各サイド (.poke-settings) 内の要素を更新する
@@ -222,9 +246,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const max = damageResult.max || 0;
                 const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
                 const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
-                const atkLabel = isAllyAttacking ? "自分" : "相手";
-                // 詳細表示: 攻撃側などの情報も少し入れたほうが分かりやすいかもしれないが、シンプルに
-                rangeText.innerHTML = `<strong>${atkLabel}からの攻撃</strong><br>ダメージ: ${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)<br>使用技: ${moveName}`;
+                
+                // 攻撃者の名前を使用（未入力の場合は種族名やデフォルトラベルを表示）
+                const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
+                
+                rangeText.innerHTML = `<strong>${atkName}から受けた攻撃</strong><br>ダメージ: ${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)<br>使用技: ${moveName}`;
             }
 
             // 16段階乱数リスト更新
@@ -234,7 +260,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (damageResult.rolls.length > 0) {
                     damageResult.rolls.forEach((val, i) => {
                         const li = document.createElement('li');
-                        li.textContent = `${(0.85 + i * 0.01).toFixed(2)}: ${val}`;
+                        li.textContent = `${85 + i}%: ${val}`;
+                        
+                        // 初期選択状態
+                        if (i === initialRollIndex) {
+                            li.classList.add('selected');
+                        }
                         
                         // Click Listener for Manual Selection
                         li.addEventListener('click', () => {
@@ -248,9 +279,37 @@ document.addEventListener('DOMContentLoaded', () => {
                                 defender.currentHp = Math.max(0, turnStartHp - val);
                             }
                             
-                            // 4. UI更新
+                            // 4. 履歴に記録・更新
+                            const rollLabel = `${85 + i}%`;
+                            const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
+                            const defName = defender.name.trim() || (isAllyAttacking ? "相手" : "自分");
+
+                            const historyEntry = {
+                                turnId: currentTurnId,
+                                moveName: moveName,
+                                damage: val,
+                                attackerName: atkName,
+                                defenderName: defName,
+                                attackerSide: attackerSide,
+                                rollLabel: rollLabel,
+                                hpBefore: turnStartHp,
+                                hpAfter: defender.currentHp
+                            };
+
+                            // ポケモンの個別履歴を更新
+                            if (defender.lastTurnId === currentTurnId) {
+                                defender.history[defender.history.length - 1] = historyEntry;
+                            } else {
+                                defender.history.push(historyEntry);
+                                defender.lastTurnId = currentTurnId;
+                            }
+
+                            // 全体の対戦ログを更新 (同じターンの場合は最新の乱数選択で上書き)
+                            updateBattleLog(historyEntry);
+
+                            // 5. UI更新
                             updateFormFromState(defenderSide);
-                            console.log(`Manual damage applied: ${val}. Target: ${defenderSide}, HP: ${turnStartHp} -> ${defender.currentHp}`);
+                            renderBattleLog();
                         });
 
                         randomList.appendChild(li);
@@ -287,6 +346,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 killChanceText.textContent = '-';
             }
 
+            // 初回計算時にも履歴に追加（デフォルト選択分）
+            const initialRollLabel = `${85 + initialRollIndex}%`;
+            const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
+            const defName = defender.name.trim() || (isAllyAttacking ? "相手" : "自分");
+            const historyEntry = {
+                turnId: currentTurnId,
+                moveName: moveName,
+                damage: appliedDamage,
+                attackerName: atkName,
+                defenderName: defName,
+                attackerSide: attackerSide,
+                rollLabel: initialRollLabel,
+                hpBefore: turnStartHp,
+                hpAfter: defender.currentHp
+            };
+            defender.history.push(historyEntry);
+            defender.lastTurnId = currentTurnId;
+
+            // 全体の対戦ログに追加
+            appState.battleHistory.push(historyEntry);
+            renderBattleLog();
+
             console.log(`Turn executed (${attackerSide} -> ${defenderSide}). Waiting for manual roll selection.`);
 
             updateFormFromState('ally');
@@ -308,9 +389,101 @@ document.addEventListener('DOMContentLoaded', () => {
         enemyAtkBtn.addEventListener('click', () => handleAttack('enemy'));
     }
 
+    // 履歴クリアボタン
+    document.querySelectorAll('.clear-history-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const side = e.target.dataset.side;
+            const poke = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            if (poke && confirm(`${side === 'ally' ? '自分' : '相手'}のダメージ履歴をクリアしますか？`)) {
+                poke.clearHistory();
+                updateFormFromState(side);
+            }
+        });
+    });
+
+    // 対戦ログ消去ボタン
+    const clearBattleLogBtn = document.getElementById('clear-battle-log-btn');
+    if (clearBattleLogBtn) {
+        clearBattleLogBtn.addEventListener('click', () => {
+            if (confirm('対戦ログをすべて消去しますか？')) {
+                appState.clearBattleHistory();
+                renderBattleLog();
+            }
+        });
+    }
+
     // 初期表示
     updateFormFromState('ally');
     updateFormFromState('enemy');
+    renderBattleLog();
+
+    // ログ更新ロジック (同じターンIDのアクションを最新の乱数で上書きする)
+    function updateBattleLog(entry) {
+        const index = appState.battleHistory.findIndex(h => h.turnId === entry.turnId);
+        if (index !== -1) {
+            appState.battleHistory[index] = entry;
+        } else {
+            appState.battleHistory.push(entry);
+        }
+    }
+
+    function renderBattleLog() {
+        const logList = document.getElementById('battle-log-list');
+        if (!logList) return;
+
+        if (appState.battleHistory.length === 0) {
+            logList.innerHTML = '<li class="log-placeholder">攻撃ボタンを押すと対戦の記録がここに表示されます</li>';
+            return;
+        }
+
+        logList.innerHTML = '';
+        appState.battleHistory.forEach((entry, idx) => {
+            const li = document.createElement('li');
+            li.classList.add(entry.attackerSide === 'ally' ? 'ally-turn' : 'enemy-turn');
+            
+            const perc = (entry.damage / entry.hpBefore * 100).toFixed(1); // 簡易計算 (maxHpがないため現在のHP比)
+            // 実際は防御側のmaxHpを参照したほうが正確だが、entryに含めていないので一旦これで行く
+            
+            li.innerHTML = `
+                <span class="turn-number">#${idx + 1}</span>
+                <strong>${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
+                ${entry.defenderName}に <strong>${entry.damage}</strong> ダメージを与えた<br>
+                <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 乱数: ${entry.rollLabel}）</span>
+            `;
+            logList.appendChild(li);
+        });
+
+        // 常に最新（下）へスクロール
+        const container = document.getElementById('battle-log-container');
+        if (container) {
+            container.scrollTop = container.scrollHeight;
+        }
+    }
+
+    function renderHistory(side, poke) {
+        const historyList = document.getElementById(`${side}-damage-history`);
+        if (!historyList) return;
+
+        historyList.innerHTML = '';
+        // 履歴を逆順（新しい順）で表示
+        if (poke.history && poke.history.length > 0) {
+            [...poke.history].reverse().forEach(entry => {
+                const li = document.createElement('li');
+                const perc = (poke.maxHp > 0) ? (entry.damage / poke.maxHp * 100).toFixed(1) : 0;
+                
+                li.innerHTML = `
+                    <span class="move">${entry.moveName}</span>
+                    <span class="dmg">ダメージ：${entry.damage}</span>
+                    <span class="perc">(割合：${perc}%)</span>
+                    <div class="attacker">
+                        HP：${entry.hpBefore} → ${entry.hpAfter}<br>
+                        ${entry.attackerName}からの受けた攻撃 (乱数：${entry.rollLabel})
+                    </div>
+                `;
+                historyList.appendChild(li);
+            });
+        }
+    }
 
     function updateFormFromState(teamType) {
         let pokemon;
@@ -346,6 +519,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (enemyItemSelect) enemyItemSelect.value = pokemon.item;
             if (enemyAbilitySelect) enemyAbilitySelect.value = pokemon.ability;
         }
+
+        // アイテム・特性 (今は空文字)
+        // These lines are redundant if the above if/else block already handles it.
+        // Assuming the intent is to ensure these are always updated, even if the inputs are not present.
+        // However, the original code already updates them via allyItemSelect, enemyItemSelect etc.
+        // I will interpret this as a general update for the current pokemon's item/ability,
+        // but since the inputs are already handled, I'll skip adding redundant lines here.
+        // If the HTML elements for item/ability are *not* the inputs, then this would be needed.
+        // Given the context, the existing input updates are sufficient.
+
+        // 履歴の更新
+        renderHistory(teamType, pokemon);
 
         // HP Bar
         const currentHpSpan = document.getElementById(`${teamType}-current-hp`);
