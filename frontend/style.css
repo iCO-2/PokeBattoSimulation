@@ -79,6 +79,26 @@ header {
     border-color: #bbb;
 }
 
+.poke-slot.fainted {
+    position: relative;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.poke-slot.fainted::after {
+    content: "×";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(231, 76, 60, 0.9);
+    font-size: 40px;
+    font-weight: bold;
+    z-index: 10;
+    pointer-events: none;
+    line-height: 1;
+}
+
 .calc-container {
     display: grid;
     grid-template-columns: 1fr 300px 1fr;

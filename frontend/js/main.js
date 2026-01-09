@@ -532,6 +532,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // 履歴の更新
         renderHistory(teamType, pokemon);
 
+        // スロットの状態（ひんし等）を同期
+        updateSlotLabel(teamType);
+
         // HP Bar
         const currentHpSpan = document.getElementById(`${teamType}-current-hp`);
         const maxHpSpan = document.getElementById(`${teamType}-max-hp`);
@@ -595,8 +598,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!name) {
                 activeBtn.textContent = currentIndex + 1;
                 activeBtn.style.backgroundImage = 'none';
-                activeBtn.classList.remove('has-image');
+                activeBtn.classList.remove('has-image', 'fainted');
                 return;
+            }
+
+            // ひんし状態の判定
+            if (pokemon.currentHp === 0) {
+                activeBtn.classList.add('fainted');
+            } else {
+                activeBtn.classList.remove('fainted');
             }
 
             activeBtn.innerHTML = '';
