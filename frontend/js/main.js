@@ -293,7 +293,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 attackerSide: attackerSide,
                                 rollLabel: rollLabel,
                                 hpBefore: turnStartHp,
-                                hpAfter: defender.currentHp
+                                hpAfter: defender.currentHp,
+                                // スナップショット: パーティ全員のHPを保存
+                                snapshot: {
+                                    allyHps: appState.allyTeam.map(p => p.currentHp),
+                                    enemyHps: appState.enemyTeam.map(p => p.currentHp)
+                                }
                             };
 
                             // ポケモンの個別履歴を更新
@@ -359,7 +364,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 attackerSide: attackerSide,
                 rollLabel: initialRollLabel,
                 hpBefore: turnStartHp,
-                hpAfter: defender.currentHp
+                hpAfter: defender.currentHp,
+                snapshot: {
+                    allyHps: appState.allyTeam.map(p => p.currentHp),
+                    enemyHps: appState.enemyTeam.map(p => p.currentHp)
+                }
             };
             defender.history.push(historyEntry);
             defender.lastTurnId = currentTurnId;
@@ -458,6 +467,47 @@ document.addEventListener('DOMContentLoaded', () => {
         if (container) {
             container.scrollTop = container.scrollHeight;
         }
+
+        // クリックイベントの紐付け (行ごとにやり直す)
+        logList.querySelectorAll('li').forEach((li, idx) => {
+            if (li.classList.contains('log-placeholder')) return;
+            li.addEventListener('click', () => {
+                const entry = appState.battleHistory[idx];
+                if (entry && confirm(`ターン #${idx + 1} の時点まで状態を戻しますか？\n（これ以降の記録は消去されます）`)) {
+                    revertToTurn(idx);
+                }
+            });
+        });
+    }
+
+    function revertToTurn(historyIndex) {
+        const targetEntry = appState.battleHistory[historyIndex];
+        if (!targetEntry || !targetEntry.snapshot) return;
+
+        // 1. HPの復元
+        appState.allyTeam.forEach((p, i) => {
+            p.currentHp = targetEntry.snapshot.allyHps[i];
+        });
+        appState.enemyTeam.forEach((p, i) => {
+            p.currentHp = targetEntry.snapshot.enemyHps[i];
+        });
+
+        // 2. 履歴のトリミング (対象より後のものを削除)
+        appState.battleHistory = appState.battleHistory.slice(0, historyIndex + 1);
+
+        // 3. 個別ポケモンの履歴も必要に応じて整理したほうが良いが、
+        // 簡易化のため一旦そのままでも良い（HP整合性さえ取れれば）。
+        // 本来は turnId > targetEntry.turnId のものを各Pokemon.historyから消すべき。
+        [...appState.allyTeam, ...appState.enemyTeam].forEach(p => {
+            p.history = p.history.filter(h => h.turnId <= targetEntry.turnId);
+            // lastTurnId も戻す
+            p.lastTurnId = p.history.length > 0 ? p.history[p.history.length - 1].turnId : null;
+        });
+
+        // 4. UI更新
+        updateFormFromState('ally');
+        updateFormFromState('enemy');
+        renderBattleLog();
     }
 
     function renderHistory(side, poke) {

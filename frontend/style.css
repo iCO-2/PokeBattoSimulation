@@ -383,6 +383,34 @@ h2 {
     font-size: 0.85em;
     line-height: 1.4;
     animation: fadeIn 0.3s ease-in;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    position: relative;
+}
+
+.battle-log-list li:hover {
+    background-color: #f0f7ff !important;
+    transform: translateX(2px);
+}
+
+.battle-log-list li:active {
+    transform: translateX(0);
+}
+
+.battle-log-list li::before {
+    content: "↺";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 1.2em;
+    color: #3498db;
+}
+
+.battle-log-list li:hover::before {
+    opacity: 0.5;
 }
 
 .battle-log-list li:last-child {
