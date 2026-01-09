@@ -109,16 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ステータス入力の監視
     document.querySelectorAll('.stat-input').forEach(input => {
         // Nature (Select) changes need to trigger calc
         input.addEventListener('input', handleStatChange);
         input.addEventListener('change', handleStatChange);
-    });
-
-    // Nature radio buttons
-    document.querySelectorAll('.nature-radio').forEach(radio => {
-        radio.addEventListener('change', handleStatChange);
     });
 
     // 技選択ボタン
@@ -171,16 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pokemon) {
             const statName = e.target.dataset.stat;
             const type = e.target.dataset.type;
-            
-            // Radio button handling for Nature (simplified UI implies select, but radio exists in HTML?)
-            // The HTML has radio buttons for nature bonus? Let's check HTML structure logic.
-            // HTML: <input type="radio" name="ally-nature-bonus" ...> AND <select ... data-type="nature">
-            // This duplication in HTML is tricky. I'll support the inputs currently visible.
-            
-            if (e.target.type === 'radio') {
-                 // Radio logic if needed, but the select box seems primary for nature in previous code? 
-                 // Actually previous code used data-type="nature" on select. 
-            }
 
             if (statName && type) {
                 let value = e.target.value;
