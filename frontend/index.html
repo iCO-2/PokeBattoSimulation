@@ -32,7 +32,7 @@
             
             <div class="hp-status">
                 <div class="hp-text">HP: <span id="ally-current-hp">150</span> / <span id="ally-max-hp">150</span></div>
-                <div class="hp-bar-input-container">
+                <div class="hp-bar-container">
                     <div class="battle-hp-bar" id="ally-hp-bar" style="width: 100%; background-color: var(--primary-green);"></div>
                 </div>
             </div>
@@ -172,29 +172,27 @@
                 <label><input type="checkbox" class="condition-check" data-cond="isMultiTarget"> 複数対象攻撃(3/4倍) [5]</label>
                 <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
             </div>
+
+            <div class="damage-result-info">
+                <hr>
+                <h3>ダメージ計算結果</h3>
+                <p class="damage-range">-</p>
+                <p class="kill-chance">-</p>
+                <ul class="random-list"></ul>
+            </div>
         </section>
 
         <!-- 計算結果表示（中央） -->
         <section class="result-display">
             <div class="action-panel">
-                <button id="execute-turn-btn" class="action-btn">ターン実行</button>
-            </div>
+                <div class="action-buttons">
+                <!-- 攻撃方向ボタン -->
+                 <p>【攻撃ボタン】</p>
+                <button id="execute-ally-attack" class="action-btn"><span style="font-weight: bold; font-size: 1.2em;">自分</span> → 相手</button>
+                <br><br>
+                <button id="execute-enemy-attack" class="action-btn">自分 ← <span style="font-weight: bold; font-size: 1.2em;">相手</span></button>
 
-            <div class="damage-summary">
-                <div class="hp-bar-container">
-                    <div class="hp-bar" style="width: 45%;"></div>
-                </div>
-                <p class="damage-range">ダメージ: 85 〜 100 (42.5% 〜 50%)</p>
-                <p class="kill-chance">確定3発 (乱数2発: 6.25%)</p>
             </div>
-
-            <div class="detailed-log">
-                <h3>16段階乱数テーブル</h3>
-                <ul class="random-list">
-                    <!-- ソースに基づき16段階を表示 -->
-                    <li>0.85: 85</li><li>0.86: 86</li><li>...</li><li>1.00: 100</li>
-                </ul>
-                <p>↑「ターン実行」をクリック後に採用したい乱数を選択して下さい</p>
             </div>
         </section>
 
@@ -204,7 +202,7 @@
             
             <div class="hp-status">
                 <div class="hp-text">HP: <span id="enemy-current-hp">150</span> / <span id="enemy-max-hp">150</span></div>
-                <div class="hp-bar-input-container">
+                <div class="hp-bar-container">
                     <div class="battle-hp-bar" id="enemy-hp-bar" style="width: 100%; background-color: var(--primary-green);"></div>
                 </div>
             </div>
@@ -333,9 +331,17 @@
                 <label><input type="checkbox" class="condition-check" data-cond="isMultiTarget"> 複数対象攻撃(3/4倍) [5]</label>
                 <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
             </div>
+            
+            <div class="damage-result-info">
+                <hr>
+                <h3>ダメージ計算結果</h3>
+                <p class="damage-range">-</p>
+                <p class="kill-chance">-</p>
+                <ul class="random-list"></ul>
+            </div>
         </section>
     </main>
     <datalist id="pokemon-list"></datalist>
-    <script type="module" src="js/main.js?v=1"></script>
+    <script type="module" src="js/main.js?v=5"></script>
 </body>
 </html>

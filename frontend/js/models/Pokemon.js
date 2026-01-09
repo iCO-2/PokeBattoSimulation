@@ -55,13 +55,19 @@ export class Pokemon {
             // 種族値不明時はとりあえず Base=100 として計算するか、現状維持
             const baseHp = base ? base.hp : 100; 
             
+            const oldMaxHp = this.maxHp;
             this.maxHp = calculateHp(baseHp, iv, ev, this.level);
             this.realStats.hp = this.maxHp;
 
             // HP補正
-            if (this.currentHp > this.maxHp) this.currentHp = this.maxHp;
-            // 初期化や種族変更時などで0以下なら満タンにする
-            if (this.currentHp <= 0) this.currentHp = this.maxHp;
+            // もし前回が満タン(current == oldMax)なら、新しいMaxにも追従する
+            // または、現在のHPが150(初期値)で、かつ変更後がそれ以外なら追従
+            if (this.currentHp === oldMaxHp || (this.currentHp === 150 && this.maxHp !== 150)) {
+                this.currentHp = this.maxHp;
+            } else {
+                if (this.currentHp > this.maxHp) this.currentHp = this.maxHp;
+                if (this.currentHp <= 0) this.currentHp = 0; // 0以下は0に (回復等は別ロジックだが一応)
+            }
         }
 
         // 他のステータス計算

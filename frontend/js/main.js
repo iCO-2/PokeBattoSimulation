@@ -194,118 +194,118 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // ターン実行ボタン
-    const executeBtn = document.getElementById('execute-turn-btn');
-    if (executeBtn) {
-        executeBtn.addEventListener('click', () => {
-            try {
-                const allyPoke = appState.getAllyPokemon();
-                const enemyPoke = appState.getEnemyPokemon();
+    // ターン実行ロジック (共通化)
+    const handleAttack = (attackerSide) => {
+        try {
+            const isAllyAttacking = (attackerSide === 'ally');
+            const attacker = isAllyAttacking ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            const defender = isAllyAttacking ? appState.getEnemyPokemon() : appState.getAllyPokemon();
+            const defenderSide = isAllyAttacking ? 'enemy' : 'ally';
 
-                // ダメージ計算 (Ally -> Enemy)
-                const moveName = allyPoke.moves[allyPoke.activeMoveIndex];
-                const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
+            // ダメージ計算
+            const moveName = attacker.moves[attacker.activeMoveIndex];
+            const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
 
-                const damageResult = calculateDamage(allyPoke, enemyPoke, move, {});
-                
-                // --- 変更点: 自動適用を行わず、開始時のHPを保持して選択待機する ---
-                // ターン開始時点のHPを記録（乱数選択でここから引く）
-                const turnStartHp = enemyPoke.currentHp;
-                
-                /* 自動適用ロジックは削除
-                let damage = 0;
+            const damageResult = calculateDamage(attacker, defender, move, {});
+            
+            // ターン開始時点のHPを記録（乱数選択でここから引く）
+            const turnStartHp = defender.currentHp;
+
+            // 結果表示更新
+            // 変更点: calc-container配下ではなく、各サイド (.poke-settings) 内の要素を更新する
+            const defenderContainer = document.querySelector(`.poke-settings.${defenderSide}`);
+            if (!defenderContainer) return;
+
+            const rangeText = defenderContainer.querySelector('.damage-range');
+            if (rangeText) {
+                const min = damageResult.min || 0;
+                const max = damageResult.max || 0;
+                const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
+                const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
+                const atkLabel = isAllyAttacking ? "自分" : "相手";
+                // 詳細表示: 攻撃側などの情報も少し入れたほうが分かりやすいかもしれないが、シンプルに
+                rangeText.innerHTML = `<strong>${atkLabel}からの攻撃</strong><br>ダメージ: ${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)<br>使用技: ${moveName}`;
+            }
+
+            // 16段階乱数リスト更新
+            const randomList = defenderContainer.querySelector('.random-list');
+            if (randomList) {
+                randomList.innerHTML = '';
                 if (damageResult.rolls.length > 0) {
-                    damage = damageResult.rolls[Math.floor(Math.random() * damageResult.rolls.length)];
-                }
-                if (enemyPoke.currentHp > 0) {
-                    enemyPoke.currentHp = Math.max(0, enemyPoke.currentHp - damage);
-                }
-                */
-
-                // 結果表示更新
-                const rangeText = document.querySelector('.damage-range');
-                if (rangeText) {
-                    const min = damageResult.min || 0;
-                    const max = damageResult.max || 0;
-                    const minPerc = (enemyPoke.maxHp > 0) ? (min / enemyPoke.maxHp * 100).toFixed(1) : 0;
-                    const maxPerc = (enemyPoke.maxHp > 0) ? (max / enemyPoke.maxHp * 100).toFixed(1) : 0;
-                    rangeText.textContent = `ダメージ: ${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%) - 使用技: ${moveName}`;
-                }
-
-                // 16段階乱数リスト更新
-                const randomList = document.querySelector('.random-list');
-                if (randomList) {
-                    randomList.innerHTML = '';
-                    if (damageResult.rolls.length > 0) {
-                        damageResult.rolls.forEach((val, i) => {
-                            const li = document.createElement('li');
-                            li.textContent = `${(0.85 + i * 0.01).toFixed(2)}: ${val}`;
-                            
-                            // Click Listener for Manual Selection
-                            li.addEventListener('click', () => {
-                                // 1. 他の選択解除
-                                randomList.querySelectorAll('li').forEach(l => l.classList.remove('selected'));
-                                // 2. 選択状態にする
-                                li.classList.add('selected');
-                                
-                                // 3. HPをターン開始時の状態から減算して適用
-                                if (turnStartHp > 0) {
-                                    enemyPoke.currentHp = Math.max(0, turnStartHp - val);
-                                }
-                                
-                                // 4. UI更新
-                                updateFormFromState('enemy');
-                                console.log(`Manual damage applied: ${val}. HP: ${turnStartHp} -> ${enemyPoke.currentHp}`);
-                            });
-
-                            randomList.appendChild(li);
-                        });
-                    } else {
-                        randomList.innerHTML = '<li>ダメージなし</li>';
-                    }
-                }
-
-                // 確定数（Kill Chance）の更新
-                const killChanceText = document.querySelector('.kill-chance');
-                if (killChanceText && enemyPoke.maxHp > 0) {
-                    if (damageResult.max === 0) {
-                        killChanceText.textContent = 'ダメージなし';
-                    } else {
-                        const minDmg = damageResult.rolls[0];
-                        const maxDmg = damageResult.rolls[damageResult.rolls.length - 1];
+                    damageResult.rolls.forEach((val, i) => {
+                        const li = document.createElement('li');
+                        li.textContent = `${(0.85 + i * 0.01).toFixed(2)}: ${val}`;
                         
-                        // 最小ダメージでの確定数 (最悪ケース)
-                        const maxHits = Math.ceil(enemyPoke.maxHp / minDmg);
-                        // 最大ダメージでの確定数 (最良ケース)
-                        const minHits = Math.ceil(enemyPoke.maxHp / maxDmg);
-
-                        if (minHits === maxHits) {
-                            killChanceText.textContent = `確定${minHits}発`;
-                        } else {
-                            // 乱数1発の確率計算 (簡易)
-                            if (minHits === 1) {
-                                const koCount = damageResult.rolls.filter(r => r >= enemyPoke.maxHp).length;
-                                const percentage = (koCount / 16 * 100).toFixed(1);
-                                killChanceText.textContent = `乱数1発 (${percentage}%)`;
-                            } else {
-                                killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
+                        // Click Listener for Manual Selection
+                        li.addEventListener('click', () => {
+                            // 1. 他の選択解除
+                            randomList.querySelectorAll('li').forEach(l => l.classList.remove('selected'));
+                            // 2. 選択状態にする
+                            li.classList.add('selected');
+                            
+                            // 3. HPをターン開始時の状態から減算して適用
+                            if (turnStartHp > 0) {
+                                defender.currentHp = Math.max(0, turnStartHp - val);
                             }
+                            
+                            // 4. UI更新
+                            updateFormFromState(defenderSide);
+                            console.log(`Manual damage applied: ${val}. Target: ${defenderSide}, HP: ${turnStartHp} -> ${defender.currentHp}`);
+                        });
+
+                        randomList.appendChild(li);
+                    });
+                } else {
+                    randomList.innerHTML = '<li>ダメージなし</li>';
+                }
+            }
+
+            // 確定数（Kill Chance）の更新
+            const killChanceText = defenderContainer.querySelector('.kill-chance');
+            if (killChanceText && defender.maxHp > 0) {
+                if (damageResult.max === 0) {
+                    killChanceText.textContent = 'ダメージなし';
+                } else {
+                    const minDmg = damageResult.rolls[0];
+                    const maxDmg = damageResult.rolls[damageResult.rolls.length - 1];
+                    const maxHits = Math.ceil(defender.maxHp / minDmg);
+                    const minHits = Math.ceil(defender.maxHp / maxDmg);
+
+                    if (minHits === maxHits) {
+                        killChanceText.textContent = `確定${minHits}発`;
+                    } else {
+                        if (minHits === 1) {
+                            const koCount = damageResult.rolls.filter(r => r >= defender.maxHp).length;
+                            const percentage = (koCount / 16 * 100).toFixed(1);
+                            killChanceText.textContent = `乱数1発 (${percentage}%)`;
+                        } else {
+                            killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
                         }
                     }
-                } else if (killChanceText) {
-                    killChanceText.textContent = '-';
                 }
-
-                console.log(`Turn executed. Waiting for manual roll selection.`);
-
-                // Initial UI update (Hp unchanged initially, but text updated)
-                updateFormFromState('ally');
-                updateFormFromState('enemy'); // This will redraw stats, but HP is still startHp
-            } catch (e) {
-                console.error(e);
-                alert('エラーが発生しました: ' + e.message);
+            } else if (killChanceText) {
+                killChanceText.textContent = '-';
             }
-        });
+
+            console.log(`Turn executed (${attackerSide} -> ${defenderSide}). Waiting for manual roll selection.`);
+
+            updateFormFromState('ally');
+            updateFormFromState('enemy');
+        } catch (e) {
+            console.error(e);
+            alert('エラーが発生しました: ' + e.message);
+        }
+    };
+
+    // ボタンイベントリスナー設定
+    const allyAtkBtn = document.getElementById('execute-ally-attack');
+    if (allyAtkBtn) {
+        allyAtkBtn.addEventListener('click', () => handleAttack('ally'));
+    }
+
+    const enemyAtkBtn = document.getElementById('execute-enemy-attack');
+    if (enemyAtkBtn) {
+        enemyAtkBtn.addEventListener('click', () => handleAttack('enemy'));
     }
 
     // 初期表示

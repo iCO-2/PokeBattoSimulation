@@ -189,11 +189,16 @@ h2 {
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.hp-bar {
+.battle-hp-bar {
     background: linear-gradient(to right, #2ecc71, #27ae60);
     height: 100%;
-    transition: width 0.3s;
+    transition: width 0.3s, background-color 0.3s;
+    width: 100%; /* Default to full */
 }
+
+/* Color thresholds handled in JS, but defaults here */
+.battle-hp-bar.yellow { background: #f1c40f; }
+.battle-hp-bar.red { background: #e74c3c; }
 
 .random-list {
     display: grid;
@@ -225,6 +230,27 @@ h2 {
     font-weight: bold;
     border-color: #f1c40f;
     box-shadow: 0 0 5px rgba(241, 196, 15, 0.5);
+}
+
+/* Damage Result Info in Cassette */
+.damage-result-info {
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.damage-result-info h3 {
+    font-size: 1em;
+    margin: 5px 0 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.damage-result-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
 }
 
 /* レスポンシブ対応 */
