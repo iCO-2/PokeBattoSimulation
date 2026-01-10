@@ -1,6 +1,7 @@
 import { AppState } from './AppState.js';
 import { SPECIES_DEX } from './data/species.js';
 import { MOVES_DEX } from './data/moves.js';
+import { ITEMS_DEX } from './data/items.js';
 import { calculateDamage } from './calc/damage.js';
 
 const appState = new AppState();
@@ -127,6 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 持ち物手動発動
+    document.querySelectorAll('.item-trigger-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const side = e.target.dataset.side;
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            if (pokemon && pokemon.item) {
+                applyRecovery(pokemon, side, pokemon.item);
+            }
+        });
+    });
+
     // 技選択ボタン
     document.querySelectorAll('.move-grid').forEach(grid => {
         grid.addEventListener('click', (e) => {
@@ -147,6 +159,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.classList.add('active');
             }
         });
+    });
+
+    // Item Selects
+    ['ally', 'enemy'].forEach(side => {
+        const select = document.getElementById(`${side}-item-select`);
+        if (select) {
+            select.addEventListener('change', (e) => {
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    pokemon.item = e.target.value;
+                    // 他のステータスへの影響（ハチマキ等）がある場合は再計算
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        }
     });
 
     // Field Conditions
@@ -382,8 +410,63 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) {
             console.error(e);
             alert('エラーが発生しました: ' + e.message);
+        } finally {
+            // 自動きのみチェック
+            if (attackerSide === 'ally') {
+                checkBerryRecovery(defender, 'enemy');
+            } else {
+                checkBerryRecovery(defender, 'ally');
+            }
         }
     };
+
+    function checkBerryRecovery(pokemon, side) {
+        if (pokemon.itemConsumed || pokemon.currentHp <= 0) return;
+        const itemInfo = ITEMS_DEX[pokemon.item];
+        if (!itemInfo || itemInfo.type !== 'berry') return;
+
+        const hpRatio = pokemon.currentHp / pokemon.maxHp;
+        if (hpRatio <= itemInfo.threshold) {
+            applyRecovery(pokemon, side, pokemon.item);
+        }
+    }
+
+    function applyRecovery(pokemon, side, itemName) {
+        const itemInfo = ITEMS_DEX[itemName];
+        if (!itemInfo) return;
+
+        let healAmount = 0;
+        if (itemInfo.healType === 'ratio') {
+            healAmount = Math.floor(pokemon.maxHp * itemInfo.value);
+        }
+
+        const actualHealed = pokemon.heal(healAmount);
+        if (actualHealed <= 0 && itemInfo.type === 'passive') return; // 回復なしなら何もしない（たべのこし連打防止）
+
+        if (itemInfo.type === 'berry') {
+            pokemon.itemConsumed = true;
+        }
+
+        // ログに記録
+        const historyEntry = {
+            type: 'heal',
+            turnId: globalTurnCounter || 0, // 0ターン目もありうる
+            moveName: itemInfo.message,
+            damage: actualHealed,
+            attackerName: pokemon.name.trim() || (side === 'ally' ? "自分" : "相手"),
+            attackerSide: side, // 回復した側をattackerSideとして扱う
+            hpBefore: pokemon.currentHp - actualHealed,
+            hpAfter: pokemon.currentHp,
+            snapshot: {
+                allyHps: appState.allyTeam.map(p => p.currentHp),
+                enemyHps: appState.enemyTeam.map(p => p.currentHp)
+            }
+        };
+
+        appState.battleHistory.push(historyEntry);
+        updateFormFromState(side);
+        renderBattleLog();
+    }
 
     // ボタンイベントリスナー設定
     const allyAtkBtn = document.getElementById('execute-ally-attack');
@@ -493,6 +576,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <strong>${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
                     ${entry.defenderName}に <strong>${entry.damage}</strong> ダメージを与えた<br>
                     <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 乱数: ${entry.rollLabel}）</span>
+                `;
+            } else if (entry.type === 'heal') {
+                li.classList.add('heal-log');
+                li.innerHTML = `
+                    <span class="turn-number">✨</span>
+                    <span class="log-move">${entry.attackerName} は ${entry.moveName}</span>
+                    <span class="log-hp">HP: ${entry.hpBefore} → ${entry.hpAfter} (+${entry.damage})</span>
                 `;
             } else if (entry.type === 'faint') {
                 // ひんしログは攻撃された側（defender）の属性で色分け
@@ -667,6 +757,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const maxHpSpan = document.getElementById(`${teamType}-max-hp`);
         const hpBar = document.getElementById(`${teamType}-hp-bar`);
         
+        // Item Status & Button
+        const itemStatus = document.getElementById(`${teamType}-item-status`);
+        const itemBtn = container.querySelector('.item-trigger-btn');
+        if (itemStatus && itemBtn) {
+            if (pokemon.itemConsumed) {
+                itemStatus.textContent = "（使用済み）";
+                itemBtn.disabled = true;
+            } else {
+                itemStatus.textContent = "";
+                const itemInfo = ITEMS_DEX[pokemon.item];
+                itemBtn.disabled = !itemInfo;
+                if (itemInfo) {
+                    itemBtn.textContent = itemInfo.type === 'berry' ? 'きのみ発動' : '回復実行';
+                } else {
+                    itemBtn.textContent = '発動';
+                }
+            }
+        }
+
         if (currentHpSpan && maxHpSpan && hpBar) {
             currentHpSpan.textContent = pokemon.currentHp;
             maxHpSpan.textContent = pokemon.maxHp;

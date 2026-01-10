@@ -41,6 +41,18 @@ export class Pokemon {
         // 被ダメージ履歴
         this.history = [];
         this.lastTurnId = null; // 同じターンの連打を統合するため
+
+        // アイテム使用フラグ
+        this.itemConsumed = false;
+    }
+
+    // HP回復処理
+    heal(amount, sourceMessage = "") {
+        if (this.currentHp <= 0) return 0; // ひんし状態なら回復しない
+        
+        const oldHp = this.currentHp;
+        this.currentHp = Math.min(this.maxHp, this.currentHp + amount);
+        return this.currentHp - oldHp; // 実際に回復した量
     }
 
     clearHistory() {
@@ -50,6 +62,7 @@ export class Pokemon {
 
     fullReset() {
         this.currentHp = this.maxHp;
+        this.itemConsumed = false; // アイテム使用状況もリセット
         this.clearHistory();
     }
 
