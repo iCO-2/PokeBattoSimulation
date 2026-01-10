@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 名前変更時は種族値が変わる可能性があるので再計算
             pokemon.computeStats(); 
             updateFormFromState('ally'); 
-            updateSlotLabel('ally');
+            updateTeamSlots('ally');
         });
     }
 
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pokemon.name = e.target.value;
             pokemon.computeStats();
             updateFormFromState('enemy');
-            updateSlotLabel('enemy');
+            updateTeamSlots('enemy');
         });
     }
     if (enemyItemSelect) {
@@ -750,7 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderHistory(teamType, pokemon);
 
         // スロットの状態（ひんし等）を同期
-        updateSlotLabel(teamType);
+        updateTeamSlots(teamType);
 
         // HP Bar
         const currentHpSpan = document.getElementById(`${teamType}-current-hp`);
@@ -823,42 +823,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function updateSlotLabel(teamType) {
-        let currentIndex = (teamType === 'ally') ? appState.currentAllyIndex : appState.currentEnemyIndex;
+    function updateTeamSlots(teamType) {
+        const team = (teamType === 'ally') ? appState.allyTeam : appState.enemyTeam;
         
-        const activeBtn = document.querySelector(`.poke-slot[data-team="${teamType}"][data-index="${currentIndex}"]`);
-        if (activeBtn) {
-            let pokemon = (teamType === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+        team.forEach((pokemon, index) => {
+            const slotBtn = document.querySelector(`.poke-slot[data-team="${teamType}"][data-index="${index}"]`);
+            if (!slotBtn) return;
+
             const name = pokemon.name.trim();
 
             if (!name) {
-                activeBtn.textContent = currentIndex + 1;
-                activeBtn.style.backgroundImage = 'none';
-                activeBtn.classList.remove('has-image', 'fainted');
+                slotBtn.textContent = index + 1;
+                slotBtn.style.backgroundImage = 'none';
+                slotBtn.classList.remove('has-image', 'fainted');
                 return;
             }
 
             // ひんし状態の判定
             if (pokemon.currentHp === 0) {
-                activeBtn.classList.add('fainted');
+                slotBtn.classList.add('fainted');
             } else {
-                activeBtn.classList.remove('fainted');
+                slotBtn.classList.remove('fainted');
             }
 
-            activeBtn.innerHTML = '';
-            const img = document.createElement('img');
-            img.src = `../backend/image/${name}.gif`;
-            img.alt = name;
-            img.classList.add('pokemon-icon');
-            
-            img.onerror = () => {
-                activeBtn.textContent = name;
-                activeBtn.classList.remove('has-image');
-            };
-            img.onload = () => {
-                activeBtn.classList.add('has-image');
-            };
-            activeBtn.appendChild(img);
-        }
+            // アイコンの同期 (既に読み込み済みなら再生成しない工夫もできるが、一旦シンプルに)
+            // すでにimgがある場合はsrcをチェック
+            let img = slotBtn.querySelector('img.pokemon-icon');
+            const expectedSrc = `../backend/image/${name}.gif`;
+
+            if (!img) {
+                slotBtn.innerHTML = '';
+                img = document.createElement('img');
+                img.classList.add('pokemon-icon');
+                slotBtn.appendChild(img);
+            }
+
+            if (img.src !== expectedSrc) {
+                img.src = expectedSrc;
+                img.alt = name;
+                img.onerror = () => {
+                    slotBtn.textContent = name;
+                    slotBtn.classList.remove('has-image');
+                    if (img.parentNode) slotBtn.removeChild(img);
+                };
+                img.onload = () => {
+                    slotBtn.classList.add('has-image');
+                };
+            }
+        });
     }
 });
