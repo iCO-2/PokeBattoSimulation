@@ -1,0 +1,569 @@
+:root {
+    --primary-red: #e74c3c;
+    --primary-blue: #3498db;
+    --bg-color: #f4f6f8;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --border-color: #ddd;
+    --input-bg: #fff;
+    --input-border: #ccc;
+    --slot-bg: #e0e0e0;
+    --slot-active-border: #f1c40f;
+    --primary-gray: #95a5a6;
+    --primary-light-gray: #ecf0f1;
+    --primary-green: #2ecc71;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+}
+
+header {
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.party-selector {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.team {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.poke-slot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #999;
+    background: var(--slot-bg);
+    color: #555;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: all 0.2s;
+}
+
+.poke-slot:hover {
+    transform: scale(1.1);
+}
+
+.poke-slot.active {
+    border-color: var(--slot-active-border);
+    box-shadow: 0 0 10px var(--slot-active-border);
+    background: #fff;
+}
+
+.poke-slot img.pokemon-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.poke-slot.has-image {
+    background: #fff;
+    border-color: #bbb;
+}
+
+.poke-slot.fainted {
+    position: relative;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.poke-slot.fainted::after {
+    content: "×";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(231, 76, 60, 0.9);
+    font-size: 40px;
+    font-weight: bold;
+    z-index: 10;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.calc-container {
+    display: grid;
+    grid-template-columns: 1fr 300px 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.poke-settings {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-top: 5px solid transparent;
+}
+
+.ally { border-color: var(--primary-red); }
+.enemy { border-color: var(--primary-blue); }
+
+h2 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    color: #444;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.base-stats-info {
+    font-size: 0.72em;
+    color: #888;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    min-height: 1.2em;
+    font-family: inherit;
+}
+
+.base-stats-info .stat-item {
+    display: flex;
+    gap: 2px;
+}
+
+.base-stats-info .label {
+    color: #aaa;
+}
+
+.base-stats-info .value {
+    color: #666;
+    font-weight: bold;
+}
+
+.stats-table table {
+    width: 100%;
+    font-size: 0.85em;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+.stats-table th {
+    background: #f8f9fa;
+    padding: 5px;
+    border-bottom: 2px solid var(--border-color);
+    color: #666;
+}
+
+.stats-table td {
+    padding: 5px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    overflow: visible;
+}
+
+/* 努力値列の幅を確保 */
+.stats-table td:nth-child(3) {
+    min-width: 100px;
+}
+
+.stats-table input {
+    width: 50px;
+    padding: 4px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+    border-radius: 3px;
+    text-align: center;
+}
+
+.options {
+    margin-top: 15px;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    flex-wrap: wrap;
+}
+
+.move-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.move-btn {
+    padding: 10px;
+    background: #f8f9fa;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.move-btn:hover {
+    background: #e9ecef;
+}
+
+.move-btn.active {
+    background: #e3f2fd;
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+
+.result-display {
+    text-align: center;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.hp-bar-container {
+    background: #e0e0e0;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px 0;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.battle-hp-bar {
+    background: linear-gradient(to right, #2ecc71, #27ae60);
+    height: 100%;
+    transition: width 0.3s, background-color 0.3s;
+    width: 100%; /* Default to full */
+}
+
+/* Color thresholds handled in JS, but defaults here */
+.battle-hp-bar.yellow { background: #f1c40f; }
+.battle-hp-bar.red { background: #e74c3c; }
+
+.random-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    list-style: none;
+    padding: 0;
+    font-size: 0.75em;
+}
+
+.random-list li {
+    background: #f1f3f5;
+    padding: 5px;
+    border-radius: 3px;
+    color: #555;
+    border: 1px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.random-list li:hover {
+    background: #e9ecef;
+    border-color: #ced4da;
+}
+
+.random-list li.selected {
+    background: #ffd700;
+    color: #000;
+    font-weight: bold;
+    border-color: #f1c40f;
+    box-shadow: 0 0 5px rgba(241, 196, 15, 0.5);
+}
+
+.ev-input-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ev-252-btn {
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    background-color: var(--primary-light-gray);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.ev-252-btn:hover {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+/* Damage Result Info in Cassette */
+.damage-result-info {
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.damage-result-info h3 {
+    font-size: 1em;
+    margin: 5px 0 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.damage-result-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.random-table-title {
+    font-size: 0.85em;
+    margin: 15px 0 5px;
+    color: #666;
+    font-weight: bold;
+}
+
+/* Damage History */
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.history-header h4 {
+    margin: 0;
+    font-size: 0.95em;
+}
+
+.clear-history-btn {
+    font-size: 0.75em;
+    padding: 2px 8px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.clear-history-btn:hover {
+    background: #eee;
+}
+
+.damage-history {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    font-size: 0.8em;
+    max-height: 150px;
+    overflow-y: auto;
+    border-top: 1px dashed #eee;
+}
+
+.damage-history li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f9f9f9;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.damage-history li span.move {
+    font-weight: bold;
+    color: #555;
+    flex: 1;
+}
+
+.damage-history li span.dmg {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.damage-history li span.perc {
+    color: #888;
+    margin-left: 5px;
+    font-size: 0.9em;
+}
+
+.damage-history li .attacker {
+    width: 100%;
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 2px;
+}
+
+/* Battle Log (Central) */
+.battle-log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.battle-log-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #444;
+}
+
+.battle-log-container {
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.battle-log-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.battle-log-list li {
+    padding: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.85em;
+    line-height: 1.4;
+    animation: fadeIn 0.3s ease-in;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    position: relative;
+}
+
+.battle-log-list li:hover {
+    background-color: #f0f7ff !important;
+    transform: translateX(2px);
+}
+
+.battle-log-list li:active {
+    transform: translateX(0);
+}
+
+.battle-log-list li::before {
+    content: "↺";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 1.2em;
+    color: #3498db;
+}
+
+.battle-log-list li:hover::before {
+    opacity: 0.5;
+}
+
+.battle-log-list li:last-child {
+    border-bottom: none;
+}
+
+.battle-log-list li.ally-turn {
+    border-left: 4px solid var(--primary-red);
+    background: rgba(231, 76, 60, 0.02);
+}
+
+.battle-log-list li.enemy-turn {
+    border-left: 4px solid var(--primary-blue);
+    background: rgba(52, 152, 219, 0.02);
+}
+
+.battle-log-list .turn-number {
+    font-weight: bold;
+    color: #999;
+    margin-right: 10px;
+}
+
+.battle-log-list .log-move {
+    font-weight: bold;
+    color: #333;
+}
+
+.battle-log-list .log-hp {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.battle-log-list li.log-placeholder {
+    color: #aaa;
+    text-align: center;
+    padding: 20px;
+    border: none;
+    background: transparent;
+}
+
+.battle-log-list li.heal-log {
+    border-left: 4px solid var(--primary-green);
+    background: rgba(46, 204, 113, 0.05);
+}
+
+.item-trigger-btn {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    margin-left: 5px;
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.item-trigger-btn:hover {
+    background-color: #27ae60;
+}
+
+.item-trigger-btn:disabled {
+    background-color: #ccc;
+    cursor: default;
+}
+
+.item-status {
+    font-size: 0.75rem;
+    color: #e74c3c;
+    margin-left: 5px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1000px) {
+    .calc-container {
+        grid-template-columns: 1fr;
+    }
+}
