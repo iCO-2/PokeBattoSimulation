@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
     <header>
@@ -25,9 +25,16 @@
         </div>
     </header>
 
+    <!-- Mobile Tab Navigation -->
+    <div class="mobile-tab-nav">
+        <button class="tab-btn active" data-tab="ally">自分のチーム</button>
+        <button class="tab-btn" data-tab="battle">対戦ログ</button>
+        <button class="tab-btn" data-tab="enemy">相手のチーム</button>
+    </div>
+
     <main class="calc-container">
         <!-- 自分側設定 -->
-        <section class="poke-settings ally">
+        <section class="poke-settings ally tab-content active" id="tab-ally">
             <h2>自分</h2>
             
             <div class="hp-status">
@@ -226,7 +233,7 @@
         </section>
 
         <!-- 計算結果表示（中央） -->
-        <section class="result-display">
+        <section class="result-display tab-content" id="tab-battle">
             <div class="action-panel">
                 <div class="action-buttons">
                 <!-- 攻撃方向ボタン -->
@@ -252,7 +259,7 @@
         </section>
 
         <!-- 相手側設定 -->
-        <section class="poke-settings enemy">
+        <section class="poke-settings enemy tab-content" id="tab-enemy">
             <h2>相手</h2>
             
             <div class="hp-status">
@@ -439,6 +446,14 @@
         </section>
     </main>
     <datalist id="pokemon-list"></datalist>
-    <script type="module" src="js/main.js?v=20"></script>
+
+    <div class="mobile-sticky-footer">
+        <div class="mobile-action-buttons">
+            <button id="mobile-attack-ally" class="mobile-action-btn ally-attack">自分→相手</button>
+            <button id="mobile-attack-enemy" class="mobile-action-btn enemy-attack">自分←相手</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js?v=21"></script>
 </body>
 </html>

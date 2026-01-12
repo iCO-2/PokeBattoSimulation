@@ -972,3 +972,55 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// --- Mobile Tab & Sticky Footer Logic ---
+function initMobileTabs() {
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const allyFooterBtn = document.getElementById('mobile-attack-ally');
+        const enemyFooterBtn = document.getElementById('mobile-attack-enemy');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-tab');
+                
+                // Update Buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update Content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                const targetContent = document.getElementById('tab-' + targetId);
+                if (targetContent) targetContent.classList.add('active');
+            });
+        });
+
+        if (allyFooterBtn) {
+            allyFooterBtn.addEventListener('click', () => {
+                const allyAttackBtn = document.getElementById('execute-ally-attack');
+                if (allyAttackBtn) {
+                     allyAttackBtn.click();
+                     // Switch to Battle tab to see result
+                     const battleTab = document.querySelector('.tab-btn[data-tab="battle"]');
+                     if (battleTab) battleTab.click();
+                }
+            });
+        }
+
+        if (enemyFooterBtn) {
+            enemyFooterBtn.addEventListener('click', () => {
+                const enemyAttackBtn = document.getElementById('execute-enemy-attack');
+                if (enemyAttackBtn) {
+                     enemyAttackBtn.click();
+                     // Switch to Battle tab to see result
+                     const battleTab = document.querySelector('.tab-btn[data-tab="battle"]');
+                     if (battleTab) battleTab.click();
+                }
+            });
+        }
+    }
+
+document.addEventListener('DOMContentLoaded', () => {
+    initMobileTabs();
+});
