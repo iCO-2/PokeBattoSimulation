@@ -995,6 +995,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 slotBtn.classList.remove('fainted');
             }
 
+            // 1. Ensure clean slate (remove text nodes from "1", "2", etc.)
+            // Keep only our managed elements
+            Array.from(slotBtn.childNodes).forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    slotBtn.removeChild(node);
+                }
+            });
+
             // 1. Ensure Name Span
             let nameSpan = slotBtn.querySelector('.pokemon-name-text');
             if (!nameSpan) {

@@ -119,8 +119,8 @@ header {
     border-top: 5px solid transparent;
 }
 
-.ally { border-color: var(--primary-red); }
-.enemy { border-color: var(--primary-blue); }
+.ally { border-color: var(--primary-blue); }
+.enemy { border-color: var(--primary-red); }
 
 h2 {
     margin-top: 0;
@@ -554,13 +554,13 @@ h2 {
 }
 
 .battle-log-list li.ally-turn {
-    border-left: 4px solid var(--primary-red);
-    background: rgba(231, 76, 60, 0.02);
+    border-left: 4px solid var(--primary-blue);
+    background: rgba(52, 152, 219, 0.02);
 }
 
 .battle-log-list li.enemy-turn {
-    border-left: 4px solid var(--primary-blue);
-    background: rgba(52, 152, 219, 0.02);
+    border-left: 4px solid var(--primary-red);
+    background: rgba(231, 76, 60, 0.02);
 }
 
 .battle-log-list .turn-number {
@@ -668,8 +668,8 @@ h2 {
         background: #fff;
     }
 
-    .tab-btn[data-tab='ally'].active { color: var(--primary-red); border-bottom-color: var(--primary-red); }
-    .tab-btn[data-tab='enemy'].active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); }
+    .tab-btn[data-tab='ally'].active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); }
+    .tab-btn[data-tab='enemy'].active { color: var(--primary-red); border-bottom-color: var(--primary-red); }
     .tab-btn[data-tab='battle'].active { color: var(--primary-green); border-bottom-color: var(--primary-green); }
 
     /* Tab Content Visibility */
@@ -716,11 +716,11 @@ h2 {
     }
 
     .mobile-action-btn.ally-attack {
-        background: linear-gradient(135deg, var(--primary-red), #c0392b);
+        background: linear-gradient(135deg, var(--primary-blue), #2980b9);
     }
 
     .mobile-action-btn.enemy-attack {
-        background: linear-gradient(135deg, var(--primary-blue), #2980b9);
+        background: linear-gradient(135deg, var(--primary-red), #c0392b);
     }
 
     .mobile-action-btn:active {
@@ -842,5 +842,41 @@ h2 {
     width: 100%;
     background-color: var(--primary-green);
     transition: width 0.3s, background-color 0.3s;
+}
+
+/* 計算結果のアイコン表示エリア */
+.result-header-display {
+    display: none; /* JSで攻撃時にflexにする */
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.result-header-display img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.result-header-display #result-move-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 0.9em;
+}
+
+.arrow-icon {
+    font-size: 1.5em;
+    color: var(--primary-gray);
+    line-height: 1;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    display: inline-block; /* 回転を確実にするため */
+}
+
+.arrow-icon.reversed {
+    transform: rotate(180deg);
 }
 
