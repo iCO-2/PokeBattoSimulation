@@ -333,6 +333,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // ターンIDを更新
             globalTurnCounter++;
             const currentTurnId = globalTurnCounter;
+            
+            // Define names early for use in all blocks
+            const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
 
             // バリデーション: 自分または相手のポケモン名が未入力の場合は警告を出して中断
             if (!attacker.name.trim() || !defender.name.trim()) {
@@ -371,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
                     const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
                     
-                    const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
+                // const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手"); // Moved to top
                     rangeText.innerHTML = `${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)`;
                 }
 
@@ -399,6 +402,50 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 } else if (killChanceText) {
                     killChanceText.textContent = '-';
+                }
+
+                // Update Result Header (Icons & Move)
+                const headerDisplay = document.querySelector('.result-header-display');
+                if (headerDisplay) {
+                    headerDisplay.style.display = 'flex';
+                    
+                    // Always set Ally Icon (Left) and Enemy Icon (Right)
+                    const allyPoke = appState.getAllyPokemon();
+                    const enemyPoke = appState.getEnemyPokemon();
+                    
+                    // Ally Icon
+                    const allyIcon = document.getElementById('result-ally-icon');
+                    if (allyIcon && allyPoke) {
+                        const name = allyPoke.name.trim();
+                        allyIcon.src = `../backend/image/${name}.gif`;
+                        allyIcon.alt = name;
+                        allyIcon.onerror = () => { allyIcon.src = ''; allyIcon.alt = name; };
+                    }
+
+                    // Enemy Icon
+                    const enemyIcon = document.getElementById('result-enemy-icon');
+                    if (enemyIcon && enemyPoke) {
+                        const name = enemyPoke.name.trim();
+                        enemyIcon.src = `../backend/image/${name}.gif`;
+                        enemyIcon.alt = name;
+                        enemyIcon.onerror = () => { enemyIcon.src = ''; enemyIcon.alt = name; };
+                    }
+                    
+                    // Arrow Direction
+                    const arrowIcon = document.getElementById('result-arrow-icon');
+                    if (arrowIcon) {
+                        if (attackerSide === 'enemy') {
+                            arrowIcon.classList.add('reversed'); // Point Left
+                        } else {
+                            arrowIcon.classList.remove('reversed'); // Point Right
+                        }
+                    }
+
+                    // Move Name
+                    const moveNameSpan = document.getElementById('result-move-name');
+                    if (moveNameSpan) {
+                         moveNameSpan.textContent = moveName;
+                    }
                 }
 
                 // 16段階乱数セレクト更新
@@ -474,7 +521,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 初回計算時にも履歴に追加（デフォルト選択分）
             const initialRollLabel = `${85 + initialRollIndex}%`;
-            const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
             const defName = defender.name.trim() || (isAllyAttacking ? "相手" : "自分");
             const historyEntry = {
                 type: 'attack',
@@ -935,6 +981,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = pokemon.name.trim();
 
             if (!name) {
+                while (slotBtn.firstChild) slotBtn.removeChild(slotBtn.firstChild);
                 slotBtn.textContent = index + 1;
                 slotBtn.style.backgroundImage = 'none';
                 slotBtn.classList.remove('has-image', 'fainted');
@@ -948,29 +995,76 @@ document.addEventListener('DOMContentLoaded', () => {
                 slotBtn.classList.remove('fainted');
             }
 
-            // アイコンの同期 (既に読み込み済みなら再生成しない工夫もできるが、一旦シンプルに)
-            // すでにimgがある場合はsrcをチェック
-            let img = slotBtn.querySelector('img.pokemon-icon');
-            const expectedSrc = `../backend/image/${name}.gif`;
-
-            if (!img) {
-                slotBtn.innerHTML = '';
-                img = document.createElement('img');
-                img.classList.add('pokemon-icon');
-                slotBtn.appendChild(img);
+            // 1. Ensure Name Span
+            let nameSpan = slotBtn.querySelector('.pokemon-name-text');
+            if (!nameSpan) {
+                nameSpan = document.createElement('span');
+                nameSpan.className = 'pokemon-name-text';
+                slotBtn.appendChild(nameSpan);
             }
 
-            if (img.src !== expectedSrc) {
+            // 2. Ensure Image
+            let img = slotBtn.querySelector('.pokemon-icon');
+            if (!img) {
+                img = document.createElement('img');
+                img.className = 'pokemon-icon';
+                slotBtn.insertBefore(img, nameSpan);
+            }
+
+            const expectedSrc = `../backend/image/${name}.gif`;
+
+            // Only update if src changed
+            if (img.dataset.key !== name) {
+                img.dataset.key = name;
                 img.src = expectedSrc;
                 img.alt = name;
+                
+                // Reset display states
+                img.style.display = '';
+                nameSpan.style.display = 'none';
+                
                 img.onerror = () => {
-                    slotBtn.textContent = name;
+                    img.style.display = 'none';
+                    nameSpan.textContent = name;
+                    nameSpan.style.display = 'inline';
                     slotBtn.classList.remove('has-image');
-                    if (img.parentNode) slotBtn.removeChild(img);
                 };
+                
                 img.onload = () => {
+                    img.style.display = '';
+                    nameSpan.style.display = 'none';
                     slotBtn.classList.add('has-image');
                 };
+            }
+            
+            // Re-apply current state if not loading
+            if (img.style.display === 'none') {
+                 nameSpan.textContent = name;
+                 nameSpan.style.display = 'inline';
+            } else {
+                 nameSpan.style.display = 'none';
+            }
+            
+            // 3. Mini HP Bar
+            let miniHpContainer = slotBtn.querySelector('.mini-hp-bar');
+            if (!miniHpContainer) {
+                miniHpContainer = document.createElement('div');
+                miniHpContainer.className = 'mini-hp-bar';
+                const fill = document.createElement('div');
+                fill.className = 'mini-hp-bar-fill';
+                miniHpContainer.appendChild(fill);
+                slotBtn.appendChild(miniHpContainer);
+            }
+            
+            const fill = miniHpContainer.querySelector('.mini-hp-bar-fill');
+            if (fill) {
+                const hpRatio = pokemon.maxHp > 0 ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
+                fill.style.width = `${hpRatio}%`;
+                
+                fill.style.backgroundColor = '';
+                if (hpRatio >= 50) fill.style.backgroundColor = 'var(--primary-green)';
+                else if (hpRatio >= 25) fill.style.backgroundColor = 'var(--accent-orange)';
+                else fill.style.backgroundColor = 'var(--primary-red)';
             }
         });
     }

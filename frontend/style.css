@@ -751,9 +751,96 @@ h2 {
 
 /* Default state for desktop */
 /* Default state for desktop */
-@media (min-width: 769px) {
-    .mobile-tab-nav, .mobile-sticky-footer {
-        display: none;
-    }
+
+/* Result Header Display (Icons) */
+.result-header-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.icon-wrapper {
+    width: 60px; /* Slightly larger */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #e0e0e0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.pokemon-icon-small {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.move-arrow-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    max-width: 120px;
+}
+
+.move-name-display {
+    font-weight: bold;
+    font-size: 0.95em;
+    color: #333;
+    text-align: center;
+    background: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.arrow-icon {
+    font-size: 1.5em;
+    color: var(--primary-gray);
+    line-height: 1;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+
+/* Mini HP Bar for Poke Slots */
+.poke-slot {
+    position: relative; /* Ensure absolute children are positioned relative to this */
+}
+
+.mini-hp-bar {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    z-index: 5;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.mini-hp-bar-fill {
+    height: 100%;
+    width: 100%;
+    background-color: var(--primary-green);
+    transition: width 0.3s, background-color 0.3s;
 }
 

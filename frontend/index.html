@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
     <header>
@@ -241,6 +241,18 @@
             <!-- Centralized Damage Result -->
             <div class="damage-result-container">
                 <h3>計算結果</h3>
+                <div class="result-header-display" style="display: none;">
+                    <div class="icon-wrapper">
+                        <img id="result-ally-icon" class="pokemon-icon-small" src="" alt="">
+                    </div>
+                    <div class="move-arrow-display">
+                        <span id="result-move-name" class="move-name-display">-</span>
+                        <div class="arrow-icon" id="result-arrow-icon">➜</div>
+                    </div>
+                    <div class="icon-wrapper">
+                        <img id="result-enemy-icon" class="pokemon-icon-small" src="" alt="">
+                    </div>
+                </div>
                 <div class="result-row">
                     <span class="label">ダメージ:</span>
                     <span class="value damage-range">-</span>
@@ -459,6 +471,6 @@
         </div>
     </div>
 
-    <script type="module" src="js/main.js?v=25"></script>
+    <script type="module" src="js/main.js?v=34"></script>
 </body>
 </html>
