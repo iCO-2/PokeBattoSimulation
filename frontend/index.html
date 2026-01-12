@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
     <header>
@@ -216,14 +216,7 @@
                 <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
             </div>
 
-            <div class="damage-result-info">
-                <hr>
-                <h3>ダメージ計算結果</h3>
-                <p class="damage-range">-</p>
-                <p class="kill-chance">-</p>
-                <h4 class="random-table-title">16段階乱数テーブル</h4>
-                <ul class="random-list"></ul>
-                <hr>
+            <div class="damage-history-container">
                 <div class="history-header">
                     <h4>被ダメージ履歴</h4>
                     <button class="clear-history-btn" data-side="ally">クリア</button>
@@ -243,6 +236,25 @@
                 <button id="execute-enemy-attack" class="action-btn">自分 ← <span style="font-weight: bold; font-size: 1.2em;">相手</span></button>
 
             </div>
+            </div>
+
+            <!-- Centralized Damage Result -->
+            <div class="damage-result-container">
+                <h3>計算結果</h3>
+                <div class="result-row">
+                    <span class="label">ダメージ:</span>
+                    <span class="value damage-range">-</span>
+                </div>
+                <div class="result-row">
+                    <span class="label">瀕死率:</span>
+                    <span class="value kill-chance">-</span>
+                </div>
+                <div class="result-row">
+                    <span class="label">採用乱数:</span>
+                    <select class="random-select" id="battle-random-roll">
+                        <option value="-1">-- 乱数選択 --</option>
+                    </select>
+                </div>
             </div>
 
             <hr>
@@ -429,14 +441,7 @@
                 <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
             </div>
             
-            <div class="damage-result-info">
-                <hr>
-                <h3>ダメージ計算結果</h3>
-                <p class="damage-range">-</p>
-                <p class="kill-chance">-</p>
-                <h4 class="random-table-title">16段階乱数テーブル ※自身で選択可能</h4>
-                <ul class="random-list"></ul>
-                <hr>
+            <div class="damage-history-container">
                 <div class="history-header">
                     <h4>被ダメージ履歴</h4>
                     <button class="clear-history-btn" data-side="enemy">クリア</button>
@@ -454,6 +459,6 @@
         </div>
     </div>
 
-    <script type="module" src="js/main.js?v=21"></script>
+    <script type="module" src="js/main.js?v=25"></script>
 </body>
 </html>

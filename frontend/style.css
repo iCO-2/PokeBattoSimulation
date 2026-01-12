@@ -12,6 +12,7 @@
     --primary-gray: #95a5a6;
     --primary-light-gray: #ecf0f1;
     --primary-green: #2ecc71;
+    --accent-orange: #f39c12;
 }
 
 body {
@@ -272,7 +273,7 @@ h2 {
 }
 
 .battle-hp-bar {
-    background: linear-gradient(to right, #2ecc71, #27ae60);
+    background-color: var(--primary-green);
     height: 100%;
     transition: width 0.3s, background-color 0.3s;
     width: 100%; /* Default to full */
@@ -432,6 +433,55 @@ h2 {
     font-size: 0.9em;
     color: #999;
     margin-top: 2px;
+}
+
+/* Central Damage Result */
+.damage-result-container {
+    background: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.damage-result-container h3 {
+    margin: 0 0 10px 0;
+    font-size: 1em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    color: #444;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.result-row:last-child {
+    margin-bottom: 0;
+}
+
+.result-row .label {
+    color: #7f8c8d;
+    font-weight: bold;
+}
+
+.result-row .value {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.random-select {
+    padding: 5px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 0.9em;
+    width: 60%;
+    background-color: #fff;
 }
 
 /* Battle Log (Central) */

@@ -39,6 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('active');
             
             updateFormFromState(team);
+
+            // スマホ版：異なるチームのスロットをクリックした場合、そのチームのタブへ切り替え
+            if (window.innerWidth <= 768) {
+                const activeTab = document.querySelector('.tab-btn.active');
+                if (activeTab && activeTab.dataset.tab !== team && activeTab.dataset.tab !== 'battle') {
+                     const targetTabBtn = document.querySelector(`.tab-btn[data-tab="${team}"]`);
+                     if (targetTabBtn) targetTabBtn.click();
+                }
+            }
         });
     });
 
@@ -352,67 +361,86 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // 結果表示更新
-            // 変更点: calc-container配下ではなく、各サイド (.poke-settings) 内の要素を更新する
-            const defenderContainer = document.querySelector(`.poke-settings.${defenderSide}`);
-            if (!defenderContainer) return;
+            // 結果表示更新 (Centralized)
+            const resultContainer = document.querySelector('.damage-result-container');
+            if (resultContainer) {
+                const rangeText = resultContainer.querySelector('.damage-range');
+                if (rangeText) {
+                    const min = damageResult.min || 0;
+                    const max = damageResult.max || 0;
+                    const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
+                    const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
+                    
+                    const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
+                    rangeText.innerHTML = `${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)`;
+                }
 
-            const rangeText = defenderContainer.querySelector('.damage-range');
-            if (rangeText) {
-                const min = damageResult.min || 0;
-                const max = damageResult.max || 0;
-                const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
-                const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
-                
-                // 攻撃者の名前を使用（未入力の場合は種族名やデフォルトラベルを表示）
-                const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
-                
-                rangeText.innerHTML = `<strong>${atkName}から受けた攻撃</strong><br>ダメージ: ${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)<br>使用技: ${moveName}`;
-            }
+                const killChanceText = resultContainer.querySelector('.kill-chance');
+                if (killChanceText && defender.maxHp > 0) {
+                     if (damageResult.max === 0) {
+                        killChanceText.textContent = 'ダメージなし';
+                    } else {
+                        const minDmg = damageResult.rolls[0];
+                        const maxDmg = damageResult.rolls[damageResult.rolls.length - 1];
+                        const maxHits = Math.ceil(defender.maxHp / minDmg);
+                        const minHits = Math.ceil(defender.maxHp / maxDmg);
 
-            // 16段階乱数リスト更新
-            const randomList = defenderContainer.querySelector('.random-list');
-            if (randomList) {
-                randomList.innerHTML = '';
-                if (damageResult.rolls.length > 0) {
-                    damageResult.rolls.forEach((val, i) => {
-                        const li = document.createElement('li');
-                        li.textContent = `${85 + i}%: ${val}`;
-                        
-                        // 初期選択状態
-                        if (i === initialRollIndex) {
-                            li.classList.add('selected');
+                        if (minHits === maxHits) {
+                            killChanceText.textContent = `確定${minHits}発`;
+                        } else {
+                            if (minHits === 1) {
+                                const koCount = damageResult.rolls.filter(r => r >= defender.maxHp).length;
+                                const percentage = (koCount / 16 * 100).toFixed(1);
+                                killChanceText.textContent = `乱数1発 (${percentage}%)`;
+                            } else {
+                                killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
+                            }
                         }
-                        
-                        // Click Listener for Manual Selection
-                        li.addEventListener('click', () => {
-                            // 1. 他の選択解除
-                            randomList.querySelectorAll('li').forEach(l => l.classList.remove('selected'));
-                            // 2. 選択状態にする
-                            li.classList.add('selected');
+                    }
+                } else if (killChanceText) {
+                    killChanceText.textContent = '-';
+                }
+
+                // 16段階乱数セレクト更新
+                const oldSelect = document.getElementById('battle-random-roll');
+                if (oldSelect && oldSelect.parentNode) {
+                    const newSelect = document.createElement('select');
+                    newSelect.className = 'random-select';
+                    newSelect.id = 'battle-random-roll';
+
+                    if (damageResult.rolls.length > 0) {
+                        damageResult.rolls.forEach((val, i) => {
+                            const option = document.createElement('option');
+                            option.value = i;
+                            option.textContent = `${85 + i}%: ${val}ダメージ`;
+                            if (i === initialRollIndex) {
+                                option.selected = true;
+                            }
+                            newSelect.appendChild(option);
+                        });
+
+                        newSelect.addEventListener('change', (e) => {
+                            const selectedIndex = parseInt(e.target.value);
+                            const val = damageResult.rolls[selectedIndex];
                             
-                            // 3. HPをターン開始時の状態から減算して適用
+                            // HP再適用 logic
                             if (turnStartHp > 0) {
                                 defender.currentHp = Math.max(0, turnStartHp - val);
                             }
-                            
-                            // 4. 履歴に記録・更新
-                            const rollLabel = `${85 + i}%`;
-                            const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
-                            const defName = defender.name.trim() || (isAllyAttacking ? "相手" : "自分");
 
+                            // 履歴更新
+                            const rollLabel = `${85 + selectedIndex}%`;
                             const historyEntry = {
                                 type: 'attack',
                                 turnId: currentTurnId,
                                 moveName: moveName,
                                 damage: val,
                                 attackerName: atkName,
-                                defenderName: defName,
+                                defenderName: defender.name.trim() || (isAllyAttacking ? "相手" : "自分"),
                                 attackerSide: attackerSide,
                                 rollLabel: rollLabel,
                                 hpBefore: turnStartHp,
                                 hpAfter: defender.currentHp,
-                                // スナップショット: パーティ全員のHPを保存
                                 snapshot: {
                                     allyHps: appState.allyTeam.map(p => p.currentHp),
                                     enemyHps: appState.enemyTeam.map(p => p.currentHp)
@@ -426,47 +454,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                 defender.history.push(historyEntry);
                                 defender.lastTurnId = currentTurnId;
                             }
-
-                            // 全体の対戦ログを更新 (同じターンの場合は最新の乱数選択で上書き)
+                            
+                            // 全体の対戦ログを更新
                             updateBattleLog(historyEntry);
-
-                            // 5. UI更新
+                            
+                            // UI更新
                             updateFormFromState(defenderSide);
                             renderBattleLog();
                         });
-
-                        randomList.appendChild(li);
-                    });
-                } else {
-                    randomList.innerHTML = '<li>ダメージなし</li>';
-                }
-            }
-
-            // 確定数（Kill Chance）の更新
-            const killChanceText = defenderContainer.querySelector('.kill-chance');
-            if (killChanceText && defender.maxHp > 0) {
-                if (damageResult.max === 0) {
-                    killChanceText.textContent = 'ダメージなし';
-                } else {
-                    const minDmg = damageResult.rolls[0];
-                    const maxDmg = damageResult.rolls[damageResult.rolls.length - 1];
-                    const maxHits = Math.ceil(defender.maxHp / minDmg);
-                    const minHits = Math.ceil(defender.maxHp / maxDmg);
-
-                    if (minHits === maxHits) {
-                        killChanceText.textContent = `確定${minHits}発`;
                     } else {
-                        if (minHits === 1) {
-                            const koCount = damageResult.rolls.filter(r => r >= defender.maxHp).length;
-                            const percentage = (koCount / 16 * 100).toFixed(1);
-                            killChanceText.textContent = `乱数1発 (${percentage}%)`;
-                        } else {
-                            killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
-                        }
+                         const option = document.createElement('option');
+                         option.textContent = "ダメージなし";
+                         newSelect.appendChild(option);
                     }
+                    
+                    oldSelect.parentNode.replaceChild(newSelect, oldSelect);
                 }
-            } else if (killChanceText) {
-                killChanceText.textContent = '-';
             }
 
             // 初回計算時にも履歴に追加（デフォルト選択分）
@@ -496,7 +499,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateBattleLog(historyEntry);
             renderBattleLog();
 
-            console.log(`Turn executed (${attackerSide} -> ${defenderSide}). Waiting for manual roll selection.`);
+            console.log(`Turn executed (${attackerSide} -> ${defenderSide}).`);
 
             updateFormFromState('ally');
             updateFormFromState('enemy');
@@ -668,7 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="turn-number">#${turnDisplayCounter}</span>
                     <strong>${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
                     ${entry.defenderName}に <strong>${entry.damage}</strong> ダメージを与えた<br>
-                    <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 乱数: ${entry.rollLabel}）</span>
+                    <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 採用乱数:${entry.rollLabel}）</span>
                 `;
             } else if (entry.type === 'heal') {
                 li.classList.add('heal-log');
@@ -876,8 +879,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const ratio = (pokemon.maxHp > 0) ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
             hpBar.style.width = `${Math.max(0, ratio)}%`;
             
-            if (ratio > 50) hpBar.style.backgroundColor = 'var(--primary-green)';
-            else if (ratio > 20) hpBar.style.backgroundColor = 'var(--accent-orange)';
+            if (ratio >= 50) hpBar.style.backgroundColor = 'var(--primary-green)';
+            else if (ratio >= 25) hpBar.style.backgroundColor = 'var(--accent-orange)';
             else hpBar.style.backgroundColor = 'var(--primary-red)';
         }
 
