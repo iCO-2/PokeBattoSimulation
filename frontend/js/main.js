@@ -111,36 +111,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Move Configuration Logic ---
-    function populateMoveSelects(side) {
-        const moves = Object.keys(MOVES_DEX);
+    function populateMoveDatalist() {
+        const datalist = document.getElementById('move-list');
+        if (!datalist) return;
+
+        datalist.innerHTML = ''; // Clear existing
+        Object.keys(MOVES_DEX).forEach(move => {
+            const opt = document.createElement('option');
+            opt.value = move;
+            datalist.appendChild(opt);
+        });
+    }
+
+    function setupMoveInputs(side) {
         const prefix = (side === 'ally') ? 'ally' : 'enemy';
         
         for (let i = 0; i < 4; i++) {
-            const select = document.getElementById(`${prefix}-move-${i}`);
-            if (!select) continue;
+            const input = document.getElementById(`${prefix}-move-${i}`);
+            if (!input) continue;
 
-            select.innerHTML = '<option value="">(なし)</option>';
-            moves.forEach(move => {
-                const opt = document.createElement('option');
-                opt.value = move;
-                opt.textContent = move;
-                select.appendChild(opt);
-            });
-
-            // Set initial value from current pokemon
+            // Set initial value
             const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
             if (pokemon && pokemon.moves[i]) {
-                select.value = pokemon.moves[i];
+                input.value = pokemon.moves[i];
             }
 
             // Event Listener
-            select.addEventListener('change', (e) => {
+            input.addEventListener('change', (e) => {
                 const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
                 if (pokemon) {
                     pokemon.moves[i] = e.target.value;
                     renderMoveButtons(side);
                 }
             });
+            
+            // Also update on 'input' for smoother feel? 
+            // 'change' is sufficiently standard for datalist selection.
         }
     }
 
@@ -163,8 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (moveName && MOVES_DEX[moveName]) {
                 const moveData = MOVES_DEX[moveName];
-                // Check for Tera Burst special handling or fixed damage logic if needed
-                // For now, just display defined power
                 const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
                 btn.innerHTML = `${moveName}<br><small>${powerText}</small>`;
             } else {
@@ -177,8 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize Moves
+    populateMoveDatalist();
     ['ally', 'enemy'].forEach(side => {
-        populateMoveSelects(side);
+        setupMoveInputs(side);
         renderMoveButtons(side);
     });
     // ----------------------------
