@@ -39,6 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('active');
             
             updateFormFromState(team);
+
+            // スマホ版：異なるチームのスロットをクリックした場合、そのチームのタブへ切り替え
+            if (window.innerWidth <= 768) {
+                const activeTab = document.querySelector('.tab-btn.active');
+                if (activeTab && activeTab.dataset.tab !== team && activeTab.dataset.tab !== 'battle') {
+                     const targetTabBtn = document.querySelector(`.tab-btn[data-tab="${team}"]`);
+                     if (targetTabBtn) targetTabBtn.click();
+                }
+            }
         });
     });
 
@@ -324,6 +333,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // ターンIDを更新
             globalTurnCounter++;
             const currentTurnId = globalTurnCounter;
+            
+            // Define names early for use in all blocks
+            const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
 
             // バリデーション: 自分または相手のポケモン名が未入力の場合は警告を出して中断
             if (!attacker.name.trim() || !defender.name.trim()) {
@@ -352,67 +364,130 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // 結果表示更新
-            // 変更点: calc-container配下ではなく、各サイド (.poke-settings) 内の要素を更新する
-            const defenderContainer = document.querySelector(`.poke-settings.${defenderSide}`);
-            if (!defenderContainer) return;
+            // 結果表示更新 (Centralized)
+            const resultContainer = document.querySelector('.damage-result-container');
+            if (resultContainer) {
+                const rangeText = resultContainer.querySelector('.damage-range');
+                if (rangeText) {
+                    const min = damageResult.min || 0;
+                    const max = damageResult.max || 0;
+                    const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
+                    const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
+                    
+                // const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手"); // Moved to top
+                    rangeText.innerHTML = `${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)`;
+                }
 
-            const rangeText = defenderContainer.querySelector('.damage-range');
-            if (rangeText) {
-                const min = damageResult.min || 0;
-                const max = damageResult.max || 0;
-                const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
-                const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
-                
-                // 攻撃者の名前を使用（未入力の場合は種族名やデフォルトラベルを表示）
-                const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
-                
-                rangeText.innerHTML = `<strong>${atkName}から受けた攻撃</strong><br>ダメージ: ${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)<br>使用技: ${moveName}`;
-            }
+                const killChanceText = resultContainer.querySelector('.kill-chance');
+                if (killChanceText && defender.maxHp > 0) {
+                     if (damageResult.max === 0) {
+                        killChanceText.textContent = 'ダメージなし';
+                    } else {
+                        const minDmg = damageResult.rolls[0];
+                        const maxDmg = damageResult.rolls[damageResult.rolls.length - 1];
+                        const maxHits = Math.ceil(defender.maxHp / minDmg);
+                        const minHits = Math.ceil(defender.maxHp / maxDmg);
 
-            // 16段階乱数リスト更新
-            const randomList = defenderContainer.querySelector('.random-list');
-            if (randomList) {
-                randomList.innerHTML = '';
-                if (damageResult.rolls.length > 0) {
-                    damageResult.rolls.forEach((val, i) => {
-                        const li = document.createElement('li');
-                        li.textContent = `${85 + i}%: ${val}`;
-                        
-                        // 初期選択状態
-                        if (i === initialRollIndex) {
-                            li.classList.add('selected');
+                        if (minHits === maxHits) {
+                            killChanceText.textContent = `確定${minHits}発`;
+                        } else {
+                            if (minHits === 1) {
+                                const koCount = damageResult.rolls.filter(r => r >= defender.maxHp).length;
+                                const percentage = (koCount / 16 * 100).toFixed(1);
+                                killChanceText.textContent = `乱数1発 (${percentage}%)`;
+                            } else {
+                                killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
+                            }
                         }
-                        
-                        // Click Listener for Manual Selection
-                        li.addEventListener('click', () => {
-                            // 1. 他の選択解除
-                            randomList.querySelectorAll('li').forEach(l => l.classList.remove('selected'));
-                            // 2. 選択状態にする
-                            li.classList.add('selected');
+                    }
+                } else if (killChanceText) {
+                    killChanceText.textContent = '-';
+                }
+
+                // Update Result Header (Icons & Move)
+                const headerDisplay = document.querySelector('.result-header-display');
+                if (headerDisplay) {
+                    headerDisplay.style.display = 'flex';
+                    
+                    // Always set Ally Icon (Left) and Enemy Icon (Right)
+                    const allyPoke = appState.getAllyPokemon();
+                    const enemyPoke = appState.getEnemyPokemon();
+                    
+                    // Ally Icon
+                    const allyIcon = document.getElementById('result-ally-icon');
+                    if (allyIcon && allyPoke) {
+                        const name = allyPoke.name.trim();
+                        allyIcon.src = `../backend/image/${name}.gif`;
+                        allyIcon.alt = name;
+                        allyIcon.onerror = () => { allyIcon.src = ''; allyIcon.alt = name; };
+                    }
+
+                    // Enemy Icon
+                    const enemyIcon = document.getElementById('result-enemy-icon');
+                    if (enemyIcon && enemyPoke) {
+                        const name = enemyPoke.name.trim();
+                        enemyIcon.src = `../backend/image/${name}.gif`;
+                        enemyIcon.alt = name;
+                        enemyIcon.onerror = () => { enemyIcon.src = ''; enemyIcon.alt = name; };
+                    }
+                    
+                    // Arrow Direction
+                    const arrowIcon = document.getElementById('result-arrow-icon');
+                    if (arrowIcon) {
+                        if (attackerSide === 'enemy') {
+                            arrowIcon.classList.add('reversed'); // Point Left
+                        } else {
+                            arrowIcon.classList.remove('reversed'); // Point Right
+                        }
+                    }
+
+                    // Move Name
+                    const moveNameSpan = document.getElementById('result-move-name');
+                    if (moveNameSpan) {
+                         moveNameSpan.textContent = moveName;
+                    }
+                }
+
+                // 16段階乱数セレクト更新
+                const oldSelect = document.getElementById('battle-random-roll');
+                if (oldSelect && oldSelect.parentNode) {
+                    const newSelect = document.createElement('select');
+                    newSelect.className = 'random-select';
+                    newSelect.id = 'battle-random-roll';
+
+                    if (damageResult.rolls.length > 0) {
+                        damageResult.rolls.forEach((val, i) => {
+                            const option = document.createElement('option');
+                            option.value = i;
+                            option.textContent = `${85 + i}%: ${val}ダメージ`;
+                            if (i === initialRollIndex) {
+                                option.selected = true;
+                            }
+                            newSelect.appendChild(option);
+                        });
+
+                        newSelect.addEventListener('change', (e) => {
+                            const selectedIndex = parseInt(e.target.value);
+                            const val = damageResult.rolls[selectedIndex];
                             
-                            // 3. HPをターン開始時の状態から減算して適用
+                            // HP再適用 logic
                             if (turnStartHp > 0) {
                                 defender.currentHp = Math.max(0, turnStartHp - val);
                             }
-                            
-                            // 4. 履歴に記録・更新
-                            const rollLabel = `${85 + i}%`;
-                            const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
-                            const defName = defender.name.trim() || (isAllyAttacking ? "相手" : "自分");
 
+                            // 履歴更新
+                            const rollLabel = `${85 + selectedIndex}%`;
                             const historyEntry = {
                                 type: 'attack',
                                 turnId: currentTurnId,
                                 moveName: moveName,
                                 damage: val,
                                 attackerName: atkName,
-                                defenderName: defName,
+                                defenderName: defender.name.trim() || (isAllyAttacking ? "相手" : "自分"),
                                 attackerSide: attackerSide,
                                 rollLabel: rollLabel,
                                 hpBefore: turnStartHp,
                                 hpAfter: defender.currentHp,
-                                // スナップショット: パーティ全員のHPを保存
                                 snapshot: {
                                     allyHps: appState.allyTeam.map(p => p.currentHp),
                                     enemyHps: appState.enemyTeam.map(p => p.currentHp)
@@ -426,52 +501,26 @@ document.addEventListener('DOMContentLoaded', () => {
                                 defender.history.push(historyEntry);
                                 defender.lastTurnId = currentTurnId;
                             }
-
-                            // 全体の対戦ログを更新 (同じターンの場合は最新の乱数選択で上書き)
+                            
+                            // 全体の対戦ログを更新
                             updateBattleLog(historyEntry);
-
-                            // 5. UI更新
+                            
+                            // UI更新
                             updateFormFromState(defenderSide);
                             renderBattleLog();
                         });
-
-                        randomList.appendChild(li);
-                    });
-                } else {
-                    randomList.innerHTML = '<li>ダメージなし</li>';
-                }
-            }
-
-            // 確定数（Kill Chance）の更新
-            const killChanceText = defenderContainer.querySelector('.kill-chance');
-            if (killChanceText && defender.maxHp > 0) {
-                if (damageResult.max === 0) {
-                    killChanceText.textContent = 'ダメージなし';
-                } else {
-                    const minDmg = damageResult.rolls[0];
-                    const maxDmg = damageResult.rolls[damageResult.rolls.length - 1];
-                    const maxHits = Math.ceil(defender.maxHp / minDmg);
-                    const minHits = Math.ceil(defender.maxHp / maxDmg);
-
-                    if (minHits === maxHits) {
-                        killChanceText.textContent = `確定${minHits}発`;
                     } else {
-                        if (minHits === 1) {
-                            const koCount = damageResult.rolls.filter(r => r >= defender.maxHp).length;
-                            const percentage = (koCount / 16 * 100).toFixed(1);
-                            killChanceText.textContent = `乱数1発 (${percentage}%)`;
-                        } else {
-                            killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
-                        }
+                         const option = document.createElement('option');
+                         option.textContent = "ダメージなし";
+                         newSelect.appendChild(option);
                     }
+                    
+                    oldSelect.parentNode.replaceChild(newSelect, oldSelect);
                 }
-            } else if (killChanceText) {
-                killChanceText.textContent = '-';
             }
 
             // 初回計算時にも履歴に追加（デフォルト選択分）
             const initialRollLabel = `${85 + initialRollIndex}%`;
-            const atkName = attacker.name.trim() || (isAllyAttacking ? "自分" : "相手");
             const defName = defender.name.trim() || (isAllyAttacking ? "相手" : "自分");
             const historyEntry = {
                 type: 'attack',
@@ -496,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateBattleLog(historyEntry);
             renderBattleLog();
 
-            console.log(`Turn executed (${attackerSide} -> ${defenderSide}). Waiting for manual roll selection.`);
+            console.log(`Turn executed (${attackerSide} -> ${defenderSide}).`);
 
             updateFormFromState('ally');
             updateFormFromState('enemy');
@@ -668,7 +717,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="turn-number">#${turnDisplayCounter}</span>
                     <strong>${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
                     ${entry.defenderName}に <strong>${entry.damage}</strong> ダメージを与えた<br>
-                    <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 乱数: ${entry.rollLabel}）</span>
+                    <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 採用乱数:${entry.rollLabel}）</span>
                 `;
             } else if (entry.type === 'heal') {
                 li.classList.add('heal-log');
@@ -876,8 +925,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const ratio = (pokemon.maxHp > 0) ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
             hpBar.style.width = `${Math.max(0, ratio)}%`;
             
-            if (ratio > 50) hpBar.style.backgroundColor = 'var(--primary-green)';
-            else if (ratio > 20) hpBar.style.backgroundColor = 'var(--accent-orange)';
+            if (ratio >= 50) hpBar.style.backgroundColor = 'var(--primary-green)';
+            else if (ratio >= 25) hpBar.style.backgroundColor = 'var(--accent-orange)';
             else hpBar.style.backgroundColor = 'var(--primary-red)';
         }
 
@@ -932,6 +981,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = pokemon.name.trim();
 
             if (!name) {
+                while (slotBtn.firstChild) slotBtn.removeChild(slotBtn.firstChild);
                 slotBtn.textContent = index + 1;
                 slotBtn.style.backgroundImage = 'none';
                 slotBtn.classList.remove('has-image', 'fainted');
@@ -945,30 +995,137 @@ document.addEventListener('DOMContentLoaded', () => {
                 slotBtn.classList.remove('fainted');
             }
 
-            // アイコンの同期 (既に読み込み済みなら再生成しない工夫もできるが、一旦シンプルに)
-            // すでにimgがある場合はsrcをチェック
-            let img = slotBtn.querySelector('img.pokemon-icon');
-            const expectedSrc = `../backend/image/${name}.gif`;
+            // 1. Ensure clean slate (remove text nodes from "1", "2", etc.)
+            // Keep only our managed elements
+            Array.from(slotBtn.childNodes).forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    slotBtn.removeChild(node);
+                }
+            });
 
-            if (!img) {
-                slotBtn.innerHTML = '';
-                img = document.createElement('img');
-                img.classList.add('pokemon-icon');
-                slotBtn.appendChild(img);
+            // 1. Ensure Name Span
+            let nameSpan = slotBtn.querySelector('.pokemon-name-text');
+            if (!nameSpan) {
+                nameSpan = document.createElement('span');
+                nameSpan.className = 'pokemon-name-text';
+                slotBtn.appendChild(nameSpan);
             }
 
-            if (img.src !== expectedSrc) {
+            // 2. Ensure Image
+            let img = slotBtn.querySelector('.pokemon-icon');
+            if (!img) {
+                img = document.createElement('img');
+                img.className = 'pokemon-icon';
+                slotBtn.insertBefore(img, nameSpan);
+            }
+
+            const expectedSrc = `../backend/image/${name}.gif`;
+
+            // Only update if src changed
+            if (img.dataset.key !== name) {
+                img.dataset.key = name;
                 img.src = expectedSrc;
                 img.alt = name;
+                
+                // Reset display states
+                img.style.display = '';
+                nameSpan.style.display = 'none';
+                
                 img.onerror = () => {
-                    slotBtn.textContent = name;
+                    img.style.display = 'none';
+                    nameSpan.textContent = name;
+                    nameSpan.style.display = 'inline';
                     slotBtn.classList.remove('has-image');
-                    if (img.parentNode) slotBtn.removeChild(img);
                 };
+                
                 img.onload = () => {
+                    img.style.display = '';
+                    nameSpan.style.display = 'none';
                     slotBtn.classList.add('has-image');
                 };
             }
+            
+            // Re-apply current state if not loading
+            if (img.style.display === 'none') {
+                 nameSpan.textContent = name;
+                 nameSpan.style.display = 'inline';
+            } else {
+                 nameSpan.style.display = 'none';
+            }
+            
+            // 3. Mini HP Bar
+            let miniHpContainer = slotBtn.querySelector('.mini-hp-bar');
+            if (!miniHpContainer) {
+                miniHpContainer = document.createElement('div');
+                miniHpContainer.className = 'mini-hp-bar';
+                const fill = document.createElement('div');
+                fill.className = 'mini-hp-bar-fill';
+                miniHpContainer.appendChild(fill);
+                slotBtn.appendChild(miniHpContainer);
+            }
+            
+            const fill = miniHpContainer.querySelector('.mini-hp-bar-fill');
+            if (fill) {
+                const hpRatio = pokemon.maxHp > 0 ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
+                fill.style.width = `${hpRatio}%`;
+                
+                fill.style.backgroundColor = '';
+                if (hpRatio >= 50) fill.style.backgroundColor = 'var(--primary-green)';
+                else if (hpRatio >= 25) fill.style.backgroundColor = 'var(--accent-orange)';
+                else fill.style.backgroundColor = 'var(--primary-red)';
+            }
         });
     }
+});
+
+// --- Mobile Tab & Sticky Footer Logic ---
+function initMobileTabs() {
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const allyFooterBtn = document.getElementById('mobile-attack-ally');
+        const enemyFooterBtn = document.getElementById('mobile-attack-enemy');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-tab');
+                
+                // Update Buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update Content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                const targetContent = document.getElementById('tab-' + targetId);
+                if (targetContent) targetContent.classList.add('active');
+            });
+        });
+
+        if (allyFooterBtn) {
+            allyFooterBtn.addEventListener('click', () => {
+                const allyAttackBtn = document.getElementById('execute-ally-attack');
+                if (allyAttackBtn) {
+                     allyAttackBtn.click();
+                     // Switch to Battle tab to see result
+                     const battleTab = document.querySelector('.tab-btn[data-tab="battle"]');
+                     if (battleTab) battleTab.click();
+                }
+            });
+        }
+
+        if (enemyFooterBtn) {
+            enemyFooterBtn.addEventListener('click', () => {
+                const enemyAttackBtn = document.getElementById('execute-enemy-attack');
+                if (enemyAttackBtn) {
+                     enemyAttackBtn.click();
+                     // Switch to Battle tab to see result
+                     const battleTab = document.querySelector('.tab-btn[data-tab="battle"]');
+                     if (battleTab) battleTab.click();
+                }
+            });
+        }
+    }
+
+document.addEventListener('DOMContentLoaded', () => {
+    initMobileTabs();
 });

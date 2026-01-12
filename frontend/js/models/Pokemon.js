@@ -19,7 +19,7 @@ export class Pokemon {
         this.ability = "";
         
         // 技構成 (簡易版)
-        this.moves = ["ストーンエッジ", "じしん", "テラバースト", "ハイドロポンプ"]; 
+        this.moves = ["", "", "", ""]; 
         this.activeMoveIndex = 0; // 選択中の技インデックス
         
         // フィールド・状態
