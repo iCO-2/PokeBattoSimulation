@@ -6,46 +6,26 @@ export const ITEMS_DEX = {
         value: 0.25,      // 回復量 (25%)
         message: "オボンののみで回復！"
     },
-    "フィラのみ": {
+    "回復実": {
         type: "berry",
         healType: "ratio",
         threshold: 0.25,    // 1/4以下
         value: 0.333,       // 1/3回復
-        message: "フィラのみで回復！"
-    },
-    "イアのみ": {
-        type: "berry",
-        healType: "ratio",
-        threshold: 0.25,
-        value: 0.333,
-        message: "イアのみで回復！"
-    },
-    "ウイのみ": {
-        type: "berry",
-        healType: "ratio",
-        threshold: 0.25,
-        value: 0.333,
-        message: "ウイのみで回復！"
-    },
-    "マゴのみ": {
-        type: "berry",
-        healType: "ratio",
-        threshold: 0.25,
-        value: 0.333,
-        message: "マゴのみで回復！"
-    },
-    "バンジのみ": {
-        type: "berry",
-        healType: "ratio",
-        threshold: 0.25,
-        value: 0.333,
-        message: "バンジのみで回復！"
+        message: "回復実で回復！"
     },
     "たべのこし": {
         type: "passive",
         healType: "ratio",
         value: 0.0625,      // 1/16回復
         message: "たべのこしで回復"
+    },
+    "こだわりハチマキ": {
+        type: "stat_modifier",
+        message: "こだわりハチマキで攻撃アップ"
+    },
+    "いのちのたま": {
+        type: "damage_boost",
+        message: "いのちのたまで威力アップ"
     },
     "くろいヘドロ": {
         type: "passive",

@@ -110,6 +110,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // アイテムリストの生成
+    const itemSelects = [allyItemSelect, enemyItemSelect];
+    itemSelects.forEach(select => {
+        if (!select) return;
+        // 既存のオプションをクリア（"なし"以外）
+        select.innerHTML = '<option value="">なし</option>';
+        
+        Object.keys(ITEMS_DEX).forEach(itemName => {
+            const option = document.createElement('option');
+            option.value = itemName;
+            option.textContent = itemName;
+            select.appendChild(option);
+        });
+    });
+
     document.querySelectorAll('.stat-input').forEach(input => {
         // Nature (Select) changes need to trigger calc
         input.addEventListener('input', handleStatChange);
