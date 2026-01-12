@@ -211,6 +211,21 @@ h2 {
     flex-wrap: wrap;
 }
 
+.move-config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.move-select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
 .move-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

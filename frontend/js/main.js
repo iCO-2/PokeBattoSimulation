@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 名前変更時は種族値が変わる可能性があるので再計算
             pokemon.computeStats(); 
             updateFormFromState('ally'); 
-            updateSlotLabel('ally');
+            updateTeamSlots('ally');
         });
     }
 
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pokemon.name = e.target.value;
             pokemon.computeStats();
             updateFormFromState('enemy');
-            updateSlotLabel('enemy');
+            updateTeamSlots('enemy');
         });
     }
     if (enemyItemSelect) {
@@ -109,6 +109,99 @@ document.addEventListener('DOMContentLoaded', () => {
             datalist.appendChild(option);
         });
     }
+
+    // --- Move Configuration Logic ---
+    function populateMoveDatalist() {
+        const datalist = document.getElementById('move-list');
+        if (!datalist) return;
+
+        datalist.innerHTML = ''; // Clear existing
+        Object.keys(MOVES_DEX).forEach(move => {
+            const opt = document.createElement('option');
+            opt.value = move;
+            datalist.appendChild(opt);
+        });
+    }
+
+    function setupMoveInputs(side) {
+        const prefix = (side === 'ally') ? 'ally' : 'enemy';
+        
+        for (let i = 0; i < 4; i++) {
+            const input = document.getElementById(`${prefix}-move-${i}`);
+            if (!input) continue;
+
+            // Set initial value
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            if (pokemon && pokemon.moves[i]) {
+                input.value = pokemon.moves[i];
+            }
+
+            // Event Listener
+            input.addEventListener('change', (e) => {
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    pokemon.moves[i] = e.target.value;
+                    renderMoveButtons(side);
+                }
+            });
+            
+            // Also update on 'input' for smoother feel? 
+            // 'change' is sufficiently standard for datalist selection.
+        }
+    }
+
+    function renderMoveButtons(side) {
+        const prefix = (side === 'ally') ? 'ally' : 'enemy';
+        const grid = document.getElementById(`${prefix}-move-grid`);
+        const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+        
+        if (!grid || !pokemon) return;
+
+        grid.innerHTML = '';
+        pokemon.moves.forEach((moveName, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'move-btn';
+            btn.dataset.index = index;
+            
+            if (index === pokemon.activeMoveIndex) {
+                btn.classList.add('active');
+            }
+
+            if (moveName && MOVES_DEX[moveName]) {
+                const moveData = MOVES_DEX[moveName];
+                const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
+                btn.innerHTML = `${moveName}<br><small>${powerText}</small>`;
+            } else {
+                btn.textContent = moveName || '(なし)';
+                if (!moveName) btn.disabled = true;
+            }
+
+            grid.appendChild(btn);
+        });
+    }
+
+    // Initialize Moves
+    populateMoveDatalist();
+    ['ally', 'enemy'].forEach(side => {
+        setupMoveInputs(side);
+        renderMoveButtons(side);
+    });
+    // ----------------------------
+
+    // アイテムリストの生成
+    const itemSelects = [allyItemSelect, enemyItemSelect];
+    itemSelects.forEach(select => {
+        if (!select) return;
+        // 既存のオプションをクリア（"なし"以外）
+        select.innerHTML = '<option value="">なし</option>';
+        
+        Object.keys(ITEMS_DEX).forEach(itemName => {
+            const option = document.createElement('option');
+            option.value = itemName;
+            option.textContent = itemName;
+            select.appendChild(option);
+        });
+    });
 
     document.querySelectorAll('.stat-input').forEach(input => {
         // Nature (Select) changes need to trigger calc
@@ -750,7 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderHistory(teamType, pokemon);
 
         // スロットの状態（ひんし等）を同期
-        updateSlotLabel(teamType);
+        updateTeamSlots(teamType);
 
         // HP Bar
         const currentHpSpan = document.getElementById(`${teamType}-current-hp`);
@@ -807,12 +900,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Move Buttons
-        const moveBtns = container.querySelectorAll('.move-btn');
-        moveBtns.forEach((btn, index) => {
-            if (index === pokemon.activeMoveIndex) btn.classList.add('active');
-            else btn.classList.remove('active');
-        });
+        // Move Buttons & Selects Sync
+        renderMoveButtons(teamType);
+        
+        // Update Selects values
+        for (let i = 0; i < 4; i++) {
+            const select = document.getElementById(`${teamType}-move-${i}`);
+            if (select && pokemon.moves[i]) {
+                select.value = pokemon.moves[i];
+            } else if (select) {
+                select.value = "";
+            }
+        }
 
         // Conditions
         container.querySelectorAll('.condition-check').forEach(check => {
@@ -823,42 +922,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function updateSlotLabel(teamType) {
-        let currentIndex = (teamType === 'ally') ? appState.currentAllyIndex : appState.currentEnemyIndex;
+    function updateTeamSlots(teamType) {
+        const team = (teamType === 'ally') ? appState.allyTeam : appState.enemyTeam;
         
-        const activeBtn = document.querySelector(`.poke-slot[data-team="${teamType}"][data-index="${currentIndex}"]`);
-        if (activeBtn) {
-            let pokemon = (teamType === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+        team.forEach((pokemon, index) => {
+            const slotBtn = document.querySelector(`.poke-slot[data-team="${teamType}"][data-index="${index}"]`);
+            if (!slotBtn) return;
+
             const name = pokemon.name.trim();
 
             if (!name) {
-                activeBtn.textContent = currentIndex + 1;
-                activeBtn.style.backgroundImage = 'none';
-                activeBtn.classList.remove('has-image', 'fainted');
+                slotBtn.textContent = index + 1;
+                slotBtn.style.backgroundImage = 'none';
+                slotBtn.classList.remove('has-image', 'fainted');
                 return;
             }
 
             // ひんし状態の判定
             if (pokemon.currentHp === 0) {
-                activeBtn.classList.add('fainted');
+                slotBtn.classList.add('fainted');
             } else {
-                activeBtn.classList.remove('fainted');
+                slotBtn.classList.remove('fainted');
             }
 
-            activeBtn.innerHTML = '';
-            const img = document.createElement('img');
-            img.src = `../backend/image/${name}.gif`;
-            img.alt = name;
-            img.classList.add('pokemon-icon');
-            
-            img.onerror = () => {
-                activeBtn.textContent = name;
-                activeBtn.classList.remove('has-image');
-            };
-            img.onload = () => {
-                activeBtn.classList.add('has-image');
-            };
-            activeBtn.appendChild(img);
-        }
+            // アイコンの同期 (既に読み込み済みなら再生成しない工夫もできるが、一旦シンプルに)
+            // すでにimgがある場合はsrcをチェック
+            let img = slotBtn.querySelector('img.pokemon-icon');
+            const expectedSrc = `../backend/image/${name}.gif`;
+
+            if (!img) {
+                slotBtn.innerHTML = '';
+                img = document.createElement('img');
+                img.classList.add('pokemon-icon');
+                slotBtn.appendChild(img);
+            }
+
+            if (img.src !== expectedSrc) {
+                img.src = expectedSrc;
+                img.alt = name;
+                img.onerror = () => {
+                    slotBtn.textContent = name;
+                    slotBtn.classList.remove('has-image');
+                    if (img.parentNode) slotBtn.removeChild(img);
+                };
+                img.onload = () => {
+                    slotBtn.classList.add('has-image');
+                };
+            }
+        });
     }
 });

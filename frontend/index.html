@@ -180,11 +180,6 @@
                 <label>持ち物: 
                     <select id="ally-item-select">
                         <option value="">なし</option>
-                        <option>こだわりハチマキ</option>
-                        <option>いのちのたま</option>
-                        <option>オボンののみ</option>
-                        <option>フィラのみ</option>
-                        <option>たべのこし</option>
                     </select>
                     <button type="button" class="item-trigger-btn" data-side="ally" title="持ち物の効果を手動で発動します">発動</button>
                     <span id="ally-item-status" class="item-status"></span>
@@ -192,12 +187,18 @@
             </div>
 
             <div class="move-selector">
+                <h3>技構成</h3>
+                <div class="move-config-grid">
+                    <input class="move-select" data-index="0" id="ally-move-0" list="move-list" placeholder="(なし)">
+                    <input class="move-select" data-index="1" id="ally-move-1" list="move-list" placeholder="(なし)">
+                    <input class="move-select" data-index="2" id="ally-move-2" list="move-list" placeholder="(なし)">
+                    <input class="move-select" data-index="3" id="ally-move-3" list="move-list" placeholder="(なし)">
+                </div>
+                <datalist id="move-list"></datalist>
+
                 <h3>技選択</h3>
-                <div class="move-grid ally-move-grid">
-                    <button class="move-btn active" data-index="0">ストーンエッジ<br><small>威力: 100</small></button>
-                    <button class="move-btn" data-index="1">じしん</button>
-                    <button class="move-btn" data-index="2">テラバースト</button>
-                    <button class="move-btn" data-index="3">技4</button>
+                <div class="move-grid ally-move-grid" id="ally-move-grid">
+                    <!-- Javascriptでボタン生成 -->
                 </div>
             </div>
 
@@ -393,11 +394,6 @@
                 <label>持ち物: 
                     <select id="enemy-item-select">
                         <option value="">なし</option>
-                        <option>こだわりハチマキ</option>
-                        <option>いのちのたま</option>
-                        <option>オボンののみ</option>
-                        <option>フィラのみ</option>
-                        <option>たべのこし</option>
                     </select>
                     <button type="button" class="item-trigger-btn" data-side="enemy" title="持ち物の効果を手動で発動します">発動</button>
                     <span id="enemy-item-status" class="item-status"></span>
@@ -405,12 +401,17 @@
             </div>
 
             <div class="move-selector">
+                <h3>技構成</h3>
+                <div class="move-config-grid">
+                    <input class="move-select" data-index="0" id="enemy-move-0" list="move-list" placeholder="(なし)">
+                    <input class="move-select" data-index="1" id="enemy-move-1" list="move-list" placeholder="(なし)">
+                    <input class="move-select" data-index="2" id="enemy-move-2" list="move-list" placeholder="(なし)">
+                    <input class="move-select" data-index="3" id="enemy-move-3" list="move-list" placeholder="(なし)">
+                </div>
+
                 <h3>技選択</h3>
-                <div class="move-grid enemy-move-grid">
-                    <button class="move-btn active" data-index="0">ストーンエッジ<br><small>威力: 100</small></button>
-                    <button class="move-btn" data-index="1">じしん</button>
-                    <button class="move-btn" data-index="2">テラバースト</button>
-                    <button class="move-btn" data-index="3">技4</button>
+                <div class="move-grid enemy-move-grid" id="enemy-move-grid">
+                     <!-- Javascriptでボタン生成 -->
                 </div>
             </div>
 
