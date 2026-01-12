@@ -110,6 +110,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Move Configuration Logic ---
+    function populateMoveSelects(side) {
+        const moves = Object.keys(MOVES_DEX);
+        const prefix = (side === 'ally') ? 'ally' : 'enemy';
+        
+        for (let i = 0; i < 4; i++) {
+            const select = document.getElementById(`${prefix}-move-${i}`);
+            if (!select) continue;
+
+            select.innerHTML = '<option value="">(なし)</option>';
+            moves.forEach(move => {
+                const opt = document.createElement('option');
+                opt.value = move;
+                opt.textContent = move;
+                select.appendChild(opt);
+            });
+
+            // Set initial value from current pokemon
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            if (pokemon && pokemon.moves[i]) {
+                select.value = pokemon.moves[i];
+            }
+
+            // Event Listener
+            select.addEventListener('change', (e) => {
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    pokemon.moves[i] = e.target.value;
+                    renderMoveButtons(side);
+                }
+            });
+        }
+    }
+
+    function renderMoveButtons(side) {
+        const prefix = (side === 'ally') ? 'ally' : 'enemy';
+        const grid = document.getElementById(`${prefix}-move-grid`);
+        const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+        
+        if (!grid || !pokemon) return;
+
+        grid.innerHTML = '';
+        pokemon.moves.forEach((moveName, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'move-btn';
+            btn.dataset.index = index;
+            
+            if (index === pokemon.activeMoveIndex) {
+                btn.classList.add('active');
+            }
+
+            if (moveName && MOVES_DEX[moveName]) {
+                const moveData = MOVES_DEX[moveName];
+                // Check for Tera Burst special handling or fixed damage logic if needed
+                // For now, just display defined power
+                const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
+                btn.innerHTML = `${moveName}<br><small>${powerText}</small>`;
+            } else {
+                btn.textContent = moveName || '(なし)';
+                if (!moveName) btn.disabled = true;
+            }
+
+            grid.appendChild(btn);
+        });
+    }
+
+    // Initialize Moves
+    ['ally', 'enemy'].forEach(side => {
+        populateMoveSelects(side);
+        renderMoveButtons(side);
+    });
+    // ----------------------------
+
     // アイテムリストの生成
     const itemSelects = [allyItemSelect, enemyItemSelect];
     itemSelects.forEach(select => {
@@ -822,12 +895,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Move Buttons
-        const moveBtns = container.querySelectorAll('.move-btn');
-        moveBtns.forEach((btn, index) => {
-            if (index === pokemon.activeMoveIndex) btn.classList.add('active');
-            else btn.classList.remove('active');
-        });
+        // Move Buttons & Selects Sync
+        renderMoveButtons(teamType);
+        
+        // Update Selects values
+        for (let i = 0; i < 4; i++) {
+            const select = document.getElementById(`${teamType}-move-${i}`);
+            if (select && pokemon.moves[i]) {
+                select.value = pokemon.moves[i];
+            } else if (select) {
+                select.value = "";
+            }
+        }
 
         // Conditions
         container.querySelectorAll('.condition-check').forEach(check => {

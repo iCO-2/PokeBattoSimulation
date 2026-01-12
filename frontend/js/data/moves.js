@@ -10,5 +10,6 @@ export const MOVES_DEX = {
     "カタストロフィ": { power: 0, type: "Dark", category: "Special" }, // Fixed damage 50%
     "ふいうち": { power: 70, type: "Dark", category: "Physical" },
     "あくのはどう": { power: 80, type: "Dark", category: "Special" },
-    "オーバーヒート": { power: 130, type: "Fire", category: "Special" }
+    "オーバーヒート": { power: 130, type: "Fire", category: "Special" },
+    "ハイドロポンプ": { power: 110, type: "Water", category: "Special" },
 };

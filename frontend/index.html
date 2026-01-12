@@ -187,12 +187,17 @@
             </div>
 
             <div class="move-selector">
+                <h3>技構成</h3>
+                <div class="move-config-grid">
+                    <select class="move-select" data-index="0" id="ally-move-0"></select>
+                    <select class="move-select" data-index="1" id="ally-move-1"></select>
+                    <select class="move-select" data-index="2" id="ally-move-2"></select>
+                    <select class="move-select" data-index="3" id="ally-move-3"></select>
+                </div>
+
                 <h3>技選択</h3>
-                <div class="move-grid ally-move-grid">
-                    <button class="move-btn active" data-index="0">ストーンエッジ<br><small>威力: 100</small></button>
-                    <button class="move-btn" data-index="1">じしん</button>
-                    <button class="move-btn" data-index="2">テラバースト</button>
-                    <button class="move-btn" data-index="3">技4</button>
+                <div class="move-grid ally-move-grid" id="ally-move-grid">
+                    <!-- Javascriptでボタン生成 -->
                 </div>
             </div>
 
@@ -395,12 +400,17 @@
             </div>
 
             <div class="move-selector">
+                <h3>技構成</h3>
+                <div class="move-config-grid">
+                    <select class="move-select" data-index="0" id="enemy-move-0"></select>
+                    <select class="move-select" data-index="1" id="enemy-move-1"></select>
+                    <select class="move-select" data-index="2" id="enemy-move-2"></select>
+                    <select class="move-select" data-index="3" id="enemy-move-3"></select>
+                </div>
+
                 <h3>技選択</h3>
-                <div class="move-grid enemy-move-grid">
-                    <button class="move-btn active" data-index="0">ストーンエッジ<br><small>威力: 100</small></button>
-                    <button class="move-btn" data-index="1">じしん</button>
-                    <button class="move-btn" data-index="2">テラバースト</button>
-                    <button class="move-btn" data-index="3">技4</button>
+                <div class="move-grid enemy-move-grid" id="enemy-move-grid">
+                     <!-- Javascriptでボタン生成 -->
                 </div>
             </div>
 
