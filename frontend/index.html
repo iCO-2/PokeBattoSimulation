@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
-    <link rel="stylesheet" href="style.css?v=15">
+    <link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
     <header>
@@ -244,6 +244,7 @@
                 <div class="result-header-display" style="display: none;">
                     <div class="icon-wrapper">
                         <img id="result-ally-icon" class="pokemon-icon-small" src="" alt="">
+                        <div class="mini-hp-bar"><div id="result-ally-mini-hp-fill" class="mini-hp-bar-fill"></div></div>
                     </div>
                     <div class="move-arrow-display">
                         <span id="result-move-name" class="move-name-display">-</span>
@@ -251,6 +252,7 @@
                     </div>
                     <div class="icon-wrapper">
                         <img id="result-enemy-icon" class="pokemon-icon-small" src="" alt="">
+                        <div class="mini-hp-bar"><div id="result-enemy-mini-hp-fill" class="mini-hp-bar-fill"></div></div>
                     </div>
                 </div>
                 <div class="result-row">
@@ -471,6 +473,6 @@
         </div>
     </div>
 
-    <script type="module" src="js/main.js?v=35"></script>
+    <script type="module" src="js/main.js?v=36"></script>
 </body>
 </html>

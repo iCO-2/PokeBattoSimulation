@@ -446,6 +446,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (moveNameSpan) {
                          moveNameSpan.textContent = moveName;
                     }
+
+                    // Update Mini HP Bars in Result Header
+                    const updateHeaderHpBar = (side, pokemon) => {
+                        const fill = document.getElementById(`result-${side}-mini-hp-fill`);
+                        if (fill && pokemon) {
+                            const hpRatio = pokemon.maxHp > 0 ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
+                            fill.style.width = `${hpRatio}%`;
+                            
+                            fill.style.backgroundColor = '';
+                            if (hpRatio >= 50) fill.style.backgroundColor = 'var(--primary-green)';
+                            else if (hpRatio >= 25) fill.style.backgroundColor = 'var(--accent-orange)';
+                            else fill.style.backgroundColor = 'var(--primary-red)';
+                        }
+                    };
+                    updateHeaderHpBar('ally', allyPoke);
+                    updateHeaderHpBar('enemy', enemyPoke);
                 }
 
                 // 16段階乱数セレクト更新
