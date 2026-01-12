@@ -855,10 +855,38 @@ h2 {
     border-bottom: 1px solid #eee;
 }
 
-.result-header-display img {
-    width: 32px;
-    height: 32px;
+.result-header-display .icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 48px; /* 少し広げる */
+    height: auto; /* 縦長を防ぐ */
+    background: transparent; /* 背景円を外すか、形を変える */
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+}
+
+.result-header-display .icon-wrapper img {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
     object-fit: contain;
+    padding: 2px;
+}
+
+
+.result-header-display .mini-hp-bar {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative; /* poke-slot版と異なり相対配置で良い */
 }
 
 .result-header-display #result-move-name {
