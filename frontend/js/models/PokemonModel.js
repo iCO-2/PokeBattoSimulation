@@ -1,4 +1,4 @@
-import { SPECIES_DEX } from '../data/species.js';
+import { SPECIES_DEX } from '../data/loader.js';
 import { calculateHp, calculateStat } from '../calc/stats.js';
 
 export class Pokemon {
@@ -67,7 +67,9 @@ export class Pokemon {
     }
 
     get speciesData() {
-        return SPECIES_DEX[this.name] || null;
+        const data = SPECIES_DEX[this.name];
+        // console.log(`[PokemonModel] Accessing speciesData for '${this.name}':`, data ? 'Found' : 'Not Found');
+        return data || null;
     }
 
     // ステータス入力からHPおよび全実数値を再計算する

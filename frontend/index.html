@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
-    <link rel="stylesheet" href="style.css?v=16">
+    <link rel="stylesheet" href="style.css?v=18">
 </head>
 <body>
     <header>
-        <h1>ポケモン対戦シミュレーター (3vs3)</h1>
+        <h1>ポケモン対戦シミュレーター</h1>
         <div class="party-selector">
             <div class="team ally-team">
-                <span>自分:</span>
+                <span>自分</span>
                 <button class="poke-slot active" data-team="ally" data-index="0">1</button>
                 <button class="poke-slot" data-team="ally" data-index="1">2</button>
                 <button class="poke-slot" data-team="ally" data-index="2">3</button>
+                <button class="poke-slot" data-team="ally" data-index="3">4</button>
+                <button class="poke-slot" data-team="ally" data-index="4">5</button>
+                <button class="poke-slot" data-team="ally" data-index="5">6</button>
             </div>
+            
+            <div class="versus-divider">
+                <span class="vs-text">VS</span>
+            </div>
+
             <div class="team enemy-team">
-                <span>相手:</span>
+                <span>相手</span>
                 <button class="poke-slot" data-team="enemy" data-index="0">1</button>
                 <button class="poke-slot" data-team="enemy" data-index="1">2</button>
                 <button class="poke-slot" data-team="enemy" data-index="2">3</button>
+                <button class="poke-slot" data-team="enemy" data-index="3">4</button>
+                <button class="poke-slot" data-team="enemy" data-index="4">5</button>
+                <button class="poke-slot" data-team="enemy" data-index="5">6</button>
             </div>
         </div>
     </header>
@@ -44,7 +55,10 @@
                 </div>
             </div>
 
-            <input type="text" id="ally-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
+            <div class="autocomplete-container">
+                <input type="text" id="ally-name-input" placeholder="ポケモン名入力" class="search-input" autocomplete="off">
+                <ul id="ally-autocomplete-list" class="autocomplete-list"></ul>
+            </div>
             <div id="ally-base-stats" class="base-stats-info"></div>
             
             <div class="grid-params">
@@ -62,7 +76,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ステータス</th>
+                            <th></th>
                             <th>個体値</th>
                             <th>努力値</th>
                             <th>性格</th>
@@ -194,18 +208,40 @@
             </div>
 
             <div class="move-selector">
-                <h3>技構成</h3>
+                <h3>技</h3>
                 <div class="move-config-grid">
-                    <input class="move-select" data-index="0" id="ally-move-0" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="1" id="ally-move-1" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="2" id="ally-move-2" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="3" id="ally-move-3" list="move-list" placeholder="(なし)">
-                </div>
-                <datalist id="move-list"></datalist>
-
-                <h3>技選択</h3>
-                <div class="move-grid ally-move-grid" id="ally-move-grid">
-                    <!-- Javascriptでボタン生成 -->
+                    <div class="move-row">
+                        <input type="radio" name="ally-active-move" value="0" class="move-select-radio" checked>
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="0" id="ally-move-0" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="ally-active-move" value="1" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="1" id="ally-move-1" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="ally-active-move" value="2" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="2" id="ally-move-2" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="ally-active-move" value="3" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="3" id="ally-move-3" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -295,14 +331,17 @@
                 </div>
             </div>
 
-            <input type="text" id="enemy-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
+            <div class="autocomplete-container">
+                <input type="text" id="enemy-name-input" placeholder="ポケモン名入力" class="search-input" autocomplete="off">
+                <ul id="enemy-autocomplete-list" class="autocomplete-list"></ul>
+            </div>
             <div id="enemy-base-stats" class="base-stats-info"></div>
             
             <div class="stats-table">
                 <table>
                     <thead>
                         <tr>
-                            <th>ステータス</th>
+                            <th></th>
                             <th>個体値</th>
                             <th>努力値</th>
                             <th>性格</th>
@@ -434,17 +473,40 @@
             </div>
 
             <div class="move-selector">
-                <h3>技構成</h3>
+                <h3>技</h3>
                 <div class="move-config-grid">
-                    <input class="move-select" data-index="0" id="enemy-move-0" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="1" id="enemy-move-1" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="2" id="enemy-move-2" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="3" id="enemy-move-3" list="move-list" placeholder="(なし)">
-                </div>
-
-                <h3>技選択</h3>
-                <div class="move-grid enemy-move-grid" id="enemy-move-grid">
-                     <!-- Javascriptでボタン生成 -->
+                    <div class="move-row">
+                        <input type="radio" name="enemy-active-move" value="0" class="move-select-radio" checked>
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="0" id="enemy-move-0" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="enemy-active-move" value="1" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="1" id="enemy-move-1" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="enemy-active-move" value="2" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="2" id="enemy-move-2" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="enemy-active-move" value="3" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="3" id="enemy-move-3" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -464,7 +526,7 @@
             </div>
         </section>
     </main>
-    <datalist id="pokemon-list"></datalist>
+
 
     <div class="mobile-sticky-footer">
         <div class="mobile-action-buttons">
@@ -473,6 +535,6 @@
         </div>
     </div>
 
-    <script type="module" src="js/main.js?v=36"></script>
+    <script type="module" src="js/main.js?v=42"></script>
 </body>
 </html>

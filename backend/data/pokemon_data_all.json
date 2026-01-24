@@ -3246,113 +3246,6 @@
     ]
   },
   {
-    "pokedex_name": "ラッタ（totem-alola）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10093.png",
-    "pokedex_number": 20,
-    "weight_kg": 105.0,
-    "height_m": 1.4,
-    "is_default": false,
-    "form_name": "totem-alola",
-    "base_species": "ラッタ",
-    "types": [
-      {
-        "name": "Dark",
-        "slot": 1
-      },
-      {
-        "name": "Normal",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 75,
-      "attack": 71,
-      "defense": 70,
-      "special-attack": 40,
-      "special-defense": 80,
-      "speed": 77
-    },
-    "abilities": [
-      {
-        "name": "くいしんぼう",
-        "is_hidden": false
-      },
-      {
-        "name": "はりきり",
-        "is_hidden": false
-      },
-      {
-        "name": "あついしぼう",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "つるぎのまい",
-      "たいあたり",
-      "すてみタックル",
-      "しっぽをふる",
-      "かみつく",
-      "ほえる",
-      "れいとうビーム",
-      "ふぶき",
-      "はかいこうせん",
-      "どくどく",
-      "でんこうせっか",
-      "かげぶんしん",
-      "きあいだめ",
-      "ねむる",
-      "ひっさつまえば",
-      "いかりのまえば",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "まもる",
-      "こわいかお",
-      "ヘドロばくだん",
-      "こごえるかぜ",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "おいうち",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "にほんばれ",
-      "かみくだく",
-      "シャドーボール",
-      "さわぐ",
-      "いちゃもん",
-      "からげんき",
-      "ちょうはつ",
-      "はたきおとす",
-      "がむしゃら",
-      "よこどり",
-      "ビルドアップ",
-      "ほしがる",
-      "でんげきは",
-      "とんぼがえり",
-      "ダメおし",
-      "さしおさえ",
-      "とっておき",
-      "ふいうち",
-      "あくのはどう",
-      "ギガインパクト",
-      "シャドークロー",
-      "しねんのずつき",
-      "くさむすび",
-      "ベノムショック",
-      "ヘドロウェーブ",
-      "りんしょう",
-      "さきおくり",
-      "バークアウト",
-      "ないしょばなし",
-      "じごくづき",
-      "じだんだ"
-    ]
-  },
-  {
     "pokedex_name": "オニスズメ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/21.gif",
     "pokedex_number": 21,
@@ -3985,1527 +3878,6 @@
       "くさわけ",
       "みわくのボイス",
       "はやてがえし"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（rock-star）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10080.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "rock-star",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "かみなりパンチ",
-      "たたきつける",
-      "しっぽをふる",
-      "なきごえ",
-      "かいりき",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "フラッシュ",
-      "ねむる",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "いわくだき",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "ひみつのちから",
-      "コメットパンチ",
-      "シグナルビーム",
-      "ほしがる",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "なかよくする",
-      "ないしょばなし",
-      "ほっぺすりすり"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（belle）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10081.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "belle",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "かみなりパンチ",
-      "たたきつける",
-      "しっぽをふる",
-      "なきごえ",
-      "かいりき",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "フラッシュ",
-      "ねむる",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "いわくだき",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "ひみつのちから",
-      "シグナルビーム",
-      "ほしがる",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "つららおとし",
-      "なかよくする",
-      "ないしょばなし",
-      "ほっぺすりすり"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（pop-star）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10082.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "pop-star",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "かみなりパンチ",
-      "たたきつける",
-      "しっぽをふる",
-      "なきごえ",
-      "かいりき",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "フラッシュ",
-      "ねむる",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "いわくだき",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "ひみつのちから",
-      "シグナルビーム",
-      "ほしがる",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "ドレインキッス",
-      "なかよくする",
-      "ないしょばなし",
-      "ほっぺすりすり"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（phd）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10083.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "phd",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "かみなりパンチ",
-      "たたきつける",
-      "しっぽをふる",
-      "なきごえ",
-      "かいりき",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "フラッシュ",
-      "ねむる",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "いわくだき",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "ひみつのちから",
-      "シグナルビーム",
-      "ほしがる",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "なかよくする",
-      "ないしょばなし",
-      "エレキフィールド",
-      "ほっぺすりすり"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（libre）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10084.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "libre",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "かみなりパンチ",
-      "たたきつける",
-      "しっぽをふる",
-      "なきごえ",
-      "かいりき",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "フラッシュ",
-      "ねむる",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "いわくだき",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "ひみつのちから",
-      "シグナルビーム",
-      "ほしがる",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "フライングプレス",
-      "なかよくする",
-      "ないしょばなし",
-      "ほっぺすりすり"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（cosplay）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10085.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "cosplay",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "かみなりパンチ",
-      "たたきつける",
-      "しっぽをふる",
-      "なきごえ",
-      "かいりき",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "フラッシュ",
-      "ねむる",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "いわくだき",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "ひみつのちから",
-      "シグナルビーム",
-      "ほしがる",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "なかよくする",
-      "ないしょばなし",
-      "ほっぺすりすり"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（original-cap）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10094.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "original-cap",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "しっぽをふる",
-      "なきごえ",
-      "なみのり",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "スピードスター",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "きしかいせい",
-      "まもる",
-      "てんしのキッス",
-      "こらえる",
-      "あまえる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アンコール",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "さわぐ",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "うそなき",
-      "シグナルビーム",
-      "ほしがる",
-      "ボルテッカー",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "わるだくみ",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "チャームボイス",
-      "ドレインキッス",
-      "じゃれつく",
-      "なかよくする",
-      "ないしょばなし",
-      "かいでんぱ",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "とぎすます",
-      "ライジングボルト",
-      "テラバースト",
-      "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（hoenn-cap）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10095.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "hoenn-cap",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "しっぽをふる",
-      "なきごえ",
-      "なみのり",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "スピードスター",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "きしかいせい",
-      "まもる",
-      "てんしのキッス",
-      "こらえる",
-      "あまえる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アンコール",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "さわぐ",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "うそなき",
-      "シグナルビーム",
-      "ほしがる",
-      "ボルテッカー",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "わるだくみ",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "チャームボイス",
-      "ドレインキッス",
-      "じゃれつく",
-      "なかよくする",
-      "ないしょばなし",
-      "かいでんぱ",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "とぎすます",
-      "ライジングボルト",
-      "テラバースト",
-      "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（sinnoh-cap）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10096.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "sinnoh-cap",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "しっぽをふる",
-      "なきごえ",
-      "なみのり",
-      "カウンター",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "スピードスター",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "じたばた",
-      "きしかいせい",
-      "まもる",
-      "てんしのキッス",
-      "こらえる",
-      "あまえる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アンコール",
-      "こうそくスピン",
-      "アイアンテール",
-      "メタルクロー",
-      "めざめるパワー",
-      "あまごい",
-      "さわぐ",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "ブレイククロー",
-      "うそなき",
-      "シグナルビーム",
-      "マッドショット",
-      "ほしがる",
-      "ボルテッカー",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "つじぎり",
-      "わるだくみ",
-      "ロッククライム",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "つめとぎ",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "なしくずし",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "たがやす",
-      "チャームボイス",
-      "ドレインキッス",
-      "じゃれつく",
-      "なかよくする",
-      "ないしょばなし",
-      "かいでんぱ",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "とぎすます",
-      "ライジングボルト",
-      "テラバースト",
-      "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（unova-cap）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10097.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "unova-cap",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "しっぽをふる",
-      "なきごえ",
-      "なみのり",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "スピードスター",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "きしかいせい",
-      "まもる",
-      "てんしのキッス",
-      "こらえる",
-      "あまえる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アンコール",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "さわぐ",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "うそなき",
-      "シグナルビーム",
-      "ほしがる",
-      "ボルテッカー",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "わるだくみ",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "チャームボイス",
-      "ドレインキッス",
-      "じゃれつく",
-      "なかよくする",
-      "ないしょばなし",
-      "かいでんぱ",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "とぎすます",
-      "ライジングボルト",
-      "テラバースト",
-      "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（kalos-cap）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10098.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "kalos-cap",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "しっぽをふる",
-      "なきごえ",
-      "ちょうおんぱ",
-      "かなしばり",
-      "なみのり",
-      "カウンター",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "きあいだめ",
-      "スピードスター",
-      "ロケットずつき",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "きしかいせい",
-      "まもる",
-      "てんしのキッス",
-      "こらえる",
-      "あまえる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アンコール",
-      "おいうち",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "ふくろだたき",
-      "さわぐ",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "うそなき",
-      "シグナルビーム",
-      "ポイズンテール",
-      "ほしがる",
-      "ボルテッカー",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "わるだくみ",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "なしくずし",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "チャームボイス",
-      "ドレインキッス",
-      "じゃれつく",
-      "なかよくする",
-      "ないしょばなし",
-      "かいでんぱ",
-      "ベノムトラップ",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "とぎすます",
-      "ライジングボルト",
-      "テラバースト",
-      "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（alola-cap）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10099.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "alola-cap",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "しっぽをふる",
-      "なきごえ",
-      "なみのり",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "スピードスター",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "きしかいせい",
-      "まもる",
-      "てんしのキッス",
-      "こらえる",
-      "あまえる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アンコール",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "さわぐ",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "うそなき",
-      "シグナルビーム",
-      "ほしがる",
-      "ボルテッカー",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "わるだくみ",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "チャームボイス",
-      "ドレインキッス",
-      "じゃれつく",
-      "なかよくする",
-      "ないしょばなし",
-      "かいでんぱ",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "とぎすます",
-      "ライジングボルト",
-      "テラバースト",
-      "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（partner-cap）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10148.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "partner-cap",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "しっぽをふる",
-      "なきごえ",
-      "なみのり",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "スピードスター",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "きしかいせい",
-      "まもる",
-      "てんしのキッス",
-      "こらえる",
-      "あまえる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アンコール",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "さわぐ",
-      "からげんき",
-      "きあいパンチ",
-      "てだすけ",
-      "かわらわり",
-      "はたきおとす",
-      "うそなき",
-      "シグナルビーム",
-      "ほしがる",
-      "ボルテッカー",
-      "でんげきは",
-      "フェイント",
-      "なげつける",
-      "でんじふゆう",
-      "わるだくみ",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "エコーボイス",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "チャームボイス",
-      "ドレインキッス",
-      "じゃれつく",
-      "なかよくする",
-      "ないしょばなし",
-      "かいでんぱ",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "とぎすます",
-      "ライジングボルト",
-      "テラバースト",
-      "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（starter）",
-    "sprite_url": null,
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "starter",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 45,
-      "attack": 80,
-      "defense": 50,
-      "special-attack": 75,
-      "special-defense": 60,
-      "speed": 120
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "にどげり",
-      "ずつき",
-      "しっぽをふる",
-      "なきごえ",
-      "ちきゅうなげ",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "ねむる",
-      "みがわり",
-      "まもる",
-      "アイアンテール",
-      "からげんき",
-      "てだすけ",
-      "かわらわり",
-      "めいそう",
-      "ばちばちアクセル",
-      "ざぶざぶサーフ",
-      "ふわふわフォール"
-    ]
-  },
-  {
-    "pokedex_name": "ピカチュウ（world-cap）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10160.png",
-    "pokedex_number": 25,
-    "weight_kg": 6.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "world-cap",
-    "base_species": "ピカチュウ",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "special-attack": 50,
-      "special-defense": 50,
-      "speed": 90
-    },
-    "abilities": [
-      {
-        "name": "せいでんき",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ネコにこばん",
-      "かみなりパンチ",
-      "たたきつける",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "しっぽをふる",
-      "なきごえ",
-      "なみのり",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "こうそくいどう",
-      "でんこうせっか",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "スピードスター",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "きしかいせい",
-      "まもる",
-      "てんしのキッス",
-      "こらえる",
-      "あまえる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "アンコール",
-      "アイアンテール",
-      "あまごい",
-      "さわぐ",
-      "からげんき",
-      "てだすけ",
-      "かわらわり",
-      "うそなき",
-      "フェイント",
-      "なげつける",
-      "わるだくみ",
-      "ほうでん",
-      "くさむすび",
-      "チャージビーム",
-      "エレキボール",
-      "りんしょう",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "チャームボイス",
-      "ドレインキッス",
-      "じゃれつく",
-      "なかよくする",
-      "かいでんぱ",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "ライジングボルト",
-      "テラバースト",
-      "くさわけ"
     ]
   },
   {
@@ -6422,7 +4794,7 @@
     ]
   },
   {
-    "pokedex_name": "ニドラン♀（f）",
+    "pokedex_name": "ニドラン♀",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/29.gif",
     "pokedex_number": 29,
     "weight_kg": 7.0,
@@ -6834,7 +5206,7 @@
     ]
   },
   {
-    "pokedex_name": "ニドラン♂（m）",
+    "pokedex_name": "ニドラン♂",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/32.gif",
     "pokedex_number": 32,
     "weight_kg": 9.0,
@@ -20379,129 +18751,6 @@
     ]
   },
   {
-    "pokedex_name": "ガラガラ（totem）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10149.png",
-    "pokedex_number": 105,
-    "weight_kg": 98.0,
-    "height_m": 1.7,
-    "is_default": false,
-    "form_name": "totem",
-    "base_species": "ガラガラ",
-    "types": [
-      {
-        "name": "Fire",
-        "slot": 1
-      },
-      {
-        "name": "Ghost",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 80,
-      "defense": 110,
-      "special-attack": 50,
-      "special-defense": 80,
-      "speed": 45
-    },
-    "abilities": [
-      {
-        "name": "のろわれボディ",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": false
-      },
-      {
-        "name": "いしあたま",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "ほのおのパンチ",
-      "かみなりパンチ",
-      "つるぎのまい",
-      "あばれる",
-      "しっぽをふる",
-      "にらみつける",
-      "なきごえ",
-      "かえんほうしゃ",
-      "れいとうビーム",
-      "ふぶき",
-      "はかいこうせん",
-      "けたぐり",
-      "１０まんボルト",
-      "かみなり",
-      "じしん",
-      "どくどく",
-      "かげぶんしん",
-      "ホネこんぼう",
-      "だいもんじ",
-      "ゆめくい",
-      "ホネブーメラン",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "どろぼう",
-      "かえんぐるま",
-      "いびき",
-      "うらみ",
-      "まもる",
-      "こごえるかぜ",
-      "ボーンラッシュ",
-      "げきりん",
-      "すなあらし",
-      "みねうち",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "いたみわけ",
-      "アイアンテール",
-      "めざめるパワー",
-      "あまごい",
-      "にほんばれ",
-      "シャドーボール",
-      "さわぐ",
-      "ねっぷう",
-      "おにび",
-      "からげんき",
-      "きあいパンチ",
-      "かわらわり",
-      "はたきおとす",
-      "がむしゃら",
-      "がんせきふうじ",
-      "つばめがえし",
-      "てっぺき",
-      "なげつける",
-      "フレアドライブ",
-      "あくのはどう",
-      "きあいだま",
-      "だいちのちから",
-      "ギガインパクト",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "うちおとす",
-      "ニトロチャージ",
-      "りんしょう",
-      "エコーボイス",
-      "サイドチェンジ",
-      "たたりめ",
-      "かたきうち",
-      "じならし",
-      "ないしょばなし",
-      "とぎすます",
-      "じごくづき",
-      "ぶんまわす",
-      "じだんだ",
-      "シャドーボーン"
-    ]
-  },
-  {
     "pokedex_name": "サワムラー",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/106.gif",
     "pokedex_number": 106,
@@ -22960,13 +21209,13 @@
     "moves": []
   },
   {
-    "pokedex_name": "バリヤード（mime）",
+    "pokedex_name": "バリヤード",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/122.gif",
     "pokedex_number": 122,
     "weight_kg": 54.5,
     "height_m": 1.3,
     "is_default": true,
-    "form_name": "mime",
+    "form_name": "通常",
     "base_species": "バリヤード",
     "types": [
       {
@@ -23131,13 +21380,13 @@
     ]
   },
   {
-    "pokedex_name": "バリヤード（mime-galar）",
+    "pokedex_name": "バリヤード（ガラルのすがた）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10168.png",
     "pokedex_number": 122,
     "weight_kg": 56.8,
     "height_m": 1.4,
     "is_default": false,
-    "form_name": "mime-galar",
+    "form_name": "ガラルのすがた",
     "base_species": "バリヤード",
     "types": [
       {
@@ -25121,76 +23370,6 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
-  },
-  {
-    "pokedex_name": "イーブイ（starter）",
-    "sprite_url": null,
-    "pokedex_number": 133,
-    "weight_kg": 6.5,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "starter",
-    "base_species": "イーブイ",
-    "types": [
-      {
-        "name": "Normal",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 65,
-      "attack": 75,
-      "defense": 70,
-      "special-attack": 65,
-      "special-defense": 85,
-      "speed": 75
-    },
-    "abilities": [
-      {
-        "name": "にげあし",
-        "is_hidden": false
-      },
-      {
-        "name": "てきおうりょく",
-        "is_hidden": false
-      },
-      {
-        "name": "きけんよち",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "ネコにこばん",
-      "にどげり",
-      "すなかけ",
-      "ずつき",
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "しっぽをふる",
-      "かみつく",
-      "なきごえ",
-      "あなをほる",
-      "どくどく",
-      "でんこうせっか",
-      "リフレクター",
-      "スピードスター",
-      "ねむる",
-      "みがわり",
-      "まもる",
-      "アイアンテール",
-      "シャドーボール",
-      "からげんき",
-      "てだすけ",
-      "いきいきバブル",
-      "びりびりエレキ",
-      "めらめらバーン",
-      "どばどばオーラ",
-      "わるわるゾーン",
-      "すくすくボンバー",
-      "こちこちフロスト",
-      "きらきらストーム"
     ]
   },
   {
@@ -43017,7 +41196,7 @@
     ]
   },
   {
-    "pokedex_name": "ホウオウ（oh）",
+    "pokedex_name": "ホウオウ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/250.gif",
     "pokedex_number": 250,
     "weight_kg": 199.0,
@@ -59111,13 +57290,13 @@
     ]
   },
   {
-    "pokedex_name": "アブソル（mega-z）",
+    "pokedex_name": "アブソル（メガZ）",
     "sprite_url": null,
     "pokedex_number": 359,
     "weight_kg": 49.0,
     "height_m": 1.2,
     "is_default": false,
-    "form_name": "mega-z",
+    "form_name": "メガZ",
     "base_species": "アブソル",
     "types": [
       {
@@ -70166,7 +68345,7 @@
     ]
   },
   {
-    "pokedex_name": "マネネ（jr）",
+    "pokedex_name": "マネネ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/439.gif",
     "pokedex_number": 439,
     "weight_kg": 13.0,
@@ -71129,13 +69308,13 @@
     ]
   },
   {
-    "pokedex_name": "ガブリアス（mega-z）",
+    "pokedex_name": "ガブリアス（メガZ）",
     "sprite_url": null,
     "pokedex_number": 445,
     "weight_kg": 99.0,
     "height_m": 1.9,
     "is_default": false,
-    "form_name": "mega-z",
+    "form_name": "メガZ",
     "base_species": "ガブリアス",
     "types": [
       {
@@ -71708,13 +69887,13 @@
     ]
   },
   {
-    "pokedex_name": "ルカリオ（mega-z）",
+    "pokedex_name": "ルカリオ（メガZ）",
     "sprite_url": null,
     "pokedex_number": 448,
     "weight_kg": 49.4,
     "height_m": 1.3,
     "is_default": false,
-    "form_name": "mega-z",
+    "form_name": "メガZ",
     "base_species": "ルカリオ",
     "types": [
       {
@@ -75104,7 +73283,7 @@
     ]
   },
   {
-    "pokedex_name": "ポリゴンＺ（z）",
+    "pokedex_name": "ポリゴンＺ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/474.gif",
     "pokedex_number": 474,
     "weight_kg": 34.0,
@@ -78494,13 +76673,13 @@
     "moves": []
   },
   {
-    "pokedex_name": "シェイミ（けしんフォルム）",
+    "pokedex_name": "シェイミ（通常フォルム）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/492.gif",
     "pokedex_number": 492,
     "weight_kg": 2.1,
     "height_m": 0.2,
     "is_default": true,
-    "form_name": "けしんフォルム",
+    "form_name": "通常",
     "base_species": "シェイミ",
     "types": [
       {
@@ -78602,13 +76781,13 @@
     ]
   },
   {
-    "pokedex_name": "シェイミ（れいじゅうフォルム）",
+    "pokedex_name": "シェイミ（スカイフォルム）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/10006.gif",
     "pokedex_number": 492,
     "weight_kg": 5.2,
     "height_m": 0.4,
     "is_default": false,
-    "form_name": "れいじゅうフォルム",
+    "form_name": "スカイフォルム",
     "base_species": "シェイミ",
     "types": [
       {
@@ -86725,13 +84904,13 @@
     ]
   },
   {
-    "pokedex_name": "ヒヒダルマ（galar-standard）",
+    "pokedex_name": "ヒヒダルマ（ガラルのすがた）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10177.png",
     "pokedex_number": 555,
     "weight_kg": 120.0,
     "height_m": 1.7,
     "is_default": false,
-    "form_name": "galar-standard",
+    "form_name": "ガラルのすがた",
     "base_species": "ヒヒダルマ",
     "types": [
       {
@@ -86827,13 +85006,13 @@
     ]
   },
   {
-    "pokedex_name": "ヒヒダルマ（galar-zen）",
+    "pokedex_name": "ヒヒダルマ（ガラルのすがた）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10178.png",
     "pokedex_number": 555,
     "weight_kg": 120.0,
     "height_m": 1.7,
     "is_default": false,
-    "form_name": "galar-zen",
+    "form_name": "ガラルのすがた",
     "base_species": "ヒヒダルマ",
     "types": [
       {
@@ -101939,13 +100118,13 @@
     ]
   },
   {
-    "pokedex_name": "フラエッテ（eternal）",
+    "pokedex_name": "フラエッテ（永遠）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10061.png",
     "pokedex_number": 670,
     "weight_kg": 0.9,
     "height_m": 0.2,
     "is_default": false,
-    "form_name": "eternal",
+    "form_name": "永遠",
     "base_species": "フラエッテ",
     "types": [
       {
@@ -102869,13 +101048,13 @@
     ]
   },
   {
-    "pokedex_name": "ニャオニクス（male）",
+    "pokedex_name": "ニャオニクス（オス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/678.png",
     "pokedex_number": 678,
     "weight_kg": 8.5,
     "height_m": 0.6,
     "is_default": true,
-    "form_name": "male",
+    "form_name": "オス",
     "base_species": "ニャオニクス",
     "types": [
       {
@@ -103000,13 +101179,13 @@
     ]
   },
   {
-    "pokedex_name": "ニャオニクス（female）",
+    "pokedex_name": "ニャオニクス（メス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10025.png",
     "pokedex_number": 678,
     "weight_kg": 8.5,
     "height_m": 0.6,
     "is_default": false,
-    "form_name": "female",
+    "form_name": "メス",
     "base_species": "ニャオニクス",
     "types": [
       {
@@ -109038,109 +107217,6 @@
     ]
   },
   {
-    "pokedex_name": "ジガルデ（50%フォルム）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10119.png",
-    "pokedex_number": 718,
-    "weight_kg": 305.0,
-    "height_m": 5.0,
-    "is_default": false,
-    "form_name": "50%フォルム",
-    "base_species": "ジガルデ",
-    "types": [
-      {
-        "name": "Dragon",
-        "slot": 1
-      },
-      {
-        "name": "Ground",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 108,
-      "attack": 100,
-      "defense": 121,
-      "special-attack": 81,
-      "special-defense": 95,
-      "speed": 95
-    },
-    "abilities": [
-      {
-        "name": "スワームチェンジ",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "しめつける",
-      "のしかかり",
-      "かみつく",
-      "はかいこうせん",
-      "じしん",
-      "あなをほる",
-      "どくどく",
-      "かげぶんしん",
-      "くろいきり",
-      "スピードスター",
-      "へびにらみ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "きしかいせい",
-      "うらみ",
-      "まもる",
-      "げきりん",
-      "すなあらし",
-      "こらえる",
-      "いばる",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "いたみわけ",
-      "りゅうのいぶき",
-      "アイアンテール",
-      "めざめるパワー",
-      "にほんばれ",
-      "かみくだく",
-      "しんそく",
-      "からげんき",
-      "ばかぢから",
-      "かわらわり",
-      "ほごしょく",
-      "ハイパーボイス",
-      "とおせんぼう",
-      "りゅうのまい",
-      "でんげきは",
-      "しっぺがえし",
-      "りゅうのはどう",
-      "きあいだま",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "りゅうせいぐん",
-      "ストーンエッジ",
-      "くさむすび",
-      "ヘドロウェーブ",
-      "とぐろをまく",
-      "りんしょう",
-      "かたきうち",
-      "じならし",
-      "ドラゴンテール",
-      "ないしょばなし",
-      "サウザンアロー",
-      "サウザンウェーブ",
-      "グランドフォース",
-      "１０まんばりき",
-      "コアパニッシャー",
-      "じだんだ",
-      "ワイドブレイカー",
-      "スケイルショット",
-      "はいよるいちげき",
-      "ねっさのだいち"
-    ]
-  },
-  {
     "pokedex_name": "ジガルデ（パーフェクトフォルム）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10120.png",
     "pokedex_number": 718,
@@ -109170,109 +107246,6 @@
     "abilities": [
       {
         "name": "スワームチェンジ",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "しめつける",
-      "のしかかり",
-      "かみつく",
-      "はかいこうせん",
-      "じしん",
-      "あなをほる",
-      "どくどく",
-      "かげぶんしん",
-      "くろいきり",
-      "スピードスター",
-      "へびにらみ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "きしかいせい",
-      "うらみ",
-      "まもる",
-      "げきりん",
-      "すなあらし",
-      "こらえる",
-      "いばる",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "いたみわけ",
-      "りゅうのいぶき",
-      "アイアンテール",
-      "めざめるパワー",
-      "にほんばれ",
-      "かみくだく",
-      "しんそく",
-      "からげんき",
-      "ばかぢから",
-      "かわらわり",
-      "ほごしょく",
-      "ハイパーボイス",
-      "とおせんぼう",
-      "りゅうのまい",
-      "でんげきは",
-      "しっぺがえし",
-      "りゅうのはどう",
-      "きあいだま",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "りゅうせいぐん",
-      "ストーンエッジ",
-      "くさむすび",
-      "ヘドロウェーブ",
-      "とぐろをまく",
-      "りんしょう",
-      "かたきうち",
-      "じならし",
-      "ドラゴンテール",
-      "ないしょばなし",
-      "サウザンアロー",
-      "サウザンウェーブ",
-      "グランドフォース",
-      "１０まんばりき",
-      "コアパニッシャー",
-      "じだんだ",
-      "ワイドブレイカー",
-      "スケイルショット",
-      "はいよるいちげき",
-      "ねっさのだいち"
-    ]
-  },
-  {
-    "pokedex_name": "ジガルデ（10%フォルム）",
-    "sprite_url": null,
-    "pokedex_number": 718,
-    "weight_kg": 33.5,
-    "height_m": 1.2,
-    "is_default": false,
-    "form_name": "10%フォルム",
-    "base_species": "ジガルデ",
-    "types": [
-      {
-        "name": "Dragon",
-        "slot": 1
-      },
-      {
-        "name": "Ground",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 54,
-      "attack": 100,
-      "defense": 71,
-      "special-attack": 61,
-      "special-defense": 85,
-      "speed": 115
-    },
-    "abilities": [
-      {
-        "name": "オーラブレイク",
         "is_hidden": false
       }
     ],
@@ -111709,102 +109682,6 @@
     ]
   },
   {
-    "pokedex_name": "デカグース（totem）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10121.png",
-    "pokedex_number": 735,
-    "weight_kg": 60.0,
-    "height_m": 1.4,
-    "is_default": false,
-    "form_name": "totem",
-    "base_species": "デカグース",
-    "types": [
-      {
-        "name": "Normal",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 88,
-      "attack": 110,
-      "defense": 60,
-      "special-attack": 55,
-      "special-defense": 60,
-      "speed": 45
-    },
-    "abilities": [
-      {
-        "name": "はりこみ",
-        "is_hidden": false
-      },
-      {
-        "name": "がんじょうあご",
-        "is_hidden": false
-      },
-      {
-        "name": "てきおうりょく",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "ほのおのパンチ",
-      "れいとうパンチ",
-      "かみなりパンチ",
-      "すなかけ",
-      "たいあたり",
-      "とっしん",
-      "あばれる",
-      "にらみつける",
-      "かみつく",
-      "ほえる",
-      "じしん",
-      "どくどく",
-      "かげぶんしん",
-      "がまん",
-      "ねむる",
-      "ひっさつまえば",
-      "いかりのまえば",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "まもる",
-      "こわいかお",
-      "どろかけ",
-      "すなあらし",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "おいうち",
-      "アイアンテール",
-      "めざめるパワー",
-      "かみくだく",
-      "さわぐ",
-      "いちゃもん",
-      "からげんき",
-      "ちょうはつ",
-      "あくび",
-      "がむしゃら",
-      "かぎわける",
-      "がんせきふうじ",
-      "とおせんぼう",
-      "でんげきは",
-      "とんぼがえり",
-      "しっぺがえし",
-      "なげつける",
-      "とっておき",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "りんしょう",
-      "エコーボイス",
-      "じならし",
-      "ふるいたてる",
-      "ダブルチョップ",
-      "ないしょばなし",
-      "じだんだ"
-    ]
-  },
-  {
     "pokedex_name": "アゴジムシ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/736.png",
     "pokedex_number": 736,
@@ -112089,94 +109966,6 @@
       "テラバースト",
       "とびつく",
       "サンダーダイブ"
-    ]
-  },
-  {
-    "pokedex_name": "クワガノン（totem）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10122.png",
-    "pokedex_number": 738,
-    "weight_kg": 147.5,
-    "height_m": 2.6,
-    "is_default": false,
-    "form_name": "totem",
-    "base_species": "クワガノン",
-    "types": [
-      {
-        "name": "Bug",
-        "slot": 1
-      },
-      {
-        "name": "Electric",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 77,
-      "attack": 70,
-      "defense": 90,
-      "special-attack": 145,
-      "special-defense": 75,
-      "speed": 43
-    },
-    "abilities": [
-      {
-        "name": "ふゆう",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "はさむ",
-      "ハサミギロチン",
-      "かみつく",
-      "はかいこうせん",
-      "ソーラービーム",
-      "いとをはく",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "ねむる",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "どろかけ",
-      "でんじほう",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "めざめるパワー",
-      "あまごい",
-      "からげんき",
-      "じゅうでん",
-      "シグナルビーム",
-      "てっぺき",
-      "でんげきは",
-      "はねやすめ",
-      "でんじふゆう",
-      "どくづき",
-      "エアスラッシュ",
-      "シザークロス",
-      "むしのさざめき",
-      "エナジーボール",
-      "ギガインパクト",
-      "ラスターカノン",
-      "むしくい",
-      "チャージビーム",
-      "りんしょう",
-      "フリーフォール",
-      "アクロバット",
-      "ボルトチェンジ",
-      "エレキネット",
-      "ワイルドボルト",
-      "ないしょばなし",
-      "とぎすます"
     ]
   },
   {
@@ -113106,109 +110895,6 @@
     ]
   },
   {
-    "pokedex_name": "アブリボン（totem）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10150.png",
-    "pokedex_number": 743,
-    "weight_kg": 2.0,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "totem",
-    "base_species": "アブリボン",
-    "types": [
-      {
-        "name": "Bug",
-        "slot": 1
-      },
-      {
-        "name": "Fairy",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 55,
-      "defense": 60,
-      "special-attack": 95,
-      "special-defense": 70,
-      "speed": 124
-    },
-    "abilities": [
-      {
-        "name": "みつあつめ",
-        "is_hidden": false
-      },
-      {
-        "name": "りんぷん",
-        "is_hidden": false
-      },
-      {
-        "name": "スイートベール",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "すいとる",
-      "ソーラービーム",
-      "しびれごな",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "リフレクター",
-      "ゆめくい",
-      "きゅうけつ",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "まもる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "あまいかおり",
-      "めざめるパワー",
-      "にほんばれ",
-      "じこあんじ",
-      "からげんき",
-      "しぜんのちから",
-      "てだすけ",
-      "トリック",
-      "スキルスワップ",
-      "アロマセラピー",
-      "ぎんいろのかぜ",
-      "シグナルビーム",
-      "つばめがえし",
-      "ほしがる",
-      "めいそう",
-      "はねやすめ",
-      "おいかぜ",
-      "とんぼがえり",
-      "とっておき",
-      "むしのさざめき",
-      "エナジーボール",
-      "きりばらい",
-      "むしくい",
-      "ワンダールーム",
-      "テレキネシス",
-      "マジックルーム",
-      "ちょうのまい",
-      "おさきにどうぞ",
-      "りんしょう",
-      "サイドチェンジ",
-      "アクロバット",
-      "むしのていこう",
-      "ドレインキッス",
-      "ようせいのかぜ",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "まとわりつく",
-      "かふんだんご"
-    ]
-  },
-  {
     "pokedex_name": "イワンコ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/744.png",
     "pokedex_number": 744,
@@ -113313,13 +110999,13 @@
     ]
   },
   {
-    "pokedex_name": "イワンコ（own-tempo）",
+    "pokedex_name": "イワンコ（マイペース）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10151.png",
     "pokedex_number": 744,
     "weight_kg": 9.2,
     "height_m": 0.5,
     "is_default": false,
-    "form_name": "own-tempo",
+    "form_name": "マイペース",
     "base_species": "イワンコ",
     "types": [
       {
@@ -114569,96 +112255,6 @@
     ]
   },
   {
-    "pokedex_name": "オニシズクモ（totem）",
-    "sprite_url": null,
-    "pokedex_number": 752,
-    "weight_kg": 217.5,
-    "height_m": 3.1,
-    "is_default": false,
-    "form_name": "totem",
-    "base_species": "オニシズクモ",
-    "types": [
-      {
-        "name": "Water",
-        "slot": 1
-      },
-      {
-        "name": "Bug",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 68,
-      "attack": 70,
-      "defense": 92,
-      "special-attack": 50,
-      "special-defense": 132,
-      "speed": 42
-    },
-    "abilities": [
-      {
-        "name": "すいほう",
-        "is_hidden": false
-      },
-      {
-        "name": "ちょすい",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "かみつく",
-      "なみのり",
-      "れいとうビーム",
-      "ふぶき",
-      "バブルこうせん",
-      "どくどく",
-      "かげぶんしん",
-      "リフレクター",
-      "たきのぼり",
-      "きゅうけつ",
-      "あわ",
-      "ねむる",
-      "みがわり",
-      "クモのす",
-      "いびき",
-      "まもる",
-      "こごえるかぜ",
-      "ギガドレイン",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "あまごい",
-      "かみくだく",
-      "ミラーコート",
-      "からげんき",
-      "マジックコート",
-      "シグナルビーム",
-      "てっぺき",
-      "みずのはどう",
-      "アクアリング",
-      "どくづき",
-      "シザークロス",
-      "むしくい",
-      "ワイドガード",
-      "ワンダールーム",
-      "マジックルーム",
-      "みずびたし",
-      "なかまづくり",
-      "りんしょう",
-      "ねっとう",
-      "こおりのいぶき",
-      "ないしょばなし",
-      "まとわりつく",
-      "とぎすます",
-      "とびかかる",
-      "アクアブレイク"
-    ]
-  },
-  {
     "pokedex_name": "カリキリ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/753.png",
     "pokedex_number": 753,
@@ -114856,97 +112452,6 @@
       "はいよるいちげき",
       "テラバースト",
       "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ラランテス（totem）",
-    "sprite_url": null,
-    "pokedex_number": 754,
-    "weight_kg": 58.0,
-    "height_m": 1.5,
-    "is_default": false,
-    "form_name": "totem",
-    "base_species": "ラランテス",
-    "types": [
-      {
-        "name": "Grass",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 70,
-      "attack": 105,
-      "defense": 90,
-      "special-attack": 80,
-      "special-defense": 90,
-      "speed": 45
-    },
-    "abilities": [
-      {
-        "name": "リーフガード",
-        "is_hidden": false
-      },
-      {
-        "name": "あまのじゃく",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "つるぎのまい",
-      "はかいこうせん",
-      "せいちょう",
-      "はっぱカッター",
-      "ソーラービーム",
-      "どくどく",
-      "かげぶんしん",
-      "きゅうけつ",
-      "ねむる",
-      "きりさく",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "ギガドレイン",
-      "みねうち",
-      "いばる",
-      "れんぞくぎり",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "あまいかおり",
-      "こうごうせい",
-      "めざめるパワー",
-      "にほんばれ",
-      "からげんき",
-      "しぜんのちから",
-      "ねをはる",
-      "ばかぢから",
-      "かわらわり",
-      "はたきおとす",
-      "シグナルビーム",
-      "つばめがえし",
-      "リーフブレード",
-      "しっぺがえし",
-      "なげつける",
-      "なやみのタネ",
-      "どくづき",
-      "つじぎり",
-      "タネばくだん",
-      "シザークロス",
-      "エナジーボール",
-      "ギガインパクト",
-      "きりばらい",
-      "くさむすび",
-      "むしくい",
-      "ローキック",
-      "りんしょう",
-      "ダブルチョップ",
-      "はなふぶき",
-      "ないしょばなし",
-      "ソーラーブレード",
-      "このは",
-      "とぎすます"
     ]
   },
   {
@@ -115398,103 +112903,6 @@
       "くさわけ",
       "ドラゴンエール",
       "やけっぱち"
-    ]
-  },
-  {
-    "pokedex_name": "エンニュート（totem）",
-    "sprite_url": null,
-    "pokedex_number": 758,
-    "weight_kg": 81.0,
-    "height_m": 2.1,
-    "is_default": false,
-    "form_name": "totem",
-    "base_species": "エンニュート",
-    "types": [
-      {
-        "name": "Poison",
-        "slot": 1
-      },
-      {
-        "name": "Fire",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 68,
-      "attack": 64,
-      "defense": 60,
-      "special-attack": 111,
-      "special-defense": 60,
-      "speed": 117
-    },
-    "abilities": [
-      {
-        "name": "ふしょく",
-        "is_hidden": false
-      },
-      {
-        "name": "どんかん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "はたく",
-      "おうふくビンタ",
-      "かなしばり",
-      "ひのこ",
-      "かえんほうしゃ",
-      "りゅうのいかり",
-      "どくどく",
-      "かげぶんしん",
-      "スモッグ",
-      "だいもんじ",
-      "どくガス",
-      "きゅうけつ",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "まもる",
-      "ヘドロばくだん",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "アンコール",
-      "あまいかおり",
-      "アイアンテール",
-      "めざめるパワー",
-      "ねっぷう",
-      "いちゃもん",
-      "おにび",
-      "からげんき",
-      "ちょうはつ",
-      "てだすけ",
-      "はたきおとす",
-      "よこどり",
-      "オーバーヒート",
-      "ドラゴンクロー",
-      "ほしがる",
-      "しっぺがえし",
-      "なげつける",
-      "どくづき",
-      "りゅうのはどう",
-      "わるだくみ",
-      "シャドークロー",
-      "ダストシュート",
-      "ゆうわく",
-      "ベノムショック",
-      "はじけるほのお",
-      "ヘドロウェーブ",
-      "ニトロチャージ",
-      "イカサマ",
-      "りんしょう",
-      "アクロバット",
-      "ドラゴンテール",
-      "ないしょばなし",
-      "ベノムトラップ",
-      "とぎすます"
     ]
   },
   {
@@ -116943,13 +114351,13 @@
     ]
   },
   {
-    "pokedex_name": "タイプ：ヌル（null）",
+    "pokedex_name": "タイプ：ヌル",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/772.png",
     "pokedex_number": 772,
     "weight_kg": 120.5,
     "height_m": 1.9,
     "is_default": true,
-    "form_name": "null",
+    "form_name": "通常",
     "base_species": "タイプ：ヌル",
     "types": [
       {
@@ -117151,13 +114559,13 @@
     ]
   },
   {
-    "pokedex_name": "メテノ（red-meteor）",
+    "pokedex_name": "メテノ（りゅうせいのすがた）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/774.png",
     "pokedex_number": 774,
     "weight_kg": 40.0,
     "height_m": 0.3,
     "is_default": true,
-    "form_name": "red-meteor",
+    "form_name": "りゅうせいのすがた",
     "base_species": "メテノ",
     "types": [
       {
@@ -117251,1214 +114659,14 @@
     ]
   },
   {
-    "pokedex_name": "メテノ（orange-meteor）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10130.png",
-    "pokedex_number": 774,
-    "weight_kg": 40.0,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "orange-meteor",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 60,
-      "defense": 100,
-      "special-attack": 60,
-      "special-defense": 100,
-      "speed": 60
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（yellow-meteor）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10131.png",
-    "pokedex_number": 774,
-    "weight_kg": 40.0,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "yellow-meteor",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 60,
-      "defense": 100,
-      "special-attack": 60,
-      "special-defense": 100,
-      "speed": 60
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（green-meteor）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10132.png",
-    "pokedex_number": 774,
-    "weight_kg": 40.0,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "green-meteor",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 60,
-      "defense": 100,
-      "special-attack": 60,
-      "special-defense": 100,
-      "speed": 60
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（blue-meteor）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10133.png",
-    "pokedex_number": 774,
-    "weight_kg": 40.0,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "blue-meteor",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 60,
-      "defense": 100,
-      "special-attack": 60,
-      "special-defense": 100,
-      "speed": 60
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（indigo-meteor）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10134.png",
-    "pokedex_number": 774,
-    "weight_kg": 40.0,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "indigo-meteor",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 60,
-      "defense": 100,
-      "special-attack": 60,
-      "special-defense": 100,
-      "speed": 60
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（violet-meteor）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10135.png",
-    "pokedex_number": 774,
-    "weight_kg": 40.0,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "violet-meteor",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 60,
-      "defense": 100,
-      "special-attack": 60,
-      "special-defense": 100,
-      "speed": 60
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（red）",
+    "pokedex_name": "メテノ（コア）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10136.png",
     "pokedex_number": 774,
     "weight_kg": 0.3,
     "height_m": 0.3,
     "is_default": false,
-    "form_name": "red",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 100,
-      "defense": 60,
-      "special-attack": 100,
-      "special-defense": 60,
-      "speed": 120
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（orange）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10137.png",
-    "pokedex_number": 774,
-    "weight_kg": 0.3,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "orange",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 100,
-      "defense": 60,
-      "special-attack": 100,
-      "special-defense": 60,
-      "speed": 120
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（yellow）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10138.png",
-    "pokedex_number": 774,
-    "weight_kg": 0.3,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "yellow",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 100,
-      "defense": 60,
-      "special-attack": 100,
-      "special-defense": 60,
-      "speed": 120
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（green）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10139.png",
-    "pokedex_number": 774,
-    "weight_kg": 0.3,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "green",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 100,
-      "defense": 60,
-      "special-attack": 100,
-      "special-defense": 60,
-      "speed": 120
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（blue）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10140.png",
-    "pokedex_number": 774,
-    "weight_kg": 0.3,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "blue",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 100,
-      "defense": 60,
-      "special-attack": 100,
-      "special-defense": 60,
-      "speed": 120
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（indigo）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10141.png",
-    "pokedex_number": 774,
-    "weight_kg": 0.3,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "indigo",
-    "base_species": "メテノ",
-    "types": [
-      {
-        "name": "Rock",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 60,
-      "attack": 100,
-      "defense": 60,
-      "special-attack": 100,
-      "special-defense": 60,
-      "speed": 120
-    },
-    "abilities": [
-      {
-        "name": "リミットシールド",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "ソーラービーム",
-      "じしん",
-      "どくどく",
-      "サイコキネシス",
-      "かげぶんしん",
-      "あやしいひかり",
-      "まるくなる",
-      "ひかりのかべ",
-      "リフレクター",
-      "じばく",
-      "スピードスター",
-      "だいばくはつ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "めざめるパワー",
-      "じこあんじ",
-      "げんしのちから",
-      "からげんき",
-      "がむしゃら",
-      "がんせきふうじ",
-      "コスモパワー",
-      "めいそう",
-      "ロックブラスト",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "とっておき",
-      "でんじふゆう",
-      "ロックカット",
-      "パワージェム",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "アイアンヘッド",
-      "ストーンエッジ",
-      "ステルスロック",
-      "チャージビーム",
-      "ボディパージ",
-      "テレキネシス",
-      "りんしょう",
-      "からをやぶる",
-      "アクロバット",
-      "じならし",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "メテオビーム",
-      "ねっさのだいち",
-      "テラバースト"
-    ]
-  },
-  {
-    "pokedex_name": "メテノ（violet）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10142.png",
-    "pokedex_number": 774,
-    "weight_kg": 0.3,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "violet",
-    "base_species": "メテノ",
+    "form_name": "コア",
+    "base_species": "メテノ（りゅうせいのすがた）",
     "types": [
       {
         "name": "Rock",
@@ -118894,125 +115102,13 @@
     ]
   },
   {
-    "pokedex_name": "トゲデマル（totem）",
-    "sprite_url": null,
-    "pokedex_number": 777,
-    "weight_kg": 13.0,
-    "height_m": 0.6,
-    "is_default": false,
-    "form_name": "totem",
-    "base_species": "トゲデマル",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      },
-      {
-        "name": "Steel",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 65,
-      "attack": 98,
-      "defense": 63,
-      "special-attack": 40,
-      "special-defense": 73,
-      "speed": 96
-    },
-    "abilities": [
-      {
-        "name": "てつのトゲ",
-        "is_hidden": false
-      },
-      {
-        "name": "ひらいしん",
-        "is_hidden": false
-      },
-      {
-        "name": "がんじょう",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "たいあたり",
-      "ダブルニードル",
-      "ミサイルばり",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "どくどく",
-      "かげぶんしん",
-      "まるくなる",
-      "リフレクター",
-      "ねむる",
-      "いかりのまえば",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "じたばた",
-      "きしかいせい",
-      "まもる",
-      "ころがる",
-      "いばる",
-      "スパーク",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "プレゼント",
-      "やつあたり",
-      "アンコール",
-      "アイアンテール",
-      "めざめるパワー",
-      "ねこだまし",
-      "からげんき",
-      "じゅうでん",
-      "てだすけ",
-      "なりきり",
-      "ねがいごと",
-      "がむしゃら",
-      "くすぐる",
-      "とびはねる",
-      "ほしがる",
-      "でんげきは",
-      "じゅうりょく",
-      "ジャイロボール",
-      "とんぼがえり",
-      "しっぺがえし",
-      "なげつける",
-      "とっておき",
-      "でんじふゆう",
-      "どくづき",
-      "ギガインパクト",
-      "しねんのずつき",
-      "ほうでん",
-      "アイアンヘッド",
-      "くさむすび",
-      "チャージビーム",
-      "おさきにどうぞ",
-      "りんしょう",
-      "ボルトチェンジ",
-      "ふるいたてる",
-      "エレキネット",
-      "ワイルドボルト",
-      "とどめばり",
-      "チャームボイス",
-      "ないしょばなし",
-      "ニードルガード",
-      "エレキフィールド",
-      "ほっぺすりすり",
-      "びりびりちくちく"
-    ]
-  },
-  {
-    "pokedex_name": "ミミッキュ（disguised）",
+    "pokedex_name": "ミミッキュ（ばけたすがた）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/778.png",
     "pokedex_number": 778,
     "weight_kg": 0.7,
     "height_m": 0.2,
     "is_default": true,
-    "form_name": "disguised",
+    "form_name": "ばけたすがた",
     "base_species": "ミミッキュ",
     "types": [
       {
@@ -119129,14 +115225,14 @@
     ]
   },
   {
-    "pokedex_name": "ミミッキュ（busted）",
+    "pokedex_name": "ミミッキュ（ばれたすがた）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10143.png",
     "pokedex_number": 778,
     "weight_kg": 0.7,
     "height_m": 0.2,
     "is_default": false,
-    "form_name": "busted",
-    "base_species": "ミミッキュ",
+    "form_name": "ばれたすがた",
+    "base_species": "ミミッキュ（ばけたすがた）",
     "types": [
       {
         "name": "Ghost",
@@ -119250,211 +115346,6 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ミミッキュ（totem-disguised）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10144.png",
-    "pokedex_number": 778,
-    "weight_kg": 2.8,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "totem-disguised",
-    "base_species": "ミミッキュ",
-    "types": [
-      {
-        "name": "Ghost",
-        "slot": 1
-      },
-      {
-        "name": "Fairy",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 55,
-      "attack": 90,
-      "defense": 80,
-      "special-attack": 50,
-      "special-defense": 105,
-      "speed": 96
-    },
-    "abilities": [
-      {
-        "name": "ばけのかわ",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "ひっかく",
-      "つるぎのまい",
-      "はかいこうせん",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "どくどく",
-      "サイコキネシス",
-      "ものまね",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "ゆめくい",
-      "きゅうけつ",
-      "はねる",
-      "ねむる",
-      "きりさく",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "うらみ",
-      "まもる",
-      "だましうち",
-      "ギガドレイン",
-      "あまえる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "いたみわけ",
-      "めざめるパワー",
-      "じこあんじ",
-      "シャドーボール",
-      "おにび",
-      "からげんき",
-      "ちょうはつ",
-      "トリック",
-      "よこどり",
-      "おどろかす",
-      "ビルドアップ",
-      "ほしがる",
-      "しっぺがえし",
-      "さしおさえ",
-      "なげつける",
-      "まねっこ",
-      "とっておき",
-      "あくのはどう",
-      "シザークロス",
-      "ドレインパンチ",
-      "シャドークロー",
-      "かげうち",
-      "トリックルーム",
-      "チャージビーム",
-      "ウッドハンマー",
-      "つめとぎ",
-      "テレキネシス",
-      "マジックルーム",
-      "おさきにどうぞ",
-      "りんしょう",
-      "ふるいたてる",
-      "じゃれつく",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "つぶらなひとみ",
-      "まとわりつく"
-    ]
-  },
-  {
-    "pokedex_name": "ミミッキュ（totem-busted）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10145.png",
-    "pokedex_number": 778,
-    "weight_kg": 2.8,
-    "height_m": 0.4,
-    "is_default": false,
-    "form_name": "totem-busted",
-    "base_species": "ミミッキュ",
-    "types": [
-      {
-        "name": "Ghost",
-        "slot": 1
-      },
-      {
-        "name": "Fairy",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 55,
-      "attack": 90,
-      "defense": 80,
-      "special-attack": 50,
-      "special-defense": 105,
-      "speed": 96
-    },
-    "abilities": [
-      {
-        "name": "ばけのかわ",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "ひっかく",
-      "つるぎのまい",
-      "なみのり",
-      "はかいこうせん",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "どくどく",
-      "サイコキネシス",
-      "ものまね",
-      "かげぶんしん",
-      "ひかりのかべ",
-      "ゆめくい",
-      "きゅうけつ",
-      "はねる",
-      "ねむる",
-      "きりさく",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "うらみ",
-      "まもる",
-      "だましうち",
-      "ギガドレイン",
-      "あまえる",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "いたみわけ",
-      "めざめるパワー",
-      "じこあんじ",
-      "シャドーボール",
-      "おにび",
-      "からげんき",
-      "ちょうはつ",
-      "トリック",
-      "よこどり",
-      "おどろかす",
-      "ビルドアップ",
-      "ほしがる",
-      "しっぺがえし",
-      "さしおさえ",
-      "なげつける",
-      "まねっこ",
-      "とっておき",
-      "あくのはどう",
-      "シザークロス",
-      "ドレインパンチ",
-      "シャドークロー",
-      "かげうち",
-      "トリックルーム",
-      "チャージビーム",
-      "ウッドハンマー",
-      "つめとぎ",
-      "テレキネシス",
-      "マジックルーム",
-      "おさきにどうぞ",
-      "りんしょう",
-      "ふるいたてる",
-      "じゃれつく",
-      "ないしょばなし",
-      "マジカルシャイン",
-      "つぶらなひとみ",
-      "まとわりつく"
     ]
   },
   {
@@ -119860,7 +115751,7 @@
     ]
   },
   {
-    "pokedex_name": "ジャラコ（o）",
+    "pokedex_name": "ジャラコ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/782.png",
     "pokedex_number": 782,
     "weight_kg": 29.7,
@@ -119966,7 +115857,7 @@
     ]
   },
   {
-    "pokedex_name": "ジャランゴ（o）",
+    "pokedex_name": "ジャランゴ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/783.png",
     "pokedex_number": 783,
     "weight_kg": 47.0,
@@ -120090,7 +115981,7 @@
     ]
   },
   {
-    "pokedex_name": "ジャラランガ（o）",
+    "pokedex_name": "ジャラランガ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/784.png",
     "pokedex_number": 784,
     "weight_kg": 78.2,
@@ -120241,137 +116132,13 @@
     ]
   },
   {
-    "pokedex_name": "ジャラランガ（o-totem）",
-    "sprite_url": null,
-    "pokedex_number": 784,
-    "weight_kg": 207.5,
-    "height_m": 2.4,
-    "is_default": false,
-    "form_name": "o-totem",
-    "base_species": "ジャラランガ",
-    "types": [
-      {
-        "name": "Dragon",
-        "slot": 1
-      },
-      {
-        "name": "Fighting",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 75,
-      "attack": 110,
-      "defense": 125,
-      "special-attack": 100,
-      "special-defense": 105,
-      "speed": 85
-    },
-    "abilities": [
-      {
-        "name": "ぼうだん",
-        "is_hidden": false
-      },
-      {
-        "name": "ぼうおん",
-        "is_hidden": false
-      },
-      {
-        "name": "ぼうじん",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "ほのおのパンチ",
-      "れいとうパンチ",
-      "かみなりパンチ",
-      "つるぎのまい",
-      "ずつき",
-      "たいあたり",
-      "にらみつける",
-      "ほえる",
-      "かえんほうしゃ",
-      "はかいこうせん",
-      "けたぐり",
-      "じしん",
-      "どくどく",
-      "いやなおと",
-      "かげぶんしん",
-      "がまん",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "いびき",
-      "まもる",
-      "こわいかお",
-      "はらだいこ",
-      "げきりん",
-      "すなあらし",
-      "みねうち",
-      "いばる",
-      "メロメロ",
-      "ねごと",
-      "おんがえし",
-      "やつあたり",
-      "しんぴのまもり",
-      "アイアンテール",
-      "めざめるパワー",
-      "さわぐ",
-      "からげんき",
-      "きあいパンチ",
-      "ちょうはつ",
-      "ばかぢから",
-      "かわらわり",
-      "がむしゃら",
-      "ハイパーボイス",
-      "がんせきふうじ",
-      "スカイアッパー",
-      "つばめがえし",
-      "てっぺき",
-      "ドラゴンクロー",
-      "ビルドアップ",
-      "りゅうのまい",
-      "でんげきは",
-      "みずのはどう",
-      "インファイト",
-      "しっぺがえし",
-      "なげつける",
-      "ロックカット",
-      "どくづき",
-      "アクアテール",
-      "シザークロス",
-      "りゅうのはどう",
-      "ドレインパンチ",
-      "きあいだま",
-      "ギガインパクト",
-      "シャドークロー",
-      "ラスターカノン",
-      "りゅうせいぐん",
-      "アイアンヘッド",
-      "ステルスロック",
-      "ボディパージ",
-      "りんしょう",
-      "エコーボイス",
-      "じならし",
-      "ドラゴンテール",
-      "ふるいたてる",
-      "ダブルチョップ",
-      "おたけび",
-      "ないしょばなし",
-      "とぎすます",
-      "スケイルノイズ",
-      "ぶんまわす",
-      "じだんだ"
-    ]
-  },
-  {
-    "pokedex_name": "カプ・コケコ（koko）",
+    "pokedex_name": "カプ・コケコ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/785.png",
     "pokedex_number": 785,
     "weight_kg": 20.5,
     "height_m": 1.8,
     "is_default": true,
-    "form_name": "koko",
+    "form_name": "通常",
     "base_species": "カプ・コケコ",
     "types": [
       {
@@ -120479,13 +116246,13 @@
     ]
   },
   {
-    "pokedex_name": "カプ・テテフ（lele）",
+    "pokedex_name": "カプ・テテフ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/786.png",
     "pokedex_number": 786,
     "weight_kg": 18.6,
     "height_m": 1.2,
     "is_default": true,
-    "form_name": "lele",
+    "form_name": "通常",
     "base_species": "カプ・テテフ",
     "types": [
       {
@@ -120590,13 +116357,13 @@
     ]
   },
   {
-    "pokedex_name": "カプ・ブルル（bulu）",
+    "pokedex_name": "カプ・ブルル",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/787.png",
     "pokedex_number": 787,
     "weight_kg": 45.5,
     "height_m": 1.9,
     "is_default": true,
-    "form_name": "bulu",
+    "form_name": "通常",
     "base_species": "カプ・ブルル",
     "types": [
       {
@@ -120711,13 +116478,13 @@
     ]
   },
   {
-    "pokedex_name": "カプ・レヒレ（fini）",
+    "pokedex_name": "カプ・レヒレ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/788.png",
     "pokedex_number": 788,
     "weight_kg": 21.2,
     "height_m": 1.3,
     "is_default": true,
-    "form_name": "fini",
+    "form_name": "通常",
     "base_species": "カプ・レヒレ",
     "types": [
       {
@@ -121951,13 +117718,13 @@
     ]
   },
   {
-    "pokedex_name": "ネクロズマ（たそがれのすがた）",
+    "pokedex_name": "ネクロズマ（日食）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10155.png",
     "pokedex_number": 800,
     "weight_kg": 460.0,
     "height_m": 3.8,
     "is_default": false,
-    "form_name": "たそがれのすがた",
+    "form_name": "日食",
     "base_species": "ネクロズマ",
     "types": [
       {
@@ -122077,13 +117844,13 @@
     ]
   },
   {
-    "pokedex_name": "ネクロズマ（dawn）",
+    "pokedex_name": "ネクロズマ（月食）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10156.png",
     "pokedex_number": 800,
     "weight_kg": 350.0,
     "height_m": 4.2,
     "is_default": false,
-    "form_name": "dawn",
+    "form_name": "月食",
     "base_species": "ネクロズマ",
     "types": [
       {
@@ -122599,36 +118366,6 @@
     "height_m": 1.3,
     "is_default": false,
     "form_name": "メガ",
-    "base_species": "マギアナ",
-    "types": [
-      {
-        "name": "Steel",
-        "slot": 1
-      },
-      {
-        "name": "Fairy",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 80,
-      "attack": 125,
-      "defense": 115,
-      "special-attack": 170,
-      "special-defense": 115,
-      "speed": 95
-    },
-    "abilities": [],
-    "moves": []
-  },
-  {
-    "pokedex_name": "マギアナ（original-mega）",
-    "sprite_url": null,
-    "pokedex_number": 801,
-    "weight_kg": 248.1,
-    "height_m": 1.3,
-    "is_default": false,
-    "form_name": "original-mega",
     "base_species": "マギアナ",
     "types": [
       {
@@ -127070,100 +122807,13 @@
     ]
   },
   {
-    "pokedex_name": "ウッウ（うのみのすがた）",
+    "pokedex_name": "ウッウ",
     "sprite_url": null,
     "pokedex_number": 845,
     "weight_kg": 18.0,
     "height_m": 0.8,
     "is_default": false,
-    "form_name": "うのみのすがた",
-    "base_species": "ウッウ",
-    "types": [
-      {
-        "name": "Flying",
-        "slot": 1
-      },
-      {
-        "name": "Water",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 70,
-      "attack": 85,
-      "defense": 55,
-      "special-attack": 85,
-      "special-defense": 95,
-      "speed": 85
-    },
-    "abilities": [
-      {
-        "name": "うのミサイル",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "そらをとぶ",
-      "みだれづき",
-      "あばれる",
-      "みずでっぽう",
-      "ハイドロポンプ",
-      "なみのり",
-      "れいとうビーム",
-      "ふぶき",
-      "はかいこうせん",
-      "つつく",
-      "ドリルくちばし",
-      "こうそくいどう",
-      "ドわすれ",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "きしかいせい",
-      "まもる",
-      "こごえるかぜ",
-      "こらえる",
-      "はがねのつばさ",
-      "メロメロ",
-      "ねごと",
-      "あまごい",
-      "うずしお",
-      "さわぐ",
-      "たくわえる",
-      "はきだす",
-      "のみこむ",
-      "からげんき",
-      "ばかぢから",
-      "ダイビング",
-      "フェザーダンス",
-      "ウェザーボール",
-      "つばめがえし",
-      "はねやすめ",
-      "ついばむ",
-      "ダメおし",
-      "アクアリング",
-      "エアスラッシュ",
-      "ブレイブバード",
-      "ギガインパクト",
-      "きりばらい",
-      "りんしょう",
-      "ねっとう",
-      "ぼうふう",
-      "ゲップ",
-      "じごくづき",
-      "アクアブレイク",
-      "ダブルウイング"
-    ]
-  },
-  {
-    "pokedex_name": "ウッウ（まるのみのすがた）",
-    "sprite_url": null,
-    "pokedex_number": 845,
-    "weight_kg": 18.0,
-    "height_m": 0.8,
-    "is_default": false,
-    "form_name": "まるのみのすがた",
+    "form_name": "通常",
     "base_species": "ウッウ",
     "types": [
       {
@@ -127723,13 +123373,13 @@
     ]
   },
   {
-    "pokedex_name": "ストリンダー（amped-gmax）",
+    "pokedex_name": "ストリンダー（キョダイマックス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10219.png",
     "pokedex_number": 849,
     "weight_kg": 1000.0,
     "height_m": 24.0,
     "is_default": false,
-    "form_name": "amped-gmax",
+    "form_name": "キョダイマックス",
     "base_species": "ストリンダー",
     "types": [
       {
@@ -127756,49 +123406,6 @@
       },
       {
         "name": "プラス",
-        "is_hidden": false
-      },
-      {
-        "name": "テクニシャン",
-        "is_hidden": true
-      }
-    ],
-    "moves": []
-  },
-  {
-    "pokedex_name": "ストリンダー（low-key-gmax）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10228.png",
-    "pokedex_number": 849,
-    "weight_kg": 1000.0,
-    "height_m": 24.0,
-    "is_default": false,
-    "form_name": "low-key-gmax",
-    "base_species": "ストリンダー",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      },
-      {
-        "name": "Poison",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 75,
-      "attack": 98,
-      "defense": 70,
-      "special-attack": 114,
-      "special-defense": 70,
-      "speed": 75
-    },
-    "abilities": [
-      {
-        "name": "パンクロック",
-        "is_hidden": false
-      },
-      {
-        "name": "マイナス",
         "is_hidden": false
       },
       {
@@ -129472,13 +125079,13 @@
     ]
   },
   {
-    "pokedex_name": "バリコオル（rime）",
+    "pokedex_name": "バリコオル",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/866.png",
     "pokedex_number": 866,
     "weight_kg": 58.2,
     "height_m": 1.5,
     "is_default": true,
-    "form_name": "rime",
+    "form_name": "通常",
     "base_species": "バリコオル",
     "types": [
       {
@@ -130356,14 +125963,14 @@
     ]
   },
   {
-    "pokedex_name": "コオリッポ（アイスライダー）",
+    "pokedex_name": "コオリッポ（アイスフェイス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/875.png",
     "pokedex_number": 875,
     "weight_kg": 89.0,
     "height_m": 1.4,
     "is_default": true,
-    "form_name": "アイスライダー",
-    "base_species": "コオリッポ",
+    "form_name": "アイスフェイス",
+    "base_species": "コオリッポ（ナイスなすがた）",
     "types": [
       {
         "name": "Ice",
@@ -130450,7 +126057,7 @@
     "height_m": 1.4,
     "is_default": false,
     "form_name": "ナイスなすがた",
-    "base_species": "コオリッポ",
+    "base_species": "コオリッポ（アイスフェイス）",
     "types": [
       {
         "name": "Ice",
@@ -130530,13 +126137,13 @@
     ]
   },
   {
-    "pokedex_name": "イエッサン（male）",
+    "pokedex_name": "イエッサン（オス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/876.png",
     "pokedex_number": 876,
     "weight_kg": 28.0,
     "height_m": 0.9,
     "is_default": true,
-    "form_name": "male",
+    "form_name": "オス",
     "base_species": "イエッサン",
     "types": [
       {
@@ -130631,13 +126238,13 @@
     ]
   },
   {
-    "pokedex_name": "イエッサン（female）",
+    "pokedex_name": "イエッサン（メス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10186.png",
     "pokedex_number": 876,
     "weight_kg": 28.0,
     "height_m": 0.9,
     "is_default": false,
-    "form_name": "female",
+    "form_name": "メス",
     "base_species": "イエッサン",
     "types": [
       {
@@ -130733,14 +126340,14 @@
     ]
   },
   {
-    "pokedex_name": "モルペコ（full-belly）",
+    "pokedex_name": "モルペコ（まんぷく）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/877.png",
     "pokedex_number": 877,
     "weight_kg": 3.0,
     "height_m": 0.3,
     "is_default": true,
-    "form_name": "full-belly",
-    "base_species": "モルペコ",
+    "form_name": "まんぷく",
+    "base_species": "モルペコ（はらぺこ）",
     "types": [
       {
         "name": "Electric",
@@ -130843,14 +126450,14 @@
     ]
   },
   {
-    "pokedex_name": "モルペコ（まんぷくもよう）",
+    "pokedex_name": "モルペコ（はらぺこ）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10187.png",
     "pokedex_number": 877,
     "weight_kg": 3.0,
     "height_m": 0.3,
     "is_default": false,
-    "form_name": "まんぷくもよう",
-    "base_species": "モルペコ",
+    "form_name": "はらぺこ",
+    "base_species": "モルペコ（まんぷく）",
     "types": [
       {
         "name": "Electric",
@@ -132862,201 +128469,13 @@
     ]
   },
   {
-    "pokedex_name": "ウーラオス（single-strike-gmax）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10226.png",
-    "pokedex_number": 892,
-    "weight_kg": 1000.0,
-    "height_m": 29.0,
-    "is_default": false,
-    "form_name": "single-strike-gmax",
-    "base_species": "ウーラオス",
-    "types": [
-      {
-        "name": "Fighting",
-        "slot": 1
-      },
-      {
-        "name": "Dark",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 100,
-      "attack": 130,
-      "defense": 100,
-      "special-attack": 63,
-      "special-defense": 60,
-      "speed": 97
-    },
-    "abilities": [
-      {
-        "name": "ふかしのこぶし",
-        "is_hidden": false
-      }
-    ],
-    "moves": []
-  },
-  {
-    "pokedex_name": "ウーラオス（rapid-strike-gmax）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10227.png",
-    "pokedex_number": 892,
-    "weight_kg": 1000.0,
-    "height_m": 26.0,
-    "is_default": false,
-    "form_name": "rapid-strike-gmax",
-    "base_species": "ウーラオス",
-    "types": [
-      {
-        "name": "Fighting",
-        "slot": 1
-      },
-      {
-        "name": "Water",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 100,
-      "attack": 130,
-      "defense": 100,
-      "special-attack": 63,
-      "special-defense": 60,
-      "speed": 97
-    },
-    "abilities": [
-      {
-        "name": "ふかしのこぶし",
-        "is_hidden": false
-      }
-    ],
-    "moves": []
-  },
-  {
     "pokedex_name": "ザルード",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/893.png",
-    "pokedex_number": 893,
-    "weight_kg": 70.0,
-    "height_m": 1.8,
-    "is_default": true,
-    "form_name": "通常",
-    "base_species": "ザルード",
-    "types": [
-      {
-        "name": "Dark",
-        "slot": 1
-      },
-      {
-        "name": "Grass",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 105,
-      "attack": 120,
-      "defense": 105,
-      "special-attack": 70,
-      "special-defense": 95,
-      "speed": 105
-    },
-    "abilities": [
-      {
-        "name": "リーフガード",
-        "is_hidden": false
-      }
-    ],
-    "moves": [
-      "メガトンパンチ",
-      "ひっかく",
-      "つるぎのまい",
-      "しめつける",
-      "つるのムチ",
-      "メガトンキック",
-      "のしかかり",
-      "とっしん",
-      "あばれる",
-      "すてみタックル",
-      "にらみつける",
-      "かみつく",
-      "ほえる",
-      "はかいこうせん",
-      "けたぐり",
-      "せいちょう",
-      "ソーラービーム",
-      "あなをほる",
-      "スピードスター",
-      "みだれひっかき",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "どろぼう",
-      "いびき",
-      "まもる",
-      "こわいかお",
-      "ギガドレイン",
-      "こらえる",
-      "いばる",
-      "ねごと",
-      "アンコール",
-      "アイアンテール",
-      "こうごうせい",
-      "にほんばれ",
-      "かみくだく",
-      "からげんき",
-      "きあいパンチ",
-      "ちょうはつ",
-      "てだすけ",
-      "ばかぢから",
-      "リベンジ",
-      "かわらわり",
-      "はたきおとす",
-      "ハイパーボイス",
-      "がんせきふうじ",
-      "タネマシンガン",
-      "つばめがえし",
-      "ビルドアップ",
-      "マッドショット",
-      "マジカルリーフ",
-      "アームハンマー",
-      "とんぼがえり",
-      "インファイト",
-      "しっぺがえし",
-      "ダメおし",
-      "なげつける",
-      "あくのはどう",
-      "タネばくだん",
-      "ドレインパンチ",
-      "エナジーボール",
-      "ギガインパクト",
-      "わるだくみ",
-      "リーフストーム",
-      "パワーウィップ",
-      "くさむすび",
-      "ローキック",
-      "りんしょう",
-      "アクロバット",
-      "バークアウト",
-      "はなふぶき",
-      "グラスフィールド",
-      "ＤＤラリアット",
-      "ソーラーブレード",
-      "じごくづき",
-      "ぶんまわす",
-      "じだんだ",
-      "グラススライダー",
-      "うっぷんばらし",
-      "ジャングルヒール",
-      "テラバースト",
-      "くさわけ"
-    ]
-  },
-  {
-    "pokedex_name": "ザルード（dada）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10192.png",
     "pokedex_number": 893,
     "weight_kg": 70.0,
     "height_m": 1.8,
     "is_default": false,
-    "form_name": "dada",
+    "form_name": "通常",
     "base_species": "ザルード",
     "types": [
       {
@@ -134310,13 +129729,13 @@
     ]
   },
   {
-    "pokedex_name": "イダイトウ（male）",
+    "pokedex_name": "イダイトウ（オス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/902.png",
     "pokedex_number": 902,
     "weight_kg": 110.0,
     "height_m": 3.0,
     "is_default": true,
-    "form_name": "male",
+    "form_name": "オス",
     "base_species": "イダイトウ",
     "types": [
       {
@@ -134408,13 +129827,13 @@
     ]
   },
   {
-    "pokedex_name": "イダイトウ（female）",
+    "pokedex_name": "イダイトウ（メス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10248.png",
     "pokedex_number": 902,
     "weight_kg": 110.0,
     "height_m": 3.0,
     "is_default": false,
-    "form_name": "female",
+    "form_name": "メス",
     "base_species": "イダイトウ",
     "types": [
       {
@@ -135778,13 +131197,13 @@
     ]
   },
   {
-    "pokedex_name": "パフュートン（male）",
+    "pokedex_name": "パフュートン（オス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/916.png",
     "pokedex_number": 916,
     "weight_kg": 120.0,
     "height_m": 1.0,
     "is_default": true,
-    "form_name": "male",
+    "form_name": "オス",
     "base_species": "パフュートン",
     "types": [
       {
@@ -135865,13 +131284,13 @@
     ]
   },
   {
-    "pokedex_name": "パフュートン（female）",
+    "pokedex_name": "パフュートン（メス）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10254.png",
     "pokedex_number": 916,
     "weight_kg": 120.0,
     "height_m": 1.0,
     "is_default": false,
-    "form_name": "female",
+    "form_name": "メス",
     "base_species": "パフュートン",
     "types": [
       {
@@ -136759,95 +132178,6 @@
     ]
   },
   {
-    "pokedex_name": "イッカネズミ（3びきフォルム）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10257.png",
-    "pokedex_number": 925,
-    "weight_kg": 2.8,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "3びきフォルム",
-    "base_species": "イッカネズミ",
-    "types": [
-      {
-        "name": "Normal",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 74,
-      "attack": 75,
-      "defense": 70,
-      "special-attack": 65,
-      "special-defense": 75,
-      "speed": 111
-    },
-    "abilities": [
-      {
-        "name": "フレンドガード",
-        "is_hidden": false
-      },
-      {
-        "name": "ほおぶくろ",
-        "is_hidden": false
-      },
-      {
-        "name": "テクニシャン",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "はたく",
-      "とっしん",
-      "すてみタックル",
-      "はかいこうせん",
-      "けたぐり",
-      "でんじは",
-      "あなをほる",
-      "こうそくいどう",
-      "スピードスター",
-      "ねむる",
-      "いかりのまえば",
-      "みがわり",
-      "どろぼう",
-      "まもる",
-      "どろかけ",
-      "こらえる",
-      "あまえる",
-      "ねごと",
-      "アンコール",
-      "あまごい",
-      "にほんばれ",
-      "かみくだく",
-      "ふくろだたき",
-      "からげんき",
-      "このゆびとまれ",
-      "ちょうはつ",
-      "てだすけ",
-      "ハイパーボイス",
-      "うそなき",
-      "タネマシンガン",
-      "つばめがえし",
-      "マッドショット",
-      "みずのはどう",
-      "とんぼがえり",
-      "まねっこ",
-      "タネばくだん",
-      "ギガインパクト",
-      "シャドークロー",
-      "くさむすび",
-      "ダブルアタック",
-      "ローキック",
-      "エコーボイス",
-      "じゃれつく",
-      "つぶらなひとみ",
-      "テラバースト",
-      "ネズミざん",
-      "おかたづけ",
-      "くさわけ",
-      "ひやみず"
-    ]
-  },
-  {
     "pokedex_name": "パピモッチ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/926.png",
     "pokedex_number": 926,
@@ -137254,13 +132584,13 @@
     ]
   },
   {
-    "pokedex_name": "イキリンコ（green-plumage）",
+    "pokedex_name": "イキリンコ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/931.png",
     "pokedex_number": 931,
     "weight_kg": 2.4,
     "height_m": 0.6,
     "is_default": true,
-    "form_name": "green-plumage",
+    "form_name": "通常",
     "base_species": "イキリンコ",
     "types": [
       {
@@ -137291,279 +132621,6 @@
       },
       {
         "name": "こんじょう",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "そらをとぶ",
-      "みだれづき",
-      "とっしん",
-      "すてみタックル",
-      "なきごえ",
-      "はかいこうせん",
-      "つつく",
-      "でんこうせっか",
-      "ものまね",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "きしかいせい",
-      "まもる",
-      "こわいかお",
-      "こらえる",
-      "いばる",
-      "ねごと",
-      "にほんばれ",
-      "さわぐ",
-      "ねっぷう",
-      "いちゃもん",
-      "おだてる",
-      "からげんき",
-      "ちょうはつ",
-      "てだすけ",
-      "がむしゃら",
-      "フェザーダンス",
-      "ハイパーボイス",
-      "うそなき",
-      "エアカッター",
-      "つばめがえし",
-      "はねやすめ",
-      "おいかぜ",
-      "とんぼがえり",
-      "まねっこ",
-      "エアスラッシュ",
-      "ブレイブバード",
-      "ギガインパクト",
-      "イカサマ",
-      "いのちがけ",
-      "ぼうふう",
-      "すてゼリフ",
-      "うっぷんばらし",
-      "ダブルウイング",
-      "テラバースト",
-      "とびつく"
-    ]
-  },
-  {
-    "pokedex_name": "イキリンコ（blue-plumage）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10260.png",
-    "pokedex_number": 931,
-    "weight_kg": 2.4,
-    "height_m": 0.6,
-    "is_default": false,
-    "form_name": "blue-plumage",
-    "base_species": "イキリンコ",
-    "types": [
-      {
-        "name": "Normal",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 82,
-      "attack": 96,
-      "defense": 51,
-      "special-attack": 45,
-      "special-defense": 51,
-      "speed": 92
-    },
-    "abilities": [
-      {
-        "name": "いかく",
-        "is_hidden": false
-      },
-      {
-        "name": "はりきり",
-        "is_hidden": false
-      },
-      {
-        "name": "こんじょう",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "そらをとぶ",
-      "みだれづき",
-      "とっしん",
-      "すてみタックル",
-      "なきごえ",
-      "はかいこうせん",
-      "つつく",
-      "でんこうせっか",
-      "ものまね",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "きしかいせい",
-      "まもる",
-      "こわいかお",
-      "こらえる",
-      "いばる",
-      "ねごと",
-      "にほんばれ",
-      "さわぐ",
-      "ねっぷう",
-      "いちゃもん",
-      "おだてる",
-      "からげんき",
-      "ちょうはつ",
-      "てだすけ",
-      "がむしゃら",
-      "フェザーダンス",
-      "ハイパーボイス",
-      "うそなき",
-      "エアカッター",
-      "つばめがえし",
-      "はねやすめ",
-      "おいかぜ",
-      "とんぼがえり",
-      "まねっこ",
-      "エアスラッシュ",
-      "ブレイブバード",
-      "ギガインパクト",
-      "イカサマ",
-      "いのちがけ",
-      "ぼうふう",
-      "すてゼリフ",
-      "うっぷんばらし",
-      "ダブルウイング",
-      "テラバースト",
-      "とびつく"
-    ]
-  },
-  {
-    "pokedex_name": "イキリンコ（yellow-plumage）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10261.png",
-    "pokedex_number": 931,
-    "weight_kg": 2.4,
-    "height_m": 0.6,
-    "is_default": false,
-    "form_name": "yellow-plumage",
-    "base_species": "イキリンコ",
-    "types": [
-      {
-        "name": "Normal",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 82,
-      "attack": 96,
-      "defense": 51,
-      "special-attack": 45,
-      "special-defense": 51,
-      "speed": 92
-    },
-    "abilities": [
-      {
-        "name": "いかく",
-        "is_hidden": false
-      },
-      {
-        "name": "はりきり",
-        "is_hidden": false
-      },
-      {
-        "name": "ちからずく",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "そらをとぶ",
-      "みだれづき",
-      "とっしん",
-      "すてみタックル",
-      "なきごえ",
-      "はかいこうせん",
-      "つつく",
-      "でんこうせっか",
-      "ものまね",
-      "ねむる",
-      "みがわり",
-      "どろぼう",
-      "きしかいせい",
-      "まもる",
-      "こわいかお",
-      "こらえる",
-      "いばる",
-      "ねごと",
-      "にほんばれ",
-      "さわぐ",
-      "ねっぷう",
-      "いちゃもん",
-      "おだてる",
-      "からげんき",
-      "ちょうはつ",
-      "てだすけ",
-      "がむしゃら",
-      "フェザーダンス",
-      "ハイパーボイス",
-      "うそなき",
-      "エアカッター",
-      "つばめがえし",
-      "はねやすめ",
-      "おいかぜ",
-      "とんぼがえり",
-      "まねっこ",
-      "エアスラッシュ",
-      "ブレイブバード",
-      "ギガインパクト",
-      "イカサマ",
-      "いのちがけ",
-      "ぼうふう",
-      "すてゼリフ",
-      "うっぷんばらし",
-      "ダブルウイング",
-      "テラバースト",
-      "とびつく"
-    ]
-  },
-  {
-    "pokedex_name": "イキリンコ（white-plumage）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10262.png",
-    "pokedex_number": 931,
-    "weight_kg": 2.4,
-    "height_m": 0.6,
-    "is_default": false,
-    "form_name": "white-plumage",
-    "base_species": "イキリンコ",
-    "types": [
-      {
-        "name": "Normal",
-        "slot": 1
-      },
-      {
-        "name": "Flying",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 82,
-      "attack": 96,
-      "defense": 51,
-      "special-attack": 45,
-      "special-defense": 51,
-      "speed": 92
-    },
-    "abilities": [
-      {
-        "name": "いかく",
-        "is_hidden": false
-      },
-      {
-        "name": "はりきり",
-        "is_hidden": false
-      },
-      {
-        "name": "ちからずく",
         "is_hidden": true
       }
     ],
@@ -140487,13 +135544,13 @@
     ]
   },
   {
-    "pokedex_name": "イルカマン（zero）",
+    "pokedex_name": "イルカマン（ナイーブフォルム）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/964.png",
     "pokedex_number": 964,
     "weight_kg": 60.2,
     "height_m": 1.3,
     "is_default": true,
-    "form_name": "zero",
+    "form_name": "ナイーブフォルム",
     "base_species": "イルカマン",
     "types": [
       {
@@ -140585,14 +135642,14 @@
     ]
   },
   {
-    "pokedex_name": "イルカマン（ヒーローフォルム）",
+    "pokedex_name": "イルカマン（マイティフォルム）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10256.png",
     "pokedex_number": 964,
     "weight_kg": 97.4,
     "height_m": 1.8,
     "is_default": false,
-    "form_name": "ヒーローフォルム",
-    "base_species": "イルカマン",
+    "form_name": "マイティフォルム",
+    "base_species": "イルカマン（ナイーブフォルム）",
     "types": [
       {
         "name": "Water",
@@ -141858,13 +136915,13 @@
     ]
   },
   {
-    "pokedex_name": "シャリタツ（curly）",
+    "pokedex_name": "シャリタツ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/978.png",
     "pokedex_number": 978,
     "weight_kg": 8.0,
     "height_m": 0.3,
     "is_default": true,
-    "form_name": "curly",
+    "form_name": "通常",
     "base_species": "シャリタツ",
     "types": [
       {
@@ -141932,248 +136989,6 @@
       "ひやみず",
       "ドラゴンエール"
     ]
-  },
-  {
-    "pokedex_name": "シャリタツ（droopy）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10258.png",
-    "pokedex_number": 978,
-    "weight_kg": 8.0,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "droopy",
-    "base_species": "シャリタツ",
-    "types": [
-      {
-        "name": "Dragon",
-        "slot": 1
-      },
-      {
-        "name": "Water",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 68,
-      "attack": 50,
-      "defense": 60,
-      "special-attack": 120,
-      "special-defense": 95,
-      "speed": 82
-    },
-    "abilities": [
-      {
-        "name": "しれいとう",
-        "is_hidden": false
-      },
-      {
-        "name": "よびみず",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "とっしん",
-      "みずでっぽう",
-      "ハイドロポンプ",
-      "なみのり",
-      "はかいこうせん",
-      "カウンター",
-      "かたくなる",
-      "はねる",
-      "ねむる",
-      "みがわり",
-      "まもる",
-      "こごえるかぜ",
-      "げきりん",
-      "こらえる",
-      "ねごと",
-      "バトンタッチ",
-      "こうそくスピン",
-      "あまごい",
-      "ミラーコート",
-      "うずしお",
-      "おきみやげ",
-      "からげんき",
-      "ちょうはつ",
-      "てだすけ",
-      "だくりゅう",
-      "りゅうのまい",
-      "みずのはどう",
-      "りゅうのはどう",
-      "ギガインパクト",
-      "わるだくみ",
-      "りゅうせいぐん",
-      "みずびたし",
-      "とびかかる",
-      "テラバースト",
-      "ひやみず",
-      "ドラゴンエール"
-    ]
-  },
-  {
-    "pokedex_name": "シャリタツ（stretchy）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10259.png",
-    "pokedex_number": 978,
-    "weight_kg": 8.0,
-    "height_m": 0.3,
-    "is_default": false,
-    "form_name": "stretchy",
-    "base_species": "シャリタツ",
-    "types": [
-      {
-        "name": "Dragon",
-        "slot": 1
-      },
-      {
-        "name": "Water",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 68,
-      "attack": 50,
-      "defense": 60,
-      "special-attack": 120,
-      "special-defense": 95,
-      "speed": 82
-    },
-    "abilities": [
-      {
-        "name": "しれいとう",
-        "is_hidden": false
-      },
-      {
-        "name": "よびみず",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "とっしん",
-      "みずでっぽう",
-      "ハイドロポンプ",
-      "なみのり",
-      "はかいこうせん",
-      "カウンター",
-      "かたくなる",
-      "はねる",
-      "ねむる",
-      "みがわり",
-      "まもる",
-      "こごえるかぜ",
-      "げきりん",
-      "こらえる",
-      "ねごと",
-      "バトンタッチ",
-      "こうそくスピン",
-      "あまごい",
-      "ミラーコート",
-      "うずしお",
-      "おきみやげ",
-      "からげんき",
-      "ちょうはつ",
-      "てだすけ",
-      "だくりゅう",
-      "りゅうのまい",
-      "みずのはどう",
-      "りゅうのはどう",
-      "ギガインパクト",
-      "わるだくみ",
-      "りゅうせいぐん",
-      "みずびたし",
-      "とびかかる",
-      "テラバースト",
-      "ひやみず",
-      "ドラゴンエール"
-    ]
-  },
-  {
-    "pokedex_name": "シャリタツ（curly-mega）",
-    "sprite_url": null,
-    "pokedex_number": 978,
-    "weight_kg": 24.0,
-    "height_m": 0.6,
-    "is_default": false,
-    "form_name": "curly-mega",
-    "base_species": "シャリタツ",
-    "types": [
-      {
-        "name": "Dragon",
-        "slot": 1
-      },
-      {
-        "name": "Water",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 68,
-      "attack": 65,
-      "defense": 90,
-      "special-attack": 135,
-      "special-defense": 125,
-      "speed": 92
-    },
-    "abilities": [],
-    "moves": []
-  },
-  {
-    "pokedex_name": "シャリタツ（droopy-mega）",
-    "sprite_url": null,
-    "pokedex_number": 978,
-    "weight_kg": 24.0,
-    "height_m": 0.6,
-    "is_default": false,
-    "form_name": "droopy-mega",
-    "base_species": "シャリタツ",
-    "types": [
-      {
-        "name": "Dragon",
-        "slot": 1
-      },
-      {
-        "name": "Water",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 68,
-      "attack": 65,
-      "defense": 90,
-      "special-attack": 135,
-      "special-defense": 125,
-      "speed": 92
-    },
-    "abilities": [],
-    "moves": []
-  },
-  {
-    "pokedex_name": "シャリタツ（stretchy-mega）",
-    "sprite_url": null,
-    "pokedex_number": 978,
-    "weight_kg": 24.0,
-    "height_m": 0.6,
-    "is_default": false,
-    "form_name": "stretchy-mega",
-    "base_species": "シャリタツ",
-    "types": [
-      {
-        "name": "Dragon",
-        "slot": 1
-      },
-      {
-        "name": "Water",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 68,
-      "attack": 65,
-      "defense": 90,
-      "special-attack": 135,
-      "special-defense": 125,
-      "speed": 92
-    },
-    "abilities": [],
-    "moves": []
   },
   {
     "pokedex_name": "コノヨザル",
@@ -142517,139 +137332,13 @@
     ]
   },
   {
-    "pokedex_name": "ノココッチ（two-segment）",
+    "pokedex_name": "ノココッチ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/982.png",
     "pokedex_number": 982,
     "weight_kg": 39.2,
     "height_m": 3.6,
     "is_default": true,
-    "form_name": "two-segment",
-    "base_species": "ノココッチ",
-    "types": [
-      {
-        "name": "Normal",
-        "slot": 1
-      }
-    ],
-    "base_stats": {
-      "hp": 125,
-      "attack": 100,
-      "defense": 80,
-      "special-attack": 85,
-      "special-defense": 75,
-      "speed": 55
-    },
-    "abilities": [
-      {
-        "name": "てんのめぐみ",
-        "is_hidden": false
-      },
-      {
-        "name": "にげあし",
-        "is_hidden": false
-      },
-      {
-        "name": "びびり",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "のしかかり",
-      "とっしん",
-      "すてみタックル",
-      "かえんほうしゃ",
-      "れいとうビーム",
-      "ふぶき",
-      "はかいこうせん",
-      "ソーラービーム",
-      "１０まんボルト",
-      "かみなり",
-      "じしん",
-      "あなをほる",
-      "どくどく",
-      "こうそくいどう",
-      "いやなおと",
-      "まるくなる",
-      "だいもんじ",
-      "ドわすれ",
-      "へびにらみ",
-      "ねむる",
-      "いわなだれ",
-      "みがわり",
-      "どろぼう",
-      "のろい",
-      "じたばた",
-      "うらみ",
-      "まもる",
-      "こわいかお",
-      "どろかけ",
-      "げきりん",
-      "すなあらし",
-      "こらえる",
-      "ころがる",
-      "ねごと",
-      "いたみわけ",
-      "バトンタッチ",
-      "あまごい",
-      "にほんばれ",
-      "じこあんじ",
-      "げんしのちから",
-      "シャドーボール",
-      "さわぐ",
-      "からげんき",
-      "てだすけ",
-      "あくび",
-      "がむしゃら",
-      "ハイパーボイス",
-      "がんせきふうじ",
-      "マッドショット",
-      "ポイズンテール",
-      "めいそう",
-      "はねやすめ",
-      "ジャイロボール",
-      "おいかぜ",
-      "どくづき",
-      "エアスラッシュ",
-      "ドラゴンダイブ",
-      "だいちのちから",
-      "ギガインパクト",
-      "しねんのずつき",
-      "ストーンエッジ",
-      "ステルスロック",
-      "ヘビーボンバー",
-      "とぐろをまく",
-      "アシストパワー",
-      "たたりめ",
-      "じならし",
-      "ドラゴンテール",
-      "ワイルドボルト",
-      "ドリルライナー",
-      "ぼうふう",
-      "ばくおんぱ",
-      "じごくづき",
-      "とびかかる",
-      "スマートホーン",
-      "じだんだ",
-      "ボディプレス",
-      "ワイドブレイカー",
-      "スケイルショット",
-      "はいよるいちげき",
-      "ダブルウイング",
-      "テラバースト",
-      "アイススピナー",
-      "とびつく",
-      "ひやみず",
-      "ハイパードリル"
-    ]
-  },
-  {
-    "pokedex_name": "ノココッチ（three-segment）",
-    "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10255.png",
-    "pokedex_number": 982,
-    "weight_kg": 47.4,
-    "height_m": 4.5,
-    "is_default": false,
-    "form_name": "three-segment",
+    "form_name": "通常",
     "base_species": "ノココッチ",
     "types": [
       {
@@ -142871,13 +137560,13 @@
     ]
   },
   {
-    "pokedex_name": "イダイナキバ（tusk）",
+    "pokedex_name": "イダイナキバ）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/984.png",
     "pokedex_number": 984,
     "weight_kg": 320.0,
     "height_m": 2.2,
     "is_default": true,
-    "form_name": "tusk",
+    "form_name": "通常",
     "base_species": "イダイナキバ",
     "types": [
       {
@@ -142965,13 +137654,13 @@
     ]
   },
   {
-    "pokedex_name": "サケブシッポ（tail）",
+    "pokedex_name": "サケブシッポ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/985.png",
     "pokedex_number": 985,
     "weight_kg": 8.0,
     "height_m": 1.2,
     "is_default": true,
-    "form_name": "tail",
+    "form_name": "通常",
     "base_species": "サケブシッポ",
     "types": [
       {
@@ -143081,13 +137770,13 @@
     ]
   },
   {
-    "pokedex_name": "アラブルタケ（bonnet）",
+    "pokedex_name": "アラブルタケ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/986.png",
     "pokedex_number": 986,
     "weight_kg": 21.0,
     "height_m": 1.2,
     "is_default": true,
-    "form_name": "bonnet",
+    "form_name": "通常",
     "base_species": "アラブルタケ",
     "types": [
       {
@@ -143168,13 +137857,13 @@
     ]
   },
   {
-    "pokedex_name": "ハバタクカミ（mane）",
+    "pokedex_name": "ハバタクカミ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/987.png",
     "pokedex_number": 987,
     "weight_kg": 4.0,
     "height_m": 1.4,
     "is_default": true,
-    "form_name": "mane",
+    "form_name": "通常",
     "base_species": "ハバタクカミ",
     "types": [
       {
@@ -143253,13 +137942,13 @@
     ]
   },
   {
-    "pokedex_name": "チヲハウハネ（wing）",
+    "pokedex_name": "チヲハウハネ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/988.png",
     "pokedex_number": 988,
     "weight_kg": 92.0,
     "height_m": 3.2,
     "is_default": true,
-    "form_name": "wing",
+    "form_name": "通常",
     "base_species": "チヲハウハネ",
     "types": [
       {
@@ -143346,13 +138035,13 @@
     ]
   },
   {
-    "pokedex_name": "スナノケガワ（shocks）",
+    "pokedex_name": "スナノケガワ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/989.png",
     "pokedex_number": 989,
     "weight_kg": 60.0,
     "height_m": 2.3,
     "is_default": true,
-    "form_name": "shocks",
+    "form_name": "通常",
     "base_species": "スナノケガワ",
     "types": [
       {
@@ -143436,13 +138125,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノワダチ（treads）",
+    "pokedex_name": "テツノワダチ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/990.png",
     "pokedex_number": 990,
     "weight_kg": 240.0,
     "height_m": 0.9,
     "is_default": true,
-    "form_name": "treads",
+    "form_name": "通常",
     "base_species": "テツノワダチ",
     "types": [
       {
@@ -143523,13 +138212,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノツツミ（bundle）",
+    "pokedex_name": "テツノツツミ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/991.png",
     "pokedex_number": 991,
     "weight_kg": 11.0,
     "height_m": 0.6,
     "is_default": true,
-    "form_name": "bundle",
+    "form_name": "通常",
     "base_species": "テツノツツミ",
     "types": [
       {
@@ -143600,13 +138289,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノカイナ（hands）",
+    "pokedex_name": "テツノカイナ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/992.png",
     "pokedex_number": 992,
     "weight_kg": 380.7,
     "height_m": 1.8,
     "is_default": true,
-    "form_name": "hands",
+    "form_name": "通常",
     "base_species": "テツノカイナ",
     "types": [
       {
@@ -143692,13 +138381,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノコウベ（jugulis）",
+    "pokedex_name": "テツノコウベ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/993.png",
     "pokedex_number": 993,
     "weight_kg": 111.0,
     "height_m": 1.3,
     "is_default": true,
-    "form_name": "jugulis",
+    "form_name": "通常",
     "base_species": "テツノコウベ",
     "types": [
       {
@@ -143784,13 +138473,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノドクガ（moth）",
+    "pokedex_name": "テツノドクガ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/994.png",
     "pokedex_number": 994,
     "weight_kg": 36.0,
     "height_m": 1.2,
     "is_default": true,
-    "form_name": "moth",
+    "form_name": "通常",
     "base_species": "テツノドクガ",
     "types": [
       {
@@ -143872,13 +138561,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノイバラ（thorns）",
+    "pokedex_name": "テツノイバラ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/995.png",
     "pokedex_number": 995,
     "weight_kg": 303.0,
     "height_m": 1.6,
     "is_default": true,
-    "form_name": "thorns",
+    "form_name": "通常",
     "base_species": "テツノイバラ",
     "types": [
       {
@@ -144442,13 +139131,13 @@
     ]
   },
   {
-    "pokedex_name": "チオンジェン（chien）",
+    "pokedex_name": "チオンジェン",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1001.png",
     "pokedex_number": 1001,
     "weight_kg": 74.2,
     "height_m": 1.5,
     "is_default": true,
-    "form_name": "chien",
+    "form_name": "通常",
     "base_species": "チオンジェン",
     "types": [
       {
@@ -144530,13 +139219,13 @@
     ]
   },
   {
-    "pokedex_name": "パオジアン（pao）",
+    "pokedex_name": "パオジアン",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1002.png",
     "pokedex_number": 1002,
     "weight_kg": 152.2,
     "height_m": 1.9,
     "is_default": true,
-    "form_name": "pao",
+    "form_name": "通常",
     "base_species": "パオジアン",
     "types": [
       {
@@ -144611,13 +139300,13 @@
     ]
   },
   {
-    "pokedex_name": "ディンルー（lu）",
+    "pokedex_name": "ディンルー",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1003.png",
     "pokedex_number": 1003,
     "weight_kg": 699.7,
     "height_m": 2.7,
     "is_default": true,
-    "form_name": "lu",
+    "form_name": "通常",
     "base_species": "ディンルー",
     "types": [
       {
@@ -144693,13 +139382,13 @@
     ]
   },
   {
-    "pokedex_name": "イーユイ（yu）",
+    "pokedex_name": "イーユイ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1004.png",
     "pokedex_number": 1004,
     "weight_kg": 4.9,
     "height_m": 0.4,
     "is_default": true,
-    "form_name": "yu",
+    "form_name": "通常",
     "base_species": "イーユイ",
     "types": [
       {
@@ -144775,13 +139464,13 @@
     ]
   },
   {
-    "pokedex_name": "トドロクツキ（moon）",
+    "pokedex_name": "トドロクツキ）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1005.png",
     "pokedex_number": 1005,
     "weight_kg": 380.0,
     "height_m": 2.0,
     "is_default": true,
-    "form_name": "moon",
+    "form_name": "通常",
     "base_species": "トドロクツキ",
     "types": [
       {
@@ -144879,13 +139568,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノブジン（valiant）",
+    "pokedex_name": "テツノブジン",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1006.png",
     "pokedex_number": 1006,
     "weight_kg": 35.0,
     "height_m": 1.4,
     "is_default": true,
-    "form_name": "valiant",
+    "form_name": "通常",
     "base_species": "テツノブジン",
     "types": [
       {
@@ -145103,13 +139792,13 @@
     ]
   },
   {
-    "pokedex_name": "コライドン（limited-build）",
+    "pokedex_name": "コライドン",
     "sprite_url": null,
     "pokedex_number": 1007,
     "weight_kg": 303.0,
     "height_m": 3.5,
     "is_default": false,
-    "form_name": "limited-build",
+    "form_name": "通常",
     "base_species": "コライドン",
     "types": [
       {
@@ -145211,229 +139900,13 @@
     ]
   },
   {
-    "pokedex_name": "コライドン（sprinting-build）",
+    "pokedex_name": "コライドン",
     "sprite_url": null,
     "pokedex_number": 1007,
     "weight_kg": 303.0,
     "height_m": 3.5,
     "is_default": false,
-    "form_name": "sprinting-build",
-    "base_species": "コライドン",
-    "types": [
-      {
-        "name": "Fighting",
-        "slot": 1
-      },
-      {
-        "name": "Dragon",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 100,
-      "attack": 135,
-      "defense": 115,
-      "special-attack": 85,
-      "special-defense": 100,
-      "speed": 135
-    },
-    "abilities": [
-      {
-        "name": "ひひいろのこどう",
-        "is_hidden": false
-      },
-      {
-        "name": "ひひいろのこどう",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "つるぎのまい",
-      "のしかかり",
-      "とっしん",
-      "ほえる",
-      "かえんほうしゃ",
-      "はかいこうせん",
-      "けたぐり",
-      "カウンター",
-      "ソーラービーム",
-      "ほのおのうず",
-      "あなをほる",
-      "こうそくいどう",
-      "いやなおと",
-      "だいもんじ",
-      "ねむる",
-      "みがわり",
-      "きしかいせい",
-      "まもる",
-      "こわいかお",
-      "どろかけ",
-      "げきりん",
-      "こらえる",
-      "ねごと",
-      "にほんばれ",
-      "かみくだく",
-      "げんしのちから",
-      "いわくだき",
-      "さわぐ",
-      "ねっぷう",
-      "からげんき",
-      "きあいパンチ",
-      "ちょうはつ",
-      "てだすけ",
-      "かわらわり",
-      "オーバーヒート",
-      "ドラゴンクロー",
-      "ビルドアップ",
-      "マッドショット",
-      "とんぼがえり",
-      "インファイト",
-      "フレアドライブ",
-      "りゅうのはどう",
-      "ドレインパンチ",
-      "きあいだま",
-      "ギガインパクト",
-      "シャドークロー",
-      "かみなりのキバ",
-      "こおりのキバ",
-      "ほのおのキバ",
-      "しねんのずつき",
-      "りゅうせいぐん",
-      "アイアンヘッド",
-      "ヘビーボンバー",
-      "ニトロチャージ",
-      "ローキック",
-      "アクロバット",
-      "じならし",
-      "ドラゴンテール",
-      "ワイルドボルト",
-      "ヒートスタンプ",
-      "バークアウト",
-      "じだんだ",
-      "ボディプレス",
-      "ワイドブレイカー",
-      "スケイルショット",
-      "ダブルウイング",
-      "テラバースト",
-      "アクセルブレイク"
-    ]
-  },
-  {
-    "pokedex_name": "コライドン（swimming-build）",
-    "sprite_url": null,
-    "pokedex_number": 1007,
-    "weight_kg": 303.0,
-    "height_m": 3.5,
-    "is_default": false,
-    "form_name": "swimming-build",
-    "base_species": "コライドン",
-    "types": [
-      {
-        "name": "Fighting",
-        "slot": 1
-      },
-      {
-        "name": "Dragon",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 100,
-      "attack": 135,
-      "defense": 115,
-      "special-attack": 85,
-      "special-defense": 100,
-      "speed": 135
-    },
-    "abilities": [
-      {
-        "name": "ひひいろのこどう",
-        "is_hidden": false
-      },
-      {
-        "name": "ひひいろのこどう",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "つるぎのまい",
-      "のしかかり",
-      "とっしん",
-      "ほえる",
-      "かえんほうしゃ",
-      "はかいこうせん",
-      "けたぐり",
-      "カウンター",
-      "ソーラービーム",
-      "ほのおのうず",
-      "あなをほる",
-      "こうそくいどう",
-      "いやなおと",
-      "だいもんじ",
-      "ねむる",
-      "みがわり",
-      "きしかいせい",
-      "まもる",
-      "こわいかお",
-      "どろかけ",
-      "げきりん",
-      "こらえる",
-      "ねごと",
-      "にほんばれ",
-      "かみくだく",
-      "げんしのちから",
-      "いわくだき",
-      "さわぐ",
-      "ねっぷう",
-      "からげんき",
-      "きあいパンチ",
-      "ちょうはつ",
-      "てだすけ",
-      "かわらわり",
-      "オーバーヒート",
-      "ドラゴンクロー",
-      "ビルドアップ",
-      "マッドショット",
-      "とんぼがえり",
-      "インファイト",
-      "フレアドライブ",
-      "りゅうのはどう",
-      "ドレインパンチ",
-      "きあいだま",
-      "ギガインパクト",
-      "シャドークロー",
-      "かみなりのキバ",
-      "こおりのキバ",
-      "ほのおのキバ",
-      "しねんのずつき",
-      "りゅうせいぐん",
-      "アイアンヘッド",
-      "ヘビーボンバー",
-      "ニトロチャージ",
-      "ローキック",
-      "アクロバット",
-      "じならし",
-      "ドラゴンテール",
-      "ワイルドボルト",
-      "ヒートスタンプ",
-      "バークアウト",
-      "じだんだ",
-      "ボディプレス",
-      "ワイドブレイカー",
-      "スケイルショット",
-      "ダブルウイング",
-      "テラバースト",
-      "アクセルブレイク"
-    ]
-  },
-  {
-    "pokedex_name": "コライドン（gliding-build）",
-    "sprite_url": null,
-    "pokedex_number": 1007,
-    "weight_kg": 303.0,
-    "height_m": 3.5,
-    "is_default": false,
-    "form_name": "gliding-build",
+    "form_name": "通常",
     "base_species": "コライドン",
     "types": [
       {
@@ -145627,389 +140100,13 @@
     ]
   },
   {
-    "pokedex_name": "ミライドン（low-power-mode）",
-    "sprite_url": null,
-    "pokedex_number": 1008,
-    "weight_kg": 240.0,
-    "height_m": 2.8,
-    "is_default": false,
-    "form_name": "low-power-mode",
-    "base_species": "ミライドン",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      },
-      {
-        "name": "Dragon",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 100,
-      "attack": 85,
-      "defense": 100,
-      "special-attack": 135,
-      "special-defense": 115,
-      "speed": 135
-    },
-    "abilities": [
-      {
-        "name": "ハドロンエンジン",
-        "is_hidden": false
-      },
-      {
-        "name": "ハドロンエンジン",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "つるぎのまい",
-      "のしかかり",
-      "とっしん",
-      "はかいこうせん",
-      "ソーラービーム",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "こうそくいどう",
-      "あやしいひかり",
-      "ひかりのかべ",
-      "リフレクター",
-      "ねむる",
-      "みがわり",
-      "まもる",
-      "こわいかお",
-      "げきりん",
-      "こらえる",
-      "ねごと",
-      "りゅうのいぶき",
-      "かみくだく",
-      "ミラーコート",
-      "からげんき",
-      "じゅうでん",
-      "ちょうはつ",
-      "てだすけ",
-      "オーバーヒート",
-      "きんぞくおん",
-      "ドラゴンクロー",
-      "めいそう",
-      "でんげきは",
-      "とんぼがえり",
-      "りゅうのはどう",
-      "パワージェム",
-      "ギガインパクト",
-      "しねんのずつき",
-      "ラスターカノン",
-      "りゅうせいぐん",
-      "ほうでん",
-      "チャージビーム",
-      "ヘビーボンバー",
-      "エレキボール",
-      "アクロバット",
-      "ボルトチェンジ",
-      "ドラゴンテール",
-      "ワイルドボルト",
-      "バークアウト",
-      "パラボラチャージ",
-      "かいでんぱ",
-      "エレキフィールド",
-      "マジカルシャイン",
-      "テラバースト",
-      "イナズマドライブ"
-    ]
-  },
-  {
-    "pokedex_name": "ミライドン（drive-mode）",
-    "sprite_url": null,
-    "pokedex_number": 1008,
-    "weight_kg": 240.0,
-    "height_m": 2.8,
-    "is_default": false,
-    "form_name": "drive-mode",
-    "base_species": "ミライドン",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      },
-      {
-        "name": "Dragon",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 100,
-      "attack": 85,
-      "defense": 100,
-      "special-attack": 135,
-      "special-defense": 115,
-      "speed": 135
-    },
-    "abilities": [
-      {
-        "name": "ハドロンエンジン",
-        "is_hidden": false
-      },
-      {
-        "name": "ハドロンエンジン",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "つるぎのまい",
-      "のしかかり",
-      "とっしん",
-      "はかいこうせん",
-      "ソーラービーム",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "こうそくいどう",
-      "あやしいひかり",
-      "ひかりのかべ",
-      "リフレクター",
-      "ねむる",
-      "みがわり",
-      "まもる",
-      "こわいかお",
-      "げきりん",
-      "こらえる",
-      "ねごと",
-      "りゅうのいぶき",
-      "かみくだく",
-      "ミラーコート",
-      "からげんき",
-      "じゅうでん",
-      "ちょうはつ",
-      "てだすけ",
-      "オーバーヒート",
-      "きんぞくおん",
-      "ドラゴンクロー",
-      "めいそう",
-      "でんげきは",
-      "とんぼがえり",
-      "りゅうのはどう",
-      "パワージェム",
-      "ギガインパクト",
-      "しねんのずつき",
-      "ラスターカノン",
-      "りゅうせいぐん",
-      "ほうでん",
-      "チャージビーム",
-      "ヘビーボンバー",
-      "エレキボール",
-      "アクロバット",
-      "ボルトチェンジ",
-      "ドラゴンテール",
-      "ワイルドボルト",
-      "バークアウト",
-      "パラボラチャージ",
-      "かいでんぱ",
-      "エレキフィールド",
-      "マジカルシャイン",
-      "テラバースト",
-      "イナズマドライブ"
-    ]
-  },
-  {
-    "pokedex_name": "ミライドン（aquatic-mode）",
-    "sprite_url": null,
-    "pokedex_number": 1008,
-    "weight_kg": 240.0,
-    "height_m": 2.8,
-    "is_default": false,
-    "form_name": "aquatic-mode",
-    "base_species": "ミライドン",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      },
-      {
-        "name": "Dragon",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 100,
-      "attack": 85,
-      "defense": 100,
-      "special-attack": 135,
-      "special-defense": 115,
-      "speed": 135
-    },
-    "abilities": [
-      {
-        "name": "ハドロンエンジン",
-        "is_hidden": false
-      },
-      {
-        "name": "ハドロンエンジン",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "つるぎのまい",
-      "のしかかり",
-      "とっしん",
-      "はかいこうせん",
-      "ソーラービーム",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "こうそくいどう",
-      "あやしいひかり",
-      "ひかりのかべ",
-      "リフレクター",
-      "ねむる",
-      "みがわり",
-      "まもる",
-      "こわいかお",
-      "げきりん",
-      "こらえる",
-      "ねごと",
-      "りゅうのいぶき",
-      "かみくだく",
-      "ミラーコート",
-      "からげんき",
-      "じゅうでん",
-      "ちょうはつ",
-      "てだすけ",
-      "オーバーヒート",
-      "きんぞくおん",
-      "ドラゴンクロー",
-      "めいそう",
-      "でんげきは",
-      "とんぼがえり",
-      "りゅうのはどう",
-      "パワージェム",
-      "ギガインパクト",
-      "しねんのずつき",
-      "ラスターカノン",
-      "りゅうせいぐん",
-      "ほうでん",
-      "チャージビーム",
-      "ヘビーボンバー",
-      "エレキボール",
-      "アクロバット",
-      "ボルトチェンジ",
-      "ドラゴンテール",
-      "ワイルドボルト",
-      "バークアウト",
-      "パラボラチャージ",
-      "かいでんぱ",
-      "エレキフィールド",
-      "マジカルシャイン",
-      "テラバースト",
-      "イナズマドライブ"
-    ]
-  },
-  {
-    "pokedex_name": "ミライドン（glide-mode）",
-    "sprite_url": null,
-    "pokedex_number": 1008,
-    "weight_kg": 240.0,
-    "height_m": 2.8,
-    "is_default": false,
-    "form_name": "glide-mode",
-    "base_species": "ミライドン",
-    "types": [
-      {
-        "name": "Electric",
-        "slot": 1
-      },
-      {
-        "name": "Dragon",
-        "slot": 2
-      }
-    ],
-    "base_stats": {
-      "hp": 100,
-      "attack": 85,
-      "defense": 100,
-      "special-attack": 135,
-      "special-defense": 115,
-      "speed": 135
-    },
-    "abilities": [
-      {
-        "name": "ハドロンエンジン",
-        "is_hidden": false
-      },
-      {
-        "name": "ハドロンエンジン",
-        "is_hidden": true
-      }
-    ],
-    "moves": [
-      "つるぎのまい",
-      "のしかかり",
-      "とっしん",
-      "はかいこうせん",
-      "ソーラービーム",
-      "でんきショック",
-      "１０まんボルト",
-      "でんじは",
-      "かみなり",
-      "こうそくいどう",
-      "あやしいひかり",
-      "ひかりのかべ",
-      "リフレクター",
-      "ねむる",
-      "みがわり",
-      "まもる",
-      "こわいかお",
-      "げきりん",
-      "こらえる",
-      "ねごと",
-      "りゅうのいぶき",
-      "かみくだく",
-      "ミラーコート",
-      "からげんき",
-      "じゅうでん",
-      "ちょうはつ",
-      "てだすけ",
-      "オーバーヒート",
-      "きんぞくおん",
-      "ドラゴンクロー",
-      "めいそう",
-      "でんげきは",
-      "とんぼがえり",
-      "りゅうのはどう",
-      "パワージェム",
-      "ギガインパクト",
-      "しねんのずつき",
-      "ラスターカノン",
-      "りゅうせいぐん",
-      "ほうでん",
-      "チャージビーム",
-      "ヘビーボンバー",
-      "エレキボール",
-      "アクロバット",
-      "ボルトチェンジ",
-      "ドラゴンテール",
-      "ワイルドボルト",
-      "バークアウト",
-      "パラボラチャージ",
-      "かいでんぱ",
-      "エレキフィールド",
-      "マジカルシャイン",
-      "テラバースト",
-      "イナズマドライブ"
-    ]
-  },
-  {
-    "pokedex_name": "ウネルミナモ（wake）",
+    "pokedex_name": "ウネルミナモ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1009.png",
     "pokedex_number": 1009,
     "weight_kg": 280.0,
     "height_m": 3.5,
     "is_default": true,
-    "form_name": "wake",
+    "form_name": "通常",
     "base_species": "ウネルミナモ",
     "types": [
       {
@@ -146091,13 +140188,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノイサハ（leaves）",
+    "pokedex_name": "テツノイサハ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1010.png",
     "pokedex_number": 1010,
     "weight_kg": 125.0,
     "height_m": 1.5,
     "is_default": true,
-    "form_name": "leaves",
+    "form_name": "通常",
     "base_species": "テツノイサハ",
     "types": [
       {
@@ -146829,13 +140926,13 @@
     ]
   },
   {
-    "pokedex_name": "オーガポン（wellspring-mask）",
+    "pokedex_name": "オーガポン（いどのめん）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10273.png",
     "pokedex_number": 1017,
     "weight_kg": 39.8,
     "height_m": 1.2,
     "is_default": false,
-    "form_name": "wellspring-mask",
+    "form_name": "いどのめん",
     "base_species": "オーガポン",
     "types": [
       {
@@ -146927,13 +141024,13 @@
     ]
   },
   {
-    "pokedex_name": "オーガポン（hearthflame-mask）",
+    "pokedex_name": "オーガポン（かまどのめん）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10274.png",
     "pokedex_number": 1017,
     "weight_kg": 39.8,
     "height_m": 1.2,
     "is_default": false,
-    "form_name": "hearthflame-mask",
+    "form_name": "かまどのめん",
     "base_species": "オーガポン",
     "types": [
       {
@@ -147025,13 +141122,13 @@
     ]
   },
   {
-    "pokedex_name": "オーガポン（cornerstone-mask）",
+    "pokedex_name": "オーガポン（いしずえのめん）",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10275.png",
     "pokedex_number": 1017,
     "weight_kg": 39.8,
     "height_m": 1.2,
     "is_default": false,
-    "form_name": "cornerstone-mask",
+    "form_name": "いしずえのめん",
     "base_species": "オーガポン",
     "types": [
       {
@@ -147329,13 +141426,13 @@
     ]
   },
   {
-    "pokedex_name": "ウガツホムラ（fire）",
+    "pokedex_name": "ウガツホムラ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1020.png",
     "pokedex_number": 1020,
     "weight_kg": 590.0,
     "height_m": 3.5,
     "is_default": true,
-    "form_name": "fire",
+    "form_name": "通常",
     "base_species": "ウガツホムラ",
     "types": [
       {
@@ -147426,13 +141523,13 @@
     ]
   },
   {
-    "pokedex_name": "タケルライコ（bolt）",
+    "pokedex_name": "タケルライコ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1021.png",
     "pokedex_number": 1021,
     "weight_kg": 480.0,
     "height_m": 5.2,
     "is_default": true,
-    "form_name": "bolt",
+    "form_name": "通常",
     "base_species": "タケルライコ",
     "types": [
       {
@@ -147517,13 +141614,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノイワオ（boulder）",
+    "pokedex_name": "テツノイワオ",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1022.png",
     "pokedex_number": 1022,
     "weight_kg": 162.5,
     "height_m": 1.5,
     "is_default": true,
-    "form_name": "boulder",
+    "form_name": "通常",
     "base_species": "テツノイワオ",
     "types": [
       {
@@ -147602,13 +141699,13 @@
     ]
   },
   {
-    "pokedex_name": "テツノカシラ（crown）",
+    "pokedex_name": "テツノカシラ通常",
     "sprite_url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1023.png",
     "pokedex_number": 1023,
     "weight_kg": 156.0,
     "height_m": 1.6,
     "is_default": true,
-    "form_name": "crown",
+    "form_name": "通常",
     "base_species": "テツノカシラ",
     "types": [
       {

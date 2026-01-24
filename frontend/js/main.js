@@ -1,15 +1,20 @@
-import { AppState } from './AppState.js';
-import { SPECIES_DEX } from './data/species.js';
-import { MOVES_DEX } from './data/moves.js';
+import { AppState } from './AppState.js?v=2';
+import { SPECIES_DEX, MOVES_DEX, loadAllData } from './data/loader.js';
 import { ITEMS_DEX } from './data/items.js';
 import { calculateDamage } from './calc/damage.js';
 
 const appState = new AppState();
+// Debug: Expose to window
+window.appState = appState;
+window.SPECIES_DEX = SPECIES_DEX;
 
 // ターン管理用ID
 let globalTurnCounter = 0;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadAllData();
+
+    // Ally (自分) Inputs
     // Ally (自分) Inputs
     const allyNameInput = document.getElementById('ally-name-input');
     const allyLevelInput = document.getElementById('ally-level-input');
@@ -109,91 +114,315 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // datalistの生成
-    const datalist = document.getElementById('pokemon-list');
-    if (datalist) {
-        Object.keys(SPECIES_DEX).forEach(name => {
-            const option = document.createElement('option');
-            option.value = name;
-            datalist.appendChild(option);
+
+
+    // --- Autocomplete Logic ---
+    function setupAutocomplete(inputElement, listElement, teamType) {
+        let currentFocus = -1;
+
+        inputElement.addEventListener('input', function(e) {
+            const val = this.value;
+            closeAllLists();
+            if (!val) return false;
+            
+            currentFocus = -1;
+            listElement.style.display = 'block';
+            
+            const matches = Object.keys(SPECIES_DEX).filter(name => name.startsWith(val));
+            
+            // 上位100件までに制限（パフォーマンス対策）
+            const maxItems = 100;
+            let count = 0;
+
+            if (matches.length === 0) {
+                 listElement.style.display = 'none';
+                 return;
+            }
+
+            matches.forEach(name => {
+                if (count >= maxItems) return;
+                
+                const item = document.createElement('li');
+                // 前方一致部分を太字に
+                item.innerHTML = `<strong>${name.substr(0, val.length)}</strong>${name.substr(val.length)}`;
+                item.addEventListener('click', function() {
+                    inputElement.value = name;
+                    closeAllLists();
+                    // 変更イベント発火 (input AND change)
+                    inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+                    inputElement.dispatchEvent(new Event('change', { bubbles: true }));
+                });
+                listElement.appendChild(item);
+                count++;
+            });
+        });
+        
+        // キーボード操作サポート
+        inputElement.addEventListener('keydown', function(e) {
+            let x = listElement.getElementsByTagName('li');
+            if (e.keyCode == 40) { // Down
+                currentFocus++;
+                addActive(x);
+            } else if (e.keyCode == 38) { // Up
+                currentFocus--;
+                addActive(x);
+            } else if (e.keyCode == 13) { // Enter
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+
+        function addActive(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            x[currentFocus].classList.add('autocomplete-active');
+            // スクロール追従
+            x[currentFocus].scrollIntoView({block: 'nearest'});
+        }
+
+        function removeActive(x) {
+            for (let i = 0; i < x.length; i++) {
+                x[i].classList.remove('autocomplete-active');
+            }
+        }
+
+        function closeAllLists(elmnt) {
+            listElement.innerHTML = '';
+            listElement.style.display = 'none';
+        }
+
+        document.addEventListener('click', function (e) {
+            if (e.target !== inputElement) {
+                closeAllLists();
+            }
         });
     }
 
-    // --- Move Configuration Logic ---
-    function populateMoveDatalist() {
-        const datalist = document.getElementById('move-list');
-        if (!datalist) return;
+    // セットアップ実行
+    const allyInput = document.getElementById('ally-name-input');
+    const allyList = document.getElementById('ally-autocomplete-list');
+    if (allyInput && allyList) {
+        setupAutocomplete(allyInput, allyList, 'ally');
+    }
 
-        datalist.innerHTML = ''; // Clear existing
-        Object.keys(MOVES_DEX).forEach(move => {
-            const opt = document.createElement('option');
-            opt.value = move;
-            datalist.appendChild(opt);
+    const enemyInput = document.getElementById('enemy-name-input');
+    const enemyList = document.getElementById('enemy-autocomplete-list');
+    if (enemyInput && enemyList) {
+        setupAutocomplete(enemyInput, enemyList, 'enemy');
+    }
+
+
+    // --- Move Configuration Logic (Rich Autocomplete & Vertical Layout) ---
+    
+    const TYPE_CLASSES = {
+        'Normal': 'normal', 'Fire': 'fire', 'Water': 'water', 'Electric': 'electric',
+        'Grass': 'grass', 'Ice': 'ice', 'Fighting': 'fighting', 'Poison': 'poison',
+        'Ground': 'ground', 'Flying': 'flying', 'Psychic': 'psychic', 'Bug': 'bug',
+        'Rock': 'rock', 'Ghost': 'ghost', 'Dragon': 'dragon', 'Dark': 'dark',
+        'Steel': 'steel', 'Fairy': 'fairy'
+    };
+
+    const TYPE_NAMES_JP = {
+        'Normal': 'ノーマル', 'Fire': 'ほのお', 'Water': 'みず', 'Electric': 'でんき',
+        'Grass': 'くさ', 'Ice': 'こおり', 'Fighting': 'かくとう', 'Poison': 'どく',
+        'Ground': 'じめん', 'Flying': 'ひこう', 'Psychic': 'エスパー', 'Bug': 'むし',
+        'Rock': 'いわ', 'Ghost': 'ゴースト', 'Dragon': 'ドラゴン', 'Dark': 'あく',
+        'Steel': 'はがね', 'Fairy': 'フェアリー'
+    };
+
+    // Helper to update the sibling display
+    function updateMoveInfoDisplay(inputElement, moveName) {
+        const wrapper = inputElement.closest('.move-input-wrapper');
+        if (!wrapper) return;
+        const display = wrapper.querySelector('.move-info-display');
+        if (!display) return;
+        
+        display.innerHTML = ''; // Clear
+        
+        if (!moveName) return;
+        
+        const moveData = MOVES_DEX[moveName];
+        if (!moveData) return;
+        
+        const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
+        const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
+        const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
+
+        // Create Badge
+        const badge = document.createElement('span');
+        badge.className = `type-badge ${typeClass}`;
+        badge.textContent = typeName;
+        
+        // Create Power Text
+        const powerSpan = document.createElement('span');
+        powerSpan.textContent = powerText;
+        powerSpan.style.color = '#666';
+        
+        display.appendChild(badge);
+        display.appendChild(powerSpan);
+    }
+
+    function setupMoveAutocomplete(inputElement, listElement, side, index) {
+        let currentFocus = -1;
+
+        inputElement.addEventListener('focus', function() {
+            renderList(this.value);
         });
+
+        inputElement.addEventListener('input', function() {
+            renderList(this.value);
+            // Clear display on manual input until match is confirmed (optional, keep it simple)
+        });
+
+        function renderList(filterText) {
+            currentFocus = -1;
+            listElement.innerHTML = '';
+            
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            const availableMoves = (pokemon && pokemon.speciesData && pokemon.speciesData.moves) 
+                ? pokemon.speciesData.moves 
+                : Object.keys(MOVES_DEX);
+
+            const matches = availableMoves.filter(m => m.startsWith(filterText));
+            
+            if (matches.length === 0) {
+                listElement.style.display = 'none';
+                return;
+            }
+
+            const limitedMatches = matches.slice(0, 50);
+
+            limitedMatches.forEach(moveName => {
+                const li = document.createElement('li');
+                const moveData = MOVES_DEX[moveName];
+                
+                let typeHtml = '';
+                let powerHtml = '-';
+                
+                if (moveData) {
+                    const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
+                    const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
+                    typeHtml = `<span class="type-badge ${typeClass}">${typeName}</span>`;
+                    powerHtml = (moveData.power > 0) ? moveData.power : (moveData.category === 'Status' ? '-' : '特殊');
+                }
+
+                const nameHtml = `<strong>${moveName.substr(0, filterText.length)}</strong>${moveName.substr(filterText.length)}`;
+
+                li.innerHTML = `
+                    <div class="move-name">${nameHtml}</div>
+                    <div class="move-type">${typeHtml}</div>
+                    <div class="move-power">${powerHtml}</div>
+                `;
+
+                li.addEventListener('mousedown', function(e) {
+                    inputElement.value = moveName;
+                    listElement.style.display = 'none';
+                    triggerChange(moveName);
+                });
+
+                listElement.appendChild(li);
+            });
+            
+            listElement.style.display = 'block';
+        }
+
+        function triggerChange(value) {
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            if (pokemon) {
+                pokemon.moves[index] = value;
+                // Radio state is independent of move name, so no need to rerender radios here usually,
+                // but good to keep state consistent.
+                updateMoveInfoDisplay(inputElement, value);
+            }
+        }
+
+        inputElement.addEventListener('blur', function() {
+            // On blur, validation or just try to display info if exact match
+            const val = this.value;
+            if (MOVES_DEX[val]) {
+                 updateMoveInfoDisplay(inputElement, val);
+            }
+            setTimeout(() => {
+                listElement.style.display = 'none';
+            }, 200);
+        });
+        
+        // Keyboard Nav (optional but good)
     }
 
     function setupMoveInputs(side) {
         const prefix = (side === 'ally') ? 'ally' : 'enemy';
+        const radioName = (side === 'ally') ? 'ally-active-move' : 'enemy-active-move';
         
         for (let i = 0; i < 4; i++) {
+            // 1. Setup Input & Autocomplete
             const input = document.getElementById(`${prefix}-move-${i}`);
-            if (!input) continue;
+            if (input) {
+                const wrapper = input.closest('.move-input-wrapper');
+                const list = wrapper ? wrapper.querySelector('.custom-autocomplete-list') : null;
 
-            // Set initial value
-            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            if (pokemon && pokemon.moves[i]) {
-                input.value = pokemon.moves[i];
+                if (list) {
+                    setupMoveAutocomplete(input, list, side, i);
+                }
+
+                // Initial Value
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon && pokemon.moves[i]) {
+                    input.value = pokemon.moves[i];
+                    updateMoveInfoDisplay(input, pokemon.moves[i]);
+                }
             }
 
-            // Event Listener
-            input.addEventListener('change', (e) => {
-                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-                if (pokemon) {
-                    pokemon.moves[i] = e.target.value;
-                    renderMoveButtons(side);
-                }
-            });
+            // 2. Setup Radio Button
+            // We need to find the radio button generated in HTML. 
+            // It shares the same container or we query by name/value.
+            const radios = document.getElementsByName(radioName);
+            // find the one with value == i
+            const radio = Array.from(radios).find(r => r.value == i);
             
-            // Also update on 'input' for smoother feel? 
-            // 'change' is sufficiently standard for datalist selection.
+            if (radio) {
+                radio.addEventListener('change', () => {
+                    const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                    if (pokemon) {
+                        pokemon.activeMoveIndex = i;
+                    }
+                });
+            }
         }
     }
 
-    function renderMoveButtons(side) {
-        const prefix = (side === 'ally') ? 'ally' : 'enemy';
-        const grid = document.getElementById(`${prefix}-move-grid`);
+    // Replaces 'renderMoveButtons'. Call this to sync radio stat with appState.
+    function updateMoveSelectionUI(side) {
+        const radioName = (side === 'ally') ? 'ally-active-move' : 'enemy-active-move';
         const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+        if (!pokemon) return;
+
+        const radios = document.getElementsByName(radioName);
+        Array.from(radios).forEach(r => {
+            if (parseInt(r.value) === pokemon.activeMoveIndex) {
+                r.checked = true;
+            }
+        });
         
-        if (!grid || !pokemon) return;
-
-        grid.innerHTML = '';
-        pokemon.moves.forEach((moveName, index) => {
-            const btn = document.createElement('button');
-            btn.className = 'move-btn';
-            btn.dataset.index = index;
-            
-            if (index === pokemon.activeMoveIndex) {
-                btn.classList.add('active');
-            }
-
-            if (moveName && MOVES_DEX[moveName]) {
-                const moveData = MOVES_DEX[moveName];
-                const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
-                btn.innerHTML = `${moveName}<br><small>${powerText}</small>`;
-            } else {
-                btn.textContent = moveName || '(なし)';
-                if (!moveName) btn.disabled = true;
-            }
-
-            grid.appendChild(btn);
+        // Update input values too (switching pokemon)
+        const prefix = (side === 'ally') ? 'ally' : 'enemy';
+        pokemon.moves.forEach((move, i) => {
+             const input = document.getElementById(`${prefix}-move-${i}`);
+             if (input) {
+                input.value = move;
+                updateMoveInfoDisplay(input, move);
+             }
         });
     }
 
-    // Initialize Moves
-    populateMoveDatalist();
+    // Initialize
     ['ally', 'enemy'].forEach(side => {
         setupMoveInputs(side);
-        renderMoveButtons(side);
+        updateMoveSelectionUI(side); // Set initial radio
     });
     // ----------------------------
 
@@ -414,21 +643,70 @@ document.addEventListener('DOMContentLoaded', () => {
                     const enemyPoke = appState.getEnemyPokemon();
                     
                     // Ally Icon
+                    // Ally Icon
                     const allyIcon = document.getElementById('result-ally-icon');
                     if (allyIcon && allyPoke) {
                         const name = allyPoke.name.trim();
-                        allyIcon.src = `../backend/image/${name}.gif`;
+                        allyIcon.dataset.retried = ''; // Reset retry flag
+                        
+                        let src = `../backend/image/${name}.gif`;
+                        if (allyPoke.speciesData && allyPoke.speciesData.sprite_url) {
+                            src = allyPoke.speciesData.sprite_url;
+                        }
+                        
+                        allyIcon.src = src;
                         allyIcon.alt = name;
-                        allyIcon.onerror = () => { allyIcon.src = ''; allyIcon.alt = name; };
+                        allyIcon.onerror = () => { 
+                            if (!allyIcon.dataset.retried) {
+                                allyIcon.dataset.retried = 'true';
+                                // JSON URL failed, try local
+                                if (src !== `../backend/image/${name}.gif`) {
+                                    allyIcon.src = `../backend/image/${name}.gif`;
+                                    return;
+                                }
+                                
+                                if (name.includes('（') || name.includes('(')) {
+                                    const baseName = name.split(/[（(]/)[0];
+                                    allyIcon.src = `../backend/image/${baseName}.gif`;
+                                    return;
+                                }
+                            }
+                            allyIcon.src = ''; 
+                            allyIcon.alt = name; 
+                        };
                     }
 
                     // Enemy Icon
                     const enemyIcon = document.getElementById('result-enemy-icon');
                     if (enemyIcon && enemyPoke) {
                         const name = enemyPoke.name.trim();
-                        enemyIcon.src = `../backend/image/${name}.gif`;
+                        enemyIcon.dataset.retried = ''; // Reset retry flag
+                        
+                        let src = `../backend/image/${name}.gif`;
+                        if (enemyPoke.speciesData && enemyPoke.speciesData.sprite_url) {
+                            src = enemyPoke.speciesData.sprite_url;
+                        }
+
+                        enemyIcon.src = src;
                         enemyIcon.alt = name;
-                        enemyIcon.onerror = () => { enemyIcon.src = ''; enemyIcon.alt = name; };
+                        enemyIcon.onerror = () => { 
+                            if (!enemyIcon.dataset.retried) {
+                                enemyIcon.dataset.retried = 'true';
+                                // JSON URL failed, try local
+                                if (src !== `../backend/image/${name}.gif`) {
+                                    enemyIcon.src = `../backend/image/${name}.gif`;
+                                    return;
+                                }
+                                
+                                if (name.includes('（') || name.includes('(')) {
+                                    const baseName = name.split(/[（(]/)[0];
+                                    enemyIcon.src = `../backend/image/${baseName}.gif`;
+                                    return;
+                                }
+                            }
+                            enemyIcon.src = ''; 
+                            enemyIcon.alt = name; 
+                        };
                     }
                     
                     // Arrow Direction
@@ -892,14 +1170,43 @@ document.addEventListener('DOMContentLoaded', () => {
             if (enemyAbilitySelect) enemyAbilitySelect.value = pokemon.ability;
         }
 
-        // アイテム・特性 (今は空文字)
-        // These lines are redundant if the above if/else block already handles it.
-        // Assuming the intent is to ensure these are always updated, even if the inputs are not present.
-        // However, the original code already updates them via allyItemSelect, enemyItemSelect etc.
-        // I will interpret this as a general update for the current pokemon's item/ability,
-        // but since the inputs are already handled, I'll skip adding redundant lines here.
-        // If the HTML elements for item/ability are *not* the inputs, then this would be needed.
-        // Given the context, the existing input updates are sufficient.
+        // アイテム・特性の更新 Check
+        // 特性セレクトボックスの更新
+        const abilitySelect = document.getElementById(`${teamType}-ability-select`);
+        
+        if (abilitySelect && pokemon.speciesData) {
+            // 現在の選択値を保持
+            const currentVal = pokemon.ability || abilitySelect.value;
+            
+            // 選択肢をクリア
+            abilitySelect.innerHTML = '';
+            
+            // JSONデータから特性リストを生成
+            // speciesData.abilities: [{name: "...", is_hidden: ...}, ...]
+            if (pokemon.speciesData.abilities) {
+                pokemon.speciesData.abilities.forEach(ab => {
+                   const opt = document.createElement('option');
+                   opt.value = ab.name;
+                   opt.textContent = ab.name + (ab.is_hidden ? ' (夢)' : '');
+                   abilitySelect.appendChild(opt);
+                });
+            }
+            
+            // 値を復元、またはデフォルト(1つ目)
+            if (currentVal) {
+                abilitySelect.value = currentVal;
+            } else if (abilitySelect.options.length > 0) {
+                abilitySelect.value = abilitySelect.options[0].value;
+                pokemon.ability = abilitySelect.value; // Modelにも反映
+            }
+        }
+        
+        // 技リスト (Datalist) の更新 - Obsolete with custom autocomplete
+        // if (pokemon.speciesData && pokemon.speciesData.moves) {
+        //     populateMoveDatalist(teamType, pokemon.speciesData.moves);
+        // } else {
+        //      populateMoveDatalist(teamType, null);
+        // }
 
         // 種族値の表示
         renderBaseStats(teamType, pokemon);
@@ -966,7 +1273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Move Buttons & Selects Sync
-        renderMoveButtons(teamType);
+        updateMoveSelectionUI(teamType);
         
         // Update Selects values
         for (let i = 0; i < 4; i++) {
@@ -1035,19 +1342,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 slotBtn.insertBefore(img, nameSpan);
             }
 
-            const expectedSrc = `../backend/image/${name}.gif`;
+            // 画像URLの決定: JSONデータがあれば sprite_url を優先
+            let expectedSrc = null;
+            if (pokemon.speciesData && pokemon.speciesData.sprite_url) {
+                expectedSrc = pokemon.speciesData.sprite_url;
+            } else if (name && SPECIES_DEX[name]) {
+                 // Fallback if speciesData exists but no sprite_url (unlikely)
+                 expectedSrc = `../backend/image/${name}.gif`;
+            }
 
             // Only update if src changed
             if (img.dataset.key !== name) {
                 img.dataset.key = name;
-                img.src = expectedSrc;
-                img.alt = name;
+                img.dataset.retried = ''; // Reset retry flag
                 
-                // Reset display states
-                img.style.display = '';
-                nameSpan.style.display = 'none';
+                if (expectedSrc) {
+                    img.src = expectedSrc;
+                    img.alt = name;
+                    img.style.display = '';
+                    nameSpan.style.display = 'none';
+                } else {
+                    // No valid data yet (partial match or invalid), hide image
+                    img.style.display = 'none';
+                    img.src = ''; // Clear to be safe
+                    nameSpan.textContent = name;
+                    nameSpan.style.display = 'inline';
+                    slotBtn.classList.remove('has-image');
+                    return; // Skip the rest
+                }
                 
                 img.onerror = () => {
+                    // JSONのURLで失敗した場合、ローカルのgifを試す (まだ試してなければ)
+                    if (!img.dataset.retried) {
+                        img.dataset.retried = 'true';
+                        
+                        // ローカルパスへフォールバック
+                         if (img.src !== `../backend/image/${name}.gif`) { // Absolute check hard, just try local
+                             // Simply try the local path if the remote one failed
+                             img.src = `../backend/image/${name}.gif`;
+                             return;
+                         }
+
+                        // ローカルでもダメなら ()除去等
+                        if (name.includes('（') || name.includes('(')) {
+                            const baseName = name.split(/[（(]/)[0];
+                            img.src = `../backend/image/${baseName}.gif`;
+                            return;
+                        }
+                    }
+
                     img.style.display = 'none';
                     nameSpan.textContent = name;
                     nameSpan.style.display = 'inline';
