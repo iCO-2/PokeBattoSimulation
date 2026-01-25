@@ -370,7 +370,8 @@ def save_final_output(pokemon_data: List[Dict]) -> None:
 # =============================================================================
 
 def fetch_pokemon_variety(pokemon_url: str, species_ja_name: str, 
-                          is_default: bool, pokedex_number: int) -> Optional[Dict]:
+                          is_default: bool, pokedex_number: int,
+                          version_group: str = 'scarlet-violet') -> Optional[Dict]:
     """
     ポケモンの1つのバリエーション（フォルム）のデータを取得
     
@@ -379,6 +380,7 @@ def fetch_pokemon_variety(pokemon_url: str, species_ja_name: str,
         species_ja_name: 種族の日本語名
         is_default: デフォルトフォルムかどうか
         pokedex_number: 図鑑番号
+        version_group: バージョングループ（例: 'scarlet-violet', 'sword-shield'）
     
     Returns:
         フォルムデータの辞書
@@ -420,13 +422,24 @@ def fetch_pokemon_variety(pokemon_url: str, species_ja_name: str,
     weight_kg = p_data.get('weight', 0) / 10
     height_m = p_data.get('height', 0) / 10
     
-    # 技取得（キャッシュ利用）
+    # 技取得（バージョングループ指定、キャッシュ利用）
     moves_ja = []
     for m in p_data['moves']:
-        move_name = m['move']['name']
-        move_ja = get_cached_name('moves', move_name, m['move']['url'])
-        if move_ja:
-            moves_ja.append(move_ja)
+        # version_group_details をチェックして、指定されたバージョングループに存在する技のみを取得
+        version_group_details = m.get('version_group_details', [])
+        is_available_in_version = False
+        
+        for vg_detail in version_group_details:
+            vg_name = vg_detail.get('version_group', {}).get('name', '')
+            if vg_name == version_group:
+                is_available_in_version = True
+                break
+        
+        if is_available_in_version:
+            move_name = m['move']['name']
+            move_ja = get_cached_name('moves', move_name, m['move']['url'])
+            if move_ja:
+                moves_ja.append(move_ja)
     
     # 画像URL取得（アニメーションGIF優先）
     sprites = p_data.get('sprites', {})
@@ -452,12 +465,13 @@ def fetch_pokemon_variety(pokemon_url: str, species_ja_name: str,
     }
 
 
-def fetch_species_all_forms(species_id: int) -> List[Dict]:
+def fetch_species_all_forms(species_id: int, version_group: str = 'scarlet-violet') -> List[Dict]:
     """
     指定した図鑑番号のポケモンの全フォルムを取得
     
     Args:
         species_id: 図鑑番号
+        version_group: バージョングループ（例: 'scarlet-violet', 'sword-shield'）
     
     Returns:
         全フォルムのデータリスト
@@ -481,7 +495,7 @@ def fetch_species_all_forms(species_id: int) -> List[Dict]:
         
         try:
             form_data = fetch_pokemon_variety(
-                pokemon_url, species_ja_name, is_default, species_data['id']
+                pokemon_url, species_ja_name, is_default, species_data['id'], version_group
             )
             if form_data:
                 all_forms.append(form_data)
@@ -497,7 +511,8 @@ def fetch_species_all_forms(species_id: int) -> List[Dict]:
 # =============================================================================
 
 def fetch_all_pokemon(start_id: int = 1, max_id: Optional[int] = None,
-                      resume: bool = True, save_interval: int = 10) -> int:
+                      resume: bool = True, save_interval: int = 10,
+                      version_group: str = 'scarlet-violet') -> int:
     """
     全ポケモンのデータを取得してJSONファイルに保存
     
@@ -506,6 +521,7 @@ def fetch_all_pokemon(start_id: int = 1, max_id: Optional[int] = None,
         max_id: 最大図鑑番号（Noneの場合は404まで）
         resume: 中断から再開するか
         save_interval: 何体ごとに中間保存するか
+        version_group: バージョングループ（例: 'scarlet-violet', 'sword-shield'）
     
     Returns:
         取得したポケモン数
@@ -531,6 +547,7 @@ def fetch_all_pokemon(start_id: int = 1, max_id: Optional[int] = None,
         print(f"\nポケモンデータの取得を開始します（図鑑番号 {pokemon_id} から {max_id} まで）...")
     else:
         print(f"\nポケモンデータの取得を開始します（図鑑番号 {pokemon_id} から）...")
+    print(f"バージョングループ: {version_group}")
     print(f"{save_interval}体ごとに中間保存します。\n")
     
     start_time = time.time()
@@ -556,7 +573,7 @@ def fetch_all_pokemon(start_id: int = 1, max_id: Optional[int] = None,
                     print(f"図鑑番号 {pokemon_id} を取得中...", end=" ", flush=True)
                 
                 # 全フォルムを取得
-                forms = fetch_species_all_forms(pokemon_id)
+                forms = fetch_species_all_forms(pokemon_id, version_group)
                 
                 if forms:
                     all_pokemon_data.extend(forms)
@@ -627,14 +644,14 @@ def fetch_all_pokemon(start_id: int = 1, max_id: Optional[int] = None,
     return len(all_pokemon_data)
 
 
-def test_single_pokemon(pokemon_id: int) -> None:
+def test_single_pokemon(pokemon_id: int, version_group: str = 'scarlet-violet') -> None:
     """単一ポケモンのフォルム取得をテスト"""
-    print(f"\n=== 図鑑番号 {pokemon_id} のテスト ===\n")
+    print(f"\n=== 図鑑番号 {pokemon_id} のテスト（バージョングループ: {version_group}）===\n")
     
     load_cache()
     
     try:
-        forms = fetch_species_all_forms(pokemon_id)
+        forms = fetch_species_all_forms(pokemon_id, version_group)
         
         if forms:
             print(f"種族名: {forms[0].get('base_species')}")
@@ -681,17 +698,20 @@ if __name__ == "__main__":
                         help='中断から再開しない（新規開始）')
     parser.add_argument('--save-interval', type=int, default=10,
                         help='何体ごとに中間保存するか（デフォルト: 10）')
+    parser.add_argument('--version-group', type=str, default='scarlet-violet',
+                        help='バージョングループ（デフォルト: scarlet-violet）例: sword-shield, sun-moon')
     parser.add_argument('--test', type=int, default=None,
                         help='単一ポケモンのテスト（図鑑番号を指定）')
     
     args = parser.parse_args()
     
     if args.test:
-        test_single_pokemon(args.test)
+        test_single_pokemon(args.test, args.version_group)
     else:
         fetch_all_pokemon(
             start_id=args.start_id,
             max_id=args.max_id,
             resume=not args.no_resume,
-            save_interval=args.save_interval
+            save_interval=args.save_interval,
+            version_group=args.version_group
         )

@@ -1082,6 +1082,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         renderBattleLog();
     }
 
+
+    const TYPE_TO_JP = {
+        'normal': 'ノーマル', 'fire': 'ほのお', 'water': 'みず', 'electric': 'でんき',
+        'grass': 'くさ', 'ice': 'こおり', 'fighting': 'かくとう', 'poison': 'どく',
+        'ground': 'じめん', 'flying': 'ひこう', 'psychic': 'エスパー', 'bug': 'むし',
+        'rock': 'いわ', 'ghost': 'ゴースト', 'dragon': 'ドラゴン', 'dark': 'あく',
+        'steel': 'はがね', 'fairy': 'フェアリー', 'stellar': 'ステラ'
+    };
+
     function renderBaseStats(side, poke) {
         const container = document.getElementById(`${side}-base-stats`);
         if (!container) return;
@@ -1090,6 +1099,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.innerHTML = '';
             return;
         }
+
+        const typesHtml = poke.speciesData.types.map(t => {
+            const jp = TYPE_TO_JP[t.toLowerCase()] || t;
+            return `<span class="type-badge ${t.toLowerCase()}">${jp}</span>`;
+        }).join(' ');
 
         const bs = poke.speciesData.baseStats;
         const stats = [
@@ -1103,12 +1117,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const total = Object.values(bs).reduce((a, b) => a + b, 0);
 
-        container.innerHTML = stats.map(s => `
-            <div class="stat-item">
-                <span class="label">${s.label}:</span>
-                <span class="value">${s.val}</span>
+        container.innerHTML = `
+            <div class="stats-types">${typesHtml}</div>
+            <div class="stats-row-container">
+                ${stats.map(s => `
+                    <div class="stat-item">
+                        <span class="label">${s.label}:</span>
+                        <span class="value">${s.val}</span>
+                    </div>
+                `).join('')}
+                <div class="stat-item"><span class="label">計:</span><span class="value">${total}</span></div>
             </div>
-        `).join('') + `<div class="stat-item"><span class="label">計:</span><span class="value">${total}</span></div>`;
+        `;
     }
 
     function renderHistory(side, poke) {
@@ -1213,12 +1233,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         const tuneButtons = container.querySelectorAll('.tune-btn');
         tuneButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const stat = e.target.dataset.stat;
-                const action = e.target.dataset.action;
+                // ボタン内のアイコンをクリックした場合などの対策 (e.targetがbuttonでない場合)
+                const target = e.target.closest('.tune-btn');
+                if (!target) return;
+
+                const stat = target.dataset.stat;
+                const action = target.dataset.action;
                 const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                
                 if (pokemon) {
-                    const delta = (action === 'up') ? 1 : -1;
-                    adjustEvForRealStat(pokemon, stat, delta);
+                    let current = pokemon.stats[stat].ev;
+                    if (action === 'up') {
+                        current = Math.min(32, current + 1);
+                    } else {
+                        current = Math.max(0, current - 1);
+                    }
+                    pokemon.stats[stat].ev = current;
                     pokemon.computeStats();
                     updateFormFromState(side);
                 }

@@ -204,10 +204,23 @@ h2 {
     color: #888;
     margin-bottom: 15px;
     display: flex;
-    justify-content: center;
-    gap: 8px;
+    flex-direction: column; /* Stack types and stats */
+    align-items: center;
+    gap: 4px;
     min-height: 1.2em;
     font-family: inherit;
+}
+
+.stats-types {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+
+.stats-row-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
 
 .base-stats-info .stat-item {
@@ -791,11 +804,19 @@ h2 {
     /* Adjustments */
     .party-selector {
         gap: 10px;
-        justify-content: center;
+        justify-content: flex-start; /* Allow start alignment for scroll */
         padding: 5px;
-        overflow: visible;
-        white-space: normal;
+        overflow-x: auto; /* Enable scroll */
+        white-space: nowrap;
         flex-wrap: nowrap; /* Keep side by side */
+        -webkit-overflow-scrolling: touch;
+        width: 100%; /* Ensure it doesn't overflow parent */
+        box-sizing: border-box;
+    }
+
+    /* Hide scrollbar for cleaner look */
+    .party-selector::-webkit-scrollbar {
+        display: none;
     }
 
     .team {
@@ -817,6 +838,14 @@ h2 {
         flex-shrink: 0;
     }
 
+    /* Header mobile adjustments - removed negative margins to align with calc-container */
+    header {
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+    }
+
     header h1 {
         font-size: 1.2em;
         margin: 0 0 10px 0;
@@ -824,6 +853,121 @@ h2 {
 
     .action-panel {
         display: none;
+    }
+
+    /* Compact Stat Rows - fit everything on one line */
+    .stat-row {
+        flex-wrap: nowrap !important;
+        gap: 2px !important;
+        overflow-x: hidden !important;
+    }
+
+    .stat-result-box {
+        width: 60px !important;
+        min-width: 38px !important;
+        padding: 1px !important;
+    }
+
+    .stat-value {
+        font-size: 0.9em !important;
+    }
+
+    .stat-label {
+        font-size: 0.55em !important;
+    }
+
+    .stat-controls {
+        flex-wrap: nowrap !important;
+        gap: 6px !important;
+        flex: 1 !important;
+    }
+
+    /* Restore labels on mobile, stacked above controls */
+    .stat-controls label {
+        display: block !important;
+        font-size: 0.55em !important;
+        margin-bottom: 1px !important;
+    }
+
+    /* Restore IV input on mobile with compact styling */
+    .iv-group {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+        width: 32px !important;
+        min-width: 32px !important;
+        margin-right: 2px !important;
+    }
+
+    .iv-group input {
+        width: 100% !important;
+        padding: 2px 1px !important;
+        font-size: 13px !important;
+    }
+
+    .ev-group {
+        flex: 0 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+    }
+
+    .ev-control-row {
+        gap: 1px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .ev-input {
+        width: 28px !important;
+        min-width: 28px !important;
+        padding: 2px 1px !important;
+        font-size: 13px !important;
+    }
+
+    /* Restore tune buttons on mobile */
+    .tune-btn {
+        display: flex !important;
+        width: 30px !important;
+        min-width: 20px !important;
+        height: 20px !important;
+        font-size: 0.6em !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .preset-btn {
+        width: 30px !important;
+        min-width: 22px !important;
+        height: 20px !important;
+        font-size: 0.6em !important;
+        padding: 0 !important;
+    }
+
+    .nature-group {
+        min-width: 55px !important;
+    }
+
+    .nature-group.empty {
+        display: none !important;
+    }
+
+    .nature-toggle {
+        transform: scale(1.0) !important;
+        transform-origin: left center !important;
+    }
+
+    .nature-btn {
+        width: 18px !important;
+        height: 18px !important;
+        font-size: 0.55em !important;
+    }
+
+    .nature-display {
+        width: 18px !important;
+        line-height: 18px !important;
+        font-size: 0.65em !important;
     }
 
     /* Prevent iOS Zoom on inputs */
@@ -1280,7 +1424,7 @@ h2 {
 
 /* Tuning Buttons (Up/Down) */
 .tune-btn {
-    width: 30px;
+    width: 48px;
     height: 30px;
     border: 1px solid #2e7d32; /* Green border */
     background: #fff;
@@ -1368,3 +1512,26 @@ h2 {
    but for now default green is "Neutral". 
    Wait, the image shows Green Middle. 
 */
+
+/* Fix desktop alignment for IV/EV inputs */
+@media (min-width: 769px) {
+    .iv-group input,
+    .ev-input {
+        height: 30px; /* Match tune button height */
+        box-sizing: border-box;
+    }
+    
+    .iv-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    /* Enforce same height for labels to align inputs below them */
+    .stat-controls label {
+        height: 18px;
+        line-height: 18px;
+        margin-bottom: 4px;
+        overflow: hidden;
+    }
+}
