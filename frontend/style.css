@@ -88,7 +88,7 @@ header {
     width: 44px;
     height: 44px;
     /* Hard stop gradient for 2 solid colors */
-    background: linear-gradient(135deg, #ff5252 50%, #448aff 50%);
+    background: linear-gradient(135deg,#448aff 50%, #ff5252 50%);
     border-radius: 50%;
     border: 3px solid #fff;
     box-shadow: 0 0 0 3px #333; /* Thick dark ring */
@@ -245,7 +245,7 @@ h2 {
     overflow: visible;
 }
 
-/* 努力値列の幅を確保 */
+/* 能力P列の幅を確保 */
 .stats-table td:nth-child(3) {
     min-width: 100px;
 }
@@ -1181,3 +1181,190 @@ h2 {
 .move-input-wrapper {
     flex: 1;
 }
+/* Stats Container Layout */
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+/* 1. Real Value Box (Left) */
+.stat-result-box {
+    background-color: #e3f2fd; /* Light Blue */
+    border: 1px solid #90caf9;
+    border-radius: 6px;
+    padding: 1px;
+    width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.poke-settings.enemy .stat-result-box {
+    background-color: #ffebee;
+    border-color: #ef9a9a;
+}
+
+.stat-label {
+    font-size: 0.7em;
+    color: #1976d2;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.poke-settings.enemy .stat-label {
+    color: #d32f2f; /* Red text to match theme */
+}
+
+.stat-value {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Controls Wrapper */
+.stat-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-grow: 1;
+}
+
+/* Common Label Style */
+.stat-controls label {
+    font-size: 0.75em;
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* 2. IV Input (Small) */
+.iv-group {
+    width: 40px;
+}
+.iv-group input {
+    width: 100%;
+    text-align: center;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* 3. EV Group (Middle) */
+.ev-group {
+    flex-grow: 1;
+    max-width: 250px;
+}
+.ev-control-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ev-input {
+    width: 40px;
+    text-align: center;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* Tuning Buttons (Up/Down) */
+.tune-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #2e7d32; /* Green border */
+    background: #fff;
+    color: #2e7d32;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tune-btn:active {
+    background: #e8f5e9;
+}
+
+/* Preset Buttons (0/252) */
+.preset-btn {
+    width: 36px;
+    height: 30px;
+    border: 1px solid #2e7d32;
+    background: #fff;
+    color: #2e7d32;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+.preset-btn:active {
+    background: #e8f5e9;
+}
+
+/* 4. Nature Group (Right) */
+.nature-group {
+    min-width: 100px;
+}
+.nature-group.empty {
+    visibility: hidden;
+}
+
+.nature-toggle {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5; /* Light gray bg */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.nature-btn {
+    border: none;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: #888;
+    font-size: 0.8em;
+}
+.nature-btn:hover {
+    background: #eee;
+}
+/* Active States */
+.nature-btn.active.up {
+    background: #ffcdd2; /* Light Red tint for Up */
+    color: #c62828;
+}
+.nature-btn.active.down {
+    background: #bbdefb; /* Light Blue tint for Down */
+    color: #1565c0;
+}
+
+.nature-display {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    line-height: 30px;
+    background: #eee; /* Darker than toggle bg */
+    color: #fff; /* Text defaults to white? wait, let's use teal like image */
+    background: #26a69a; /* Teal default */
+}
+
+/* Adjust nature display based on state via JS classes if needed, 
+   but for now default green is "Neutral". 
+   Wait, the image shows Green Middle. 
+*/

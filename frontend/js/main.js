@@ -2,6 +2,7 @@ import { AppState } from './AppState.js?v=2';
 import { SPECIES_DEX, MOVES_DEX, loadAllData } from './data/loader.js';
 import { ITEMS_DEX } from './data/items.js';
 import { calculateDamage } from './calc/damage.js';
+import { calculateHp, calculateStat } from './calc/stats.js';
 
 const appState = new AppState();
 // Debug: Expose to window
@@ -1135,6 +1136,133 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
+
+    // Helper: Find closest EV to achieve real stat +/- 1
+    function adjustEvForRealStat(pokemon, statName, delta) {
+        if (!pokemon.speciesData) return;
+        const currentReal = pokemon.realStats[statName];
+        const targetReal = currentReal + delta;
+        const currentEv = pokemon.stats[statName].ev;
+        let tempEv = currentEv;
+        
+        if (delta > 0) {
+            while (tempEv <= 32) {
+                tempEv += 1;
+                if (tempEv > 32) { tempEv = 32; break; }
+                const base = (statName === 'hp') ? pokemon.speciesData.baseStats.hp : pokemon.speciesData.baseStats[statName];
+                const iv = pokemon.stats[statName].iv;
+                const nature = pokemon.stats[statName].nature;
+                let val = (statName === 'hp') 
+                    ? calculateHp(base, iv, tempEv, pokemon.level)
+                    : calculateStat(base, iv, tempEv, pokemon.level, nature);
+                if (val > currentReal) {
+                    pokemon.stats[statName].ev = tempEv;
+                    break;
+                }
+                // If we reach 32 and still haven't found a higher value, we stop.
+                if (tempEv === 32) break;
+            }
+        } else {
+             while (tempEv >= 0) {
+                tempEv -= 1;
+                if (tempEv < 0) { tempEv = 0; break; }
+                const base = (statName === 'hp') ? pokemon.speciesData.baseStats.hp : pokemon.speciesData.baseStats[statName];
+                const iv = pokemon.stats[statName].iv;
+                const nature = pokemon.stats[statName].nature;
+                let val = (statName === 'hp') 
+                    ? calculateHp(base, iv, tempEv, pokemon.level)
+                    : calculateStat(base, iv, tempEv, pokemon.level, nature);
+                if (val < currentReal) {
+                    pokemon.stats[statName].ev = tempEv;
+                    break;
+                }
+                if (tempEv === 0) break;
+            }
+        }
+    }
+
+    function setupStatInputs(side) {
+        // Find the specific container for this side
+        // side is 'ally' or 'enemy'.
+        // In index.html, the structure is <section class="poke-settings ally ..."> -> <div class="stats-container">
+        // So we can use .poke-settings.{side} .stats-container
+        
+        const containerSelector = `.poke-settings.${side} .stats-container`;
+        const container = document.querySelector(containerSelector);
+        
+        if (!container) return; // Should not happen if DOM is ready
+
+        // 1. Standard Inputs
+        const inputs = container.querySelectorAll('.stat-input');
+        inputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const stat = e.target.dataset.stat;
+                const type = e.target.dataset.type;
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    const val = parseInt(e.target.value);
+                    if (type === 'iv') pokemon.stats[stat].iv = val;
+                    if (type === 'ev') pokemon.stats[stat].ev = val;
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        });
+
+        // 2. EV Tuning Buttons (▼ / ▲)
+        const tuneButtons = container.querySelectorAll('.tune-btn');
+        tuneButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const stat = e.target.dataset.stat;
+                const action = e.target.dataset.action;
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    const delta = (action === 'up') ? 1 : -1;
+                    adjustEvForRealStat(pokemon, stat, delta);
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        });
+
+        // 3. Preset Buttons (0 / 252)
+        const presetButtons = container.querySelectorAll('.preset-btn');
+        presetButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const row = e.target.closest('.stat-controls');
+                const statInput = row.querySelector('.ev-input');
+                const stat = statInput.dataset.stat;
+                const val = parseInt(e.target.dataset.val);
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    pokemon.stats[stat].ev = val;
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        });
+
+        // 4. Nature Buttons
+        const natureButtons = container.querySelectorAll('.nature-btn');
+        natureButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const stat = e.target.dataset.stat;
+                const val = e.target.dataset.val;
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    const currentNature = pokemon.stats[stat].nature;
+                    let newNature = val;
+                    if (currentNature === val) {
+                        newNature = 'neutral';
+                    }
+                    pokemon.stats[stat].nature = newNature;
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        });
+    }
+
     function updateFormFromState(teamType) {
         let pokemon;
         let containerSelector;
@@ -1152,37 +1280,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // 初回計算
         if (pokemon.realStats.hp === 0) {
-             pokemon.computeStats(); // 計算してなければ計算
+             pokemon.computeStats(); 
         }
-
-        // --- UI更新 ---
 
         // Basic Info
-        if (teamType === 'ally') {
-            if (allyNameInput) allyNameInput.value = pokemon.name;
-            if (allyLevelInput) allyLevelInput.value = pokemon.level;
-            if (allyTeraSelect) allyTeraSelect.value = pokemon.teraType;
-            if (allyItemSelect) allyItemSelect.value = pokemon.item;
-            if (allyAbilitySelect) allyAbilitySelect.value = pokemon.ability;
-        } else {
-            if (enemyNameInput) enemyNameInput.value = pokemon.name;
-            if (enemyItemSelect) enemyItemSelect.value = pokemon.item;
-            if (enemyAbilitySelect) enemyAbilitySelect.value = pokemon.ability;
-        }
-
-        // アイテム・特性の更新 Check
-        // 特性セレクトボックスの更新
-        const abilitySelect = document.getElementById(`${teamType}-ability-select`);
+        const prefix = (teamType === 'ally') ? 'ally' : 'enemy';
+        const nameInput = document.getElementById(`${prefix}-name-input`);
+        const itemSelect = document.getElementById(`${prefix}-item-select`);
+        const abilitySelect = document.getElementById(`${prefix}-ability-select`);
+        const levelInput = document.getElementById(`${prefix}-level-input`);
+        const teraSelect = document.getElementById(`${prefix}-tera-select`);
         
+        if (nameInput) nameInput.value = pokemon.name;
+        if (levelInput) levelInput.value = pokemon.level;
+        if (teraSelect) teraSelect.value = pokemon.teraType;
+        if (itemSelect && pokemon.item) itemSelect.value = pokemon.item;
+
+        // Ability syncing
         if (abilitySelect && pokemon.speciesData) {
-            // 現在の選択値を保持
             const currentVal = pokemon.ability || abilitySelect.value;
-            
-            // 選択肢をクリア
             abilitySelect.innerHTML = '';
-            
-            // JSONデータから特性リストを生成
-            // speciesData.abilities: [{name: "...", is_hidden: ...}, ...]
             if (pokemon.speciesData.abilities) {
                 pokemon.speciesData.abilities.forEach(ab => {
                    const opt = document.createElement('option');
@@ -1191,107 +1308,73 @@ document.addEventListener('DOMContentLoaded', async () => {
                    abilitySelect.appendChild(opt);
                 });
             }
-            
-            // 値を復元、またはデフォルト(1つ目)
             if (currentVal) {
                 abilitySelect.value = currentVal;
             } else if (abilitySelect.options.length > 0) {
                 abilitySelect.value = abilitySelect.options[0].value;
-                pokemon.ability = abilitySelect.value; // Modelにも反映
+                pokemon.ability = abilitySelect.value;
             }
         }
-        
-        // 技リスト (Datalist) の更新 - Obsolete with custom autocomplete
-        // if (pokemon.speciesData && pokemon.speciesData.moves) {
-        //     populateMoveDatalist(teamType, pokemon.speciesData.moves);
-        // } else {
-        //      populateMoveDatalist(teamType, null);
-        // }
 
-        // 種族値の表示
-        renderBaseStats(teamType, pokemon);
+        // Stats Update (Inputs & Real Values)
+        const stats = ['hp', 'attack', 'defense', 'spAtk', 'spDef', 'speed'];
+        stats.forEach(stat => {
+            const data = pokemon.stats[stat];
+            
+            // Inputs
+            // Also need to fix invalid selector here if it used #{side}-stats
+            // The original logic was: container.querySelector(...)
+            // But verify specifically what was used.
+            // Original: const ivInput = document.querySelector(`#${teamType}-stats input[data-stat="${stat}"][data-type="iv"]`);
+            // This is BAD. We should use `container.querySelector` with scoped selector to avoid ID dependency.
+            
+            const ivInput = container.querySelector(`input[data-stat="${stat}"][data-type="iv"]`);
+            const evInput = container.querySelector(`input[data-stat="${stat}"][data-type="ev"]`);
+            
+            if (ivInput) ivInput.value = data.iv;
+            if (evInput) evInput.value = data.ev;
 
-        // 履歴の更新
-        renderHistory(teamType, pokemon);
+            // Nature Buttons State
+            // Original: const upBtn = document.querySelector(`#${teamType}-stats .nature-btn.up[data-stat="${stat}"]`);
+            // Change to container.querySelector
+            
+            const upBtn = container.querySelector(`.nature-btn.up[data-stat="${stat}"]`);
+            const downBtn = container.querySelector(`.nature-btn.down[data-stat="${stat}"]`);
+            const natureDisplay = container.querySelector(`.nature-display[data-stat="${stat}"]`);
+            
+            if (upBtn && downBtn && natureDisplay) {
+                upBtn.classList.remove('active');
+                downBtn.classList.remove('active');
+                natureDisplay.textContent = '';
+                natureDisplay.style.color = '#fff';
+                natureDisplay.style.background = '#ccc'; // Default
 
-        // スロットの状態（ひんし等）を同期
-        updateTeamSlots(teamType);
-
-        // HP Bar
-        const currentHpSpan = document.getElementById(`${teamType}-current-hp`);
-        const maxHpSpan = document.getElementById(`${teamType}-max-hp`);
-        const hpBar = document.getElementById(`${teamType}-hp-bar`);
-        
-        // Item Status & Button
-        const itemStatus = document.getElementById(`${teamType}-item-status`);
-        const itemBtn = container.querySelector('.item-trigger-btn');
-        if (itemStatus && itemBtn) {
-            if (pokemon.itemConsumed) {
-                itemStatus.textContent = "（使用済み）";
-                itemBtn.disabled = true;
-            } else {
-                itemStatus.textContent = "";
-                const itemInfo = ITEMS_DEX[pokemon.item];
-                itemBtn.disabled = !itemInfo;
-                if (itemInfo) {
-                    itemBtn.textContent = itemInfo.type === 'berry' ? 'きのみ発動' : '回復実行';
+                if (data.nature === 'up') {
+                    upBtn.classList.add('active');
+                    natureDisplay.textContent = '+';
+                    natureDisplay.style.background = '#ef5350'; // Red
+                } else if (data.nature === 'down') {
+                    downBtn.classList.add('active');
+                    natureDisplay.textContent = '-';
+                    natureDisplay.style.background = '#42a5f5'; // Blue
                 } else {
-                    itemBtn.textContent = '発動';
+                    natureDisplay.style.background = '#26a69a'; // Teal
                 }
             }
-        }
 
-        if (currentHpSpan && maxHpSpan && hpBar) {
-            currentHpSpan.textContent = pokemon.currentHp;
-            maxHpSpan.textContent = pokemon.maxHp;
-            
-            const ratio = (pokemon.maxHp > 0) ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
-            hpBar.style.width = `${Math.max(0, ratio)}%`;
-            
-            if (ratio >= 50) hpBar.style.backgroundColor = 'var(--primary-green)';
-            else if (ratio >= 25) hpBar.style.backgroundColor = 'var(--accent-orange)';
-            else hpBar.style.backgroundColor = 'var(--primary-red)';
-        }
-
-        // Stats Table Inputs
-        container.querySelectorAll('.stat-input').forEach(input => {
-            const statName = input.dataset.stat;
-            const type = input.dataset.type;
-            if (statName && type && pokemon.stats[statName]) {
-                input.value = pokemon.stats[statName][type];
+            // Real Value Update
+            const realValEl = document.getElementById(`${teamType}-stat-val-${stat}`);
+            if (realValEl) {
+                realValEl.textContent = pokemon.speciesData ? pokemon.realStats[stat] : "-";
             }
         });
 
-        // Real Stats Display
-        // ID: ally-stat-val-hp etc.
-        ['hp', 'attack', 'defense', 'spAtk', 'spDef', 'speed'].forEach(stat => {
-            const el = document.getElementById(`${teamType}-stat-val-${stat}`);
-            if (el) {
-                // ポケモン名が未入力(speciesDataがない)なら "-"
-                el.textContent = pokemon.speciesData ? pokemon.realStats[stat] : "-";
-            }
-        });
-
-        // Move Buttons & Selects Sync
+        // Other syncs
+        renderBaseStats(teamType, pokemon);
         updateMoveSelectionUI(teamType);
         
-        // Update Selects values
-        for (let i = 0; i < 4; i++) {
-            const select = document.getElementById(`${teamType}-move-${i}`);
-            if (select && pokemon.moves[i]) {
-                select.value = pokemon.moves[i];
-            } else if (select) {
-                select.value = "";
-            }
-        }
-
-        // Conditions
-        container.querySelectorAll('.condition-check').forEach(check => {
-            const condName = check.dataset.cond;
-            if (condName && pokemon.conditions) {
-                check.checked = !!pokemon.conditions[condName];
-            }
-        });
+        renderHistory(teamType, pokemon);
+        updateTeamSlots(teamType);
     }
 
     function updateTeamSlots(teamType) {
@@ -1435,6 +1518,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+
+    // Initialize stat inputs (EV buttons, Nature buttons, etc.)
+    setupStatInputs('ally');
+    setupStatInputs('enemy');
 });
 
 // --- Mobile Tab & Sticky Footer Logic ---
