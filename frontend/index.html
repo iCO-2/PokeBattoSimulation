@@ -332,9 +332,17 @@
                 <div class="action-buttons">
                 <!-- 攻撃方向ボタン -->
                  <p>【攻撃ボタン】</p>
-                <button id="execute-ally-attack" class="action-btn"><span style="font-weight: bold; font-size: 1.2em;">自分</span> → 相手</button>
-                <br><br>
-                <button id="execute-enemy-attack" class="action-btn">自分 ← <span style="font-weight: bold; font-size: 1.2em;">相手</span></button>
+                 <div class="action-buttons-container">
+                    <button id="execute-ally-attack" class="action-btn ally-attack-btn">
+                        <img src="../backend/data/image/trainer_ally.png" alt="Ally" class="trainer-icon">
+                        <span class="btn-main-text">自分が攻撃</span>
+                    </button>
+                    
+                    <button id="execute-enemy-attack" class="action-btn enemy-attack-btn">
+                        <img src="../backend/data/image/trainer_enemy.png" alt="Enemy" class="trainer-icon">
+                        <span class="btn-main-text">相手が攻撃</span>
+                    </button>
+                 </div>
 
             </div>
             </div>
@@ -659,9 +667,16 @@
 
 
     <div class="mobile-sticky-footer">
+    <div class="mobile-sticky-footer">
         <div class="mobile-action-buttons">
-            <button id="mobile-attack-ally" class="mobile-action-btn ally-attack">自分→相手</button>
-            <button id="mobile-attack-enemy" class="mobile-action-btn enemy-attack">自分←相手</button>
+            <button id="mobile-attack-ally" class="mobile-action-btn ally-attack">
+                <img src="../backend/data/image/trainer_ally.png" alt="Ally" class="mobile-trainer-icon">
+                <span class="mobile-btn-text">自分が攻撃</span>
+            </button>
+            <button id="mobile-attack-enemy" class="mobile-action-btn enemy-attack">
+                <span class="mobile-btn-text">相手が攻撃</span>
+                <img src="../backend/data/image/trainer_enemy.png" alt="Enemy" class="mobile-trainer-icon">
+            </button>
         </div>
     </div>
 
