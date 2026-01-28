@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Ally (自分) Inputs
     // Ally (自分) Inputs
     const allyNameInput = document.getElementById('ally-name-input');
-    const allyLevelInput = document.getElementById('ally-level-input');
+    // const allyLevelInput = document.getElementById('ally-level-input'); // Removed
     const allyTeraSelect = document.getElementById('ally-tera-select');
     const allyItemSelect = document.getElementById('ally-item-select');
     const allyAbilitySelect = document.getElementById('ally-ability-select');
@@ -69,6 +69,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // Level input removed (Fixed 50)
+    /*
     if (allyLevelInput) {
         allyLevelInput.addEventListener('input', (e) => {
             const pokemon = appState.getAllyPokemon();
@@ -77,6 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateFormFromState('ally');
         });
     }
+    */
 
     if (allyTeraSelect) {
         allyTeraSelect.addEventListener('change', (e) => {
@@ -1091,6 +1094,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         'steel': 'はがね', 'fairy': 'フェアリー', 'stellar': 'ステラ'
     };
 
+    const JP_TO_TYPE = {};
+    Object.entries(TYPE_TO_JP).forEach(([en, jp]) => {
+        JP_TO_TYPE[jp] = en;
+    });
+
     function renderBaseStats(side, poke) {
         const container = document.getElementById(`${side}-base-stats`);
         if (!container) return;
@@ -1101,8 +1109,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const typesHtml = poke.speciesData.types.map(t => {
-            const jp = TYPE_TO_JP[t.toLowerCase()] || t;
-            return `<span class="type-badge ${t.toLowerCase()}">${jp}</span>`;
+            // t comes from JSON as Japanese (e.g. "くさ") or potentially English
+            // We need the English key (e.g. "grass") for the CSS class
+            const enType = JP_TO_TYPE[t] || t.toLowerCase();
+            const display = TYPE_TO_JP[enType] || t; // Ensure display is Japanese if we have it
+            
+            return `<span class="type-badge ${enType}">${display}</span>`;
         }).join(' ');
 
         const bs = poke.speciesData.baseStats;
