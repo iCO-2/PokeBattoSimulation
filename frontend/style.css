@@ -38,7 +38,7 @@ header {
     align-items: center;
     gap: 20px;
     padding: 20px;
-    margin-top: 15px;
+    margin: 15px auto 0;  /* Centered with top margin */
     position: relative;
     /* Solid Color Theme - "Arena" Style */
     background: #f4f4f4; 
@@ -46,6 +46,9 @@ header {
     border-radius: 12px;
     /* Strong, flat shadow for visual pop */
     box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+    max-width: 1400px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .team {
@@ -167,7 +170,7 @@ header {
     display: grid;
     grid-template-columns: 1fr 300px 1fr;
     gap: 20px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
