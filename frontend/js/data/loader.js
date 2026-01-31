@@ -4,8 +4,8 @@ export const MOVES_DEX = {};
 export async function loadAllData() {
     try {
         const [pokemonRes, movesRes] = await Promise.all([
-            fetch('../../data/pokemon_data_all.json'),
-            fetch('../../data/moves_data.json')
+            fetch('./data/pokemon_data_all.json'),
+            fetch('./data/moves_data.json')
         ]);
 
         if (!pokemonRes.ok) throw new Error(`Failed to load pokemon data: ${pokemonRes.status}`);
