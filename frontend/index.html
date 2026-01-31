@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
-    <link rel="stylesheet" href="style.css?v=16">
+    <link rel="stylesheet" href="style.css?v=18">
 </head>
 <body>
     <header>
-        <h1>ポケモン対戦シミュレーター (3vs3)</h1>
+        <h1>ポケモン対戦シミュレーター</h1>
         <div class="party-selector">
             <div class="team ally-team">
-                <span>自分:</span>
+                <span>自分</span>
                 <button class="poke-slot active" data-team="ally" data-index="0">1</button>
                 <button class="poke-slot" data-team="ally" data-index="1">2</button>
                 <button class="poke-slot" data-team="ally" data-index="2">3</button>
+                <button class="poke-slot" data-team="ally" data-index="3">4</button>
+                <button class="poke-slot" data-team="ally" data-index="4">5</button>
+                <button class="poke-slot" data-team="ally" data-index="5">6</button>
             </div>
+            
+            <div class="versus-divider">
+                <span class="vs-text">VS</span>
+            </div>
+
             <div class="team enemy-team">
-                <span>相手:</span>
+                <span>相手</span>
                 <button class="poke-slot" data-team="enemy" data-index="0">1</button>
                 <button class="poke-slot" data-team="enemy" data-index="1">2</button>
                 <button class="poke-slot" data-team="enemy" data-index="2">3</button>
+                <button class="poke-slot" data-team="enemy" data-index="3">4</button>
+                <button class="poke-slot" data-team="enemy" data-index="4">5</button>
+                <button class="poke-slot" data-team="enemy" data-index="5">6</button>
             </div>
         </div>
     </header>
@@ -44,11 +55,13 @@
                 </div>
             </div>
 
-            <input type="text" id="ally-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
+            <div class="autocomplete-container">
+                <input type="text" id="ally-name-input" placeholder="ポケモン名入力" class="search-input" autocomplete="off">
+                <ul id="ally-autocomplete-list" class="autocomplete-list"></ul>
+            </div>
             <div id="ally-base-stats" class="base-stats-info"></div>
             
             <div class="grid-params">
-                <label>レベル: <input type="number" id="ally-level-input" value="50" min="1" max="100"></label>
                 <label>テラスタル: 
                     <select id="ally-tera-select">
                         <option>なし</option>
@@ -58,128 +71,193 @@
                 </label>
             </div>
 
-            <div class="stats-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ステータス</th>
-                            <th>個体値</th>
-                            <th>努力値</th>
-                            <th>性格</th>
-                            <th>実数値</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- HP -->
-                        <tr>
-                            <td>HP</td>
-                            <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>-</td> <!-- HPに性格補正はない -->
-                            <td class="final-stat" id="ally-stat-val-hp">175</td> <!-- 仮の値 -->
-                        </tr>
-                        <!-- 攻撃 -->
-                        <tr>
-                            <td>攻撃</td>
-                            <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="attack" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="ally-stat-val-attack">150</td>
-                        </tr>
-                        <!-- 防御 -->
-                        <tr>
-                            <td>防御</td>
-                            <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="defense" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="ally-stat-val-defense">135</td>
-                        </tr>
-                        <!-- 特攻 -->
-                        <tr>
-                            <td>特攻</td>
-                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="spAtk" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="ally-stat-val-spAtk">115</td>
-                        </tr>
-                        <!-- 特防 -->
-                        <tr>
-                            <td>特防</td>
-                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="spDef" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="ally-stat-val-spDef">115</td>
-                        </tr>
-                        <!-- 素早さ -->
-                        <tr>
-                            <td>素早さ</td>
-                            <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="speed" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="ally-stat-val-speed">122</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="stats-container">
+                <!-- HP (No Nature) -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">HP</div>
+                        <div class="stat-value" id="ally-stat-val-hp">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="hp" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="hp" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="hp" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group empty">
+                            <!-- HP has no nature -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attack -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">こうげき</div>
+                        <div class="stat-value" id="ally-stat-val-attack">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="attack" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="attack" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="attack" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="attack" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="attack"></span>
+                                <button type="button" class="nature-btn up" data-stat="attack" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Defense -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">ぼうぎょ</div>
+                        <div class="stat-value" id="ally-stat-val-defense">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="defense" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="defense" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="defense" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="defense" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="defense"></span>
+                                <button type="button" class="nature-btn up" data-stat="defense" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SpA -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">とくこう</div>
+                        <div class="stat-value" id="ally-stat-val-spAtk">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="spAtk" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="spAtk" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="spAtk" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="spAtk"></span>
+                                <button type="button" class="nature-btn up" data-stat="spAtk" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SpD -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">とくぼう</div>
+                        <div class="stat-value" id="ally-stat-val-spDef">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="spDef" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="spDef" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="spDef" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="spDef"></span>
+                                <button type="button" class="nature-btn up" data-stat="spDef" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Speed -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">すばやさ</div>
+                        <div class="stat-value" id="ally-stat-val-speed">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="speed" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="speed" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="speed" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="speed" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="speed"></span>
+                                <button type="button" class="nature-btn up" data-stat="speed" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="options">
@@ -194,18 +272,40 @@
             </div>
 
             <div class="move-selector">
-                <h3>技構成</h3>
+                <h3>技</h3>
                 <div class="move-config-grid">
-                    <input class="move-select" data-index="0" id="ally-move-0" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="1" id="ally-move-1" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="2" id="ally-move-2" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="3" id="ally-move-3" list="move-list" placeholder="(なし)">
-                </div>
-                <datalist id="move-list"></datalist>
-
-                <h3>技選択</h3>
-                <div class="move-grid ally-move-grid" id="ally-move-grid">
-                    <!-- Javascriptでボタン生成 -->
+                    <div class="move-row">
+                        <input type="radio" name="ally-active-move" value="0" class="move-select-radio" checked>
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="0" id="ally-move-0" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="ally-active-move" value="1" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="1" id="ally-move-1" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="ally-active-move" value="2" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="2" id="ally-move-2" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="ally-active-move" value="3" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="3" id="ally-move-3" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -231,9 +331,17 @@
                 <div class="action-buttons">
                 <!-- 攻撃方向ボタン -->
                  <p>【攻撃ボタン】</p>
-                <button id="execute-ally-attack" class="action-btn"><span style="font-weight: bold; font-size: 1.2em;">自分</span> → 相手</button>
-                <br><br>
-                <button id="execute-enemy-attack" class="action-btn">自分 ← <span style="font-weight: bold; font-size: 1.2em;">相手</span></button>
+                 <div class="action-buttons-container">
+                    <button id="execute-ally-attack" class="action-btn ally-attack-btn">
+                        <img src="../backend/data/image/trainer_ally.png" alt="Ally" class="trainer-icon">
+                        <span class="btn-main-text">自分が攻撃</span>
+                    </button>
+                    
+                    <button id="execute-enemy-attack" class="action-btn enemy-attack-btn">
+                        <img src="../backend/data/image/trainer_enemy.png" alt="Enemy" class="trainer-icon">
+                        <span class="btn-main-text">相手が攻撃</span>
+                    </button>
+                 </div>
 
             </div>
             </div>
@@ -247,7 +355,7 @@
                         <div class="mini-hp-bar"><div id="result-ally-mini-hp-fill" class="mini-hp-bar-fill"></div></div>
                     </div>
                     <div class="move-arrow-display">
-                        <span id="result-move-name" class="move-name-display">-</span>
+                        <span id="result-move-name" class="move-name-display"></span>
                         <div class="arrow-icon" id="result-arrow-icon">➜</div>
                     </div>
                     <div class="icon-wrapper">
@@ -257,11 +365,11 @@
                 </div>
                 <div class="result-row">
                     <span class="label">ダメージ:</span>
-                    <span class="value damage-range">-</span>
+                    <span class="value damage-range"></span>
                 </div>
                 <div class="result-row">
                     <span class="label">瀕死率:</span>
-                    <span class="value kill-chance">-</span>
+                    <span class="value kill-chance"></span>
                 </div>
                 <div class="result-row">
                     <span class="label">採用乱数:</span>
@@ -295,131 +403,199 @@
                 </div>
             </div>
 
-            <input type="text" id="enemy-name-input" placeholder="ポケモン名入力" class="search-input" list="pokemon-list">
+            <div class="autocomplete-container">
+                <input type="text" id="enemy-name-input" placeholder="ポケモン名入力" class="search-input" autocomplete="off">
+                <ul id="enemy-autocomplete-list" class="autocomplete-list"></ul>
+            </div>
             <div id="enemy-base-stats" class="base-stats-info"></div>
-            
-            <div class="stats-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ステータス</th>
-                            <th>個体値</th>
-                            <th>努力値</th>
-                            <th>性格</th>
-                            <th>実数値</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- HP -->
-                        <tr>
-                            <td>HP</td>
-                            <td><input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="hp" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>-</td>
-                            <td class="final-stat" id="enemy-stat-val-hp">-</td>
-                        </tr>
-                        <!-- 攻撃 -->
-                        <tr>
-                            <td>攻撃</td>
-                            <td><input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="attack" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="attack" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="enemy-stat-val-attack">-</td>
-                        </tr>
-                        <!-- 防御 -->
-                        <tr>
-                            <td>防御</td>
-                            <td><input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="defense" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="defense" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="enemy-stat-val-defense">-</td>
-                        </tr>
-                        <!-- 特攻 -->
-                        <tr>
-                            <td>特攻</td>
-                            <td><input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="spAtk" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="enemy-stat-val-spAtk">-</td>
-                        </tr>
-                        <!-- 特防 -->
-                        <tr>
-                            <td>特防</td>
-                            <td><input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="spDef" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="enemy-stat-val-spDef">-</td>
-                        </tr>
-                        <!-- 素早さ -->
-                        <tr>
-                            <td>素早さ</td>
-                            <td><input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0"></td>
-                            <td>
-                                <div class="ev-input-container">
-                                    <input type="number" class="stat-input" data-stat="speed" data-type="ev" value="0" max="252" min="0">
-                                    <button type="button" class="ev-252-btn">252</button>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="stat-input" data-stat="speed" data-type="nature">
-                                    <option value="neutral">--</option>
-                                    <option value="up">+</option>
-                                    <option value="down">-</option>
-                                </select>
-                            </td>
-                            <td class="final-stat" id="enemy-stat-val-speed">-</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="stats-container">
+                <!-- HP (No Nature) -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">HP</div>
+                        <div class="stat-value" id="enemy-stat-val-hp">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="hp" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="hp" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="hp" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="hp" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group empty">
+                            <!-- HP has no nature -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attack -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">こうげき</div>
+                        <div class="stat-value" id="enemy-stat-val-attack">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="attack" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="attack" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="attack" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="attack" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="attack" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="attack"></span>
+                                <button type="button" class="nature-btn up" data-stat="attack" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Defense -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">ぼうぎょ</div>
+                        <div class="stat-value" id="enemy-stat-val-defense">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="defense" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="defense" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="defense" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="defense" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="defense" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="defense"></span>
+                                <button type="button" class="nature-btn up" data-stat="defense" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SpA -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">とくこう</div>
+                        <div class="stat-value" id="enemy-stat-val-spAtk">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="spAtk" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="spAtk" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="spAtk" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="spAtk" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="spAtk" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="spAtk"></span>
+                                <button type="button" class="nature-btn up" data-stat="spAtk" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SpD -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">とくぼう</div>
+                        <div class="stat-value" id="enemy-stat-val-spDef">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="spDef" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="spDef" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="spDef" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="spDef" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="spDef" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="spDef"></span>
+                                <button type="button" class="nature-btn up" data-stat="spDef" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Speed -->
+                <div class="stat-row">
+                    <div class="stat-result-box">
+                        <div class="stat-label">すばやさ</div>
+                        <div class="stat-value" id="enemy-stat-val-speed">-</div>
+                    </div>
+                    <div class="stat-controls flex-row">
+                        <div class="iv-group">
+                            <label>IV</label>
+                            <input type="number" class="stat-input" data-stat="speed" data-type="iv" value="31" max="31" min="0">
+                        </div>
+                        <div class="ev-group">
+                            <label>能力P</label>
+                            <div class="ev-control-row">
+                                <input type="number" class="stat-input ev-input" data-stat="speed" data-type="ev" value="0" max="252" min="0">
+                                <button type="button" class="tune-btn" data-stat="speed" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="speed" data-action="up" title="+1 実数値">▲</button>
+                                <button type="button" class="preset-btn" data-val="0">0</button>
+                                <button type="button" class="preset-btn" data-val="32">32</button>
+                            </div>
+                        </div>
+                        <div class="nature-group">
+                            <label>性格 補正</label>
+                            <div class="nature-toggle">
+                                <button type="button" class="nature-btn down" data-stat="speed" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="speed"></span>
+                                <button type="button" class="nature-btn up" data-stat="speed" data-val="up">▲</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
 
             <div class="options">
@@ -434,17 +610,40 @@
             </div>
 
             <div class="move-selector">
-                <h3>技構成</h3>
+                <h3>技</h3>
                 <div class="move-config-grid">
-                    <input class="move-select" data-index="0" id="enemy-move-0" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="1" id="enemy-move-1" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="2" id="enemy-move-2" list="move-list" placeholder="(なし)">
-                    <input class="move-select" data-index="3" id="enemy-move-3" list="move-list" placeholder="(なし)">
-                </div>
-
-                <h3>技選択</h3>
-                <div class="move-grid enemy-move-grid" id="enemy-move-grid">
-                     <!-- Javascriptでボタン生成 -->
+                    <div class="move-row">
+                        <input type="radio" name="enemy-active-move" value="0" class="move-select-radio" checked>
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="0" id="enemy-move-0" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="enemy-active-move" value="1" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="1" id="enemy-move-1" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="enemy-active-move" value="2" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="2" id="enemy-move-2" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
+                    <div class="move-row">
+                        <input type="radio" name="enemy-active-move" value="3" class="move-select-radio">
+                        <div class="move-input-wrapper">
+                            <input class="move-select" data-index="3" id="enemy-move-3" placeholder="(なし)" autocomplete="off">
+                            <ul class="custom-autocomplete-list"></ul>
+                            <div class="move-info-display"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -464,15 +663,27 @@
             </div>
         </section>
     </main>
-    <datalist id="pokemon-list"></datalist>
+
 
     <div class="mobile-sticky-footer">
+    <div class="mobile-sticky-footer">
         <div class="mobile-action-buttons">
-            <button id="mobile-attack-ally" class="mobile-action-btn ally-attack">自分→相手</button>
-            <button id="mobile-attack-enemy" class="mobile-action-btn enemy-attack">自分←相手</button>
+            <button id="mobile-attack-ally" class="mobile-action-btn ally-attack">
+                <img src="../backend/data/image/trainer_ally.png" alt="Ally" class="mobile-trainer-icon">
+                <span class="mobile-btn-text">自分が攻撃</span>
+            </button>
+            <button id="mobile-attack-enemy" class="mobile-action-btn enemy-attack">
+                <span class="mobile-btn-text">相手が攻撃</span>
+                <img src="../backend/data/image/trainer_enemy.png" alt="Enemy" class="mobile-trainer-icon">
+            </button>
         </div>
     </div>
 
-    <script type="module" src="js/main.js?v=36"></script>
+    <script type="module" src="js/data/loader.js?v=116"></script>
+    <script type="module" src="js/calc/stats.js?v=116"></script>
+    <script type="module" src="js/calc/damage.js?v=116"></script>
+    <script type="module" src="js/models/PokemonModel.js?v=116"></script>
+    <script type="module" src="js/state/AppState.js?v=116"></script>
+    <script type="module" src="js/main.js?v=116"></script>
 </body>
 </html>

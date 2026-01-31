@@ -1,0 +1,29 @@
+/* Vertical Move Layout */
+.move-config-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.move-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.move-select-radio {
+    transform: scale(1.2);
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Hide old button grids if they still exist (safety) */
+.move-grid {
+    display: none !important;
+}
+
+/* Ensure the input wrapper takes remaining width */
+.move-input-wrapper {
+    flex: 1;
+}

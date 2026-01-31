@@ -1,9 +1,15 @@
-import { Pokemon } from './models/Pokemon.js';
+import { Pokemon } from './models/PokemonModel.js';
 
 export class AppState {
     constructor() {
-        this.allyTeam = [new Pokemon(1), new Pokemon(2), new Pokemon(3)];
-        this.enemyTeam = [new Pokemon(1), new Pokemon(2), new Pokemon(3)];
+        this.allyTeam = [
+            new Pokemon(1), new Pokemon(2), new Pokemon(3),
+            new Pokemon(4), new Pokemon(5), new Pokemon(6)
+        ];
+        this.enemyTeam = [
+            new Pokemon(1), new Pokemon(2), new Pokemon(3),
+            new Pokemon(4), new Pokemon(5), new Pokemon(6)
+        ];
         
         // 選択中のスロット (初期値: それぞれの1番目)
         this.currentAllyIndex = 0;

@@ -35,15 +35,78 @@ header {
 .party-selector {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 10px;
-    margin-top: 10px;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin: 15px auto 0;  /* Centered with top margin */
+    position: relative;
+    /* Solid Color Theme - "Arena" Style */
+    background: #f4f4f4; 
+    border: 4px solid #333;
+    border-radius: 12px;
+    /* Strong, flat shadow for visual pop */
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+    max-width: 1400px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .team {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 10px 15px;
+    border-radius: 8px; /* Slightly squarer for "tech" feel */
+}
+
+/* Add separator between teams */
+/* Team Specific Styles - Solid Colors */
+.ally-team {
+    background: #e3f2fd; /* Solid Light Blue */
+    border: 2px solid #2196f3; /* Strong Blue */
+    padding-right: 15px;
+}
+
+.enemy-team {
+    background: #ffebee; /* Solid Light Red */
+    border: 2px solid #f44336; /* Strong Red */
+}
+
+.team span {
+    font-weight: 800; /* Extra bold */
+    color: #333;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+/* Adjust parent gap to account for padding */
+.party-selector {
+    gap: 10px; 
+}
+
+.versus-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    /* Hard stop gradient for 2 solid colors */
+    background: linear-gradient(135deg,#448aff 50%, #ff5252 50%);
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px #333; /* Thick dark ring */
+    color: #fff;
+    font-weight: 900;
+    font-size: 16px;
+    font-style: italic;
+    z-index: 5;
+    flex-shrink: 0;
+}
+
+.vs-text {
+    line-height: 1;
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 0 #000; /* Hard shadow */
 }
 
 .poke-slot {
@@ -107,7 +170,7 @@ header {
     display: grid;
     grid-template-columns: 1fr 300px 1fr;
     gap: 20px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -136,6 +199,7 @@ h2 {
     border: 1px solid var(--input-border);
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 16px; /* 防止 iOS zoom */
 }
 
 .base-stats-info {
@@ -143,10 +207,23 @@ h2 {
     color: #888;
     margin-bottom: 15px;
     display: flex;
-    justify-content: center;
-    gap: 8px;
+    flex-direction: column; /* Stack types and stats */
+    align-items: center;
+    gap: 4px;
     min-height: 1.2em;
     font-family: inherit;
+}
+
+.stats-types {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+
+.stats-row-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
 
 .base-stats-info .stat-item {
@@ -184,7 +261,7 @@ h2 {
     overflow: visible;
 }
 
-/* 努力値列の幅を確保 */
+/* 能力P列の幅を確保 */
 .stats-table td:nth-child(3) {
     min-width: 100px;
 }
@@ -632,6 +709,14 @@ h2 {
         grid-template-columns: 1fr;
     }
 }
+
+/* Default hidden on desktop */
+.mobile-sticky-footer {
+    display: none;
+}
+.mobile-tab-nav {
+    display: none;
+}
 /* Mobile Styles */
 @media (max-width: 768px) {
     .calc-container {
@@ -691,8 +776,8 @@ h2 {
         right: 0;
         width: 100%;
         background: #fff;
-        padding: 10px;
-        padding-bottom: calc(10px + env(safe-area-inset-bottom)); /* iOS Safe Area */
+        padding: 8px;
+        padding-bottom: calc(8px + env(safe-area-inset-bottom)); /* iOS Safe Area */
         box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
         z-index: 9999; /* Higher value to ensure it's on top */
         box-sizing: border-box;
@@ -700,27 +785,51 @@ h2 {
 
     .mobile-action-buttons {
         display: flex;
-        gap: 10px;
+        gap: 12px;
     }
 
     .mobile-action-btn {
         flex: 1; /* Equal width */
-        padding: 15px;
-        font-size: 1.1em;
-        font-weight: bold;
-        color: #fff;
-        border: none;
+        padding: 6px;
+        color: #333; /* Text color changed to dark for visibility on light bg */
+        border: 2px solid;
         border-radius: 8px;
         cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: row; /* Icon left, Text right */
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 50px;
     }
 
     .mobile-action-btn.ally-attack {
-        background: linear-gradient(135deg, var(--primary-blue), #2980b9);
+        border-color: var(--primary-blue);
+        background: linear-gradient(to bottom, #f0f7ff, #e3f2fd);
     }
 
     .mobile-action-btn.enemy-attack {
-        background: linear-gradient(135deg, var(--primary-red), #c0392b);
+        border-color: var(--primary-red);
+        background: linear-gradient(to bottom, #fff5f5, #ffebee);
+    }
+    
+    .mobile-trainer-icon {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+    
+    .mobile-btn-text {
+        font-weight: bold;
+        font-size: 0.95em;
+    }
+
+    .mobile-action-btn.ally-attack .mobile-btn-text {
+         color: var(--primary-blue);
+    }
+    .mobile-action-btn.enemy-attack .mobile-btn-text {
+         color: var(--primary-red);
     }
 
     .mobile-action-btn:active {
@@ -729,14 +838,47 @@ h2 {
 
     /* Adjustments */
     .party-selector {
-        gap: 15px;
-        justify-content: space-around;
+        gap: 10px;
+        justify-content: flex-start; /* Allow start alignment for scroll */
         padding: 5px;
+        overflow-x: auto; /* Enable scroll */
+        white-space: nowrap;
+        flex-wrap: nowrap; /* Keep side by side */
+        -webkit-overflow-scrolling: touch;
+        width: 100%; /* Ensure it doesn't overflow parent */
+        box-sizing: border-box;
+    }
+
+    /* Hide scrollbar for cleaner look */
+    .party-selector::-webkit-scrollbar {
+        display: none;
+    }
+
+    .team {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        justify-items: center;
+    }
+
+    .team span {
+        grid-column: 1 / -1;
+        font-size: 12px;
+        text-align: center;
     }
 
     .poke-slot {
         width: 35px;
         height: 35px;
+        flex-shrink: 0;
+    }
+
+    /* Header mobile adjustments - removed negative margins to align with calc-container */
+    header {
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
     }
 
     header h1 {
@@ -746,6 +888,130 @@ h2 {
 
     .action-panel {
         display: none;
+    }
+
+    /* Compact Stat Rows - fit everything on one line */
+    .stat-row {
+        flex-wrap: nowrap !important;
+        gap: 2px !important;
+        overflow-x: hidden !important;
+    }
+
+    .stat-result-box {
+        width: 60px !important;
+        min-width: 38px !important;
+        padding: 1px !important;
+    }
+
+    .stat-value {
+        font-size: 0.9em !important;
+    }
+
+    .stat-label {
+        font-size: 0.55em !important;
+    }
+
+    .stat-controls {
+        flex-wrap: nowrap !important;
+        gap: 6px !important;
+        flex: 1 !important;
+    }
+
+    /* Restore labels on mobile, stacked above controls */
+    .stat-controls label {
+        display: block !important;
+        font-size: 0.55em !important;
+        margin-bottom: 1px !important;
+    }
+
+    /* Restore IV input on mobile with compact styling */
+    .iv-group {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+        width: 32px !important;
+        min-width: 32px !important;
+        margin-right: 2px !important;
+    }
+
+    .iv-group input {
+        width: 100% !important;
+        padding: 2px 1px !important;
+        font-size: 13px !important;
+    }
+
+    .ev-group {
+        flex: 0 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+    }
+
+    .ev-control-row {
+        gap: 1px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .ev-input {
+        width: 28px !important;
+        min-width: 28px !important;
+        padding: 2px 1px !important;
+        font-size: 13px !important;
+    }
+
+    /* Restore tune buttons on mobile */
+    .tune-btn {
+        display: flex !important;
+        width: 30px !important;
+        min-width: 20px !important;
+        height: 20px !important;
+        font-size: 0.6em !important;
+        padding: 0 !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .preset-btn {
+        width: 30px !important;
+        min-width: 22px !important;
+        height: 20px !important;
+        font-size: 0.6em !important;
+        padding: 0 !important;
+    }
+
+    .nature-group {
+        min-width: 55px !important;
+    }
+
+    .nature-group.empty {
+        display: none !important;
+    }
+
+    .nature-toggle {
+        transform: scale(1.0) !important;
+        transform-origin: left center !important;
+    }
+
+    .nature-btn {
+        width: 18px !important;
+        height: 18px !important;
+        font-size: 0.55em !important;
+    }
+
+    .nature-display {
+        width: 18px !important;
+        line-height: 18px !important;
+        font-size: 0.65em !important;
+    }
+
+    /* Prevent iOS Zoom on inputs */
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea,
+    .move-select {
+        font-size: 16px !important;
     }
 }
 
@@ -908,3 +1174,460 @@ h2 {
     transform: rotate(180deg);
 }
 
+
+/* Autocomplete Styles */
+.autocomplete-container {
+    position: relative;
+    width: 100%;
+}
+
+.autocomplete-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.autocomplete-list li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9em;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.autocomplete-list li:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-list li:hover {
+    background-color: #f0f7ff;
+    color: var(--primary-blue);
+}
+
+.autocomplete-list li strong {
+    font-weight: bold;
+    color: var(--primary-blue);
+}
+
+.autocomplete-list li.autocomplete-active {
+    background-color: #e3f2fd; /* Same as hover or active blue */
+    color: var(--primary-blue); 
+}
+/* Move Input Wrapper */
+.move-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.move-select {
+    width: 100%;
+    flex: 1;
+}
+
+.move-info-display {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85em;
+    min-width: 80px; /* Prevent jumping */
+    white-space: nowrap;
+}
+
+/* Custom Autocomplete List */
+.custom-autocomplete-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-height: 250px;
+    overflow-y: auto;
+    display: none; /* Hidden by default */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-autocomplete-list li {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 2fr 1fr 0.5fr; /* Name | Type | Power */
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.custom-autocomplete-list li:last-child {
+    border-bottom: none;
+}
+
+.custom-autocomplete-list li.active,
+.custom-autocomplete-list li:hover {
+    background-color: #e3f2fd; /* Light Blue highlight */
+}
+
+.custom-autocomplete-list li strong {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Type Badges */
+.type-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    min-width: 60px;
+}
+
+/* Type Colors */
+/* Type Colors (Game Accurate) */
+.type-badge.normal { background-color: #A8A77A; border: 1px solid #6D6D4E; }
+.type-badge.fire { background-color: red; border: 1px solid #9C531F; }
+.type-badge.water { background-color: #6390F0; border: 1px solid #445E9C; }
+.type-badge.electric { background-color: #F7D02C; border: 1px solid #A1871F; color: #444; text-shadow: none; }
+.type-badge.grass { background-color: #7AC74C; border: 1px solid #4E8234; }
+.type-badge.ice { background-color: #96D9D6; border: 1px solid #638D8D; color: #444; text-shadow: none; }
+.type-badge.fighting { background-color: #C22E28; border: 1px solid #7D1F1A; }
+.type-badge.poison { background-color: #A33EA1; border: 1px solid #682A68; }
+.type-badge.ground { background-color: #E2BF65; border: 1px solid #927D44; }
+.type-badge.flying { background-color: skyblue; border: 1px solid #6D5E9C; }
+.type-badge.psychic { background-color: fuchsia; border: 1px solid #A13959; }
+.type-badge.bug { background-color: #A6B91A; border: 1px solid #6D7815; }
+.type-badge.rock { background-color: #B6A136; border: 1px solid #786824; }
+.type-badge.ghost { background-color: #735797; border: 1px solid #493963; }
+.type-badge.dragon { background-color: #6F35FC; border: 1px solid #4924A1; }
+.type-badge.dark { background-color: #705746; border: 1px solid #49392F; }
+.type-badge.steel { background-color: #B7B7CE; border: 1px solid #787887; }
+.type-badge.fairy { background-color: #D685AD; border: 1px solid #9B6470; }
+
+.move-power {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+    font-family: monospace;
+}
+/* Vertical Move Layout */
+.move-config-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.move-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.move-select-radio {
+    transform: scale(1.2);
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Hide old button grids if they still exist (safety) */
+.move-grid {
+    display: none !important;
+}
+
+/* Ensure the input wrapper takes remaining width */
+.move-input-wrapper {
+    flex: 1;
+}
+/* Stats Container Layout */
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+/* 1. Real Value Box (Left) */
+.stat-result-box {
+    background-color: #e3f2fd; /* Light Blue */
+    border: 1px solid #90caf9;
+    border-radius: 6px;
+    padding: 1px;
+    width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.poke-settings.enemy .stat-result-box {
+    background-color: #ffebee;
+    border-color: #ef9a9a;
+}
+
+.stat-label {
+    font-size: 0.7em;
+    color: #1976d2;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.poke-settings.enemy .stat-label {
+    color: #d32f2f; /* Red text to match theme */
+}
+
+.stat-value {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Controls Wrapper */
+.stat-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-grow: 1;
+}
+
+/* Common Label Style */
+.stat-controls label {
+    font-size: 0.75em;
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* 2. IV Input (Small) */
+.iv-group {
+    width: 40px;
+}
+.iv-group input {
+    width: 100%;
+    text-align: center;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* 3. EV Group (Middle) */
+.ev-group {
+    flex-grow: 1;
+    max-width: 250px;
+}
+.ev-control-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ev-input {
+    width: 40px;
+    text-align: center;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* Tuning Buttons (Up/Down) */
+.tune-btn {
+    width: 48px;
+    height: 30px;
+    border: 1px solid #2e7d32; /* Green border */
+    background: #fff;
+    color: #2e7d32;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tune-btn:active {
+    background: #e8f5e9;
+}
+
+/* Preset Buttons (0/252) */
+.preset-btn {
+    width: 36px;
+    height: 30px;
+    border: 1px solid #2e7d32;
+    background: #fff;
+    color: #2e7d32;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+.preset-btn:active {
+    background: #e8f5e9;
+}
+
+/* 4. Nature Group (Right) */
+.nature-group {
+    min-width: 100px;
+}
+.nature-group.empty {
+    visibility: hidden;
+}
+
+.nature-toggle {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5; /* Light gray bg */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.nature-btn {
+    border: none;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: #888;
+    font-size: 0.8em;
+}
+.nature-btn:hover {
+    background: #eee;
+}
+/* Active States */
+.nature-btn.active.up {
+    background: #ffcdd2; /* Light Red tint for Up */
+    color: #c62828;
+}
+.nature-btn.active.down {
+    background: #bbdefb; /* Light Blue tint for Down */
+    color: #1565c0;
+}
+
+.nature-display {
+    width: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    line-height: 30px;
+    background: #eee; /* Darker than toggle bg */
+    color: #fff; /* Text defaults to white? wait, let's use teal like image */
+    background: #26a69a; /* Teal default */
+}
+
+/* Adjust nature display based on state via JS classes if needed, 
+   but for now default green is "Neutral". 
+   Wait, the image shows Green Middle. 
+*/
+
+/* Fix desktop alignment for IV/EV inputs */
+@media (min-width: 769px) {
+    .iv-group input,
+    .ev-input {
+        height: 30px; /* Match tune button height */
+        box-sizing: border-box;
+    }
+    
+    .iv-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    /* Enforce same height for labels to align inputs below them */
+    .stat-controls label {
+        height: 18px;
+        line-height: 18px;
+        margin-bottom: 4px;
+        overflow: hidden;
+    }
+}
+
+/* Action Buttons Grid Redesign */
+.action-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0 20px 0;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 10px;
+}
+
+.action-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.ally-attack-btn {
+    border-color: var(--primary-blue);
+    background: linear-gradient(to bottom, #f0f7ff, #e3f2fd);
+}
+
+.enemy-attack-btn {
+    border-color: var(--primary-red);
+    background: linear-gradient(to bottom, #fff5f5, #ffebee);
+}
+
+.trainer-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.btn-main-text {
+    font-weight: bold;
+    font-size: 1.0em;
+    color: #444;
+}
+
+.ally-attack-btn .btn-main-text {
+    color: var(--primary-blue);
+}
+
+.enemy-attack-btn .btn-main-text {
+    color: var(--primary-red);
+}

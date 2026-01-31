@@ -1,18 +1,24 @@
-import { AppState } from './AppState.js';
-import { SPECIES_DEX } from './data/species.js';
-import { MOVES_DEX } from './data/moves.js';
+import { AppState } from './AppState.js?v=2';
+import { SPECIES_DEX, MOVES_DEX, loadAllData } from './data/loader.js';
 import { ITEMS_DEX } from './data/items.js';
 import { calculateDamage } from './calc/damage.js';
+import { calculateHp, calculateStat } from './calc/stats.js';
 
 const appState = new AppState();
+// Debug: Expose to window
+window.appState = appState;
+window.SPECIES_DEX = SPECIES_DEX;
 
 // ターン管理用ID
 let globalTurnCounter = 0;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadAllData();
+
+    // Ally (自分) Inputs
     // Ally (自分) Inputs
     const allyNameInput = document.getElementById('ally-name-input');
-    const allyLevelInput = document.getElementById('ally-level-input');
+    // const allyLevelInput = document.getElementById('ally-level-input'); // Removed
     const allyTeraSelect = document.getElementById('ally-tera-select');
     const allyItemSelect = document.getElementById('ally-item-select');
     const allyAbilitySelect = document.getElementById('ally-ability-select');
@@ -63,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Level input removed (Fixed 50)
+    /*
     if (allyLevelInput) {
         allyLevelInput.addEventListener('input', (e) => {
             const pokemon = appState.getAllyPokemon();
@@ -71,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateFormFromState('ally');
         });
     }
+    */
 
     if (allyTeraSelect) {
         allyTeraSelect.addEventListener('change', (e) => {
@@ -109,91 +118,315 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // datalistの生成
-    const datalist = document.getElementById('pokemon-list');
-    if (datalist) {
-        Object.keys(SPECIES_DEX).forEach(name => {
-            const option = document.createElement('option');
-            option.value = name;
-            datalist.appendChild(option);
+
+
+    // --- Autocomplete Logic ---
+    function setupAutocomplete(inputElement, listElement, teamType) {
+        let currentFocus = -1;
+
+        inputElement.addEventListener('input', function(e) {
+            const val = this.value;
+            closeAllLists();
+            if (!val) return false;
+            
+            currentFocus = -1;
+            listElement.style.display = 'block';
+            
+            const matches = Object.keys(SPECIES_DEX).filter(name => name.startsWith(val));
+            
+            // 上位100件までに制限（パフォーマンス対策）
+            const maxItems = 100;
+            let count = 0;
+
+            if (matches.length === 0) {
+                 listElement.style.display = 'none';
+                 return;
+            }
+
+            matches.forEach(name => {
+                if (count >= maxItems) return;
+                
+                const item = document.createElement('li');
+                // 前方一致部分を太字に
+                item.innerHTML = `<strong>${name.substr(0, val.length)}</strong>${name.substr(val.length)}`;
+                item.addEventListener('click', function() {
+                    inputElement.value = name;
+                    closeAllLists();
+                    // 変更イベント発火 (input AND change)
+                    inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+                    inputElement.dispatchEvent(new Event('change', { bubbles: true }));
+                });
+                listElement.appendChild(item);
+                count++;
+            });
+        });
+        
+        // キーボード操作サポート
+        inputElement.addEventListener('keydown', function(e) {
+            let x = listElement.getElementsByTagName('li');
+            if (e.keyCode == 40) { // Down
+                currentFocus++;
+                addActive(x);
+            } else if (e.keyCode == 38) { // Up
+                currentFocus--;
+                addActive(x);
+            } else if (e.keyCode == 13) { // Enter
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+
+        function addActive(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            x[currentFocus].classList.add('autocomplete-active');
+            // スクロール追従
+            x[currentFocus].scrollIntoView({block: 'nearest'});
+        }
+
+        function removeActive(x) {
+            for (let i = 0; i < x.length; i++) {
+                x[i].classList.remove('autocomplete-active');
+            }
+        }
+
+        function closeAllLists(elmnt) {
+            listElement.innerHTML = '';
+            listElement.style.display = 'none';
+        }
+
+        document.addEventListener('click', function (e) {
+            if (e.target !== inputElement) {
+                closeAllLists();
+            }
         });
     }
 
-    // --- Move Configuration Logic ---
-    function populateMoveDatalist() {
-        const datalist = document.getElementById('move-list');
-        if (!datalist) return;
+    // セットアップ実行
+    const allyInput = document.getElementById('ally-name-input');
+    const allyList = document.getElementById('ally-autocomplete-list');
+    if (allyInput && allyList) {
+        setupAutocomplete(allyInput, allyList, 'ally');
+    }
 
-        datalist.innerHTML = ''; // Clear existing
-        Object.keys(MOVES_DEX).forEach(move => {
-            const opt = document.createElement('option');
-            opt.value = move;
-            datalist.appendChild(opt);
+    const enemyInput = document.getElementById('enemy-name-input');
+    const enemyList = document.getElementById('enemy-autocomplete-list');
+    if (enemyInput && enemyList) {
+        setupAutocomplete(enemyInput, enemyList, 'enemy');
+    }
+
+
+    // --- Move Configuration Logic (Rich Autocomplete & Vertical Layout) ---
+    
+    const TYPE_CLASSES = {
+        'Normal': 'normal', 'Fire': 'fire', 'Water': 'water', 'Electric': 'electric',
+        'Grass': 'grass', 'Ice': 'ice', 'Fighting': 'fighting', 'Poison': 'poison',
+        'Ground': 'ground', 'Flying': 'flying', 'Psychic': 'psychic', 'Bug': 'bug',
+        'Rock': 'rock', 'Ghost': 'ghost', 'Dragon': 'dragon', 'Dark': 'dark',
+        'Steel': 'steel', 'Fairy': 'fairy'
+    };
+
+    const TYPE_NAMES_JP = {
+        'Normal': 'ノーマル', 'Fire': 'ほのお', 'Water': 'みず', 'Electric': 'でんき',
+        'Grass': 'くさ', 'Ice': 'こおり', 'Fighting': 'かくとう', 'Poison': 'どく',
+        'Ground': 'じめん', 'Flying': 'ひこう', 'Psychic': 'エスパー', 'Bug': 'むし',
+        'Rock': 'いわ', 'Ghost': 'ゴースト', 'Dragon': 'ドラゴン', 'Dark': 'あく',
+        'Steel': 'はがね', 'Fairy': 'フェアリー'
+    };
+
+    // Helper to update the sibling display
+    function updateMoveInfoDisplay(inputElement, moveName) {
+        const wrapper = inputElement.closest('.move-input-wrapper');
+        if (!wrapper) return;
+        const display = wrapper.querySelector('.move-info-display');
+        if (!display) return;
+        
+        display.innerHTML = ''; // Clear
+        
+        if (!moveName) return;
+        
+        const moveData = MOVES_DEX[moveName];
+        if (!moveData) return;
+        
+        const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
+        const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
+        const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
+
+        // Create Badge
+        const badge = document.createElement('span');
+        badge.className = `type-badge ${typeClass}`;
+        badge.textContent = typeName;
+        
+        // Create Power Text
+        const powerSpan = document.createElement('span');
+        powerSpan.textContent = powerText;
+        powerSpan.style.color = '#666';
+        
+        display.appendChild(badge);
+        display.appendChild(powerSpan);
+    }
+
+    function setupMoveAutocomplete(inputElement, listElement, side, index) {
+        let currentFocus = -1;
+
+        inputElement.addEventListener('focus', function() {
+            renderList(this.value);
         });
+
+        inputElement.addEventListener('input', function() {
+            renderList(this.value);
+            // Clear display on manual input until match is confirmed (optional, keep it simple)
+        });
+
+        function renderList(filterText) {
+            currentFocus = -1;
+            listElement.innerHTML = '';
+            
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            const availableMoves = (pokemon && pokemon.speciesData && pokemon.speciesData.moves) 
+                ? pokemon.speciesData.moves 
+                : Object.keys(MOVES_DEX);
+
+            const matches = availableMoves.filter(m => m.startsWith(filterText));
+            
+            if (matches.length === 0) {
+                listElement.style.display = 'none';
+                return;
+            }
+
+            const limitedMatches = matches.slice(0, 50);
+
+            limitedMatches.forEach(moveName => {
+                const li = document.createElement('li');
+                const moveData = MOVES_DEX[moveName];
+                
+                let typeHtml = '';
+                let powerHtml = '-';
+                
+                if (moveData) {
+                    const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
+                    const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
+                    typeHtml = `<span class="type-badge ${typeClass}">${typeName}</span>`;
+                    powerHtml = (moveData.power > 0) ? moveData.power : (moveData.category === 'Status' ? '-' : '特殊');
+                }
+
+                const nameHtml = `<strong>${moveName.substr(0, filterText.length)}</strong>${moveName.substr(filterText.length)}`;
+
+                li.innerHTML = `
+                    <div class="move-name">${nameHtml}</div>
+                    <div class="move-type">${typeHtml}</div>
+                    <div class="move-power">${powerHtml}</div>
+                `;
+
+                li.addEventListener('mousedown', function(e) {
+                    inputElement.value = moveName;
+                    listElement.style.display = 'none';
+                    triggerChange(moveName);
+                });
+
+                listElement.appendChild(li);
+            });
+            
+            listElement.style.display = 'block';
+        }
+
+        function triggerChange(value) {
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            if (pokemon) {
+                pokemon.moves[index] = value;
+                // Radio state is independent of move name, so no need to rerender radios here usually,
+                // but good to keep state consistent.
+                updateMoveInfoDisplay(inputElement, value);
+            }
+        }
+
+        inputElement.addEventListener('blur', function() {
+            // On blur, validation or just try to display info if exact match
+            const val = this.value;
+            if (MOVES_DEX[val]) {
+                 updateMoveInfoDisplay(inputElement, val);
+            }
+            setTimeout(() => {
+                listElement.style.display = 'none';
+            }, 200);
+        });
+        
+        // Keyboard Nav (optional but good)
     }
 
     function setupMoveInputs(side) {
         const prefix = (side === 'ally') ? 'ally' : 'enemy';
+        const radioName = (side === 'ally') ? 'ally-active-move' : 'enemy-active-move';
         
         for (let i = 0; i < 4; i++) {
+            // 1. Setup Input & Autocomplete
             const input = document.getElementById(`${prefix}-move-${i}`);
-            if (!input) continue;
+            if (input) {
+                const wrapper = input.closest('.move-input-wrapper');
+                const list = wrapper ? wrapper.querySelector('.custom-autocomplete-list') : null;
 
-            // Set initial value
-            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            if (pokemon && pokemon.moves[i]) {
-                input.value = pokemon.moves[i];
+                if (list) {
+                    setupMoveAutocomplete(input, list, side, i);
+                }
+
+                // Initial Value
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon && pokemon.moves[i]) {
+                    input.value = pokemon.moves[i];
+                    updateMoveInfoDisplay(input, pokemon.moves[i]);
+                }
             }
 
-            // Event Listener
-            input.addEventListener('change', (e) => {
-                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-                if (pokemon) {
-                    pokemon.moves[i] = e.target.value;
-                    renderMoveButtons(side);
-                }
-            });
+            // 2. Setup Radio Button
+            // We need to find the radio button generated in HTML. 
+            // It shares the same container or we query by name/value.
+            const radios = document.getElementsByName(radioName);
+            // find the one with value == i
+            const radio = Array.from(radios).find(r => r.value == i);
             
-            // Also update on 'input' for smoother feel? 
-            // 'change' is sufficiently standard for datalist selection.
+            if (radio) {
+                radio.addEventListener('change', () => {
+                    const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                    if (pokemon) {
+                        pokemon.activeMoveIndex = i;
+                    }
+                });
+            }
         }
     }
 
-    function renderMoveButtons(side) {
-        const prefix = (side === 'ally') ? 'ally' : 'enemy';
-        const grid = document.getElementById(`${prefix}-move-grid`);
+    // Replaces 'renderMoveButtons'. Call this to sync radio stat with appState.
+    function updateMoveSelectionUI(side) {
+        const radioName = (side === 'ally') ? 'ally-active-move' : 'enemy-active-move';
         const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+        if (!pokemon) return;
+
+        const radios = document.getElementsByName(radioName);
+        Array.from(radios).forEach(r => {
+            if (parseInt(r.value) === pokemon.activeMoveIndex) {
+                r.checked = true;
+            }
+        });
         
-        if (!grid || !pokemon) return;
-
-        grid.innerHTML = '';
-        pokemon.moves.forEach((moveName, index) => {
-            const btn = document.createElement('button');
-            btn.className = 'move-btn';
-            btn.dataset.index = index;
-            
-            if (index === pokemon.activeMoveIndex) {
-                btn.classList.add('active');
-            }
-
-            if (moveName && MOVES_DEX[moveName]) {
-                const moveData = MOVES_DEX[moveName];
-                const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
-                btn.innerHTML = `${moveName}<br><small>${powerText}</small>`;
-            } else {
-                btn.textContent = moveName || '(なし)';
-                if (!moveName) btn.disabled = true;
-            }
-
-            grid.appendChild(btn);
+        // Update input values too (switching pokemon)
+        const prefix = (side === 'ally') ? 'ally' : 'enemy';
+        pokemon.moves.forEach((move, i) => {
+             const input = document.getElementById(`${prefix}-move-${i}`);
+             if (input) {
+                input.value = move;
+                updateMoveInfoDisplay(input, move);
+             }
         });
     }
 
-    // Initialize Moves
-    populateMoveDatalist();
+    // Initialize
     ['ally', 'enemy'].forEach(side => {
         setupMoveInputs(side);
-        renderMoveButtons(side);
+        updateMoveSelectionUI(side); // Set initial radio
     });
     // ----------------------------
 
@@ -414,21 +647,70 @@ document.addEventListener('DOMContentLoaded', () => {
                     const enemyPoke = appState.getEnemyPokemon();
                     
                     // Ally Icon
+                    // Ally Icon
                     const allyIcon = document.getElementById('result-ally-icon');
                     if (allyIcon && allyPoke) {
                         const name = allyPoke.name.trim();
-                        allyIcon.src = `../backend/image/${name}.gif`;
+                        allyIcon.dataset.retried = ''; // Reset retry flag
+                        
+                        let src = `../backend/image/${name}.gif`;
+                        if (allyPoke.speciesData && allyPoke.speciesData.sprite_url) {
+                            src = allyPoke.speciesData.sprite_url;
+                        }
+                        
+                        allyIcon.src = src;
                         allyIcon.alt = name;
-                        allyIcon.onerror = () => { allyIcon.src = ''; allyIcon.alt = name; };
+                        allyIcon.onerror = () => { 
+                            if (!allyIcon.dataset.retried) {
+                                allyIcon.dataset.retried = 'true';
+                                // JSON URL failed, try local
+                                if (src !== `../backend/image/${name}.gif`) {
+                                    allyIcon.src = `../backend/image/${name}.gif`;
+                                    return;
+                                }
+                                
+                                if (name.includes('（') || name.includes('(')) {
+                                    const baseName = name.split(/[（(]/)[0];
+                                    allyIcon.src = `../backend/image/${baseName}.gif`;
+                                    return;
+                                }
+                            }
+                            allyIcon.src = ''; 
+                            allyIcon.alt = name; 
+                        };
                     }
 
                     // Enemy Icon
                     const enemyIcon = document.getElementById('result-enemy-icon');
                     if (enemyIcon && enemyPoke) {
                         const name = enemyPoke.name.trim();
-                        enemyIcon.src = `../backend/image/${name}.gif`;
+                        enemyIcon.dataset.retried = ''; // Reset retry flag
+                        
+                        let src = `../backend/image/${name}.gif`;
+                        if (enemyPoke.speciesData && enemyPoke.speciesData.sprite_url) {
+                            src = enemyPoke.speciesData.sprite_url;
+                        }
+
+                        enemyIcon.src = src;
                         enemyIcon.alt = name;
-                        enemyIcon.onerror = () => { enemyIcon.src = ''; enemyIcon.alt = name; };
+                        enemyIcon.onerror = () => { 
+                            if (!enemyIcon.dataset.retried) {
+                                enemyIcon.dataset.retried = 'true';
+                                // JSON URL failed, try local
+                                if (src !== `../backend/image/${name}.gif`) {
+                                    enemyIcon.src = `../backend/image/${name}.gif`;
+                                    return;
+                                }
+                                
+                                if (name.includes('（') || name.includes('(')) {
+                                    const baseName = name.split(/[（(]/)[0];
+                                    enemyIcon.src = `../backend/image/${baseName}.gif`;
+                                    return;
+                                }
+                            }
+                            enemyIcon.src = ''; 
+                            enemyIcon.alt = name; 
+                        };
                     }
                     
                     // Arrow Direction
@@ -803,6 +1085,20 @@ document.addEventListener('DOMContentLoaded', () => {
         renderBattleLog();
     }
 
+
+    const TYPE_TO_JP = {
+        'normal': 'ノーマル', 'fire': 'ほのお', 'water': 'みず', 'electric': 'でんき',
+        'grass': 'くさ', 'ice': 'こおり', 'fighting': 'かくとう', 'poison': 'どく',
+        'ground': 'じめん', 'flying': 'ひこう', 'psychic': 'エスパー', 'bug': 'むし',
+        'rock': 'いわ', 'ghost': 'ゴースト', 'dragon': 'ドラゴン', 'dark': 'あく',
+        'steel': 'はがね', 'fairy': 'フェアリー', 'stellar': 'ステラ'
+    };
+
+    const JP_TO_TYPE = {};
+    Object.entries(TYPE_TO_JP).forEach(([en, jp]) => {
+        JP_TO_TYPE[jp] = en;
+    });
+
     function renderBaseStats(side, poke) {
         const container = document.getElementById(`${side}-base-stats`);
         if (!container) return;
@@ -811,6 +1107,15 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = '';
             return;
         }
+
+        const typesHtml = poke.speciesData.types.map(t => {
+            // t comes from JSON as Japanese (e.g. "くさ") or potentially English
+            // We need the English key (e.g. "grass") for the CSS class
+            const enType = JP_TO_TYPE[t] || t.toLowerCase();
+            const display = TYPE_TO_JP[enType] || t; // Ensure display is Japanese if we have it
+            
+            return `<span class="type-badge ${enType}">${display}</span>`;
+        }).join(' ');
 
         const bs = poke.speciesData.baseStats;
         const stats = [
@@ -824,12 +1129,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const total = Object.values(bs).reduce((a, b) => a + b, 0);
 
-        container.innerHTML = stats.map(s => `
-            <div class="stat-item">
-                <span class="label">${s.label}:</span>
-                <span class="value">${s.val}</span>
+        container.innerHTML = `
+            <div class="stats-types">${typesHtml}</div>
+            <div class="stats-row-container">
+                ${stats.map(s => `
+                    <div class="stat-item">
+                        <span class="label">${s.label}:</span>
+                        <span class="value">${s.val}</span>
+                    </div>
+                `).join('')}
+                <div class="stat-item"><span class="label">計:</span><span class="value">${total}</span></div>
             </div>
-        `).join('') + `<div class="stat-item"><span class="label">計:</span><span class="value">${total}</span></div>`;
+        `;
     }
 
     function renderHistory(side, poke) {
@@ -857,6 +1168,143 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    // Helper: Find closest EV to achieve real stat +/- 1
+    function adjustEvForRealStat(pokemon, statName, delta) {
+        if (!pokemon.speciesData) return;
+        const currentReal = pokemon.realStats[statName];
+        const targetReal = currentReal + delta;
+        const currentEv = pokemon.stats[statName].ev;
+        let tempEv = currentEv;
+        
+        if (delta > 0) {
+            while (tempEv <= 32) {
+                tempEv += 1;
+                if (tempEv > 32) { tempEv = 32; break; }
+                const base = (statName === 'hp') ? pokemon.speciesData.baseStats.hp : pokemon.speciesData.baseStats[statName];
+                const iv = pokemon.stats[statName].iv;
+                const nature = pokemon.stats[statName].nature;
+                let val = (statName === 'hp') 
+                    ? calculateHp(base, iv, tempEv, pokemon.level)
+                    : calculateStat(base, iv, tempEv, pokemon.level, nature);
+                if (val > currentReal) {
+                    pokemon.stats[statName].ev = tempEv;
+                    break;
+                }
+                // If we reach 32 and still haven't found a higher value, we stop.
+                if (tempEv === 32) break;
+            }
+        } else {
+             while (tempEv >= 0) {
+                tempEv -= 1;
+                if (tempEv < 0) { tempEv = 0; break; }
+                const base = (statName === 'hp') ? pokemon.speciesData.baseStats.hp : pokemon.speciesData.baseStats[statName];
+                const iv = pokemon.stats[statName].iv;
+                const nature = pokemon.stats[statName].nature;
+                let val = (statName === 'hp') 
+                    ? calculateHp(base, iv, tempEv, pokemon.level)
+                    : calculateStat(base, iv, tempEv, pokemon.level, nature);
+                if (val < currentReal) {
+                    pokemon.stats[statName].ev = tempEv;
+                    break;
+                }
+                if (tempEv === 0) break;
+            }
+        }
+    }
+
+    function setupStatInputs(side) {
+        // Find the specific container for this side
+        // side is 'ally' or 'enemy'.
+        // In index.html, the structure is <section class="poke-settings ally ..."> -> <div class="stats-container">
+        // So we can use .poke-settings.{side} .stats-container
+        
+        const containerSelector = `.poke-settings.${side} .stats-container`;
+        const container = document.querySelector(containerSelector);
+        
+        if (!container) return; // Should not happen if DOM is ready
+
+        // 1. Standard Inputs
+        const inputs = container.querySelectorAll('.stat-input');
+        inputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const stat = e.target.dataset.stat;
+                const type = e.target.dataset.type;
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    const val = parseInt(e.target.value);
+                    if (type === 'iv') pokemon.stats[stat].iv = val;
+                    if (type === 'ev') pokemon.stats[stat].ev = val;
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        });
+
+        // 2. EV Tuning Buttons (▼ / ▲)
+        const tuneButtons = container.querySelectorAll('.tune-btn');
+        tuneButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // ボタン内のアイコンをクリックした場合などの対策 (e.targetがbuttonでない場合)
+                const target = e.target.closest('.tune-btn');
+                if (!target) return;
+
+                const stat = target.dataset.stat;
+                const action = target.dataset.action;
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                
+                if (pokemon) {
+                    let current = pokemon.stats[stat].ev;
+                    if (action === 'up') {
+                        current = Math.min(32, current + 1);
+                    } else {
+                        current = Math.max(0, current - 1);
+                    }
+                    pokemon.stats[stat].ev = current;
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        });
+
+        // 3. Preset Buttons (0 / 252)
+        const presetButtons = container.querySelectorAll('.preset-btn');
+        presetButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const row = e.target.closest('.stat-controls');
+                const statInput = row.querySelector('.ev-input');
+                const stat = statInput.dataset.stat;
+                const val = parseInt(e.target.dataset.val);
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    pokemon.stats[stat].ev = val;
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        });
+
+        // 4. Nature Buttons
+        const natureButtons = container.querySelectorAll('.nature-btn');
+        natureButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const stat = e.target.dataset.stat;
+                const val = e.target.dataset.val;
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    const currentNature = pokemon.stats[stat].nature;
+                    let newNature = val;
+                    if (currentNature === val) {
+                        newNature = 'neutral';
+                    }
+                    pokemon.stats[stat].nature = newNature;
+                    pokemon.computeStats();
+                    updateFormFromState(side);
+                }
+            });
+        });
+    }
+
     function updateFormFromState(teamType) {
         let pokemon;
         let containerSelector;
@@ -874,117 +1322,101 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 初回計算
         if (pokemon.realStats.hp === 0) {
-             pokemon.computeStats(); // 計算してなければ計算
+             pokemon.computeStats(); 
         }
-
-        // --- UI更新 ---
 
         // Basic Info
-        if (teamType === 'ally') {
-            if (allyNameInput) allyNameInput.value = pokemon.name;
-            if (allyLevelInput) allyLevelInput.value = pokemon.level;
-            if (allyTeraSelect) allyTeraSelect.value = pokemon.teraType;
-            if (allyItemSelect) allyItemSelect.value = pokemon.item;
-            if (allyAbilitySelect) allyAbilitySelect.value = pokemon.ability;
-        } else {
-            if (enemyNameInput) enemyNameInput.value = pokemon.name;
-            if (enemyItemSelect) enemyItemSelect.value = pokemon.item;
-            if (enemyAbilitySelect) enemyAbilitySelect.value = pokemon.ability;
+        const prefix = (teamType === 'ally') ? 'ally' : 'enemy';
+        const nameInput = document.getElementById(`${prefix}-name-input`);
+        const itemSelect = document.getElementById(`${prefix}-item-select`);
+        const abilitySelect = document.getElementById(`${prefix}-ability-select`);
+        const levelInput = document.getElementById(`${prefix}-level-input`);
+        const teraSelect = document.getElementById(`${prefix}-tera-select`);
+        
+        if (nameInput) nameInput.value = pokemon.name;
+        if (levelInput) levelInput.value = pokemon.level;
+        if (teraSelect) teraSelect.value = pokemon.teraType;
+        if (itemSelect && pokemon.item) itemSelect.value = pokemon.item;
+
+        // Ability syncing
+        if (abilitySelect && pokemon.speciesData) {
+            const currentVal = pokemon.ability || abilitySelect.value;
+            abilitySelect.innerHTML = '';
+            if (pokemon.speciesData.abilities) {
+                pokemon.speciesData.abilities.forEach(ab => {
+                   const opt = document.createElement('option');
+                   opt.value = ab.name;
+                   opt.textContent = ab.name + (ab.is_hidden ? ' (夢)' : '');
+                   abilitySelect.appendChild(opt);
+                });
+            }
+            if (currentVal) {
+                abilitySelect.value = currentVal;
+            } else if (abilitySelect.options.length > 0) {
+                abilitySelect.value = abilitySelect.options[0].value;
+                pokemon.ability = abilitySelect.value;
+            }
         }
 
-        // アイテム・特性 (今は空文字)
-        // These lines are redundant if the above if/else block already handles it.
-        // Assuming the intent is to ensure these are always updated, even if the inputs are not present.
-        // However, the original code already updates them via allyItemSelect, enemyItemSelect etc.
-        // I will interpret this as a general update for the current pokemon's item/ability,
-        // but since the inputs are already handled, I'll skip adding redundant lines here.
-        // If the HTML elements for item/ability are *not* the inputs, then this would be needed.
-        // Given the context, the existing input updates are sufficient.
+        // Stats Update (Inputs & Real Values)
+        const stats = ['hp', 'attack', 'defense', 'spAtk', 'spDef', 'speed'];
+        stats.forEach(stat => {
+            const data = pokemon.stats[stat];
+            
+            // Inputs
+            // Also need to fix invalid selector here if it used #{side}-stats
+            // The original logic was: container.querySelector(...)
+            // But verify specifically what was used.
+            // Original: const ivInput = document.querySelector(`#${teamType}-stats input[data-stat="${stat}"][data-type="iv"]`);
+            // This is BAD. We should use `container.querySelector` with scoped selector to avoid ID dependency.
+            
+            const ivInput = container.querySelector(`input[data-stat="${stat}"][data-type="iv"]`);
+            const evInput = container.querySelector(`input[data-stat="${stat}"][data-type="ev"]`);
+            
+            if (ivInput) ivInput.value = data.iv;
+            if (evInput) evInput.value = data.ev;
 
-        // 種族値の表示
-        renderBaseStats(teamType, pokemon);
+            // Nature Buttons State
+            // Original: const upBtn = document.querySelector(`#${teamType}-stats .nature-btn.up[data-stat="${stat}"]`);
+            // Change to container.querySelector
+            
+            const upBtn = container.querySelector(`.nature-btn.up[data-stat="${stat}"]`);
+            const downBtn = container.querySelector(`.nature-btn.down[data-stat="${stat}"]`);
+            const natureDisplay = container.querySelector(`.nature-display[data-stat="${stat}"]`);
+            
+            if (upBtn && downBtn && natureDisplay) {
+                upBtn.classList.remove('active');
+                downBtn.classList.remove('active');
+                natureDisplay.textContent = '';
+                natureDisplay.style.color = '#fff';
+                natureDisplay.style.background = '#ccc'; // Default
 
-        // 履歴の更新
-        renderHistory(teamType, pokemon);
-
-        // スロットの状態（ひんし等）を同期
-        updateTeamSlots(teamType);
-
-        // HP Bar
-        const currentHpSpan = document.getElementById(`${teamType}-current-hp`);
-        const maxHpSpan = document.getElementById(`${teamType}-max-hp`);
-        const hpBar = document.getElementById(`${teamType}-hp-bar`);
-        
-        // Item Status & Button
-        const itemStatus = document.getElementById(`${teamType}-item-status`);
-        const itemBtn = container.querySelector('.item-trigger-btn');
-        if (itemStatus && itemBtn) {
-            if (pokemon.itemConsumed) {
-                itemStatus.textContent = "（使用済み）";
-                itemBtn.disabled = true;
-            } else {
-                itemStatus.textContent = "";
-                const itemInfo = ITEMS_DEX[pokemon.item];
-                itemBtn.disabled = !itemInfo;
-                if (itemInfo) {
-                    itemBtn.textContent = itemInfo.type === 'berry' ? 'きのみ発動' : '回復実行';
+                if (data.nature === 'up') {
+                    upBtn.classList.add('active');
+                    natureDisplay.textContent = '+';
+                    natureDisplay.style.background = '#ef5350'; // Red
+                } else if (data.nature === 'down') {
+                    downBtn.classList.add('active');
+                    natureDisplay.textContent = '-';
+                    natureDisplay.style.background = '#42a5f5'; // Blue
                 } else {
-                    itemBtn.textContent = '発動';
+                    natureDisplay.style.background = '#26a69a'; // Teal
                 }
             }
-        }
 
-        if (currentHpSpan && maxHpSpan && hpBar) {
-            currentHpSpan.textContent = pokemon.currentHp;
-            maxHpSpan.textContent = pokemon.maxHp;
-            
-            const ratio = (pokemon.maxHp > 0) ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
-            hpBar.style.width = `${Math.max(0, ratio)}%`;
-            
-            if (ratio >= 50) hpBar.style.backgroundColor = 'var(--primary-green)';
-            else if (ratio >= 25) hpBar.style.backgroundColor = 'var(--accent-orange)';
-            else hpBar.style.backgroundColor = 'var(--primary-red)';
-        }
-
-        // Stats Table Inputs
-        container.querySelectorAll('.stat-input').forEach(input => {
-            const statName = input.dataset.stat;
-            const type = input.dataset.type;
-            if (statName && type && pokemon.stats[statName]) {
-                input.value = pokemon.stats[statName][type];
+            // Real Value Update
+            const realValEl = document.getElementById(`${teamType}-stat-val-${stat}`);
+            if (realValEl) {
+                realValEl.textContent = pokemon.speciesData ? pokemon.realStats[stat] : "-";
             }
         });
 
-        // Real Stats Display
-        // ID: ally-stat-val-hp etc.
-        ['hp', 'attack', 'defense', 'spAtk', 'spDef', 'speed'].forEach(stat => {
-            const el = document.getElementById(`${teamType}-stat-val-${stat}`);
-            if (el) {
-                // ポケモン名が未入力(speciesDataがない)なら "-"
-                el.textContent = pokemon.speciesData ? pokemon.realStats[stat] : "-";
-            }
-        });
-
-        // Move Buttons & Selects Sync
-        renderMoveButtons(teamType);
+        // Other syncs
+        renderBaseStats(teamType, pokemon);
+        updateMoveSelectionUI(teamType);
         
-        // Update Selects values
-        for (let i = 0; i < 4; i++) {
-            const select = document.getElementById(`${teamType}-move-${i}`);
-            if (select && pokemon.moves[i]) {
-                select.value = pokemon.moves[i];
-            } else if (select) {
-                select.value = "";
-            }
-        }
-
-        // Conditions
-        container.querySelectorAll('.condition-check').forEach(check => {
-            const condName = check.dataset.cond;
-            if (condName && pokemon.conditions) {
-                check.checked = !!pokemon.conditions[condName];
-            }
-        });
+        renderHistory(teamType, pokemon);
+        updateTeamSlots(teamType);
     }
 
     function updateTeamSlots(teamType) {
@@ -1035,19 +1467,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 slotBtn.insertBefore(img, nameSpan);
             }
 
-            const expectedSrc = `../backend/image/${name}.gif`;
+            // 画像URLの決定: JSONデータがあれば sprite_url を優先
+            let expectedSrc = null;
+            if (pokemon.speciesData && pokemon.speciesData.sprite_url) {
+                expectedSrc = pokemon.speciesData.sprite_url;
+            } else if (name && SPECIES_DEX[name]) {
+                 // Fallback if speciesData exists but no sprite_url (unlikely)
+                 expectedSrc = `../backend/image/${name}.gif`;
+            }
 
             // Only update if src changed
             if (img.dataset.key !== name) {
                 img.dataset.key = name;
-                img.src = expectedSrc;
-                img.alt = name;
+                img.dataset.retried = ''; // Reset retry flag
                 
-                // Reset display states
-                img.style.display = '';
-                nameSpan.style.display = 'none';
+                if (expectedSrc) {
+                    img.src = expectedSrc;
+                    img.alt = name;
+                    img.style.display = '';
+                    nameSpan.style.display = 'none';
+                } else {
+                    // No valid data yet (partial match or invalid), hide image
+                    img.style.display = 'none';
+                    img.src = ''; // Clear to be safe
+                    nameSpan.textContent = name;
+                    nameSpan.style.display = 'inline';
+                    slotBtn.classList.remove('has-image');
+                    return; // Skip the rest
+                }
                 
                 img.onerror = () => {
+                    // JSONのURLで失敗した場合、ローカルのgifを試す (まだ試してなければ)
+                    if (!img.dataset.retried) {
+                        img.dataset.retried = 'true';
+                        
+                        // ローカルパスへフォールバック
+                         if (img.src !== `../backend/image/${name}.gif`) { // Absolute check hard, just try local
+                             // Simply try the local path if the remote one failed
+                             img.src = `../backend/image/${name}.gif`;
+                             return;
+                         }
+
+                        // ローカルでもダメなら ()除去等
+                        if (name.includes('（') || name.includes('(')) {
+                            const baseName = name.split(/[（(]/)[0];
+                            img.src = `../backend/image/${baseName}.gif`;
+                            return;
+                        }
+                    }
+
                     img.style.display = 'none';
                     nameSpan.textContent = name;
                     nameSpan.style.display = 'inline';
@@ -1092,6 +1560,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Initialize stat inputs (EV buttons, Nature buttons, etc.)
+    setupStatInputs('ally');
+    setupStatInputs('enemy');
 });
 
 // --- Mobile Tab & Sticky Footer Logic ---
