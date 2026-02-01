@@ -1190,48 +1190,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // Helper: Find closest EV to achieve real stat +/- 1
+    // Helper: Adjust 能力P to achieve real stat +/- 1 (since 1P = 1 stat, just increment/decrement)
     function adjustEvForRealStat(pokemon, statName, delta) {
         if (!pokemon.speciesData) return;
-        const currentReal = pokemon.realStats[statName];
-        const targetReal = currentReal + delta;
-        const currentEv = pokemon.stats[statName].ev;
-        let tempEv = currentEv;
-        
+        let current = pokemon.stats[statName].ev;
         if (delta > 0) {
-            while (tempEv <= 32) {
-                tempEv += 1;
-                if (tempEv > 32) { tempEv = 32; break; }
-                const base = (statName === 'hp') ? pokemon.speciesData.baseStats.hp : pokemon.speciesData.baseStats[statName];
-                const iv = pokemon.stats[statName].iv;
-                const nature = pokemon.stats[statName].nature;
-                let val = (statName === 'hp') 
-                    ? calculateHp(base, iv, tempEv, pokemon.level)
-                    : calculateStat(base, iv, tempEv, pokemon.level, nature);
-                if (val > currentReal) {
-                    pokemon.stats[statName].ev = tempEv;
-                    break;
-                }
-                // If we reach 32 and still haven't found a higher value, we stop.
-                if (tempEv === 32) break;
-            }
+            current = Math.min(32, current + 1);
         } else {
-             while (tempEv >= 0) {
-                tempEv -= 1;
-                if (tempEv < 0) { tempEv = 0; break; }
-                const base = (statName === 'hp') ? pokemon.speciesData.baseStats.hp : pokemon.speciesData.baseStats[statName];
-                const iv = pokemon.stats[statName].iv;
-                const nature = pokemon.stats[statName].nature;
-                let val = (statName === 'hp') 
-                    ? calculateHp(base, iv, tempEv, pokemon.level)
-                    : calculateStat(base, iv, tempEv, pokemon.level, nature);
-                if (val < currentReal) {
-                    pokemon.stats[statName].ev = tempEv;
-                    break;
-                }
-                if (tempEv === 0) break;
-            }
+            current = Math.max(0, current - 1);
         }
+        pokemon.stats[statName].ev = current;
     }
 
     function setupStatInputs(side) {
@@ -1262,7 +1230,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
 
-        // 2. EV Tuning Buttons (▼ / ▲)
+        // 2. 能力P Tuning Buttons (▼ / ▲) - range 0-32
         const tuneButtons = container.querySelectorAll('.tune-btn');
         tuneButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -1288,7 +1256,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
 
-        // 3. Preset Buttons (0 / 252)
+        // 3. Preset Buttons (0 / 32)
         const presetButtons = container.querySelectorAll('.preset-btn');
         presetButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
