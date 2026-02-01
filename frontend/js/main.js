@@ -227,7 +227,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         'Grass': 'grass', 'Ice': 'ice', 'Fighting': 'fighting', 'Poison': 'poison',
         'Ground': 'ground', 'Flying': 'flying', 'Psychic': 'psychic', 'Bug': 'bug',
         'Rock': 'rock', 'Ghost': 'ghost', 'Dragon': 'dragon', 'Dark': 'dark',
-        'Steel': 'steel', 'Fairy': 'fairy'
+        'Steel': 'steel', 'Fairy': 'fairy',
+        // Japanese Keys
+        'ノーマル': 'normal', 'ほのお': 'fire', 'みず': 'water', 'でんき': 'electric',
+        'くさ': 'grass', 'こおり': 'ice', 'かくとう': 'fighting', 'どく': 'poison',
+        'じめん': 'ground', 'ひこう': 'flying', 'エスパー': 'psychic', 'むし': 'bug',
+        'いわ': 'rock', 'ゴースト': 'ghost', 'ドラゴン': 'dragon', 'あく': 'dark',
+        'はがね': 'steel', 'フェアリー': 'fairy'
     };
 
     const TYPE_NAMES_JP = {
