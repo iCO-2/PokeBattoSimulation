@@ -85,6 +85,9 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
+    ],
+    "commonly_use": [
+      "はっぱカッター"
     ]
   },
   {
@@ -174,7 +177,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フシギバナ",
@@ -274,7 +278,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガフシギバナ",
@@ -309,7 +314,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒトカゲ",
@@ -404,7 +410,8 @@
       "ワイドブレイカー",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リザード",
@@ -499,7 +506,8 @@
       "ワイドブレイカー",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リザードン",
@@ -614,7 +622,8 @@
       "テラバースト",
       "ドラゴンエール",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガリザードンX",
@@ -649,7 +658,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガリザードンY",
@@ -684,7 +694,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゼニガメ",
@@ -774,7 +785,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カメール",
@@ -864,7 +876,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カメックス",
@@ -971,7 +984,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガカメックス",
@@ -1002,7 +1016,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キャタピー",
@@ -1037,7 +1052,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トランセル",
@@ -1068,7 +1084,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バタフリー",
@@ -1107,7 +1124,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビードル",
@@ -1146,7 +1164,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コクーン",
@@ -1181,7 +1200,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スピアー",
@@ -1220,7 +1240,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガスピアー",
@@ -1255,7 +1276,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポッポ",
@@ -1298,7 +1320,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ピジョン",
@@ -1341,7 +1364,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ピジョット",
@@ -1384,7 +1408,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガピジョット",
@@ -1419,7 +1444,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コラッタ",
@@ -1458,7 +1484,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コラッタ（アローラのすがた）",
@@ -1501,7 +1528,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラッタ",
@@ -1540,7 +1568,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラッタ（アローラのすがた）",
@@ -1583,7 +1612,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オニスズメ",
@@ -1622,7 +1652,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オニドリル",
@@ -1661,7 +1692,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アーボ",
@@ -1760,7 +1792,8 @@
       "うっぷんばらし",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アーボック",
@@ -1870,7 +1903,8 @@
       "うっぷんばらし",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ピカチュウ",
@@ -1965,7 +1999,8 @@
       "くさわけ",
       "みわくのボイス",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ライチュウ",
@@ -2062,7 +2097,8 @@
       "くさわけ",
       "みわくのボイス",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ライチュウ（アローラのすがた）",
@@ -2166,7 +2202,8 @@
       "みわくのボイス",
       "サイコノイズ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガライチュウX",
@@ -2192,7 +2229,8 @@
       "speed": 110
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガライチュウY",
@@ -2218,7 +2256,8 @@
       "speed": 130
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サンド",
@@ -2317,7 +2356,8 @@
       "じだんだ",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サンド（アローラのすがた）",
@@ -2422,7 +2462,8 @@
       "テラバースト",
       "アイススピナー",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サンドパン",
@@ -2527,7 +2568,8 @@
       "じだんだ",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サンドパン（アローラのすがた）",
@@ -2632,7 +2674,8 @@
       "テラバースト",
       "アイススピナー",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニドラン♀",
@@ -2671,7 +2714,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニドリーナ",
@@ -2710,7 +2754,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニドクイン",
@@ -2753,7 +2798,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニドラン♂",
@@ -2792,7 +2838,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニドリーノ",
@@ -2831,7 +2878,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニドキング",
@@ -2874,7 +2922,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ピッピ",
@@ -3005,7 +3054,8 @@
       "テラバースト",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ピクシー",
@@ -3140,7 +3190,8 @@
       "テラバースト",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガピクシー",
@@ -3170,7 +3221,8 @@
       "speed": 70
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロコン",
@@ -3261,7 +3313,8 @@
       "つぶらなひとみ",
       "しっとのほのお",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロコン（アローラのすがた）",
@@ -3354,7 +3407,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キュウコン",
@@ -3449,7 +3503,8 @@
       "しっとのほのお",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キュウコン（アローラのすがた）",
@@ -3544,7 +3599,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "プリン",
@@ -3678,7 +3734,8 @@
       "ひやみず",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "プクリン",
@@ -3816,7 +3873,8 @@
       "ひやみず",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ズバット",
@@ -3855,7 +3913,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴルバット",
@@ -3894,7 +3953,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナゾノクサ",
@@ -3980,7 +4040,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クサイハナ",
@@ -4068,7 +4129,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラフレシア",
@@ -4164,7 +4226,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パラス",
@@ -4207,7 +4270,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パラセクト",
@@ -4250,7 +4314,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コンパン",
@@ -4341,7 +4406,8 @@
       "テラバースト",
       "とびつく",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モルフォン",
@@ -4438,7 +4504,8 @@
       "テラバースト",
       "とびつく",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ディグダ",
@@ -4530,7 +4597,8 @@
       "じだんだ",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ディグダ（アローラのすがた）",
@@ -4627,7 +4695,8 @@
       "てっていこうせん",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダグトリオ",
@@ -4718,7 +4787,8 @@
       "じだんだ",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダグトリオ（アローラのすがた）",
@@ -4819,7 +4889,8 @@
       "てっていこうせん",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャース",
@@ -4923,7 +4994,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャース（アローラのすがた）",
@@ -5027,7 +5099,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャース（ガラルのすがた）",
@@ -5134,7 +5207,8 @@
       "うっぷんばらし",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ペルシアン",
@@ -5238,7 +5312,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ペルシアン（アローラのすがた）",
@@ -5345,7 +5420,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コダック",
@@ -5455,7 +5531,8 @@
       "くさわけ",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴルダック",
@@ -5567,7 +5644,8 @@
       "くさわけ",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マンキー",
@@ -5676,7 +5754,8 @@
       "じだんだ",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オコリザル",
@@ -5788,7 +5867,8 @@
       "うっぷんばらし",
       "テラバースト",
       "ふんどのこぶし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガーディ",
@@ -5878,7 +5958,8 @@
       "だいふんげき",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガーディ（ヒスイのすがた）",
@@ -5975,7 +6056,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウインディ",
@@ -6071,7 +6153,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウインディ（ヒスイのすがた）",
@@ -6178,7 +6261,8 @@
       "だいふんげき",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニョロモ",
@@ -6263,7 +6347,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニョロゾ",
@@ -6355,7 +6440,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニョロボン",
@@ -6472,7 +6558,8 @@
       "テラバースト",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケーシィ",
@@ -6511,7 +6598,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユンゲラー",
@@ -6550,7 +6638,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フーディン",
@@ -6589,7 +6678,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガフーディン",
@@ -6620,7 +6710,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワンリキー",
@@ -6659,7 +6750,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴーリキー",
@@ -6698,7 +6790,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カイリキー",
@@ -6737,7 +6830,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マダツボミ",
@@ -6830,7 +6924,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウツドン",
@@ -6926,7 +7021,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウツボット",
@@ -7023,7 +7119,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガウツボット",
@@ -7053,7 +7150,8 @@
       "speed": 70
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メノクラゲ",
@@ -7150,7 +7248,8 @@
       "テラバースト",
       "とびつく",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドククラゲ",
@@ -7253,7 +7352,8 @@
       "テラバースト",
       "とびつく",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イシツブテ",
@@ -7348,7 +7448,8 @@
       "１０まんばりき",
       "じだんだ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イシツブテ（アローラのすがた）",
@@ -7451,7 +7552,8 @@
       "１０まんばりき",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴローン",
@@ -7551,7 +7653,8 @@
       "ボディプレス",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴローン（アローラのすがた）",
@@ -7660,7 +7763,8 @@
       "テラバースト",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴローニャ",
@@ -7762,7 +7866,8 @@
       "ボディプレス",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴローニャ（アローラのすがた）",
@@ -7876,7 +7981,8 @@
       "テラバースト",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポニータ",
@@ -7915,7 +8021,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポニータ（ガラルのすがた）",
@@ -7954,7 +8061,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギャロップ",
@@ -7993,7 +8101,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギャロップ（ガラルのすがた）",
@@ -8036,7 +8145,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤドン",
@@ -8145,7 +8255,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤドン（ガラルのすがた）",
@@ -8250,7 +8361,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤドラン",
@@ -8372,7 +8484,8 @@
       "ゆきげしき",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガヤドラン",
@@ -8407,7 +8520,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤドラン（ガラルのすがた）",
@@ -8541,7 +8655,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コイル",
@@ -8630,7 +8745,8 @@
       "エレキフィールド",
       "てっていこうせん",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レアコイル",
@@ -8720,7 +8836,8 @@
       "エレキフィールド",
       "てっていこうせん",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カモネギ",
@@ -8763,7 +8880,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カモネギ（ガラルのすがた）",
@@ -8798,7 +8916,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドードー",
@@ -8885,7 +9004,8 @@
       "じごくづき",
       "とびかかる",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドードリオ",
@@ -8982,7 +9102,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パウワウ",
@@ -9080,7 +9201,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジュゴン",
@@ -9190,7 +9312,8 @@
       "ゆきげしき",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベトベター",
@@ -9293,7 +9416,8 @@
       "たたりめ",
       "ゲップ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベトベター（アローラのすがた）",
@@ -9411,7 +9535,8 @@
       "バークアウト",
       "ゲップ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベトベトン",
@@ -9520,7 +9645,8 @@
       "とびかかる",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベトベトン（アローラのすがた）",
@@ -9634,7 +9760,8 @@
       "ゲップ",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シェルダー",
@@ -9716,7 +9843,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パルシェン",
@@ -9809,7 +9937,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴース",
@@ -9906,7 +10035,8 @@
       "はいよるいちげき",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴースト",
@@ -10005,7 +10135,8 @@
       "はいよるいちげき",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゲンガー",
@@ -10115,7 +10246,8 @@
       "ポルターガイスト",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガゲンガー",
@@ -10150,7 +10282,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イワーク",
@@ -10193,7 +10326,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スリープ",
@@ -10304,7 +10438,8 @@
       "テラバースト",
       "くさわけ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スリーパー",
@@ -10418,7 +10553,8 @@
       "テラバースト",
       "くさわけ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クラブ",
@@ -10457,7 +10593,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キングラー",
@@ -10496,7 +10633,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビリリダマ",
@@ -10577,7 +10715,8 @@
       "かいでんぱ",
       "エレキフィールド",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビリリダマ（ヒスイのすがた）",
@@ -10668,7 +10807,8 @@
       "エレキフィールド",
       "グラススライダー",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マルマイン",
@@ -10754,7 +10894,8 @@
       "エレキフィールド",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マルマイン（ヒスイのすがた）",
@@ -10848,7 +10989,8 @@
       "クロロブラスト",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タマタマ",
@@ -10938,7 +11080,8 @@
       "グラススライダー",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナッシー",
@@ -11039,7 +11182,8 @@
       "グラススライダー",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナッシー（アローラのすがた）",
@@ -11149,7 +11293,8 @@
       "くさわけ",
       "ドラゴンエール",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カラカラ",
@@ -11188,7 +11333,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガラガラ",
@@ -11227,7 +11373,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガラガラ（アローラのすがた）",
@@ -11270,7 +11417,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サワムラー",
@@ -11371,7 +11519,8 @@
       "テラバースト",
       "かかとおとし",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エビワラー",
@@ -11475,7 +11624,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベロリンガ",
@@ -11514,7 +11664,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドガース",
@@ -11603,7 +11754,8 @@
       "クリアスモッグ",
       "ゲップ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マタドガス",
@@ -11693,7 +11845,8 @@
       "クリアスモッグ",
       "ゲップ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マタドガス（ガラルのすがた）",
@@ -11797,7 +11950,8 @@
       "ワンダースチーム",
       "ミストバースト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サイホーン",
@@ -11906,7 +12060,8 @@
       "ねっさのだいち",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サイドン",
@@ -12035,7 +12190,8 @@
       "ねっさのだいち",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラッキー",
@@ -12152,7 +12308,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モンジャラ",
@@ -12191,7 +12348,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガルーラ",
@@ -12230,7 +12388,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガガルーラ",
@@ -12261,7 +12420,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タッツー",
@@ -12341,7 +12501,8 @@
       "クイックターン",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シードラ",
@@ -12425,7 +12586,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トサキント",
@@ -12464,7 +12626,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アズマオウ",
@@ -12503,7 +12666,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒトデマン",
@@ -12542,7 +12706,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スターミー",
@@ -12585,7 +12750,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガスターミー",
@@ -12615,7 +12781,8 @@
       "speed": 120
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バリヤード",
@@ -12658,7 +12825,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バリヤード（ガラルのすがた）",
@@ -12701,7 +12869,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ストライク",
@@ -12798,7 +12967,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルージュラ",
@@ -12841,7 +13011,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エレブー",
@@ -12934,7 +13105,8 @@
       "テラバースト",
       "くさわけ",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブーバー",
@@ -13029,7 +13201,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カイロス",
@@ -13068,7 +13241,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガカイロス",
@@ -13103,7 +13277,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケンタロス",
@@ -13200,7 +13375,8 @@
       "テラバースト",
       "レイジングブル",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケンタロス（パルデアのすがた（コンバット種））",
@@ -13290,7 +13466,8 @@
       "テラバースト",
       "レイジングブル",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケンタロス（パルデアのすがた（ブレイズ種））",
@@ -13389,7 +13566,8 @@
       "レイジングブル",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケンタロス（パルデアのすがた（ウォーター種））",
@@ -13487,7 +13665,8 @@
       "レイジングブル",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コイキング",
@@ -13526,7 +13705,8 @@
       "たいあたり",
       "はねる",
       "じたばた"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギャラドス",
@@ -13629,7 +13809,8 @@
       "ひやみず",
       "ドラゴンエール",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガギャラドス",
@@ -13664,7 +13845,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラプラス",
@@ -13775,7 +13957,8 @@
       "ドラゴンエール",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メタモン",
@@ -13812,7 +13995,8 @@
     ],
     "moves": [
       "へんしん"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イーブイ",
@@ -13896,7 +14080,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シャワーズ",
@@ -13990,7 +14175,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サンダース",
@@ -14085,7 +14271,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブースター",
@@ -14177,7 +14364,8 @@
       "くさわけ",
       "みわくのボイス",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポリゴン",
@@ -14264,7 +14452,8 @@
       "エレキネット",
       "かいでんぱ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オムナイト",
@@ -14307,7 +14496,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オムスター",
@@ -14350,7 +14540,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カブト",
@@ -14393,7 +14584,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カブトプス",
@@ -14436,7 +14628,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "プテラ",
@@ -14479,7 +14672,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガプテラ",
@@ -14514,7 +14708,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カビゴン",
@@ -14636,7 +14831,8 @@
       "ひやみず",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フリーザー",
@@ -14725,7 +14921,8 @@
       "テラバースト",
       "アイススピナー",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フリーザー（ガラルのすがた）",
@@ -14811,7 +15008,8 @@
       "テラバースト",
       "ゆきげしき",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サンダー",
@@ -14901,7 +15099,8 @@
       "ダブルウイング",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サンダー（ガラルのすがた）",
@@ -14987,7 +15186,8 @@
       "らいめいげり",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ファイヤー",
@@ -15077,7 +15277,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ファイヤー（ガラルのすがた）",
@@ -15163,7 +15364,8 @@
       "ダブルウイング",
       "もえあがるいかり",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミニリュウ",
@@ -15252,7 +15454,8 @@
       "テラバースト",
       "ひやみず",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハクリュー",
@@ -15337,7 +15540,8 @@
       "テラバースト",
       "ひやみず",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カイリュー",
@@ -15459,7 +15663,8 @@
       "ゆきげしき",
       "ひやみず",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガカイリュー",
@@ -15489,7 +15694,8 @@
       "speed": 100
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミュウツー",
@@ -15627,7 +15833,8 @@
       "くさわけ",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガミュウツーX",
@@ -15662,7 +15869,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガミュウツーY",
@@ -15693,7 +15901,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミュウ",
@@ -15959,7 +16168,8 @@
       "サンダーダイブ",
       "サイコノイズ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チコリータ",
@@ -16042,7 +16252,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベイリーフ",
@@ -16127,7 +16338,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガニウム",
@@ -16225,7 +16437,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガメガニウム",
@@ -16255,7 +16468,8 @@
       "speed": 80
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒノアラシ",
@@ -16339,7 +16553,8 @@
       "しっとのほのお",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マグマラシ",
@@ -16425,7 +16640,8 @@
       "しっとのほのお",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バクフーン",
@@ -16538,7 +16754,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バクフーン（ヒスイのすがた）",
@@ -16647,7 +16864,8 @@
       "ひゃっきやこう",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワニノコ",
@@ -16747,7 +16965,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アリゲイツ",
@@ -16849,7 +17068,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オーダイル",
@@ -16967,7 +17187,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガオーダイル",
@@ -16997,7 +17218,8 @@
       "speed": 78
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オタチ",
@@ -17098,7 +17320,8 @@
       "おかたづけ",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オオタチ",
@@ -17205,7 +17428,8 @@
       "おかたづけ",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホーホー",
@@ -17305,7 +17529,8 @@
       "ムーンフォース",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヨルノズク",
@@ -17413,7 +17638,8 @@
       "ダブルウイング",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レディバ",
@@ -17456,7 +17682,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レディアン",
@@ -17499,7 +17726,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イトマル",
@@ -17596,7 +17824,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アリアドス",
@@ -17700,7 +17929,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クロバット",
@@ -17739,7 +17969,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チョンチー",
@@ -17833,7 +18064,8 @@
       "クイックターン",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ランターン",
@@ -17932,7 +18164,8 @@
       "クイックターン",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ピチュー",
@@ -18012,7 +18245,8 @@
       "ほっぺすりすり",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ピィ",
@@ -18109,7 +18343,8 @@
       "テラバースト",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ププリン",
@@ -18208,7 +18443,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トゲピー",
@@ -18247,7 +18483,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トゲチック",
@@ -18290,7 +18527,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネイティ",
@@ -18333,7 +18571,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネイティオ",
@@ -18376,7 +18615,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メリープ",
@@ -18453,7 +18693,8 @@
       "マジカルシャイン",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モココ",
@@ -18537,7 +18778,8 @@
       "マジカルシャイン",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デンリュウ",
@@ -18635,7 +18877,8 @@
       "くさわけ",
       "ドラゴンエール",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガデンリュウ",
@@ -18670,7 +18913,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キレイハナ",
@@ -18768,7 +19012,8 @@
       "トリプルアクセル",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マリル",
@@ -18873,7 +19118,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マリルリ",
@@ -18981,7 +19227,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウソッキー",
@@ -19087,7 +19334,8 @@
       "メテオビーム",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニョロトノ",
@@ -19186,7 +19434,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハネッコ",
@@ -19286,7 +19535,8 @@
       "とびかかる",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポポッコ",
@@ -19381,7 +19631,8 @@
       "とびかかる",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワタッコ",
@@ -19479,7 +19730,8 @@
       "とびかかる",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エイパム",
@@ -19589,7 +19841,8 @@
       "くさわけ",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒマナッツ",
@@ -19667,7 +19920,8 @@
       "グラスフィールド",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キマワリ",
@@ -19752,7 +20006,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤンヤンマ",
@@ -19840,7 +20095,8 @@
       "テラバースト",
       "とびつく",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウパー",
@@ -19945,7 +20201,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウパー（パルデアのすがた）",
@@ -20048,7 +20305,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌオー",
@@ -20158,7 +20416,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エーフィ",
@@ -20261,7 +20520,8 @@
       "くさわけ",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブラッキー",
@@ -20359,7 +20619,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤミカラス",
@@ -20464,7 +20725,8 @@
       "ダブルウイング",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤドキング",
@@ -20591,7 +20853,8 @@
       "ゆきげしき",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤドキング（ガラルのすがた）",
@@ -20726,7 +20989,8 @@
       "さむいギャグ",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムウマ",
@@ -20827,7 +21091,8 @@
       "テラバースト",
       "ゆきげしき",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アンノーン",
@@ -20858,7 +21123,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ソーナンス",
@@ -20893,7 +21159,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キリンリキ",
@@ -21013,7 +21280,8 @@
       "くさわけ",
       "ツインビーム",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クヌギダマ",
@@ -21103,7 +21371,8 @@
       "テラバースト",
       "アイススピナー",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フォレトス",
@@ -21210,7 +21479,8 @@
       "アイススピナー",
       "とびつく",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ノコッチ",
@@ -21332,7 +21602,8 @@
       "とびつく",
       "ひやみず",
       "ハイパードリル"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グライガー",
@@ -21450,7 +21721,8 @@
       "はいよるいちげき",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハガネール",
@@ -21493,7 +21765,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガハガネール",
@@ -21528,7 +21801,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブルー",
@@ -21645,7 +21919,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グランブル",
@@ -21770,7 +22045,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハリーセン",
@@ -21884,7 +22160,8 @@
       "どくばりセンボン",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハリーセン（ヒスイのすがた）",
@@ -21996,7 +22273,8 @@
       "どくばりセンボン",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハッサム",
@@ -22100,7 +22378,8 @@
       "とびつく",
       "くさわけ",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガハッサム",
@@ -22135,7 +22414,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ツボツボ",
@@ -22178,7 +22458,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヘラクロス",
@@ -22291,7 +22572,8 @@
       "とびつく",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガヘラクロス",
@@ -22326,7 +22608,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニューラ",
@@ -22439,7 +22722,8 @@
       "ゆきげしき",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニューラ（ヒスイのすがた）",
@@ -22547,7 +22831,8 @@
       "コーチング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒメグマ",
@@ -22651,7 +22936,8 @@
       "つぶらなひとみ",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リングマ",
@@ -22756,7 +23042,8 @@
       "じだんだ",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マグマッグ",
@@ -22852,7 +23139,8 @@
       "１０まんばりき",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マグカルゴ",
@@ -22961,7 +23249,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウリムー",
@@ -23057,7 +23346,8 @@
       "テラバースト",
       "ゆきげしき",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イノムー",
@@ -23157,7 +23447,8 @@
       "テラバースト",
       "ゆきげしき",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サニーゴ",
@@ -23200,7 +23491,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サニーゴ（ガラルのすがた）",
@@ -23235,7 +23527,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テッポウオ",
@@ -23274,7 +23567,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オクタン",
@@ -23313,7 +23607,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デリバード",
@@ -23420,7 +23715,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マンタイン",
@@ -23463,7 +23759,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エアームド",
@@ -23565,7 +23862,8 @@
       "てっていこうせん",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガエアームド",
@@ -23595,7 +23893,8 @@
       "speed": 110
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デルビル",
@@ -23701,7 +24000,8 @@
       "くさわけ",
       "ほうふく",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヘルガー",
@@ -23807,7 +24107,8 @@
       "くさわけ",
       "ほうふく",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガヘルガー",
@@ -23842,7 +24143,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キングドラ",
@@ -23940,7 +24242,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴマゾウ",
@@ -24032,7 +24335,8 @@
       "じだんだ",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドンファン",
@@ -24131,7 +24435,8 @@
       "テラバースト",
       "アイススピナー",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポリゴン２",
@@ -24219,7 +24524,8 @@
       "エレキネット",
       "かいでんぱ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オドシシ",
@@ -24327,7 +24633,8 @@
       "バリアーラッシュ",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドーブル",
@@ -24368,7 +24675,8 @@
     ],
     "moves": [
       "スケッチ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バルキー",
@@ -24440,7 +24748,8 @@
       "じならし",
       "テラバースト",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カポエラー",
@@ -24536,7 +24845,8 @@
       "テラバースト",
       "アイススピナー",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムチュール",
@@ -24579,7 +24889,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エレキッド",
@@ -24667,7 +24978,8 @@
       "テラバースト",
       "くさわけ",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブビィ",
@@ -24751,7 +25063,8 @@
       "しっとのほのお",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミルタンク",
@@ -24790,7 +25103,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハピナス",
@@ -24912,7 +25226,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ライコウ",
@@ -25004,7 +25319,8 @@
       "テラバースト",
       "くさわけ",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エンテイ",
@@ -25095,7 +25411,8 @@
       "ねっさのだいち",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スイクン",
@@ -25181,7 +25498,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヨーギラス",
@@ -25274,7 +25592,8 @@
       "バークアウト",
       "じだんだ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サナギラス",
@@ -25362,7 +25681,8 @@
       "じだんだ",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バンギラス",
@@ -25488,7 +25808,8 @@
       "うっぷんばらし",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガバンギラス",
@@ -25523,7 +25844,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルギア",
@@ -25637,7 +25959,8 @@
       "テラバースト",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホウオウ",
@@ -25739,7 +26062,8 @@
       "ダブルウイング",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "セレビィ",
@@ -25774,7 +26098,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キモリ",
@@ -25870,7 +26195,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジュプトル",
@@ -25973,7 +26299,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジュカイン",
@@ -26094,7 +26421,8 @@
       "くさわけ",
       "ドラゴンエール",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガジュカイン",
@@ -26129,7 +26457,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アチャモ",
@@ -26216,7 +26545,8 @@
       "ほのおのちかい",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワカシャモ",
@@ -26322,7 +26652,8 @@
       "コーチング",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バシャーモ",
@@ -26445,7 +26776,8 @@
       "テラバースト",
       "やけっぱち",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガバシャーモ",
@@ -26480,7 +26812,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミズゴロウ",
@@ -26568,7 +26901,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌマクロー",
@@ -26669,7 +27003,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラグラージ",
@@ -26788,7 +27123,8 @@
       "テラバースト",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガラグラージ",
@@ -26823,7 +27159,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポチエナ",
@@ -26912,7 +27249,8 @@
       "うっぷんばらし",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グラエナ",
@@ -27005,7 +27343,8 @@
       "うっぷんばらし",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジグザグマ",
@@ -27044,7 +27383,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジグザグマ（ガラルのすがた）",
@@ -27087,7 +27427,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マッスグマ",
@@ -27126,7 +27467,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マッスグマ（ガラルのすがた）",
@@ -27169,7 +27511,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケムッソ",
@@ -27204,7 +27547,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カラサリス",
@@ -27235,7 +27579,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アゲハント",
@@ -27274,7 +27619,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マユルド",
@@ -27305,7 +27651,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドクケイル",
@@ -27344,7 +27691,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハスボー",
@@ -27439,7 +27787,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハスブレロ",
@@ -27549,7 +27898,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルンパッパ",
@@ -27666,7 +28016,8 @@
       "アイススピナー",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タネボー",
@@ -27755,7 +28106,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コノハナ",
@@ -27873,7 +28225,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダーテング",
@@ -28014,7 +28367,8 @@
       "くさわけ",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スバメ",
@@ -28053,7 +28407,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オオスバメ",
@@ -28092,7 +28447,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キャモメ",
@@ -28185,7 +28541,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ペリッパー",
@@ -28285,7 +28642,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラルトス",
@@ -28397,7 +28755,8 @@
       "ワイドフォース",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キルリア",
@@ -28505,7 +28864,8 @@
       "トリプルアクセル",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サーナイト",
@@ -28626,7 +28986,8 @@
       "テラバースト",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガサーナイト",
@@ -28661,7 +29022,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アメタマ",
@@ -28750,7 +29112,8 @@
       "テラバースト",
       "とびつく",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アメモース",
@@ -28851,7 +29214,8 @@
       "テラバースト",
       "とびつく",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キノココ",
@@ -28932,7 +29296,8 @@
       "グラスフィールド",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キノガッサ",
@@ -29044,7 +29409,8 @@
       "グラスフィールド",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナマケロ",
@@ -29139,7 +29505,8 @@
       "じごくづき",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤルキモノ",
@@ -29246,7 +29613,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケッキング",
@@ -29367,7 +29735,8 @@
       "くさわけ",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ツチニン",
@@ -29406,7 +29775,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テッカニン",
@@ -29445,7 +29815,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌケニン",
@@ -29480,7 +29851,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴニョニョ",
@@ -29515,7 +29887,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドゴーム",
@@ -29550,7 +29923,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バクオング",
@@ -29585,7 +29959,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マクノシタ",
@@ -29691,7 +30066,8 @@
       "テラバースト",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハリテヤマ",
@@ -29800,7 +30176,8 @@
       "テラバースト",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルリリ",
@@ -29884,7 +30261,8 @@
       "ドレインキッス",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ノズパス",
@@ -29979,7 +30357,8 @@
       "てっていこうせん",
       "メテオビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エネコ",
@@ -30018,7 +30397,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エネコロロ",
@@ -30057,7 +30437,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤミラミ",
@@ -30189,7 +30570,8 @@
       "うっぷんばらし",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガヤミラミ",
@@ -30224,7 +30606,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クチート",
@@ -30267,7 +30650,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガクチート",
@@ -30302,7 +30686,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ココドラ",
@@ -30345,7 +30730,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コドラ",
@@ -30388,7 +30774,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ボスゴドラ",
@@ -30431,7 +30818,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガボスゴドラ",
@@ -30462,7 +30850,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アサナン",
@@ -30574,7 +30963,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チャーレム",
@@ -30686,7 +31076,8 @@
       "かかとおとし",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガチャーレム",
@@ -30721,7 +31112,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラクライ",
@@ -30760,7 +31152,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ライボルト",
@@ -30799,7 +31192,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガライボルト",
@@ -30830,7 +31224,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "プラスル",
@@ -30918,7 +31313,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マイナン",
@@ -31004,7 +31400,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バルビート",
@@ -31107,7 +31504,8 @@
       "とびつく",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イルミーゼ",
@@ -31213,7 +31611,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロゼリア",
@@ -31256,7 +31655,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴクリン",
@@ -31350,7 +31750,8 @@
       "ゲップ",
       "ほおばる",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マルノーム",
@@ -31449,7 +31850,8 @@
       "ゲップ",
       "ボディプレス",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キバニア",
@@ -31488,7 +31890,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サメハダー",
@@ -31527,7 +31930,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガサメハダー",
@@ -31562,7 +31966,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホエルコ",
@@ -31601,7 +32006,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホエルオー",
@@ -31640,7 +32046,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドンメル",
@@ -31750,7 +32157,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バクーダ",
@@ -31857,7 +32265,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガバクーダ",
@@ -31892,7 +32301,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コータス",
@@ -31992,7 +32402,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バネブー",
@@ -32092,7 +32503,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブーピッグ",
@@ -32214,7 +32626,8 @@
       "くさわけ",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パッチール",
@@ -32253,7 +32666,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナックラー",
@@ -32332,7 +32746,8 @@
       "であいがしら",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビブラーバ",
@@ -32431,7 +32846,8 @@
       "ダブルウイング",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フライゴン",
@@ -32545,7 +32961,8 @@
       "ドラゴンエール",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サボネア",
@@ -32651,7 +33068,8 @@
       "はいよるいちげき",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ノクタス",
@@ -32764,7 +33182,8 @@
       "うっぷんばらし",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チルット",
@@ -32854,7 +33273,8 @@
       "テラバースト",
       "くさわけ",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チルタリス",
@@ -32960,7 +33380,8 @@
       "くさわけ",
       "ドラゴンエール",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガチルタリス",
@@ -32995,7 +33416,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ザングース",
@@ -33115,7 +33537,8 @@
       "つけあがる",
       "テラバースト",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハブネーク",
@@ -33224,7 +33647,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルナトーン",
@@ -33259,7 +33683,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ソルロック",
@@ -33294,7 +33719,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドジョッチ",
@@ -33386,7 +33812,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナマズン",
@@ -33486,7 +33913,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヘイガニ",
@@ -33579,7 +34007,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シザリガー",
@@ -33689,7 +34118,8 @@
       "テラバースト",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤジロン",
@@ -33724,7 +34154,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネンドール",
@@ -33759,7 +34190,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リリーラ",
@@ -33798,7 +34230,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユレイドル",
@@ -33837,7 +34270,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アノプス",
@@ -33876,7 +34310,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アーマルド",
@@ -33915,7 +34350,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒンバス",
@@ -33988,7 +34424,8 @@
       "スケイルショット",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミロカロス",
@@ -34094,7 +34531,8 @@
       "ひやみず",
       "ドラゴンエール",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポワルン",
@@ -34125,7 +34563,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポワルン（たいようのすがた）",
@@ -34156,7 +34595,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポワルン（あまみずのすがた）",
@@ -34187,7 +34627,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポワルン（ゆきぐものすがた）",
@@ -34218,7 +34659,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カクレオン",
@@ -34253,7 +34695,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カゲボウズ",
@@ -34346,7 +34789,8 @@
       "ポルターガイスト",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジュペッタ",
@@ -34445,7 +34889,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガジュペッタ",
@@ -34476,7 +34921,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヨマワル",
@@ -34559,7 +35005,8 @@
       "はいよるいちげき",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サマヨール",
@@ -34653,7 +35100,8 @@
       "はいよるいちげき",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トロピウス",
@@ -34758,7 +35206,8 @@
       "ダブルウイング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チリーン",
@@ -34856,7 +35305,8 @@
       "ワイドフォース",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガチリーン",
@@ -34886,7 +35336,8 @@
       "speed": 65
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アブソル",
@@ -34925,7 +35376,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガアブソル",
@@ -34956,7 +35408,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ソーナノ",
@@ -34991,7 +35444,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユキワラシ",
@@ -35074,7 +35528,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オニゴーリ",
@@ -35164,7 +35619,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガオニゴーリ",
@@ -35195,7 +35651,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タマザラシ",
@@ -35238,7 +35695,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トドグラー",
@@ -35281,7 +35739,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トドゼルガ",
@@ -35324,7 +35783,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パールル",
@@ -35359,7 +35819,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハンテール",
@@ -35394,7 +35855,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サクラビス",
@@ -35429,7 +35891,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジーランス",
@@ -35472,7 +35935,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラブカス",
@@ -35548,7 +36012,8 @@
       "クイックターン",
       "テラバースト",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タツベイ",
@@ -35632,7 +36097,8 @@
       "ドラゴンテール",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コモルー",
@@ -35713,7 +36179,8 @@
       "テラバースト",
       "ドラゴンエール",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ボーマンダ",
@@ -35814,7 +36281,8 @@
       "テラバースト",
       "ドラゴンエール",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガボーマンダ",
@@ -35849,7 +36317,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダンバル",
@@ -35896,7 +36365,8 @@
       "アイアンヘッド",
       "てっていこうせん",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メタング",
@@ -35995,7 +36465,8 @@
       "くさわけ",
       "ハードプレス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メタグロス",
@@ -36103,7 +36574,8 @@
       "くさわけ",
       "ハードプレス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガメタグロス",
@@ -36138,7 +36610,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レジロック",
@@ -36230,7 +36703,8 @@
       "メテオビーム",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レジアイス",
@@ -36313,7 +36787,8 @@
       "テラバースト",
       "アイススピナー",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レジスチル",
@@ -36403,7 +36878,8 @@
       "テラバースト",
       "アイススピナー",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラティアス",
@@ -36517,7 +36993,8 @@
       "ひやみず",
       "ドラゴンエール",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガラティアス",
@@ -36552,7 +37029,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラティオス",
@@ -36663,7 +37141,8 @@
       "ひやみず",
       "ドラゴンエール",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガラティオス",
@@ -36698,7 +37177,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カイオーガ",
@@ -36775,7 +37255,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゲンシカイオーガ",
@@ -36806,7 +37287,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グラードン",
@@ -36907,7 +37389,8 @@
       "ボディプレス",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゲンシグラードン",
@@ -36942,7 +37425,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レックウザ",
@@ -37051,7 +37535,8 @@
       "メテオビーム",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガレックウザ",
@@ -37086,7 +37571,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジラーチ",
@@ -37196,7 +37682,8 @@
       "メテオビーム",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デオキシス（ノーマルフォルム）",
@@ -37301,7 +37788,8 @@
       "メテオビーム",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デオキシス（アタックフォルム）",
@@ -37408,7 +37896,8 @@
       "メテオビーム",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デオキシス（ディフェンスフォルム）",
@@ -37517,7 +38006,8 @@
       "メテオビーム",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デオキシス（スピードフォルム）",
@@ -37624,7 +38114,8 @@
       "メテオビーム",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナエトル",
@@ -37718,7 +38209,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハヤシガメ",
@@ -37812,7 +38304,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドダイトス",
@@ -37930,7 +38423,8 @@
       "テラバースト",
       "くさわけ",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒコザル",
@@ -38034,7 +38528,8 @@
       "しっとのほのお",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モウカザル",
@@ -38151,7 +38646,8 @@
       "テラバースト",
       "やけっぱち",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴウカザル",
@@ -38285,7 +38781,8 @@
       "テラバースト",
       "やけっぱち",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポッチャマ",
@@ -38374,7 +38871,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポッタイシ",
@@ -38467,7 +38965,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エンペルト",
@@ -38592,7 +39091,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムックル",
@@ -38671,7 +39171,8 @@
       "ぼうふう",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムクバード",
@@ -38747,7 +39248,8 @@
       "ぼうふう",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムクホーク",
@@ -38827,7 +39329,8 @@
       "ぼうふう",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガムクホーク",
@@ -38857,7 +39360,8 @@
       "speed": 110
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビッパ",
@@ -38896,7 +39400,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビーダル",
@@ -38939,7 +39444,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コロボーシ",
@@ -38983,7 +39489,8 @@
       "とびかかる",
       "はいよるいちげき",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コロトック",
@@ -39065,7 +39572,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コリンク",
@@ -39156,7 +39664,8 @@
       "サイコファング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルクシオ",
@@ -39241,7 +39750,8 @@
       "サイコファング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レントラー",
@@ -39332,7 +39842,8 @@
       "テラバースト",
       "くさわけ",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スボミー",
@@ -39375,7 +39886,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロズレイド",
@@ -39418,7 +39930,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ズガイドス",
@@ -39514,7 +40027,8 @@
       "テラバースト",
       "くさわけ",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラムパルド",
@@ -39624,7 +40138,8 @@
       "くさわけ",
       "ドラゴンエール",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タテトプス",
@@ -39720,7 +40235,8 @@
       "テラバースト",
       "くさわけ",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トリデプス",
@@ -39827,7 +40343,8 @@
       "テラバースト",
       "くさわけ",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミノムッチ",
@@ -39862,7 +40379,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミノマダム（くさきのミノ）",
@@ -39901,7 +40419,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミノマダム（すなちのすがた）",
@@ -39940,7 +40459,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミノマダム（ゴミのミノ）",
@@ -39979,7 +40499,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガーメイル",
@@ -40018,7 +40539,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミツハニー",
@@ -40068,7 +40590,8 @@
       "とびかかる",
       "はいよるいちげき",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビークイン",
@@ -40166,7 +40689,8 @@
       "テラバースト",
       "とびつく",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パチリス",
@@ -40271,7 +40795,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブイゼル",
@@ -40362,7 +40887,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フローゼル",
@@ -40456,7 +40982,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チェリンボ",
@@ -40487,7 +41014,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チェリム",
@@ -40518,7 +41046,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カラナクシ",
@@ -40609,7 +41138,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トリトドン",
@@ -40705,7 +41235,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エテボース",
@@ -40818,7 +41349,8 @@
       "くさわけ",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フワンテ",
@@ -40922,7 +41454,8 @@
       "ゴーストダイブ",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フワライド",
@@ -41027,7 +41560,8 @@
       "ちからをすいとる",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミミロル",
@@ -41066,7 +41600,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミミロップ",
@@ -41105,7 +41640,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガミミロップ",
@@ -41140,7 +41676,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムウマージ",
@@ -41233,7 +41770,8 @@
       "テラバースト",
       "ゆきげしき",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドンカラス",
@@ -41334,7 +41872,8 @@
       "ひやみず",
       "ほうふく",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャルマー",
@@ -41373,7 +41912,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブニャット",
@@ -41412,7 +41952,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リーシャン",
@@ -41496,7 +42037,8 @@
       "マジカルシャイン",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スカンプー",
@@ -41602,7 +42144,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スカタンク",
@@ -41710,7 +42253,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドーミラー",
@@ -41812,7 +42356,8 @@
       "ワイドフォース",
       "テラバースト",
       "アイススピナー"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドータクン",
@@ -41923,7 +42468,8 @@
       "アイススピナー",
       "ハードプレス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウソハチ",
@@ -42015,7 +42561,8 @@
       "なみだめ",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マネネ",
@@ -42058,7 +42605,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ピンプク",
@@ -42133,7 +42681,8 @@
       "チャームボイス",
       "テラバースト",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ペラップ",
@@ -42176,7 +42725,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミカルゲ",
@@ -42270,7 +42820,8 @@
       "うっぷんばらし",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フカマル",
@@ -42361,7 +42912,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガバイト",
@@ -42454,7 +43006,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガブリアス",
@@ -42556,7 +43109,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガガブリアス",
@@ -42591,7 +43145,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴンベ",
@@ -42697,7 +43252,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リオル",
@@ -42797,7 +43353,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルカリオ",
@@ -42918,7 +43475,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガルカリオ",
@@ -42953,7 +43511,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒポポタス",
@@ -43035,7 +43594,8 @@
       "ボディプレス",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カバルドン",
@@ -43119,7 +43679,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スコルピ",
@@ -43162,7 +43723,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドラピオン",
@@ -43205,7 +43767,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グレッグル",
@@ -43319,7 +43882,8 @@
       "テラバースト",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドクロッグ",
@@ -43432,7 +43996,8 @@
       "テラバースト",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マスキッパ",
@@ -43463,7 +44028,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケイコウオ",
@@ -43548,7 +44114,8 @@
       "テラバースト",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネオラント",
@@ -43633,7 +44200,8 @@
       "テラバースト",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タマンタ",
@@ -43676,7 +44244,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユキカブリ",
@@ -43765,7 +44334,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユキノオー",
@@ -43869,7 +44439,8 @@
       "くさわけ",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガユキノオー",
@@ -43904,7 +44475,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マニューラ",
@@ -44014,7 +44586,8 @@
       "くさわけ",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジバコイル",
@@ -44112,7 +44685,8 @@
       "テラバースト",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベロベルト",
@@ -44151,7 +44725,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドサイドン",
@@ -44286,7 +44861,8 @@
       "テラバースト",
       "やけっぱち",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モジャンボ",
@@ -44325,7 +44901,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エレキブル",
@@ -44427,7 +45004,8 @@
       "テラバースト",
       "くさわけ",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブーバーン",
@@ -44531,7 +45109,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トゲキッス",
@@ -44574,7 +45153,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガヤンマ",
@@ -44667,7 +45247,8 @@
       "テラバースト",
       "とびつく",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リーフィア",
@@ -44762,7 +45343,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グレイシア",
@@ -44853,7 +45435,8 @@
       "ゆきげしき",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グライオン",
@@ -44971,7 +45554,8 @@
       "はいよるいちげき",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マンムー",
@@ -45079,7 +45663,8 @@
       "ゆきげしき",
       "くさわけ",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポリゴンＺ",
@@ -45170,7 +45755,8 @@
       "エレキネット",
       "かいでんぱ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エルレイド",
@@ -45321,7 +45907,8 @@
       "アクアカッター",
       "みわくのボイス",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガエルレイド",
@@ -45356,7 +45943,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダイノーズ",
@@ -45462,7 +46050,8 @@
       "テラバースト",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヨノワール",
@@ -45563,7 +46152,8 @@
       "ポルターガイスト",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユキメノコ",
@@ -45666,7 +46256,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガユキメノコ",
@@ -45696,7 +46287,8 @@
       "speed": 120
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロトム",
@@ -45776,7 +46368,8 @@
       "エレキフィールド",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロトム（ヒートロトム）",
@@ -45857,7 +46450,8 @@
       "エレキフィールド",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロトム（ウォッシュロトム）",
@@ -45938,7 +46532,8 @@
       "エレキフィールド",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロトム（フロストロトム）",
@@ -46019,7 +46614,8 @@
       "エレキフィールド",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロトム（スピンロトム）",
@@ -46100,7 +46696,8 @@
       "エレキフィールド",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ロトム（カットロトム）",
@@ -46181,7 +46778,8 @@
       "エレキフィールド",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユクシー",
@@ -46280,7 +46878,8 @@
       "しんぴのちから",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エムリット",
@@ -46378,7 +46977,8 @@
       "しんぴのちから",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アグノム",
@@ -46476,7 +47076,8 @@
       "ワイドフォース",
       "しんぴのちから",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ディアルガ",
@@ -46581,7 +47182,8 @@
       "てっていこうせん",
       "スケイルショット",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ディアルガ（オリジンフォルム）",
@@ -46680,7 +47282,8 @@
       "ボディプレス",
       "てっていこうせん",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パルキア",
@@ -46790,7 +47393,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パルキア（オリジンフォルム）",
@@ -46893,7 +47497,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒードラン",
@@ -46990,7 +47595,8 @@
       "テラバースト",
       "とびつく",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガヒードラン",
@@ -47020,7 +47626,8 @@
       "speed": 67
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レジギガス",
@@ -47103,7 +47710,8 @@
       "ボディプレス",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギラティナ（アナザーフォルム）",
@@ -47201,7 +47809,8 @@
       "ポルターガイスト",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギラティナ（オリジンフォルム）",
@@ -47295,7 +47904,8 @@
       "ポルターガイスト",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クレセリア",
@@ -47384,7 +47994,8 @@
       "ワイドフォース",
       "みかづきのいのり",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フィオネ",
@@ -47458,7 +48069,8 @@
       "テラバースト",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マナフィ",
@@ -47547,7 +48159,8 @@
       "テラバースト",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダークライ",
@@ -47639,7 +48252,8 @@
       "じごくづき",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガダークライ",
@@ -47665,7 +48279,8 @@
       "speed": 85
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シェイミ（ランドフォルム）",
@@ -47743,7 +48358,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シェイミ（スカイフォルム）",
@@ -47824,7 +48440,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アルセウス",
@@ -47977,7 +48594,8 @@
       "くさわけ",
       "ひやみず",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビクティニ",
@@ -48012,7 +48630,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ツタージャ",
@@ -48098,7 +48717,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジャノビー",
@@ -48184,7 +48804,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジャローダ",
@@ -48280,7 +48901,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポカブ",
@@ -48367,7 +48989,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チャオブー",
@@ -48478,7 +49101,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エンブオー",
@@ -48599,7 +49223,8 @@
       "くさわけ",
       "ハードプレス",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガエンブオー",
@@ -48629,7 +49254,8 @@
       "speed": 75
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミジュマル",
@@ -48718,7 +49344,8 @@
       "ゆきげしき",
       "ひやみず",
       "アクアカッター"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フタチマル",
@@ -48809,7 +49436,8 @@
       "ゆきげしき",
       "ひやみず",
       "アクアカッター"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダイケンキ",
@@ -48915,7 +49543,8 @@
       "ひやみず",
       "アクアカッター",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダイケンキ（ヒスイのすがた）",
@@ -49020,7 +49649,8 @@
       "ゆきげしき",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミネズミ",
@@ -49059,7 +49689,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミルホッグ",
@@ -49098,7 +49729,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヨーテリー",
@@ -49137,7 +49769,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハーデリア",
@@ -49176,7 +49809,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムーランド",
@@ -49215,7 +49849,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チョロネコ",
@@ -49254,7 +49889,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レパルダス",
@@ -49293,7 +49929,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤナップ",
@@ -49328,7 +49965,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤナッキー",
@@ -49363,7 +50001,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バオップ",
@@ -49398,7 +50037,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バオッキー",
@@ -49433,7 +50073,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒヤップ",
@@ -49468,7 +50109,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒヤッキー",
@@ -49503,7 +50145,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムンナ",
@@ -49542,7 +50185,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムシャーナ",
@@ -49581,7 +50225,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マメパト",
@@ -49624,7 +50269,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハトーボー",
@@ -49667,7 +50313,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケンホロウ",
@@ -49710,7 +50357,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シママ",
@@ -49796,7 +50444,8 @@
       "テラバースト",
       "くさわけ",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゼブライカ",
@@ -49889,7 +50538,8 @@
       "テラバースト",
       "くさわけ",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダンゴロ",
@@ -49928,7 +50578,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガントル",
@@ -49967,7 +50618,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギガイアス",
@@ -50006,7 +50658,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コロモリ",
@@ -50049,7 +50702,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ココロモリ",
@@ -50092,7 +50746,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モグリュー",
@@ -50176,7 +50831,8 @@
       "じだんだ",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドリュウズ",
@@ -50275,7 +50931,8 @@
       "てっていこうせん",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガドリュウズ",
@@ -50305,7 +50962,8 @@
       "speed": 103
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タブンネ",
@@ -50344,7 +51002,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガタブンネ",
@@ -50379,7 +51038,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドッコラー",
@@ -50470,7 +51130,8 @@
       "ローキック",
       "コーチング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドテッコツ",
@@ -50562,7 +51223,8 @@
       "１０まんばりき",
       "コーチング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ローブシン",
@@ -50663,7 +51325,8 @@
       "テラバースト",
       "ハードプレス",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オタマロ",
@@ -50702,7 +51365,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガマガル",
@@ -50745,7 +51409,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガマゲロゲ",
@@ -50788,7 +51453,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナゲキ",
@@ -50827,7 +51493,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダゲキ",
@@ -50866,7 +51533,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クルミル",
@@ -50949,7 +51617,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クルマユ",
@@ -51033,7 +51702,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハハコモリ",
@@ -51138,7 +51808,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フシデ",
@@ -51181,7 +51852,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホイーガ",
@@ -51224,7 +51896,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ペンドラー",
@@ -51267,7 +51940,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガペンドラー",
@@ -51297,7 +51971,8 @@
       "speed": 62
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モンメン",
@@ -51380,7 +52055,8 @@
       "マジカルシャイン",
       "グラススライダー",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エルフーン",
@@ -51477,7 +52153,8 @@
       "マジカルシャイン",
       "グラススライダー",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チュリネ",
@@ -51552,7 +52229,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドレディア",
@@ -51636,7 +52314,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドレディア（ヒスイのすがた）",
@@ -51742,7 +52421,8 @@
       "アイススピナー",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バスラオ（あかすじのすがた）",
@@ -51832,7 +52512,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バスラオ（あおすじのすがた）",
@@ -51922,7 +52603,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バスラオ（しろすじのすがた）",
@@ -52008,7 +52690,8 @@
       "おはかまいり",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メグロコ",
@@ -52106,7 +52789,8 @@
       "うっぷんばらし",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワルビル",
@@ -52212,7 +52896,8 @@
       "うっぷんばらし",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワルビアル",
@@ -52329,7 +53014,8 @@
       "うっぷんばらし",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダルマッカ",
@@ -52364,7 +53050,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダルマッカ（ガラルのすがた）",
@@ -52399,7 +53086,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒヒダルマ（ノーマルモード）",
@@ -52434,7 +53122,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒヒダルマ（ダルマモード）",
@@ -52473,7 +53162,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒヒダルマ（ガラルのすがた。ノーマルモード）",
@@ -52508,7 +53198,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒヒダルマ（ガラルのすがた。ダルマモード）",
@@ -52547,7 +53238,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マラカッチ",
@@ -52586,7 +53278,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イシズマイ",
@@ -52629,7 +53322,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イワパレス",
@@ -52672,7 +53366,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ズルッグ",
@@ -52790,7 +53485,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ズルズキン",
@@ -52916,7 +53612,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガズルズキン",
@@ -52946,7 +53643,8 @@
       "speed": 68
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シンボラー",
@@ -52989,7 +53687,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デスマス",
@@ -53020,7 +53719,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デスマス（ガラルのすがた）",
@@ -53055,7 +53755,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デスカーン",
@@ -53086,7 +53787,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "プロトーガ",
@@ -53129,7 +53831,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アバゴーラ",
@@ -53172,7 +53875,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アーケン",
@@ -53207,7 +53911,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アーケオス",
@@ -53242,7 +53947,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤブクロン",
@@ -53281,7 +53987,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダストダス",
@@ -53320,7 +54027,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゾロア",
@@ -53409,7 +54117,8 @@
       "しっとのほのお",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゾロア（ヒスイのすがた）",
@@ -53501,7 +54210,8 @@
       "テラバースト",
       "ゆきげしき",
       "ほうふく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゾロアーク",
@@ -53597,7 +54307,8 @@
       "しっとのほのお",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゾロアーク（ヒスイのすがた）",
@@ -53701,7 +54412,8 @@
       "うらみつらみ",
       "テラバースト",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チラーミィ",
@@ -53793,7 +54505,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チラチーノ",
@@ -53893,7 +54606,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴチム",
@@ -53988,7 +54702,8 @@
       "ワイドフォース",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴチミル",
@@ -54079,7 +54794,8 @@
       "ワイドフォース",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴチルゼル",
@@ -54176,7 +54892,8 @@
       "ワイドフォース",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユニラン",
@@ -54265,7 +54982,8 @@
       "サイコフィールド",
       "ワイドフォース",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダブラン",
@@ -54354,7 +55072,8 @@
       "サイコフィールド",
       "ワイドフォース",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ランクルス",
@@ -54457,7 +55176,8 @@
       "ワイドフォース",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コアルヒー",
@@ -54541,7 +55261,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スワンナ",
@@ -54633,7 +55354,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バニプッチ",
@@ -54672,7 +55394,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バニリッチ",
@@ -54711,7 +55434,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バイバニラ",
@@ -54750,7 +55474,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シキジカ",
@@ -54839,7 +55564,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メブキジカ",
@@ -54936,7 +55662,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エモンガ",
@@ -54975,7 +55702,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カブルモ",
@@ -55014,7 +55742,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シュバルゴ",
@@ -55057,7 +55786,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タマゲタケ",
@@ -55136,7 +55866,8 @@
       "グラスフィールド",
       "かふんだんご",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モロバレル",
@@ -55216,7 +55947,8 @@
       "かふんだんご",
       "じだんだ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "プルリル",
@@ -55259,7 +55991,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブルンゲル",
@@ -55302,7 +56035,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ママンボウ",
@@ -55395,7 +56129,8 @@
       "ゆきげしき",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バチュル",
@@ -55482,7 +56217,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デンチュラ",
@@ -55574,7 +56310,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テッシード",
@@ -55609,7 +56346,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナットレイ",
@@ -55648,7 +56386,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギアル",
@@ -55687,7 +56426,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギギアル",
@@ -55726,7 +56466,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギギギアル",
@@ -55765,7 +56506,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シビシラス",
@@ -55804,7 +56546,8 @@
       "はたきおとす",
       "チャージビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シビビール",
@@ -55879,7 +56622,8 @@
       "じごくづき",
       "とびかかる",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シビルドン",
@@ -55981,7 +56725,8 @@
       "ボディプレス",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガシビルドン",
@@ -56007,7 +56752,8 @@
       "speed": 80
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リグレー",
@@ -56046,7 +56792,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オーベム",
@@ -56085,7 +56832,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒトモシ",
@@ -56177,7 +56925,8 @@
       "ポルターガイスト",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ランプラー",
@@ -56270,7 +57019,8 @@
       "ポルターガイスト",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シャンデラ",
@@ -56366,7 +57116,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガシャンデラ",
@@ -56396,7 +57147,8 @@
       "speed": 90
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キバゴ",
@@ -56492,7 +57244,8 @@
       "テラバースト",
       "くさわけ",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オノンド",
@@ -56584,7 +57337,8 @@
       "テラバースト",
       "くさわけ",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オノノクス",
@@ -56684,7 +57438,8 @@
       "テラバースト",
       "くさわけ",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クマシュン",
@@ -56783,7 +57538,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ツンベアー",
@@ -56900,7 +57656,8 @@
       "くさわけ",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フリージオ",
@@ -56979,7 +57736,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チョボマキ",
@@ -57018,7 +57776,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アギルダー",
@@ -57057,7 +57816,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マッギョ",
@@ -57100,7 +57860,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マッギョ（ガラルのすがた）",
@@ -57135,7 +57896,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コジョフー",
@@ -57226,7 +57988,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コジョンド",
@@ -57324,7 +58087,8 @@
       "アイススピナー",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クリムガン",
@@ -57363,7 +58127,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴビット",
@@ -57469,7 +58234,8 @@
       "ポルターガイスト",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴルーグ",
@@ -57590,7 +58356,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガゴルーグ",
@@ -57620,7 +58387,8 @@
       "speed": 55
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コマタナ",
@@ -57718,7 +58486,8 @@
       "てっていこうせん",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キリキザン",
@@ -57818,7 +58587,8 @@
       "てっていこうせん",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バッフロン",
@@ -57857,7 +58627,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワシボン",
@@ -57946,7 +58717,8 @@
       "ぼうふう",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウォーグル",
@@ -58040,7 +58812,8 @@
       "ぼうふう",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウォーグル（ヒスイのすがた）",
@@ -58152,7 +58925,8 @@
       "オーラウイング",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バルチャイ",
@@ -58244,7 +59018,8 @@
       "うっぷんばらし",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バルジーナ",
@@ -58344,7 +59119,8 @@
       "うっぷんばらし",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クイタラン",
@@ -58383,7 +59159,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アイアント",
@@ -58426,7 +59203,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モノズ",
@@ -58508,7 +59286,8 @@
       "ゲップ",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジヘッド",
@@ -58590,7 +59369,8 @@
       "うっぷんばらし",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サザンドラ",
@@ -58699,7 +59479,8 @@
       "ダブルウイング",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メラルバ",
@@ -58784,7 +59565,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウルガモス",
@@ -58880,7 +59662,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コバルオン",
@@ -58975,7 +59758,8 @@
       "コーチング",
       "テラバースト",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テラキオン",
@@ -59066,7 +59850,8 @@
       "コーチング",
       "テラバースト",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビリジオン",
@@ -59160,7 +59945,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トルネロス（けしんフォルム）",
@@ -59253,7 +60039,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トルネロス（れいじゅうフォルム）",
@@ -59342,7 +60129,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ボルトロス（けしんフォルム）",
@@ -59446,7 +60234,8 @@
       "かみなりあらし",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ボルトロス（れいじゅうフォルム）",
@@ -59546,7 +60335,8 @@
       "かみなりあらし",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レシラム",
@@ -59648,7 +60438,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゼクロム",
@@ -59754,7 +60545,8 @@
       "テラバースト",
       "ドラゴンエール",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ランドロス（けしんフォルム）",
@@ -59848,7 +60640,8 @@
       "ねっさのだいち",
       "ねっさのあらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ランドロス（れいじゅうフォルム）",
@@ -59938,7 +60731,8 @@
       "ねっさのだいち",
       "ねっさのあらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キュレム",
@@ -60036,7 +60830,8 @@
       "テラバースト",
       "ゆきげしき",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブラックキュレム",
@@ -60135,7 +60930,8 @@
       "テラバースト",
       "ゆきげしき",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホワイトキュレム",
@@ -60234,7 +61030,8 @@
       "テラバースト",
       "ゆきげしき",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケルディオ（いつものすがた）",
@@ -60328,7 +61125,8 @@
       "くさわけ",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケルディオ（かくごのすがた）",
@@ -60422,7 +61220,8 @@
       "くさわけ",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メロエッタ（ボイスフォルム）",
@@ -60526,7 +61325,8 @@
       "トリプルアクセル",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メロエッタ（ステップフォルム）",
@@ -60630,7 +61430,8 @@
       "トリプルアクセル",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゲノセクト",
@@ -60665,7 +61466,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハリマロン",
@@ -60762,7 +61564,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハリボーグ",
@@ -60865,7 +61668,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブリガロン",
@@ -60994,7 +61798,8 @@
       "コーチング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガブリガロン",
@@ -61024,7 +61829,8 @@
       "speed": 44
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フォッコ",
@@ -61110,7 +61916,8 @@
       "サイコフィールド",
       "しっとのほのお",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テールナー",
@@ -61200,7 +62007,8 @@
       "サイコフィールド",
       "しっとのほのお",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マフォクシー",
@@ -61315,7 +62123,8 @@
       "ねっさのだいち",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガマフォクシー",
@@ -61345,7 +62154,8 @@
       "speed": 134
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケロマツ",
@@ -61432,7 +62242,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゲコガシラ",
@@ -61523,7 +62334,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゲッコウガ",
@@ -61631,7 +62443,8 @@
       "くさわけ",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゲッコウガ（サトシ）",
@@ -61727,7 +62540,8 @@
       "ゆきげしき",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガゲッコウガ",
@@ -61757,7 +62571,8 @@
       "speed": 142
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホルビー",
@@ -61796,7 +62611,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホルード",
@@ -61839,7 +62655,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤヤコマ",
@@ -61919,7 +62736,8 @@
       "ぼうふう",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒノヤコマ",
@@ -62003,7 +62821,8 @@
       "ダブルウイング",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ファイアロー",
@@ -62092,7 +62911,8 @@
       "テラバースト",
       "やけっぱち",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コフキムシ",
@@ -62141,7 +62961,8 @@
       "むしのていこう",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コフーライ",
@@ -62184,7 +63005,8 @@
       "むしのていこう",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ビビヨン",
@@ -62270,7 +63092,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シシコ",
@@ -62363,7 +63186,8 @@
       "サイコファング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カエンジシ",
@@ -62459,7 +63283,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガカエンジシ",
@@ -62489,7 +63314,8 @@
       "speed": 126
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フラベベ",
@@ -62570,7 +63396,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フラエッテ",
@@ -62652,7 +63479,8 @@
       "くさわけ",
       "ひやみず",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フラージェス",
@@ -62734,7 +63562,8 @@
       "ひやみず",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メェークル",
@@ -62821,7 +63650,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴーゴート",
@@ -62912,7 +63742,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤンチャム",
@@ -62951,7 +63782,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴロンダ",
@@ -62994,7 +63826,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トリミアン",
@@ -63025,7 +63858,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャスパー",
@@ -63108,7 +63942,8 @@
       "ワイドフォース",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャオニクス（オス）",
@@ -63205,7 +64040,8 @@
       "くさわけ",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャオニクス（メス）",
@@ -63301,7 +64137,8 @@
       "くさわけ",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガニャオニクス",
@@ -63327,7 +64164,8 @@
       "speed": 124
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒトツキ",
@@ -63362,7 +64200,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニダンギル",
@@ -63397,7 +64236,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギルガルド（シールドフォルム）",
@@ -63432,7 +64272,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギルガルド（ブレードフォルム）",
@@ -63467,7 +64308,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シュシュプ",
@@ -63502,7 +64344,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フレフワン",
@@ -63537,7 +64380,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ペロッパフ",
@@ -63572,7 +64416,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ペロリーム",
@@ -63607,7 +64452,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マーイーカ",
@@ -63709,7 +64555,8 @@
       "ワイドフォース",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カラマネロ",
@@ -63818,7 +64665,8 @@
       "テラバースト",
       "くさわけ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガカラマネロ",
@@ -63848,7 +64696,8 @@
       "speed": 88
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カメテテ",
@@ -63891,7 +64740,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガメノデス",
@@ -63934,7 +64784,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガガメノデス",
@@ -63964,7 +64815,8 @@
       "speed": 88
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クズモー",
@@ -64058,7 +64910,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドラミドロ",
@@ -64155,7 +65008,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガドラミドロ",
@@ -64185,7 +65039,8 @@
       "speed": 44
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウデッポウ",
@@ -64263,7 +65118,8 @@
       "テラバースト",
       "とびつく",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブロスター",
@@ -64346,7 +65202,8 @@
       "テラバースト",
       "とびつく",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エリキテル",
@@ -64389,7 +65246,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エレザード",
@@ -64432,7 +65290,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チゴラス",
@@ -64471,7 +65330,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガチゴラス",
@@ -64510,7 +65370,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アマルス",
@@ -64549,7 +65410,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アマルルガ",
@@ -64588,7 +65450,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニンフィア",
@@ -64677,7 +65540,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルチャブル",
@@ -64794,7 +65658,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガルチャブル",
@@ -64824,7 +65689,8 @@
       "speed": 118
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デデンネ",
@@ -64921,7 +65787,8 @@
       "なみだめ",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メレシー",
@@ -65014,7 +65881,8 @@
       "メテオビーム",
       "ミストバースト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌメラ",
@@ -65086,7 +65954,8 @@
       "はいよるいちげき",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌメイル",
@@ -65162,7 +66031,8 @@
       "はいよるいちげき",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌメイル（ヒスイのすがた）",
@@ -65250,7 +66120,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌメルゴン",
@@ -65351,7 +66222,8 @@
       "テラバースト",
       "ひやみず",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌメルゴン（ヒスイのすがた）",
@@ -65461,7 +66333,8 @@
       "アイススピナー",
       "ひやみず",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クレッフィ",
@@ -65546,7 +66419,8 @@
       "てっていこうせん",
       "はいよるいちげき",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ボクレー",
@@ -65648,7 +66522,8 @@
       "ポルターガイスト",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オーロット",
@@ -65765,7 +66640,8 @@
       "テラバースト",
       "くさわけ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バケッチャ（ふつうのすがた）",
@@ -65808,7 +66684,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バケッチャ（ちいさいサイズ）",
@@ -65851,7 +66728,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バケッチャ（おおきいサイズ）",
@@ -65894,7 +66772,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バケッチャ（特大サイズ）",
@@ -65937,7 +66816,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パンプジン（ふつうのすがた）",
@@ -65980,7 +66860,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パンプジン（ちいさいサイズ）",
@@ -66023,7 +66904,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パンプジン（おおきいサイズ）",
@@ -66066,7 +66948,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パンプジン（特大サイズ）",
@@ -66109,7 +66992,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カチコール",
@@ -66186,7 +67070,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クレベース",
@@ -66274,7 +67159,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クレベース（ヒスイのすがた）",
@@ -66369,7 +67255,8 @@
       "ゆきげしき",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オンバット",
@@ -66464,7 +67351,8 @@
       "ぼうふう",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オンバーン",
@@ -66572,7 +67460,8 @@
       "テラバースト",
       "ドラゴンエール",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゼルネアス",
@@ -66603,7 +67492,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イベルタル",
@@ -66638,7 +67528,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジガルデ（50%フォルム）",
@@ -66673,7 +67564,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジガルデ（10%フォルム）",
@@ -66708,7 +67600,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジガルデ（パーフェクトフォルム）",
@@ -66743,7 +67636,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジガルデ（10%フォルム）",
@@ -66778,7 +67672,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ディアンシー",
@@ -66876,7 +67771,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガディアンシー",
@@ -66911,7 +67807,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フーパ",
@@ -67011,7 +67908,8 @@
       "うっぷんばらし",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フーパ（ときはなたれしフーパ）",
@@ -67111,7 +68009,8 @@
       "うっぷんばらし",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ボルケニオン",
@@ -67212,7 +68111,8 @@
       "ボディプレス",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モクロー",
@@ -67305,7 +68205,8 @@
       "ダブルウイング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フクスロー",
@@ -67400,7 +68301,8 @@
       "ダブルウイング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジュナイパー",
@@ -67526,7 +68428,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジュナイパー（ヒスイのすがた）",
@@ -67640,7 +68543,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャビー",
@@ -67725,7 +68629,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャヒート",
@@ -67810,7 +68715,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガオガエン",
@@ -67930,7 +68836,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アシマリ",
@@ -68010,7 +68917,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オシャマリ",
@@ -68091,7 +68999,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アシレーヌ",
@@ -68196,7 +69105,8 @@
       "ひやみず",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ツツケラ",
@@ -68284,7 +69194,8 @@
       "ばくおんぱ",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケララッパ",
@@ -68374,7 +69285,8 @@
       "ばくおんぱ",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドデカバシ",
@@ -68476,7 +69388,8 @@
       "ダブルウイング",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤングース",
@@ -68561,7 +69474,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デカグース",
@@ -68659,7 +69573,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アゴジムシ",
@@ -68728,7 +69643,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デンヂムシ",
@@ -68805,7 +69721,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クワガノン",
@@ -68897,7 +69814,8 @@
       "テラバースト",
       "とびつく",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マケンカニ",
@@ -68989,7 +69907,8 @@
       "テラバースト",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ケケンカニ",
@@ -69093,7 +70012,8 @@
       "ひやみず",
       "ハードプレス",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガケケンカニ",
@@ -69123,7 +70043,8 @@
       "speed": 33
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オドリドリ（めらめらスタイル）",
@@ -69205,7 +70126,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オドリドリ（ぱちぱちスタイル）",
@@ -69287,7 +70209,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オドリドリ（ふらふらスタイル）",
@@ -69369,7 +70292,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オドリドリ（まいまいスタイル）",
@@ -69451,7 +70375,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アブリー",
@@ -69544,7 +70469,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アブリボン",
@@ -69647,7 +70573,8 @@
       "くさわけ",
       "みわくのボイス",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イワンコ",
@@ -69734,7 +70661,8 @@
       "じだんだ",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルガルガン（まひるのすがた）",
@@ -69832,7 +70760,8 @@
       "アクセルロック",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルガルガン（まよなかのすがた）",
@@ -69937,7 +70866,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルガルガン（たそがれのすがた）",
@@ -70027,7 +70957,8 @@
       "アクセルロック",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヨワシ（たんどくのすがた）",
@@ -70058,7 +70989,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヨワシ（むれのすがた）",
@@ -70089,7 +71021,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒドイデ",
@@ -70175,7 +71108,8 @@
       "アイススピナー",
       "とびつく",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドヒドイデ",
@@ -70264,7 +71198,8 @@
       "アイススピナー",
       "とびつく",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドロバンコ",
@@ -70345,7 +71280,8 @@
       "１０まんばりき",
       "じだんだ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バンバドロ",
@@ -70432,7 +71368,8 @@
       "ボディプレス",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シズクモ",
@@ -70515,7 +71452,8 @@
       "とびつく",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オニシズクモ",
@@ -70604,7 +71542,8 @@
       "とびつく",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カリキリ",
@@ -70680,7 +71619,8 @@
       "はいよるいちげき",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラランテス",
@@ -70765,7 +71705,8 @@
       "はいよるいちげき",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネマシュ",
@@ -70808,7 +71749,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マシェード",
@@ -70851,7 +71793,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤトウモリ",
@@ -70948,7 +71891,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エンニュート",
@@ -71057,7 +72001,8 @@
       "くさわけ",
       "ドラゴンエール",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヌイコグマ",
@@ -71100,7 +72045,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キテルグマ",
@@ -71143,7 +72089,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アマカジ",
@@ -71223,7 +72170,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アママイコ",
@@ -71306,7 +72254,8 @@
       "トリプルアクセル",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アマージョ",
@@ -71401,7 +72350,8 @@
       "トリプルアクセル",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キュワワー",
@@ -71498,7 +72448,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤレユータン",
@@ -71604,7 +72555,8 @@
       "くさわけ",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナゲツケサル",
@@ -71703,7 +72655,8 @@
       "くさわけ",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コソクムシ",
@@ -71738,7 +72691,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グソクムシャ",
@@ -71773,7 +72727,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガグソクムシャ",
@@ -71803,7 +72758,8 @@
       "speed": 40
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スナバァ",
@@ -71898,7 +72854,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シロデスナ",
@@ -71991,7 +72948,8 @@
       "ねっさのだいち",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナマコブシ",
@@ -72026,7 +72984,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タイプ：ヌル",
@@ -72057,7 +73016,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シルヴァディ",
@@ -72088,7 +73048,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メテノ（あかいろのコア）",
@@ -72172,7 +73133,8 @@
       "メテオビーム",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メテノ（りゅうせいのすがた）",
@@ -72256,7 +73218,8 @@
       "メテオビーム",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネッコアラ",
@@ -72347,7 +73310,8 @@
       "テラバースト",
       "アイススピナー",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バクガメス",
@@ -72382,7 +73346,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トゲデマル",
@@ -72425,7 +73390,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミミッキュ（ばけたすがた）",
@@ -72521,7 +73487,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミミッキュ（ばれたすがた）",
@@ -72615,7 +73582,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハギギシリ",
@@ -72711,7 +73679,8 @@
       "テラバースト",
       "ひやみず",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジジーロン",
@@ -72754,7 +73723,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガジジーロン",
@@ -72784,7 +73754,8 @@
       "speed": 36
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダダリン",
@@ -72819,7 +73790,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジャラコ",
@@ -72905,7 +73877,8 @@
       "スケイルショット",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジャランゴ",
@@ -73006,7 +73979,8 @@
       "テラバースト",
       "ドラゴンエール",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジャラランガ",
@@ -73128,7 +74102,8 @@
       "テラバースト",
       "ドラゴンエール",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カプ・コケコ",
@@ -73167,7 +74142,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カプ・テテフ",
@@ -73206,7 +74182,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カプ・ブルル",
@@ -73245,7 +74222,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カプ・レヒレ",
@@ -73284,7 +74262,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コスモッグ",
@@ -73318,7 +74297,8 @@
     "moves": [
       "テレポート",
       "はねる"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コスモウム",
@@ -73352,7 +74332,8 @@
     "moves": [
       "テレポート",
       "コスモパワー"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ソルガレオ",
@@ -73456,7 +74437,8 @@
       "ワイドフォース",
       "メテオビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ルナアーラ",
@@ -73553,7 +74535,8 @@
       "ポルターガイスト",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウツロイド",
@@ -73588,7 +74571,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マッシブーン",
@@ -73623,7 +74607,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フェローチェ",
@@ -73658,7 +74643,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デンジュモク",
@@ -73689,7 +74675,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テッカグヤ",
@@ -73724,7 +74711,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カミツルギ",
@@ -73759,7 +74747,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アクジキング",
@@ -73794,7 +74783,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネクロズマ",
@@ -73892,7 +74882,8 @@
       "ワイドフォース",
       "メテオビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネクロズマ（たそがれのすがた）",
@@ -73994,7 +74985,8 @@
       "ワイドフォース",
       "メテオビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネクロズマ（あかつきのすがた）",
@@ -74096,7 +75088,8 @@
       "ワイドフォース",
       "メテオビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウルトラネクロズマ",
@@ -74131,7 +75124,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マギアナ",
@@ -74239,7 +75233,8 @@
       "テラバースト",
       "アイススピナー",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マギアナ（オリジナル）",
@@ -74343,7 +75338,8 @@
       "テラバースト",
       "アイススピナー",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガマギアナ",
@@ -74373,7 +75369,8 @@
       "speed": 95
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マーシャドー",
@@ -74408,7 +75405,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベベノム",
@@ -74439,7 +75437,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アーゴヨン",
@@ -74474,7 +75473,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ツンデツンデ",
@@ -74509,7 +75509,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ズガドーン",
@@ -74544,7 +75545,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゼラオラ",
@@ -74575,7 +75577,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガゼラオラ",
@@ -74601,7 +75604,8 @@
       "speed": 153
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メルタン",
@@ -74632,7 +75636,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メルメタル",
@@ -74663,7 +75668,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サルノリ",
@@ -74748,7 +75754,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バチンキー",
@@ -74836,7 +75843,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゴリランダー",
@@ -74944,7 +75952,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒバニー",
@@ -75026,7 +76035,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラビフット",
@@ -75112,7 +76122,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エースバーン",
@@ -75216,7 +76227,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メッソン",
@@ -75290,7 +76302,8 @@
       "なみだめ",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジメレオン",
@@ -75366,7 +76379,8 @@
       "なみだめ",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "インテレオン",
@@ -75467,7 +76481,8 @@
       "テラバースト",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホシガリス",
@@ -75541,7 +76556,8 @@
       "ほおばる",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヨクバリス",
@@ -75627,7 +76643,8 @@
       "ほおばる",
       "ボディプレス",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ココガラ",
@@ -75705,7 +76722,8 @@
       "つけあがる",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アオガラス",
@@ -75780,7 +76798,8 @@
       "つけあがる",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アーマーガア",
@@ -75883,7 +76902,8 @@
       "てっていこうせん",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サッチムシ",
@@ -75922,7 +76942,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レドームシ",
@@ -75965,7 +76986,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イオルブ",
@@ -76008,7 +77030,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クスネ",
@@ -76047,7 +77070,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "フォクスライ",
@@ -76086,7 +77110,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒメンカ",
@@ -76125,7 +77150,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワタシラガ",
@@ -76164,7 +77190,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウールー",
@@ -76203,7 +77230,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バイウールー",
@@ -76242,7 +77270,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カムカメ",
@@ -76316,7 +77345,8 @@
       "はいよるいちげき",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カジリガメ",
@@ -76420,7 +77450,8 @@
       "テラバースト",
       "アイススピナー",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワンパチ",
@@ -76455,7 +77486,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パルスワン",
@@ -76490,7 +77522,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タンドン",
@@ -76569,7 +77602,8 @@
       "メテオビーム",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トロッゴン",
@@ -76662,7 +77696,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "セキタンザン",
@@ -76762,7 +77797,8 @@
       "ねっさのだいち",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カジッチュ",
@@ -76814,7 +77850,8 @@
       "ふいうち",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アップリュー",
@@ -76906,7 +77943,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タルップル",
@@ -77004,7 +78042,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スナヘビ",
@@ -77083,7 +78122,8 @@
       "はいよるいちげき",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サダイジャ",
@@ -77171,7 +78211,8 @@
       "はいよるいちげき",
       "ねっさのだいち",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウッウ",
@@ -77261,7 +78302,8 @@
       "とびつく",
       "ひやみず",
       "アクアカッター"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サシカマス",
@@ -77335,7 +78377,8 @@
       "クイックターン",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カマスジョー",
@@ -77411,7 +78454,8 @@
       "クイックターン",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エレズン",
@@ -77472,7 +78516,8 @@
       "ほっぺすりすり",
       "なみだめ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ストリンダー（ハイなすがた）",
@@ -77589,7 +78634,8 @@
       "テラバースト",
       "くさわけ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ストリンダー（ローなすがた）",
@@ -77706,7 +78752,8 @@
       "テラバースト",
       "くさわけ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤクデ",
@@ -77749,7 +78796,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マルヤクデ",
@@ -77792,7 +78840,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タタッコ",
@@ -77827,7 +78876,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オトスパス",
@@ -77862,7 +78912,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤバチャ",
@@ -77939,7 +78990,8 @@
       "アロマミスト",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ポットデス",
@@ -78022,7 +79074,8 @@
       "おちゃかい",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミブリム",
@@ -78108,7 +79161,8 @@
       "いのちのしずく",
       "ワイドフォース",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テブリム",
@@ -78191,7 +79245,8 @@
       "いのちのしずく",
       "ワイドフォース",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブリムオン",
@@ -78290,7 +79345,8 @@
       "ミストバースト",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベロバー",
@@ -78376,7 +79432,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ギモー",
@@ -78464,7 +79521,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オーロンゲ",
@@ -78568,7 +79626,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タチフサグマ",
@@ -78611,7 +79670,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャイキング",
@@ -78720,7 +79780,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サニゴーン",
@@ -78755,7 +79816,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ネギガナイト",
@@ -78790,7 +79852,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デスバーン",
@@ -78825,7 +79888,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マホミル",
@@ -78884,7 +79948,8 @@
       "マジカルシャイン",
       "つぶらなひとみ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マホイップ",
@@ -78967,7 +80032,8 @@
       "ミストバースト",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タイレーツ",
@@ -79051,7 +80117,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガタイレーツ",
@@ -79077,7 +80144,8 @@
       "speed": 100
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バチンウニ",
@@ -79163,7 +80231,8 @@
       "テラバースト",
       "ひやみず",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ユキハミ",
@@ -79220,7 +80289,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モスノウ",
@@ -79311,7 +80381,8 @@
       "アイススピナー",
       "ゆきげしき",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イシヘンジン",
@@ -79389,7 +80460,8 @@
       "メテオビーム",
       "テラバースト",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コオリッポ（アイスフェイス）",
@@ -79470,7 +80542,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コオリッポ（ナイスなすがた）",
@@ -79551,7 +80624,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イエッサン（オス）",
@@ -79639,7 +80713,8 @@
       "ワイドフォース",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イエッサン（メス）",
@@ -79729,7 +80804,8 @@
       "ワイドフォース",
       "テラバースト",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モルペコ（まんぷく）",
@@ -79832,7 +80908,8 @@
       "オーラぐるま",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モルペコ（はらぺこ）",
@@ -79935,7 +81012,8 @@
       "オーラぐるま",
       "うっぷんばらし",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ゾウドウ",
@@ -80019,7 +81097,8 @@
       "ボディプレス",
       "てっていこうせん",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダイオウドウ",
@@ -80107,7 +81186,8 @@
       "テラバースト",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パッチラゴン",
@@ -80150,7 +81230,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パッチルドン",
@@ -80193,7 +81274,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウオノラゴン",
@@ -80236,7 +81318,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウオチルドン",
@@ -80279,7 +81362,8 @@
         "is_hidden": true
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジュラルドン",
@@ -80376,7 +81460,8 @@
       "てっていこうせん",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドラメシヤ",
@@ -80442,7 +81527,8 @@
       "ドラゴンテール",
       "まとわりつく",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドロンチ",
@@ -80536,7 +81622,8 @@
       "テラバースト",
       "とびつく",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドラパルト",
@@ -80638,7 +81725,8 @@
       "テラバースト",
       "とびつく",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ザシアン",
@@ -80721,7 +81809,8 @@
       "てっていこうせん",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ザシアン（けんのおう）",
@@ -80808,7 +81897,8 @@
       "てっていこうせん",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ザマゼンタ",
@@ -80895,7 +81985,8 @@
       "コーチング",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ザマゼンタ（けんのおう）",
@@ -80985,7 +82076,8 @@
       "てっていこうせん",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムゲンダイナ",
@@ -81065,7 +82157,8 @@
       "ダイマックスほう",
       "メテオビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ムゲンダイナ（ムゲンダイマックス）",
@@ -81100,7 +82193,8 @@
         "is_hidden": false
       }
     ],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ダクマ",
@@ -81170,7 +82264,8 @@
       "ローキック",
       "アクロバット",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウーラオス（いちげきのかた）",
@@ -81268,7 +82363,8 @@
       "あんこくきょうだ",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウーラオス（れんげきのかた）",
@@ -81364,7 +82460,8 @@
       "アイススピナー",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ザルード",
@@ -81471,7 +82568,8 @@
       "ジャングルヒール",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レジエレキ",
@@ -81543,7 +82641,8 @@
       "サンダープリズン",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レジドラゴ",
@@ -81613,7 +82712,8 @@
       "ドラゴンエナジー",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブリザポス",
@@ -81691,7 +82791,8 @@
       "テラバースト",
       "ゆきげしき",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "レイスポス",
@@ -81767,7 +82868,8 @@
       "うっぷんばらし",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バドレックス",
@@ -81860,7 +82962,8 @@
       "いのちのしずく",
       "ワイドフォース",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バドレックス（はくば）",
@@ -81977,7 +83080,8 @@
       "テラバースト",
       "ゆきげしき",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バドレックス（こくば）",
@@ -82088,7 +83192,8 @@
       "いのちのしずく",
       "アストラルビット",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アヤシシ",
@@ -82198,7 +83303,8 @@
       "テラバースト",
       "くさわけ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バサギリ",
@@ -82297,7 +83403,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガチグマ",
@@ -82416,7 +83523,8 @@
       "くさわけ",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガチグマ（アカツキ）",
@@ -82529,7 +83637,8 @@
       "くさわけ",
       "ブラッドムーン",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イダイトウ（オス）",
@@ -82626,7 +83735,8 @@
       "おはかまいり",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イダイトウ（メス）",
@@ -82723,7 +83833,8 @@
       "おはかまいり",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オオニューラ",
@@ -82832,7 +83943,8 @@
       "テラバースト",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハリーマン",
@@ -82936,7 +84048,8 @@
       "どくばりセンボン",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラブトロス（けしんフォルム）",
@@ -83027,7 +84140,8 @@
       "はるのあらし",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラブトロス（れいじゅうフォルム）",
@@ -83114,7 +84228,8 @@
       "はるのあらし",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャオハ",
@@ -83196,7 +84311,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ニャローテ",
@@ -83279,7 +84395,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マスカーニャ",
@@ -83391,7 +84508,8 @@
       "トリックフラワー",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ホゲータ",
@@ -83472,7 +84590,8 @@
       "じだんだ",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アチゲータ",
@@ -83551,7 +84670,8 @@
       "じだんだ",
       "テラバースト",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ラウドボーン",
@@ -83652,7 +84772,8 @@
       "フレアソング",
       "みわくのボイス",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クワッス",
@@ -83727,7 +84848,8 @@
       "テラバースト",
       "ひやみず",
       "アクアカッター"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウェルカモ",
@@ -83803,7 +84925,8 @@
       "テラバースト",
       "ひやみず",
       "アクアカッター"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウェーニバル",
@@ -83908,7 +85031,8 @@
       "ひやみず",
       "アクアカッター",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グルトン",
@@ -83990,7 +85114,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パフュートン（オス）",
@@ -84077,7 +85202,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パフュートン（メス）",
@@ -84164,7 +85290,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タマンチュラ",
@@ -84244,7 +85371,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワナイダー",
@@ -84335,7 +85463,8 @@
       "とびつく",
       "くさわけ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マメバッタ",
@@ -84402,7 +85531,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "エクスレッグ",
@@ -84492,7 +85622,8 @@
       "かかとおとし",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パモ",
@@ -84581,7 +85712,8 @@
       "エレキフィールド",
       "ほっぺすりすり",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パモット",
@@ -84678,7 +85810,8 @@
       "コーチング",
       "テラバースト",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パーモット",
@@ -84793,7 +85926,8 @@
       "でんこうそうげき",
       "サンダーダイブ",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ワッカネズミ",
@@ -84882,7 +86016,8 @@
       "つぶらなひとみ",
       "テラバースト",
       "ネズミざん"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イッカネズミ",
@@ -84971,7 +86106,8 @@
       "おかたづけ",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パピモッチ",
@@ -85055,7 +86191,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "バウッツェル",
@@ -85139,7 +86276,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミニーブ",
@@ -85215,7 +86353,8 @@
       "だいちのはどう",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オリーニョ",
@@ -85288,7 +86427,8 @@
       "だいちのはどう",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オリーヴァ",
@@ -85377,7 +86517,8 @@
       "テラバースト",
       "くさわけ",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イキリンコ",
@@ -85468,7 +86609,8 @@
       "ダブルウイング",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コジオ",
@@ -85547,7 +86689,8 @@
       "じだんだ",
       "メテオビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ジオヅム",
@@ -85629,7 +86772,8 @@
       "メテオビーム",
       "テラバースト",
       "しおづけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キョジオーン",
@@ -85726,7 +86870,8 @@
       "テラバースト",
       "しおづけ",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カルボウ",
@@ -85790,7 +86935,8 @@
       "クリアスモッグ",
       "やきつくす",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "グレンアルマ",
@@ -85888,7 +87034,8 @@
       "ねっさのだいち",
       "テラバースト",
       "アーマーキャノン"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ソウブレイズ",
@@ -85986,7 +87133,8 @@
       "ポルターガイスト",
       "テラバースト",
       "むねんのつるぎ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ズピカ",
@@ -86066,7 +87214,8 @@
       "エレキフィールド",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハラバリー",
@@ -86149,7 +87298,8 @@
       "テラバースト",
       "ひやみず",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カイデン",
@@ -86239,7 +87389,8 @@
       "エレキフィールド",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タイカイデン",
@@ -86330,7 +87481,8 @@
       "ダブルウイング",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オラチフ",
@@ -86413,7 +87565,8 @@
       "うっぷんばらし",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マフィティフ",
@@ -86503,7 +87656,8 @@
       "テラバースト",
       "くさわけ",
       "ほうふく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シルシュルー",
@@ -86600,7 +87754,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タギングル",
@@ -86700,7 +87855,8 @@
       "うつしえ",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アノクサ",
@@ -86784,7 +87940,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アノホラグサ",
@@ -86871,7 +88028,8 @@
       "テラバースト",
       "とびつく",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ノノクラゲ",
@@ -86969,7 +88127,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リククラゲ",
@@ -87065,7 +88224,8 @@
       "はいよるいちげき",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ガケガニ",
@@ -87158,7 +88318,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カプサイジ",
@@ -87237,7 +88398,8 @@
       "グラススライダー",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スコヴィラン",
@@ -87328,7 +88490,8 @@
       "ハバネロエキス",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガスコヴィラン",
@@ -87358,7 +88521,8 @@
       "speed": 75
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シガロコ",
@@ -87427,7 +88591,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ベラカス",
@@ -87535,7 +88700,8 @@
       "さいきのいのり",
       "とびつく",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヒラヒナ",
@@ -87620,7 +88786,8 @@
       "サイコフィールド",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "クエスパトラ",
@@ -87722,7 +88889,8 @@
       "テラバースト",
       "ルミナコリジョン",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カヌチャン",
@@ -87812,7 +88980,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナカヌチャン",
@@ -87900,7 +89069,8 @@
       "はいよるいちげき",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "デカヌチャン",
@@ -87993,7 +89163,8 @@
       "とびつく",
       "デカハンマー",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウミディグダ",
@@ -88072,7 +89243,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウミトリオ",
@@ -88153,7 +89325,8 @@
       "テラバースト",
       "トリプルダイブ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オトシドリ",
@@ -88257,7 +89430,8 @@
       "うっぷんばらし",
       "ダブルウイング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ナミイルカ",
@@ -88333,7 +89507,8 @@
       "アクアブレイク",
       "テラバースト",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イルカマン（ナイーブフォルム）",
@@ -88427,7 +89602,8 @@
       "ジェットパンチ",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イルカマン（マイティフォルム）",
@@ -88521,7 +89697,8 @@
       "ジェットパンチ",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブロロン",
@@ -88607,7 +89784,8 @@
       "てっていこうせん",
       "テラバースト",
       "ホイールスピン"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブロロローム",
@@ -88702,7 +89880,8 @@
       "ホイールスピン",
       "ハードプレス",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モトトカゲ",
@@ -88798,7 +89977,8 @@
       "ドラゴンエール",
       "やけっぱち",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミミズズ",
@@ -88878,7 +90058,8 @@
       "てっていこうせん",
       "テラバースト",
       "しっぽきり"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キラーメ",
@@ -88959,7 +90140,8 @@
       "マジカルシャイン",
       "メテオビーム",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キラフロル",
@@ -89046,7 +90228,8 @@
       "メテオビーム",
       "テラバースト",
       "キラースピン"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガキラフロル",
@@ -89076,7 +90259,8 @@
       "speed": 101
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ボチ",
@@ -89164,7 +90348,8 @@
       "じだんだ",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハカドッグ",
@@ -89250,7 +90435,8 @@
       "ポルターガイスト",
       "テラバースト",
       "おはかまいり"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カラミンゴ",
@@ -89348,7 +90534,8 @@
       "とびつく",
       "ひやみず",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アルクジラ",
@@ -89436,7 +90623,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハルクジラ",
@@ -89522,7 +90710,8 @@
       "ゆきげしき",
       "ひやみず",
       "ハードプレス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミガルーサ",
@@ -89610,7 +90799,8 @@
       "ゆきげしき",
       "ひやみず",
       "アクアカッター"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヘイラッシャ",
@@ -89696,7 +90886,8 @@
       "テラバースト",
       "いっちょうあがり",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "シャリタツ",
@@ -89772,7 +90963,8 @@
       "テラバースト",
       "ひやみず",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コノヨザル",
@@ -89893,7 +91085,8 @@
       "うっぷんばらし",
       "コーチング",
       "ふんどのこぶし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドオー",
@@ -89995,7 +91188,8 @@
       "テラバースト",
       "くさわけ",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "リキキリン",
@@ -90113,7 +91307,8 @@
       "くさわけ",
       "ツインビーム",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ノココッチ",
@@ -90239,7 +91434,8 @@
       "とびつく",
       "ひやみず",
       "ハイパードリル"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ドドゲザン",
@@ -90341,7 +91537,8 @@
       "うっぷんばらし",
       "テラバースト",
       "ドゲザン"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イダイナキバ",
@@ -90435,7 +91632,8 @@
       "アイススピナー",
       "やけっぱち",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サケブシッポ",
@@ -90551,7 +91749,8 @@
       "テラバースト",
       "ゆきげしき",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "アラブルタケ",
@@ -90638,7 +91837,8 @@
       "うっぷんばらし",
       "テラバースト",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ハバタクカミ",
@@ -90723,7 +91923,8 @@
       "マジカルシャイン",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チヲハウハネ",
@@ -90816,7 +92017,8 @@
       "テラバースト",
       "くさわけ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "スナノケガワ",
@@ -90906,7 +92108,8 @@
       "ねっさのだいち",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノワダチ",
@@ -90993,7 +92196,8 @@
       "アイススピナー",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノツツミ",
@@ -91070,7 +92274,8 @@
       "アイススピナー",
       "ゆきげしき",
       "ひやみず"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノカイナ",
@@ -91162,7 +92367,8 @@
       "テラバースト",
       "ハードプレス",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノコウベ",
@@ -91254,7 +92460,8 @@
       "ダブルウイング",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノドクガ",
@@ -91342,7 +92549,8 @@
       "メテオビーム",
       "テラバースト",
       "とびつく"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノイバラ",
@@ -91453,7 +92661,8 @@
       "メテオビーム",
       "テラバースト",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "セビエ",
@@ -91528,7 +92737,8 @@
       "フリーズドライ",
       "テラバースト",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "セゴール",
@@ -91604,7 +92814,8 @@
       "つららおとし",
       "テラバースト",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "セグレイブ",
@@ -91697,7 +92908,8 @@
       "きょけんとつげき",
       "ゆきげしき",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "メガセグレイブ",
@@ -91727,7 +92939,8 @@
       "speed": 87
     },
     "abilities": [],
-    "moves": []
+    "moves": [],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コレクレー（はこフォルム）",
@@ -91777,7 +92990,8 @@
       "わるだくみ",
       "たたりめ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コレクレー（とほフォルム）",
@@ -91831,7 +93045,8 @@
       "わるだくみ",
       "たたりめ",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "サーフゴー",
@@ -91912,7 +93127,8 @@
       "ポルターガイスト",
       "テラバースト",
       "ゴールドラッシュ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チオンジェン",
@@ -92000,7 +93216,8 @@
       "テラバースト",
       "カタストロフィ",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "パオジアン",
@@ -92081,7 +93298,8 @@
       "アイススピナー",
       "カタストロフィ",
       "ゆきげしき"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ディンルー",
@@ -92163,7 +93381,8 @@
       "うっぷんばらし",
       "テラバースト",
       "カタストロフィ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イーユイ",
@@ -92245,7 +93464,8 @@
       "テラバースト",
       "カタストロフィ",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "トドロクツキ",
@@ -92349,7 +93569,8 @@
       "うっぷんばらし",
       "テラバースト",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノブジン",
@@ -92465,7 +93686,8 @@
       "ワイドフォース",
       "コーチング",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "コライドン",
@@ -92573,7 +93795,8 @@
       "アクセルブレイク",
       "ドラゴンエール",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ミライドン",
@@ -92665,7 +93888,8 @@
       "イナズマドライブ",
       "ドラゴンエール",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウネルミナモ",
@@ -92753,7 +93977,8 @@
       "ハイドロスチーム",
       "ひやみず",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノイサハ",
@@ -92846,7 +94071,8 @@
       "テラバースト",
       "サイコブレイド ",
       "くさわけ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カミッチュ",
@@ -92930,7 +94156,8 @@
       "とびつく",
       "みずあめボム",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "チャデス",
@@ -93008,7 +94235,8 @@
       "いのちのしずく",
       "ポルターガイスト",
       "テラバースト"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ヤバソチャ",
@@ -93089,7 +94317,8 @@
       "ポルターガイスト",
       "テラバースト",
       "シャカシャカほう"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "イイネイヌ",
@@ -93194,7 +94423,8 @@
       "テラバースト",
       "ハードプレス",
       "はやてがえし"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "マシマシラ",
@@ -93290,7 +94520,8 @@
       "テラバースト",
       "くさわけ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "キチキギス",
@@ -93393,7 +94624,8 @@
       "ダブルウイング",
       "テラバースト",
       "みわくのボイス"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オーガポン",
@@ -93487,7 +94719,8 @@
       "テラバースト",
       "くさわけ",
       "ツタこんぼう"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オーガポン（いどのめん）",
@@ -93585,7 +94818,8 @@
       "テラバースト",
       "くさわけ",
       "ツタこんぼう"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オーガポン（かまどのめん）",
@@ -93683,7 +94917,8 @@
       "テラバースト",
       "くさわけ",
       "ツタこんぼう"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "オーガポン（いしずえのめん）",
@@ -93781,7 +95016,8 @@
       "テラバースト",
       "くさわけ",
       "ツタこんぼう"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ブリジュラス",
@@ -93884,7 +95120,8 @@
       "エレクトロビーム",
       "ハードプレス",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "カミツオロチ",
@@ -93983,7 +95220,8 @@
       "みずあめボム",
       "きまぐレーザー",
       "ドラゴンエール"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "ウガツホムラ",
@@ -94080,7 +95318,8 @@
       "かえんのまもり",
       "ドラゴンエール",
       "やけっぱち"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "タケルライコ",
@@ -94171,7 +95410,8 @@
       "じんらい",
       "ドラゴンエール",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノイワオ",
@@ -94256,7 +95496,8 @@
       "メテオビーム",
       "テラバースト",
       "パワフルエッジ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テツノカシラ",
@@ -94341,7 +95582,8 @@
       "タキオンカッター",
       "サンダーダイブ",
       "サイコノイズ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テラパゴス",
@@ -94432,7 +95674,8 @@
       "アイススピナー",
       "テラクラスター",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テラパゴス（テラスタル）",
@@ -94523,7 +95766,8 @@
       "アイススピナー",
       "テラクラスター",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "テラパゴス（ステラフォルム）",
@@ -94614,7 +95858,8 @@
       "アイススピナー",
       "テラクラスター",
       "サンダーダイブ"
-    ]
+    ],
+    "commonly_use": []
   },
   {
     "pokedex_name": "モモワロウ",
@@ -94685,6 +95930,7 @@
       "ポルターガイスト",
       "テラバースト",
       "じゃどくのくさり"
-    ]
+    ],
+    "commonly_use": []
   }
 ]
