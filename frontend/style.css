@@ -1225,6 +1225,23 @@ h2 {
     background-color: #e3f2fd; /* Same as hover or active blue */
     color: var(--primary-blue); 
 }
+
+/* Autocomplete header for commonly used items */
+.autocomplete-list li.autocomplete-header {
+    background: linear-gradient(to right, #ffe0b2, #fff3e0);
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #e65100;
+    padding: 6px 12px;
+    border-bottom: 2px solid #ffcc80;
+    cursor: default;
+    pointer-events: none;
+}
+
+.autocomplete-list li.commonly-used {
+    background: #fff8e1;
+    border-left: 3px solid #ffa000;
+}
 /* Move Input Wrapper */
 .move-input-wrapper {
     position: relative;

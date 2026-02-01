@@ -1,5 +1,5 @@
 import { AppState } from './AppState.js?v=2';
-import { SPECIES_DEX, MOVES_DEX, loadAllData } from './data/loader.js';
+import { SPECIES_DEX, MOVES_DEX, COMMONLY_USED_POKEMON, loadAllData } from './data/loader.js';
 import { ITEMS_DEX } from './data/items.js';
 import { calculateDamage } from './calc/damage.js';
 import { calculateHp, calculateStat } from './calc/stats.js';
@@ -121,37 +121,76 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // --- Autocomplete Logic ---
+
     function setupAutocomplete(inputElement, listElement, teamType) {
         let currentFocus = -1;
 
+        // Show suggestions on focus
+        inputElement.addEventListener('focus', function(e) {
+            renderPokemonList(this.value);
+        });
+
         inputElement.addEventListener('input', function(e) {
-            const val = this.value;
-            closeAllLists();
-            if (!val) return false;
-            
+            renderPokemonList(this.value);
+        });
+
+        function renderPokemonList(filterText) {
+            listElement.innerHTML = '';
             currentFocus = -1;
-            listElement.style.display = 'block';
+
+            const allPokemon = Object.keys(SPECIES_DEX);
             
-            const matches = Object.keys(SPECIES_DEX).filter(name => name.startsWith(val));
+            if (!filterText) {
+                // Empty input - show commonly used Pokemon
+                const availableCommon = COMMONLY_USED_POKEMON.filter(name => SPECIES_DEX[name]);
+                
+                if (availableCommon.length > 0) {
+                    // Header
+                    const header = document.createElement('li');
+                    header.className = 'autocomplete-header';
+                    header.textContent = 'よく使われているポケモン';
+                    listElement.appendChild(header);
+
+                    availableCommon.forEach(name => {
+                        const item = document.createElement('li');
+                        item.className = 'commonly-used';
+                        item.textContent = name;
+                        item.addEventListener('click', function() {
+                            inputElement.value = name;
+                            listElement.innerHTML = '';
+                            listElement.style.display = 'none';
+                            inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+                            inputElement.dispatchEvent(new Event('change', { bubbles: true }));
+                        });
+                        listElement.appendChild(item);
+                    });
+
+                    listElement.style.display = 'block';
+                }
+                return;
+            }
             
+            const matches = allPokemon.filter(name => name.startsWith(filterText));
+            
+            if (matches.length === 0) {
+                listElement.style.display = 'none';
+                return;
+            }
+
             // 上位100件までに制限（パフォーマンス対策）
             const maxItems = 100;
             let count = 0;
-
-            if (matches.length === 0) {
-                 listElement.style.display = 'none';
-                 return;
-            }
 
             matches.forEach(name => {
                 if (count >= maxItems) return;
                 
                 const item = document.createElement('li');
                 // 前方一致部分を太字に
-                item.innerHTML = `<strong>${name.substr(0, val.length)}</strong>${name.substr(val.length)}`;
+                item.innerHTML = `<strong>${name.substr(0, filterText.length)}</strong>${name.substr(filterText.length)}`;
                 item.addEventListener('click', function() {
                     inputElement.value = name;
-                    closeAllLists();
+                    listElement.innerHTML = '';
+                    listElement.style.display = 'none';
                     // 変更イベント発火 (input AND change)
                     inputElement.dispatchEvent(new Event('input', { bubbles: true }));
                     inputElement.dispatchEvent(new Event('change', { bubbles: true }));
@@ -159,7 +198,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 listElement.appendChild(item);
                 count++;
             });
-        });
+
+            listElement.style.display = 'block';
+        }
         
         // キーボード操作サポート
         inputElement.addEventListener('keydown', function(e) {
@@ -194,14 +235,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
 
-        function closeAllLists(elmnt) {
-            listElement.innerHTML = '';
-            listElement.style.display = 'none';
-        }
-
         document.addEventListener('click', function (e) {
             if (e.target !== inputElement) {
-                closeAllLists();
+                listElement.innerHTML = '';
+                listElement.style.display = 'none';
             }
         });
     }
