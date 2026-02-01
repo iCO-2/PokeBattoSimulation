@@ -70,7 +70,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
         rolls.push(dmg);
     }
-
+    
     return {
         min: rolls[0],
         max: rolls[rolls.length - 1],

@@ -575,15 +575,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     }
-    
     // ターン実行ロジック (共通化)
     const handleAttack = (attackerSide) => {
+        const isAllyAttacking = (attackerSide === 'ally');
+        const attacker = isAllyAttacking ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+        const defender = isAllyAttacking ? appState.getEnemyPokemon() : appState.getAllyPokemon();
+        const defenderSide = isAllyAttacking ? 'enemy' : 'ally';
+        
         try {
-            const isAllyAttacking = (attackerSide === 'ally');
-            const attacker = isAllyAttacking ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            const defender = isAllyAttacking ? appState.getEnemyPokemon() : appState.getAllyPokemon();
-            const defenderSide = isAllyAttacking ? 'enemy' : 'ally';
-
             // ターンIDを更新
             globalTurnCounter++;
             const currentTurnId = globalTurnCounter;
