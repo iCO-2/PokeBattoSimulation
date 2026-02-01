@@ -373,6 +373,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                     setupMoveAutocomplete(input, list, side, i);
                 }
 
+                // Fix: Auto-detect move on input without clicking suggestion
+                input.addEventListener('input', (e) => {
+                    const val = e.target.value.trim();
+                    const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                    if (!pokemon) return;
+
+                    // Try exact match in Japanese or English
+                    let foundMove = null;
+                    // MOVES_DEX keys are Japanese names
+                    if (MOVES_DEX[val]) {
+                         foundMove = val;
+                    } else {
+                        // Check if it's an English name or alias if needed (omitted for now as keys are JP)
+                    }
+
+                    if (foundMove) {
+                        pokemon.moves[i] = foundMove;
+                        updateMoveInfoDisplay(input, foundMove);
+                    }
+                });
+
                 // Initial Value
                 const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
                 if (pokemon && pokemon.moves[i]) {
