@@ -17,5 +17,6 @@ export function calculateStat(base, iv, statPoints, level, natureBonus) {
     if (natureBonus === 'up') multiplier = 1.1;
     if (natureBonus === 'down') multiplier = 0.9;
     
-    return Math.floor(raw * multiplier) + statPoints;
+    // 性格補正を最後に適用する (能力P込みの値に対して)
+    return Math.floor((raw + statPoints) * multiplier);
 }

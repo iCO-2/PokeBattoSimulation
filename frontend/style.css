@@ -1225,6 +1225,23 @@ h2 {
     background-color: #e3f2fd; /* Same as hover or active blue */
     color: var(--primary-blue); 
 }
+
+/* Autocomplete header for commonly used items */
+.autocomplete-list li.autocomplete-header {
+    background: linear-gradient(to right, #ffe0b2, #fff3e0);
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #e65100;
+    padding: 6px 12px;
+    border-bottom: 2px solid #ffcc80;
+    cursor: default;
+    pointer-events: none;
+}
+
+.autocomplete-list li.commonly-used {
+    background: #fff8e1;
+    border-left: 3px solid #ffa000;
+}
 /* Move Input Wrapper */
 .move-input-wrapper {
     position: relative;
@@ -1272,9 +1289,9 @@ h2 {
     border-bottom: 1px solid #f0f0f0;
     cursor: pointer;
     display: grid;
-    grid-template-columns: 2fr 1fr 0.5fr; /* Name | Type | Power */
+    grid-template-columns: 2fr 1fr 0.6fr 0.4fr; /* Name | Type | Category | Power */
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     transition: background 0.2s;
 }
 
@@ -1290,6 +1307,38 @@ h2 {
 .custom-autocomplete-list li strong {
     color: #333;
     font-size: 14px;
+}
+
+/* Commonly Used Moves Section Header */
+.custom-autocomplete-list li.autocomplete-header {
+    background: linear-gradient(to right, #ffe0b2, #fff3e0);
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #e65100;
+    padding: 6px 12px;
+    border-bottom: 2px solid #ffcc80;
+    cursor: default;
+    pointer-events: none;
+    display: block;
+}
+
+/* Separator between commonly used and regular moves */
+.custom-autocomplete-list li.autocomplete-separator {
+    background: #f5f5f5;
+    font-size: 0.75em;
+    color: #757575;
+    padding: 4px 12px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: default;
+    pointer-events: none;
+    display: block;
+}
+
+/* Highlight commonly used moves */
+.custom-autocomplete-list li.commonly-used {
+    background: #fff8e1;
+    border-left: 3px solid #ffa000;
 }
 
 /* Type Badges */
@@ -1331,6 +1380,31 @@ h2 {
     color: #666;
     text-align: right;
     font-family: monospace;
+}
+
+/* Move Category Badges */
+.move-category {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.move-category.physical {
+    background: #C92112;
+    color: #fff;
+}
+
+.move-category.special {
+    background: #4F5870;
+    color: #fff;
+}
+
+.move-category.status {
+    background: #8C888C;
+    color: #fff;
 }
 /* Vertical Move Layout */
 .move-config-grid {

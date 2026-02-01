@@ -461,7 +461,8 @@ def fetch_pokemon_variety(pokemon_url: str, species_ja_name: str,
         "types": types_ja,
         "base_stats": base_stats,
         "abilities": abilities_ja,
-        "moves": moves_ja
+        "moves": moves_ja,
+        "commonly_use": []
     }
 
 

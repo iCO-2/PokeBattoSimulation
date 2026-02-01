@@ -1,18 +1,22 @@
 export const SPECIES_DEX = {};
 export const MOVES_DEX = {};
+export let COMMONLY_USED_POKEMON = [];
 
 export async function loadAllData() {
     try {
-        const [pokemonRes, movesRes] = await Promise.all([
+        const [pokemonRes, movesRes, commonlyUsedRes] = await Promise.all([
             fetch('./data/pokemon_data_all.json'),
-            fetch('./data/moves_data.json')
+            fetch('./data/moves_data.json'),
+            fetch('./data/commonly_used_pokemon.json')
         ]);
 
         if (!pokemonRes.ok) throw new Error(`Failed to load pokemon data: ${pokemonRes.status}`);
         if (!movesRes.ok) throw new Error(`Failed to load moves data: ${movesRes.status}`);
+        if (!commonlyUsedRes.ok) throw new Error(`Failed to load commonly used pokemon: ${commonlyUsedRes.status}`);
 
         const pokemonList = await pokemonRes.json();
         const movesData = await movesRes.json();
+        COMMONLY_USED_POKEMON = await commonlyUsedRes.json();
 
         // Parse Pokemon Data
         pokemonList.forEach(p => {
@@ -35,6 +39,7 @@ export async function loadAllData() {
                 types: typeList,
                 abilities: p.abilities,
                 moves: p.moves,
+                commonly_use: p.commonly_use || [],
                 sprite_url: p.sprite_url,
                 weight_kg: p.weight_kg,
                 height_m: p.height_m

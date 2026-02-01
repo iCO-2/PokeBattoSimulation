@@ -1,5 +1,5 @@
 import { AppState } from './AppState.js?v=2';
-import { SPECIES_DEX, MOVES_DEX, loadAllData } from './data/loader.js';
+import { SPECIES_DEX, MOVES_DEX, COMMONLY_USED_POKEMON, loadAllData } from './data/loader.js';
 import { ITEMS_DEX } from './data/items.js';
 import { calculateDamage } from './calc/damage.js';
 import { calculateHp, calculateStat } from './calc/stats.js';
@@ -121,37 +121,76 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // --- Autocomplete Logic ---
+
     function setupAutocomplete(inputElement, listElement, teamType) {
         let currentFocus = -1;
 
+        // Show suggestions on focus
+        inputElement.addEventListener('focus', function(e) {
+            renderPokemonList(this.value);
+        });
+
         inputElement.addEventListener('input', function(e) {
-            const val = this.value;
-            closeAllLists();
-            if (!val) return false;
-            
+            renderPokemonList(this.value);
+        });
+
+        function renderPokemonList(filterText) {
+            listElement.innerHTML = '';
             currentFocus = -1;
-            listElement.style.display = 'block';
+
+            const allPokemon = Object.keys(SPECIES_DEX);
             
-            const matches = Object.keys(SPECIES_DEX).filter(name => name.startsWith(val));
+            if (!filterText) {
+                // Empty input - show commonly used Pokemon
+                const availableCommon = COMMONLY_USED_POKEMON.filter(name => SPECIES_DEX[name]);
+                
+                if (availableCommon.length > 0) {
+                    // Header
+                    const header = document.createElement('li');
+                    header.className = 'autocomplete-header';
+                    header.textContent = 'よく使われているポケモン';
+                    listElement.appendChild(header);
+
+                    availableCommon.forEach(name => {
+                        const item = document.createElement('li');
+                        item.className = 'commonly-used';
+                        item.textContent = name;
+                        item.addEventListener('click', function() {
+                            inputElement.value = name;
+                            listElement.innerHTML = '';
+                            listElement.style.display = 'none';
+                            inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+                            inputElement.dispatchEvent(new Event('change', { bubbles: true }));
+                        });
+                        listElement.appendChild(item);
+                    });
+
+                    listElement.style.display = 'block';
+                }
+                return;
+            }
             
+            const matches = allPokemon.filter(name => name.startsWith(filterText));
+            
+            if (matches.length === 0) {
+                listElement.style.display = 'none';
+                return;
+            }
+
             // 上位100件までに制限（パフォーマンス対策）
             const maxItems = 100;
             let count = 0;
-
-            if (matches.length === 0) {
-                 listElement.style.display = 'none';
-                 return;
-            }
 
             matches.forEach(name => {
                 if (count >= maxItems) return;
                 
                 const item = document.createElement('li');
                 // 前方一致部分を太字に
-                item.innerHTML = `<strong>${name.substr(0, val.length)}</strong>${name.substr(val.length)}`;
+                item.innerHTML = `<strong>${name.substr(0, filterText.length)}</strong>${name.substr(filterText.length)}`;
                 item.addEventListener('click', function() {
                     inputElement.value = name;
-                    closeAllLists();
+                    listElement.innerHTML = '';
+                    listElement.style.display = 'none';
                     // 変更イベント発火 (input AND change)
                     inputElement.dispatchEvent(new Event('input', { bubbles: true }));
                     inputElement.dispatchEvent(new Event('change', { bubbles: true }));
@@ -159,7 +198,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 listElement.appendChild(item);
                 count++;
             });
-        });
+
+            listElement.style.display = 'block';
+        }
         
         // キーボード操作サポート
         inputElement.addEventListener('keydown', function(e) {
@@ -194,14 +235,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
 
-        function closeAllLists(elmnt) {
-            listElement.innerHTML = '';
-            listElement.style.display = 'none';
-        }
-
         document.addEventListener('click', function (e) {
             if (e.target !== inputElement) {
-                closeAllLists();
+                listElement.innerHTML = '';
+                listElement.style.display = 'none';
             }
         });
     }
@@ -227,7 +264,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         'Grass': 'grass', 'Ice': 'ice', 'Fighting': 'fighting', 'Poison': 'poison',
         'Ground': 'ground', 'Flying': 'flying', 'Psychic': 'psychic', 'Bug': 'bug',
         'Rock': 'rock', 'Ghost': 'ghost', 'Dragon': 'dragon', 'Dark': 'dark',
-        'Steel': 'steel', 'Fairy': 'fairy'
+        'Steel': 'steel', 'Fairy': 'fairy',
+        // Japanese Keys
+        'ノーマル': 'normal', 'ほのお': 'fire', 'みず': 'water', 'でんき': 'electric',
+        'くさ': 'grass', 'こおり': 'ice', 'かくとう': 'fighting', 'どく': 'poison',
+        'じめん': 'ground', 'ひこう': 'flying', 'エスパー': 'psychic', 'むし': 'bug',
+        'いわ': 'rock', 'ゴースト': 'ghost', 'ドラゴン': 'dragon', 'あく': 'dark',
+        'はがね': 'steel', 'フェアリー': 'fairy'
     };
 
     const TYPE_NAMES_JP = {
@@ -254,12 +297,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
         const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
-        const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
+        const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : '-';
 
-        // Create Badge
+        // Create Type Badge
         const badge = document.createElement('span');
         badge.className = `type-badge ${typeClass}`;
         badge.textContent = typeName;
+        
+        // Create Category Badge
+        const categorySpan = document.createElement('span');
+        categorySpan.className = 'move-category ';
+        if (moveData.category === 'Physical') {
+            categorySpan.className += 'physical';
+            categorySpan.textContent = '物理';
+        } else if (moveData.category === 'Special') {
+            categorySpan.className += 'special';
+            categorySpan.textContent = '特殊';
+        } else {
+            categorySpan.className += 'status';
+            categorySpan.textContent = '変化';
+        }
         
         // Create Power Text
         const powerSpan = document.createElement('span');
@@ -267,6 +324,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         powerSpan.style.color = '#666';
         
         display.appendChild(badge);
+        display.appendChild(categorySpan);
         display.appendChild(powerSpan);
     }
 
@@ -287,31 +345,48 @@ document.addEventListener('DOMContentLoaded', async () => {
             listElement.innerHTML = '';
             
             const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            const availableMoves = (pokemon && pokemon.speciesData && pokemon.speciesData.moves) 
+            const commonlyUsed = (pokemon && pokemon.speciesData && pokemon.speciesData.commonly_use) 
+                ? pokemon.speciesData.commonly_use 
+                : [];
+            const allMoves = (pokemon && pokemon.speciesData && pokemon.speciesData.moves) 
                 ? pokemon.speciesData.moves 
                 : Object.keys(MOVES_DEX);
 
-            const matches = availableMoves.filter(m => m.startsWith(filterText));
-            
-            if (matches.length === 0) {
+            // Filter commonly used moves
+            const commonMatches = commonlyUsed.filter(m => m.startsWith(filterText));
+            // Filter regular moves (excluding commonly used)
+            const regularMoves = allMoves.filter(m => !commonlyUsed.includes(m));
+            const regularMatches = regularMoves.filter(m => m.startsWith(filterText));
+
+            if (commonMatches.length === 0 && regularMatches.length === 0) {
                 listElement.style.display = 'none';
                 return;
             }
 
-            const limitedMatches = matches.slice(0, 50);
-
-            limitedMatches.forEach(moveName => {
+            // Helper to create move item
+            function createMoveItem(moveName) {
                 const li = document.createElement('li');
                 const moveData = MOVES_DEX[moveName];
                 
                 let typeHtml = '';
+                let categoryHtml = '';
                 let powerHtml = '-';
                 
                 if (moveData) {
                     const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
                     const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
                     typeHtml = `<span class="type-badge ${typeClass}">${typeName}</span>`;
-                    powerHtml = (moveData.power > 0) ? moveData.power : (moveData.category === 'Status' ? '-' : '特殊');
+                    
+                    // Category display
+                    if (moveData.category === 'Physical') {
+                        categoryHtml = '<span class="move-category physical">物理</span>';
+                    } else if (moveData.category === 'Special') {
+                        categoryHtml = '<span class="move-category special">特殊</span>';
+                    } else {
+                        categoryHtml = '<span class="move-category status">変化</span>';
+                    }
+                    
+                    powerHtml = (moveData.power > 0) ? moveData.power : '-';
                 }
 
                 const nameHtml = `<strong>${moveName.substr(0, filterText.length)}</strong>${moveName.substr(filterText.length)}`;
@@ -319,6 +394,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 li.innerHTML = `
                     <div class="move-name">${nameHtml}</div>
                     <div class="move-type">${typeHtml}</div>
+                    <div class="move-category-col">${categoryHtml}</div>
                     <div class="move-power">${powerHtml}</div>
                 `;
 
@@ -328,8 +404,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                     triggerChange(moveName);
                 });
 
-                listElement.appendChild(li);
-            });
+                return li;
+            }
+
+            // Show commonly used moves first (if any match)
+            if (commonMatches.length > 0) {
+                const header = document.createElement('li');
+                header.className = 'autocomplete-header';
+                header.textContent = 'よく使われている技';
+                listElement.appendChild(header);
+
+                commonMatches.slice(0, 10).forEach(moveName => {
+                    const li = createMoveItem(moveName);
+                    li.classList.add('commonly-used');
+                    listElement.appendChild(li);
+                });
+            }
+
+            // Show regular moves (limited count)
+            if (regularMatches.length > 0) {
+                if (commonMatches.length > 0) {
+                    // Add separator
+                    const separator = document.createElement('li');
+                    separator.className = 'autocomplete-separator';
+                    separator.textContent = 'その他';
+                    listElement.appendChild(separator);
+                }
+
+                const limit = Math.min(regularMatches.length, 40 - Math.min(commonMatches.length, 10));
+                regularMatches.slice(0, limit).forEach(moveName => {
+                    listElement.appendChild(createMoveItem(moveName));
+                });
+            }
             
             listElement.style.display = 'block';
         }
