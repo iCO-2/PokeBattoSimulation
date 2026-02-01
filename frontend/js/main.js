@@ -260,12 +260,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
         const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
-        const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : (moveData.category === 'Status' ? '-' : '特殊');
+        const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : '-';
 
-        // Create Badge
+        // Create Type Badge
         const badge = document.createElement('span');
         badge.className = `type-badge ${typeClass}`;
         badge.textContent = typeName;
+        
+        // Create Category Badge
+        const categorySpan = document.createElement('span');
+        categorySpan.className = 'move-category ';
+        if (moveData.category === 'Physical') {
+            categorySpan.className += 'physical';
+            categorySpan.textContent = '物理';
+        } else if (moveData.category === 'Special') {
+            categorySpan.className += 'special';
+            categorySpan.textContent = '特殊';
+        } else {
+            categorySpan.className += 'status';
+            categorySpan.textContent = '変化';
+        }
         
         // Create Power Text
         const powerSpan = document.createElement('span');
@@ -273,6 +287,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         powerSpan.style.color = '#666';
         
         display.appendChild(badge);
+        display.appendChild(categorySpan);
         display.appendChild(powerSpan);
     }
 
@@ -317,13 +332,24 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const moveData = MOVES_DEX[moveName];
                 
                 let typeHtml = '';
+                let categoryHtml = '';
                 let powerHtml = '-';
                 
                 if (moveData) {
                     const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
                     const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
                     typeHtml = `<span class="type-badge ${typeClass}">${typeName}</span>`;
-                    powerHtml = (moveData.power > 0) ? moveData.power : (moveData.category === 'Status' ? '-' : '特殊');
+                    
+                    // Category display
+                    if (moveData.category === 'Physical') {
+                        categoryHtml = '<span class="move-category physical">物理</span>';
+                    } else if (moveData.category === 'Special') {
+                        categoryHtml = '<span class="move-category special">特殊</span>';
+                    } else {
+                        categoryHtml = '<span class="move-category status">変化</span>';
+                    }
+                    
+                    powerHtml = (moveData.power > 0) ? moveData.power : '-';
                 }
 
                 const nameHtml = `<strong>${moveName.substr(0, filterText.length)}</strong>${moveName.substr(filterText.length)}`;
@@ -331,6 +357,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 li.innerHTML = `
                     <div class="move-name">${nameHtml}</div>
                     <div class="move-type">${typeHtml}</div>
+                    <div class="move-category-col">${categoryHtml}</div>
                     <div class="move-power">${powerHtml}</div>
                 `;
 
@@ -347,7 +374,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (commonMatches.length > 0) {
                 const header = document.createElement('li');
                 header.className = 'autocomplete-header';
-                header.textContent = 'よく使う技';
+                header.textContent = 'よく使われている技';
                 listElement.appendChild(header);
 
                 commonMatches.slice(0, 10).forEach(moveName => {
