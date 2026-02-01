@@ -293,20 +293,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             listElement.innerHTML = '';
             
             const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            const availableMoves = (pokemon && pokemon.speciesData && pokemon.speciesData.moves) 
+            const commonlyUsed = (pokemon && pokemon.speciesData && pokemon.speciesData.commonly_use) 
+                ? pokemon.speciesData.commonly_use 
+                : [];
+            const allMoves = (pokemon && pokemon.speciesData && pokemon.speciesData.moves) 
                 ? pokemon.speciesData.moves 
                 : Object.keys(MOVES_DEX);
 
-            const matches = availableMoves.filter(m => m.startsWith(filterText));
-            
-            if (matches.length === 0) {
+            // Filter commonly used moves
+            const commonMatches = commonlyUsed.filter(m => m.startsWith(filterText));
+            // Filter regular moves (excluding commonly used)
+            const regularMoves = allMoves.filter(m => !commonlyUsed.includes(m));
+            const regularMatches = regularMoves.filter(m => m.startsWith(filterText));
+
+            if (commonMatches.length === 0 && regularMatches.length === 0) {
                 listElement.style.display = 'none';
                 return;
             }
 
-            const limitedMatches = matches.slice(0, 50);
-
-            limitedMatches.forEach(moveName => {
+            // Helper to create move item
+            function createMoveItem(moveName) {
                 const li = document.createElement('li');
                 const moveData = MOVES_DEX[moveName];
                 
@@ -334,8 +340,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                     triggerChange(moveName);
                 });
 
-                listElement.appendChild(li);
-            });
+                return li;
+            }
+
+            // Show commonly used moves first (if any match)
+            if (commonMatches.length > 0) {
+                const header = document.createElement('li');
+                header.className = 'autocomplete-header';
+                header.textContent = 'よく使う技';
+                listElement.appendChild(header);
+
+                commonMatches.slice(0, 10).forEach(moveName => {
+                    const li = createMoveItem(moveName);
+                    li.classList.add('commonly-used');
+                    listElement.appendChild(li);
+                });
+            }
+
+            // Show regular moves (limited count)
+            if (regularMatches.length > 0) {
+                if (commonMatches.length > 0) {
+                    // Add separator
+                    const separator = document.createElement('li');
+                    separator.className = 'autocomplete-separator';
+                    separator.textContent = 'その他';
+                    listElement.appendChild(separator);
+                }
+
+                const limit = Math.min(regularMatches.length, 40 - Math.min(commonMatches.length, 10));
+                regularMatches.slice(0, limit).forEach(moveName => {
+                    listElement.appendChild(createMoveItem(moveName));
+                });
+            }
             
             listElement.style.display = 'block';
         }

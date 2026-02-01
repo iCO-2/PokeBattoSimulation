@@ -35,6 +35,7 @@ export async function loadAllData() {
                 types: typeList,
                 abilities: p.abilities,
                 moves: p.moves,
+                commonly_use: p.commonly_use || [],
                 sprite_url: p.sprite_url,
                 weight_kg: p.weight_kg,
                 height_m: p.height_m
