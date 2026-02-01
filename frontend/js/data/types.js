@@ -19,14 +19,42 @@ export const TYPE_CHART = {
     "Fairy": { "Fire": 0.5, "Fighting": 2, "Poison": 0.5, "Dragon": 2, "Dark": 2, "Steel": 0.5 }
 };
 
+// 日本語タイプ名 → 英語タイプ名の変換マップ
+const TYPE_TRANSLATION_JP_TO_EN = {
+    "ノーマル": "Normal",
+    "ほのお": "Fire",
+    "みず": "Water",
+    "でんき": "Electric",
+    "くさ": "Grass",
+    "こおり": "Ice",
+    "かくとう": "Fighting",
+    "どく": "Poison",
+    "じめん": "Ground",
+    "ひこう": "Flying",
+    "エスパー": "Psychic",
+    "むし": "Bug",
+    "いわ": "Rock",
+    "ゴースト": "Ghost",
+    "ドラゴン": "Dragon",
+    "あく": "Dark",
+    "はがね": "Steel",
+    "フェアリー": "Fairy"
+};
+
 export function getTypeEffectiveness(moveType, defTypes) {
     let multiplier = 1.0;
     if (!moveType || !defTypes) return multiplier;
 
+    // 技タイプを英語に変換（日本語の場合）
+    const moveTypeEn = TYPE_TRANSLATION_JP_TO_EN[moveType] || moveType;
+
     defTypes.forEach(defType => {
-        const attackChart = TYPE_CHART[moveType];
-        if (attackChart && typeof attackChart[defType] !== 'undefined') {
-            multiplier *= attackChart[defType];
+        // 防御タイプを英語に変換（日本語の場合）
+        const defTypeEn = TYPE_TRANSLATION_JP_TO_EN[defType] || defType;
+        
+        const attackChart = TYPE_CHART[moveTypeEn];
+        if (attackChart && typeof attackChart[defTypeEn] !== 'undefined') {
+            multiplier *= attackChart[defTypeEn];
         }
     });
     return multiplier;

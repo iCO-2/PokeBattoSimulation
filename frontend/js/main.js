@@ -373,6 +373,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                     setupMoveAutocomplete(input, list, side, i);
                 }
 
+                // Fix: Auto-detect move on input without clicking suggestion
+                input.addEventListener('input', (e) => {
+                    const val = e.target.value.trim();
+                    const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                    if (!pokemon) return;
+
+                    // Try exact match in Japanese or English
+                    let foundMove = null;
+                    // MOVES_DEX keys are Japanese names
+                    if (MOVES_DEX[val]) {
+                         foundMove = val;
+                    } else {
+                        // Check if it's an English name or alias if needed (omitted for now as keys are JP)
+                    }
+
+                    if (foundMove) {
+                        pokemon.moves[i] = foundMove;
+                        updateMoveInfoDisplay(input, foundMove);
+                    }
+                });
+
                 // Initial Value
                 const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
                 if (pokemon && pokemon.moves[i]) {
@@ -554,15 +575,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     }
-    
     // ターン実行ロジック (共通化)
     const handleAttack = (attackerSide) => {
+        const isAllyAttacking = (attackerSide === 'ally');
+        const attacker = isAllyAttacking ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+        const defender = isAllyAttacking ? appState.getEnemyPokemon() : appState.getAllyPokemon();
+        const defenderSide = isAllyAttacking ? 'enemy' : 'ally';
+        
         try {
-            const isAllyAttacking = (attackerSide === 'ally');
-            const attacker = isAllyAttacking ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            const defender = isAllyAttacking ? appState.getEnemyPokemon() : appState.getAllyPokemon();
-            const defenderSide = isAllyAttacking ? 'enemy' : 'ally';
-
             // ターンIDを更新
             globalTurnCounter++;
             const currentTurnId = globalTurnCounter;
@@ -1169,48 +1189,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // Helper: Find closest EV to achieve real stat +/- 1
+    // Helper: Adjust 能力P to achieve real stat +/- 1 (since 1P = 1 stat, just increment/decrement)
     function adjustEvForRealStat(pokemon, statName, delta) {
         if (!pokemon.speciesData) return;
-        const currentReal = pokemon.realStats[statName];
-        const targetReal = currentReal + delta;
-        const currentEv = pokemon.stats[statName].ev;
-        let tempEv = currentEv;
-        
+        let current = pokemon.stats[statName].ev;
         if (delta > 0) {
-            while (tempEv <= 32) {
-                tempEv += 1;
-                if (tempEv > 32) { tempEv = 32; break; }
-                const base = (statName === 'hp') ? pokemon.speciesData.baseStats.hp : pokemon.speciesData.baseStats[statName];
-                const iv = pokemon.stats[statName].iv;
-                const nature = pokemon.stats[statName].nature;
-                let val = (statName === 'hp') 
-                    ? calculateHp(base, iv, tempEv, pokemon.level)
-                    : calculateStat(base, iv, tempEv, pokemon.level, nature);
-                if (val > currentReal) {
-                    pokemon.stats[statName].ev = tempEv;
-                    break;
-                }
-                // If we reach 32 and still haven't found a higher value, we stop.
-                if (tempEv === 32) break;
-            }
+            current = Math.min(32, current + 1);
         } else {
-             while (tempEv >= 0) {
-                tempEv -= 1;
-                if (tempEv < 0) { tempEv = 0; break; }
-                const base = (statName === 'hp') ? pokemon.speciesData.baseStats.hp : pokemon.speciesData.baseStats[statName];
-                const iv = pokemon.stats[statName].iv;
-                const nature = pokemon.stats[statName].nature;
-                let val = (statName === 'hp') 
-                    ? calculateHp(base, iv, tempEv, pokemon.level)
-                    : calculateStat(base, iv, tempEv, pokemon.level, nature);
-                if (val < currentReal) {
-                    pokemon.stats[statName].ev = tempEv;
-                    break;
-                }
-                if (tempEv === 0) break;
-            }
+            current = Math.max(0, current - 1);
         }
+        pokemon.stats[statName].ev = current;
     }
 
     function setupStatInputs(side) {
@@ -1241,7 +1229,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
 
-        // 2. EV Tuning Buttons (▼ / ▲)
+        // 2. 能力P Tuning Buttons (▼ / ▲) - range 0-32
         const tuneButtons = container.querySelectorAll('.tune-btn');
         tuneButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -1267,7 +1255,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
 
-        // 3. Preset Buttons (0 / 252)
+        // 3. Preset Buttons (0 / 32)
         const presetButtons = container.querySelectorAll('.preset-btn');
         presetButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {

@@ -183,7 +183,7 @@ h2 {
     overflow: visible;
 }
 
-/* 努力値列の幅を確保 */
+/* 能力P列の幅を確保 */
 .stats-table td:nth-child(3) {
     min-width: 100px;
 }
