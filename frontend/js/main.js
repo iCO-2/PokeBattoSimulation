@@ -1,8 +1,8 @@
-import { AppState } from './AppState.js?v=2';
-import { SPECIES_DEX, MOVES_DEX, COMMONLY_USED_POKEMON, loadAllData } from './data/loader.js';
-import { ITEMS_DEX } from './data/items.js';
-import { calculateDamage } from './calc/damage.js';
-import { calculateHp, calculateStat } from './calc/stats.js';
+import { AppState } from './AppState.js?v=117';
+import { SPECIES_DEX, MOVES_DEX, COMMONLY_USED_POKEMON, loadAllData } from './data/loader.js?v=3';
+import { ITEMS_DEX } from './data/items.js?v=3';
+import { calculateDamage } from './calc/damage.js?v=202';
+import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
 // Debug: Expose to window
@@ -578,6 +578,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         input.addEventListener('change', handleStatChange);
     });
 
+    // ランク補正 select のイベント監視
+    document.querySelectorAll('.rank-select').forEach(select => {
+        select.addEventListener('change', (e) => {
+            const isAlly = e.target.closest('.ally');
+            const pokemon = isAlly ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            
+            if (pokemon) {
+                const statName = e.target.dataset.stat;
+                if (statName && pokemon.stats[statName]) {
+                    pokemon.stats[statName].rank = parseInt(e.target.value) || 0;
+                    // ランク補正はダメージ計算時に反映されるので computeStats() は不要
+                    // ただし、表示更新が必要な場合はここで行う
+                }
+            }
+        });
+    });
+
     document.querySelectorAll('.ev-252-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const container = e.target.closest('.ev-input-container');
@@ -668,12 +685,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const statName = e.target.dataset.stat;
             const type = e.target.dataset.type;
 
-            if (statName && type) {
-                let value = e.target.value;
-                if (type === 'iv' || type === 'ev') {
-                    value = parseInt(value) || 0;
-                }
-                pokemon.stats[statName][type] = value;
+            if (statName && type === 'ev') {
+                const value = parseInt(e.target.value) || 0;
+                pokemon.stats[statName].ev = value;
                 
                 // 再計算
                 pokemon.computeStats();
@@ -1464,11 +1478,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Original: const ivInput = document.querySelector(`#${teamType}-stats input[data-stat="${stat}"][data-type="iv"]`);
             // This is BAD. We should use `container.querySelector` with scoped selector to avoid ID dependency.
             
-            const ivInput = container.querySelector(`input[data-stat="${stat}"][data-type="iv"]`);
             const evInput = container.querySelector(`input[data-stat="${stat}"][data-type="ev"]`);
+            const rankSelect = container.querySelector(`.rank-select[data-stat="${stat}"]`);
             
-            if (ivInput) ivInput.value = data.iv;
             if (evInput) evInput.value = data.ev;
+            
+            // ランク値の同期（HP以外）
+            if (rankSelect && data.rank !== undefined) {
+                rankSelect.value = data.rank;
+            }
 
             // Nature Buttons State
             // Original: const upBtn = document.querySelector(`#${teamType}-stats .nature-btn.up[data-stat="${stat}"]`);

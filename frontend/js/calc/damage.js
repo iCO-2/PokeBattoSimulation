@@ -1,6 +1,20 @@
 import { getTypeEffectiveness } from '../data/types.js';
 
+/**
+ * ランク補正倍率を取得
+ * -6: ÷4.0, -5: ÷3.5, -4: ÷3.0, -3: ÷2.5, -2: ÷2.0, -1: ÷1.5
+ *  0: x1.0
+ * +1: x1.5, +2: x2.0, +3: x2.5, +4: x3.0, +5: x3.5, +6: x4.0
+ */
+function getRankMultiplier(rank) {
+    if (rank === 0) return 1.0;
+    if (rank > 0) return 1 + rank * 0.5; // +1→1.5, +2→2.0, ...
+    // rank < 0: ÷1.5, ÷2.0, ... (reciprocal)
+    return 1 / (1 + Math.abs(rank) * 0.5);
+}
+
 export function calculateDamage(attacker, defender, move, field = {}) {
+    console.log('[damage.js] calculateDamage CALLED', { move: move.name || move.type, power: move.power });
     // 0. 基本情報取得
     const level = attacker.level;
     const power = move.power || 0;
@@ -16,9 +30,27 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         // イカサマなどは考慮せずシンプルに
     }
 
-    // ステータスランク補正は未実装（今回は実数値直接利用とみなす）
-    const A = attacker.realStats[aStr];
-    const D = defender.realStats[dStr];
+    // ステータス実数値にランク補正を適用
+    const attackerRank = attacker.stats[aStr] ? attacker.stats[aStr].rank || 0 : 0;
+    const defenderRank = defender.stats[dStr] ? defender.stats[dStr].rank || 0 : 0;
+    
+    console.log('[damage.js] Debug:', {
+        aStr,
+        dStr,
+        attackerStats: attacker.stats[aStr],
+        defenderStats: defender.stats[dStr],
+        attackerRank,
+        defenderRank,
+        attackerMultiplier: getRankMultiplier(attackerRank),
+        defenderMultiplier: getRankMultiplier(defenderRank),
+        baseA: attacker.realStats[aStr],
+        baseD: defender.realStats[dStr]
+    });
+    
+    const A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
+    const D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
+    
+    console.log('[damage.js] Final A/D:', { A, D });
 
     // 1. ダメージ計算の基礎
     // Floor(Floor(Floor(Lv * 2 / 5 + 2) * Power * A / D) / 50) + 2
@@ -43,6 +75,14 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     // タイプ相性
     const defenderTypes = defender.speciesData ? defender.speciesData.types : [];
     const typeMod = getTypeEffectiveness(move.type, defenderTypes);
+    
+    console.log('[damage.js] Type Debug:', {
+        moveType: move.type,
+        defenderTypes: defenderTypes,
+        typeMod: typeMod,
+        isSTAB: isSTAB,
+        attackerTypes: attackerTypes
+    });
     
     // 状態異常(やけど): 物理なら0.5 (未実装)
 
