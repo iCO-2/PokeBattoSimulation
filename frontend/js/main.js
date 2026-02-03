@@ -1529,6 +1529,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         renderHistory(teamType, pokemon);
         updateTeamSlots(teamType);
+
+        // HP Status Bar Update (新規追加)
+        const currentHpEl = document.getElementById(`${prefix}-current-hp`);
+        const maxHpEl = document.getElementById(`${prefix}-max-hp`);
+        const hpBar = document.getElementById(`${prefix}-hp-bar`);
+        
+        if (currentHpEl) currentHpEl.textContent = pokemon.currentHp;
+        if (maxHpEl) maxHpEl.textContent = pokemon.maxHp;
+        
+        if (hpBar && pokemon.maxHp > 0) {
+            const hpRatio = (pokemon.currentHp / pokemon.maxHp) * 100;
+            hpBar.style.width = `${hpRatio}%`;
+            
+            // HP残量に応じた色変更
+            if (hpRatio >= 50) {
+                hpBar.style.backgroundColor = 'var(--primary-green)';
+            } else if (hpRatio >= 25) {
+                hpBar.style.backgroundColor = 'var(--accent-orange)';
+            } else {
+                hpBar.style.backgroundColor = 'var(--primary-red)';
+            }
+        }
     }
 
     function updateTeamSlots(teamType) {
