@@ -1499,7 +1499,7 @@ h2 {
     margin-bottom: 4px;
 }
 
-/* 2. IV Input (Small) */
+/* 2. IV Input (Small) - Legacy, now replaced by rank-group */
 .iv-group {
     width: 40px;
 }
@@ -1510,6 +1510,30 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1em;
+}
+
+/* 2b. Rank Group (replaces IV) */
+.rank-group {
+    width: 60px;
+}
+.rank-group.empty {
+    visibility: hidden;
+}
+.rank-group label {
+    display: block;
+    font-size: 0.75em;
+    color: #666;
+    margin-bottom: 2px;
+}
+.rank-select {
+    width: 100%;
+    padding: 4px 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+    background: #fff;
+    cursor: pointer;
 }
 
 /* 3. EV Group (Middle) */
