@@ -5,10 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/PlaySphere.png">
-    <link rel="stylesheet" href="style.css?v=20">
+    <link rel="stylesheet" href="style.css?v=21">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
+    <!-- 新しいヘッダー -->
+    <div class="top-header">
+        <div class="header-inner">
+            <div class="header-left">
+                <button class="menu-btn" aria-label="メニュー">
+                    <span class="menu-icon">☰</span>
+                </button>
+                <div class="logo">
+                    <span class="logo-playsphere">PlaySphere</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-icon-btn settings-btn" aria-label="設定" title="設定">
+                    <span class="icon">⚙</span>
+                </button>
+                <button class="header-icon-btn notifications-btn" aria-label="通知" title="通知">
+                    <span class="icon">🔔</span>
+                </button>
+                <button class="header-icon-btn user-btn" aria-label="ユーザー" title="ユーザーメニュー">
+                    <span class="icon">👤</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 既存のヘッダー（パーティセレクター） -->
     <header>
         <h1>ポケモン対戦シミュレーター</h1>
         <div class="party-selector">
@@ -360,10 +386,10 @@
             </div>
 
             <div class="options">
-                <label><span class="option-label">特性:</span><select id="ally-ability-select"><option>てきおうりょく</option></select></label>
+                <label><span class="option-label">特性:</span><select id="ally-ability-select"><option>未設定</option></select></label>
                 <label><span class="option-label">持ち物:</span>
                     <select id="ally-item-select">
-                        <option value="">なし</option>
+                        <option value="">未設定</option>
                     </select>
                     <button type="button" class="item-trigger-btn" data-side="ally" title="持ち物の効果を手動で発動します">発動</button>
                     <span id="ally-item-status" class="item-status"></span>
@@ -481,6 +507,10 @@
                 <div class="result-row">
                     <span class="label">瀕死率:</span>
                     <span class="value kill-chance"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">持ち物補正:</span>
+                    <span class="value item-modifier"></span>
                 </div>
                 <div class="result-row">
                     <span class="label">採用乱数:</span>
@@ -811,7 +841,7 @@
                 <label><span class="option-label">特性:</span><select id="enemy-ability-select"><option>未設定</option></select></label>
                 <label><span class="option-label">持ち物:</span>
                     <select id="enemy-item-select">
-                        <option value="">なし</option>
+                        <option value="">未設定</option>
                     </select>
                     <button type="button" class="item-trigger-btn" data-side="enemy" title="持ち物の効果を手動で発動します">発動</button>
                     <span id="enemy-item-status" class="item-status"></span>

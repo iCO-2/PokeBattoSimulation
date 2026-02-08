@@ -1,4 +1,5 @@
 import { getTypeEffectiveness } from '../data/types.js';
+import { ITEMS_DEX } from '../data/loader.js?v=3';
 
 /**
  * ランク補正倍率を取得
@@ -47,8 +48,27 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         baseD: defender.realStats[dStr]
     });
     
-    const A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
+    let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
     const D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
+
+    // 持ち物補正（攻撃/特攻アップ系・ダメージアップ系）
+    const attackerItem = ITEMS_DEX[attacker.item];
+    let itemModifier = null;
+    if (attackerItem && attackerItem.type === 'stat_modifier' && attackerItem.stat === aStr) {
+        A = Math.floor(A * attackerItem.multiplier);
+        itemModifier = {
+            type: 'stat_modifier',
+            name: attacker.item,
+            stat: aStr,
+            multiplier: attackerItem.multiplier
+        };
+    } else if (attackerItem && attackerItem.type === 'damage_boost') {
+        itemModifier = {
+            type: 'damage_boost',
+            name: attacker.item,
+            multiplier: attackerItem.multiplier
+        };
+    }
     
     console.log('[damage.js] Final A/D:', { A, D });
 
@@ -103,7 +123,10 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         // 3. タイプ相性
         dmg = Math.floor(dmg * typeMod);
 
-        // 4. その他補正（やけど等、今回は未実装だが順序としてはここ）
+        // 4. ダメージ補正（いのちのたま等）
+        if (attackerItem && attackerItem.type === 'damage_boost') {
+            dmg = Math.floor(dmg * attackerItem.multiplier);
+        }
         
         if (dmg < 1) dmg = 1; // 最低1ダメージ (タイプ無効0倍は別途)
         if (typeMod === 0) dmg = 0;
@@ -115,6 +138,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         min: rolls[0],
         max: rolls[rolls.length - 1],
         rolls: rolls,
-        typeMod: typeMod
+        typeMod: typeMod,
+        itemModifier: itemModifier
     };
 }

@@ -1,6 +1,5 @@
 import { AppState } from './AppState.js?v=117';
-import { SPECIES_DEX, MOVES_DEX, COMMONLY_USED_POKEMON, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
-import { ITEMS_DEX } from './data/items.js?v=3';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, COMMONLY_USED_POKEMON, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
 import { calculateDamage } from './calc/damage.js?v=202';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
@@ -608,7 +607,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     itemSelects.forEach(select => {
         if (!select) return;
         // 既存のオプションをクリア（"なし"以外）
-        select.innerHTML = '<option value="">なし</option>';
+        select.innerHTML = '<option value="">未設定</option>';
         
         Object.keys(ITEMS_DEX).forEach(itemName => {
             const option = document.createElement('option');
@@ -821,6 +820,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 } else if (killChanceText) {
                     killChanceText.textContent = '-';
+                }
+
+                const itemModifierText = resultContainer.querySelector('.item-modifier');
+                if (itemModifierText) {
+                    if (damageResult.itemModifier) {
+                        const mod = damageResult.itemModifier;
+                        if (mod.type === 'stat_modifier') {
+                            const statLabel = mod.stat === 'attack' ? '攻撃' : (mod.stat === 'spAtk' ? '特攻' : mod.stat);
+                            itemModifierText.textContent = `${mod.name} (${statLabel}×${mod.multiplier})`;
+                        } else if (mod.type === 'damage_boost') {
+                            itemModifierText.textContent = `${mod.name} (ダメージ×${mod.multiplier})`;
+                        } else {
+                            itemModifierText.textContent = '-';
+                        }
+                    } else {
+                        itemModifierText.textContent = '-';
+                    }
                 }
 
                 // Update Result Header (Icons & Move)
@@ -1490,7 +1506,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (nameInput) nameInput.value = pokemon.name;
         if (levelInput) levelInput.value = pokemon.level;
         if (teraSelect) teraSelect.value = pokemon.teraType;
-        if (itemSelect && pokemon.item) itemSelect.value = pokemon.item;
+        if (itemSelect) itemSelect.value = pokemon.item || '';
 
         // 使用率データ表示をポケモンに同期
         updateUsageRateDisplay(teamType, pokemon.name);
@@ -1500,8 +1516,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Ability syncing
         if (abilitySelect && pokemon.speciesData) {
-            const currentVal = pokemon.ability || abilitySelect.value;
+            const currentVal = pokemon.ability || '';
             abilitySelect.innerHTML = '';
+            
+            // 「未設定」オプションを追加
+            const unsetOpt = document.createElement('option');
+            unsetOpt.value = '';
+            unsetOpt.textContent = '未設定';
+            abilitySelect.appendChild(unsetOpt);
+            
             if (pokemon.speciesData.abilities) {
                 pokemon.speciesData.abilities.forEach(ab => {
                    const opt = document.createElement('option');
@@ -1513,9 +1536,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const hasCurrent = currentVal && Array.from(abilitySelect.options).some(opt => opt.value === currentVal);
             if (hasCurrent) {
                 abilitySelect.value = currentVal;
-            } else if (abilitySelect.options.length > 0) {
-                abilitySelect.value = abilitySelect.options[0].value;
-                pokemon.ability = abilitySelect.value;
+            } else if (pokemon.speciesData.abilities && pokemon.speciesData.abilities.length > 0) {
+                // デフォルトはabilitiesの先頭
+                abilitySelect.value = pokemon.speciesData.abilities[0].name;
+                pokemon.ability = pokemon.speciesData.abilities[0].name;
             }
         }
 
