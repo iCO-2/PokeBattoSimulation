@@ -2057,6 +2057,7 @@ function renderPersonalitiesChart(side, naturesData) {
                     }
                 },
                 y: {
+                    position: 'right',
                     ticks: {
                         font: {
                             size: 11
