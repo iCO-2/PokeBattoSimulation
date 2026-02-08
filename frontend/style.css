@@ -1729,3 +1729,102 @@ h2 {
 .enemy-attack-btn .btn-main-text {
     color: var(--primary-red);
 }
+
+/* 使用率データ表示セクション */
+.usage-rate-section {
+    margin: 15px 0;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.usage-rate-header {
+    background: linear-gradient(to right, #e3f2fd, #f3e5f5);
+    padding: 12px 15px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.usage-rate-header:hover {
+    background: linear-gradient(to right, #bbdefb, #e1bee7);
+}
+
+.usage-rate-header h3 {
+    margin: 0;
+    font-size: 1em;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-icon {
+    font-size: 0.8em;
+    transition: transform 0.3s;
+}
+
+.usage-rate-header.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.usage-rate-content {
+    padding: 15px;
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s;
+}
+
+.usage-rate-content.collapsed {
+    max-height: 0;
+    padding: 0 15px;
+}
+
+.usage-rate-charts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.chart-container {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container h4 {
+    margin: 0 0 6px 0;
+    font-size: 0.95em;
+    color: #555;
+    text-align: center;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 6px;
+    flex-shrink: 0;
+}
+
+.chart-container canvas {
+    flex: 1;
+    min-height: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .usage-rate-charts {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-container {
+        height: 200px;
+    }
+    
+    .chart-container canvas {
+        max-height: 190px;
+    }
+}

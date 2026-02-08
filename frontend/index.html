@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/PlaySphere.png">
-    <link rel="stylesheet" href="style.css?v=18">
+    <link rel="stylesheet" href="style.css?v=20">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
     <header>
@@ -61,6 +62,33 @@
                 <ul id="ally-autocomplete-list" class="autocomplete-list"></ul>
             </div>
             <div id="ally-base-stats" class="base-stats-info"></div>
+            
+            <!-- 使用率データ表示セクション -->
+            <div class="usage-rate-section" id="ally-usage-rate-section" style="display: none;">
+                <div class="usage-rate-header" id="ally-usage-rate-header">
+                    <h3>使用率データ <span class="toggle-icon">▼</span></h3>
+                </div>
+                <div class="usage-rate-content" id="ally-usage-rate-content">
+                    <div class="usage-rate-charts">
+                        <div class="chart-container">
+                            <h4>技</h4>
+                            <canvas id="ally-chart-trend-moves"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h4>持ち物</h4>
+                            <canvas id="ally-chart-trend-items"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h4>性格</h4>
+                            <canvas id="ally-chart-trend-personalities"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h4>テラスタイプ</h4>
+                            <canvas id="ally-chart-trend-tera-types"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <div class="grid-params">
                 <label>テラスタル: 
@@ -478,6 +506,34 @@
                 <ul id="enemy-autocomplete-list" class="autocomplete-list"></ul>
             </div>
             <div id="enemy-base-stats" class="base-stats-info"></div>
+            
+            <!-- 使用率データ表示セクション -->
+            <div class="usage-rate-section" id="enemy-usage-rate-section" style="display: none;">
+                <div class="usage-rate-header" id="enemy-usage-rate-header">
+                    <h3>使用率データ <span class="toggle-icon">▼</span></h3>
+                </div>
+                <div class="usage-rate-content" id="enemy-usage-rate-content">
+                    <div class="usage-rate-charts">
+                        <div class="chart-container">
+                            <h4>技</h4>
+                            <canvas id="enemy-chart-trend-moves"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h4>持ち物</h4>
+                            <canvas id="enemy-chart-trend-items"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h4>性格</h4>
+                            <canvas id="enemy-chart-trend-personalities"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h4>テラスタイプ</h4>
+                            <canvas id="enemy-chart-trend-tera-types"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
                 <div class="stats-container">
                 <!-- HP (No Nature) -->
                 <div class="stat-row">

@@ -1775,4 +1775,371 @@ function initMobileTabs() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initMobileTabs();
+    initUsageRateDisplay();
 });
+
+// ========================================
+// 使用率データ表示機能
+// ========================================
+
+// グラフインスタンスを保持
+const chartInstances = {
+    ally: {
+        moves: null,
+        items: null,
+        personalities: null,
+        teraTypes: null
+    },
+    enemy: {
+        moves: null,
+        items: null,
+        personalities: null,
+        teraTypes: null
+    }
+};
+
+function initUsageRateDisplay() {
+    // トグル機能の設定
+    setupUsageRateToggle('ally');
+    setupUsageRateToggle('enemy');
+    
+    // ポケモン選択時のイベントリスナー
+    const allyInput = document.getElementById('ally-name-input');
+    const enemyInput = document.getElementById('enemy-name-input');
+    
+    if (allyInput) {
+        allyInput.addEventListener('change', () => {
+            updateUsageRateDisplay('ally', allyInput.value);
+        });
+    }
+    
+    if (enemyInput) {
+        enemyInput.addEventListener('change', () => {
+            updateUsageRateDisplay('enemy', enemyInput.value);
+        });
+    }
+}
+
+function setupUsageRateToggle(side) {
+    const header = document.getElementById(`${side}-usage-rate-header`);
+    const content = document.getElementById(`${side}-usage-rate-content`);
+    
+    if (header && content) {
+        header.addEventListener('click', () => {
+            const isCollapsed = content.classList.contains('collapsed');
+            
+            if (isCollapsed) {
+                content.classList.remove('collapsed');
+                header.classList.remove('collapsed');
+            } else {
+                content.classList.add('collapsed');
+                header.classList.add('collapsed');
+            }
+        });
+    }
+}
+
+function updateUsageRateDisplay(side, pokemonName) {
+    const section = document.getElementById(`${side}-usage-rate-section`);
+    
+    if (!pokemonName || !USAGE_RATE_DATA) {
+        // データがない場合は非表示
+        if (section) {
+            section.style.display = 'none';
+        }
+        destroyCharts(side);
+        return;
+    }
+    
+    // 配列からポケモン名で検索
+    const usageData = USAGE_RATE_DATA.find(entry => entry.name === pokemonName);
+    
+    if (!usageData) {
+        // データがない場合は非表示
+        if (section) {
+            section.style.display = 'none';
+        }
+        destroyCharts(side);
+        return;
+    }
+    
+    // データがある場合は表示
+    if (section) {
+        section.style.display = 'block';
+    }
+    
+    // 各グラフを描画
+    renderMovesChart(side, usageData.moves);
+    renderItemsChart(side, usageData.items);
+    renderPersonalitiesChart(side, usageData.natures);
+    renderTeraTypesChart(side, usageData.teras);
+}
+
+function destroyCharts(side) {
+    Object.keys(chartInstances[side]).forEach(key => {
+        if (chartInstances[side][key]) {
+            chartInstances[side][key].destroy();
+            chartInstances[side][key] = null;
+        }
+    });
+}
+
+function renderMovesChart(side, movesData) {
+    const canvasId = `${side}-chart-trend-moves`;
+    const canvas = document.getElementById(canvasId);
+    
+    if (!canvas || !movesData) return;
+    
+    // 既存のグラフを破棄
+    if (chartInstances[side].moves) {
+        chartInstances[side].moves.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
+    const labels = movesData.map(item => item.name);
+    const data = movesData.map(item => parseFloat(item.rate));
+    
+    chartInstances[side].moves = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '使用率 (%)',
+                data: data,
+                backgroundColor: 'rgba(52, 152, 219, 0.6)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            size: 11
+                        },
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        autoSkip: true,
+                        maxRotation: 35,
+                        minRotation: 0,
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function renderItemsChart(side, itemsData) {
+    const canvasId = `${side}-chart-trend-items`;
+    const canvas = document.getElementById(canvasId);
+    
+    if (!canvas || !itemsData) return;
+    
+    // 既存のグラフを破棄
+    if (chartInstances[side].items) {
+        chartInstances[side].items.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
+    const labels = itemsData.map(item => item.name);
+    const data = itemsData.map(item => parseFloat(item.rate));
+    
+    chartInstances[side].items = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(199, 199, 199, 0.6)',
+                    'rgba(83, 102, 255, 0.6)',
+                    'rgba(255, 99, 255, 0.6)',
+                    'rgba(99, 255, 132, 0.6)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        font: {
+                            size: 11
+                        },
+                        boxWidth: 12,
+                        padding: 6
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.parsed + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function renderPersonalitiesChart(side, naturesData) {
+    const canvasId = `${side}-chart-trend-personalities`;
+    const canvas = document.getElementById(canvasId);
+    
+    if (!canvas || !naturesData) return;
+    
+    // 既存のグラフを破棄
+    if (chartInstances[side].personalities) {
+        chartInstances[side].personalities.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
+    const labels = naturesData.map(item => item.name);
+    const data = naturesData.map(item => parseFloat(item.rate));
+    
+    chartInstances[side].personalities = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '使用率 (%)',
+                data: data,
+                backgroundColor: 'rgba(46, 204, 113, 0.6)',
+                borderColor: 'rgba(46, 204, 113, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            size: 11
+                        },
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function renderTeraTypesChart(side, teraTypesData) {
+    const canvasId = `${side}-chart-trend-tera-types`;
+    const canvas = document.getElementById(canvasId);
+    
+    if (!canvas || !teraTypesData) return;
+    
+    // 既存のグラフを破棄
+    if (chartInstances[side].teraTypes) {
+        chartInstances[side].teraTypes.destroy();
+    }
+    
+    const ctx = canvas.getContext('2d');
+    const labels = teraTypesData.map(item => item.name);
+    const data = teraTypesData.map(item => parseFloat(item.rate));
+    
+    // タイプごとの色設定
+    const typeColors = {
+        'ノーマル': 'rgba(168, 167, 122, 0.6)',
+        'ほのお': 'rgba(238, 129, 48, 0.6)',
+        'みず': 'rgba(99, 144, 240, 0.6)',
+        'でんき': 'rgba(247, 208, 44, 0.6)',
+        'くさ': 'rgba(122, 199, 76, 0.6)',
+        'こおり': 'rgba(150, 217, 214, 0.6)',
+        'かくとう': 'rgba(194, 46, 40, 0.6)',
+        'どく': 'rgba(163, 62, 161, 0.6)',
+        'じめん': 'rgba(226, 191, 101, 0.6)',
+        'ひこう': 'rgba(169, 143, 243, 0.6)',
+        'エスパー': 'rgba(249, 85, 135, 0.6)',
+        'むし': 'rgba(166, 185, 26, 0.6)',
+        'いわ': 'rgba(182, 161, 54, 0.6)',
+        'ゴースト': 'rgba(115, 87, 151, 0.6)',
+        'ドラゴン': 'rgba(111, 53, 252, 0.6)',
+        'あく': 'rgba(112, 87, 70, 0.6)',
+        'はがね': 'rgba(183, 183, 206, 0.6)',
+        'フェアリー': 'rgba(214, 133, 173, 0.6)'
+    };
+    
+    const backgroundColors = labels.map(label => typeColors[label] || 'rgba(200, 200, 200, 0.6)');
+    
+    chartInstances[side].teraTypes = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: backgroundColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '0%',
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        font: {
+                            size: 11
+                        },
+                        boxWidth: 12,
+                        padding: 6
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.parsed + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
