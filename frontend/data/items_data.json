@@ -1,0 +1,45 @@
+{
+  "オボンののみ": {
+    "type": "berry",
+    "healType": "ratio",
+    "threshold": 0.5,
+    "value": 0.25,
+    "message": "オボンののみで回復！"
+  },
+  "回復実": {
+    "type": "berry",
+    "healType": "ratio",
+    "threshold": 0.25,
+    "value": 0.333,
+    "message": "回復実で回復！"
+  },
+  "たべのこし": {
+    "type": "passive",
+    "healType": "ratio",
+    "value": 0.0625,
+    "message": "たべのこしで回復"
+  },
+  "くろいヘドロ": {
+    "type": "passive",
+    "healType": "ratio",
+    "value": 0.0625,
+    "message": "くろいヘドロで回復"
+  },
+  "こだわりメガネ": {
+    "type": "stat_modifier",
+    "stat": "spAtk",
+    "multiplier": 1.5,
+    "message": "こだわりメガネで特攻アップ"
+  },
+  "こだわりハチマキ": {
+    "type": "stat_modifier",
+    "stat": "attack",
+    "multiplier": 1.5,
+    "message": "こだわりハチマキで攻撃アップ"
+  },
+  "いのちのたま": {
+    "type": "damage_boost",
+    "multiplier": 1.3,
+    "message": "いのちのたまで威力アップ"
+  }
+}

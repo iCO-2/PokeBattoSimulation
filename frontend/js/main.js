@@ -1,6 +1,5 @@
 import { AppState } from './AppState.js?v=117';
-import { SPECIES_DEX, MOVES_DEX, COMMONLY_USED_POKEMON, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
-import { ITEMS_DEX } from './data/items.js?v=3';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, COMMONLY_USED_POKEMON, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
 import { calculateDamage } from './calc/damage.js?v=202';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
@@ -821,6 +820,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 } else if (killChanceText) {
                     killChanceText.textContent = '-';
+                }
+
+                const itemModifierText = resultContainer.querySelector('.item-modifier');
+                if (itemModifierText) {
+                    if (damageResult.itemModifier) {
+                        const mod = damageResult.itemModifier;
+                        if (mod.type === 'stat_modifier') {
+                            const statLabel = mod.stat === 'attack' ? '攻撃' : (mod.stat === 'spAtk' ? '特攻' : mod.stat);
+                            itemModifierText.textContent = `${mod.name} (${statLabel}×${mod.multiplier})`;
+                        } else if (mod.type === 'damage_boost') {
+                            itemModifierText.textContent = `${mod.name} (ダメージ×${mod.multiplier})`;
+                        } else {
+                            itemModifierText.textContent = '-';
+                        }
+                    } else {
+                        itemModifierText.textContent = '-';
+                    }
                 }
 
                 // Update Result Header (Icons & Move)
