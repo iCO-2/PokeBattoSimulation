@@ -180,6 +180,7 @@ header {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-top: 5px solid transparent;
+    box-sizing: border-box;
 }
 
 .ally { border-color: var(--primary-blue); }
@@ -200,6 +201,10 @@ h2 {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px; /* 防止 iOS zoom */
+}
+
+.autocomplete-container .search-input {
+    padding-right: 32px;
 }
 
 .base-stats-info {
@@ -721,7 +726,11 @@ h2 {
 @media (max-width: 768px) {
     .calc-container {
         grid-template-columns: 1fr;
-        padding-bottom: 80px; 
+        padding-bottom: 80px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     /* Tab Navigation */
@@ -765,6 +774,17 @@ h2 {
     .tab-content.active {
         display: block !important;
         animation: fadeIn 0.3s;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .poke-settings {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     /* Sticky Footer */
@@ -1181,6 +1201,28 @@ h2 {
     width: 100%;
 }
 
+.clear-input-btn {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #555;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 0;
+    cursor: pointer;
+    display: none;
+}
+
+.clear-input-btn:hover {
+    background: #d0d0d0;
+}
+
 .autocomplete-list {
     position: absolute;
     top: 100%;
@@ -1248,15 +1290,35 @@ h2 {
     width: 100%;
     display: flex;
     align-items: center;
+    gap: 8px;
+}
+
+.move-input-field {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+    width: 18em;
+    min-width: 18em;
+    max-width: 18em;
+    flex: 0 0 18em;
+}
+
+.move-input-field .clear-input-btn {
+    right: 6px;
 }
 
 .move-select {
     width: 100%;
     flex: 1;
+    padding-right: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .move-info-display {
-    margin-left: 8px;
+    margin-left: 0;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1797,6 +1859,9 @@ h2 {
     height: 220px;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .chart-container h4 {
@@ -1821,12 +1886,21 @@ h2 {
 .chart-container canvas {
     flex: 1;
     min-height: 0;
+    width: 100% !important;
+    max-width: 100%;
 }
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .usage-rate-charts {
         grid-template-columns: 1fr;
+    }
+
+    .move-input-field {
+        width: 10em;
+        min-width: 10em;
+        max-width: 10em;
+        flex: 0 0 10em;
     }
     
     .chart-container {

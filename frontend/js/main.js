@@ -118,6 +118,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    setupClearInputButtons();
+
 
 
     // --- Autocomplete Logic ---
@@ -309,7 +311,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
         const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
-        const powerText = (moveData.power > 0) ? `威力: ${moveData.power}` : '-';
+        const powerText = (moveData.power > 0) ? `${moveData.power}` : '-';
 
         // Create Type Badge
         const badge = document.createElement('span');
@@ -426,6 +428,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 li.addEventListener('mousedown', function(e) {
                     inputElement.value = moveName;
                     listElement.style.display = 'none';
+                    inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+                    inputElement.dispatchEvent(new Event('change', { bubbles: true }));
                     triggerChange(moveName);
                 });
 
@@ -1471,6 +1475,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (teraSelect) teraSelect.value = pokemon.teraType;
         if (itemSelect && pokemon.item) itemSelect.value = pokemon.item;
 
+        // 使用率データ表示をポケモンに同期
+        updateUsageRateDisplay(teamType, pokemon.name);
+
         // Ability syncing
         if (abilitySelect && pokemon.speciesData) {
             const currentVal = pokemon.ability || abilitySelect.value;
@@ -1725,6 +1732,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupStatInputs('enemy');
 });
 
+function setupClearInputButtons() {
+    const buttons = document.querySelectorAll('.clear-input-btn[data-target]');
+    buttons.forEach(button => {
+        const inputId = button.dataset.target;
+        const input = document.getElementById(inputId);
+        if (!input) return;
+
+        const toggleVisibility = () => {
+            button.style.display = input.value ? 'block' : 'none';
+        };
+
+        input.addEventListener('input', toggleVisibility);
+        toggleVisibility();
+
+        button.addEventListener('click', () => {
+            input.value = '';
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+            input.focus();
+        });
+    });
+}
+
 // --- Mobile Tab & Sticky Footer Logic ---
 function initMobileTabs() {
         const tabBtns = document.querySelectorAll('.tab-btn');
@@ -1899,6 +1929,8 @@ function renderMovesChart(side, movesData) {
     const labels = movesData.map(item => item.name);
     const data = movesData.map(item => parseFloat(item.rate));
     
+    const isMobile = window.innerWidth <= 768;
+
     chartInstances[side].moves = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -1933,11 +1965,11 @@ function renderMovesChart(side, movesData) {
                 },
                 x: {
                     ticks: {
-                        autoSkip: true,
-                        maxRotation: 35,
-                        minRotation: 0,
+                        autoSkip: !isMobile,
+                        maxRotation: isMobile ? 60 : 35,
+                        minRotation: isMobile ? 45 : 0,
                         font: {
-                            size: 11
+                            size: isMobile ? 9 : 11
                         }
                     }
                 }

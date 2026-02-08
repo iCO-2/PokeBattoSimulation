@@ -59,16 +59,17 @@
 
             <div class="autocomplete-container">
                 <input type="text" id="ally-name-input" placeholder="ポケモン名を入力してください" class="search-input" autocomplete="off">
+                <button type="button" class="clear-input-btn" data-target="ally-name-input" aria-label="入力をクリア">×</button>
                 <ul id="ally-autocomplete-list" class="autocomplete-list"></ul>
             </div>
             <div id="ally-base-stats" class="base-stats-info"></div>
             
             <!-- 使用率データ表示セクション -->
             <div class="usage-rate-section" id="ally-usage-rate-section" style="display: none;">
-                <div class="usage-rate-header" id="ally-usage-rate-header">
-                    <h3>使用率データ <span class="toggle-icon">▼</span></h3>
+                <div class="usage-rate-header collapsed" id="ally-usage-rate-header">
+                    <h3>採用率データをみる <span class="toggle-icon">▼</span></h3>
                 </div>
-                <div class="usage-rate-content" id="ally-usage-rate-content">
+                <div class="usage-rate-content collapsed" id="ally-usage-rate-content">
                     <div class="usage-rate-charts">
                         <div class="chart-container">
                             <h4><img class="usage-rate-icon" src="../backend/data/image/move_record.png" alt="技">技</h4>
@@ -375,7 +376,10 @@
                     <div class="move-row">
                         <input type="radio" name="ally-active-move" value="0" class="move-select-radio" checked>
                         <div class="move-input-wrapper">
-                            <input class="move-select" data-index="0" id="ally-move-0" placeholder="技1" autocomplete="off">
+                            <div class="move-input-field">
+                                <input class="move-select" data-index="0" id="ally-move-0" placeholder="技1" autocomplete="off">
+                                <button type="button" class="clear-input-btn" data-target="ally-move-0" aria-label="入力をクリア">×</button>
+                            </div>
                             <ul class="custom-autocomplete-list"></ul>
                             <div class="move-info-display"></div>
                         </div>
@@ -383,7 +387,10 @@
                     <div class="move-row">
                         <input type="radio" name="ally-active-move" value="1" class="move-select-radio">
                         <div class="move-input-wrapper">
-                            <input class="move-select" data-index="1" id="ally-move-1" placeholder="技2" autocomplete="off">
+                            <div class="move-input-field">
+                                <input class="move-select" data-index="1" id="ally-move-1" placeholder="技2" autocomplete="off">
+                                <button type="button" class="clear-input-btn" data-target="ally-move-1" aria-label="入力をクリア">×</button>
+                            </div>
                             <ul class="custom-autocomplete-list"></ul>
                             <div class="move-info-display"></div>
                         </div>
@@ -391,7 +398,10 @@
                     <div class="move-row">
                         <input type="radio" name="ally-active-move" value="2" class="move-select-radio">
                         <div class="move-input-wrapper">
-                            <input class="move-select" data-index="2" id="ally-move-2" placeholder="技3" autocomplete="off">
+                            <div class="move-input-field">
+                                <input class="move-select" data-index="2" id="ally-move-2" placeholder="技3" autocomplete="off">
+                                <button type="button" class="clear-input-btn" data-target="ally-move-2" aria-label="入力をクリア">×</button>
+                            </div>
                             <ul class="custom-autocomplete-list"></ul>
                             <div class="move-info-display"></div>
                         </div>
@@ -399,7 +409,10 @@
                     <div class="move-row">
                         <input type="radio" name="ally-active-move" value="3" class="move-select-radio">
                         <div class="move-input-wrapper">
-                            <input class="move-select" data-index="3" id="ally-move-3" placeholder="技4" autocomplete="off">
+                            <div class="move-input-field">
+                                <input class="move-select" data-index="3" id="ally-move-3" placeholder="技4" autocomplete="off">
+                                <button type="button" class="clear-input-btn" data-target="ally-move-3" aria-label="入力をクリア">×</button>
+                            </div>
                             <ul class="custom-autocomplete-list"></ul>
                             <div class="move-info-display"></div>
                         </div>
@@ -503,16 +516,17 @@
 
             <div class="autocomplete-container">
                 <input type="text" id="enemy-name-input" placeholder="ポケモン名を入力してください" class="search-input" autocomplete="off">
+                <button type="button" class="clear-input-btn" data-target="enemy-name-input" aria-label="入力をクリア">×</button>
                 <ul id="enemy-autocomplete-list" class="autocomplete-list"></ul>
             </div>
             <div id="enemy-base-stats" class="base-stats-info"></div>
             
             <!-- 使用率データ表示セクション -->
             <div class="usage-rate-section" id="enemy-usage-rate-section" style="display: none;">
-                <div class="usage-rate-header" id="enemy-usage-rate-header">
-                    <h3>使用率データ <span class="toggle-icon">▼</span></h3>
+                <div class="usage-rate-header collapsed" id="enemy-usage-rate-header">
+                    <h3>採用率データをみる <span class="toggle-icon">▼</span></h3>
                 </div>
-                <div class="usage-rate-content" id="enemy-usage-rate-content">
+                <div class="usage-rate-content collapsed" id="enemy-usage-rate-content">
                     <div class="usage-rate-charts">
                         <div class="chart-container">
                             <h4><img class="usage-rate-icon" src="../backend/data/image/move_record.png" alt="技">技</h4>
@@ -810,7 +824,10 @@
                     <div class="move-row">
                         <input type="radio" name="enemy-active-move" value="0" class="move-select-radio" checked>
                         <div class="move-input-wrapper">
-                            <input class="move-select" data-index="0" id="enemy-move-0" placeholder="技1" autocomplete="off">
+                            <div class="move-input-field">
+                                <input class="move-select" data-index="0" id="enemy-move-0" placeholder="技1" autocomplete="off">
+                                <button type="button" class="clear-input-btn" data-target="enemy-move-0" aria-label="入力をクリア">×</button>
+                            </div>
                             <ul class="custom-autocomplete-list"></ul>
                             <div class="move-info-display"></div>
                         </div>
@@ -818,7 +835,10 @@
                     <div class="move-row">
                         <input type="radio" name="enemy-active-move" value="1" class="move-select-radio">
                         <div class="move-input-wrapper">
-                            <input class="move-select" data-index="1" id="enemy-move-1" placeholder="技2" autocomplete="off">
+                            <div class="move-input-field">
+                                <input class="move-select" data-index="1" id="enemy-move-1" placeholder="技2" autocomplete="off">
+                                <button type="button" class="clear-input-btn" data-target="enemy-move-1" aria-label="入力をクリア">×</button>
+                            </div>
                             <ul class="custom-autocomplete-list"></ul>
                             <div class="move-info-display"></div>
                         </div>
@@ -826,7 +846,10 @@
                     <div class="move-row">
                         <input type="radio" name="enemy-active-move" value="2" class="move-select-radio">
                         <div class="move-input-wrapper">
-                            <input class="move-select" data-index="2" id="enemy-move-2" placeholder="技3" autocomplete="off">
+                            <div class="move-input-field">
+                                <input class="move-select" data-index="2" id="enemy-move-2" placeholder="技3" autocomplete="off">
+                                <button type="button" class="clear-input-btn" data-target="enemy-move-2" aria-label="入力をクリア">×</button>
+                            </div>
                             <ul class="custom-autocomplete-list"></ul>
                             <div class="move-info-display"></div>
                         </div>
@@ -834,7 +857,10 @@
                     <div class="move-row">
                         <input type="radio" name="enemy-active-move" value="3" class="move-select-radio">
                         <div class="move-input-wrapper">
-                            <input class="move-select" data-index="3" id="enemy-move-3" placeholder="技4" autocomplete="off">
+                            <div class="move-input-field">
+                                <input class="move-select" data-index="3" id="enemy-move-3" placeholder="技4" autocomplete="off">
+                                <button type="button" class="clear-input-btn" data-target="enemy-move-3" aria-label="入力をクリア">×</button>
+                            </div>
                             <ul class="custom-autocomplete-list"></ul>
                             <div class="move-info-display"></div>
                         </div>
