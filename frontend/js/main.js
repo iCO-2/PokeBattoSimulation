@@ -61,7 +61,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (allyNameInput) {
         allyNameInput.addEventListener('input', (e) => {
             const pokemon = appState.getAllyPokemon();
+            const prevName = pokemon.name;
             pokemon.name = e.target.value;
+            if (pokemon.name !== prevName) {
+                pokemon.moves = ['', '', '', ''];
+                pokemon.activeMoveIndex = 0;
+            }
             // 名前変更時は種族値が変わる可能性があるので再計算
             pokemon.computeStats(); 
             updateFormFromState('ally'); 
@@ -101,7 +106,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (enemyNameInput) {
         enemyNameInput.addEventListener('input', (e) => {
             const pokemon = appState.getEnemyPokemon();
+            const prevName = pokemon.name;
             pokemon.name = e.target.value;
+            if (pokemon.name !== prevName) {
+                pokemon.moves = ['', '', '', ''];
+                pokemon.activeMoveIndex = 0;
+            }
             pokemon.computeStats();
             updateFormFromState('enemy');
             updateTeamSlots('enemy');
@@ -514,6 +524,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
                     if (!pokemon) return;
 
+                    // 入力変更時は情報表示をリセット
+                    updateMoveInfoDisplay(input, '');
+
                     // Try exact match in Japanese or English
                     let foundMove = null;
                     // MOVES_DEX keys are Japanese names
@@ -526,6 +539,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     if (foundMove) {
                         pokemon.moves[i] = foundMove;
                         updateMoveInfoDisplay(input, foundMove);
+                    } else {
+                        pokemon.moves[i] = val || '';
                     }
                 });
 
@@ -1477,6 +1492,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // 使用率データ表示をポケモンに同期
         updateUsageRateDisplay(teamType, pokemon.name);
+
+        // 技入力・表示をポケモンに同期
+        updateMoveSelectionUI(teamType);
 
         // Ability syncing
         if (abilitySelect && pokemon.speciesData) {
