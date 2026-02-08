@@ -607,7 +607,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     itemSelects.forEach(select => {
         if (!select) return;
         // 既存のオプションをクリア（"なし"以外）
-        select.innerHTML = '<option value="">なし</option>';
+        select.innerHTML = '<option value="">未設定</option>';
         
         Object.keys(ITEMS_DEX).forEach(itemName => {
             const option = document.createElement('option');
@@ -1518,6 +1518,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (abilitySelect && pokemon.speciesData) {
             const currentVal = pokemon.ability || abilitySelect.value;
             abilitySelect.innerHTML = '';
+            
+            // 「未設定」オプションを追加
+            const unsetOpt = document.createElement('option');
+            unsetOpt.value = '';
+            unsetOpt.textContent = '未設定';
+            abilitySelect.appendChild(unsetOpt);
+            
             if (pokemon.speciesData.abilities) {
                 pokemon.speciesData.abilities.forEach(ab => {
                    const opt = document.createElement('option');
@@ -1529,9 +1536,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const hasCurrent = currentVal && Array.from(abilitySelect.options).some(opt => opt.value === currentVal);
             if (hasCurrent) {
                 abilitySelect.value = currentVal;
-            } else if (abilitySelect.options.length > 0) {
-                abilitySelect.value = abilitySelect.options[0].value;
-                pokemon.ability = abilitySelect.value;
+            } else if (pokemon.speciesData.abilities && pokemon.speciesData.abilities.length > 0) {
+                // デフォルトはabilitiesの先頭
+                abilitySelect.value = pokemon.speciesData.abilities[0].name;
+                pokemon.ability = pokemon.speciesData.abilities[0].name;
             }
         }
 
