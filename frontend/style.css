@@ -20,15 +20,99 @@ body {
     color: var(--text-color);
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    padding: 10px;
+    padding: 0;
 }
+
+/* トップヘッダー */
+.top-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.menu-btn:hover {
+    background: #f0f0f0;
+}
+
+.menu-icon {
+    font-size: 24px;
+    color: #333;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-playsphere {
+    color: #000000;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+    width: 36px;
+    height: 36px;
+}
+
+.header-icon-btn:hover {
+    background: #f0f0f0;
+}
+
+.header-icon-btn .icon {
+    font-size: 20px;
+    color: #666;
+}
+
+/* 既存のヘッダー調整 */
 
 header {
     text-align: center;
     border-bottom: 2px solid var(--border-color);
     margin-bottom: 20px;
     background: var(--card-bg);
-    padding: 20px 0;
+    padding: 20px 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
@@ -172,6 +256,7 @@ header {
     gap: 20px;
     max-width: 1400px;
     margin: 0 auto;
+    padding: 0 10px;
 }
 
 .poke-settings {
