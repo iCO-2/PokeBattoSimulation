@@ -1307,6 +1307,10 @@ h2 {
     width: 100%;
 }
 
+.autocomplete-container .clear-input-btn {
+    top: calc(50% - 2.5px);
+}
+
 .clear-input-btn {
     position: absolute;
     top: 50%;
@@ -1315,18 +1319,17 @@ h2 {
     width: 22px;
     height: 22px;
     border: none;
-    border-radius: 50%;
-    background: #e0e0e0;
-    color: #555;
-    font-size: 16px;
-    line-height: 22px;
+    background: url('../backend/data/image/batsu.png') no-repeat center center;
+    background-size: contain;
+    font-size: 0;
+    text-indent: -9999px;
     padding: 0;
     cursor: pointer;
     display: none;
 }
 
 .clear-input-btn:hover {
-    background: #d0d0d0;
+    opacity: 0.7;
 }
 
 .autocomplete-list {
