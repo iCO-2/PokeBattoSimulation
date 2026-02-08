@@ -918,7 +918,7 @@ h2 {
     }
 
     .stat-result-box {
-        width: 60px !important;
+        width: 55px !important;
         min-width: 38px !important;
         padding: 1px !important;
     }
@@ -1894,6 +1894,14 @@ h2 {
 @media (max-width: 768px) {
     .usage-rate-charts {
         grid-template-columns: 1fr;
+    }
+
+    .rank-group {
+        width: 45px !important;
+    }
+
+    .rank-select {
+        width: 100%;
     }
 
     .move-input-field {
