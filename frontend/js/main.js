@@ -1,5 +1,5 @@
 import { AppState } from './AppState.js?v=117';
-import { SPECIES_DEX, MOVES_DEX, COMMONLY_USED_POKEMON, loadAllData } from './data/loader.js?v=3';
+import { SPECIES_DEX, MOVES_DEX, COMMONLY_USED_POKEMON, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
 import { ITEMS_DEX } from './data/items.js?v=3';
 import { calculateDamage } from './calc/damage.js?v=202';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
@@ -141,17 +141,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             const allPokemon = Object.keys(SPECIES_DEX);
             
             if (!filterText) {
-                // Empty input - show commonly used Pokemon
-                const availableCommon = COMMONLY_USED_POKEMON.filter(name => SPECIES_DEX[name]);
+                // Empty input - show Pokemon from usage rate data (ranked by popularity)
+                let suggestedPokemon = [];
                 
-                if (availableCommon.length > 0) {
+                if (USAGE_RATE_DATA && USAGE_RATE_DATA.length > 0) {
+                    // Use usage rate data, sorted by rank
+                    suggestedPokemon = USAGE_RATE_DATA
+                        .sort((a, b) => a.rank - b.rank)
+                        .map(entry => entry.name)
+                        .filter(name => SPECIES_DEX[name])
+                        .slice(0, 30); // Top 30
+                } else {
+                    // Fallback to COMMONLY_USED_POKEMON
+                    suggestedPokemon = COMMONLY_USED_POKEMON.filter(name => SPECIES_DEX[name]);
+                }
+                
+                if (suggestedPokemon.length > 0) {
                     // Header
                     const header = document.createElement('li');
                     header.className = 'autocomplete-header';
                     header.textContent = 'よく使われているポケモン';
                     listElement.appendChild(header);
 
-                    availableCommon.forEach(name => {
+                    suggestedPokemon.forEach(name => {
                         const item = document.createElement('li');
                         item.className = 'commonly-used';
                         item.textContent = name;
@@ -345,9 +357,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             listElement.innerHTML = '';
             
             const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            const commonlyUsed = (pokemon && pokemon.speciesData && pokemon.speciesData.commonly_use) 
-                ? pokemon.speciesData.commonly_use 
-                : [];
+            
+            // Get commonly used moves from usage rate data first, fallback to speciesData
+            let commonlyUsed = [];
+            if (pokemon && pokemon.name && USAGE_RATE_DATA && USAGE_RATE_DATA.length > 0) {
+                const usageEntry = USAGE_RATE_DATA.find(entry => entry.name === pokemon.name);
+                if (usageEntry && usageEntry.moves) {
+                    // Extract move names from usage rate data (sorted by rate)
+                    commonlyUsed = usageEntry.moves.map(m => m.name);
+                }
+            }
+            
+            // Fallback to speciesData.commonly_use if no usage rate data
+            if (commonlyUsed.length === 0 && pokemon && pokemon.speciesData && pokemon.speciesData.commonly_use) {
+                commonlyUsed = pokemon.speciesData.commonly_use;
+            }
+            
             const allMoves = (pokemon && pokemon.speciesData && pokemon.speciesData.moves) 
                 ? pokemon.speciesData.moves 
                 : Object.keys(MOVES_DEX);
