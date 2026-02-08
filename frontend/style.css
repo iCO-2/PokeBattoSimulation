@@ -300,6 +300,11 @@ h2 {
     display: inline-block;
 }
 
+.options select {
+    width: 180px;
+    min-width: 180px;
+}
+
 .move-config-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
