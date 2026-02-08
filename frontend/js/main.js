@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const prevName = pokemon.name;
             pokemon.name = e.target.value;
             if (pokemon.name !== prevName) {
+                pokemon.ability = '';
                 pokemon.moves = ['', '', '', ''];
                 pokemon.activeMoveIndex = 0;
             }
@@ -109,6 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const prevName = pokemon.name;
             pokemon.name = e.target.value;
             if (pokemon.name !== prevName) {
+                pokemon.ability = '';
                 pokemon.moves = ['', '', '', ''];
                 pokemon.activeMoveIndex = 0;
             }
@@ -1508,7 +1510,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                    abilitySelect.appendChild(opt);
                 });
             }
-            if (currentVal) {
+            const hasCurrent = currentVal && Array.from(abilitySelect.options).some(opt => opt.value === currentVal);
+            if (hasCurrent) {
                 abilitySelect.value = currentVal;
             } else if (abilitySelect.options.length > 0) {
                 abilitySelect.value = abilitySelect.options[0].value;
