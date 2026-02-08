@@ -294,6 +294,12 @@ h2 {
     flex-wrap: wrap;
 }
 
+.options .option-label {
+    min-width: 3.5em;
+    text-align: left;
+    display: inline-block;
+}
+
 .move-config-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1909,6 +1915,14 @@ h2 {
         min-width: 10em;
         max-width: 10em;
         flex: 0 0 10em;
+    }
+
+    .options label {
+        flex-wrap: nowrap;
+    }
+
+    .options .option-label {
+        min-width: 3.5em !important;
     }
     
     .chart-container {
