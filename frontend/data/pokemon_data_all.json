@@ -43038,12 +43038,12 @@
     },
     "abilities": [
       {
-        "name": "すながくれ",
-        "is_hidden": false
-      },
-      {
         "name": "さめはだ",
         "is_hidden": true
+      },
+      {
+        "name": "すながくれ",
+        "is_hidden": false
       }
     ],
     "moves": [

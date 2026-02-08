@@ -180,6 +180,7 @@ header {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-top: 5px solid transparent;
+    box-sizing: border-box;
 }
 
 .ally { border-color: var(--primary-blue); }
@@ -200,6 +201,10 @@ h2 {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px; /* 防止 iOS zoom */
+}
+
+.autocomplete-container .search-input {
+    padding-right: 32px;
 }
 
 .base-stats-info {
@@ -287,6 +292,12 @@ h2 {
     margin-bottom: 8px;
     font-size: 0.9em;
     flex-wrap: wrap;
+}
+
+.options .option-label {
+    min-width: 3.5em;
+    text-align: left;
+    display: inline-block;
 }
 
 .move-config-grid {
@@ -721,7 +732,11 @@ h2 {
 @media (max-width: 768px) {
     .calc-container {
         grid-template-columns: 1fr;
-        padding-bottom: 80px; 
+        padding-bottom: 80px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     /* Tab Navigation */
@@ -765,6 +780,17 @@ h2 {
     .tab-content.active {
         display: block !important;
         animation: fadeIn 0.3s;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .poke-settings {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     /* Sticky Footer */
@@ -898,7 +924,7 @@ h2 {
     }
 
     .stat-result-box {
-        width: 60px !important;
+        width: 55px !important;
         min-width: 38px !important;
         padding: 1px !important;
     }
@@ -1181,6 +1207,28 @@ h2 {
     width: 100%;
 }
 
+.clear-input-btn {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #555;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 0;
+    cursor: pointer;
+    display: none;
+}
+
+.clear-input-btn:hover {
+    background: #d0d0d0;
+}
+
 .autocomplete-list {
     position: absolute;
     top: 100%;
@@ -1248,15 +1296,35 @@ h2 {
     width: 100%;
     display: flex;
     align-items: center;
+    gap: 8px;
+}
+
+.move-input-field {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+    width: 18em;
+    min-width: 18em;
+    max-width: 18em;
+    flex: 0 0 18em;
+}
+
+.move-input-field .clear-input-btn {
+    right: 6px;
 }
 
 .move-select {
     width: 100%;
     flex: 1;
+    padding-right: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .move-info-display {
-    margin-left: 8px;
+    margin-left: 0;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1728,4 +1796,140 @@ h2 {
 
 .enemy-attack-btn .btn-main-text {
     color: var(--primary-red);
+}
+
+/* 使用率データ表示セクション */
+.usage-rate-section {
+    margin: 15px 0;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.usage-rate-header {
+    background: linear-gradient(to right, #e3f2fd, #f3e5f5);
+    padding: 12px 15px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.usage-rate-header:hover {
+    background: linear-gradient(to right, #bbdefb, #e1bee7);
+}
+
+.usage-rate-header h3 {
+    margin: 0;
+    font-size: 1em;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-icon {
+    font-size: 0.8em;
+    transition: transform 0.3s;
+}
+
+.usage-rate-header.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.usage-rate-content {
+    padding: 15px;
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s;
+}
+
+.usage-rate-content.collapsed {
+    max-height: 0;
+    padding: 0 15px;
+}
+
+.usage-rate-charts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.chart-container {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.chart-container h4 {
+    margin: 0 0 6px 0;
+    font-size: 0.95em;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 6px;
+    flex-shrink: 0;
+}
+
+.usage-rate-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.chart-container canvas {
+    flex: 1;
+    min-height: 0;
+    width: 100% !important;
+    max-width: 100%;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .usage-rate-charts {
+        grid-template-columns: 1fr;
+    }
+
+    .rank-group {
+        width: 45px !important;
+    }
+
+    .rank-select {
+        width: 100%;
+    }
+
+    .move-input-field {
+        width: 10em;
+        min-width: 10em;
+        max-width: 10em;
+        flex: 0 0 10em;
+    }
+
+    .options label {
+        flex-wrap: nowrap;
+    }
+
+    .options .option-label {
+        min-width: 3.5em !important;
+    }
+    
+    .chart-container {
+        height: 200px;
+    }
+    
+    .chart-container canvas {
+        max-height: 190px;
+    }
 }
