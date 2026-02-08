@@ -1506,7 +1506,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (nameInput) nameInput.value = pokemon.name;
         if (levelInput) levelInput.value = pokemon.level;
         if (teraSelect) teraSelect.value = pokemon.teraType;
-        if (itemSelect && pokemon.item) itemSelect.value = pokemon.item;
+        if (itemSelect) itemSelect.value = pokemon.item || '';
 
         // 使用率データ表示をポケモンに同期
         updateUsageRateDisplay(teamType, pokemon.name);
@@ -1516,7 +1516,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Ability syncing
         if (abilitySelect && pokemon.speciesData) {
-            const currentVal = pokemon.ability || abilitySelect.value;
+            const currentVal = pokemon.ability || '';
             abilitySelect.innerHTML = '';
             
             // 「未設定」オプションを追加
