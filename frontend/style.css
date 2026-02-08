@@ -1962,7 +1962,7 @@ h2 {
     padding: 12px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    height: 220px;
+    height: 260px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -2026,7 +2026,7 @@ h2 {
     }
     
     .chart-container {
-        height: 200px;
+        height: 260px;
     }
     
     .chart-container canvas {
