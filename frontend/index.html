@@ -391,8 +391,6 @@
                     <select id="ally-item-select">
                         <option value="">未設定</option>
                     </select>
-                    <button type="button" class="item-trigger-btn" data-side="ally" title="持ち物の効果を手動で発動します">発動</button>
-                    <span id="ally-item-status" class="item-status"></span>
                 </label>
             </div>
 
@@ -517,6 +515,35 @@
                     <select class="random-select" id="battle-random-roll">
                         <option value="-1">-- 乱数選択 --</option>
                     </select>
+                </div>
+            </div>
+
+            <!-- 固定ダメージ/回復ボタン -->
+            <div class="fixed-damage-section">
+                <h3>ダメージ / 回復</h3>
+                <div class="fixed-damage-buttons">
+                    <div class="fixed-damage-group">
+                        <div class="group-label">自分</div>
+                        <div class="button-row">
+                            <button type="button" class="fixed-damage-btn damage-btn" data-target="ally" data-action="damage" title="自分に最大HPの1/16のダメージを与えます">
+                                (1/16)
+                            </button>
+                            <button type="button" class="fixed-damage-btn heal-btn" data-target="ally" data-action="heal" title="自分のHPを最大HPの1/16回復します">
+                                (1/16)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="fixed-damage-group">
+                        <div class="group-label">相手</div>
+                        <div class="button-row">
+                            <button type="button" class="fixed-damage-btn damage-btn" data-target="enemy" data-action="damage" title="相手に最大HPの1/16のダメージを与えます">
+                                (1/16)
+                            </button>
+                            <button type="button" class="fixed-damage-btn heal-btn" data-target="enemy" data-action="heal" title="相手のHPを最大HPの1/16回復します">
+                                 (1/16)
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -843,8 +870,6 @@
                     <select id="enemy-item-select">
                         <option value="">未設定</option>
                     </select>
-                    <button type="button" class="item-trigger-btn" data-side="enemy" title="持ち物の効果を手動で発動します">発動</button>
-                    <span id="enemy-item-status" class="item-status"></span>
                 </label>
             </div>
 
