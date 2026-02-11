@@ -48,8 +48,6 @@ export class Pokemon {
 
     // HP回復処理
     heal(amount, sourceMessage = "") {
-        if (this.currentHp <= 0) return 0; // ひんし状態なら回復しない
-        
         const oldHp = this.currentHp;
         this.currentHp = Math.min(this.maxHp, this.currentHp + amount);
         return this.currentHp - oldHp; // 実際に回復した量

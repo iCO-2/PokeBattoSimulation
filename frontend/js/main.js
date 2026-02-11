@@ -652,16 +652,80 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    // 持ち物手動発動
-    document.querySelectorAll('.item-trigger-btn').forEach(btn => {
+    // 固定ダメージ/回復ボタン
+    document.querySelectorAll('.fixed-damage-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const side = e.target.dataset.side;
-            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            if (pokemon && pokemon.item) {
-                applyRecovery(pokemon, side, pokemon.item);
+            const target = e.currentTarget.dataset.target; // 'ally' or 'enemy'
+            const action = e.currentTarget.dataset.action; // 'damage' or 'heal'
+            const pokemon = (target === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            
+            if (!pokemon || !pokemon.name) {
+                alert(`${target === 'ally' ? '自分' : '相手'}のポケモンが設定されていません`);
+                return;
             }
+            
+            // セレクトボックスから割合を取得
+            const ratioSelect = document.getElementById('fixed-damage-ratio');
+            const ratio = parseInt(ratioSelect.value); // 16 or 6
+            const ratioLabel = ratioSelect.options[ratioSelect.selectedIndex].text; // "1/16" or "1/6"
+            
+            // 固定ダメージ/回復量: 最大HPの1/ratio
+            const amount = Math.floor(pokemon.maxHp / ratio);
+            
+            if (action === 'damage') {
+                // ダメージを与える
+                const hpBefore = pokemon.currentHp;
+                pokemon.currentHp = Math.max(0, pokemon.currentHp - amount);
+                const actualDamage = hpBefore - pokemon.currentHp;
+                
+                // ログに記録
+                const historyEntry = {
+                    type: 'damage',
+                    turnId: globalTurnCounter || 0,
+                    moveName: `固定ダメージ (${ratioLabel})`,
+                    damage: actualDamage,
+                    attackerName: pokemon.name,
+                    defenderName: pokemon.name,
+                    attackerSide: target,
+                    defenderSide: target,
+                    hpBefore: hpBefore,
+                    hpAfter: pokemon.currentHp,
+                    snapshot: {
+                        allyHps: appState.allyTeam.map(p => p.currentHp),
+                        enemyHps: appState.enemyTeam.map(p => p.currentHp)
+                    }
+                };
+                appState.battleHistory.push(historyEntry);
+                pokemon.history.push(historyEntry);
+                
+            } else if (action === 'heal') {
+                // 回復する
+                const actualHealed = pokemon.heal(amount);
+                
+                // ログに記録
+                const historyEntry = {
+                    type: 'heal',
+                    turnId: globalTurnCounter || 0,
+                    moveName: `固定回復 (${ratioLabel})`,
+                    damage: actualHealed,
+                    attackerName: pokemon.name,
+                    attackerSide: target,
+                    hpBefore: pokemon.currentHp - actualHealed,
+                    hpAfter: pokemon.currentHp,
+                    snapshot: {
+                        allyHps: appState.allyTeam.map(p => p.currentHp),
+                        enemyHps: appState.enemyTeam.map(p => p.currentHp)
+                    }
+                };
+                appState.battleHistory.push(historyEntry);
+                pokemon.history.push(historyEntry);
+            }
+            
+            updateFormFromState(target);
+            renderBattleLog();
         });
     });
+
 
     // 技選択ボタン
     document.querySelectorAll('.move-grid').forEach(grid => {
@@ -1215,16 +1279,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                 li.classList.add(entry.attackerSide === 'ally' ? 'ally-turn' : 'enemy-turn');
                 li.innerHTML = `
                     <span class="turn-number">#${turnDisplayCounter}</span>
-                    <strong>${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
+                    <strong>💥${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
                     ${entry.defenderName}に <strong>${entry.damage}</strong> ダメージを与えた<br>
                     <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 採用乱数:${entry.rollLabel}）</span>
                 `;
             } else if (entry.type === 'heal') {
-                li.classList.add('heal-log');
+                li.classList.add('heal-log', entry.attackerSide === 'ally' ? 'ally-side' : 'enemy-side');
                 li.innerHTML = `
                     <span class="turn-number">✨</span>
                     <span class="log-move">${entry.attackerName} は ${entry.moveName}</span>
                     <span class="log-hp">HP: ${entry.hpBefore} → ${entry.hpAfter} (+${entry.damage})</span>
+                `;
+            } else if (entry.type === 'damage') {
+                li.classList.add('damage-log', entry.defenderSide === 'ally' ? 'ally-side' : 'enemy-side');
+                li.innerHTML = `
+                    <span class="turn-number">💥</span>
+                    <span class="log-move">${entry.defenderName} は ${entry.moveName}</span>
+                    <span class="log-hp">HP: ${entry.hpBefore} → ${entry.hpAfter} (-${entry.damage})</span>
                 `;
             } else if (entry.type === 'faint') {
                 // ひんしログは攻撃された側（defender）の属性で色分け
@@ -1355,16 +1426,34 @@ document.addEventListener('DOMContentLoaded', async () => {
             [...poke.history].reverse().forEach(entry => {
                 const li = document.createElement('li');
                 const perc = (poke.maxHp > 0) ? (entry.damage / poke.maxHp * 100).toFixed(1) : 0;
-                
-                li.innerHTML = `
-                    <span class="move">${entry.moveName}</span>
-                    <span class="dmg">ダメージ：${entry.damage}</span>
-                    <span class="perc">(割合：${perc}%)</span>
-                    <div class="attacker">
-                        HP：${entry.hpBefore} → ${entry.hpAfter}<br>
-                        ${entry.attackerName}からの受けた攻撃 (乱数：${entry.rollLabel})
-                    </div>
-                `;
+                const attackerLabel = entry.attackerName || (side === 'ally' ? '自分' : '相手');
+                const sideClass = side === 'ally' ? 'ally-side' : 'enemy-side';
+
+                if (entry.type === 'heal') {
+                    li.classList.add('heal-log', sideClass);
+                    li.innerHTML = `
+                        <span class="move">${entry.moveName}</span>
+                        <span class="dmg">回復：+${entry.damage}</span>
+                        <span class="perc">(割合：${perc}%)</span>
+                        <div class="attacker">
+                            HP：${entry.hpBefore} → ${entry.hpAfter}<br>
+                            ${attackerLabel}の回復
+                        </div>
+                    `;
+                } else {
+                    const damageClass = entry.type === 'attack' ? 'attack-log' : 'damage-log';
+                    li.classList.add(damageClass, sideClass);
+                    const rollLabel = entry.rollLabel || '-';
+                    li.innerHTML = `
+                        <span class="move">${entry.moveName}</span>
+                        <span class="dmg">ダメージ：${entry.damage}</span>
+                        <span class="perc">(割合：${perc}%)</span>
+                        <div class="attacker">
+                            HP：${entry.hpBefore} → ${entry.hpAfter}<br>
+                            ${attackerLabel}からの受けた攻撃 (乱数：${rollLabel})
+                        </div>
+                    `;
+                }
                 historyList.appendChild(li);
             });
         }
@@ -1473,6 +1562,108 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
         });
+    }
+
+    // 計算結果カセットの更新（ポケモンアイコンとHPバー）
+    function updateResultHeader() {
+        const headerDisplay = document.querySelector('.result-header-display');
+        if (!headerDisplay) return;
+        
+        const allyPoke = appState.getAllyPokemon();
+        const enemyPoke = appState.getEnemyPokemon();
+        
+        // 常に表示（未選択の場合はみがわりを表示）
+        headerDisplay.style.display = 'flex';
+        
+        // Ally Icon
+        const allyIcon = document.getElementById('result-ally-icon');
+        if (allyIcon) {
+            if (allyPoke && allyPoke.name) {
+                const name = allyPoke.name.trim();
+                allyIcon.dataset.retried = '';
+                
+                let src = `../backend/image/${name}.gif`;
+                if (allyPoke.speciesData && allyPoke.speciesData.sprite_url) {
+                    src = allyPoke.speciesData.sprite_url;
+                }
+                
+                allyIcon.src = src;
+                allyIcon.alt = name;
+                allyIcon.onerror = () => { 
+                    if (!allyIcon.dataset.retried) {
+                        allyIcon.dataset.retried = 'true';
+                        if (src !== `../backend/image/${name}.gif`) {
+                            allyIcon.src = `../backend/image/${name}.gif`;
+                            return;
+                        }
+                        if (name.includes('（') || name.includes('(')) {
+                            const baseName = name.split(/[（(]/)[0];
+                            allyIcon.src = `../backend/image/${baseName}.gif`;
+                            return;
+                        }
+                    }
+                    allyIcon.src = '';
+                    allyIcon.alt = name;
+                };
+            } else {
+                // ポケモンが選択されていない場合はみがわりを表示
+                allyIcon.src = '../backend/data/image/migawari.png';
+                allyIcon.alt = 'みがわり';
+            }
+        }
+        
+        // Enemy Icon
+        const enemyIcon = document.getElementById('result-enemy-icon');
+        if (enemyIcon) {
+            if (enemyPoke && enemyPoke.name) {
+                const name = enemyPoke.name.trim();
+                enemyIcon.dataset.retried = '';
+                
+                let src = `../backend/image/${name}.gif`;
+                if (enemyPoke.speciesData && enemyPoke.speciesData.sprite_url) {
+                    src = enemyPoke.speciesData.sprite_url;
+                }
+                
+                enemyIcon.src = src;
+                enemyIcon.alt = name;
+                enemyIcon.onerror = () => { 
+                    if (!enemyIcon.dataset.retried) {
+                        enemyIcon.dataset.retried = 'true';
+                        if (src !== `../backend/image/${name}.gif`) {
+                            enemyIcon.src = `../backend/image/${name}.gif`;
+                            return;
+                        }
+                        if (name.includes('（') || name.includes('(')) {
+                            const baseName = name.split(/[（(]/)[0];
+                            enemyIcon.src = `../backend/image/${baseName}.gif`;
+                            return;
+                        }
+                    }
+                    enemyIcon.src = '';
+                    enemyIcon.alt = name;
+                };
+            } else {
+                // ポケモンが選択されていない場合はみがわりを表示
+                enemyIcon.src = '../backend/data/image/migawari.png';
+                enemyIcon.alt = 'みがわり';
+            }
+        }
+        
+        // Update Mini HP Bars
+        const updateHeaderHpBar = (side, pokemon) => {
+            const fill = document.getElementById(`result-${side}-mini-hp-fill`);
+            if (fill && pokemon) {
+                const hpRatio = pokemon.maxHp > 0 ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
+                fill.style.width = `${hpRatio}%`;
+                
+                fill.style.backgroundColor = '';
+                if (hpRatio >= 50) fill.style.backgroundColor = 'var(--primary-green)';
+                else if (hpRatio >= 25) fill.style.backgroundColor = 'var(--accent-orange)';
+                else fill.style.backgroundColor = 'var(--primary-red)';
+            }
+        };
+        updateHeaderHpBar('ally', allyPoke);
+        updateHeaderHpBar('enemy', enemyPoke);
     }
 
     function updateFormFromState(teamType) {
@@ -1628,6 +1819,25 @@ document.addEventListener('DOMContentLoaded', async () => {
                 hpBar.style.backgroundColor = 'var(--primary-red)';
             }
         }
+        
+        // 計算結果エリアのHPバーも更新
+        const resultMiniHpFill = document.getElementById(`result-${prefix}-mini-hp-fill`);
+        if (resultMiniHpFill && pokemon.maxHp > 0) {
+            const hpRatio = (pokemon.currentHp / pokemon.maxHp) * 100;
+            resultMiniHpFill.style.width = `${hpRatio}%`;
+            
+            // HP残量に応じた色変更
+            if (hpRatio >= 50) {
+                resultMiniHpFill.style.backgroundColor = 'var(--primary-green)';
+            } else if (hpRatio >= 25) {
+                resultMiniHpFill.style.backgroundColor = 'var(--accent-orange)';
+            } else {
+                resultMiniHpFill.style.backgroundColor = 'var(--primary-red)';
+            }
+        }
+        
+        // 計算結果カセットも更新
+        updateResultHeader();
     }
 
     function updateTeamSlots(teamType) {
