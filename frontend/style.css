@@ -15,6 +15,10 @@
     --accent-orange: #f39c12;
 }
 
+* {
+    touch-action: manipulation;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -623,6 +627,60 @@ h2 {
     margin-top: 2px;
 }
 
+.damage-history li.heal-log.ally-side {
+    border-left: 4px solid var(--primary-green);
+    background: rgba(46, 204, 113, 0.05);
+    padding-left: 8px;
+}
+
+.damage-history li.heal-log.enemy-side {
+    border-right: 4px solid var(--primary-green);
+    border-left: none;
+    background: rgba(46, 204, 113, 0.05);
+    text-align: right;
+    padding-right: 8px;
+}
+
+.damage-history li.attack-log.ally-side {
+    border-left: 4px solid var(--primary-red);
+    background: rgba(231, 76, 60, 0.05);
+    padding-left: 8px;
+}
+
+.damage-history li.attack-log.enemy-side {
+    border-right: 4px solid var(--primary-red);
+    border-left: none;
+    background: rgba(231, 76, 60, 0.05);
+    text-align: right;
+    padding-right: 8px;
+}
+
+.damage-history li.damage-log.ally-side {
+    border-left: 4px solid #95a5a6;
+    background: rgba(149, 165, 166, 0.05);
+    padding-left: 8px;
+}
+
+.damage-history li.damage-log.enemy-side {
+    border-right: 4px solid #95a5a6;
+    border-left: none;
+    background: rgba(149, 165, 166, 0.05);
+    text-align: right;
+    padding-right: 8px;
+}
+
+.damage-history li.heal-log span.dmg {
+    color: var(--primary-green);
+}
+
+.damage-history li.attack-log span.dmg {
+    color: #e74c3c;
+}
+
+.damage-history li.damage-log span.dmg {
+    color: #7f8c8d;
+}
+
 /* Central Damage Result */
 .damage-result-container {
     background: #fdfdfd;
@@ -712,13 +770,8 @@ h2 {
     position: relative;
 }
 
-.battle-log-list li:hover {
-    background-color: #f0f7ff !important;
-    transform: translateX(2px);
-}
-
 .battle-log-list li:active {
-    transform: translateX(0);
+    background-color: #f5f5f5;
 }
 
 .battle-log-list li::before {
@@ -733,9 +786,7 @@ h2 {
     color: #3498db;
 }
 
-.battle-log-list li:hover::before {
-    opacity: 0.5;
-}
+/* ホバー時のアイコン表示を削除 */
 
 .battle-log-list li:last-child {
     border-bottom: none;
@@ -747,8 +798,10 @@ h2 {
 }
 
 .battle-log-list li.enemy-turn {
-    border-left: 4px solid var(--primary-red);
+    border-right: 4px solid var(--primary-red);
+    border-left: none;
     background: rgba(231, 76, 60, 0.02);
+    text-align: right;
 }
 
 .battle-log-list .turn-number {
@@ -777,9 +830,28 @@ h2 {
     background: transparent;
 }
 
-.battle-log-list li.heal-log {
+.battle-log-list li.heal-log.ally-side {
     border-left: 4px solid var(--primary-green);
     background: rgba(46, 204, 113, 0.05);
+}
+
+.battle-log-list li.heal-log.enemy-side {
+    border-right: 4px solid var(--primary-green);
+    border-left: none;
+    background: rgba(46, 204, 113, 0.05);
+    text-align: right;
+}
+
+.battle-log-list li.damage-log.ally-side {
+    border-left: 4px solid #95a5a6;
+    background: rgba(149, 165, 166, 0.05);
+}
+
+.battle-log-list li.damage-log.enemy-side {
+    border-right: 4px solid #95a5a6;
+    border-left: none;
+    background: rgba(149, 165, 166, 0.05);
+    text-align: right;
 }
 
 .item-trigger-btn {
@@ -824,6 +896,34 @@ h2 {
     border-bottom: 2px solid #eee;
     padding-bottom: 5px;
     color: #444;
+}
+
+.fixed-damage-ratio-selector {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.fixed-damage-ratio-selector label {
+    font-size: 0.9em;
+    color: #555;
+    font-weight: 500;
+}
+
+.fixed-damage-ratio-selector select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    background-color: white;
+    cursor: pointer;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .fixed-damage-buttons {

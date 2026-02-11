@@ -664,8 +664,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
             
-            // 固定ダメージ/回復量: 最大HPの1/16
-            const amount = Math.floor(pokemon.maxHp / 16);
+            // セレクトボックスから割合を取得
+            const ratioSelect = document.getElementById('fixed-damage-ratio');
+            const ratio = parseInt(ratioSelect.value); // 16 or 6
+            const ratioLabel = ratioSelect.options[ratioSelect.selectedIndex].text; // "1/16" or "1/6"
+            
+            // 固定ダメージ/回復量: 最大HPの1/ratio
+            const amount = Math.floor(pokemon.maxHp / ratio);
             
             if (action === 'damage') {
                 // ダメージを与える
@@ -677,10 +682,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const historyEntry = {
                     type: 'damage',
                     turnId: globalTurnCounter || 0,
-                    moveName: '固定ダメージ (1/16)',
+                    moveName: `固定ダメージ (${ratioLabel})`,
                     damage: actualDamage,
-                    attackerName: target === 'ally' ? '自分' : '相手',
-                    defenderName: target === 'ally' ? '自分' : '相手',
+                    attackerName: pokemon.name,
+                    defenderName: pokemon.name,
                     attackerSide: target,
                     defenderSide: target,
                     hpBefore: hpBefore,
@@ -691,6 +696,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 };
                 appState.battleHistory.push(historyEntry);
+                pokemon.history.push(historyEntry);
                 
             } else if (action === 'heal') {
                 // 回復する
@@ -700,9 +706,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const historyEntry = {
                     type: 'heal',
                     turnId: globalTurnCounter || 0,
-                    moveName: '固定回復 (1/16)',
+                    moveName: `固定回復 (${ratioLabel})`,
                     damage: actualHealed,
-                    attackerName: target === 'ally' ? '自分' : '相手',
+                    attackerName: pokemon.name,
                     attackerSide: target,
                     hpBefore: pokemon.currentHp - actualHealed,
                     hpAfter: pokemon.currentHp,
@@ -712,6 +718,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 };
                 appState.battleHistory.push(historyEntry);
+                pokemon.history.push(historyEntry);
             }
             
             updateFormFromState(target);
@@ -1272,16 +1279,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                 li.classList.add(entry.attackerSide === 'ally' ? 'ally-turn' : 'enemy-turn');
                 li.innerHTML = `
                     <span class="turn-number">#${turnDisplayCounter}</span>
-                    <strong>${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
+                    <strong>💥${entry.attackerName}</strong>の<span class="log-move">${entry.moveName}</span>！<br>
                     ${entry.defenderName}に <strong>${entry.damage}</strong> ダメージを与えた<br>
                     <span class="log-hp">（HP: ${entry.hpBefore} → ${entry.hpAfter} / 採用乱数:${entry.rollLabel}）</span>
                 `;
             } else if (entry.type === 'heal') {
-                li.classList.add('heal-log');
+                li.classList.add('heal-log', entry.attackerSide === 'ally' ? 'ally-side' : 'enemy-side');
                 li.innerHTML = `
                     <span class="turn-number">✨</span>
                     <span class="log-move">${entry.attackerName} は ${entry.moveName}</span>
                     <span class="log-hp">HP: ${entry.hpBefore} → ${entry.hpAfter} (+${entry.damage})</span>
+                `;
+            } else if (entry.type === 'damage') {
+                li.classList.add('damage-log', entry.defenderSide === 'ally' ? 'ally-side' : 'enemy-side');
+                li.innerHTML = `
+                    <span class="turn-number">💥</span>
+                    <span class="log-move">${entry.defenderName} は ${entry.moveName}</span>
+                    <span class="log-hp">HP: ${entry.hpBefore} → ${entry.hpAfter} (-${entry.damage})</span>
                 `;
             } else if (entry.type === 'faint') {
                 // ひんしログは攻撃された側（defender）の属性で色分け
@@ -1412,16 +1426,34 @@ document.addEventListener('DOMContentLoaded', async () => {
             [...poke.history].reverse().forEach(entry => {
                 const li = document.createElement('li');
                 const perc = (poke.maxHp > 0) ? (entry.damage / poke.maxHp * 100).toFixed(1) : 0;
-                
-                li.innerHTML = `
-                    <span class="move">${entry.moveName}</span>
-                    <span class="dmg">ダメージ：${entry.damage}</span>
-                    <span class="perc">(割合：${perc}%)</span>
-                    <div class="attacker">
-                        HP：${entry.hpBefore} → ${entry.hpAfter}<br>
-                        ${entry.attackerName}からの受けた攻撃 (乱数：${entry.rollLabel})
-                    </div>
-                `;
+                const attackerLabel = entry.attackerName || (side === 'ally' ? '自分' : '相手');
+                const sideClass = side === 'ally' ? 'ally-side' : 'enemy-side';
+
+                if (entry.type === 'heal') {
+                    li.classList.add('heal-log', sideClass);
+                    li.innerHTML = `
+                        <span class="move">${entry.moveName}</span>
+                        <span class="dmg">回復：+${entry.damage}</span>
+                        <span class="perc">(割合：${perc}%)</span>
+                        <div class="attacker">
+                            HP：${entry.hpBefore} → ${entry.hpAfter}<br>
+                            ${attackerLabel}の回復
+                        </div>
+                    `;
+                } else {
+                    const damageClass = entry.type === 'attack' ? 'attack-log' : 'damage-log';
+                    li.classList.add(damageClass, sideClass);
+                    const rollLabel = entry.rollLabel || '-';
+                    li.innerHTML = `
+                        <span class="move">${entry.moveName}</span>
+                        <span class="dmg">ダメージ：${entry.damage}</span>
+                        <span class="perc">(割合：${perc}%)</span>
+                        <div class="attacker">
+                            HP：${entry.hpBefore} → ${entry.hpAfter}<br>
+                            ${attackerLabel}からの受けた攻撃 (乱数：${rollLabel})
+                        </div>
+                    `;
+                }
                 historyList.appendChild(li);
             });
         }
