@@ -1019,15 +1019,23 @@ h2 {
         overflow-x: hidden;
     }
 
+    /* モバイル: ヘッダー固定 */
+    header {
+        position: sticky;
+        top: var(--top-header-height, 49px);
+        z-index: 999;
+        margin-bottom: 0;
+    }
+
     /* Tab Navigation */
     .mobile-tab-nav {
         display: flex;
         position: sticky;
-        top: 0;
+        top: var(--mobile-tab-top, 0px);
         z-index: 100;
         background: #fff;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        margin: -10px -10px 15px -10px;
+        margin: 0 -10px 15px -10px;
     }
 
     .tab-btn {

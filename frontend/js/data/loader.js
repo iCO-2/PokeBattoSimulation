@@ -1,23 +1,20 @@
 export const SPECIES_DEX = {};
 export const MOVES_DEX = {};
 export let ITEMS_DEX = {};
-export let COMMONLY_USED_POKEMON = [];
 export let USAGE_RATE_DATA = [];
 
 export async function loadAllData() {
     try {
-        const [pokemonRes, movesRes, itemsRes, commonlyUsedRes, usageRateRes] = await Promise.all([
+        const [pokemonRes, movesRes, itemsRes, usageRateRes] = await Promise.all([
             fetch('./data/pokemon_data_all.json'),
             fetch('./data/moves_data.json'),
             fetch('./data/items_data.json'),
-            fetch('./data/commonly_used_pokemon.json'),
             fetch('./data/pokemon_sv_season_trend.json')
         ]);
 
         if (!pokemonRes.ok) throw new Error(`Failed to load pokemon data: ${pokemonRes.status}`);
         if (!movesRes.ok) throw new Error(`Failed to load moves data: ${movesRes.status}`);
         if (!itemsRes.ok) throw new Error(`Failed to load items data: ${itemsRes.status}`);
-        if (!commonlyUsedRes.ok) throw new Error(`Failed to load commonly used pokemon: ${commonlyUsedRes.status}`);
         if (!usageRateRes.ok) {
             console.warn(`Failed to load usage rate data: ${usageRateRes.status}. Using fallback.`);
         }
@@ -25,7 +22,6 @@ export async function loadAllData() {
         const pokemonList = await pokemonRes.json();
         const movesData = await movesRes.json();
         const itemsData = await itemsRes.json();
-        COMMONLY_USED_POKEMON = await commonlyUsedRes.json();
         
         // Load usage rate data (optional, fallback to empty array if not available)
         if (usageRateRes.ok) {

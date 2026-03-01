@@ -1,5 +1,5 @@
 import { AppState } from './AppState.js?v=117';
-import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, COMMONLY_USED_POKEMON, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
 import { calculateDamage } from './calc/damage.js?v=202';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
@@ -14,6 +14,27 @@ let globalTurnCounter = 0;
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllData();
 
+    // --- モバイルヘッダー固定: CSS変数の動的計算 ---
+    function updateStickyHeaderOffsets() {
+        if (window.innerWidth > 768) return; // モバイルのみ
+        const topHeader = document.querySelector('.top-header');
+        const headerEl = document.querySelector('header');
+        const root = document.documentElement;
+        if (topHeader) {
+            const topHeaderHeight = topHeader.offsetHeight;
+            root.style.setProperty('--top-header-height', topHeaderHeight + 'px');
+            if (headerEl) {
+                const headerStyle = window.getComputedStyle(headerEl);
+                const headerHeight = headerEl.offsetHeight
+                    + parseInt(headerStyle.marginTop || 0)
+                    + parseInt(headerStyle.marginBottom || 0);
+                root.style.setProperty('--mobile-tab-top', (topHeaderHeight + headerHeight) + 'px');
+            }
+        }
+    }
+    updateStickyHeaderOffsets();
+    window.addEventListener('resize', updateStickyHeaderOffsets);
+
     // Ally (自分) Inputs
     // Ally (自分) Inputs
     const allyNameInput = document.getElementById('ally-name-input');
@@ -26,6 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const enemyNameInput = document.getElementById('enemy-name-input');
     const enemyAbilitySelect = document.getElementById('enemy-ability-select');
     const enemyItemSelect = document.getElementById('enemy-item-select');
+    const enemyTeraSelect = document.getElementById('enemy-tera-select');
 
     // スロットボタンの初期化
     const slotButtons = document.querySelectorAll('.poke-slot');
@@ -128,6 +150,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             appState.getEnemyPokemon().ability = e.target.value;
         });
     }
+    if (enemyTeraSelect) {
+        enemyTeraSelect.addEventListener('change', (e) => {
+            appState.getEnemyPokemon().teraType = e.target.value;
+        });
+    }
 
     setupClearInputButtons();
 
@@ -164,9 +191,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         .map(entry => entry.name)
                         .filter(name => SPECIES_DEX[name])
                         .slice(0, 30); // Top 30
-                } else {
-                    // Fallback to COMMONLY_USED_POKEMON
-                    suggestedPokemon = COMMONLY_USED_POKEMON.filter(name => SPECIES_DEX[name]);
                 }
                 
                 if (suggestedPokemon.length > 0) {
