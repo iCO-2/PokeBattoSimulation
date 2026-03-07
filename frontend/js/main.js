@@ -1586,6 +1586,26 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
         });
+
+        // 5. 実数値の直接入力
+        const statValueInputs = container.querySelectorAll('.stat-value');
+        statValueInputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const stat = input.id.replace(`${side}-stat-val-`, '');
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    const val = parseInt(e.target.value);
+                    if (!isNaN(val) && val > 0) {
+                        pokemon.realStats[stat] = val;
+                        if (stat === 'hp') {
+                            pokemon.maxHp = val;
+                            pokemon.currentHp = Math.min(pokemon.currentHp, val);
+                        }
+                        updateFormFromState(side);
+                    }
+                }
+            });
+        });
     }
 
     // 計算結果カセットの更新（ポケモンアイコンとHPバー）
@@ -1811,7 +1831,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Real Value Update
             const realValEl = document.getElementById(`${teamType}-stat-val-${stat}`);
             if (realValEl) {
-                realValEl.textContent = pokemon.speciesData ? pokemon.realStats[stat] : "-";
+                realValEl.value = pokemon.speciesData ? pokemon.realStats[stat] : "";
             }
         });
 
