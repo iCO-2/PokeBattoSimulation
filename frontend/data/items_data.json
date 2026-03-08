@@ -41,5 +41,134 @@
     "type": "damage_boost",
     "multiplier": 1.3,
     "message": "いのちのたまで威力アップ"
+  },
+  "ブーストエナジー": {
+    "type": "stat_modifier",
+    "stat": "highest",
+    "multiplier": 1.3,
+    "message": "ブーストエナジーで能力アップ"
+  },
+  "タイプ強化系": {
+    "type": "damage_boost",
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ"
+  },
+  "たつじんのおび": {
+    "type": "damage_boost",
+    "multiplier": 1.2,
+    "condition": "super_effective",
+    "message": "たつじんのおびで威力アップ"
+  },
+  "ちからのハチマキ": {
+    "type": "damage_boost",
+    "stat": "attack",
+    "multiplier": 1.1,
+    "message": "ちからのハチマキで物理威力アップ"
+  },
+  "ものしりメガネ": {
+    "type": "damage_boost",
+    "stat": "spAtk",
+    "multiplier": 1.1,
+    "message": "ものしりメガネで特殊威力アップ"
+  },
+  "パンチグローブ": {
+    "type": "damage_boost",
+    "multiplier": 1.1,
+    "condition": "punching_moves",
+    "message": "パンチグローブでパンチ技の威力アップ"
+  },
+  "ノーマルジュエル": {
+    "type": "damage_boost",
+    "multiplier": 1.3,
+    "condition": "normal_type",
+    "message": "ノーマルジュエルで威力アップ"
+  },
+  "メトロノーム": {
+    "type": "damage_boost",
+    "multiplier": 1.0,
+    "growth": 0.2,
+    "max": 2.0,
+    "message": "メトロノームで威力アップ"
+  },
+  "ジャポ/レンブのみ": {
+    "type": "counter_berry",
+    "value": 0.125,
+    "message": "きのみの効果で相手にダメージ！"
+  },
+  "プレート": {
+    "type": "damage_boost",
+    "multiplier": 1.2,
+    "message": "プレートの効果で威力アップ"
+  },
+  "オーガポンのおめん": {
+    "type": "damage_boost",
+    "multiplier": 1.2,
+    "message": "おめんの効果で威力アップ"
+  },
+  "でんきだま": {
+    "type": "stat_modifier",
+    "stat": "both_atk",
+    "multiplier": 2.0,
+    "condition": "pikachu",
+    "message": "でんきだまで攻撃・特攻アップ"
+  },
+  "こんごう/だいこんごう": {
+    "type": "damage_boost",
+    "multiplier": 1.2,
+    "condition": "specific_pokemon",
+    "message": "特定の技の威力アップ"
+  },
+  "しらたま/だいしらたま": {
+    "type": "damage_boost",
+    "multiplier": 1.2,
+    "condition": "specific_pokemon",
+    "message": "特定の技の威力アップ"
+  },
+  "はっきん/だいはっきん": {
+    "type": "damage_boost",
+    "multiplier": 1.2,
+    "condition": "specific_pokemon",
+    "message": "特定の技の威力アップ"
+  },
+  "くちたけん/くちたたて": {
+    "type": "stat_modifier",
+    "stat": "specific",
+    "multiplier": 1.0,
+    "message": "フォルムチェンジと能力アップ"
+  },
+  "こころのしずく": {
+    "type": "damage_boost",
+    "multiplier": 1.2,
+    "condition": "specific_pokemon",
+    "message": "特定の技の威力アップ"
+  },
+  "とつげきチョッキ": {
+    "type": "stat_modifier",
+    "stat": "spDef",
+    "multiplier": 1.5,
+    "message": "とつげきチョッキで特防アップ"
+  },
+  "しんかのきせき": {
+    "type": "stat_modifier",
+    "stat": "defensive_stats",
+    "multiplier": 1.5,
+    "condition": "not_fully_evolved",
+    "message": "しんかのきせきで防御・特防アップ"
+  },
+  "半減きのみ": {
+    "type": "berry",
+    "multiplier": 0.5,
+    "condition": "super_effective",
+    "message": "きのみでダメージを半減！"
+  },
+  "ぼうじんゴーグル": {
+    "type": "immunity",
+    "condition": "powder_and_weather",
+    "message": "ぼうじんゴーグルで粉技や砂嵐を無効！"
+  },
+  "ねらいのまと": {
+    "type": "stat_modifier",
+    "is_special": true,
+    "message": "ねらいのまとで相性が無効化される"
   }
 }
