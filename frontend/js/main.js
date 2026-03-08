@@ -973,6 +973,32 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 }
 
+                const abilityModifierText = resultContainer.querySelector('.ability-modifier');
+                if (abilityModifierText) {
+                    let abilityStrs = [];
+                    if (damageResult.abilityOffensiveInfo) {
+                        abilityStrs.push(`${damageResult.abilityOffensiveInfo.name} (与ダメージ×${damageResult.abilityOffensiveInfo.multiplier})`);
+                    }
+                    if (damageResult.abilityDefensiveInfo) {
+                        if (damageResult.abilityDefensiveInfo.multiplier === 0) {
+                            abilityStrs.push(`${damageResult.abilityDefensiveInfo.name} (ダメージ無効化)`);
+                        } else {
+                            abilityStrs.push(`${damageResult.abilityDefensiveInfo.name} (被ダメージ×${damageResult.abilityDefensiveInfo.multiplier})`);
+                        }
+                    }
+                    if (damageResult.dezasterInfo) {
+                        const statNameMap = { 'attack': '攻撃', 'defence': '防御', 'spAtk': '特攻', 'spDef': '特防', 'speed': '素早さ' };
+                        const statJP = statNameMap[damageResult.dezasterInfo.stat] || damageResult.dezasterInfo.stat;
+                        abilityStrs.push(`${damageResult.dezasterInfo.name} (${statJP}×${damageResult.dezasterInfo.multiplier})`);
+                    }
+                    
+                    if (abilityStrs.length > 0) {
+                        abilityModifierText.innerHTML = abilityStrs.join('<br>');
+                    } else {
+                        abilityModifierText.textContent = '-';
+                    }
+                }
+
                 // Update Result Header (Icons & Move)
                 const headerDisplay = document.querySelector('.result-header-display');
                 if (headerDisplay) {

@@ -107,6 +107,42 @@
     "is_special": true,
     "memo": "残りHPがマックスのときは、一撃で倒れずに1残る"
   },
+  "エレキスキン": {
+    "type": "skin",
+    "offensive": 1.2,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ノーマル技が電気タイプになって、威力が1.2倍"
+  },
+  "フェアリースキン": {
+    "type": "skin",
+    "offensive": 1.2,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ノーマル技がフェアリータイプになって、威力が1.2倍"
+  },
+  "スカイスキン": {
+    "type": "skin",
+    "offensive": 1.2,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ノーマル技が飛行タイプになって、威力が1.2倍"
+  },
+  "フリーズスキン": {
+    "type": "skin",
+    "offensive": 1.2,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ノーマル技が氷タイプになって、威力が1.2倍"
+  },
   "わざわいのおふだ": {
     "type": "dezaster",
     "offensive": 1.0,

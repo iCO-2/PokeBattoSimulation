@@ -68,29 +68,71 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     // 攻撃側の特性 (offensive)
     const attackerAbilityData = ABILITIES_DEX[attacker.ability];
-    if (attackerAbilityData && !attackerAbilityData.is_special) {
+    if (attackerAbilityData && attackerAbilityData.type !== 'dezaster') {
         const abilityType = attackerAbilityData.type;
         const movesSet = MOVE_TYPE_MOVES[abilityType];
         if (movesSet && movesSet.has(moveName)) {
             abilityOffensiveMod = attackerAbilityData.offensive;
-            abilityOffensiveInfo = {
-                name: attacker.ability,
-                multiplier: attackerAbilityData.offensive
-            };
+            // 倍率が1.0以外のときだけ結果表示に含める
+            if (abilityOffensiveMod !== 1.0) {
+                abilityOffensiveInfo = {
+                    name: attacker.ability,
+                    multiplier: abilityOffensiveMod
+                };
+            }
+        }
+
+        // is_special: true 特性の追加処理（枠組み）
+        if (attackerAbilityData.is_special) {
+            switch (attacker.ability) {
+                case 'うるおいボイス':
+                    // TODO: 自身が使う音技が全てみずタイプになる
+                    break;
+                case 'おどりこ':
+                    // TODO: 誰かが踊る技を使うと自分もそれに続いてその踊る技を出せる
+                    break;
+                case 'メガランチャー':
+                    // TODO: 「いやしのはどう」は最大HPの3/4回復する（波動技の1.5倍はこの上の処理で適用済み）
+                    break;
+                default:
+                    // その他の特殊攻撃特性の処理
+                    break;
+            }
         }
     }
 
     // 防御側の特性 (defensive)
     const defenderAbilityData = ABILITIES_DEX[defender.ability];
-    if (defenderAbilityData && !defenderAbilityData.is_special) {
+    if (defenderAbilityData && defenderAbilityData.type !== 'dezaster') {
         const defType = defenderAbilityData.type;
         const defMovesSet = MOVE_TYPE_MOVES[defType];
         if (defMovesSet && defMovesSet.has(moveName)) {
             abilityDefensiveMod = defenderAbilityData.defensive;
-            abilityDefensiveInfo = {
-                name: defender.ability,
-                multiplier: defenderAbilityData.defensive
-            };
+            // 倍率が1.0以外のとき(無効化の0.0等)だけ結果表示に含める
+            if (abilityDefensiveMod !== 1.0) {
+                abilityDefensiveInfo = {
+                    name: defender.ability,
+                    multiplier: abilityDefensiveMod
+                };
+            }
+        }
+
+        // is_special: true 特性の追加処理（枠組み）
+        if (defenderAbilityData.is_special) {
+            switch (defender.ability) {
+                case 'かぜのり':
+                    // TODO: ダメージ無効化(0倍)はこの上の処理で適用済み。ここでは攻撃を1段階上げる処理
+                    break;
+                case 'ふうりょくでんき':
+                    // TODO: 風技を受けると「じゅうでん」状態になり、でんきタイプの技の威力を1度だけ2倍にする処理
+                    break;
+                case 'がんじょう':
+                    // TODO: 残りHPがマックスのときは、一撃で倒れずに1残る（致死ダメージ判定後に行う必要あり）
+                    break;
+                default:
+                    // その他の特殊防御特性の処理
+                    break;
+            }
         }
     }
 
