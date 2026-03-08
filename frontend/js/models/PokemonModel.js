@@ -1,4 +1,4 @@
-import { SPECIES_DEX } from '../data/loader.js?v=3';
+import { SPECIES_DEX } from '../data/loader.js?v=4';
 import { calculateHp, calculateStat } from '../calc/stats.js';
 
 export class Pokemon {
@@ -10,7 +10,7 @@ export class Pokemon {
         this.stats = {
             hp: { ev: 0 },
             attack: { ev: 0, nature: 'neutral', rank: 0 },
-            defense: { ev: 0, nature: 'neutral', rank: 0 },
+            defence: { ev: 0, nature: 'neutral', rank: 0 },
             spAtk: { ev: 0, nature: 'neutral', rank: 0 },
             spDef: { ev: 0, nature: 'neutral', rank: 0 },
             speed: { ev: 0, nature: 'neutral', rank: 0 }
@@ -35,7 +35,7 @@ export class Pokemon {
         
         // 実数値キャッシュ
         this.realStats = {
-            hp: 0, attack: 0, defense: 0, spAtk: 0, spDef: 0, speed: 0
+            hp: 0, attack: 0, defence: 0, spAtk: 0, spDef: 0, speed: 0
         };
 
         // 被ダメージ履歴
@@ -106,7 +106,7 @@ export class Pokemon {
         }
 
         // 他のステータス計算（ランク補正は実数値には適用せず、ダメージ計算時に適用）
-        ['attack', 'defense', 'spAtk', 'spDef', 'speed'].forEach(statName => {
+        ['attack', 'defence', 'spAtk', 'spDef', 'speed'].forEach(statName => {
             const s = this.stats[statName];
             const baseStat = base ? base[statName] : 100;
             this.realStats[statName] = calculateStat(baseStat, IV, s.ev, this.level, s.nature);

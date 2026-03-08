@@ -1,5 +1,5 @@
 import { getTypeEffectiveness } from '../data/types.js';
-import { ITEMS_DEX } from '../data/loader.js?v=3';
+import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES } from '../data/loader.js?v=4';
 
 /**
  * ランク補正倍率を取得
@@ -23,7 +23,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     // 攻撃・防御実数値の決定 (物理/特殊)
     let aStr = 'attack';
-    let dStr = 'defense';
+    let dStr = 'defence';
     if (move.category === 'Special') {
         aStr = 'spAtk';
         dStr = 'spDef';
@@ -38,7 +38,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     
     let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
-    const D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
+    let D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
 
     // 持ち物補正（攻撃/特攻アップ系・ダメージアップ系）
     const attackerItem = ITEMS_DEX[attacker.item];
@@ -58,7 +58,66 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             multiplier: attackerItem.multiplier
         };
     }
-    
+
+    // 特性補正
+    const moveName = move.name || '';
+    let abilityOffensiveMod = 1.0;
+    let abilityDefensiveMod = 1.0;
+    let abilityOffensiveInfo = null;
+    let abilityDefensiveInfo = null;
+
+    // 攻撃側の特性 (offensive)
+    const attackerAbilityData = ABILITIES_DEX[attacker.ability];
+    if (attackerAbilityData && !attackerAbilityData.is_special) {
+        const abilityType = attackerAbilityData.type;
+        const movesSet = MOVE_TYPE_MOVES[abilityType];
+        if (movesSet && movesSet.has(moveName)) {
+            abilityOffensiveMod = attackerAbilityData.offensive;
+            abilityOffensiveInfo = {
+                name: attacker.ability,
+                multiplier: attackerAbilityData.offensive
+            };
+        }
+    }
+
+    // 防御側の特性 (defensive)
+    const defenderAbilityData = ABILITIES_DEX[defender.ability];
+    if (defenderAbilityData && !defenderAbilityData.is_special) {
+        const defType = defenderAbilityData.type;
+        const defMovesSet = MOVE_TYPE_MOVES[defType];
+        if (defMovesSet && defMovesSet.has(moveName)) {
+            abilityDefensiveMod = defenderAbilityData.defensive;
+            abilityDefensiveInfo = {
+                name: defender.ability,
+                multiplier: defenderAbilityData.defensive
+            };
+        }
+    }
+
+    // 攻撃側特性補正を攻撃力に適用
+    if (abilityOffensiveMod !== 1.0) {
+        A = Math.floor(A * abilityOffensiveMod);
+    }
+
+    // わざわい系特性 (dezaster) のステータス弱体化補正
+    // weakken_statsで指定されたステータスを相手側で0.75倍にする
+    let dezasterInfo = null;
+
+    // 攻撃側のわざわい系 → 防御側のステータス(D)を弱体化
+    if (attackerAbilityData && attackerAbilityData.type === 'dezaster' && attackerAbilityData.weaken !== 1.0) {
+        if (attackerAbilityData.weakken_stats === dStr) {
+            D = Math.floor(D * attackerAbilityData.weaken);
+            dezasterInfo = { name: attacker.ability, stat: dStr, multiplier: attackerAbilityData.weaken, side: 'attacker' };
+        }
+    }
+
+    // 防御側のわざわい系 → 攻撃側のステータス(A)を弱体化
+    if (defenderAbilityData && defenderAbilityData.type === 'dezaster' && defenderAbilityData.weaken !== 1.0) {
+        if (defenderAbilityData.weakken_stats === aStr) {
+            A = Math.floor(A * defenderAbilityData.weaken);
+            dezasterInfo = { name: defender.ability, stat: aStr, multiplier: defenderAbilityData.weaken, side: 'defender' };
+        }
+    }
 
 
     // 1. ダメージ計算の基礎
@@ -142,9 +201,16 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         if (attackerItem && attackerItem.type === 'damage_boost') {
             dmg = Math.floor(dmg * attackerItem.multiplier);
         }
+
+        // 5. 防御側特性補正 (defensive)
+        if (abilityDefensiveMod !== 1.0) {
+            dmg = Math.floor(dmg * abilityDefensiveMod);
+        }
         
         if (dmg < 1) dmg = 1; // 最低1ダメージ (タイプ無効0倍は別途)
         if (typeMod === 0) dmg = 0;
+        // 防御側特性で無効化 (defensive=0)
+        if (abilityDefensiveMod === 0) dmg = 0;
 
         rolls.push(dmg);
     }
@@ -156,6 +222,9 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         typeMod: typeMod,
         itemModifier: itemModifier,
         stellarBoosted: stellarBoosted,
-        moveType: move.type
+        moveType: move.type,
+        abilityOffensiveInfo: abilityOffensiveInfo,
+        abilityDefensiveInfo: abilityDefensiveInfo,
+        dezasterInfo: dezasterInfo
     };
 }

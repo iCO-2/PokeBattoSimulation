@@ -1,6 +1,6 @@
-import { AppState } from './AppState.js?v=119';
-import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
-import { calculateDamage } from './calc/damage.js?v=205';
+import { AppState } from './AppState.js?v=120';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, loadAllData } from './data/loader.js?v=4';
+import { calculateDamage } from './calc/damage.js?v=206';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -865,6 +865,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // ダメージ計算
             const moveName = attacker.moves[attacker.activeMoveIndex];
             const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
+            move.name = moveName;
 
             const damageResult = calculateDamage(attacker, defender, move, {});
 
@@ -1438,7 +1439,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const stats = [
             { label: 'H', val: bs.hp },
             { label: 'A', val: bs.attack },
-            { label: 'B', val: bs.defense },
+            { label: 'B', val: bs.defence },
             { label: 'C', val: bs.spAtk },
             { label: 'D', val: bs.spDef },
             { label: 'S', val: bs.speed }
@@ -1800,7 +1801,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Stats Update (Inputs & Real Values)
-        const stats = ['hp', 'attack', 'defense', 'spAtk', 'spDef', 'speed'];
+        const stats = ['hp', 'attack', 'defence', 'spAtk', 'spDef', 'speed'];
         stats.forEach(stat => {
             const data = pokemon.stats[stat];
             

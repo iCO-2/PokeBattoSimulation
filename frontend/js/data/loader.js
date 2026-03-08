@@ -2,6 +2,8 @@ export const SPECIES_DEX = {};
 export const MOVES_DEX = {};
 export let ITEMS_DEX = {};
 export let USAGE_RATE_DATA = [];
+export let ABILITIES_DEX = {};
+export let MOVE_TYPE_MOVES = {};
 
 export async function loadAllData() {
     try {
@@ -41,7 +43,7 @@ export async function loadAllData() {
             const stats = {
                 hp: bs.hp,
                 attack: bs.attack,
-                defense: bs.defense,
+                defence: bs.defense,
                 spAtk: bs['special-attack'],
                 spDef: bs['special-defense'],
                 speed: bs.speed
@@ -97,6 +99,39 @@ const TYPE_TRANSLATION = {
         console.log(`Loaded ${Object.keys(SPECIES_DEX).length} species.`);
         console.log(`Loaded ${Object.keys(MOVES_DEX).length} moves.`);
         console.log(`Loaded ${Object.keys(ITEMS_DEX).length} items.`);
+
+        // Parse Abilities Data (メインデータのロード完了後にフェッチ)
+        try {
+            const abilitiesRes = await fetch('./data/abilities.json');
+            if (abilitiesRes.ok) {
+                ABILITIES_DEX = await abilitiesRes.json();
+                console.log(`Loaded ${Object.keys(ABILITIES_DEX).length} abilities.`);
+
+                // 一意のtypeリストを取得し、対応するmoves_{type}.jsonをロード（dezasterはJSONなし）
+                const types = [...new Set(Object.values(ABILITIES_DEX).map(a => a.type))].filter(t => t !== 'dezaster');
+                const moveTypePromises = types.map(async (type) => {
+                    try {
+                        const res = await fetch(`./data/moves_info/moves_${type}.json`);
+                        if (res.ok) {
+                            const data = await res.json();
+                            if (data.moves && Array.isArray(data.moves)) {
+                                MOVE_TYPE_MOVES[type] = new Set(data.moves);
+                            }
+                        } else {
+                            console.warn(`moves_${type}.json not found (status: ${res.status})`);
+                        }
+                    } catch (e) {
+                        console.warn(`Failed to load moves_${type}.json:`, e);
+                    }
+                });
+                await Promise.all(moveTypePromises);
+                console.log(`Loaded move type data for: ${Object.keys(MOVE_TYPE_MOVES).join(', ')}`);
+            } else {
+                console.warn(`Failed to load abilities data: ${abilitiesRes.status}`);
+            }
+        } catch (e) {
+            console.warn('Failed to load abilities data:', e);
+        }
 
     } catch (error) {
         console.error("Error loading data:", error);
