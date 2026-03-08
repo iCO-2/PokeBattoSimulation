@@ -166,6 +166,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // カスタムテラスタルドロップダウンの初期化
+    initTeraCustomSelects();
+
     setupClearInputButtons();
 
 
@@ -2048,6 +2051,104 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupStatInputs('ally');
     setupStatInputs('enemy');
 });
+
+// ===== カスタムテラスタルドロップダウン =====
+const TERA_TYPE_TO_SVG = {
+    'ノーマル': 'Normal',
+    'ほのお': 'Fire',
+    'みず': 'Water',
+    'でんき': 'Electric',
+    'くさ': 'Grass',
+    'こおり': 'Ice',
+    'かくとう': 'Fighting',
+    'どく': 'Poison',
+    'じめん': 'Ground',
+    'ひこう': 'Flying',
+    'エスパー': 'Psychic',
+    'むし': 'Bug',
+    'いわ': 'Rock',
+    'ゴースト': 'Ghost',
+    'ドラゴン': 'Dragon',
+    'あく': 'Dark',
+    'はがね': 'Steel',
+    'フェアリー': 'Fairy'
+};
+
+function getTeraIconHtml(value, size = 24) {
+    if (value === 'なし') {
+        return `<span class="tera-option-none" style="width:${size}px;height:${size}px;display:inline-flex;align-items:center;justify-content:center;">−</span>`;
+    }
+    if (value === 'ステラ') {
+        return `<img class="tera-option-icon tera-stellar-icon" src="../backend/data/image/Stellar.png" alt="ステラ" style="width:${size}px;height:${size}px;">`;
+    }
+    const svgName = TERA_TYPE_TO_SVG[value];
+    if (svgName) {
+        return `<img class="tera-option-icon" src="../backend/data/image/${svgName}.svg" alt="${value}" style="width:${size}px;height:${size}px;">`;
+    }
+    return '';
+}
+
+function initTeraCustomSelects() {
+    document.querySelectorAll('.tera-custom-select').forEach(container => {
+        const side = container.dataset.side;
+        const display = container.querySelector('.tera-selected');
+        const optionsPanel = container.querySelector('.tera-options');
+        const hiddenSelect = container.querySelector('select');
+        if (!display || !optionsPanel || !hiddenSelect) return;
+
+        // オプション生成
+        Array.from(hiddenSelect.options).forEach(opt => {
+            const div = document.createElement('div');
+            div.className = 'tera-option' + (opt.value === hiddenSelect.value ? ' selected' : '');
+            div.dataset.value = opt.value;
+            div.innerHTML = `${getTeraIconHtml(opt.value)}<span>${opt.textContent}</span>`;
+            div.addEventListener('click', () => {
+                // 選択を更新
+                hiddenSelect.value = opt.value;
+                hiddenSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                // 表示を更新
+                updateTeraDisplay(display, opt.value);
+                // 選択ハイライト更新
+                optionsPanel.querySelectorAll('.tera-option').forEach(o => o.classList.remove('selected'));
+                div.classList.add('selected');
+                // 閉じる
+                display.classList.remove('open');
+                optionsPanel.classList.remove('open');
+            });
+            optionsPanel.appendChild(div);
+        });
+
+        // 開閉トグル
+        display.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // 他のドロップダウンを閉じる
+            document.querySelectorAll('.tera-custom-select').forEach(other => {
+                if (other !== container) {
+                    other.querySelector('.tera-selected')?.classList.remove('open');
+                    other.querySelector('.tera-options')?.classList.remove('open');
+                }
+            });
+            display.classList.toggle('open');
+            optionsPanel.classList.toggle('open');
+        });
+    });
+
+    // 外部クリックで閉じる
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.tera-custom-select').forEach(container => {
+            container.querySelector('.tera-selected')?.classList.remove('open');
+            container.querySelector('.tera-options')?.classList.remove('open');
+        });
+    });
+}
+
+function updateTeraDisplay(displayEl, value) {
+    const textSpan = displayEl.querySelector('.tera-selected-text');
+    if (textSpan) {
+        const displayText = value === 'なし' ? '選択なし' : value;
+        textSpan.innerHTML = `${getTeraIconHtml(value, 20)}<span>${displayText}</span>`;
+    }
+}
 
 function setupClearInputButtons() {
     const buttons = document.querySelectorAll('.clear-input-btn[data-target]');

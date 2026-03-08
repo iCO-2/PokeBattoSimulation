@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/PlaySphere.png">
-    <link rel="stylesheet" href="style.css?v=29">
+    <link rel="stylesheet" href="style.css?v=30">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -118,9 +118,15 @@
             </div>
             
             <div class="grid-params">
-                <label>テラスタル: 
-                    <select id="ally-tera-select">
-                        <option value="なし">なし</option>
+                <label>テラスタル:</label>
+                <div class="tera-custom-select" data-side="ally">
+                    <div class="tera-selected" id="ally-tera-display">
+                        <span class="tera-selected-text">選択なし</span>
+                        <span class="tera-arrow">▼</span>
+                    </div>
+                    <div class="tera-options" id="ally-tera-options"></div>
+                    <select id="ally-tera-select" style="display:none;">
+                        <option value="なし">選択なし</option>
                         <option value="ノーマル">ノーマル</option>
                         <option value="ほのお">ほのお</option>
                         <option value="みず">みず</option>
@@ -141,7 +147,7 @@
                         <option value="フェアリー">フェアリー</option>
                         <option value="ステラ">ステラ</option>
                     </select>
-                </label>
+                </div>
             </div>
 
             <div class="stats-container">
@@ -636,8 +642,14 @@
             </div>
             
             <div class="grid-params">
-                <label>テラスタル: 
-                    <select id="enemy-tera-select">
+                <label>テラスタル:</label>
+                <div class="tera-custom-select" data-side="enemy">
+                    <div class="tera-selected" id="enemy-tera-display">
+                        <span class="tera-selected-text">選択なし</span>
+                        <span class="tera-arrow">▼</span>
+                    </div>
+                    <div class="tera-options" id="enemy-tera-options"></div>
+                    <select id="enemy-tera-select" style="display:none;">
                         <option value="なし">なし</option>
                         <option value="ノーマル">ノーマル</option>
                         <option value="ほのお">ほのお</option>
@@ -659,7 +671,7 @@
                         <option value="フェアリー">フェアリー</option>
                         <option value="ステラ">ステラ</option>
                     </select>
-                </label>
+                </div>
             </div>
 
                 <div class="stats-container">
@@ -1017,6 +1029,6 @@
     <script type="module" src="js/calc/damage.js?v=205"></script>
     <script type="module" src="js/models/PokemonModel.js?v=121"></script>
     <script type="module" src="js/AppState.js?v=119"></script>
-    <script type="module" src="js/main.js?v=139"></script>
+    <script type="module" src="js/main.js?v=142"></script>
 </body>
 </html>
