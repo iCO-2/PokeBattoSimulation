@@ -1,5 +1,6 @@
 {
   "はたく": {
+    "id": 1,
     "power": 40,
     "pp": 35,
     "type": "Normal",
@@ -18,6 +19,7 @@
     "stat_changes": []
   },
   "からてチョップ": {
+    "id": 2,
     "power": 50,
     "pp": 25,
     "type": "Fighting",
@@ -36,6 +38,7 @@
     "stat_changes": []
   },
   "おうふくビンタ": {
+    "id": 3,
     "power": 15,
     "pp": 10,
     "type": "Normal",
@@ -54,6 +57,7 @@
     "stat_changes": []
   },
   "れんぞくパンチ": {
+    "id": 4,
     "power": 18,
     "pp": 15,
     "type": "Normal",
@@ -72,6 +76,7 @@
     "stat_changes": []
   },
   "メガトンパンチ": {
+    "id": 5,
     "power": 80,
     "pp": 20,
     "type": "Normal",
@@ -90,6 +95,7 @@
     "stat_changes": []
   },
   "ネコにこばん": {
+    "id": 6,
     "power": 40,
     "pp": 20,
     "type": "Normal",
@@ -108,6 +114,7 @@
     "stat_changes": []
   },
   "ほのおのパンチ": {
+    "id": 7,
     "power": 75,
     "pp": 15,
     "type": "Fire",
@@ -126,6 +133,7 @@
     "stat_changes": []
   },
   "れいとうパンチ": {
+    "id": 8,
     "power": 75,
     "pp": 15,
     "type": "Ice",
@@ -144,6 +152,7 @@
     "stat_changes": []
   },
   "かみなりパンチ": {
+    "id": 9,
     "power": 75,
     "pp": 15,
     "type": "Electric",
@@ -162,6 +171,7 @@
     "stat_changes": []
   },
   "ひっかく": {
+    "id": 10,
     "power": 40,
     "pp": 35,
     "type": "Normal",
@@ -180,6 +190,7 @@
     "stat_changes": []
   },
   "はさむ": {
+    "id": 11,
     "power": 55,
     "pp": 30,
     "type": "Normal",
@@ -198,6 +209,7 @@
     "stat_changes": []
   },
   "ハサミギロチン": {
+    "id": 12,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -216,6 +228,7 @@
     "stat_changes": []
   },
   "かまいたち": {
+    "id": 13,
     "power": 80,
     "pp": 10,
     "type": "Normal",
@@ -234,6 +247,7 @@
     "stat_changes": []
   },
   "つるぎのまい": {
+    "id": 14,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -257,6 +271,7 @@
     ]
   },
   "いあいぎり": {
+    "id": 15,
     "power": 50,
     "pp": 30,
     "type": "Normal",
@@ -275,6 +290,7 @@
     "stat_changes": []
   },
   "かぜおこし": {
+    "id": 16,
     "power": 40,
     "pp": 35,
     "type": "Flying",
@@ -293,6 +309,7 @@
     "stat_changes": []
   },
   "つばさでうつ": {
+    "id": 17,
     "power": 60,
     "pp": 35,
     "type": "Flying",
@@ -311,6 +328,7 @@
     "stat_changes": []
   },
   "ふきとばし": {
+    "id": 18,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -329,6 +347,7 @@
     "stat_changes": []
   },
   "そらをとぶ": {
+    "id": 19,
     "power": 90,
     "pp": 15,
     "type": "Flying",
@@ -347,6 +366,7 @@
     "stat_changes": []
   },
   "しめつける": {
+    "id": 20,
     "power": 15,
     "pp": 20,
     "type": "Normal",
@@ -365,6 +385,7 @@
     "stat_changes": []
   },
   "たたきつける": {
+    "id": 21,
     "power": 80,
     "pp": 20,
     "type": "Normal",
@@ -383,6 +404,7 @@
     "stat_changes": []
   },
   "つるのムチ": {
+    "id": 22,
     "power": 45,
     "pp": 25,
     "type": "Grass",
@@ -401,6 +423,7 @@
     "stat_changes": []
   },
   "ふみつけ": {
+    "id": 23,
     "power": 65,
     "pp": 20,
     "type": "Normal",
@@ -419,6 +442,7 @@
     "stat_changes": []
   },
   "にどげり": {
+    "id": 24,
     "power": 30,
     "pp": 30,
     "type": "Fighting",
@@ -437,6 +461,7 @@
     "stat_changes": []
   },
   "メガトンキック": {
+    "id": 25,
     "power": 120,
     "pp": 5,
     "type": "Normal",
@@ -455,6 +480,7 @@
     "stat_changes": []
   },
   "とびげり": {
+    "id": 26,
     "power": 100,
     "pp": 10,
     "type": "Fighting",
@@ -473,6 +499,7 @@
     "stat_changes": []
   },
   "まわしげり": {
+    "id": 27,
     "power": 60,
     "pp": 15,
     "type": "Fighting",
@@ -491,6 +518,7 @@
     "stat_changes": []
   },
   "すなかけ": {
+    "id": 28,
     "power": 0,
     "pp": 15,
     "type": "Ground",
@@ -514,6 +542,7 @@
     ]
   },
   "ずつき": {
+    "id": 29,
     "power": 70,
     "pp": 15,
     "type": "Normal",
@@ -532,6 +561,7 @@
     "stat_changes": []
   },
   "つのでつく": {
+    "id": 30,
     "power": 65,
     "pp": 25,
     "type": "Normal",
@@ -550,6 +580,7 @@
     "stat_changes": []
   },
   "みだれづき": {
+    "id": 31,
     "power": 15,
     "pp": 20,
     "type": "Normal",
@@ -568,6 +599,7 @@
     "stat_changes": []
   },
   "つのドリル": {
+    "id": 32,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -586,6 +618,7 @@
     "stat_changes": []
   },
   "たいあたり": {
+    "id": 33,
     "power": 40,
     "pp": 35,
     "type": "Normal",
@@ -604,6 +637,7 @@
     "stat_changes": []
   },
   "のしかかり": {
+    "id": 34,
     "power": 85,
     "pp": 15,
     "type": "Normal",
@@ -622,6 +656,7 @@
     "stat_changes": []
   },
   "まきつく": {
+    "id": 35,
     "power": 15,
     "pp": 20,
     "type": "Normal",
@@ -640,6 +675,7 @@
     "stat_changes": []
   },
   "とっしん": {
+    "id": 36,
     "power": 90,
     "pp": 20,
     "type": "Normal",
@@ -658,6 +694,7 @@
     "stat_changes": []
   },
   "あばれる": {
+    "id": 37,
     "power": 120,
     "pp": 10,
     "type": "Normal",
@@ -676,6 +713,7 @@
     "stat_changes": []
   },
   "すてみタックル": {
+    "id": 38,
     "power": 120,
     "pp": 15,
     "type": "Normal",
@@ -694,6 +732,7 @@
     "stat_changes": []
   },
   "しっぽをふる": {
+    "id": 39,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -717,6 +756,7 @@
     ]
   },
   "どくばり": {
+    "id": 40,
     "power": 15,
     "pp": 35,
     "type": "Poison",
@@ -735,6 +775,7 @@
     "stat_changes": []
   },
   "ダブルニードル": {
+    "id": 41,
     "power": 25,
     "pp": 20,
     "type": "Bug",
@@ -753,6 +794,7 @@
     "stat_changes": []
   },
   "ミサイルばり": {
+    "id": 42,
     "power": 25,
     "pp": 20,
     "type": "Bug",
@@ -771,6 +813,7 @@
     "stat_changes": []
   },
   "にらみつける": {
+    "id": 43,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -794,6 +837,7 @@
     ]
   },
   "かみつく": {
+    "id": 44,
     "power": 60,
     "pp": 25,
     "type": "Dark",
@@ -812,6 +856,7 @@
     "stat_changes": []
   },
   "なきごえ": {
+    "id": 45,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -835,6 +880,7 @@
     ]
   },
   "ほえる": {
+    "id": 46,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -853,6 +899,7 @@
     "stat_changes": []
   },
   "うたう": {
+    "id": 47,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -871,6 +918,7 @@
     "stat_changes": []
   },
   "ちょうおんぱ": {
+    "id": 48,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -889,6 +937,7 @@
     "stat_changes": []
   },
   "ソニックブーム": {
+    "id": 49,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -907,6 +956,7 @@
     "stat_changes": []
   },
   "かなしばり": {
+    "id": 50,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -925,6 +975,7 @@
     "stat_changes": []
   },
   "ようかいえき": {
+    "id": 51,
     "power": 40,
     "pp": 30,
     "type": "Poison",
@@ -948,6 +999,7 @@
     ]
   },
   "ひのこ": {
+    "id": 52,
     "power": 40,
     "pp": 25,
     "type": "Fire",
@@ -966,6 +1018,7 @@
     "stat_changes": []
   },
   "かえんほうしゃ": {
+    "id": 53,
     "power": 90,
     "pp": 15,
     "type": "Fire",
@@ -984,6 +1037,7 @@
     "stat_changes": []
   },
   "しろいきり": {
+    "id": 54,
     "power": 0,
     "pp": 30,
     "type": "Ice",
@@ -1002,6 +1056,7 @@
     "stat_changes": []
   },
   "みずでっぽう": {
+    "id": 55,
     "power": 40,
     "pp": 25,
     "type": "Water",
@@ -1020,6 +1075,7 @@
     "stat_changes": []
   },
   "ハイドロポンプ": {
+    "id": 56,
     "power": 110,
     "pp": 5,
     "type": "Water",
@@ -1038,6 +1094,7 @@
     "stat_changes": []
   },
   "なみのり": {
+    "id": 57,
     "power": 90,
     "pp": 15,
     "type": "Water",
@@ -1056,6 +1113,7 @@
     "stat_changes": []
   },
   "れいとうビーム": {
+    "id": 58,
     "power": 90,
     "pp": 10,
     "type": "Ice",
@@ -1074,6 +1132,7 @@
     "stat_changes": []
   },
   "ふぶき": {
+    "id": 59,
     "power": 110,
     "pp": 5,
     "type": "Ice",
@@ -1092,6 +1151,7 @@
     "stat_changes": []
   },
   "サイケこうせん": {
+    "id": 60,
     "power": 65,
     "pp": 20,
     "type": "Psychic",
@@ -1110,6 +1170,7 @@
     "stat_changes": []
   },
   "バブルこうせん": {
+    "id": 61,
     "power": 65,
     "pp": 20,
     "type": "Water",
@@ -1133,6 +1194,7 @@
     ]
   },
   "オーロラビーム": {
+    "id": 62,
     "power": 65,
     "pp": 20,
     "type": "Ice",
@@ -1156,6 +1218,7 @@
     ]
   },
   "はかいこうせん": {
+    "id": 63,
     "power": 150,
     "pp": 5,
     "type": "Normal",
@@ -1174,6 +1237,7 @@
     "stat_changes": []
   },
   "つつく": {
+    "id": 64,
     "power": 35,
     "pp": 35,
     "type": "Flying",
@@ -1192,6 +1256,7 @@
     "stat_changes": []
   },
   "ドリルくちばし": {
+    "id": 65,
     "power": 80,
     "pp": 20,
     "type": "Flying",
@@ -1210,6 +1275,7 @@
     "stat_changes": []
   },
   "じごくぐるま": {
+    "id": 66,
     "power": 80,
     "pp": 20,
     "type": "Fighting",
@@ -1228,6 +1294,7 @@
     "stat_changes": []
   },
   "けたぐり": {
+    "id": 67,
     "power": 0,
     "pp": 20,
     "type": "Fighting",
@@ -1246,6 +1313,7 @@
     "stat_changes": []
   },
   "カウンター": {
+    "id": 68,
     "power": 0,
     "pp": 20,
     "type": "Fighting",
@@ -1264,6 +1332,7 @@
     "stat_changes": []
   },
   "ちきゅうなげ": {
+    "id": 69,
     "power": 0,
     "pp": 20,
     "type": "Fighting",
@@ -1282,6 +1351,7 @@
     "stat_changes": []
   },
   "かいりき": {
+    "id": 70,
     "power": 80,
     "pp": 15,
     "type": "Normal",
@@ -1300,6 +1370,7 @@
     "stat_changes": []
   },
   "すいとる": {
+    "id": 71,
     "power": 20,
     "pp": 25,
     "type": "Grass",
@@ -1318,6 +1389,7 @@
     "stat_changes": []
   },
   "メガドレイン": {
+    "id": 72,
     "power": 40,
     "pp": 15,
     "type": "Grass",
@@ -1336,6 +1408,7 @@
     "stat_changes": []
   },
   "やどりぎのタネ": {
+    "id": 73,
     "power": 0,
     "pp": 10,
     "type": "Grass",
@@ -1354,6 +1427,7 @@
     "stat_changes": []
   },
   "せいちょう": {
+    "id": 74,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -1381,6 +1455,7 @@
     ]
   },
   "はっぱカッター": {
+    "id": 75,
     "power": 55,
     "pp": 25,
     "type": "Grass",
@@ -1399,6 +1474,7 @@
     "stat_changes": []
   },
   "ソーラービーム": {
+    "id": 76,
     "power": 120,
     "pp": 10,
     "type": "Grass",
@@ -1417,6 +1493,7 @@
     "stat_changes": []
   },
   "どくのこな": {
+    "id": 77,
     "power": 0,
     "pp": 35,
     "type": "Poison",
@@ -1435,6 +1512,7 @@
     "stat_changes": []
   },
   "しびれごな": {
+    "id": 78,
     "power": 0,
     "pp": 30,
     "type": "Grass",
@@ -1453,6 +1531,7 @@
     "stat_changes": []
   },
   "ねむりごな": {
+    "id": 79,
     "power": 0,
     "pp": 15,
     "type": "Grass",
@@ -1471,6 +1550,7 @@
     "stat_changes": []
   },
   "はなびらのまい": {
+    "id": 80,
     "power": 120,
     "pp": 10,
     "type": "Grass",
@@ -1489,6 +1569,7 @@
     "stat_changes": []
   },
   "いとをはく": {
+    "id": 81,
     "power": 0,
     "pp": 40,
     "type": "Bug",
@@ -1512,6 +1593,7 @@
     ]
   },
   "りゅうのいかり": {
+    "id": 82,
     "power": 0,
     "pp": 10,
     "type": "Dragon",
@@ -1530,6 +1612,7 @@
     "stat_changes": []
   },
   "ほのおのうず": {
+    "id": 83,
     "power": 35,
     "pp": 15,
     "type": "Fire",
@@ -1548,6 +1631,7 @@
     "stat_changes": []
   },
   "でんきショック": {
+    "id": 84,
     "power": 40,
     "pp": 30,
     "type": "Electric",
@@ -1566,6 +1650,7 @@
     "stat_changes": []
   },
   "１０まんボルト": {
+    "id": 85,
     "power": 90,
     "pp": 15,
     "type": "Electric",
@@ -1584,6 +1669,7 @@
     "stat_changes": []
   },
   "でんじは": {
+    "id": 86,
     "power": 0,
     "pp": 20,
     "type": "Electric",
@@ -1602,6 +1688,7 @@
     "stat_changes": []
   },
   "かみなり": {
+    "id": 87,
     "power": 110,
     "pp": 10,
     "type": "Electric",
@@ -1620,6 +1707,7 @@
     "stat_changes": []
   },
   "いわおとし": {
+    "id": 88,
     "power": 50,
     "pp": 15,
     "type": "Rock",
@@ -1638,6 +1726,7 @@
     "stat_changes": []
   },
   "じしん": {
+    "id": 89,
     "power": 100,
     "pp": 10,
     "type": "Ground",
@@ -1656,6 +1745,7 @@
     "stat_changes": []
   },
   "じわれ": {
+    "id": 90,
     "power": 0,
     "pp": 5,
     "type": "Ground",
@@ -1674,6 +1764,7 @@
     "stat_changes": []
   },
   "あなをほる": {
+    "id": 91,
     "power": 80,
     "pp": 10,
     "type": "Ground",
@@ -1692,6 +1783,7 @@
     "stat_changes": []
   },
   "どくどく": {
+    "id": 92,
     "power": 0,
     "pp": 10,
     "type": "Poison",
@@ -1710,6 +1802,7 @@
     "stat_changes": []
   },
   "ねんりき": {
+    "id": 93,
     "power": 50,
     "pp": 25,
     "type": "Psychic",
@@ -1728,6 +1821,7 @@
     "stat_changes": []
   },
   "サイコキネシス": {
+    "id": 94,
     "power": 90,
     "pp": 10,
     "type": "Psychic",
@@ -1751,6 +1845,7 @@
     ]
   },
   "さいみんじゅつ": {
+    "id": 95,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -1769,6 +1864,7 @@
     "stat_changes": []
   },
   "ヨガのポーズ": {
+    "id": 96,
     "power": 0,
     "pp": 40,
     "type": "Psychic",
@@ -1792,6 +1888,7 @@
     ]
   },
   "こうそくいどう": {
+    "id": 97,
     "power": 0,
     "pp": 30,
     "type": "Psychic",
@@ -1815,6 +1912,7 @@
     ]
   },
   "でんこうせっか": {
+    "id": 98,
     "power": 40,
     "pp": 30,
     "type": "Normal",
@@ -1833,6 +1931,7 @@
     "stat_changes": []
   },
   "いかり": {
+    "id": 99,
     "power": 20,
     "pp": 20,
     "type": "Normal",
@@ -1851,6 +1950,7 @@
     "stat_changes": []
   },
   "テレポート": {
+    "id": 100,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -1869,6 +1969,7 @@
     "stat_changes": []
   },
   "ナイトヘッド": {
+    "id": 101,
     "power": 0,
     "pp": 15,
     "type": "Ghost",
@@ -1887,6 +1988,7 @@
     "stat_changes": []
   },
   "ものまね": {
+    "id": 102,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -1905,6 +2007,7 @@
     "stat_changes": []
   },
   "いやなおと": {
+    "id": 103,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -1928,6 +2031,7 @@
     ]
   },
   "かげぶんしん": {
+    "id": 104,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -1951,6 +2055,7 @@
     ]
   },
   "じこさいせい": {
+    "id": 105,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -1969,6 +2074,7 @@
     "stat_changes": []
   },
   "かたくなる": {
+    "id": 106,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -1992,6 +2098,7 @@
     ]
   },
   "ちいさくなる": {
+    "id": 107,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -2015,6 +2122,7 @@
     ]
   },
   "えんまく": {
+    "id": 108,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -2038,6 +2146,7 @@
     ]
   },
   "あやしいひかり": {
+    "id": 109,
     "power": 0,
     "pp": 10,
     "type": "Ghost",
@@ -2056,6 +2165,7 @@
     "stat_changes": []
   },
   "からにこもる": {
+    "id": 110,
     "power": 0,
     "pp": 40,
     "type": "Water",
@@ -2079,6 +2189,7 @@
     ]
   },
   "まるくなる": {
+    "id": 111,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -2102,6 +2213,7 @@
     ]
   },
   "バリアー": {
+    "id": 112,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -2125,6 +2237,7 @@
     ]
   },
   "ひかりのかべ": {
+    "id": 113,
     "power": 0,
     "pp": 30,
     "type": "Psychic",
@@ -2143,6 +2256,7 @@
     "stat_changes": []
   },
   "くろいきり": {
+    "id": 114,
     "power": 0,
     "pp": 30,
     "type": "Ice",
@@ -2161,6 +2275,7 @@
     "stat_changes": []
   },
   "リフレクター": {
+    "id": 115,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -2179,6 +2294,7 @@
     "stat_changes": []
   },
   "きあいだめ": {
+    "id": 116,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -2197,6 +2313,7 @@
     "stat_changes": []
   },
   "がまん": {
+    "id": 117,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -2215,6 +2332,7 @@
     "stat_changes": []
   },
   "ゆびをふる": {
+    "id": 118,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -2233,6 +2351,7 @@
     "stat_changes": []
   },
   "オウムがえし": {
+    "id": 119,
     "power": 0,
     "pp": 20,
     "type": "Flying",
@@ -2251,6 +2370,7 @@
     "stat_changes": []
   },
   "じばく": {
+    "id": 120,
     "power": 200,
     "pp": 5,
     "type": "Normal",
@@ -2269,6 +2389,7 @@
     "stat_changes": []
   },
   "タマゴばくだん": {
+    "id": 121,
     "power": 100,
     "pp": 10,
     "type": "Normal",
@@ -2287,6 +2408,7 @@
     "stat_changes": []
   },
   "したでなめる": {
+    "id": 122,
     "power": 30,
     "pp": 30,
     "type": "Ghost",
@@ -2305,6 +2427,7 @@
     "stat_changes": []
   },
   "スモッグ": {
+    "id": 123,
     "power": 30,
     "pp": 20,
     "type": "Poison",
@@ -2323,6 +2446,7 @@
     "stat_changes": []
   },
   "ヘドロこうげき": {
+    "id": 124,
     "power": 65,
     "pp": 20,
     "type": "Poison",
@@ -2341,6 +2465,7 @@
     "stat_changes": []
   },
   "ホネこんぼう": {
+    "id": 125,
     "power": 65,
     "pp": 20,
     "type": "Ground",
@@ -2359,6 +2484,7 @@
     "stat_changes": []
   },
   "だいもんじ": {
+    "id": 126,
     "power": 110,
     "pp": 5,
     "type": "Fire",
@@ -2377,6 +2503,7 @@
     "stat_changes": []
   },
   "たきのぼり": {
+    "id": 127,
     "power": 80,
     "pp": 15,
     "type": "Water",
@@ -2395,6 +2522,7 @@
     "stat_changes": []
   },
   "からではさむ": {
+    "id": 128,
     "power": 35,
     "pp": 15,
     "type": "Water",
@@ -2413,6 +2541,7 @@
     "stat_changes": []
   },
   "スピードスター": {
+    "id": 129,
     "power": 60,
     "pp": 20,
     "type": "Normal",
@@ -2431,6 +2560,7 @@
     "stat_changes": []
   },
   "ロケットずつき": {
+    "id": 130,
     "power": 130,
     "pp": 10,
     "type": "Normal",
@@ -2449,6 +2579,7 @@
     "stat_changes": []
   },
   "とげキャノン": {
+    "id": 131,
     "power": 20,
     "pp": 15,
     "type": "Normal",
@@ -2467,6 +2598,7 @@
     "stat_changes": []
   },
   "からみつく": {
+    "id": 132,
     "power": 10,
     "pp": 35,
     "type": "Normal",
@@ -2490,6 +2622,7 @@
     ]
   },
   "ドわすれ": {
+    "id": 133,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -2513,6 +2646,7 @@
     ]
   },
   "スプーンまげ": {
+    "id": 134,
     "power": 0,
     "pp": 15,
     "type": "Psychic",
@@ -2536,6 +2670,7 @@
     ]
   },
   "タマゴうみ": {
+    "id": 135,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -2554,6 +2689,7 @@
     "stat_changes": []
   },
   "とびひざげり": {
+    "id": 136,
     "power": 130,
     "pp": 10,
     "type": "Fighting",
@@ -2572,6 +2708,7 @@
     "stat_changes": []
   },
   "へびにらみ": {
+    "id": 137,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -2590,6 +2727,7 @@
     "stat_changes": []
   },
   "ゆめくい": {
+    "id": 138,
     "power": 100,
     "pp": 15,
     "type": "Psychic",
@@ -2608,6 +2746,7 @@
     "stat_changes": []
   },
   "どくガス": {
+    "id": 139,
     "power": 0,
     "pp": 40,
     "type": "Poison",
@@ -2626,6 +2765,7 @@
     "stat_changes": []
   },
   "たまなげ": {
+    "id": 140,
     "power": 15,
     "pp": 20,
     "type": "Normal",
@@ -2644,6 +2784,7 @@
     "stat_changes": []
   },
   "きゅうけつ": {
+    "id": 141,
     "power": 80,
     "pp": 10,
     "type": "Bug",
@@ -2662,6 +2803,7 @@
     "stat_changes": []
   },
   "あくまのキッス": {
+    "id": 142,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -2680,6 +2822,7 @@
     "stat_changes": []
   },
   "ゴッドバード": {
+    "id": 143,
     "power": 140,
     "pp": 5,
     "type": "Flying",
@@ -2698,6 +2841,7 @@
     "stat_changes": []
   },
   "へんしん": {
+    "id": 144,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -2716,6 +2860,7 @@
     "stat_changes": []
   },
   "あわ": {
+    "id": 145,
     "power": 40,
     "pp": 30,
     "type": "Water",
@@ -2739,6 +2884,7 @@
     ]
   },
   "ピヨピヨパンチ": {
+    "id": 146,
     "power": 70,
     "pp": 10,
     "type": "Normal",
@@ -2757,6 +2903,7 @@
     "stat_changes": []
   },
   "キノコのほうし": {
+    "id": 147,
     "power": 0,
     "pp": 15,
     "type": "Grass",
@@ -2775,6 +2922,7 @@
     "stat_changes": []
   },
   "フラッシュ": {
+    "id": 148,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -2798,6 +2946,7 @@
     ]
   },
   "サイコウェーブ": {
+    "id": 149,
     "power": 0,
     "pp": 15,
     "type": "Psychic",
@@ -2816,6 +2965,7 @@
     "stat_changes": []
   },
   "はねる": {
+    "id": 150,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -2834,6 +2984,7 @@
     "stat_changes": []
   },
   "とける": {
+    "id": 151,
     "power": 0,
     "pp": 20,
     "type": "Poison",
@@ -2857,6 +3008,7 @@
     ]
   },
   "クラブハンマー": {
+    "id": 152,
     "power": 100,
     "pp": 10,
     "type": "Water",
@@ -2875,6 +3027,7 @@
     "stat_changes": []
   },
   "だいばくはつ": {
+    "id": 153,
     "power": 250,
     "pp": 5,
     "type": "Normal",
@@ -2893,6 +3046,7 @@
     "stat_changes": []
   },
   "みだれひっかき": {
+    "id": 154,
     "power": 18,
     "pp": 15,
     "type": "Normal",
@@ -2911,6 +3065,7 @@
     "stat_changes": []
   },
   "ホネブーメラン": {
+    "id": 155,
     "power": 50,
     "pp": 10,
     "type": "Ground",
@@ -2929,6 +3084,7 @@
     "stat_changes": []
   },
   "ねむる": {
+    "id": 156,
     "power": 0,
     "pp": 5,
     "type": "Psychic",
@@ -2947,6 +3103,7 @@
     "stat_changes": []
   },
   "いわなだれ": {
+    "id": 157,
     "power": 75,
     "pp": 10,
     "type": "Rock",
@@ -2965,6 +3122,7 @@
     "stat_changes": []
   },
   "ひっさつまえば": {
+    "id": 158,
     "power": 80,
     "pp": 15,
     "type": "Normal",
@@ -2983,6 +3141,7 @@
     "stat_changes": []
   },
   "かくばる": {
+    "id": 159,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -3006,6 +3165,7 @@
     ]
   },
   "テクスチャー": {
+    "id": 160,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -3024,6 +3184,7 @@
     "stat_changes": []
   },
   "トライアタック": {
+    "id": 161,
     "power": 80,
     "pp": 10,
     "type": "Normal",
@@ -3042,6 +3203,7 @@
     "stat_changes": []
   },
   "いかりのまえば": {
+    "id": 162,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -3060,6 +3222,7 @@
     "stat_changes": []
   },
   "きりさく": {
+    "id": 163,
     "power": 70,
     "pp": 20,
     "type": "Normal",
@@ -3078,6 +3241,7 @@
     "stat_changes": []
   },
   "みがわり": {
+    "id": 164,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -3096,6 +3260,7 @@
     "stat_changes": []
   },
   "わるあがき": {
+    "id": 165,
     "power": 50,
     "pp": 1,
     "type": "Normal",
@@ -3114,6 +3279,7 @@
     "stat_changes": []
   },
   "スケッチ": {
+    "id": 166,
     "power": 0,
     "pp": 1,
     "type": "Normal",
@@ -3132,6 +3298,7 @@
     "stat_changes": []
   },
   "トリプルキック": {
+    "id": 167,
     "power": 10,
     "pp": 10,
     "type": "Fighting",
@@ -3150,6 +3317,7 @@
     "stat_changes": []
   },
   "どろぼう": {
+    "id": 168,
     "power": 60,
     "pp": 25,
     "type": "Dark",
@@ -3168,6 +3336,7 @@
     "stat_changes": []
   },
   "クモのす": {
+    "id": 169,
     "power": 0,
     "pp": 10,
     "type": "Bug",
@@ -3186,6 +3355,7 @@
     "stat_changes": []
   },
   "こころのめ": {
+    "id": 170,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -3204,6 +3374,7 @@
     "stat_changes": []
   },
   "あくむ": {
+    "id": 171,
     "power": 0,
     "pp": 15,
     "type": "Ghost",
@@ -3222,6 +3393,7 @@
     "stat_changes": []
   },
   "かえんぐるま": {
+    "id": 172,
     "power": 60,
     "pp": 25,
     "type": "Fire",
@@ -3240,6 +3412,7 @@
     "stat_changes": []
   },
   "いびき": {
+    "id": 173,
     "power": 50,
     "pp": 15,
     "type": "Normal",
@@ -3258,6 +3431,7 @@
     "stat_changes": []
   },
   "のろい": {
+    "id": 174,
     "power": 0,
     "pp": 10,
     "type": "Ghost",
@@ -3276,6 +3450,7 @@
     "stat_changes": []
   },
   "じたばた": {
+    "id": 175,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -3294,6 +3469,7 @@
     "stat_changes": []
   },
   "テクスチャー２": {
+    "id": 176,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -3312,6 +3488,7 @@
     "stat_changes": []
   },
   "エアロブラスト": {
+    "id": 177,
     "power": 100,
     "pp": 5,
     "type": "Flying",
@@ -3330,6 +3507,7 @@
     "stat_changes": []
   },
   "わたほうし": {
+    "id": 178,
     "power": 0,
     "pp": 40,
     "type": "Grass",
@@ -3353,6 +3531,7 @@
     ]
   },
   "きしかいせい": {
+    "id": 179,
     "power": 0,
     "pp": 15,
     "type": "Fighting",
@@ -3371,6 +3550,7 @@
     "stat_changes": []
   },
   "うらみ": {
+    "id": 180,
     "power": 0,
     "pp": 10,
     "type": "Ghost",
@@ -3389,6 +3569,7 @@
     "stat_changes": []
   },
   "こなゆき": {
+    "id": 181,
     "power": 40,
     "pp": 25,
     "type": "Ice",
@@ -3407,6 +3588,7 @@
     "stat_changes": []
   },
   "まもる": {
+    "id": 182,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -3425,6 +3607,7 @@
     "stat_changes": []
   },
   "マッハパンチ": {
+    "id": 183,
     "power": 40,
     "pp": 30,
     "type": "Fighting",
@@ -3443,6 +3626,7 @@
     "stat_changes": []
   },
   "こわいかお": {
+    "id": 184,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -3466,6 +3650,7 @@
     ]
   },
   "だましうち": {
+    "id": 185,
     "power": 60,
     "pp": 20,
     "type": "Dark",
@@ -3484,6 +3669,7 @@
     "stat_changes": []
   },
   "てんしのキッス": {
+    "id": 186,
     "power": 0,
     "pp": 10,
     "type": "Fairy",
@@ -3502,6 +3688,7 @@
     "stat_changes": []
   },
   "はらだいこ": {
+    "id": 187,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -3520,6 +3707,7 @@
     "stat_changes": []
   },
   "ヘドロばくだん": {
+    "id": 188,
     "power": 90,
     "pp": 10,
     "type": "Poison",
@@ -3538,6 +3726,7 @@
     "stat_changes": []
   },
   "どろかけ": {
+    "id": 189,
     "power": 20,
     "pp": 10,
     "type": "Ground",
@@ -3561,6 +3750,7 @@
     ]
   },
   "オクタンほう": {
+    "id": 190,
     "power": 65,
     "pp": 10,
     "type": "Water",
@@ -3584,6 +3774,7 @@
     ]
   },
   "まきびし": {
+    "id": 191,
     "power": 0,
     "pp": 20,
     "type": "Ground",
@@ -3602,6 +3793,7 @@
     "stat_changes": []
   },
   "でんじほう": {
+    "id": 192,
     "power": 120,
     "pp": 5,
     "type": "Electric",
@@ -3620,6 +3812,7 @@
     "stat_changes": []
   },
   "みやぶる": {
+    "id": 193,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -3638,6 +3831,7 @@
     "stat_changes": []
   },
   "みちづれ": {
+    "id": 194,
     "power": 0,
     "pp": 5,
     "type": "Ghost",
@@ -3656,6 +3850,7 @@
     "stat_changes": []
   },
   "ほろびのうた": {
+    "id": 195,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -3674,6 +3869,7 @@
     "stat_changes": []
   },
   "こごえるかぜ": {
+    "id": 196,
     "power": 55,
     "pp": 15,
     "type": "Ice",
@@ -3697,6 +3893,7 @@
     ]
   },
   "みきり": {
+    "id": 197,
     "power": 0,
     "pp": 5,
     "type": "Fighting",
@@ -3715,6 +3912,7 @@
     "stat_changes": []
   },
   "ボーンラッシュ": {
+    "id": 198,
     "power": 25,
     "pp": 10,
     "type": "Ground",
@@ -3733,6 +3931,7 @@
     "stat_changes": []
   },
   "ロックオン": {
+    "id": 199,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -3751,6 +3950,7 @@
     "stat_changes": []
   },
   "げきりん": {
+    "id": 200,
     "power": 120,
     "pp": 10,
     "type": "Dragon",
@@ -3769,6 +3969,7 @@
     "stat_changes": []
   },
   "すなあらし": {
+    "id": 201,
     "power": 0,
     "pp": 10,
     "type": "Rock",
@@ -3787,6 +3988,7 @@
     "stat_changes": []
   },
   "ギガドレイン": {
+    "id": 202,
     "power": 75,
     "pp": 10,
     "type": "Grass",
@@ -3805,6 +4007,7 @@
     "stat_changes": []
   },
   "こらえる": {
+    "id": 203,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -3823,6 +4026,7 @@
     "stat_changes": []
   },
   "あまえる": {
+    "id": 204,
     "power": 0,
     "pp": 20,
     "type": "Fairy",
@@ -3846,6 +4050,7 @@
     ]
   },
   "ころがる": {
+    "id": 205,
     "power": 30,
     "pp": 20,
     "type": "Rock",
@@ -3864,6 +4069,7 @@
     "stat_changes": []
   },
   "みねうち": {
+    "id": 206,
     "power": 40,
     "pp": 40,
     "type": "Normal",
@@ -3882,6 +4088,7 @@
     "stat_changes": []
   },
   "いばる": {
+    "id": 207,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -3905,6 +4112,7 @@
     ]
   },
   "ミルクのみ": {
+    "id": 208,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -3923,6 +4131,7 @@
     "stat_changes": []
   },
   "スパーク": {
+    "id": 209,
     "power": 65,
     "pp": 20,
     "type": "Electric",
@@ -3941,6 +4150,7 @@
     "stat_changes": []
   },
   "れんぞくぎり": {
+    "id": 210,
     "power": 40,
     "pp": 20,
     "type": "Bug",
@@ -3959,6 +4169,7 @@
     "stat_changes": []
   },
   "はがねのつばさ": {
+    "id": 211,
     "power": 70,
     "pp": 25,
     "type": "Steel",
@@ -3982,6 +4193,7 @@
     ]
   },
   "くろいまなざし": {
+    "id": 212,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -4000,6 +4212,7 @@
     "stat_changes": []
   },
   "メロメロ": {
+    "id": 213,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -4018,6 +4231,7 @@
     "stat_changes": []
   },
   "ねごと": {
+    "id": 214,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -4036,6 +4250,7 @@
     "stat_changes": []
   },
   "いやしのすず": {
+    "id": 215,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -4054,6 +4269,7 @@
     "stat_changes": []
   },
   "おんがえし": {
+    "id": 216,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -4072,6 +4288,7 @@
     "stat_changes": []
   },
   "プレゼント": {
+    "id": 217,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -4090,6 +4307,7 @@
     "stat_changes": []
   },
   "やつあたり": {
+    "id": 218,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -4108,6 +4326,7 @@
     "stat_changes": []
   },
   "しんぴのまもり": {
+    "id": 219,
     "power": 0,
     "pp": 25,
     "type": "Normal",
@@ -4126,6 +4345,7 @@
     "stat_changes": []
   },
   "いたみわけ": {
+    "id": 220,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -4144,6 +4364,7 @@
     "stat_changes": []
   },
   "せいなるほのお": {
+    "id": 221,
     "power": 100,
     "pp": 5,
     "type": "Fire",
@@ -4162,6 +4383,7 @@
     "stat_changes": []
   },
   "マグニチュード": {
+    "id": 222,
     "power": 0,
     "pp": 30,
     "type": "Ground",
@@ -4180,6 +4402,7 @@
     "stat_changes": []
   },
   "ばくれつパンチ": {
+    "id": 223,
     "power": 100,
     "pp": 5,
     "type": "Fighting",
@@ -4198,6 +4421,7 @@
     "stat_changes": []
   },
   "メガホーン": {
+    "id": 224,
     "power": 120,
     "pp": 10,
     "type": "Bug",
@@ -4216,6 +4440,7 @@
     "stat_changes": []
   },
   "りゅうのいぶき": {
+    "id": 225,
     "power": 60,
     "pp": 20,
     "type": "Dragon",
@@ -4234,6 +4459,7 @@
     "stat_changes": []
   },
   "バトンタッチ": {
+    "id": 226,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -4252,6 +4478,7 @@
     "stat_changes": []
   },
   "アンコール": {
+    "id": 227,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -4270,6 +4497,7 @@
     "stat_changes": []
   },
   "おいうち": {
+    "id": 228,
     "power": 40,
     "pp": 20,
     "type": "Dark",
@@ -4288,6 +4516,7 @@
     "stat_changes": []
   },
   "こうそくスピン": {
+    "id": 229,
     "power": 50,
     "pp": 40,
     "type": "Normal",
@@ -4311,6 +4540,7 @@
     ]
   },
   "あまいかおり": {
+    "id": 230,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -4334,6 +4564,7 @@
     ]
   },
   "アイアンテール": {
+    "id": 231,
     "power": 100,
     "pp": 15,
     "type": "Steel",
@@ -4357,6 +4588,7 @@
     ]
   },
   "メタルクロー": {
+    "id": 232,
     "power": 50,
     "pp": 35,
     "type": "Steel",
@@ -4380,6 +4612,7 @@
     ]
   },
   "あてみなげ": {
+    "id": 233,
     "power": 70,
     "pp": 10,
     "type": "Fighting",
@@ -4398,6 +4631,7 @@
     "stat_changes": []
   },
   "あさのひざし": {
+    "id": 234,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -4416,6 +4650,7 @@
     "stat_changes": []
   },
   "こうごうせい": {
+    "id": 235,
     "power": 0,
     "pp": 5,
     "type": "Grass",
@@ -4434,6 +4669,7 @@
     "stat_changes": []
   },
   "つきのひかり": {
+    "id": 236,
     "power": 0,
     "pp": 5,
     "type": "Fairy",
@@ -4452,6 +4688,7 @@
     "stat_changes": []
   },
   "めざめるパワー": {
+    "id": 237,
     "power": 60,
     "pp": 15,
     "type": "Normal",
@@ -4470,6 +4707,7 @@
     "stat_changes": []
   },
   "クロスチョップ": {
+    "id": 238,
     "power": 100,
     "pp": 5,
     "type": "Fighting",
@@ -4488,6 +4726,7 @@
     "stat_changes": []
   },
   "たつまき": {
+    "id": 239,
     "power": 40,
     "pp": 20,
     "type": "Dragon",
@@ -4506,6 +4745,7 @@
     "stat_changes": []
   },
   "あまごい": {
+    "id": 240,
     "power": 0,
     "pp": 5,
     "type": "Water",
@@ -4524,6 +4764,7 @@
     "stat_changes": []
   },
   "にほんばれ": {
+    "id": 241,
     "power": 0,
     "pp": 5,
     "type": "Fire",
@@ -4542,6 +4783,7 @@
     "stat_changes": []
   },
   "かみくだく": {
+    "id": 242,
     "power": 80,
     "pp": 15,
     "type": "Dark",
@@ -4565,6 +4807,7 @@
     ]
   },
   "ミラーコート": {
+    "id": 243,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -4583,6 +4826,7 @@
     "stat_changes": []
   },
   "じこあんじ": {
+    "id": 244,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -4601,6 +4845,7 @@
     "stat_changes": []
   },
   "しんそく": {
+    "id": 245,
     "power": 80,
     "pp": 5,
     "type": "Normal",
@@ -4619,6 +4864,7 @@
     "stat_changes": []
   },
   "げんしのちから": {
+    "id": 246,
     "power": 60,
     "pp": 5,
     "type": "Rock",
@@ -4658,6 +4904,7 @@
     ]
   },
   "シャドーボール": {
+    "id": 247,
     "power": 80,
     "pp": 15,
     "type": "Ghost",
@@ -4681,6 +4928,7 @@
     ]
   },
   "みらいよち": {
+    "id": 248,
     "power": 120,
     "pp": 10,
     "type": "Psychic",
@@ -4699,6 +4947,7 @@
     "stat_changes": []
   },
   "いわくだき": {
+    "id": 249,
     "power": 40,
     "pp": 15,
     "type": "Fighting",
@@ -4722,6 +4971,7 @@
     ]
   },
   "うずしお": {
+    "id": 250,
     "power": 35,
     "pp": 15,
     "type": "Water",
@@ -4740,6 +4990,7 @@
     "stat_changes": []
   },
   "ふくろだたき": {
+    "id": 251,
     "power": 0,
     "pp": 10,
     "type": "Dark",
@@ -4758,6 +5009,7 @@
     "stat_changes": []
   },
   "ねこだまし": {
+    "id": 252,
     "power": 40,
     "pp": 10,
     "type": "Normal",
@@ -4776,6 +5028,7 @@
     "stat_changes": []
   },
   "さわぐ": {
+    "id": 253,
     "power": 90,
     "pp": 10,
     "type": "Normal",
@@ -4794,6 +5047,7 @@
     "stat_changes": []
   },
   "たくわえる": {
+    "id": 254,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -4821,6 +5075,7 @@
     ]
   },
   "はきだす": {
+    "id": 255,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -4839,6 +5094,7 @@
     "stat_changes": []
   },
   "のみこむ": {
+    "id": 256,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -4857,6 +5113,7 @@
     "stat_changes": []
   },
   "ねっぷう": {
+    "id": 257,
     "power": 95,
     "pp": 10,
     "type": "Fire",
@@ -4875,6 +5132,7 @@
     "stat_changes": []
   },
   "あられ": {
+    "id": 258,
     "power": 0,
     "pp": 10,
     "type": "Ice",
@@ -4893,6 +5151,7 @@
     "stat_changes": []
   },
   "いちゃもん": {
+    "id": 259,
     "power": 0,
     "pp": 15,
     "type": "Dark",
@@ -4911,6 +5170,7 @@
     "stat_changes": []
   },
   "おだてる": {
+    "id": 260,
     "power": 0,
     "pp": 15,
     "type": "Dark",
@@ -4934,6 +5194,7 @@
     ]
   },
   "おにび": {
+    "id": 261,
     "power": 0,
     "pp": 15,
     "type": "Fire",
@@ -4952,6 +5213,7 @@
     "stat_changes": []
   },
   "おきみやげ": {
+    "id": 262,
     "power": 0,
     "pp": 10,
     "type": "Dark",
@@ -4979,6 +5241,7 @@
     ]
   },
   "からげんき": {
+    "id": 263,
     "power": 70,
     "pp": 20,
     "type": "Normal",
@@ -4997,6 +5260,7 @@
     "stat_changes": []
   },
   "きあいパンチ": {
+    "id": 264,
     "power": 150,
     "pp": 20,
     "type": "Fighting",
@@ -5015,6 +5279,7 @@
     "stat_changes": []
   },
   "きつけ": {
+    "id": 265,
     "power": 70,
     "pp": 10,
     "type": "Normal",
@@ -5033,6 +5298,7 @@
     "stat_changes": []
   },
   "このゆびとまれ": {
+    "id": 266,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -5051,6 +5317,7 @@
     "stat_changes": []
   },
   "しぜんのちから": {
+    "id": 267,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -5069,6 +5336,7 @@
     "stat_changes": []
   },
   "じゅうでん": {
+    "id": 268,
     "power": 0,
     "pp": 20,
     "type": "Electric",
@@ -5092,6 +5360,7 @@
     ]
   },
   "ちょうはつ": {
+    "id": 269,
     "power": 0,
     "pp": 20,
     "type": "Dark",
@@ -5110,6 +5379,7 @@
     "stat_changes": []
   },
   "てだすけ": {
+    "id": 270,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -5128,6 +5398,7 @@
     "stat_changes": []
   },
   "トリック": {
+    "id": 271,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -5146,6 +5417,7 @@
     "stat_changes": []
   },
   "なりきり": {
+    "id": 272,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -5164,6 +5436,7 @@
     "stat_changes": []
   },
   "ねがいごと": {
+    "id": 273,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -5182,6 +5455,7 @@
     "stat_changes": []
   },
   "ねこのて": {
+    "id": 274,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -5200,6 +5474,7 @@
     "stat_changes": []
   },
   "ねをはる": {
+    "id": 275,
     "power": 0,
     "pp": 20,
     "type": "Grass",
@@ -5218,6 +5493,7 @@
     "stat_changes": []
   },
   "ばかぢから": {
+    "id": 276,
     "power": 120,
     "pp": 5,
     "type": "Fighting",
@@ -5245,6 +5521,7 @@
     ]
   },
   "マジックコート": {
+    "id": 277,
     "power": 0,
     "pp": 15,
     "type": "Psychic",
@@ -5263,6 +5540,7 @@
     "stat_changes": []
   },
   "リサイクル": {
+    "id": 278,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -5281,6 +5559,7 @@
     "stat_changes": []
   },
   "リベンジ": {
+    "id": 279,
     "power": 60,
     "pp": 10,
     "type": "Fighting",
@@ -5299,6 +5578,7 @@
     "stat_changes": []
   },
   "かわらわり": {
+    "id": 280,
     "power": 75,
     "pp": 15,
     "type": "Fighting",
@@ -5317,6 +5597,7 @@
     "stat_changes": []
   },
   "あくび": {
+    "id": 281,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -5335,6 +5616,7 @@
     "stat_changes": []
   },
   "はたきおとす": {
+    "id": 282,
     "power": 65,
     "pp": 20,
     "type": "Dark",
@@ -5353,6 +5635,7 @@
     "stat_changes": []
   },
   "がむしゃら": {
+    "id": 283,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -5371,6 +5654,7 @@
     "stat_changes": []
   },
   "ふんか": {
+    "id": 284,
     "power": 150,
     "pp": 5,
     "type": "Fire",
@@ -5389,6 +5673,7 @@
     "stat_changes": []
   },
   "スキルスワップ": {
+    "id": 285,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -5407,6 +5692,7 @@
     "stat_changes": []
   },
   "ふういん": {
+    "id": 286,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -5425,6 +5711,7 @@
     "stat_changes": []
   },
   "リフレッシュ": {
+    "id": 287,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -5443,6 +5730,7 @@
     "stat_changes": []
   },
   "おんねん": {
+    "id": 288,
     "power": 0,
     "pp": 5,
     "type": "Ghost",
@@ -5461,6 +5749,7 @@
     "stat_changes": []
   },
   "よこどり": {
+    "id": 289,
     "power": 0,
     "pp": 10,
     "type": "Dark",
@@ -5479,6 +5768,7 @@
     "stat_changes": []
   },
   "ひみつのちから": {
+    "id": 290,
     "power": 70,
     "pp": 20,
     "type": "Normal",
@@ -5497,6 +5787,7 @@
     "stat_changes": []
   },
   "ダイビング": {
+    "id": 291,
     "power": 80,
     "pp": 10,
     "type": "Water",
@@ -5515,6 +5806,7 @@
     "stat_changes": []
   },
   "つっぱり": {
+    "id": 292,
     "power": 15,
     "pp": 20,
     "type": "Fighting",
@@ -5533,6 +5825,7 @@
     "stat_changes": []
   },
   "ほごしょく": {
+    "id": 293,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -5551,6 +5844,7 @@
     "stat_changes": []
   },
   "ほたるび": {
+    "id": 294,
     "power": 0,
     "pp": 20,
     "type": "Bug",
@@ -5574,6 +5868,7 @@
     ]
   },
   "ラスターパージ": {
+    "id": 295,
     "power": 95,
     "pp": 5,
     "type": "Psychic",
@@ -5597,6 +5892,7 @@
     ]
   },
   "ミストボール": {
+    "id": 296,
     "power": 95,
     "pp": 5,
     "type": "Psychic",
@@ -5620,6 +5916,7 @@
     ]
   },
   "フェザーダンス": {
+    "id": 297,
     "power": 0,
     "pp": 15,
     "type": "Flying",
@@ -5643,6 +5940,7 @@
     ]
   },
   "フラフラダンス": {
+    "id": 298,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -5661,6 +5959,7 @@
     "stat_changes": []
   },
   "ブレイズキック": {
+    "id": 299,
     "power": 85,
     "pp": 10,
     "type": "Fire",
@@ -5679,6 +5978,7 @@
     "stat_changes": []
   },
   "どろあそび": {
+    "id": 300,
     "power": 0,
     "pp": 15,
     "type": "Ground",
@@ -5697,6 +5997,7 @@
     "stat_changes": []
   },
   "アイスボール": {
+    "id": 301,
     "power": 30,
     "pp": 20,
     "type": "Ice",
@@ -5715,6 +6016,7 @@
     "stat_changes": []
   },
   "ニードルアーム": {
+    "id": 302,
     "power": 60,
     "pp": 15,
     "type": "Grass",
@@ -5733,6 +6035,7 @@
     "stat_changes": []
   },
   "なまける": {
+    "id": 303,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -5751,6 +6054,7 @@
     "stat_changes": []
   },
   "ハイパーボイス": {
+    "id": 304,
     "power": 90,
     "pp": 10,
     "type": "Normal",
@@ -5769,6 +6073,7 @@
     "stat_changes": []
   },
   "どくどくのキバ": {
+    "id": 305,
     "power": 50,
     "pp": 15,
     "type": "Poison",
@@ -5787,6 +6092,7 @@
     "stat_changes": []
   },
   "ブレイククロー": {
+    "id": 306,
     "power": 75,
     "pp": 10,
     "type": "Normal",
@@ -5810,6 +6116,7 @@
     ]
   },
   "ブラストバーン": {
+    "id": 307,
     "power": 150,
     "pp": 5,
     "type": "Fire",
@@ -5828,6 +6135,7 @@
     "stat_changes": []
   },
   "ハイドロカノン": {
+    "id": 308,
     "power": 150,
     "pp": 5,
     "type": "Water",
@@ -5846,6 +6154,7 @@
     "stat_changes": []
   },
   "コメットパンチ": {
+    "id": 309,
     "power": 90,
     "pp": 10,
     "type": "Steel",
@@ -5869,6 +6178,7 @@
     ]
   },
   "おどろかす": {
+    "id": 310,
     "power": 30,
     "pp": 15,
     "type": "Ghost",
@@ -5887,6 +6197,7 @@
     "stat_changes": []
   },
   "ウェザーボール": {
+    "id": 311,
     "power": 50,
     "pp": 10,
     "type": "Normal",
@@ -5905,6 +6216,7 @@
     "stat_changes": []
   },
   "アロマセラピー": {
+    "id": 312,
     "power": 0,
     "pp": 5,
     "type": "Grass",
@@ -5923,6 +6235,7 @@
     "stat_changes": []
   },
   "うそなき": {
+    "id": 313,
     "power": 0,
     "pp": 20,
     "type": "Dark",
@@ -5946,6 +6259,7 @@
     ]
   },
   "エアカッター": {
+    "id": 314,
     "power": 60,
     "pp": 25,
     "type": "Flying",
@@ -5964,6 +6278,7 @@
     "stat_changes": []
   },
   "オーバーヒート": {
+    "id": 315,
     "power": 130,
     "pp": 5,
     "type": "Fire",
@@ -5987,6 +6302,7 @@
     ]
   },
   "かぎわける": {
+    "id": 316,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -6005,6 +6321,7 @@
     "stat_changes": []
   },
   "がんせきふうじ": {
+    "id": 317,
     "power": 60,
     "pp": 15,
     "type": "Rock",
@@ -6028,6 +6345,7 @@
     ]
   },
   "ぎんいろのかぜ": {
+    "id": 318,
     "power": 60,
     "pp": 5,
     "type": "Bug",
@@ -6067,6 +6385,7 @@
     ]
   },
   "きんぞくおん": {
+    "id": 319,
     "power": 0,
     "pp": 40,
     "type": "Steel",
@@ -6090,6 +6409,7 @@
     ]
   },
   "くさぶえ": {
+    "id": 320,
     "power": 0,
     "pp": 15,
     "type": "Grass",
@@ -6108,6 +6428,7 @@
     "stat_changes": []
   },
   "くすぐる": {
+    "id": 321,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -6135,6 +6456,7 @@
     ]
   },
   "コスモパワー": {
+    "id": 322,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -6162,6 +6484,7 @@
     ]
   },
   "しおふき": {
+    "id": 323,
     "power": 150,
     "pp": 5,
     "type": "Water",
@@ -6180,6 +6503,7 @@
     "stat_changes": []
   },
   "シグナルビーム": {
+    "id": 324,
     "power": 75,
     "pp": 15,
     "type": "Bug",
@@ -6198,6 +6522,7 @@
     "stat_changes": []
   },
   "シャドーパンチ": {
+    "id": 325,
     "power": 60,
     "pp": 20,
     "type": "Ghost",
@@ -6216,6 +6541,7 @@
     "stat_changes": []
   },
   "じんつうりき": {
+    "id": 326,
     "power": 80,
     "pp": 20,
     "type": "Psychic",
@@ -6234,6 +6560,7 @@
     "stat_changes": []
   },
   "スカイアッパー": {
+    "id": 327,
     "power": 85,
     "pp": 15,
     "type": "Fighting",
@@ -6252,6 +6579,7 @@
     "stat_changes": []
   },
   "すなじごく": {
+    "id": 328,
     "power": 35,
     "pp": 15,
     "type": "Ground",
@@ -6270,6 +6598,7 @@
     "stat_changes": []
   },
   "ぜったいれいど": {
+    "id": 329,
     "power": 0,
     "pp": 5,
     "type": "Ice",
@@ -6288,6 +6617,7 @@
     "stat_changes": []
   },
   "だくりゅう": {
+    "id": 330,
     "power": 90,
     "pp": 10,
     "type": "Water",
@@ -6311,6 +6641,7 @@
     ]
   },
   "タネマシンガン": {
+    "id": 331,
     "power": 25,
     "pp": 30,
     "type": "Grass",
@@ -6329,6 +6660,7 @@
     "stat_changes": []
   },
   "つばめがえし": {
+    "id": 332,
     "power": 60,
     "pp": 20,
     "type": "Flying",
@@ -6347,6 +6679,7 @@
     "stat_changes": []
   },
   "つららばり": {
+    "id": 333,
     "power": 25,
     "pp": 30,
     "type": "Ice",
@@ -6365,6 +6698,7 @@
     "stat_changes": []
   },
   "てっぺき": {
+    "id": 334,
     "power": 0,
     "pp": 15,
     "type": "Steel",
@@ -6388,6 +6722,7 @@
     ]
   },
   "とおせんぼう": {
+    "id": 335,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -6406,6 +6741,7 @@
     "stat_changes": []
   },
   "とおぼえ": {
+    "id": 336,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -6429,6 +6765,7 @@
     ]
   },
   "ドラゴンクロー": {
+    "id": 337,
     "power": 80,
     "pp": 15,
     "type": "Dragon",
@@ -6447,6 +6784,7 @@
     "stat_changes": []
   },
   "ハードプラント": {
+    "id": 338,
     "power": 150,
     "pp": 5,
     "type": "Grass",
@@ -6465,6 +6803,7 @@
     "stat_changes": []
   },
   "ビルドアップ": {
+    "id": 339,
     "power": 0,
     "pp": 20,
     "type": "Fighting",
@@ -6492,6 +6831,7 @@
     ]
   },
   "とびはねる": {
+    "id": 340,
     "power": 85,
     "pp": 5,
     "type": "Flying",
@@ -6510,6 +6850,7 @@
     "stat_changes": []
   },
   "マッドショット": {
+    "id": 341,
     "power": 55,
     "pp": 15,
     "type": "Ground",
@@ -6533,6 +6874,7 @@
     ]
   },
   "ポイズンテール": {
+    "id": 342,
     "power": 50,
     "pp": 25,
     "type": "Poison",
@@ -6551,6 +6893,7 @@
     "stat_changes": []
   },
   "ほしがる": {
+    "id": 343,
     "power": 60,
     "pp": 25,
     "type": "Normal",
@@ -6569,6 +6912,7 @@
     "stat_changes": []
   },
   "ボルテッカー": {
+    "id": 344,
     "power": 120,
     "pp": 15,
     "type": "Electric",
@@ -6587,6 +6931,7 @@
     "stat_changes": []
   },
   "マジカルリーフ": {
+    "id": 345,
     "power": 60,
     "pp": 20,
     "type": "Grass",
@@ -6605,6 +6950,7 @@
     "stat_changes": []
   },
   "みずあそび": {
+    "id": 346,
     "power": 0,
     "pp": 15,
     "type": "Water",
@@ -6623,6 +6969,7 @@
     "stat_changes": []
   },
   "めいそう": {
+    "id": 347,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -6650,6 +6997,7 @@
     ]
   },
   "リーフブレード": {
+    "id": 348,
     "power": 90,
     "pp": 15,
     "type": "Grass",
@@ -6668,6 +7016,7 @@
     "stat_changes": []
   },
   "りゅうのまい": {
+    "id": 349,
     "power": 0,
     "pp": 20,
     "type": "Dragon",
@@ -6695,6 +7044,7 @@
     ]
   },
   "ロックブラスト": {
+    "id": 350,
     "power": 25,
     "pp": 10,
     "type": "Rock",
@@ -6713,6 +7063,7 @@
     "stat_changes": []
   },
   "でんげきは": {
+    "id": 351,
     "power": 60,
     "pp": 20,
     "type": "Electric",
@@ -6731,6 +7082,7 @@
     "stat_changes": []
   },
   "みずのはどう": {
+    "id": 352,
     "power": 60,
     "pp": 20,
     "type": "Water",
@@ -6749,6 +7101,7 @@
     "stat_changes": []
   },
   "はめつのねがい": {
+    "id": 353,
     "power": 140,
     "pp": 5,
     "type": "Steel",
@@ -6767,6 +7120,7 @@
     "stat_changes": []
   },
   "サイコブースト": {
+    "id": 354,
     "power": 140,
     "pp": 5,
     "type": "Psychic",
@@ -6790,6 +7144,7 @@
     ]
   },
   "はねやすめ": {
+    "id": 355,
     "power": 0,
     "pp": 5,
     "type": "Flying",
@@ -6808,6 +7163,7 @@
     "stat_changes": []
   },
   "じゅうりょく": {
+    "id": 356,
     "power": 0,
     "pp": 5,
     "type": "Psychic",
@@ -6826,6 +7182,7 @@
     "stat_changes": []
   },
   "ミラクルアイ": {
+    "id": 357,
     "power": 0,
     "pp": 40,
     "type": "Psychic",
@@ -6844,6 +7201,7 @@
     "stat_changes": []
   },
   "めざましビンタ": {
+    "id": 358,
     "power": 70,
     "pp": 10,
     "type": "Fighting",
@@ -6862,6 +7220,7 @@
     "stat_changes": []
   },
   "アームハンマー": {
+    "id": 359,
     "power": 100,
     "pp": 10,
     "type": "Fighting",
@@ -6885,6 +7244,7 @@
     ]
   },
   "ジャイロボール": {
+    "id": 360,
     "power": 0,
     "pp": 5,
     "type": "Steel",
@@ -6903,6 +7263,7 @@
     "stat_changes": []
   },
   "いやしのねがい": {
+    "id": 361,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -6921,6 +7282,7 @@
     "stat_changes": []
   },
   "しおみず": {
+    "id": 362,
     "power": 65,
     "pp": 10,
     "type": "Water",
@@ -6939,6 +7301,7 @@
     "stat_changes": []
   },
   "しぜんのめぐみ": {
+    "id": 363,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -6957,6 +7320,7 @@
     "stat_changes": []
   },
   "フェイント": {
+    "id": 364,
     "power": 30,
     "pp": 10,
     "type": "Normal",
@@ -6975,6 +7339,7 @@
     "stat_changes": []
   },
   "ついばむ": {
+    "id": 365,
     "power": 60,
     "pp": 20,
     "type": "Flying",
@@ -6993,6 +7358,7 @@
     "stat_changes": []
   },
   "おいかぜ": {
+    "id": 366,
     "power": 0,
     "pp": 15,
     "type": "Flying",
@@ -7011,6 +7377,7 @@
     "stat_changes": []
   },
   "つぼをつく": {
+    "id": 367,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -7029,6 +7396,7 @@
     "stat_changes": []
   },
   "メタルバースト": {
+    "id": 368,
     "power": 0,
     "pp": 10,
     "type": "Steel",
@@ -7047,6 +7415,7 @@
     "stat_changes": []
   },
   "とんぼがえり": {
+    "id": 369,
     "power": 70,
     "pp": 20,
     "type": "Bug",
@@ -7065,6 +7434,7 @@
     "stat_changes": []
   },
   "インファイト": {
+    "id": 370,
     "power": 120,
     "pp": 5,
     "type": "Fighting",
@@ -7092,6 +7462,7 @@
     ]
   },
   "しっぺがえし": {
+    "id": 371,
     "power": 50,
     "pp": 10,
     "type": "Dark",
@@ -7110,6 +7481,7 @@
     "stat_changes": []
   },
   "ダメおし": {
+    "id": 372,
     "power": 60,
     "pp": 10,
     "type": "Dark",
@@ -7128,6 +7500,7 @@
     "stat_changes": []
   },
   "さしおさえ": {
+    "id": 373,
     "power": 0,
     "pp": 15,
     "type": "Dark",
@@ -7146,6 +7519,7 @@
     "stat_changes": []
   },
   "なげつける": {
+    "id": 374,
     "power": 0,
     "pp": 10,
     "type": "Dark",
@@ -7164,6 +7538,7 @@
     "stat_changes": []
   },
   "サイコシフト": {
+    "id": 375,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -7182,6 +7557,7 @@
     "stat_changes": []
   },
   "きりふだ": {
+    "id": 376,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -7200,6 +7576,7 @@
     "stat_changes": []
   },
   "かいふくふうじ": {
+    "id": 377,
     "power": 0,
     "pp": 15,
     "type": "Psychic",
@@ -7218,6 +7595,7 @@
     "stat_changes": []
   },
   "しぼりとる": {
+    "id": 378,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -7236,6 +7614,7 @@
     "stat_changes": []
   },
   "パワートリック": {
+    "id": 379,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -7254,6 +7633,7 @@
     "stat_changes": []
   },
   "いえき": {
+    "id": 380,
     "power": 0,
     "pp": 10,
     "type": "Poison",
@@ -7272,6 +7652,7 @@
     "stat_changes": []
   },
   "おまじない": {
+    "id": 381,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -7290,6 +7671,7 @@
     "stat_changes": []
   },
   "さきどり": {
+    "id": 382,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -7308,6 +7690,7 @@
     "stat_changes": []
   },
   "まねっこ": {
+    "id": 383,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -7326,6 +7709,7 @@
     "stat_changes": []
   },
   "パワースワップ": {
+    "id": 384,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -7344,6 +7728,7 @@
     "stat_changes": []
   },
   "ガードスワップ": {
+    "id": 385,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -7362,6 +7747,7 @@
     "stat_changes": []
   },
   "おしおき": {
+    "id": 386,
     "power": 0,
     "pp": 5,
     "type": "Dark",
@@ -7380,6 +7766,7 @@
     "stat_changes": []
   },
   "とっておき": {
+    "id": 387,
     "power": 140,
     "pp": 5,
     "type": "Normal",
@@ -7398,6 +7785,7 @@
     "stat_changes": []
   },
   "なやみのタネ": {
+    "id": 388,
     "power": 0,
     "pp": 10,
     "type": "Grass",
@@ -7416,6 +7804,7 @@
     "stat_changes": []
   },
   "ふいうち": {
+    "id": 389,
     "power": 70,
     "pp": 5,
     "type": "Dark",
@@ -7434,6 +7823,7 @@
     "stat_changes": []
   },
   "どくびし": {
+    "id": 390,
     "power": 0,
     "pp": 20,
     "type": "Poison",
@@ -7452,6 +7842,7 @@
     "stat_changes": []
   },
   "ハートスワップ": {
+    "id": 391,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -7470,6 +7861,7 @@
     "stat_changes": []
   },
   "アクアリング": {
+    "id": 392,
     "power": 0,
     "pp": 20,
     "type": "Water",
@@ -7488,6 +7880,7 @@
     "stat_changes": []
   },
   "でんじふゆう": {
+    "id": 393,
     "power": 0,
     "pp": 10,
     "type": "Electric",
@@ -7506,6 +7899,7 @@
     "stat_changes": []
   },
   "フレアドライブ": {
+    "id": 394,
     "power": 120,
     "pp": 15,
     "type": "Fire",
@@ -7524,6 +7918,7 @@
     "stat_changes": []
   },
   "はっけい": {
+    "id": 395,
     "power": 60,
     "pp": 10,
     "type": "Fighting",
@@ -7542,6 +7937,7 @@
     "stat_changes": []
   },
   "はどうだん": {
+    "id": 396,
     "power": 80,
     "pp": 20,
     "type": "Fighting",
@@ -7560,6 +7956,7 @@
     "stat_changes": []
   },
   "ロックカット": {
+    "id": 397,
     "power": 0,
     "pp": 20,
     "type": "Rock",
@@ -7583,6 +7980,7 @@
     ]
   },
   "どくづき": {
+    "id": 398,
     "power": 80,
     "pp": 20,
     "type": "Poison",
@@ -7601,6 +7999,7 @@
     "stat_changes": []
   },
   "あくのはどう": {
+    "id": 399,
     "power": 80,
     "pp": 15,
     "type": "Dark",
@@ -7619,6 +8018,7 @@
     "stat_changes": []
   },
   "つじぎり": {
+    "id": 400,
     "power": 70,
     "pp": 15,
     "type": "Dark",
@@ -7637,6 +8037,7 @@
     "stat_changes": []
   },
   "アクアテール": {
+    "id": 401,
     "power": 90,
     "pp": 10,
     "type": "Water",
@@ -7655,6 +8056,7 @@
     "stat_changes": []
   },
   "タネばくだん": {
+    "id": 402,
     "power": 80,
     "pp": 15,
     "type": "Grass",
@@ -7673,6 +8075,7 @@
     "stat_changes": []
   },
   "エアスラッシュ": {
+    "id": 403,
     "power": 75,
     "pp": 15,
     "type": "Flying",
@@ -7691,6 +8094,7 @@
     "stat_changes": []
   },
   "シザークロス": {
+    "id": 404,
     "power": 80,
     "pp": 15,
     "type": "Bug",
@@ -7709,6 +8113,7 @@
     "stat_changes": []
   },
   "むしのさざめき": {
+    "id": 405,
     "power": 90,
     "pp": 10,
     "type": "Bug",
@@ -7732,6 +8137,7 @@
     ]
   },
   "りゅうのはどう": {
+    "id": 406,
     "power": 85,
     "pp": 10,
     "type": "Dragon",
@@ -7750,6 +8156,7 @@
     "stat_changes": []
   },
   "ドラゴンダイブ": {
+    "id": 407,
     "power": 100,
     "pp": 10,
     "type": "Dragon",
@@ -7768,6 +8175,7 @@
     "stat_changes": []
   },
   "パワージェム": {
+    "id": 408,
     "power": 80,
     "pp": 20,
     "type": "Rock",
@@ -7786,6 +8194,7 @@
     "stat_changes": []
   },
   "ドレインパンチ": {
+    "id": 409,
     "power": 75,
     "pp": 10,
     "type": "Fighting",
@@ -7804,6 +8213,7 @@
     "stat_changes": []
   },
   "しんくうは": {
+    "id": 410,
     "power": 40,
     "pp": 30,
     "type": "Fighting",
@@ -7822,6 +8232,7 @@
     "stat_changes": []
   },
   "きあいだま": {
+    "id": 411,
     "power": 120,
     "pp": 5,
     "type": "Fighting",
@@ -7845,6 +8256,7 @@
     ]
   },
   "エナジーボール": {
+    "id": 412,
     "power": 90,
     "pp": 10,
     "type": "Grass",
@@ -7868,6 +8280,7 @@
     ]
   },
   "ブレイブバード": {
+    "id": 413,
     "power": 120,
     "pp": 15,
     "type": "Flying",
@@ -7886,6 +8299,7 @@
     "stat_changes": []
   },
   "だいちのちから": {
+    "id": 414,
     "power": 90,
     "pp": 10,
     "type": "Ground",
@@ -7909,6 +8323,7 @@
     ]
   },
   "すりかえ": {
+    "id": 415,
     "power": 0,
     "pp": 10,
     "type": "Dark",
@@ -7927,6 +8342,7 @@
     "stat_changes": []
   },
   "ギガインパクト": {
+    "id": 416,
     "power": 150,
     "pp": 5,
     "type": "Normal",
@@ -7945,6 +8361,7 @@
     "stat_changes": []
   },
   "わるだくみ": {
+    "id": 417,
     "power": 0,
     "pp": 20,
     "type": "Dark",
@@ -7968,6 +8385,7 @@
     ]
   },
   "バレットパンチ": {
+    "id": 418,
     "power": 40,
     "pp": 30,
     "type": "Steel",
@@ -7986,6 +8404,7 @@
     "stat_changes": []
   },
   "ゆきなだれ": {
+    "id": 419,
     "power": 60,
     "pp": 10,
     "type": "Ice",
@@ -8004,6 +8423,7 @@
     "stat_changes": []
   },
   "こおりのつぶて": {
+    "id": 420,
     "power": 40,
     "pp": 30,
     "type": "Ice",
@@ -8022,6 +8442,7 @@
     "stat_changes": []
   },
   "シャドークロー": {
+    "id": 421,
     "power": 70,
     "pp": 15,
     "type": "Ghost",
@@ -8040,6 +8461,7 @@
     "stat_changes": []
   },
   "かみなりのキバ": {
+    "id": 422,
     "power": 65,
     "pp": 15,
     "type": "Electric",
@@ -8058,6 +8480,7 @@
     "stat_changes": []
   },
   "こおりのキバ": {
+    "id": 423,
     "power": 65,
     "pp": 15,
     "type": "Ice",
@@ -8076,6 +8499,7 @@
     "stat_changes": []
   },
   "ほのおのキバ": {
+    "id": 424,
     "power": 65,
     "pp": 15,
     "type": "Fire",
@@ -8094,6 +8518,7 @@
     "stat_changes": []
   },
   "かげうち": {
+    "id": 425,
     "power": 40,
     "pp": 30,
     "type": "Ghost",
@@ -8112,6 +8537,7 @@
     "stat_changes": []
   },
   "どろばくだん": {
+    "id": 426,
     "power": 65,
     "pp": 10,
     "type": "Ground",
@@ -8135,6 +8561,7 @@
     ]
   },
   "サイコカッター": {
+    "id": 427,
     "power": 70,
     "pp": 20,
     "type": "Psychic",
@@ -8153,6 +8580,7 @@
     "stat_changes": []
   },
   "しねんのずつき": {
+    "id": 428,
     "power": 80,
     "pp": 15,
     "type": "Psychic",
@@ -8171,6 +8599,7 @@
     "stat_changes": []
   },
   "ミラーショット": {
+    "id": 429,
     "power": 65,
     "pp": 10,
     "type": "Steel",
@@ -8194,6 +8623,7 @@
     ]
   },
   "ラスターカノン": {
+    "id": 430,
     "power": 80,
     "pp": 10,
     "type": "Steel",
@@ -8217,6 +8647,7 @@
     ]
   },
   "ロッククライム": {
+    "id": 431,
     "power": 90,
     "pp": 20,
     "type": "Normal",
@@ -8235,6 +8666,7 @@
     "stat_changes": []
   },
   "きりばらい": {
+    "id": 432,
     "power": 0,
     "pp": 15,
     "type": "Flying",
@@ -8258,6 +8690,7 @@
     ]
   },
   "トリックルーム": {
+    "id": 433,
     "power": 0,
     "pp": 5,
     "type": "Psychic",
@@ -8276,6 +8709,7 @@
     "stat_changes": []
   },
   "りゅうせいぐん": {
+    "id": 434,
     "power": 130,
     "pp": 5,
     "type": "Dragon",
@@ -8299,6 +8733,7 @@
     ]
   },
   "ほうでん": {
+    "id": 435,
     "power": 80,
     "pp": 15,
     "type": "Electric",
@@ -8317,6 +8752,7 @@
     "stat_changes": []
   },
   "ふんえん": {
+    "id": 436,
     "power": 80,
     "pp": 15,
     "type": "Fire",
@@ -8335,6 +8771,7 @@
     "stat_changes": []
   },
   "リーフストーム": {
+    "id": 437,
     "power": 130,
     "pp": 5,
     "type": "Grass",
@@ -8358,6 +8795,7 @@
     ]
   },
   "パワーウィップ": {
+    "id": 438,
     "power": 120,
     "pp": 10,
     "type": "Grass",
@@ -8376,6 +8814,7 @@
     "stat_changes": []
   },
   "がんせきほう": {
+    "id": 439,
     "power": 150,
     "pp": 5,
     "type": "Rock",
@@ -8394,6 +8833,7 @@
     "stat_changes": []
   },
   "クロスポイズン": {
+    "id": 440,
     "power": 70,
     "pp": 20,
     "type": "Poison",
@@ -8412,6 +8852,7 @@
     "stat_changes": []
   },
   "ダストシュート": {
+    "id": 441,
     "power": 120,
     "pp": 5,
     "type": "Poison",
@@ -8430,6 +8871,7 @@
     "stat_changes": []
   },
   "アイアンヘッド": {
+    "id": 442,
     "power": 80,
     "pp": 15,
     "type": "Steel",
@@ -8448,6 +8890,7 @@
     "stat_changes": []
   },
   "マグネットボム": {
+    "id": 443,
     "power": 60,
     "pp": 20,
     "type": "Steel",
@@ -8466,6 +8909,7 @@
     "stat_changes": []
   },
   "ストーンエッジ": {
+    "id": 444,
     "power": 100,
     "pp": 5,
     "type": "Rock",
@@ -8484,6 +8928,7 @@
     "stat_changes": []
   },
   "ゆうわく": {
+    "id": 445,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -8507,6 +8952,7 @@
     ]
   },
   "ステルスロック": {
+    "id": 446,
     "power": 0,
     "pp": 20,
     "type": "Rock",
@@ -8525,6 +8971,7 @@
     "stat_changes": []
   },
   "くさむすび": {
+    "id": 447,
     "power": 0,
     "pp": 20,
     "type": "Grass",
@@ -8543,6 +8990,7 @@
     "stat_changes": []
   },
   "おしゃべり": {
+    "id": 448,
     "power": 65,
     "pp": 20,
     "type": "Flying",
@@ -8561,6 +9009,7 @@
     "stat_changes": []
   },
   "さばきのつぶて": {
+    "id": 449,
     "power": 100,
     "pp": 10,
     "type": "Normal",
@@ -8579,6 +9028,7 @@
     "stat_changes": []
   },
   "むしくい": {
+    "id": 450,
     "power": 60,
     "pp": 20,
     "type": "Bug",
@@ -8597,6 +9047,7 @@
     "stat_changes": []
   },
   "チャージビーム": {
+    "id": 451,
     "power": 50,
     "pp": 10,
     "type": "Electric",
@@ -8620,6 +9071,7 @@
     ]
   },
   "ウッドハンマー": {
+    "id": 452,
     "power": 120,
     "pp": 15,
     "type": "Grass",
@@ -8638,6 +9090,7 @@
     "stat_changes": []
   },
   "アクアジェット": {
+    "id": 453,
     "power": 40,
     "pp": 20,
     "type": "Water",
@@ -8656,6 +9109,7 @@
     "stat_changes": []
   },
   "こうげきしれい": {
+    "id": 454,
     "power": 90,
     "pp": 15,
     "type": "Bug",
@@ -8674,6 +9128,7 @@
     "stat_changes": []
   },
   "ぼうぎょしれい": {
+    "id": 455,
     "power": 0,
     "pp": 10,
     "type": "Bug",
@@ -8701,6 +9156,7 @@
     ]
   },
   "かいふくしれい": {
+    "id": 456,
     "power": 0,
     "pp": 10,
     "type": "Bug",
@@ -8719,6 +9175,7 @@
     "stat_changes": []
   },
   "もろはのずつき": {
+    "id": 457,
     "power": 150,
     "pp": 5,
     "type": "Rock",
@@ -8737,6 +9194,7 @@
     "stat_changes": []
   },
   "ダブルアタック": {
+    "id": 458,
     "power": 35,
     "pp": 10,
     "type": "Normal",
@@ -8755,6 +9213,7 @@
     "stat_changes": []
   },
   "ときのほうこう": {
+    "id": 459,
     "power": 150,
     "pp": 5,
     "type": "Dragon",
@@ -8773,6 +9232,7 @@
     "stat_changes": []
   },
   "あくうせつだん": {
+    "id": 460,
     "power": 100,
     "pp": 5,
     "type": "Dragon",
@@ -8791,6 +9251,7 @@
     "stat_changes": []
   },
   "みかづきのまい": {
+    "id": 461,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -8809,6 +9270,7 @@
     "stat_changes": []
   },
   "にぎりつぶす": {
+    "id": 462,
     "power": 0,
     "pp": 5,
     "type": "Normal",
@@ -8827,6 +9289,7 @@
     "stat_changes": []
   },
   "マグマストーム": {
+    "id": 463,
     "power": 100,
     "pp": 5,
     "type": "Fire",
@@ -8845,6 +9308,7 @@
     "stat_changes": []
   },
   "ダークホール": {
+    "id": 464,
     "power": 0,
     "pp": 10,
     "type": "Dark",
@@ -8863,6 +9327,7 @@
     "stat_changes": []
   },
   "シードフレア": {
+    "id": 465,
     "power": 120,
     "pp": 5,
     "type": "Grass",
@@ -8886,6 +9351,7 @@
     ]
   },
   "あやしいかぜ": {
+    "id": 466,
     "power": 60,
     "pp": 5,
     "type": "Ghost",
@@ -8925,6 +9391,7 @@
     ]
   },
   "シャドーダイブ": {
+    "id": 467,
     "power": 120,
     "pp": 5,
     "type": "Ghost",
@@ -8943,6 +9410,7 @@
     "stat_changes": []
   },
   "つめとぎ": {
+    "id": 468,
     "power": 0,
     "pp": 15,
     "type": "Dark",
@@ -8970,6 +9438,7 @@
     ]
   },
   "ワイドガード": {
+    "id": 469,
     "power": 0,
     "pp": 10,
     "type": "Rock",
@@ -8988,6 +9457,7 @@
     "stat_changes": []
   },
   "ガードシェア": {
+    "id": 470,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -9006,6 +9476,7 @@
     "stat_changes": []
   },
   "パワーシェア": {
+    "id": 471,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -9024,6 +9495,7 @@
     "stat_changes": []
   },
   "ワンダールーム": {
+    "id": 472,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -9042,6 +9514,7 @@
     "stat_changes": []
   },
   "サイコショック": {
+    "id": 473,
     "power": 80,
     "pp": 10,
     "type": "Psychic",
@@ -9060,6 +9533,7 @@
     "stat_changes": []
   },
   "ベノムショック": {
+    "id": 474,
     "power": 65,
     "pp": 10,
     "type": "Poison",
@@ -9078,6 +9552,7 @@
     "stat_changes": []
   },
   "ボディパージ": {
+    "id": 475,
     "power": 0,
     "pp": 15,
     "type": "Steel",
@@ -9101,6 +9576,7 @@
     ]
   },
   "いかりのこな": {
+    "id": 476,
     "power": 0,
     "pp": 20,
     "type": "Bug",
@@ -9119,6 +9595,7 @@
     "stat_changes": []
   },
   "テレキネシス": {
+    "id": 477,
     "power": 0,
     "pp": 15,
     "type": "Psychic",
@@ -9137,6 +9614,7 @@
     "stat_changes": []
   },
   "マジックルーム": {
+    "id": 478,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -9155,6 +9633,7 @@
     "stat_changes": []
   },
   "うちおとす": {
+    "id": 479,
     "power": 50,
     "pp": 15,
     "type": "Rock",
@@ -9173,6 +9652,7 @@
     "stat_changes": []
   },
   "やまあらし": {
+    "id": 480,
     "power": 60,
     "pp": 10,
     "type": "Fighting",
@@ -9191,6 +9671,7 @@
     "stat_changes": []
   },
   "はじけるほのお": {
+    "id": 481,
     "power": 70,
     "pp": 15,
     "type": "Fire",
@@ -9209,6 +9690,7 @@
     "stat_changes": []
   },
   "ヘドロウェーブ": {
+    "id": 482,
     "power": 95,
     "pp": 10,
     "type": "Poison",
@@ -9227,6 +9709,7 @@
     "stat_changes": []
   },
   "ちょうのまい": {
+    "id": 483,
     "power": 0,
     "pp": 20,
     "type": "Bug",
@@ -9258,6 +9741,7 @@
     ]
   },
   "ヘビーボンバー": {
+    "id": 484,
     "power": 0,
     "pp": 10,
     "type": "Steel",
@@ -9276,6 +9760,7 @@
     "stat_changes": []
   },
   "シンクロノイズ": {
+    "id": 485,
     "power": 120,
     "pp": 10,
     "type": "Psychic",
@@ -9294,6 +9779,7 @@
     "stat_changes": []
   },
   "エレキボール": {
+    "id": 486,
     "power": 0,
     "pp": 10,
     "type": "Electric",
@@ -9312,6 +9798,7 @@
     "stat_changes": []
   },
   "みずびたし": {
+    "id": 487,
     "power": 0,
     "pp": 20,
     "type": "Water",
@@ -9330,6 +9817,7 @@
     "stat_changes": []
   },
   "ニトロチャージ": {
+    "id": 488,
     "power": 50,
     "pp": 20,
     "type": "Fire",
@@ -9353,6 +9841,7 @@
     ]
   },
   "とぐろをまく": {
+    "id": 489,
     "power": 0,
     "pp": 20,
     "type": "Poison",
@@ -9384,6 +9873,7 @@
     ]
   },
   "ローキック": {
+    "id": 490,
     "power": 65,
     "pp": 20,
     "type": "Fighting",
@@ -9407,6 +9897,7 @@
     ]
   },
   "アシッドボム": {
+    "id": 491,
     "power": 40,
     "pp": 20,
     "type": "Poison",
@@ -9430,6 +9921,7 @@
     ]
   },
   "イカサマ": {
+    "id": 492,
     "power": 95,
     "pp": 15,
     "type": "Dark",
@@ -9448,6 +9940,7 @@
     "stat_changes": []
   },
   "シンプルビーム": {
+    "id": 493,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -9466,6 +9959,7 @@
     "stat_changes": []
   },
   "なかまづくり": {
+    "id": 494,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -9484,6 +9978,7 @@
     "stat_changes": []
   },
   "おさきにどうぞ": {
+    "id": 495,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -9502,6 +9997,7 @@
     "stat_changes": []
   },
   "りんしょう": {
+    "id": 496,
     "power": 60,
     "pp": 15,
     "type": "Normal",
@@ -9520,6 +10016,7 @@
     "stat_changes": []
   },
   "エコーボイス": {
+    "id": 497,
     "power": 40,
     "pp": 15,
     "type": "Normal",
@@ -9538,6 +10035,7 @@
     "stat_changes": []
   },
   "なしくずし": {
+    "id": 498,
     "power": 70,
     "pp": 20,
     "type": "Normal",
@@ -9556,6 +10054,7 @@
     "stat_changes": []
   },
   "クリアスモッグ": {
+    "id": 499,
     "power": 50,
     "pp": 15,
     "type": "Poison",
@@ -9574,6 +10073,7 @@
     "stat_changes": []
   },
   "アシストパワー": {
+    "id": 500,
     "power": 20,
     "pp": 10,
     "type": "Psychic",
@@ -9592,6 +10092,7 @@
     "stat_changes": []
   },
   "ファストガード": {
+    "id": 501,
     "power": 0,
     "pp": 15,
     "type": "Fighting",
@@ -9610,6 +10111,7 @@
     "stat_changes": []
   },
   "サイドチェンジ": {
+    "id": 502,
     "power": 0,
     "pp": 15,
     "type": "Psychic",
@@ -9628,6 +10130,7 @@
     "stat_changes": []
   },
   "ねっとう": {
+    "id": 503,
     "power": 80,
     "pp": 15,
     "type": "Water",
@@ -9646,6 +10149,7 @@
     "stat_changes": []
   },
   "からをやぶる": {
+    "id": 504,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -9685,6 +10189,7 @@
     ]
   },
   "いやしのはどう": {
+    "id": 505,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -9703,6 +10208,7 @@
     "stat_changes": []
   },
   "たたりめ": {
+    "id": 506,
     "power": 65,
     "pp": 10,
     "type": "Ghost",
@@ -9721,6 +10227,7 @@
     "stat_changes": []
   },
   "フリーフォール": {
+    "id": 507,
     "power": 60,
     "pp": 10,
     "type": "Flying",
@@ -9739,6 +10246,7 @@
     "stat_changes": []
   },
   "ギアチェンジ": {
+    "id": 508,
     "power": 0,
     "pp": 10,
     "type": "Steel",
@@ -9766,6 +10274,7 @@
     ]
   },
   "ともえなげ": {
+    "id": 509,
     "power": 60,
     "pp": 10,
     "type": "Fighting",
@@ -9784,6 +10293,7 @@
     "stat_changes": []
   },
   "やきつくす": {
+    "id": 510,
     "power": 60,
     "pp": 15,
     "type": "Fire",
@@ -9802,6 +10312,7 @@
     "stat_changes": []
   },
   "さきおくり": {
+    "id": 511,
     "power": 0,
     "pp": 15,
     "type": "Dark",
@@ -9820,6 +10331,7 @@
     "stat_changes": []
   },
   "アクロバット": {
+    "id": 512,
     "power": 55,
     "pp": 15,
     "type": "Flying",
@@ -9838,6 +10350,7 @@
     "stat_changes": []
   },
   "ミラータイプ": {
+    "id": 513,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -9856,6 +10369,7 @@
     "stat_changes": []
   },
   "かたきうち": {
+    "id": 514,
     "power": 70,
     "pp": 5,
     "type": "Normal",
@@ -9874,6 +10388,7 @@
     "stat_changes": []
   },
   "いのちがけ": {
+    "id": 515,
     "power": 0,
     "pp": 5,
     "type": "Fighting",
@@ -9892,6 +10407,7 @@
     "stat_changes": []
   },
   "ギフトパス": {
+    "id": 516,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -9910,6 +10426,7 @@
     "stat_changes": []
   },
   "れんごく": {
+    "id": 517,
     "power": 100,
     "pp": 5,
     "type": "Fire",
@@ -9928,6 +10445,7 @@
     "stat_changes": []
   },
   "みずのちかい": {
+    "id": 518,
     "power": 80,
     "pp": 10,
     "type": "Water",
@@ -9946,6 +10464,7 @@
     "stat_changes": []
   },
   "ほのおのちかい": {
+    "id": 519,
     "power": 80,
     "pp": 10,
     "type": "Fire",
@@ -9964,6 +10483,7 @@
     "stat_changes": []
   },
   "くさのちかい": {
+    "id": 520,
     "power": 80,
     "pp": 10,
     "type": "Grass",
@@ -9982,6 +10502,7 @@
     "stat_changes": []
   },
   "ボルトチェンジ": {
+    "id": 521,
     "power": 70,
     "pp": 20,
     "type": "Electric",
@@ -10000,6 +10521,7 @@
     "stat_changes": []
   },
   "むしのていこう": {
+    "id": 522,
     "power": 50,
     "pp": 20,
     "type": "Bug",
@@ -10023,6 +10545,7 @@
     ]
   },
   "じならし": {
+    "id": 523,
     "power": 60,
     "pp": 20,
     "type": "Ground",
@@ -10046,6 +10569,7 @@
     ]
   },
   "こおりのいぶき": {
+    "id": 524,
     "power": 60,
     "pp": 10,
     "type": "Ice",
@@ -10064,6 +10588,7 @@
     "stat_changes": []
   },
   "ドラゴンテール": {
+    "id": 525,
     "power": 60,
     "pp": 10,
     "type": "Dragon",
@@ -10082,6 +10607,7 @@
     "stat_changes": []
   },
   "ふるいたてる": {
+    "id": 526,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -10109,6 +10635,7 @@
     ]
   },
   "エレキネット": {
+    "id": 527,
     "power": 55,
     "pp": 15,
     "type": "Electric",
@@ -10132,6 +10659,7 @@
     ]
   },
   "ワイルドボルト": {
+    "id": 528,
     "power": 90,
     "pp": 15,
     "type": "Electric",
@@ -10150,6 +10678,7 @@
     "stat_changes": []
   },
   "ドリルライナー": {
+    "id": 529,
     "power": 80,
     "pp": 10,
     "type": "Ground",
@@ -10168,6 +10697,7 @@
     "stat_changes": []
   },
   "ダブルチョップ": {
+    "id": 530,
     "power": 40,
     "pp": 15,
     "type": "Dragon",
@@ -10186,6 +10716,7 @@
     "stat_changes": []
   },
   "ハートスタンプ": {
+    "id": 531,
     "power": 60,
     "pp": 25,
     "type": "Psychic",
@@ -10204,6 +10735,7 @@
     "stat_changes": []
   },
   "ウッドホーン": {
+    "id": 532,
     "power": 75,
     "pp": 10,
     "type": "Grass",
@@ -10222,6 +10754,7 @@
     "stat_changes": []
   },
   "せいなるつるぎ": {
+    "id": 533,
     "power": 90,
     "pp": 15,
     "type": "Fighting",
@@ -10240,6 +10773,7 @@
     "stat_changes": []
   },
   "シェルブレード": {
+    "id": 534,
     "power": 75,
     "pp": 10,
     "type": "Water",
@@ -10263,6 +10797,7 @@
     ]
   },
   "ヒートスタンプ": {
+    "id": 535,
     "power": 0,
     "pp": 10,
     "type": "Fire",
@@ -10281,6 +10816,7 @@
     "stat_changes": []
   },
   "グラスミキサー": {
+    "id": 536,
     "power": 65,
     "pp": 10,
     "type": "Grass",
@@ -10304,6 +10840,7 @@
     ]
   },
   "ハードローラー": {
+    "id": 537,
     "power": 65,
     "pp": 20,
     "type": "Bug",
@@ -10322,6 +10859,7 @@
     "stat_changes": []
   },
   "コットンガード": {
+    "id": 538,
     "power": 0,
     "pp": 10,
     "type": "Grass",
@@ -10345,6 +10883,7 @@
     ]
   },
   "ナイトバースト": {
+    "id": 539,
     "power": 85,
     "pp": 10,
     "type": "Dark",
@@ -10368,6 +10907,7 @@
     ]
   },
   "サイコブレイク": {
+    "id": 540,
     "power": 100,
     "pp": 10,
     "type": "Psychic",
@@ -10386,6 +10926,7 @@
     "stat_changes": []
   },
   "スイープビンタ": {
+    "id": 541,
     "power": 25,
     "pp": 10,
     "type": "Normal",
@@ -10404,6 +10945,7 @@
     "stat_changes": []
   },
   "ぼうふう": {
+    "id": 542,
     "power": 110,
     "pp": 10,
     "type": "Flying",
@@ -10422,6 +10964,7 @@
     "stat_changes": []
   },
   "アフロブレイク": {
+    "id": 543,
     "power": 120,
     "pp": 15,
     "type": "Normal",
@@ -10440,6 +10983,7 @@
     "stat_changes": []
   },
   "ギアソーサー": {
+    "id": 544,
     "power": 50,
     "pp": 15,
     "type": "Steel",
@@ -10458,6 +11002,7 @@
     "stat_changes": []
   },
   "かえんだん": {
+    "id": 545,
     "power": 100,
     "pp": 5,
     "type": "Fire",
@@ -10476,6 +11021,7 @@
     "stat_changes": []
   },
   "テクノバスター": {
+    "id": 546,
     "power": 120,
     "pp": 5,
     "type": "Normal",
@@ -10494,6 +11040,7 @@
     "stat_changes": []
   },
   "いにしえのうた": {
+    "id": 547,
     "power": 75,
     "pp": 10,
     "type": "Normal",
@@ -10512,6 +11059,7 @@
     "stat_changes": []
   },
   "しんぴのつるぎ": {
+    "id": 548,
     "power": 85,
     "pp": 10,
     "type": "Fighting",
@@ -10530,6 +11078,7 @@
     "stat_changes": []
   },
   "こごえるせかい": {
+    "id": 549,
     "power": 65,
     "pp": 10,
     "type": "Ice",
@@ -10553,6 +11102,7 @@
     ]
   },
   "らいげき": {
+    "id": 550,
     "power": 130,
     "pp": 5,
     "type": "Electric",
@@ -10571,6 +11121,7 @@
     "stat_changes": []
   },
   "あおいほのお": {
+    "id": 551,
     "power": 130,
     "pp": 5,
     "type": "Fire",
@@ -10589,6 +11140,7 @@
     "stat_changes": []
   },
   "ほのおのまい": {
+    "id": 552,
     "power": 80,
     "pp": 10,
     "type": "Fire",
@@ -10612,6 +11164,7 @@
     ]
   },
   "フリーズボルト": {
+    "id": 553,
     "power": 140,
     "pp": 5,
     "type": "Ice",
@@ -10630,6 +11183,7 @@
     "stat_changes": []
   },
   "コールドフレア": {
+    "id": 554,
     "power": 140,
     "pp": 5,
     "type": "Ice",
@@ -10648,6 +11202,7 @@
     "stat_changes": []
   },
   "バークアウト": {
+    "id": 555,
     "power": 55,
     "pp": 15,
     "type": "Dark",
@@ -10671,6 +11226,7 @@
     ]
   },
   "つららおとし": {
+    "id": 556,
     "power": 85,
     "pp": 10,
     "type": "Ice",
@@ -10689,6 +11245,7 @@
     "stat_changes": []
   },
   "Ｖジェネレート": {
+    "id": 557,
     "power": 180,
     "pp": 5,
     "type": "Fire",
@@ -10720,6 +11277,7 @@
     ]
   },
   "クロスフレイム": {
+    "id": 558,
     "power": 100,
     "pp": 5,
     "type": "Fire",
@@ -10738,6 +11296,7 @@
     "stat_changes": []
   },
   "クロスサンダー": {
+    "id": 559,
     "power": 100,
     "pp": 5,
     "type": "Electric",
@@ -10756,6 +11315,7 @@
     "stat_changes": []
   },
   "フライングプレス": {
+    "id": 560,
     "power": 100,
     "pp": 10,
     "type": "Fighting",
@@ -10774,6 +11334,7 @@
     "stat_changes": []
   },
   "たたみがえし": {
+    "id": 561,
     "power": 0,
     "pp": 10,
     "type": "Fighting",
@@ -10792,6 +11353,7 @@
     "stat_changes": []
   },
   "ゲップ": {
+    "id": 562,
     "power": 120,
     "pp": 10,
     "type": "Poison",
@@ -10810,6 +11372,7 @@
     "stat_changes": []
   },
   "たがやす": {
+    "id": 563,
     "power": 0,
     "pp": 10,
     "type": "Ground",
@@ -10837,6 +11400,7 @@
     ]
   },
   "ねばねばネット": {
+    "id": 564,
     "power": 0,
     "pp": 20,
     "type": "Bug",
@@ -10855,6 +11419,7 @@
     "stat_changes": []
   },
   "とどめばり": {
+    "id": 565,
     "power": 50,
     "pp": 25,
     "type": "Bug",
@@ -10873,6 +11438,7 @@
     "stat_changes": []
   },
   "ゴーストダイブ": {
+    "id": 566,
     "power": 90,
     "pp": 10,
     "type": "Ghost",
@@ -10891,6 +11457,7 @@
     "stat_changes": []
   },
   "ハロウィン": {
+    "id": 567,
     "power": 0,
     "pp": 20,
     "type": "Ghost",
@@ -10909,6 +11476,7 @@
     "stat_changes": []
   },
   "おたけび": {
+    "id": 568,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -10936,6 +11504,7 @@
     ]
   },
   "プラズマシャワー": {
+    "id": 569,
     "power": 0,
     "pp": 25,
     "type": "Electric",
@@ -10954,6 +11523,7 @@
     "stat_changes": []
   },
   "パラボラチャージ": {
+    "id": 570,
     "power": 65,
     "pp": 20,
     "type": "Electric",
@@ -10972,6 +11542,7 @@
     "stat_changes": []
   },
   "もりののろい": {
+    "id": 571,
     "power": 0,
     "pp": 20,
     "type": "Grass",
@@ -10990,6 +11561,7 @@
     "stat_changes": []
   },
   "はなふぶき": {
+    "id": 572,
     "power": 90,
     "pp": 15,
     "type": "Grass",
@@ -11008,6 +11580,7 @@
     "stat_changes": []
   },
   "フリーズドライ": {
+    "id": 573,
     "power": 70,
     "pp": 20,
     "type": "Ice",
@@ -11026,6 +11599,7 @@
     "stat_changes": []
   },
   "チャームボイス": {
+    "id": 574,
     "power": 40,
     "pp": 15,
     "type": "Fairy",
@@ -11044,6 +11618,7 @@
     "stat_changes": []
   },
   "すてゼリフ": {
+    "id": 575,
     "power": 0,
     "pp": 20,
     "type": "Dark",
@@ -11071,6 +11646,7 @@
     ]
   },
   "ひっくりかえす": {
+    "id": 576,
     "power": 0,
     "pp": 20,
     "type": "Dark",
@@ -11089,6 +11665,7 @@
     "stat_changes": []
   },
   "ドレインキッス": {
+    "id": 577,
     "power": 50,
     "pp": 10,
     "type": "Fairy",
@@ -11107,6 +11684,7 @@
     "stat_changes": []
   },
   "トリックガード": {
+    "id": 578,
     "power": 0,
     "pp": 10,
     "type": "Fairy",
@@ -11125,6 +11703,7 @@
     "stat_changes": []
   },
   "フラワーガード": {
+    "id": 579,
     "power": 0,
     "pp": 10,
     "type": "Fairy",
@@ -11148,6 +11727,7 @@
     ]
   },
   "グラスフィールド": {
+    "id": 580,
     "power": 0,
     "pp": 10,
     "type": "Grass",
@@ -11166,6 +11746,7 @@
     "stat_changes": []
   },
   "ミストフィールド": {
+    "id": 581,
     "power": 0,
     "pp": 10,
     "type": "Fairy",
@@ -11184,6 +11765,7 @@
     "stat_changes": []
   },
   "そうでん": {
+    "id": 582,
     "power": 0,
     "pp": 20,
     "type": "Electric",
@@ -11202,6 +11784,7 @@
     "stat_changes": []
   },
   "じゃれつく": {
+    "id": 583,
     "power": 90,
     "pp": 10,
     "type": "Fairy",
@@ -11225,6 +11808,7 @@
     ]
   },
   "ようせいのかぜ": {
+    "id": 584,
     "power": 40,
     "pp": 30,
     "type": "Fairy",
@@ -11243,6 +11827,7 @@
     "stat_changes": []
   },
   "ムーンフォース": {
+    "id": 585,
     "power": 95,
     "pp": 15,
     "type": "Fairy",
@@ -11266,6 +11851,7 @@
     ]
   },
   "ばくおんぱ": {
+    "id": 586,
     "power": 140,
     "pp": 10,
     "type": "Normal",
@@ -11284,6 +11870,7 @@
     "stat_changes": []
   },
   "フェアリーロック": {
+    "id": 587,
     "power": 0,
     "pp": 10,
     "type": "Fairy",
@@ -11302,6 +11889,7 @@
     "stat_changes": []
   },
   "キングシールド": {
+    "id": 588,
     "power": 0,
     "pp": 10,
     "type": "Steel",
@@ -11320,6 +11908,7 @@
     "stat_changes": []
   },
   "なかよくする": {
+    "id": 589,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -11343,6 +11932,7 @@
     ]
   },
   "ないしょばなし": {
+    "id": 590,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -11366,6 +11956,7 @@
     ]
   },
   "ダイヤストーム": {
+    "id": 591,
     "power": 100,
     "pp": 5,
     "type": "Rock",
@@ -11389,6 +11980,7 @@
     ]
   },
   "スチームバースト": {
+    "id": 592,
     "power": 110,
     "pp": 5,
     "type": "Water",
@@ -11407,6 +11999,7 @@
     "stat_changes": []
   },
   "いじげんホール": {
+    "id": 593,
     "power": 80,
     "pp": 5,
     "type": "Psychic",
@@ -11425,6 +12018,7 @@
     "stat_changes": []
   },
   "みずしゅりけん": {
+    "id": 594,
     "power": 15,
     "pp": 20,
     "type": "Water",
@@ -11443,6 +12037,7 @@
     "stat_changes": []
   },
   "マジカルフレイム": {
+    "id": 595,
     "power": 75,
     "pp": 10,
     "type": "Fire",
@@ -11466,6 +12061,7 @@
     ]
   },
   "ニードルガード": {
+    "id": 596,
     "power": 0,
     "pp": 10,
     "type": "Grass",
@@ -11484,6 +12080,7 @@
     "stat_changes": []
   },
   "アロマミスト": {
+    "id": 597,
     "power": 0,
     "pp": 20,
     "type": "Fairy",
@@ -11507,6 +12104,7 @@
     ]
   },
   "かいでんぱ": {
+    "id": 598,
     "power": 0,
     "pp": 15,
     "type": "Electric",
@@ -11530,6 +12128,7 @@
     ]
   },
   "ベノムトラップ": {
+    "id": 599,
     "power": 0,
     "pp": 20,
     "type": "Poison",
@@ -11561,6 +12160,7 @@
     ]
   },
   "ふんじん": {
+    "id": 600,
     "power": 0,
     "pp": 20,
     "type": "Bug",
@@ -11579,6 +12179,7 @@
     "stat_changes": []
   },
   "ジオコントロール": {
+    "id": 601,
     "power": 0,
     "pp": 10,
     "type": "Fairy",
@@ -11610,6 +12211,7 @@
     ]
   },
   "じばそうさ": {
+    "id": 602,
     "power": 0,
     "pp": 20,
     "type": "Electric",
@@ -11637,6 +12239,7 @@
     ]
   },
   "ハッピータイム": {
+    "id": 603,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -11655,6 +12258,7 @@
     "stat_changes": []
   },
   "エレキフィールド": {
+    "id": 604,
     "power": 0,
     "pp": 10,
     "type": "Electric",
@@ -11673,6 +12277,7 @@
     "stat_changes": []
   },
   "マジカルシャイン": {
+    "id": 605,
     "power": 80,
     "pp": 10,
     "type": "Fairy",
@@ -11691,6 +12296,7 @@
     "stat_changes": []
   },
   "おいわい": {
+    "id": 606,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -11709,6 +12315,7 @@
     "stat_changes": []
   },
   "てをつなぐ": {
+    "id": 607,
     "power": 0,
     "pp": 40,
     "type": "Normal",
@@ -11727,6 +12334,7 @@
     "stat_changes": []
   },
   "つぶらなひとみ": {
+    "id": 608,
     "power": 0,
     "pp": 30,
     "type": "Fairy",
@@ -11750,6 +12358,7 @@
     ]
   },
   "ほっぺすりすり": {
+    "id": 609,
     "power": 20,
     "pp": 20,
     "type": "Electric",
@@ -11768,6 +12377,7 @@
     "stat_changes": []
   },
   "てかげん": {
+    "id": 610,
     "power": 40,
     "pp": 40,
     "type": "Normal",
@@ -11786,6 +12396,7 @@
     "stat_changes": []
   },
   "まとわりつく": {
+    "id": 611,
     "power": 20,
     "pp": 20,
     "type": "Bug",
@@ -11804,6 +12415,7 @@
     "stat_changes": []
   },
   "グロウパンチ": {
+    "id": 612,
     "power": 40,
     "pp": 20,
     "type": "Fighting",
@@ -11827,6 +12439,7 @@
     ]
   },
   "デスウイング": {
+    "id": 613,
     "power": 80,
     "pp": 10,
     "type": "Flying",
@@ -11845,6 +12458,7 @@
     "stat_changes": []
   },
   "サウザンアロー": {
+    "id": 614,
     "power": 90,
     "pp": 10,
     "type": "Ground",
@@ -11863,6 +12477,7 @@
     "stat_changes": []
   },
   "サウザンウェーブ": {
+    "id": 615,
     "power": 90,
     "pp": 10,
     "type": "Ground",
@@ -11881,6 +12496,7 @@
     "stat_changes": []
   },
   "グランドフォース": {
+    "id": 616,
     "power": 90,
     "pp": 10,
     "type": "Ground",
@@ -11899,6 +12515,7 @@
     "stat_changes": []
   },
   "はめつのひかり": {
+    "id": 617,
     "power": 140,
     "pp": 5,
     "type": "Fairy",
@@ -11917,6 +12534,7 @@
     "stat_changes": []
   },
   "こんげんのはどう": {
+    "id": 618,
     "power": 110,
     "pp": 10,
     "type": "Water",
@@ -11935,6 +12553,7 @@
     "stat_changes": []
   },
   "だんがいのつるぎ": {
+    "id": 619,
     "power": 120,
     "pp": 10,
     "type": "Ground",
@@ -11953,6 +12572,7 @@
     "stat_changes": []
   },
   "ガリョウテンセイ": {
+    "id": 620,
     "power": 120,
     "pp": 5,
     "type": "Flying",
@@ -11980,6 +12600,7 @@
     ]
   },
   "いじげんラッシュ": {
+    "id": 621,
     "power": 100,
     "pp": 5,
     "type": "Dark",
@@ -12003,6 +12624,7 @@
     ]
   },
   "ウルトラダッシュアタック": {
+    "id": 623,
     "power": 0,
     "pp": 1,
     "type": "Normal",
@@ -12021,6 +12643,7 @@
     "stat_changes": []
   },
   "ぜんりょくむそうげきれつけん": {
+    "id": 625,
     "power": 0,
     "pp": 1,
     "type": "Fighting",
@@ -12039,6 +12662,7 @@
     "stat_changes": []
   },
   "ファイナルダイブクラッシュ": {
+    "id": 627,
     "power": 0,
     "pp": 1,
     "type": "Flying",
@@ -12057,6 +12681,7 @@
     "stat_changes": []
   },
   "アシッドポイズンデリート": {
+    "id": 629,
     "power": 0,
     "pp": 1,
     "type": "Poison",
@@ -12075,6 +12700,7 @@
     "stat_changes": []
   },
   "ライジングランドオーバー": {
+    "id": 631,
     "power": 0,
     "pp": 1,
     "type": "Ground",
@@ -12093,6 +12719,7 @@
     "stat_changes": []
   },
   "ワールズエンドフォール": {
+    "id": 633,
     "power": 0,
     "pp": 1,
     "type": "Rock",
@@ -12111,6 +12738,7 @@
     "stat_changes": []
   },
   "ぜったいほしょくかいてんざん": {
+    "id": 635,
     "power": 0,
     "pp": 1,
     "type": "Bug",
@@ -12129,6 +12757,7 @@
     "stat_changes": []
   },
   "むげんあんやへのいざない": {
+    "id": 637,
     "power": 0,
     "pp": 1,
     "type": "Ghost",
@@ -12147,6 +12776,7 @@
     "stat_changes": []
   },
   "ちょうぜつらせんれんげき": {
+    "id": 639,
     "power": 0,
     "pp": 1,
     "type": "Steel",
@@ -12165,6 +12795,7 @@
     "stat_changes": []
   },
   "ダイナミックフルフレイム": {
+    "id": 641,
     "power": 0,
     "pp": 1,
     "type": "Fire",
@@ -12183,6 +12814,7 @@
     "stat_changes": []
   },
   "スーパーアクアトルネード": {
+    "id": 643,
     "power": 0,
     "pp": 1,
     "type": "Water",
@@ -12201,6 +12833,7 @@
     "stat_changes": []
   },
   "ブルームシャインエクストラ": {
+    "id": 645,
     "power": 0,
     "pp": 1,
     "type": "Grass",
@@ -12219,6 +12852,7 @@
     "stat_changes": []
   },
   "スパーキングギガボルト": {
+    "id": 647,
     "power": 0,
     "pp": 1,
     "type": "Electric",
@@ -12237,6 +12871,7 @@
     "stat_changes": []
   },
   "マキシマムサイブレイカー": {
+    "id": 649,
     "power": 0,
     "pp": 1,
     "type": "Psychic",
@@ -12255,6 +12890,7 @@
     "stat_changes": []
   },
   "レイジングジオフリーズ": {
+    "id": 651,
     "power": 0,
     "pp": 1,
     "type": "Ice",
@@ -12273,6 +12909,7 @@
     "stat_changes": []
   },
   "アルティメットドラゴンバーン": {
+    "id": 653,
     "power": 0,
     "pp": 1,
     "type": "Dragon",
@@ -12291,6 +12928,7 @@
     "stat_changes": []
   },
   "ブラックホールイクリプス": {
+    "id": 655,
     "power": 0,
     "pp": 1,
     "type": "Dark",
@@ -12309,6 +12947,7 @@
     "stat_changes": []
   },
   "ラブリースターインパクト": {
+    "id": 657,
     "power": 0,
     "pp": 1,
     "type": "Fairy",
@@ -12327,6 +12966,7 @@
     "stat_changes": []
   },
   "ひっさつのピカチュート": {
+    "id": 658,
     "power": 210,
     "pp": 1,
     "type": "Electric",
@@ -12345,6 +12985,7 @@
     "stat_changes": []
   },
   "すなあつめ": {
+    "id": 659,
     "power": 0,
     "pp": 5,
     "type": "Ground",
@@ -12363,6 +13004,7 @@
     "stat_changes": []
   },
   "であいがしら": {
+    "id": 660,
     "power": 90,
     "pp": 10,
     "type": "Bug",
@@ -12381,6 +13023,7 @@
     "stat_changes": []
   },
   "トーチカ": {
+    "id": 661,
     "power": 0,
     "pp": 10,
     "type": "Poison",
@@ -12399,6 +13042,7 @@
     "stat_changes": []
   },
   "かげぬい": {
+    "id": 662,
     "power": 80,
     "pp": 10,
     "type": "Ghost",
@@ -12417,6 +13061,7 @@
     "stat_changes": []
   },
   "ＤＤラリアット": {
+    "id": 663,
     "power": 85,
     "pp": 10,
     "type": "Dark",
@@ -12435,6 +13080,7 @@
     "stat_changes": []
   },
   "うたかたのアリア": {
+    "id": 664,
     "power": 90,
     "pp": 10,
     "type": "Water",
@@ -12453,6 +13099,7 @@
     "stat_changes": []
   },
   "アイスハンマー": {
+    "id": 665,
     "power": 100,
     "pp": 10,
     "type": "Ice",
@@ -12476,6 +13123,7 @@
     ]
   },
   "フラワーヒール": {
+    "id": 666,
     "power": 0,
     "pp": 10,
     "type": "Fairy",
@@ -12494,6 +13142,7 @@
     "stat_changes": []
   },
   "１０まんばりき": {
+    "id": 667,
     "power": 95,
     "pp": 10,
     "type": "Ground",
@@ -12512,6 +13161,7 @@
     "stat_changes": []
   },
   "ちからをすいとる": {
+    "id": 668,
     "power": 0,
     "pp": 10,
     "type": "Grass",
@@ -12535,6 +13185,7 @@
     ]
   },
   "ソーラーブレード": {
+    "id": 669,
     "power": 125,
     "pp": 10,
     "type": "Grass",
@@ -12553,6 +13204,7 @@
     "stat_changes": []
   },
   "このは": {
+    "id": 670,
     "power": 40,
     "pp": 40,
     "type": "Grass",
@@ -12571,6 +13223,7 @@
     "stat_changes": []
   },
   "スポットライト": {
+    "id": 671,
     "power": 0,
     "pp": 15,
     "type": "Normal",
@@ -12589,6 +13242,7 @@
     "stat_changes": []
   },
   "どくのいと": {
+    "id": 672,
     "power": 0,
     "pp": 20,
     "type": "Poison",
@@ -12612,6 +13266,7 @@
     ]
   },
   "とぎすます": {
+    "id": 673,
     "power": 0,
     "pp": 30,
     "type": "Normal",
@@ -12630,6 +13285,7 @@
     "stat_changes": []
   },
   "アシストギア": {
+    "id": 674,
     "power": 0,
     "pp": 20,
     "type": "Steel",
@@ -12657,6 +13313,7 @@
     ]
   },
   "じごくづき": {
+    "id": 675,
     "power": 80,
     "pp": 15,
     "type": "Dark",
@@ -12675,6 +13332,7 @@
     "stat_changes": []
   },
   "かふんだんご": {
+    "id": 676,
     "power": 90,
     "pp": 15,
     "type": "Bug",
@@ -12693,6 +13351,7 @@
     "stat_changes": []
   },
   "アンカーショット": {
+    "id": 677,
     "power": 80,
     "pp": 20,
     "type": "Steel",
@@ -12711,6 +13370,7 @@
     "stat_changes": []
   },
   "サイコフィールド": {
+    "id": 678,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -12729,6 +13389,7 @@
     "stat_changes": []
   },
   "とびかかる": {
+    "id": 679,
     "power": 80,
     "pp": 15,
     "type": "Bug",
@@ -12752,6 +13413,7 @@
     ]
   },
   "ほのおのムチ": {
+    "id": 680,
     "power": 80,
     "pp": 15,
     "type": "Fire",
@@ -12775,6 +13437,7 @@
     ]
   },
   "つけあがる": {
+    "id": 681,
     "power": 20,
     "pp": 10,
     "type": "Dark",
@@ -12793,6 +13456,7 @@
     "stat_changes": []
   },
   "もえつきる": {
+    "id": 682,
     "power": 130,
     "pp": 5,
     "type": "Fire",
@@ -12811,6 +13475,7 @@
     "stat_changes": []
   },
   "スピードスワップ": {
+    "id": 683,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -12829,6 +13494,7 @@
     "stat_changes": []
   },
   "スマートホーン": {
+    "id": 684,
     "power": 70,
     "pp": 10,
     "type": "Steel",
@@ -12847,6 +13513,7 @@
     "stat_changes": []
   },
   "じょうか": {
+    "id": 685,
     "power": 0,
     "pp": 20,
     "type": "Poison",
@@ -12865,6 +13532,7 @@
     "stat_changes": []
   },
   "めざめるダンス": {
+    "id": 686,
     "power": 90,
     "pp": 15,
     "type": "Normal",
@@ -12883,6 +13551,7 @@
     "stat_changes": []
   },
   "コアパニッシャー": {
+    "id": 687,
     "power": 100,
     "pp": 10,
     "type": "Dragon",
@@ -12901,6 +13570,7 @@
     "stat_changes": []
   },
   "トロピカルキック": {
+    "id": 688,
     "power": 70,
     "pp": 15,
     "type": "Grass",
@@ -12924,6 +13594,7 @@
     ]
   },
   "さいはい": {
+    "id": 689,
     "power": 0,
     "pp": 15,
     "type": "Psychic",
@@ -12942,6 +13613,7 @@
     "stat_changes": []
   },
   "くちばしキャノン": {
+    "id": 690,
     "power": 100,
     "pp": 15,
     "type": "Flying",
@@ -12960,6 +13632,7 @@
     "stat_changes": []
   },
   "スケイルノイズ": {
+    "id": 691,
     "power": 110,
     "pp": 5,
     "type": "Dragon",
@@ -12983,6 +13656,7 @@
     ]
   },
   "ドラゴンハンマー": {
+    "id": 692,
     "power": 90,
     "pp": 15,
     "type": "Dragon",
@@ -13001,6 +13675,7 @@
     "stat_changes": []
   },
   "ぶんまわす": {
+    "id": 693,
     "power": 60,
     "pp": 20,
     "type": "Dark",
@@ -13019,6 +13694,7 @@
     "stat_changes": []
   },
   "オーロラベール": {
+    "id": 694,
     "power": 0,
     "pp": 20,
     "type": "Ice",
@@ -13037,6 +13713,7 @@
     "stat_changes": []
   },
   "シャドーアローズストライク": {
+    "id": 695,
     "power": 180,
     "pp": 1,
     "type": "Ghost",
@@ -13055,6 +13732,7 @@
     "stat_changes": []
   },
   "ハイパーダーククラッシャー": {
+    "id": 696,
     "power": 180,
     "pp": 1,
     "type": "Dark",
@@ -13073,6 +13751,7 @@
     "stat_changes": []
   },
   "わだつみのシンフォニア": {
+    "id": 697,
     "power": 195,
     "pp": 1,
     "type": "Water",
@@ -13091,6 +13770,7 @@
     "stat_changes": []
   },
   "ガーディアン・デ・アローラ": {
+    "id": 698,
     "power": 0,
     "pp": 1,
     "type": "Fairy",
@@ -13109,6 +13789,7 @@
     "stat_changes": []
   },
   "しちせいだっこんたい": {
+    "id": 699,
     "power": 195,
     "pp": 1,
     "type": "Ghost",
@@ -13127,6 +13808,7 @@
     "stat_changes": []
   },
   "ライトニングサーフライド": {
+    "id": 700,
     "power": 175,
     "pp": 1,
     "type": "Electric",
@@ -13145,6 +13827,7 @@
     "stat_changes": []
   },
   "ほんきをだす　こうげき": {
+    "id": 701,
     "power": 210,
     "pp": 1,
     "type": "Normal",
@@ -13163,6 +13846,7 @@
     "stat_changes": []
   },
   "ナインエボルブースト": {
+    "id": 702,
     "power": 0,
     "pp": 1,
     "type": "Normal",
@@ -13202,6 +13886,7 @@
     ]
   },
   "オリジンズスーパーノヴァ": {
+    "id": 703,
     "power": 185,
     "pp": 1,
     "type": "Psychic",
@@ -13220,6 +13905,7 @@
     "stat_changes": []
   },
   "トラップシェル": {
+    "id": 704,
     "power": 150,
     "pp": 5,
     "type": "Fire",
@@ -13238,6 +13924,7 @@
     "stat_changes": []
   },
   "フルールカノン": {
+    "id": 705,
     "power": 130,
     "pp": 5,
     "type": "Fairy",
@@ -13261,6 +13948,7 @@
     ]
   },
   "サイコファング": {
+    "id": 706,
     "power": 85,
     "pp": 10,
     "type": "Psychic",
@@ -13279,6 +13967,7 @@
     "stat_changes": []
   },
   "じだんだ": {
+    "id": 707,
     "power": 75,
     "pp": 10,
     "type": "Ground",
@@ -13297,6 +13986,7 @@
     "stat_changes": []
   },
   "シャドーボーン": {
+    "id": 708,
     "power": 85,
     "pp": 10,
     "type": "Ghost",
@@ -13320,6 +14010,7 @@
     ]
   },
   "アクセルロック": {
+    "id": 709,
     "power": 40,
     "pp": 20,
     "type": "Rock",
@@ -13338,6 +14029,7 @@
     "stat_changes": []
   },
   "アクアブレイク": {
+    "id": 710,
     "power": 85,
     "pp": 10,
     "type": "Water",
@@ -13361,6 +14053,7 @@
     ]
   },
   "プリズムレーザー": {
+    "id": 711,
     "power": 160,
     "pp": 10,
     "type": "Psychic",
@@ -13379,6 +14072,7 @@
     "stat_changes": []
   },
   "シャドースチール": {
+    "id": 712,
     "power": 90,
     "pp": 10,
     "type": "Ghost",
@@ -13397,6 +14091,7 @@
     "stat_changes": []
   },
   "メテオドライブ": {
+    "id": 713,
     "power": 100,
     "pp": 5,
     "type": "Steel",
@@ -13415,6 +14110,7 @@
     "stat_changes": []
   },
   "シャドーレイ": {
+    "id": 714,
     "power": 100,
     "pp": 5,
     "type": "Ghost",
@@ -13433,6 +14129,7 @@
     "stat_changes": []
   },
   "なみだめ": {
+    "id": 715,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -13460,6 +14157,7 @@
     ]
   },
   "びりびりちくちく": {
+    "id": 716,
     "power": 80,
     "pp": 10,
     "type": "Electric",
@@ -13478,6 +14176,7 @@
     "stat_changes": []
   },
   "しぜんのいかり": {
+    "id": 717,
     "power": 0,
     "pp": 10,
     "type": "Fairy",
@@ -13496,6 +14195,7 @@
     "stat_changes": []
   },
   "マルチアタック": {
+    "id": 718,
     "power": 120,
     "pp": 10,
     "type": "Normal",
@@ -13514,6 +14214,7 @@
     "stat_changes": []
   },
   "１０００まんボルト": {
+    "id": 719,
     "power": 195,
     "pp": 1,
     "type": "Electric",
@@ -13532,6 +14233,7 @@
     "stat_changes": []
   },
   "ビックリヘッド": {
+    "id": 720,
     "power": 150,
     "pp": 5,
     "type": "Fire",
@@ -13550,6 +14252,7 @@
     "stat_changes": []
   },
   "プラズマフィスト": {
+    "id": 721,
     "power": 100,
     "pp": 15,
     "type": "Electric",
@@ -13568,6 +14271,7 @@
     "stat_changes": []
   },
   "フォトンゲイザー": {
+    "id": 722,
     "power": 100,
     "pp": 5,
     "type": "Psychic",
@@ -13586,6 +14290,7 @@
     "stat_changes": []
   },
   "てんこがすめつぼうのひかり": {
+    "id": 723,
     "power": 200,
     "pp": 1,
     "type": "Psychic",
@@ -13604,6 +14309,7 @@
     "stat_changes": []
   },
   "サンシャインスマッシャー": {
+    "id": 724,
     "power": 200,
     "pp": 1,
     "type": "Steel",
@@ -13622,6 +14328,7 @@
     "stat_changes": []
   },
   "ムーンライトブラスター": {
+    "id": 725,
     "power": 200,
     "pp": 1,
     "type": "Ghost",
@@ -13640,6 +14347,7 @@
     "stat_changes": []
   },
   "ぽかぼかフレンドタイム": {
+    "id": 726,
     "power": 190,
     "pp": 1,
     "type": "Fairy",
@@ -13658,6 +14366,7 @@
     "stat_changes": []
   },
   "ラジアルエッジストーム": {
+    "id": 727,
     "power": 190,
     "pp": 1,
     "type": "Rock",
@@ -13676,6 +14385,7 @@
     "stat_changes": []
   },
   "ブレイジングソウルビート": {
+    "id": 728,
     "power": 185,
     "pp": 1,
     "type": "Dragon",
@@ -13715,6 +14425,7 @@
     ]
   },
   "ばちばちアクセル": {
+    "id": 729,
     "power": 80,
     "pp": 10,
     "type": "Electric",
@@ -13738,6 +14449,7 @@
     ]
   },
   "ざぶざぶサーフ": {
+    "id": 730,
     "power": 90,
     "pp": 15,
     "type": "Water",
@@ -13756,6 +14468,7 @@
     "stat_changes": []
   },
   "ふわふわフォール": {
+    "id": 731,
     "power": 90,
     "pp": 15,
     "type": "Flying",
@@ -13774,6 +14487,7 @@
     "stat_changes": []
   },
   "ピカピカサンダー": {
+    "id": 732,
     "power": 0,
     "pp": 20,
     "type": "Electric",
@@ -13792,6 +14506,7 @@
     "stat_changes": []
   },
   "いきいきバブル": {
+    "id": 733,
     "power": 60,
     "pp": 20,
     "type": "Water",
@@ -13810,6 +14525,7 @@
     "stat_changes": []
   },
   "びりびりエレキ": {
+    "id": 734,
     "power": 60,
     "pp": 20,
     "type": "Electric",
@@ -13828,6 +14544,7 @@
     "stat_changes": []
   },
   "めらめらバーン": {
+    "id": 735,
     "power": 60,
     "pp": 20,
     "type": "Fire",
@@ -13846,6 +14563,7 @@
     "stat_changes": []
   },
   "どばどばオーラ": {
+    "id": 736,
     "power": 80,
     "pp": 15,
     "type": "Psychic",
@@ -13864,6 +14582,7 @@
     "stat_changes": []
   },
   "わるわるゾーン": {
+    "id": 737,
     "power": 80,
     "pp": 15,
     "type": "Dark",
@@ -13882,6 +14601,7 @@
     "stat_changes": []
   },
   "すくすくボンバー": {
+    "id": 738,
     "power": 100,
     "pp": 10,
     "type": "Grass",
@@ -13900,6 +14620,7 @@
     "stat_changes": []
   },
   "こちこちフロスト": {
+    "id": 739,
     "power": 100,
     "pp": 10,
     "type": "Ice",
@@ -13918,6 +14639,7 @@
     "stat_changes": []
   },
   "きらきらストーム": {
+    "id": 740,
     "power": 120,
     "pp": 5,
     "type": "Fairy",
@@ -13936,6 +14658,7 @@
     "stat_changes": []
   },
   "ブイブイブレイク": {
+    "id": 741,
     "power": 0,
     "pp": 20,
     "type": "Normal",
@@ -13954,6 +14677,7 @@
     "stat_changes": []
   },
   "ダブルパンツァー": {
+    "id": 742,
     "power": 60,
     "pp": 5,
     "type": "Steel",
@@ -13972,6 +14696,7 @@
     "stat_changes": []
   },
   "ダイウォール": {
+    "id": 743,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -13990,6 +14715,7 @@
     "stat_changes": []
   },
   "ダイマックスほう": {
+    "id": 744,
     "power": 100,
     "pp": 5,
     "type": "Dragon",
@@ -14008,6 +14734,7 @@
     "stat_changes": []
   },
   "ねらいうち": {
+    "id": 745,
     "power": 80,
     "pp": 15,
     "type": "Water",
@@ -14026,6 +14753,7 @@
     "stat_changes": []
   },
   "くらいつく": {
+    "id": 746,
     "power": 80,
     "pp": 10,
     "type": "Dark",
@@ -14044,6 +14772,7 @@
     "stat_changes": []
   },
   "ほおばる": {
+    "id": 747,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -14067,6 +14796,7 @@
     ]
   },
   "はいすいのじん": {
+    "id": 748,
     "power": 0,
     "pp": 5,
     "type": "Fighting",
@@ -14106,6 +14836,7 @@
     ]
   },
   "タールショット": {
+    "id": 749,
     "power": 0,
     "pp": 15,
     "type": "Rock",
@@ -14129,6 +14860,7 @@
     ]
   },
   "まほうのこな": {
+    "id": 750,
     "power": 0,
     "pp": 20,
     "type": "Psychic",
@@ -14147,6 +14879,7 @@
     "stat_changes": []
   },
   "ドラゴンアロー": {
+    "id": 751,
     "power": 50,
     "pp": 10,
     "type": "Dragon",
@@ -14165,6 +14898,7 @@
     "stat_changes": []
   },
   "おちゃかい": {
+    "id": 752,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -14183,6 +14917,7 @@
     "stat_changes": []
   },
   "たこがため": {
+    "id": 753,
     "power": 0,
     "pp": 15,
     "type": "Fighting",
@@ -14201,6 +14936,7 @@
     "stat_changes": []
   },
   "でんげきくちばし": {
+    "id": 754,
     "power": 85,
     "pp": 10,
     "type": "Electric",
@@ -14219,6 +14955,7 @@
     "stat_changes": []
   },
   "エラがみ": {
+    "id": 755,
     "power": 85,
     "pp": 10,
     "type": "Water",
@@ -14237,6 +14974,7 @@
     "stat_changes": []
   },
   "コートチェンジ": {
+    "id": 756,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -14255,6 +14993,7 @@
     "stat_changes": []
   },
   "ダイバーン": {
+    "id": 757,
     "power": 100,
     "pp": 10,
     "type": "Fire",
@@ -14273,6 +15012,7 @@
     "stat_changes": []
   },
   "ダイワーム": {
+    "id": 758,
     "power": 10,
     "pp": 10,
     "type": "Bug",
@@ -14291,6 +15031,7 @@
     "stat_changes": []
   },
   "ダイサンダー": {
+    "id": 759,
     "power": 10,
     "pp": 10,
     "type": "Electric",
@@ -14309,6 +15050,7 @@
     "stat_changes": []
   },
   "ダイアタック": {
+    "id": 760,
     "power": 10,
     "pp": 10,
     "type": "Normal",
@@ -14327,6 +15069,7 @@
     "stat_changes": []
   },
   "ダイナックル": {
+    "id": 761,
     "power": 10,
     "pp": 10,
     "type": "Fighting",
@@ -14345,6 +15088,7 @@
     "stat_changes": []
   },
   "ダイホロウ": {
+    "id": 762,
     "power": 10,
     "pp": 10,
     "type": "Ghost",
@@ -14363,6 +15107,7 @@
     "stat_changes": []
   },
   "ダイアイス": {
+    "id": 763,
     "power": 10,
     "pp": 10,
     "type": "Ice",
@@ -14381,6 +15126,7 @@
     "stat_changes": []
   },
   "ダイアシッド": {
+    "id": 764,
     "power": 10,
     "pp": 10,
     "type": "Poison",
@@ -14399,6 +15145,7 @@
     "stat_changes": []
   },
   "ダイストリーム": {
+    "id": 765,
     "power": 10,
     "pp": 10,
     "type": "Water",
@@ -14417,6 +15164,7 @@
     "stat_changes": []
   },
   "ダイジェット": {
+    "id": 766,
     "power": 10,
     "pp": 10,
     "type": "Flying",
@@ -14435,6 +15183,7 @@
     "stat_changes": []
   },
   "ダイフェアリー": {
+    "id": 767,
     "power": 10,
     "pp": 10,
     "type": "Fairy",
@@ -14453,6 +15202,7 @@
     "stat_changes": []
   },
   "ダイドラグーン": {
+    "id": 768,
     "power": 10,
     "pp": 10,
     "type": "Dragon",
@@ -14471,6 +15221,7 @@
     "stat_changes": []
   },
   "ダイサイコ": {
+    "id": 769,
     "power": 10,
     "pp": 10,
     "type": "Psychic",
@@ -14489,6 +15240,7 @@
     "stat_changes": []
   },
   "ダイロック": {
+    "id": 770,
     "power": 10,
     "pp": 10,
     "type": "Rock",
@@ -14507,6 +15259,7 @@
     "stat_changes": []
   },
   "ダイアース": {
+    "id": 771,
     "power": 10,
     "pp": 10,
     "type": "Ground",
@@ -14525,6 +15278,7 @@
     "stat_changes": []
   },
   "ダイアーク": {
+    "id": 772,
     "power": 10,
     "pp": 10,
     "type": "Dark",
@@ -14543,6 +15297,7 @@
     "stat_changes": []
   },
   "ダイソウゲン": {
+    "id": 773,
     "power": 10,
     "pp": 10,
     "type": "Grass",
@@ -14561,6 +15316,7 @@
     "stat_changes": []
   },
   "ダイスチル": {
+    "id": 774,
     "power": 10,
     "pp": 10,
     "type": "Steel",
@@ -14579,6 +15335,7 @@
     "stat_changes": []
   },
   "ソウルビート": {
+    "id": 775,
     "power": 0,
     "pp": 5,
     "type": "Dragon",
@@ -14618,6 +15375,7 @@
     ]
   },
   "ボディプレス": {
+    "id": 776,
     "power": 80,
     "pp": 10,
     "type": "Fighting",
@@ -14636,6 +15394,7 @@
     "stat_changes": []
   },
   "デコレーション": {
+    "id": 777,
     "power": 0,
     "pp": 15,
     "type": "Fairy",
@@ -14663,6 +15422,7 @@
     ]
   },
   "ドラムアタック": {
+    "id": 778,
     "power": 80,
     "pp": 10,
     "type": "Grass",
@@ -14686,6 +15446,7 @@
     ]
   },
   "トラバサミ": {
+    "id": 779,
     "power": 35,
     "pp": 15,
     "type": "Grass",
@@ -14704,6 +15465,7 @@
     "stat_changes": []
   },
   "かえんボール": {
+    "id": 780,
     "power": 120,
     "pp": 5,
     "type": "Fire",
@@ -14722,6 +15484,7 @@
     "stat_changes": []
   },
   "きょじゅうざん": {
+    "id": 781,
     "power": 100,
     "pp": 5,
     "type": "Steel",
@@ -14740,6 +15503,7 @@
     "stat_changes": []
   },
   "きょじゅうだん": {
+    "id": 782,
     "power": 100,
     "pp": 5,
     "type": "Steel",
@@ -14758,6 +15522,7 @@
     "stat_changes": []
   },
   "オーラぐるま": {
+    "id": 783,
     "power": 110,
     "pp": 10,
     "type": "Electric",
@@ -14781,6 +15546,7 @@
     ]
   },
   "ワイドブレイカー": {
+    "id": 784,
     "power": 60,
     "pp": 15,
     "type": "Dragon",
@@ -14804,6 +15570,7 @@
     ]
   },
   "えだづき": {
+    "id": 785,
     "power": 40,
     "pp": 40,
     "type": "Grass",
@@ -14822,6 +15589,7 @@
     "stat_changes": []
   },
   "オーバードライブ": {
+    "id": 786,
     "power": 80,
     "pp": 10,
     "type": "Electric",
@@ -14840,6 +15608,7 @@
     "stat_changes": []
   },
   "りんごさん": {
+    "id": 787,
     "power": 80,
     "pp": 10,
     "type": "Grass",
@@ -14863,6 +15632,7 @@
     ]
   },
   "Ｇのちから": {
+    "id": 788,
     "power": 80,
     "pp": 10,
     "type": "Grass",
@@ -14886,6 +15656,7 @@
     ]
   },
   "ソウルクラッシュ": {
+    "id": 789,
     "power": 75,
     "pp": 15,
     "type": "Fairy",
@@ -14909,6 +15680,7 @@
     ]
   },
   "ワンダースチーム": {
+    "id": 790,
     "power": 90,
     "pp": 10,
     "type": "Fairy",
@@ -14927,6 +15699,7 @@
     "stat_changes": []
   },
   "いのちのしずく": {
+    "id": 791,
     "power": 0,
     "pp": 10,
     "type": "Water",
@@ -14945,6 +15718,7 @@
     "stat_changes": []
   },
   "ブロッキング": {
+    "id": 792,
     "power": 0,
     "pp": 10,
     "type": "Dark",
@@ -14963,6 +15737,7 @@
     "stat_changes": []
   },
   "どげざつき": {
+    "id": 793,
     "power": 80,
     "pp": 10,
     "type": "Dark",
@@ -14981,6 +15756,7 @@
     "stat_changes": []
   },
   "スターアサルト": {
+    "id": 794,
     "power": 150,
     "pp": 5,
     "type": "Fighting",
@@ -14999,6 +15775,7 @@
     "stat_changes": []
   },
   "ムゲンダイビーム": {
+    "id": 795,
     "power": 160,
     "pp": 5,
     "type": "Dragon",
@@ -15017,6 +15794,7 @@
     "stat_changes": []
   },
   "てっていこうせん": {
+    "id": 796,
     "power": 140,
     "pp": 5,
     "type": "Steel",
@@ -15035,6 +15813,7 @@
     "stat_changes": []
   },
   "ワイドフォース": {
+    "id": 797,
     "power": 80,
     "pp": 10,
     "type": "Psychic",
@@ -15053,6 +15832,7 @@
     "stat_changes": []
   },
   "アイアンローラー": {
+    "id": 798,
     "power": 130,
     "pp": 5,
     "type": "Steel",
@@ -15071,6 +15851,7 @@
     "stat_changes": []
   },
   "スケイルショット": {
+    "id": 799,
     "power": 25,
     "pp": 20,
     "type": "Dragon",
@@ -15089,6 +15870,7 @@
     "stat_changes": []
   },
   "メテオビーム": {
+    "id": 800,
     "power": 120,
     "pp": 10,
     "type": "Rock",
@@ -15107,6 +15889,7 @@
     "stat_changes": []
   },
   "シェルアームズ": {
+    "id": 801,
     "power": 90,
     "pp": 10,
     "type": "Poison",
@@ -15125,6 +15908,7 @@
     "stat_changes": []
   },
   "ミストバースト": {
+    "id": 802,
     "power": 100,
     "pp": 5,
     "type": "Fairy",
@@ -15143,6 +15927,7 @@
     "stat_changes": []
   },
   "グラススライダー": {
+    "id": 803,
     "power": 55,
     "pp": 20,
     "type": "Grass",
@@ -15161,6 +15946,7 @@
     "stat_changes": []
   },
   "ライジングボルト": {
+    "id": 804,
     "power": 70,
     "pp": 20,
     "type": "Electric",
@@ -15179,6 +15965,7 @@
     "stat_changes": []
   },
   "だいちのはどう": {
+    "id": 805,
     "power": 50,
     "pp": 10,
     "type": "Normal",
@@ -15197,6 +15984,7 @@
     "stat_changes": []
   },
   "はいよるいちげき": {
+    "id": 806,
     "power": 70,
     "pp": 10,
     "type": "Bug",
@@ -15220,6 +16008,7 @@
     ]
   },
   "しっとのほのお": {
+    "id": 807,
     "power": 70,
     "pp": 5,
     "type": "Fire",
@@ -15238,6 +16027,7 @@
     "stat_changes": []
   },
   "うっぷんばらし": {
+    "id": 808,
     "power": 75,
     "pp": 5,
     "type": "Dark",
@@ -15256,6 +16046,7 @@
     "stat_changes": []
   },
   "ポルターガイスト": {
+    "id": 809,
     "power": 110,
     "pp": 5,
     "type": "Ghost",
@@ -15274,6 +16065,7 @@
     "stat_changes": []
   },
   "ふしょくガス": {
+    "id": 810,
     "power": 0,
     "pp": 40,
     "type": "Poison",
@@ -15292,6 +16084,7 @@
     "stat_changes": []
   },
   "コーチング": {
+    "id": 811,
     "power": 0,
     "pp": 10,
     "type": "Fighting",
@@ -15319,6 +16112,7 @@
     ]
   },
   "クイックターン": {
+    "id": 812,
     "power": 60,
     "pp": 20,
     "type": "Water",
@@ -15337,6 +16131,7 @@
     "stat_changes": []
   },
   "トリプルアクセル": {
+    "id": 813,
     "power": 20,
     "pp": 10,
     "type": "Ice",
@@ -15355,6 +16150,7 @@
     "stat_changes": []
   },
   "ダブルウイング": {
+    "id": 814,
     "power": 40,
     "pp": 10,
     "type": "Flying",
@@ -15373,6 +16169,7 @@
     "stat_changes": []
   },
   "ねっさのだいち": {
+    "id": 815,
     "power": 70,
     "pp": 10,
     "type": "Ground",
@@ -15391,6 +16188,7 @@
     "stat_changes": []
   },
   "ジャングルヒール": {
+    "id": 816,
     "power": 0,
     "pp": 10,
     "type": "Grass",
@@ -15409,6 +16207,7 @@
     "stat_changes": []
   },
   "あんこくきょうだ": {
+    "id": 817,
     "power": 75,
     "pp": 5,
     "type": "Dark",
@@ -15427,6 +16226,7 @@
     "stat_changes": []
   },
   "すいりゅうれんだ": {
+    "id": 818,
     "power": 25,
     "pp": 5,
     "type": "Water",
@@ -15445,6 +16245,7 @@
     "stat_changes": []
   },
   "サンダープリズン": {
+    "id": 819,
     "power": 80,
     "pp": 15,
     "type": "Electric",
@@ -15463,6 +16264,7 @@
     "stat_changes": []
   },
   "ドラゴンエナジー": {
+    "id": 820,
     "power": 150,
     "pp": 5,
     "type": "Dragon",
@@ -15481,6 +16283,7 @@
     "stat_changes": []
   },
   "いてつくしせん": {
+    "id": 821,
     "power": 90,
     "pp": 10,
     "type": "Psychic",
@@ -15499,6 +16302,7 @@
     "stat_changes": []
   },
   "もえあがるいかり": {
+    "id": 822,
     "power": 90,
     "pp": 10,
     "type": "Dark",
@@ -15517,6 +16321,7 @@
     "stat_changes": []
   },
   "らいめいげり": {
+    "id": 823,
     "power": 90,
     "pp": 10,
     "type": "Fighting",
@@ -15540,6 +16345,7 @@
     ]
   },
   "ブリザードランス": {
+    "id": 824,
     "power": 120,
     "pp": 5,
     "type": "Ice",
@@ -15558,6 +16364,7 @@
     "stat_changes": []
   },
   "アストラルビット": {
+    "id": 825,
     "power": 120,
     "pp": 5,
     "type": "Ghost",
@@ -15576,6 +16383,7 @@
     "stat_changes": []
   },
   "ぶきみなじゅもん": {
+    "id": 826,
     "power": 80,
     "pp": 5,
     "type": "Psychic",
@@ -15594,6 +16402,7 @@
     "stat_changes": []
   },
   "フェイタルクロー": {
+    "id": 827,
     "power": 80,
     "pp": 15,
     "type": "Poison",
@@ -15612,6 +16421,7 @@
     "stat_changes": []
   },
   "バリアーラッシュ": {
+    "id": 828,
     "power": 70,
     "pp": 10,
     "type": "Psychic",
@@ -15630,6 +16440,7 @@
     "stat_changes": []
   },
   "パワーシフト": {
+    "id": 829,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -15648,6 +16459,7 @@
     "stat_changes": []
   },
   "がんせきアックス": {
+    "id": 830,
     "power": 65,
     "pp": 15,
     "type": "Rock",
@@ -15666,6 +16478,7 @@
     "stat_changes": []
   },
   "はるのあらし": {
+    "id": 831,
     "power": 100,
     "pp": 5,
     "type": "Fairy",
@@ -15684,6 +16497,7 @@
     "stat_changes": []
   },
   "しんぴのちから": {
+    "id": 832,
     "power": 70,
     "pp": 10,
     "type": "Psychic",
@@ -15702,6 +16516,7 @@
     "stat_changes": []
   },
   "だいふんげき": {
+    "id": 833,
     "power": 120,
     "pp": 10,
     "type": "Fire",
@@ -15720,6 +16535,7 @@
     "stat_changes": []
   },
   "ウェーブタックル": {
+    "id": 834,
     "power": 120,
     "pp": 10,
     "type": "Water",
@@ -15738,6 +16554,7 @@
     "stat_changes": []
   },
   "クロロブラスト": {
+    "id": 835,
     "power": 150,
     "pp": 5,
     "type": "Grass",
@@ -15756,6 +16573,7 @@
     "stat_changes": []
   },
   "ひょうざんおろし": {
+    "id": 836,
     "power": 100,
     "pp": 10,
     "type": "Ice",
@@ -15774,6 +16592,7 @@
     "stat_changes": []
   },
   "しょうりのまい": {
+    "id": 837,
     "power": 0,
     "pp": 10,
     "type": "Fighting",
@@ -15792,6 +16611,7 @@
     "stat_changes": []
   },
   "ぶちかまし": {
+    "id": 838,
     "power": 120,
     "pp": 5,
     "type": "Ground",
@@ -15810,6 +16630,7 @@
     "stat_changes": []
   },
   "どくばりセンボン": {
+    "id": 839,
     "power": 60,
     "pp": 10,
     "type": "Poison",
@@ -15828,6 +16649,7 @@
     "stat_changes": []
   },
   "オーラウイング": {
+    "id": 840,
     "power": 80,
     "pp": 10,
     "type": "Psychic",
@@ -15846,6 +16668,7 @@
     "stat_changes": []
   },
   "うらみつらみ": {
+    "id": 841,
     "power": 75,
     "pp": 10,
     "type": "Ghost",
@@ -15864,6 +16687,7 @@
     "stat_changes": []
   },
   "たてこもる": {
+    "id": 842,
     "power": 0,
     "pp": 10,
     "type": "Steel",
@@ -15882,6 +16706,7 @@
     "stat_changes": []
   },
   "３ぼんのや": {
+    "id": 843,
     "power": 90,
     "pp": 10,
     "type": "Fighting",
@@ -15900,6 +16725,7 @@
     "stat_changes": []
   },
   "ひゃっきやこう": {
+    "id": 844,
     "power": 60,
     "pp": 15,
     "type": "Ghost",
@@ -15918,6 +16744,7 @@
     "stat_changes": []
   },
   "ひけん・ちえなみ": {
+    "id": 845,
     "power": 65,
     "pp": 15,
     "type": "Dark",
@@ -15936,6 +16763,7 @@
     "stat_changes": []
   },
   "こがらしあらし": {
+    "id": 846,
     "power": 100,
     "pp": 10,
     "type": "Flying",
@@ -15954,6 +16782,7 @@
     "stat_changes": []
   },
   "かみなりあらし": {
+    "id": 847,
     "power": 100,
     "pp": 10,
     "type": "Electric",
@@ -15972,6 +16801,7 @@
     "stat_changes": []
   },
   "ねっさのあらし": {
+    "id": 848,
     "power": 100,
     "pp": 10,
     "type": "Ground",
@@ -15990,6 +16820,7 @@
     "stat_changes": []
   },
   "みかづきのいのり": {
+    "id": 849,
     "power": 0,
     "pp": 5,
     "type": "Psychic",
@@ -16008,6 +16839,7 @@
     "stat_changes": []
   },
   "ブレイブチャージ": {
+    "id": 850,
     "power": 0,
     "pp": 10,
     "type": "Psychic",
@@ -16026,6 +16858,7 @@
     "stat_changes": []
   },
   "テラバースト": {
+    "id": 851,
     "power": 80,
     "pp": 10,
     "type": "Normal",
@@ -16053,6 +16886,7 @@
     ]
   },
   "スレッドトラップ": {
+    "id": 852,
     "power": 0,
     "pp": 10,
     "type": "Bug",
@@ -16076,6 +16910,7 @@
     ]
   },
   "かかとおとし": {
+    "id": 853,
     "power": 120,
     "pp": 10,
     "type": "Fighting",
@@ -16094,6 +16929,7 @@
     "stat_changes": []
   },
   "おはかまいり": {
+    "id": 854,
     "power": 50,
     "pp": 10,
     "type": "Ghost",
@@ -16112,6 +16948,7 @@
     "stat_changes": []
   },
   "ルミナコリジョン": {
+    "id": 855,
     "power": 80,
     "pp": 10,
     "type": "Psychic",
@@ -16135,6 +16972,7 @@
     ]
   },
   "いっちょうあがり": {
+    "id": 856,
     "power": 80,
     "pp": 10,
     "type": "Dragon",
@@ -16153,6 +16991,7 @@
     "stat_changes": []
   },
   "ジェットパンチ": {
+    "id": 857,
     "power": 60,
     "pp": 15,
     "type": "Water",
@@ -16171,6 +17010,7 @@
     "stat_changes": []
   },
   "ハバネロエキス": {
+    "id": 858,
     "power": 0,
     "pp": 15,
     "type": "Grass",
@@ -16198,6 +17038,7 @@
     ]
   },
   "ホイールスピン": {
+    "id": 859,
     "power": 100,
     "pp": 5,
     "type": "Steel",
@@ -16221,6 +17062,7 @@
     ]
   },
   "ネズミざん": {
+    "id": 860,
     "power": 20,
     "pp": 10,
     "type": "Normal",
@@ -16239,6 +17081,7 @@
     "stat_changes": []
   },
   "アイススピナー": {
+    "id": 861,
     "power": 80,
     "pp": 15,
     "type": "Ice",
@@ -16257,6 +17100,7 @@
     "stat_changes": []
   },
   "きょけんとつげき": {
+    "id": 862,
     "power": 120,
     "pp": 5,
     "type": "Dragon",
@@ -16275,6 +17119,7 @@
     "stat_changes": []
   },
   "さいきのいのり": {
+    "id": 863,
     "power": 0,
     "pp": 1,
     "type": "Normal",
@@ -16293,6 +17138,7 @@
     "stat_changes": []
   },
   "しおづけ": {
+    "id": 864,
     "power": 40,
     "pp": 15,
     "type": "Rock",
@@ -16311,6 +17157,7 @@
     "stat_changes": []
   },
   "トリプルダイブ": {
+    "id": 865,
     "power": 30,
     "pp": 10,
     "type": "Water",
@@ -16329,6 +17176,7 @@
     "stat_changes": []
   },
   "キラースピン": {
+    "id": 866,
     "power": 30,
     "pp": 15,
     "type": "Poison",
@@ -16347,6 +17195,7 @@
     "stat_changes": []
   },
   "うつしえ": {
+    "id": 867,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -16365,6 +17214,7 @@
     "stat_changes": []
   },
   "みをけずる": {
+    "id": 868,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -16396,6 +17246,7 @@
     ]
   },
   "ドゲザン": {
+    "id": 869,
     "power": 85,
     "pp": 10,
     "type": "Dark",
@@ -16414,6 +17265,7 @@
     "stat_changes": []
   },
   "トリックフラワー": {
+    "id": 870,
     "power": 70,
     "pp": 10,
     "type": "Grass",
@@ -16432,6 +17284,7 @@
     "stat_changes": []
   },
   "フレアソング": {
+    "id": 871,
     "power": 80,
     "pp": 10,
     "type": "Fire",
@@ -16455,6 +17308,7 @@
     ]
   },
   "アクアステップ": {
+    "id": 872,
     "power": 80,
     "pp": 10,
     "type": "Water",
@@ -16478,6 +17332,7 @@
     ]
   },
   "レイジングブル": {
+    "id": 873,
     "power": 90,
     "pp": 10,
     "type": "Normal",
@@ -16496,6 +17351,7 @@
     "stat_changes": []
   },
   "ゴールドラッシュ": {
+    "id": 874,
     "power": 120,
     "pp": 5,
     "type": "Steel",
@@ -16519,6 +17375,7 @@
     ]
   },
   "サイコブレイド ": {
+    "id": 875,
     "power": 80,
     "pp": 15,
     "type": "Psychic",
@@ -16537,6 +17394,7 @@
     "stat_changes": []
   },
   "ハイドロスチーム": {
+    "id": 876,
     "power": 80,
     "pp": 15,
     "type": "Water",
@@ -16555,6 +17413,7 @@
     "stat_changes": []
   },
   "カタストロフィ": {
+    "id": 877,
     "power": 1,
     "pp": 10,
     "type": "Dark",
@@ -16573,6 +17432,7 @@
     "stat_changes": []
   },
   "アクセルブレイク": {
+    "id": 878,
     "power": 100,
     "pp": 5,
     "type": "Fighting",
@@ -16591,6 +17451,7 @@
     "stat_changes": []
   },
   "イナズマドライブ": {
+    "id": 879,
     "power": 100,
     "pp": 5,
     "type": "Electric",
@@ -16609,6 +17470,7 @@
     "stat_changes": []
   },
   "しっぽきり": {
+    "id": 880,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -16627,6 +17489,7 @@
     "stat_changes": []
   },
   "さむいギャグ": {
+    "id": 881,
     "power": 0,
     "pp": 10,
     "type": "Ice",
@@ -16645,6 +17508,7 @@
     "stat_changes": []
   },
   "おかたづけ": {
+    "id": 882,
     "power": 0,
     "pp": 10,
     "type": "Normal",
@@ -16672,6 +17536,7 @@
     ]
   },
   "ゆきげしき": {
+    "id": 883,
     "power": 0,
     "pp": 10,
     "type": "Ice",
@@ -16690,6 +17555,7 @@
     "stat_changes": []
   },
   "とびつく": {
+    "id": 884,
     "power": 50,
     "pp": 20,
     "type": "Bug",
@@ -16713,6 +17579,7 @@
     ]
   },
   "くさわけ": {
+    "id": 885,
     "power": 50,
     "pp": 20,
     "type": "Grass",
@@ -16736,6 +17603,7 @@
     ]
   },
   "ひやみず": {
+    "id": 886,
     "power": 50,
     "pp": 20,
     "type": "Water",
@@ -16759,6 +17627,7 @@
     ]
   },
   "ハイパードリル": {
+    "id": 887,
     "power": 100,
     "pp": 5,
     "type": "Normal",
@@ -16777,6 +17646,7 @@
     "stat_changes": []
   },
   "ツインビーム": {
+    "id": 888,
     "power": 40,
     "pp": 10,
     "type": "Psychic",
@@ -16795,6 +17665,7 @@
     "stat_changes": []
   },
   "ふんどのこぶし": {
+    "id": 889,
     "power": 50,
     "pp": 10,
     "type": "Ghost",
@@ -16813,6 +17684,7 @@
     "stat_changes": []
   },
   "アーマーキャノン": {
+    "id": 890,
     "power": 120,
     "pp": 5,
     "type": "Fire",
@@ -16840,6 +17712,7 @@
     ]
   },
   "むねんのつるぎ": {
+    "id": 891,
     "power": 90,
     "pp": 10,
     "type": "Fire",
@@ -16858,6 +17731,7 @@
     "stat_changes": []
   },
   "でんこうそうげき": {
+    "id": 892,
     "power": 120,
     "pp": 5,
     "type": "Electric",
@@ -16876,6 +17750,7 @@
     "stat_changes": []
   },
   "デカハンマー": {
+    "id": 893,
     "power": 160,
     "pp": 5,
     "type": "Steel",
@@ -16894,6 +17769,7 @@
     "stat_changes": []
   },
   "ほうふく": {
+    "id": 894,
     "power": 1,
     "pp": 10,
     "type": "Dark",
@@ -16912,6 +17788,7 @@
     "stat_changes": []
   },
   "アクアカッター": {
+    "id": 895,
     "power": 70,
     "pp": 20,
     "type": "Water",
@@ -16930,6 +17807,7 @@
     "stat_changes": []
   },
   "バーンアクセル": {
+    "id": 896,
     "power": 80,
     "pp": 10,
     "type": "Fire",
@@ -16948,6 +17826,7 @@
     "stat_changes": []
   },
   "ダークアクセル": {
+    "id": 897,
     "power": 80,
     "pp": 10,
     "type": "Dark",
@@ -16966,6 +17845,7 @@
     "stat_changes": []
   },
   "ポイズンアクセル": {
+    "id": 898,
     "power": 100,
     "pp": 10,
     "type": "Poison",
@@ -16984,6 +17864,7 @@
     "stat_changes": []
   },
   "ファイトアクセル": {
+    "id": 899,
     "power": 100,
     "pp": 10,
     "type": "Fighting",
@@ -17002,6 +17883,7 @@
     "stat_changes": []
   },
   "マジカルアクセル": {
+    "id": 900,
     "power": 100,
     "pp": 10,
     "type": "Fairy",
@@ -17020,6 +17902,7 @@
     "stat_changes": []
   },
   "ブラッドムーン": {
+    "id": 901,
     "power": 140,
     "pp": 5,
     "type": "Normal",
@@ -17038,6 +17921,7 @@
     "stat_changes": []
   },
   "シャカシャカほう": {
+    "id": 902,
     "power": 80,
     "pp": 15,
     "type": "Grass",
@@ -17056,6 +17940,7 @@
     "stat_changes": []
   },
   "みずあめボム": {
+    "id": 903,
     "power": 60,
     "pp": 10,
     "type": "Grass",
@@ -17079,6 +17964,7 @@
     ]
   },
   "ツタこんぼう": {
+    "id": 904,
     "power": 100,
     "pp": 10,
     "type": "Grass",
@@ -17097,6 +17983,7 @@
     "stat_changes": []
   },
   "エレクトロビーム": {
+    "id": 905,
     "power": 130,
     "pp": 10,
     "type": "Electric",
@@ -17120,6 +18007,7 @@
     ]
   },
   "テラクラスター": {
+    "id": 906,
     "power": 120,
     "pp": 5,
     "type": "Normal",
@@ -17138,6 +18026,7 @@
     "stat_changes": []
   },
   "きまぐレーザー": {
+    "id": 907,
     "power": 80,
     "pp": 5,
     "type": "Dragon",
@@ -17156,6 +18045,7 @@
     "stat_changes": []
   },
   "かえんのまもり": {
+    "id": 908,
     "power": 0,
     "pp": 10,
     "type": "Fire",
@@ -17174,6 +18064,7 @@
     "stat_changes": []
   },
   "じんらい": {
+    "id": 909,
     "power": 70,
     "pp": 5,
     "type": "Electric",
@@ -17192,6 +18083,7 @@
     "stat_changes": []
   },
   "パワフルエッジ": {
+    "id": 910,
     "power": 95,
     "pp": 5,
     "type": "Rock",
@@ -17210,6 +18102,7 @@
     "stat_changes": []
   },
   "タキオンカッター": {
+    "id": 911,
     "power": 50,
     "pp": 10,
     "type": "Steel",
@@ -17228,6 +18121,7 @@
     "stat_changes": []
   },
   "ハードプレス": {
+    "id": 912,
     "power": 0,
     "pp": 10,
     "type": "Steel",
@@ -17246,6 +18140,7 @@
     "stat_changes": []
   },
   "ドラゴンエール": {
+    "id": 913,
     "power": 0,
     "pp": 15,
     "type": "Dragon",
@@ -17264,6 +18159,7 @@
     "stat_changes": []
   },
   "みわくのボイス": {
+    "id": 914,
     "power": 80,
     "pp": 10,
     "type": "Fairy",
@@ -17282,6 +18178,7 @@
     "stat_changes": []
   },
   "やけっぱち": {
+    "id": 915,
     "power": 75,
     "pp": 10,
     "type": "Fire",
@@ -17300,6 +18197,7 @@
     "stat_changes": []
   },
   "サンダーダイブ": {
+    "id": 916,
     "power": 100,
     "pp": 15,
     "type": "Electric",
@@ -17318,6 +18216,7 @@
     "stat_changes": []
   },
   "サイコノイズ": {
+    "id": 917,
     "power": 75,
     "pp": 10,
     "type": "Psychic",
@@ -17336,6 +18235,7 @@
     "stat_changes": []
   },
   "はやてがえし": {
+    "id": 918,
     "power": 65,
     "pp": 15,
     "type": "Fighting",
@@ -17354,6 +18254,7 @@
     "stat_changes": []
   },
   "じゃどくのくさり": {
+    "id": 919,
     "power": 100,
     "pp": 5,
     "type": "Poison",
