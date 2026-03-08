@@ -7,7 +7,7 @@ import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES } from '../data/loader.js?v=4
  *  0: x1.0
  * +1: x1.5, +2: x2.0, +3: x2.5, +4: x3.0, +5: x3.5, +6: x4.0
  */
-function getRankMultiplier(rank) {
+export function getRankMultiplier(rank) {
     if (rank === 0) return 1.0;
     if (rank > 0) return 1 + rank * 0.5; // +1→1.5, +2→2.0, ...
     // rank < 0: ÷1.5, ÷2.0, ... (reciprocal)

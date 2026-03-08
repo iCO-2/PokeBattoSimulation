@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, loadAllData } from './data/loader.js?v=4';
-import { calculateDamage } from './calc/damage.js?v=206';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=206';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -700,13 +700,41 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
             
-            // セレクトボックスから割合を取得
+            // セレクトボックスから値を取得
             const ratioSelect = document.getElementById('fixed-damage-ratio');
-            const ratio = parseInt(ratioSelect.value); // 16 or 6
-            const ratioLabel = ratioSelect.options[ratioSelect.selectedIndex].text; // "1/16" or "1/6"
+            const ratioType = ratioSelect.value;
+            const ratioLabel = ratioSelect.options[ratioSelect.selectedIndex].text;
             
-            // 固定ダメージ/回復量: 最大HPの1/ratio
-            const amount = Math.floor(pokemon.maxHp / ratio);
+            let amount = 0;
+            let moveNameForLog = '';
+
+            if (ratioType === 'confusion') {
+                if (action === 'heal') {
+                    alert('混乱自傷はダメージ専用設定です');
+                    return;
+                }
+                // 混乱自傷ダメージ計算（威力40物理、自分自身のAとBのランク補正を適用）
+                const level = pokemon.level || 50;
+                const power = 40;
+                const aStr = 'attack';
+                const dStr = 'defence';
+                const attackerRank = pokemon.stats[aStr] ? pokemon.stats[aStr].rank || 0 : 0;
+                const defenderRank = pokemon.stats[dStr] ? pokemon.stats[dStr].rank || 0 : 0;
+                
+                const A = Math.floor(pokemon.realStats[aStr] * getRankMultiplier(attackerRank));
+                const D = Math.floor(pokemon.realStats[dStr] * getRankMultiplier(defenderRank));
+
+                // 基礎ダメージ（最大ダメージの乱数1.0倍を適用）
+                amount = Math.floor(Math.floor(Math.floor(level * 2 / 5 + 2) * power * A / D) / 50) + 2;
+                moveNameForLog = '混乱自傷';
+            } else {
+                const ratio = parseInt(ratioType);
+                amount = Math.floor(pokemon.maxHp / ratio);
+                moveNameForLog = `固定ダメージ (${ratioLabel})`;
+                if (action === 'heal') {
+                    moveNameForLog = `固定回復 (${ratioLabel})`;
+                }
+            }
             
             if (action === 'damage') {
                 // ダメージを与える
@@ -718,7 +746,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const historyEntry = {
                     type: 'damage',
                     turnId: globalTurnCounter || 0,
-                    moveName: `固定ダメージ (${ratioLabel})`,
+                    moveName: moveNameForLog,
                     damage: actualDamage,
                     attackerName: pokemon.name,
                     defenderName: pokemon.name,
@@ -742,7 +770,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const historyEntry = {
                     type: 'heal',
                     turnId: globalTurnCounter || 0,
-                    moveName: `固定回復 (${ratioLabel})`,
+                    moveName: moveNameForLog,
                     damage: actualHealed,
                     attackerName: pokemon.name,
                     attackerSide: target,
