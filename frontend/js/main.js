@@ -1465,9 +1465,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!historyList) return;
 
         historyList.innerHTML = '';
-        // 履歴を逆順（新しい順）で表示
+        // 履歴を古い順（追加順）で表示
         if (poke.history && poke.history.length > 0) {
-            [...poke.history].reverse().forEach(entry => {
+            [...poke.history].forEach(entry => {
                 const li = document.createElement('li');
                 const perc = (poke.maxHp > 0) ? (entry.damage / poke.maxHp * 100).toFixed(1) : 0;
                 const attackerLabel = entry.attackerName || (side === 'ally' ? '自分' : '相手');
