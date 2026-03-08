@@ -1,0 +1,146 @@
+{
+  "がんじょうあご": {
+    "type": "fang",
+    "offensive": 1.5,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": ""
+  },
+  "パンクロック": {
+    "type": "sound",
+    "offensive": 1.3,
+    "defensive": 0.5,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": ""
+  },
+  "うるおいボイス": {
+    "type": "sound",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "自身が使う音技が全てみずタイプになる"
+  },
+  "ぼうおん": {
+    "type": "sound",
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "ほえるを無効"
+  },
+  "おどりこ": {
+    "type": "dance",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "誰かが踊る技を使うと自分もそれに続いてその踊る技を出せる"
+  },
+  "かぜのり": {
+    "type": "wind",
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "味方側のおいかぜが吹いたり、風技を受けるとダメージを受けずに攻撃が1段階上がる"
+  },
+  "ふうりょくでんき": {
+    "type": "wind",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "風技を受けると「じゅうでん」状態になり、でんきタイプの技の威力を1度だけ2倍にする"
+  },
+  "きれあじ": {
+    "type": "blade",
+    "offensive": 1.5,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": ""
+  },
+  "ぼうだん": {
+    "type": "bullet",
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": ""
+  },
+  "メガランチャー": {
+    "type": "hadou",
+    "offensive": 1.5,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "「いやしのはどう」は最大HPの3/4回復する"
+  },
+  "てつのこぶし": {
+    "type": "punch",
+    "offensive": 1.2,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": ""
+  },
+  "がんじょう": {
+    "type": "onehit_knockout",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "残りHPがマックスのときは、一撃で倒れずに1残る"
+  },
+  "わざわいのおふだ": {
+    "type": "dezaster",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 0.75,
+    "weakken_stats": "attack",
+    "is_special": false,
+    "memo": ""
+  },
+    "わざわいのつるぎ": {
+    "type": "dezaster",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 0.75,
+    "weakken_stats": "defence",
+    "is_special": false,
+    "memo": ""
+  },
+    "わざわいのうつわ": {
+    "type": "dezaster",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 0.75,
+    "weakken_stats": "spAtk",
+    "is_special": false,
+    "memo": ""
+  },
+    "わざわいのたま": {
+    "type": "dezaster",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 0.75,
+    "weakken_stats": "spDef",
+    "is_special": false,
+    "memo": ""
+  }
+}
