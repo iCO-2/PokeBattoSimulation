@@ -1,6 +1,6 @@
-import { AppState } from './AppState.js?v=117';
+import { AppState } from './AppState.js?v=119';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
-import { calculateDamage } from './calc/damage.js?v=202';
+import { calculateDamage } from './calc/damage.js?v=205';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -110,7 +110,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (allyTeraSelect) {
         allyTeraSelect.addEventListener('change', (e) => {
-            appState.getAllyPokemon().teraType = e.target.value;
+            const pokemon = appState.getAllyPokemon();
+            pokemon.teraType = e.target.value;
+            // ステラ選択時はボーナスをリセット
+            if (e.target.value === 'ステラ') {
+                pokemon.resetStellarBonus();
+            }
         });
     }
     if (allyItemSelect) {
@@ -152,7 +157,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     if (enemyTeraSelect) {
         enemyTeraSelect.addEventListener('change', (e) => {
-            appState.getEnemyPokemon().teraType = e.target.value;
+            const pokemon = appState.getEnemyPokemon();
+            pokemon.teraType = e.target.value;
+            // ステラ選択時はボーナスをリセット
+            if (e.target.value === 'ステラ') {
+                pokemon.resetStellarBonus();
+            }
         });
     }
 
@@ -854,6 +864,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
 
             const damageResult = calculateDamage(attacker, defender, move, {});
+
+            // ステラボーナスが適用された場合、そのタイプを使用済みに記録
+            if (damageResult.stellarBoosted && attacker.stellarUsedTypes) {
+                attacker.stellarUsedTypes.add(damageResult.moveType);
+            }
             
             // ターン開始時点のHPを記録（乱数選択でここから引く）
             const turnStartHp = defender.currentHp;
@@ -1076,6 +1091,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 rollLabel: rollLabel,
                                 hpBefore: turnStartHp,
                                 hpAfter: defender.currentHp,
+                                stellarBoosted: damageResult.stellarBoosted || false,
                                 snapshot: {
                                     allyHps: appState.allyTeam.map(p => p.currentHp),
                                     enemyHps: appState.enemyTeam.map(p => p.currentHp)
@@ -1121,6 +1137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 rollLabel: initialRollLabel,
                 hpBefore: turnStartHp,
                 hpAfter: defender.currentHp,
+                stellarBoosted: damageResult.stellarBoosted || false,
                 snapshot: {
                     allyHps: appState.allyTeam.map(p => p.currentHp),
                     enemyHps: appState.enemyTeam.map(p => p.currentHp)
@@ -1468,8 +1485,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const damageClass = entry.type === 'attack' ? 'attack-log' : 'damage-log';
                     li.classList.add(damageClass, sideClass);
                     const rollLabel = entry.rollLabel || '-';
+                    const stellarLabel = entry.stellarBoosted ? ' [ステラ補正]' : '';
                     li.innerHTML = `
-                        <span class="move">${entry.moveName}</span>
+                        <span class="move">${entry.moveName}${stellarLabel}</span>
                         <span class="dmg">ダメージ：${entry.damage}</span>
                         <span class="perc">(割合：${perc}%)</span>
                         <div class="attacker">

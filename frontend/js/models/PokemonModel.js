@@ -44,6 +44,9 @@ export class Pokemon {
 
         // アイテム使用フラグ
         this.itemConsumed = false;
+
+        // ステラテラスの使用済みタイプ追跡
+        this.stellarUsedTypes = new Set();
     }
 
     // HP回復処理
@@ -51,6 +54,11 @@ export class Pokemon {
         const oldHp = this.currentHp;
         this.currentHp = Math.min(this.maxHp, this.currentHp + amount);
         return this.currentHp - oldHp; // 実際に回復した量
+    }
+
+    // ステラボーナスのリセット
+    resetStellarBonus() {
+        this.stellarUsedTypes = new Set();
     }
 
     clearHistory() {
@@ -61,12 +69,12 @@ export class Pokemon {
     fullReset() {
         this.currentHp = this.maxHp;
         this.itemConsumed = false; // アイテム使用状況もリセット
+        this.stellarUsedTypes = new Set(); // ステラボーナスもリセット
         this.clearHistory();
     }
 
     get speciesData() {
         const data = SPECIES_DEX[this.name];
-        console.log(`[PokemonModel] speciesData for '${this.name}':`, data ? { types: data.types } : 'Not Found');
         return data || null;
     }
 

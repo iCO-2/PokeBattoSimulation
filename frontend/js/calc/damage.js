@@ -15,7 +15,7 @@ function getRankMultiplier(rank) {
 }
 
 export function calculateDamage(attacker, defender, move, field = {}) {
-    console.log('[damage.js] calculateDamage CALLED', { move: move.name || move.type, power: move.power });
+
     // 0. 基本情報取得
     const level = attacker.level;
     const power = move.power || 0;
@@ -35,18 +35,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const attackerRank = attacker.stats[aStr] ? attacker.stats[aStr].rank || 0 : 0;
     const defenderRank = defender.stats[dStr] ? defender.stats[dStr].rank || 0 : 0;
     
-    console.log('[damage.js] Debug:', {
-        aStr,
-        dStr,
-        attackerStats: attacker.stats[aStr],
-        defenderStats: defender.stats[dStr],
-        attackerRank,
-        defenderRank,
-        attackerMultiplier: getRankMultiplier(attackerRank),
-        defenderMultiplier: getRankMultiplier(defenderRank),
-        baseA: attacker.realStats[aStr],
-        baseD: defender.realStats[dStr]
-    });
+
     
     let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
     const D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
@@ -70,7 +59,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         };
     }
     
-    console.log('[damage.js] Final A/D:', { A, D });
+
 
     // 1. ダメージ計算の基礎
     // Floor(Floor(Floor(Lv * 2 / 5 + 2) * Power * A / D) / 50) + 2
@@ -86,23 +75,49 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     
     // 乱数 (0.85 ~ 1.00) を適用する前の値を保持して、最後にリスト生成する
     
-    // タイプ一致 (STAB): 1.5倍
-    // テラスタルは考慮せず、元のタイプで判定 (speciesData)
-    const attackerTypes = attacker.speciesData ? attacker.speciesData.types : [];
-    const isSTAB = attackerTypes.includes(move.type); // テラスタル時はteraTypeで判定すべきだが一旦省略
-    let stabMod = isSTAB ? 1.5 : 1.0;
+    // タイプ一致 (STAB): テラスタル対応
+    const originalTypes = attacker.speciesData ? attacker.speciesData.types : [];
+    const attackerTera = attacker.teraType && attacker.teraType !== 'なし' ? attacker.teraType : null;
+    const isAttackerStellar = attackerTera === 'ステラ';
     
-    // タイプ相性
-    const defenderTypes = defender.speciesData ? defender.speciesData.types : [];
+    let stabMod = 1.0;
+    let stellarBoosted = false; // ステラボーナスが適用されたかどうか
+    
+    if (isAttackerStellar) {
+        // ステラテラス: 使用済みタイプかどうかチェック
+        const alreadyUsed = attacker.stellarUsedTypes && attacker.stellarUsedTypes.has(move.type);
+        const originalMatch = originalTypes.includes(move.type);
+        if (!alreadyUsed) {
+            // 初回使用: 元タイプ一致 → 2.0倍、不一致 → 1.2倍
+            stabMod = originalMatch ? 2.0 : 1.2;
+            stellarBoosted = true;
+        } else {
+            // 2回目以降: 通常ルール（元タイプ一致なら1.5倍、不一致なら1.0倍）
+            stabMod = originalMatch ? 1.5 : 1.0;
+        }
+    } else if (attackerTera) {
+        // 通常テラスタル: テラスタイプ＋元タイプ両方一致 → 2.0倍、片方一致 → 1.5倍
+        const teraMatch = move.type === attackerTera;
+        const originalMatch = originalTypes.includes(move.type);
+        if (teraMatch && originalMatch) {
+            stabMod = 2.0;
+        } else if (teraMatch || originalMatch) {
+            stabMod = 1.5;
+        }
+    } else {
+        // テラスタルなし: 通常STAB
+        const isSTAB = originalTypes.includes(move.type);
+        stabMod = isSTAB ? 1.5 : 1.0;
+    }
+    
+    // タイプ相性: 防御側テラスタル対応
+    const defenderTera = defender.teraType && defender.teraType !== 'なし' ? defender.teraType : null;
+    const isDefenderStellar = defenderTera === 'ステラ';
+    // ステラテラスの防御側は元タイプを維持する
+    const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
     const typeMod = getTypeEffectiveness(move.type, defenderTypes);
     
-    console.log('[damage.js] Type Debug:', {
-        moveType: move.type,
-        defenderTypes: defenderTypes,
-        typeMod: typeMod,
-        isSTAB: isSTAB,
-        attackerTypes: attackerTypes
-    });
+
     
     // 状態異常(やけど): 物理なら0.5 (未実装)
 
@@ -139,6 +154,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         max: rolls[rolls.length - 1],
         rolls: rolls,
         typeMod: typeMod,
-        itemModifier: itemModifier
+        itemModifier: itemModifier,
+        stellarBoosted: stellarBoosted,
+        moveType: move.type
     };
 }
