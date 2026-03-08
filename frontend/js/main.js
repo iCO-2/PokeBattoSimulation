@@ -508,8 +508,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     listElement.appendChild(separator);
                 }
 
-                const limit = Math.min(regularMatches.length, 40 - Math.min(commonMatches.length, 10));
-                regularMatches.slice(0, limit).forEach(moveName => {
+                regularMatches.forEach(moveName => {
                     listElement.appendChild(createMoveItem(moveName));
                 });
             }
