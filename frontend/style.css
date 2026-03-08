@@ -1227,8 +1227,10 @@ h2 {
 
     .stat-controls {
         flex-wrap: nowrap !important;
-        gap: 6px !important;
+        gap: 4px !important;
         flex: 1 !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
     }
 
     /* Restore labels on mobile, stacked above controls */
@@ -1268,8 +1270,8 @@ h2 {
     }
 
     .ev-input {
-        width: 28px !important;
-        min-width: 28px !important;
+        width: 30px !important;
+        min-width: 24px !important;
         padding: 2px 1px !important;
         font-size: 13px !important;
     }
@@ -1278,7 +1280,7 @@ h2 {
     .tune-btn {
         display: flex !important;
         width: 30px !important;
-        min-width: 20px !important;
+        min-width: 18px !important;
         height: 20px !important;
         font-size: 0.6em !important;
         padding: 0 !important;
@@ -1288,14 +1290,15 @@ h2 {
 
     .preset-btn {
         width: 30px !important;
-        min-width: 22px !important;
+        min-width: 18px !important;
         height: 20px !important;
         font-size: 0.6em !important;
         padding: 0 !important;
     }
 
     .nature-group {
-        min-width: 55px !important;
+        min-width: 48px !important;
+        flex-shrink: 0 !important;
     }
 
     .nature-group.empty {
