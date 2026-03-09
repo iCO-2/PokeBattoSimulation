@@ -14,6 +14,22 @@ let globalTurnCounter = 0;
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllData();
 
+    // --- 手動補正 説明モーダル ---
+    const manualModInfoBtn = document.getElementById('manual-modifier-info-btn');
+    const manualModModal = document.getElementById('manual-modifier-modal');
+    const manualModModalClose = document.getElementById('manual-modifier-modal-close');
+    if (manualModInfoBtn && manualModModal) {
+        manualModInfoBtn.addEventListener('click', () => {
+            manualModModal.style.display = 'flex';
+        });
+        manualModModalClose.addEventListener('click', () => {
+            manualModModal.style.display = 'none';
+        });
+        manualModModal.addEventListener('click', (e) => {
+            if (e.target === manualModModal) manualModModal.style.display = 'none';
+        });
+    }
+
     // --- モバイルヘッダー固定: CSS変数の動的計算 ---
     function updateStickyHeaderOffsets() {
         if (window.innerWidth > 768) return; // モバイルのみ
