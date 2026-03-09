@@ -61,6 +61,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     // 特性補正
     const moveName = move.name || '';
+    let moveType = move.type || 'ノーマル';
+
     let abilityOffensiveMod = 1.0;
     let abilityDefensiveMod = 1.0;
     let abilityOffensiveInfo = null;
@@ -80,6 +82,22 @@ export function calculateDamage(attacker, defender, move, field = {}) {
                     multiplier: abilityOffensiveMod
                 };
             }
+        }
+
+        // スキン系特性: ノーマル技のタイプを変更し威力を1.2倍
+        const SKIN_TYPE_MAP = {
+            'エレキスキン': 'でんき',
+            'フェアリースキン': 'フェアリー',
+            'スカイスキン': 'ひこう',
+            'フリーズスキン': 'こおり'
+        };
+        if (attackerAbilityData.type === 'skin' && moveType === 'ノーマル') {
+            moveType = SKIN_TYPE_MAP[attacker.ability] || moveType;
+            abilityOffensiveMod = attackerAbilityData.offensive;
+            abilityOffensiveInfo = {
+                name: attacker.ability,
+                multiplier: abilityOffensiveMod
+            };
         }
 
         // is_special: true 特性の追加処理（枠組み）
@@ -186,8 +204,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     
     if (isAttackerStellar) {
         // ステラテラス: 使用済みタイプかどうかチェック
-        const alreadyUsed = attacker.stellarUsedTypes && attacker.stellarUsedTypes.has(move.type);
-        const originalMatch = originalTypes.includes(move.type);
+        const alreadyUsed = attacker.stellarUsedTypes && attacker.stellarUsedTypes.has(moveType);
+        const originalMatch = originalTypes.includes(moveType);
         if (!alreadyUsed) {
             // 初回使用: 元タイプ一致 → 2.0倍、不一致 → 1.2倍
             stabMod = originalMatch ? 2.0 : 1.2;
@@ -198,8 +216,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     } else if (attackerTera) {
         // 通常テラスタル: テラスタイプ＋元タイプ両方一致 → 2.0倍、片方一致 → 1.5倍
-        const teraMatch = move.type === attackerTera;
-        const originalMatch = originalTypes.includes(move.type);
+        const teraMatch = moveType === attackerTera;
+        const originalMatch = originalTypes.includes(moveType);
         if (teraMatch && originalMatch) {
             stabMod = 2.0;
         } else if (teraMatch || originalMatch) {
@@ -207,7 +225,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     } else {
         // テラスタルなし: 通常STAB
-        const isSTAB = originalTypes.includes(move.type);
+        const isSTAB = originalTypes.includes(moveType);
         stabMod = isSTAB ? 1.5 : 1.0;
     }
     
@@ -216,7 +234,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const isDefenderStellar = defenderTera === 'ステラ';
     // ステラテラスの防御側は元タイプを維持する
     const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
-    const typeMod = getTypeEffectiveness(move.type, defenderTypes);
+    const typeMod = getTypeEffectiveness(moveType, defenderTypes);
     
 
     
@@ -264,7 +282,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         typeMod: typeMod,
         itemModifier: itemModifier,
         stellarBoosted: stellarBoosted,
-        moveType: move.type,
+        moveType: moveType,
         abilityOffensiveInfo: abilityOffensiveInfo,
         abilityDefensiveInfo: abilityDefensiveInfo,
         dezasterInfo: dezasterInfo

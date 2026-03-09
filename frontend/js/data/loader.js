@@ -107,8 +107,8 @@ const TYPE_TRANSLATION = {
                 ABILITIES_DEX = await abilitiesRes.json();
                 console.log(`Loaded ${Object.keys(ABILITIES_DEX).length} abilities.`);
 
-                // 一意のtypeリストを取得し、対応するmoves_{type}.jsonをロード（dezasterはJSONなし）
-                const types = [...new Set(Object.values(ABILITIES_DEX).map(a => a.type))].filter(t => t !== 'dezaster');
+                // 一意のtypeリストを取得し、対応するmoves_{type}.jsonをロード（dezaster, skinはJSONなし）
+                const types = [...new Set(Object.values(ABILITIES_DEX).map(a => a.type))].filter(t => t !== 'dezaster' && t !== 'skin');
                 const moveTypePromises = types.map(async (type) => {
                     try {
                         const res = await fetch(`./data/moves_info/moves_${type}.json`);
