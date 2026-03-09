@@ -1,6 +1,6 @@
-import { AppState } from './AppState.js?v=117';
-import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, loadAllData } from './data/loader.js?v=3';
-import { calculateDamage } from './calc/damage.js?v=202';
+import { AppState } from './AppState.js?v=120';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, loadAllData } from './data/loader.js?v=4';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=206';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -110,7 +110,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (allyTeraSelect) {
         allyTeraSelect.addEventListener('change', (e) => {
-            appState.getAllyPokemon().teraType = e.target.value;
+            const pokemon = appState.getAllyPokemon();
+            pokemon.teraType = e.target.value;
+            // ステラ選択時はボーナスをリセット
+            if (e.target.value === 'ステラ') {
+                pokemon.resetStellarBonus();
+            }
         });
     }
     if (allyItemSelect) {
@@ -152,9 +157,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     if (enemyTeraSelect) {
         enemyTeraSelect.addEventListener('change', (e) => {
-            appState.getEnemyPokemon().teraType = e.target.value;
+            const pokemon = appState.getEnemyPokemon();
+            pokemon.teraType = e.target.value;
+            // ステラ選択時はボーナスをリセット
+            if (e.target.value === 'ステラ') {
+                pokemon.resetStellarBonus();
+            }
         });
     }
+
+    // カスタムテラスタルドロップダウンの初期化
+    initTeraCustomSelects();
 
     setupClearInputButtons();
 
@@ -495,8 +508,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     listElement.appendChild(separator);
                 }
 
-                const limit = Math.min(regularMatches.length, 40 - Math.min(commonMatches.length, 10));
-                regularMatches.slice(0, limit).forEach(moveName => {
+                regularMatches.forEach(moveName => {
                     listElement.appendChild(createMoveItem(moveName));
                 });
             }
@@ -688,13 +700,41 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
             
-            // セレクトボックスから割合を取得
+            // セレクトボックスから値を取得
             const ratioSelect = document.getElementById('fixed-damage-ratio');
-            const ratio = parseInt(ratioSelect.value); // 16 or 6
-            const ratioLabel = ratioSelect.options[ratioSelect.selectedIndex].text; // "1/16" or "1/6"
+            const ratioType = ratioSelect.value;
+            const ratioLabel = ratioSelect.options[ratioSelect.selectedIndex].text;
             
-            // 固定ダメージ/回復量: 最大HPの1/ratio
-            const amount = Math.floor(pokemon.maxHp / ratio);
+            let amount = 0;
+            let moveNameForLog = '';
+
+            if (ratioType === 'confusion') {
+                if (action === 'heal') {
+                    alert('混乱自傷はダメージ専用設定です');
+                    return;
+                }
+                // 混乱自傷ダメージ計算（威力40物理、自分自身のAとBのランク補正を適用）
+                const level = pokemon.level || 50;
+                const power = 40;
+                const aStr = 'attack';
+                const dStr = 'defence';
+                const attackerRank = pokemon.stats[aStr] ? pokemon.stats[aStr].rank || 0 : 0;
+                const defenderRank = pokemon.stats[dStr] ? pokemon.stats[dStr].rank || 0 : 0;
+                
+                const A = Math.floor(pokemon.realStats[aStr] * getRankMultiplier(attackerRank));
+                const D = Math.floor(pokemon.realStats[dStr] * getRankMultiplier(defenderRank));
+
+                // 基礎ダメージ（最大ダメージの乱数1.0倍を適用）
+                amount = Math.floor(Math.floor(Math.floor(level * 2 / 5 + 2) * power * A / D) / 50) + 2;
+                moveNameForLog = '混乱自傷';
+            } else {
+                const ratio = parseInt(ratioType);
+                amount = Math.floor(pokemon.maxHp / ratio);
+                moveNameForLog = `固定ダメージ (${ratioLabel})`;
+                if (action === 'heal') {
+                    moveNameForLog = `固定回復 (${ratioLabel})`;
+                }
+            }
             
             if (action === 'damage') {
                 // ダメージを与える
@@ -706,7 +746,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const historyEntry = {
                     type: 'damage',
                     turnId: globalTurnCounter || 0,
-                    moveName: `固定ダメージ (${ratioLabel})`,
+                    moveName: moveNameForLog,
                     damage: actualDamage,
                     attackerName: pokemon.name,
                     defenderName: pokemon.name,
@@ -730,7 +770,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const historyEntry = {
                     type: 'heal',
                     turnId: globalTurnCounter || 0,
-                    moveName: `固定回復 (${ratioLabel})`,
+                    moveName: moveNameForLog,
                     damage: actualHealed,
                     attackerName: pokemon.name,
                     attackerSide: target,
@@ -852,8 +892,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             // ダメージ計算
             const moveName = attacker.moves[attacker.activeMoveIndex];
             const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
+            move.name = moveName;
 
             const damageResult = calculateDamage(attacker, defender, move, {});
+
+            // ステラボーナスが適用された場合、そのタイプを使用済みに記録
+            if (damageResult.stellarBoosted && attacker.stellarUsedTypes) {
+                attacker.stellarUsedTypes.add(damageResult.moveType);
+            }
             
             // ターン開始時点のHPを記録（乱数選択でここから引く）
             const turnStartHp = defender.currentHp;
@@ -924,6 +970,32 @@ document.addEventListener('DOMContentLoaded', async () => {
                         }
                     } else {
                         itemModifierText.textContent = '-';
+                    }
+                }
+
+                const abilityModifierText = resultContainer.querySelector('.ability-modifier');
+                if (abilityModifierText) {
+                    let abilityStrs = [];
+                    if (damageResult.abilityOffensiveInfo) {
+                        abilityStrs.push(`${damageResult.abilityOffensiveInfo.name} (与ダメージ×${damageResult.abilityOffensiveInfo.multiplier})`);
+                    }
+                    if (damageResult.abilityDefensiveInfo) {
+                        if (damageResult.abilityDefensiveInfo.multiplier === 0) {
+                            abilityStrs.push(`${damageResult.abilityDefensiveInfo.name} (ダメージ無効化)`);
+                        } else {
+                            abilityStrs.push(`${damageResult.abilityDefensiveInfo.name} (被ダメージ×${damageResult.abilityDefensiveInfo.multiplier})`);
+                        }
+                    }
+                    if (damageResult.dezasterInfo) {
+                        const statNameMap = { 'attack': '攻撃', 'defence': '防御', 'spAtk': '特攻', 'spDef': '特防', 'speed': '素早さ' };
+                        const statJP = statNameMap[damageResult.dezasterInfo.stat] || damageResult.dezasterInfo.stat;
+                        abilityStrs.push(`${damageResult.dezasterInfo.name} (${statJP}×${damageResult.dezasterInfo.multiplier})`);
+                    }
+                    
+                    if (abilityStrs.length > 0) {
+                        abilityModifierText.innerHTML = abilityStrs.join('<br>');
+                    } else {
+                        abilityModifierText.textContent = '-';
                     }
                 }
 
@@ -1076,6 +1148,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 rollLabel: rollLabel,
                                 hpBefore: turnStartHp,
                                 hpAfter: defender.currentHp,
+                                stellarBoosted: damageResult.stellarBoosted || false,
                                 snapshot: {
                                     allyHps: appState.allyTeam.map(p => p.currentHp),
                                     enemyHps: appState.enemyTeam.map(p => p.currentHp)
@@ -1121,6 +1194,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 rollLabel: initialRollLabel,
                 hpBefore: turnStartHp,
                 hpAfter: defender.currentHp,
+                stellarBoosted: damageResult.stellarBoosted || false,
                 snapshot: {
                     allyHps: appState.allyTeam.map(p => p.currentHp),
                     enemyHps: appState.enemyTeam.map(p => p.currentHp)
@@ -1418,7 +1492,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const stats = [
             { label: 'H', val: bs.hp },
             { label: 'A', val: bs.attack },
-            { label: 'B', val: bs.defense },
+            { label: 'B', val: bs.defence },
             { label: 'C', val: bs.spAtk },
             { label: 'D', val: bs.spDef },
             { label: 'S', val: bs.speed }
@@ -1445,9 +1519,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!historyList) return;
 
         historyList.innerHTML = '';
-        // 履歴を逆順（新しい順）で表示
+        // 履歴を古い順（追加順）で表示
         if (poke.history && poke.history.length > 0) {
-            [...poke.history].reverse().forEach(entry => {
+            [...poke.history].forEach(entry => {
                 const li = document.createElement('li');
                 const perc = (poke.maxHp > 0) ? (entry.damage / poke.maxHp * 100).toFixed(1) : 0;
                 const attackerLabel = entry.attackerName || (side === 'ally' ? '自分' : '相手');
@@ -1468,8 +1542,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const damageClass = entry.type === 'attack' ? 'attack-log' : 'damage-log';
                     li.classList.add(damageClass, sideClass);
                     const rollLabel = entry.rollLabel || '-';
+                    const stellarLabel = entry.stellarBoosted ? ' [ステラ補正]' : '';
                     li.innerHTML = `
-                        <span class="move">${entry.moveName}</span>
+                        <span class="move">${entry.moveName}${stellarLabel}</span>
                         <span class="dmg">ダメージ：${entry.damage}</span>
                         <span class="perc">(割合：${perc}%)</span>
                         <div class="attacker">
@@ -1583,6 +1658,26 @@ document.addEventListener('DOMContentLoaded', async () => {
                     pokemon.stats[stat].nature = newNature;
                     pokemon.computeStats();
                     updateFormFromState(side);
+                }
+            });
+        });
+
+        // 5. 実数値の直接入力
+        const statValueInputs = container.querySelectorAll('.stat-value');
+        statValueInputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                const stat = input.id.replace(`${side}-stat-val-`, '');
+                const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                if (pokemon) {
+                    const val = parseInt(e.target.value);
+                    if (!isNaN(val) && val > 0) {
+                        pokemon.realStats[stat] = val;
+                        if (stat === 'hp') {
+                            pokemon.maxHp = val;
+                            pokemon.currentHp = Math.min(pokemon.currentHp, val);
+                        }
+                        updateFormFromState(side);
+                    }
                 }
             });
         });
@@ -1759,7 +1854,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Stats Update (Inputs & Real Values)
-        const stats = ['hp', 'attack', 'defense', 'spAtk', 'spDef', 'speed'];
+        const stats = ['hp', 'attack', 'defence', 'spAtk', 'spDef', 'speed'];
         stats.forEach(stat => {
             const data = pokemon.stats[stat];
             
@@ -1811,7 +1906,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Real Value Update
             const realValEl = document.getElementById(`${teamType}-stat-val-${stat}`);
             if (realValEl) {
-                realValEl.textContent = pokemon.speciesData ? pokemon.realStats[stat] : "-";
+                realValEl.value = pokemon.speciesData ? pokemon.realStats[stat] : "";
             }
         });
 
@@ -2010,6 +2105,104 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupStatInputs('ally');
     setupStatInputs('enemy');
 });
+
+// ===== カスタムテラスタルドロップダウン =====
+const TERA_TYPE_TO_SVG = {
+    'ノーマル': 'Normal',
+    'ほのお': 'Fire',
+    'みず': 'Water',
+    'でんき': 'Electric',
+    'くさ': 'Grass',
+    'こおり': 'Ice',
+    'かくとう': 'Fighting',
+    'どく': 'Poison',
+    'じめん': 'Ground',
+    'ひこう': 'Flying',
+    'エスパー': 'Psychic',
+    'むし': 'Bug',
+    'いわ': 'Rock',
+    'ゴースト': 'Ghost',
+    'ドラゴン': 'Dragon',
+    'あく': 'Dark',
+    'はがね': 'Steel',
+    'フェアリー': 'Fairy'
+};
+
+function getTeraIconHtml(value, size = 24) {
+    if (value === 'なし') {
+        return `<span class="tera-option-none" style="width:${size}px;height:${size}px;display:inline-flex;align-items:center;justify-content:center;">−</span>`;
+    }
+    if (value === 'ステラ') {
+        return `<img class="tera-option-icon tera-stellar-icon" src="../backend/data/image/Stellar.png" alt="ステラ" style="width:${size}px;height:${size}px;">`;
+    }
+    const svgName = TERA_TYPE_TO_SVG[value];
+    if (svgName) {
+        return `<img class="tera-option-icon" src="../backend/data/image/${svgName}.svg" alt="${value}" style="width:${size}px;height:${size}px;">`;
+    }
+    return '';
+}
+
+function initTeraCustomSelects() {
+    document.querySelectorAll('.tera-custom-select').forEach(container => {
+        const side = container.dataset.side;
+        const display = container.querySelector('.tera-selected');
+        const optionsPanel = container.querySelector('.tera-options');
+        const hiddenSelect = container.querySelector('select');
+        if (!display || !optionsPanel || !hiddenSelect) return;
+
+        // オプション生成
+        Array.from(hiddenSelect.options).forEach(opt => {
+            const div = document.createElement('div');
+            div.className = 'tera-option' + (opt.value === hiddenSelect.value ? ' selected' : '');
+            div.dataset.value = opt.value;
+            div.innerHTML = `${getTeraIconHtml(opt.value)}<span>${opt.textContent}</span>`;
+            div.addEventListener('click', () => {
+                // 選択を更新
+                hiddenSelect.value = opt.value;
+                hiddenSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                // 表示を更新
+                updateTeraDisplay(display, opt.value);
+                // 選択ハイライト更新
+                optionsPanel.querySelectorAll('.tera-option').forEach(o => o.classList.remove('selected'));
+                div.classList.add('selected');
+                // 閉じる
+                display.classList.remove('open');
+                optionsPanel.classList.remove('open');
+            });
+            optionsPanel.appendChild(div);
+        });
+
+        // 開閉トグル
+        display.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // 他のドロップダウンを閉じる
+            document.querySelectorAll('.tera-custom-select').forEach(other => {
+                if (other !== container) {
+                    other.querySelector('.tera-selected')?.classList.remove('open');
+                    other.querySelector('.tera-options')?.classList.remove('open');
+                }
+            });
+            display.classList.toggle('open');
+            optionsPanel.classList.toggle('open');
+        });
+    });
+
+    // 外部クリックで閉じる
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.tera-custom-select').forEach(container => {
+            container.querySelector('.tera-selected')?.classList.remove('open');
+            container.querySelector('.tera-options')?.classList.remove('open');
+        });
+    });
+}
+
+function updateTeraDisplay(displayEl, value) {
+    const textSpan = displayEl.querySelector('.tera-selected-text');
+    if (textSpan) {
+        const displayText = value === 'なし' ? '選択なし' : value;
+        textSpan.innerHTML = `${getTeraIconHtml(value, 20)}<span>${displayText}</span>`;
+    }
+}
 
 function setupClearInputButtons() {
     const buttons = document.querySelectorAll('.clear-input-btn[data-target]');

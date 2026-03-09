@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/PlaySphere.png">
-    <link rel="stylesheet" href="style.css?v=29">
+    <link rel="stylesheet" href="style.css?v=30">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -118,13 +118,36 @@
             </div>
             
             <div class="grid-params">
-                <label>テラスタル: 
-                    <select id="ally-tera-select">
-                        <option>なし</option>
-                        <option>一致テラス</option>
-                        <option>不一致テラス</option>
+                <label>テラスタル:</label>
+                <div class="tera-custom-select" data-side="ally">
+                    <div class="tera-selected" id="ally-tera-display">
+                        <span class="tera-selected-text">選択なし</span>
+                        <span class="tera-arrow">▼</span>
+                    </div>
+                    <div class="tera-options" id="ally-tera-options"></div>
+                    <select id="ally-tera-select" style="display:none;">
+                        <option value="なし">選択なし</option>
+                        <option value="ノーマル">ノーマル</option>
+                        <option value="ほのお">ほのお</option>
+                        <option value="みず">みず</option>
+                        <option value="でんき">でんき</option>
+                        <option value="くさ">くさ</option>
+                        <option value="こおり">こおり</option>
+                        <option value="かくとう">かくとう</option>
+                        <option value="どく">どく</option>
+                        <option value="じめん">じめん</option>
+                        <option value="ひこう">ひこう</option>
+                        <option value="エスパー">エスパー</option>
+                        <option value="むし">むし</option>
+                        <option value="いわ">いわ</option>
+                        <option value="ゴースト">ゴースト</option>
+                        <option value="ドラゴン">ドラゴン</option>
+                        <option value="あく">あく</option>
+                        <option value="はがね">はがね</option>
+                        <option value="フェアリー">フェアリー</option>
+                        <option value="ステラ">ステラ</option>
                     </select>
-                </label>
+                </div>
             </div>
 
             <div class="stats-container">
@@ -132,7 +155,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">HP</div>
-                        <div class="stat-value" id="ally-stat-val-hp">-</div>
+                        <input type="number" class="stat-value" id="ally-stat-val-hp">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group empty">
@@ -158,7 +181,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">こうげき</div>
-                        <div class="stat-value" id="ally-stat-val-attack">-</div>
+                        <input type="number" class="stat-value" id="ally-stat-val-attack">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
@@ -190,7 +213,7 @@
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
                                 <button type="button" class="nature-btn down" data-stat="attack" data-val="down">▼</button>
                                 <span class="nature-display" data-stat="attack"></span>
@@ -204,12 +227,12 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">ぼうぎょ</div>
-                        <div class="stat-value" id="ally-stat-val-defense">-</div>
+                        <input type="number" class="stat-value" id="ally-stat-val-defence">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
                             <label>ランク</label>
-                            <select class="rank-select" data-stat="defense">
+                            <select class="rank-select" data-stat="defence">
                                 <option value="6">+6</option>
                                 <option value="5">+5</option>
                                 <option value="4">+4</option>
@@ -228,19 +251,19 @@
                         <div class="ev-group">
                             <label>能力P</label>
                             <div class="ev-control-row">
-                                <input type="number" class="stat-input ev-input" data-stat="defense" data-type="ev" value="0" max="32" min="0">
-                                <button type="button" class="tune-btn" data-stat="defense" data-action="down" title="-1 実数値">▼</button>
-                                <button type="button" class="tune-btn" data-stat="defense" data-action="up" title="+1 実数値">▲</button>
+                                <input type="number" class="stat-input ev-input" data-stat="defence" data-type="ev" value="0" max="32" min="0">
+                                <button type="button" class="tune-btn" data-stat="defence" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="defence" data-action="up" title="+1 実数値">▲</button>
                                 <button type="button" class="preset-btn" data-val="0">0</button>
                                 <button type="button" class="preset-btn" data-val="32">32</button>
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
-                                <button type="button" class="nature-btn down" data-stat="defense" data-val="down">▼</button>
-                                <span class="nature-display" data-stat="defense"></span>
-                                <button type="button" class="nature-btn up" data-stat="defense" data-val="up">▲</button>
+                                <button type="button" class="nature-btn down" data-stat="defence" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="defence"></span>
+                                <button type="button" class="nature-btn up" data-stat="defence" data-val="up">▲</button>
                             </div>
                         </div>
                     </div>
@@ -250,7 +273,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">とくこう</div>
-                        <div class="stat-value" id="ally-stat-val-spAtk">-</div>
+                        <input type="number" class="stat-value" id="ally-stat-val-spAtk">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
@@ -282,7 +305,7 @@
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
                                 <button type="button" class="nature-btn down" data-stat="spAtk" data-val="down">▼</button>
                                 <span class="nature-display" data-stat="spAtk"></span>
@@ -296,7 +319,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">とくぼう</div>
-                        <div class="stat-value" id="ally-stat-val-spDef">-</div>
+                        <input type="number" class="stat-value" id="ally-stat-val-spDef">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
@@ -328,7 +351,7 @@
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
                                 <button type="button" class="nature-btn down" data-stat="spDef" data-val="down">▼</button>
                                 <span class="nature-display" data-stat="spDef"></span>
@@ -342,7 +365,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">すばやさ</div>
-                        <div class="stat-value" id="ally-stat-val-speed">-</div>
+                        <input type="number" class="stat-value" id="ally-stat-val-speed">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
@@ -374,7 +397,7 @@
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
                                 <button type="button" class="nature-btn down" data-stat="speed" data-val="down">▼</button>
                                 <span class="nature-display" data-stat="speed"></span>
@@ -511,6 +534,10 @@
                     <span class="value item-modifier"></span>
                 </div>
                 <div class="result-row">
+                    <span class="label">特性補正:</span>
+                    <span class="value ability-modifier"></span>
+                </div>
+                <div class="result-row">
                     <span class="label">採用乱数:</span>
                     <select class="random-select" id="battle-random-roll">
                         <option value="-1">-- 乱数選択 --</option>
@@ -532,6 +559,7 @@
                         <option value="4">1/4 (オボン/みがわり/まきびし3回/のろい/誘爆)</option>
                         <option value="3">1/3 (再生力/回復実)</option>
                         <option value="2">1/2 (自己再生)</option>
+                        <option value="confusion">混乱自傷 (威力40物理)</option>
                     </select>
                 </div>
                 <div class="fixed-damage-buttons">
@@ -619,13 +647,36 @@
             </div>
             
             <div class="grid-params">
-                <label>テラスタル: 
-                    <select id="enemy-tera-select">
-                        <option>なし</option>
-                        <option>一致テラス</option>
-                        <option>不一致テラス</option>
+                <label>テラスタル:</label>
+                <div class="tera-custom-select" data-side="enemy">
+                    <div class="tera-selected" id="enemy-tera-display">
+                        <span class="tera-selected-text">選択なし</span>
+                        <span class="tera-arrow">▼</span>
+                    </div>
+                    <div class="tera-options" id="enemy-tera-options"></div>
+                    <select id="enemy-tera-select" style="display:none;">
+                        <option value="なし">なし</option>
+                        <option value="ノーマル">ノーマル</option>
+                        <option value="ほのお">ほのお</option>
+                        <option value="みず">みず</option>
+                        <option value="でんき">でんき</option>
+                        <option value="くさ">くさ</option>
+                        <option value="こおり">こおり</option>
+                        <option value="かくとう">かくとう</option>
+                        <option value="どく">どく</option>
+                        <option value="じめん">じめん</option>
+                        <option value="ひこう">ひこう</option>
+                        <option value="エスパー">エスパー</option>
+                        <option value="むし">むし</option>
+                        <option value="いわ">いわ</option>
+                        <option value="ゴースト">ゴースト</option>
+                        <option value="ドラゴン">ドラゴン</option>
+                        <option value="あく">あく</option>
+                        <option value="はがね">はがね</option>
+                        <option value="フェアリー">フェアリー</option>
+                        <option value="ステラ">ステラ</option>
                     </select>
-                </label>
+                </div>
             </div>
 
                 <div class="stats-container">
@@ -633,7 +684,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">HP</div>
-                        <div class="stat-value" id="enemy-stat-val-hp">-</div>
+                        <input type="number" class="stat-value" id="enemy-stat-val-hp">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group empty">
@@ -659,7 +710,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">こうげき</div>
-                        <div class="stat-value" id="enemy-stat-val-attack">-</div>
+                        <input type="number" class="stat-value" id="enemy-stat-val-attack">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
@@ -691,7 +742,7 @@
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
                                 <button type="button" class="nature-btn down" data-stat="attack" data-val="down">▼</button>
                                 <span class="nature-display" data-stat="attack"></span>
@@ -705,12 +756,12 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">ぼうぎょ</div>
-                        <div class="stat-value" id="enemy-stat-val-defense">-</div>
+                        <input type="number" class="stat-value" id="enemy-stat-val-defence">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
                             <label>ランク</label>
-                            <select class="rank-select" data-stat="defense">
+                            <select class="rank-select" data-stat="defence">
                                 <option value="6">+6</option>
                                 <option value="5">+5</option>
                                 <option value="4">+4</option>
@@ -729,19 +780,19 @@
                         <div class="ev-group">
                             <label>能力P</label>
                             <div class="ev-control-row">
-                                <input type="number" class="stat-input ev-input" data-stat="defense" data-type="ev" value="0" max="32" min="0">
-                                <button type="button" class="tune-btn" data-stat="defense" data-action="down" title="-1 実数値">▼</button>
-                                <button type="button" class="tune-btn" data-stat="defense" data-action="up" title="+1 実数値">▲</button>
+                                <input type="number" class="stat-input ev-input" data-stat="defence" data-type="ev" value="0" max="32" min="0">
+                                <button type="button" class="tune-btn" data-stat="defence" data-action="down" title="-1 実数値">▼</button>
+                                <button type="button" class="tune-btn" data-stat="defence" data-action="up" title="+1 実数値">▲</button>
                                 <button type="button" class="preset-btn" data-val="0">0</button>
                                 <button type="button" class="preset-btn" data-val="32">32</button>
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
-                                <button type="button" class="nature-btn down" data-stat="defense" data-val="down">▼</button>
-                                <span class="nature-display" data-stat="defense"></span>
-                                <button type="button" class="nature-btn up" data-stat="defense" data-val="up">▲</button>
+                                <button type="button" class="nature-btn down" data-stat="defence" data-val="down">▼</button>
+                                <span class="nature-display" data-stat="defence"></span>
+                                <button type="button" class="nature-btn up" data-stat="defence" data-val="up">▲</button>
                             </div>
                         </div>
                     </div>
@@ -751,7 +802,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">とくこう</div>
-                        <div class="stat-value" id="enemy-stat-val-spAtk">-</div>
+                        <input type="number" class="stat-value" id="enemy-stat-val-spAtk">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
@@ -783,7 +834,7 @@
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
                                 <button type="button" class="nature-btn down" data-stat="spAtk" data-val="down">▼</button>
                                 <span class="nature-display" data-stat="spAtk"></span>
@@ -797,7 +848,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">とくぼう</div>
-                        <div class="stat-value" id="enemy-stat-val-spDef">-</div>
+                        <input type="number" class="stat-value" id="enemy-stat-val-spDef">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
@@ -829,7 +880,7 @@
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
                                 <button type="button" class="nature-btn down" data-stat="spDef" data-val="down">▼</button>
                                 <span class="nature-display" data-stat="spDef"></span>
@@ -843,7 +894,7 @@
                 <div class="stat-row">
                     <div class="stat-result-box">
                         <div class="stat-label">すばやさ</div>
-                        <div class="stat-value" id="enemy-stat-val-speed">-</div>
+                        <input type="number" class="stat-value" id="enemy-stat-val-speed">
                     </div>
                     <div class="stat-controls flex-row">
                         <div class="rank-group">
@@ -875,7 +926,7 @@
                             </div>
                         </div>
                         <div class="nature-group">
-                            <label>性格 補正</label>
+                            <label>性格補正</label>
                             <div class="nature-toggle">
                                 <button type="button" class="nature-btn down" data-stat="speed" data-val="down">▼</button>
                                 <span class="nature-display" data-stat="speed"></span>
@@ -978,11 +1029,11 @@
         </div>
     </div>
 
-    <script type="module" src="js/data/loader.js?v=121"></script>
+    <script type="module" src="js/data/loader.js?v=4"></script>
     <script type="module" src="js/calc/stats.js?v=118"></script>
-    <script type="module" src="js/calc/damage.js?v=202"></script>
-    <script type="module" src="js/models/PokemonModel.js?v=119"></script>
-    <script type="module" src="js/AppState.js?v=117"></script>
-    <script type="module" src="js/main.js?v=135"></script>
+    <script type="module" src="js/calc/damage.js?v=206"></script>
+    <script type="module" src="js/models/PokemonModel.js?v=122"></script>
+    <script type="module" src="js/AppState.js?v=120"></script>
+    <script type="module" src="js/main.js?v=143"></script>
 </body>
 </html>

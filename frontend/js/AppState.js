@@ -1,4 +1,4 @@
-import { Pokemon } from './models/PokemonModel.js?v=118';
+import { Pokemon } from './models/PokemonModel.js?v=122';
 
 export class AppState {
     constructor() {
