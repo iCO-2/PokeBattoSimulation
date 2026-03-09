@@ -538,14 +538,14 @@
                     <span class="value ability-modifier"></span>
                 </div>
                 <div class="result-row">
-                    <span class="label">手動補正:</span>
+                    <span class="label">手動補正:<button type="button" class="info-icon-btn" id="manual-modifier-info-btn" aria-label="手動補正の説明"><img src="../backend/data/image/info.svg" alt="!" class="info-icon"></button></span>
                     <select id="battle-manual-modifier" class="random-select">
                         <option value="0.25">×0.25</option>
                         <option value="0.5">×0.5</option>
                         <option value="0.75">×0.75</option>
                         <option value="1.0" selected>×1.0（補正なし）</option>
-                        <option value="1.5">×1.5（例：急所など）</option>
-                        <option value="2.0">×2.0（例：アナライズなど）</option>
+                        <option value="1.5">×1.5</option>
+                        <option value="2.0">×2.0</option>
                         <option value="4.0">×4.0</option>
                     </select>
                 </div>
@@ -1026,6 +1026,22 @@
         </section>
     </main>
 
+    <!-- 手動補正 説明モーダル -->
+    <div id="manual-modifier-modal" class="info-modal-overlay" style="display:none;">
+        <div class="info-modal">
+            <button type="button" class="info-modal-close" id="manual-modifier-modal-close" aria-label="閉じる">×</button>
+            <h3 class="info-modal-title">手動補正について</h3>
+            <p>計算結果に対して追加の倍率補正を手動でかけることができます。</p>
+            <p>以下のような場面での活用を想定しています。</p>
+            <ul>
+                <li><strong>×0.5</strong>: やけど（物理技の火傷補正）など</li>
+                <li><strong>×0.75</strong>: リフレクター / 光の壁 など</li>
+                <li><strong>×1.5</strong>: 急所 など</li>
+                <li><strong>×2.0</strong>: アナライズ / ゆきなだれ / もらいび（ほのお技）など</li>
+            </ul>
+            <p class="info-modal-note">攻撃ボタンを押した後でも変更でき、HP・ダメージ幅・瀕死率がリアルタイムで更新されます。</p>
+        </div>
+    </div>
 
     <div class="mobile-sticky-footer">
     <div class="mobile-sticky-footer">

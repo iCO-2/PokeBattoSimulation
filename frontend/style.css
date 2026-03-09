@@ -714,6 +714,11 @@ h2 {
 .result-row .label {
     color: #7f8c8d;
     font-weight: bold;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .result-row .value {
@@ -727,7 +732,98 @@ h2 {
     border-radius: 4px;
     font-size: 0.9em;
     width: auto;
+    flex-shrink: 0;
     background-color: #fff;
+}
+
+/* 手動補正 インフォアイコン */
+.info-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0 0 0 4px;
+    cursor: pointer;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.info-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.info-icon-btn:hover .info-icon {
+    opacity: 1.0;
+}
+
+/* 手動補正 説明モーダル */
+.info-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-modal {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px 28px;
+    max-width: 420px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    font-size: 0.95em;
+    line-height: 1.7;
+}
+
+.info-modal-title {
+    margin: 0 0 12px 0;
+    font-size: 1.1em;
+    color: #2c3e50;
+}
+
+.info-modal p {
+    margin: 0 0 8px 0;
+    color: #444;
+}
+
+.info-modal ul {
+    margin: 4px 0 10px 0;
+    padding-left: 20px;
+    color: #444;
+}
+
+.info-modal li {
+    margin-bottom: 4px;
+}
+
+.info-modal-note {
+    font-size: 0.88em;
+    color: #7f8c8d;
+}
+
+.info-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 1.4em;
+    cursor: pointer;
+    color: #7f8c8d;
+    line-height: 1;
+    padding: 0;
+}
+
+.info-modal-close:hover {
+    color: #2c3e50;
 }
 
 /* Battle Log (Central) */
