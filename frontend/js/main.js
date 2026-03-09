@@ -983,7 +983,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (abilityModifierText) {
                     let abilityStrs = [];
                     if (damageResult.abilityOffensiveInfo) {
-                        abilityStrs.push(`${damageResult.abilityOffensiveInfo.name} (与ダメージ×${damageResult.abilityOffensiveInfo.multiplier})`);
+                        abilityStrs.push(`${damageResult.abilityOffensiveInfo.name} (ダメージ×${damageResult.abilityOffensiveInfo.multiplier})`);
                     }
                     if (damageResult.abilityDefensiveInfo) {
                         if (damageResult.abilityDefensiveInfo.multiplier === 0) {
