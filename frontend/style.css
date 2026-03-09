@@ -726,7 +726,7 @@ h2 {
     border: 1px solid #bdc3c7;
     border-radius: 4px;
     font-size: 0.9em;
-    width: 60%;
+    width: auto;
     background-color: #fff;
 }
 

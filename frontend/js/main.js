@@ -904,12 +904,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             // ターン開始時点のHPを記録（乱数選択でここから引く）
             const turnStartHp = defender.currentHp;
 
+            // 手動補正を適用したロール配列を生成
+            const manualMod = parseFloat(document.getElementById('battle-manual-modifier').value) || 1.0;
+            let modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * manualMod)));
+
             // デフォルト: ランダムに1つ採用して適用
             let appliedDamage = 0;
             let initialRollIndex = 0;
-            if (damageResult.rolls.length > 0) {
-                initialRollIndex = Math.floor(Math.random() * damageResult.rolls.length);
-                appliedDamage = damageResult.rolls[initialRollIndex];
+            if (modifiedRolls.length > 0) {
+                initialRollIndex = Math.floor(Math.random() * modifiedRolls.length);
+                appliedDamage = modifiedRolls[initialRollIndex];
                 // HP適用
                 if (turnStartHp > 0) {
                     defender.currentHp = Math.max(0, turnStartHp - appliedDamage);
@@ -921,8 +925,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (resultContainer) {
                 const rangeText = resultContainer.querySelector('.damage-range');
                 if (rangeText) {
-                    const min = damageResult.min || 0;
-                    const max = damageResult.max || 0;
+                    const min = modifiedRolls.length > 0 ? modifiedRolls[0] : 0;
+                    const max = modifiedRolls.length > 0 ? modifiedRolls[modifiedRolls.length - 1] : 0;
                     const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
                     const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
                     
@@ -932,11 +936,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const killChanceText = resultContainer.querySelector('.kill-chance');
                 if (killChanceText && defender.maxHp > 0) {
-                     if (damageResult.max === 0) {
+                    const modMin = modifiedRolls.length > 0 ? modifiedRolls[0] : 0;
+                    const modMax = modifiedRolls.length > 0 ? modifiedRolls[modifiedRolls.length - 1] : 0;
+                    if (modMax === 0) {
                         killChanceText.textContent = 'ダメージなし';
                     } else {
-                        const minDmg = damageResult.rolls[0];
-                        const maxDmg = damageResult.rolls[damageResult.rolls.length - 1];
+                        const minDmg = modMin;
+                        const maxDmg = modMax;
                         const maxHits = Math.ceil(defender.maxHp / minDmg);
                         const minHits = Math.ceil(defender.maxHp / maxDmg);
 
@@ -944,7 +950,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             killChanceText.textContent = `確定${minHits}発`;
                         } else {
                             if (minHits === 1) {
-                                const koCount = damageResult.rolls.filter(r => r >= defender.maxHp).length;
+                                const koCount = modifiedRolls.filter(r => r >= defender.maxHp).length;
                                 const percentage = (koCount / 16 * 100).toFixed(1);
                                 killChanceText.textContent = `乱数1発 (${percentage}%)`;
                             } else {
@@ -977,7 +983,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (abilityModifierText) {
                     let abilityStrs = [];
                     if (damageResult.abilityOffensiveInfo) {
-                        abilityStrs.push(`${damageResult.abilityOffensiveInfo.name} (与ダメージ×${damageResult.abilityOffensiveInfo.multiplier})`);
+                        abilityStrs.push(`${damageResult.abilityOffensiveInfo.name} (ダメージ×${damageResult.abilityOffensiveInfo.multiplier})`);
                     }
                     if (damageResult.abilityDefensiveInfo) {
                         if (damageResult.abilityDefensiveInfo.multiplier === 0) {
@@ -1115,8 +1121,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     newSelect.className = 'random-select';
                     newSelect.id = 'battle-random-roll';
 
-                    if (damageResult.rolls.length > 0) {
-                        damageResult.rolls.forEach((val, i) => {
+                    if (modifiedRolls.length > 0) {
+                        modifiedRolls.forEach((val, i) => {
                             const option = document.createElement('option');
                             option.value = i;
                             option.textContent = `${85 + i}%: ${val}ダメージ`;
@@ -1128,7 +1134,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                         newSelect.addEventListener('change', (e) => {
                             const selectedIndex = parseInt(e.target.value);
-                            const val = damageResult.rolls[selectedIndex];
+                            const val = modifiedRolls[selectedIndex];
                             
                             // HP再適用 logic
                             if (turnStartHp > 0) {
@@ -1177,6 +1183,100 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                     
                     oldSelect.parentNode.replaceChild(newSelect, oldSelect);
+                }
+
+                // 手動補正セレクト: 攻撃ごとにリスナーを付け替えて前回分をクリア
+                const oldManualModSelect = document.getElementById('battle-manual-modifier');
+                if (oldManualModSelect && oldManualModSelect.parentNode) {
+                    const newManualModSelect = oldManualModSelect.cloneNode(true);
+                    oldManualModSelect.parentNode.replaceChild(newManualModSelect, oldManualModSelect);
+
+                    newManualModSelect.addEventListener('change', () => {
+                        const newMod = parseFloat(newManualModSelect.value) || 1.0;
+                        modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * newMod)));
+
+                        // 乱数セレクトのオプションテキストを更新
+                        const rollSelect = document.getElementById('battle-random-roll');
+                        let currentIdx = 0;
+                        if (rollSelect && rollSelect.options.length > 0) {
+                            currentIdx = parseInt(rollSelect.value) || 0;
+                            modifiedRolls.forEach((val, i) => {
+                                if (rollSelect.options[i]) {
+                                    rollSelect.options[i].textContent = `${85 + i}%: ${val}ダメージ`;
+                                }
+                            });
+                        }
+
+                        // HPを再適用
+                        const newVal = modifiedRolls[currentIdx] ?? 0;
+                        if (turnStartHp > 0) {
+                            defender.currentHp = Math.max(0, turnStartHp - newVal);
+                        }
+
+                        // ダメージ幅・瀕死率表示を更新
+                        const rContainer = document.querySelector('.damage-result-container');
+                        if (rContainer) {
+                            const rangeText = rContainer.querySelector('.damage-range');
+                            if (rangeText) {
+                                const min = modifiedRolls.length > 0 ? modifiedRolls[0] : 0;
+                                const max = modifiedRolls.length > 0 ? modifiedRolls[modifiedRolls.length - 1] : 0;
+                                const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
+                                const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
+                                rangeText.innerHTML = `${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)`;
+                            }
+                            const killChanceText = rContainer.querySelector('.kill-chance');
+                            if (killChanceText && defender.maxHp > 0) {
+                                const modMin = modifiedRolls.length > 0 ? modifiedRolls[0] : 0;
+                                const modMax = modifiedRolls.length > 0 ? modifiedRolls[modifiedRolls.length - 1] : 0;
+                                if (modMax === 0) {
+                                    killChanceText.textContent = 'ダメージなし';
+                                } else {
+                                    const maxHits = Math.ceil(defender.maxHp / modMin);
+                                    const minHits = Math.ceil(defender.maxHp / modMax);
+                                    if (minHits === maxHits) {
+                                        killChanceText.textContent = `確定${minHits}発`;
+                                    } else {
+                                        if (minHits === 1) {
+                                            const koCount = modifiedRolls.filter(r => r >= defender.maxHp).length;
+                                            const percentage = (koCount / 16 * 100).toFixed(1);
+                                            killChanceText.textContent = `乱数1発 (${percentage}%)`;
+                                        } else {
+                                            killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // 履歴と対戦ログを更新
+                        const rollLabel = `${85 + currentIdx}%`;
+                        const historyEntry = {
+                            type: 'attack',
+                            turnId: currentTurnId,
+                            moveName: moveName,
+                            damage: newVal,
+                            attackerName: atkName,
+                            defenderName: defender.name.trim() || (isAllyAttacking ? "相手" : "自分"),
+                            attackerSide: attackerSide,
+                            rollLabel: rollLabel,
+                            hpBefore: turnStartHp,
+                            hpAfter: defender.currentHp,
+                            stellarBoosted: damageResult.stellarBoosted || false,
+                            snapshot: {
+                                allyHps: appState.allyTeam.map(p => p.currentHp),
+                                enemyHps: appState.enemyTeam.map(p => p.currentHp)
+                            }
+                        };
+                        if (defender.lastTurnId === currentTurnId) {
+                            defender.history[defender.history.length - 1] = historyEntry;
+                        } else {
+                            defender.history.push(historyEntry);
+                            defender.lastTurnId = currentTurnId;
+                        }
+                        updateBattleLog(historyEntry);
+                        updateFormFromState(defenderSide);
+                        renderBattleLog();
+                    });
                 }
             }
 

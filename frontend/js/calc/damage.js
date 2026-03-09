@@ -161,10 +161,13 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     // わざわい系特性 (dezaster) のステータス弱体化補正
     // weakken_statsで指定されたステータスを相手側で0.75倍にする
+    // ただし、双方が同じわざわい特性を持つ場合は無効（同じ特性持ちは対象外）
     let dezasterInfo = null;
+    const bothHaveSameRuin = attacker.ability === defender.ability
+        && attackerAbilityData && attackerAbilityData.type === 'dezaster';
 
     // 攻撃側のわざわい系 → 防御側のステータス(D)を弱体化
-    if (attackerAbilityData && attackerAbilityData.type === 'dezaster' && attackerAbilityData.weaken !== 1.0) {
+    if (!bothHaveSameRuin && attackerAbilityData && attackerAbilityData.type === 'dezaster') {
         if (attackerAbilityData.weakken_stats === dStr) {
             D = Math.floor(D * attackerAbilityData.weaken);
             dezasterInfo = { name: attacker.ability, stat: dStr, multiplier: attackerAbilityData.weaken, side: 'attacker' };
@@ -172,7 +175,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     }
 
     // 防御側のわざわい系 → 攻撃側のステータス(A)を弱体化
-    if (defenderAbilityData && defenderAbilityData.type === 'dezaster' && defenderAbilityData.weaken !== 1.0) {
+    if (!bothHaveSameRuin && defenderAbilityData && defenderAbilityData.type === 'dezaster') {
         if (defenderAbilityData.weakken_stats === aStr) {
             A = Math.floor(A * defenderAbilityData.weaken);
             dezasterInfo = { name: defender.ability, stat: aStr, multiplier: defenderAbilityData.weaken, side: 'defender' };
