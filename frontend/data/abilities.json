@@ -8,6 +8,15 @@
     "is_special": false,
     "memo": ""
   },
+  "かたいツメ": {
+    "type": "contact",
+    "offensive": 1.3,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": ""
+  },
   "パンクロック": {
     "type": "sound",
     "offensive": 1.3,
