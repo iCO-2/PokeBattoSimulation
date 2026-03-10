@@ -17,13 +17,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- 手動補正 説明モーダル ---
     const manualModInfoBtn = document.getElementById('manual-modifier-info-btn');
     const manualModModal = document.getElementById('manual-modifier-modal');
-    const manualModModalClose = document.getElementById('manual-modifier-modal-close');
     if (manualModInfoBtn && manualModModal) {
+        // 外部JSONからモーダルの内容を動的に読み込み
+        fetch('./components/manual_modifier_info.json')
+            .then(res => res.json())
+            .then(data => {
+                const contentDiv = document.getElementById('manual-modifier-modal-content');
+                if (contentDiv) {
+                    let itemsHtml = data.items.map(item => `<li><strong>${item.multiplier}</strong>: ${item.example}</li>`).join('');
+                    let descHtml = data.descriptions.map(desc => `<p>${desc}</p>`).join('');
+                    
+                    contentDiv.innerHTML = `
+                        <button type="button" class="info-modal-close" id="manual-modifier-modal-close" aria-label="閉じる">×</button>
+                        <h3 class="info-modal-title">${data.title}</h3>
+                        ${descHtml}
+                        <ul>${itemsHtml}</ul>
+                        <p class="info-modal-note">${data.note}</p>
+                    `;
+                    
+                    // 動的生成された閉じるボタンにイベントを設定
+                    const closeBtn = document.getElementById('manual-modifier-modal-close');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', () => {
+                            manualModModal.style.display = 'none';
+                        });
+                    }
+                }
+            })
+            .catch(err => console.error("Failed to load manual modifier info:", err));
+
         manualModInfoBtn.addEventListener('click', () => {
             manualModModal.style.display = 'flex';
-        });
-        manualModModalClose.addEventListener('click', () => {
-            manualModModal.style.display = 'none';
         });
         manualModModal.addEventListener('click', (e) => {
             if (e.target === manualModModal) manualModModal.style.display = 'none';

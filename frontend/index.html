@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/PlaySphere.png">
-    <link rel="stylesheet" href="style.css?v=30">
+    <link rel="stylesheet" href="css/style.css?v=30">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -544,6 +544,8 @@
                         <option value="0.5">×0.5</option>
                         <option value="0.75">×0.75</option>
                         <option value="1.0" selected>×1.0（補正なし）</option>
+                        <option value="1.1">×1.1</option>
+                        <option value="1.1">×1.3</option>
                         <option value="1.5">×1.5</option>
                         <option value="2.0">×2.0</option>
                         <option value="4.0">×4.0</option>
@@ -566,10 +568,10 @@
                         <option value="32">1/32 (ステロ1/4)</option>
                         <option value="16" selected>1/16 (ステロ半減/残飯/砂/やけど/猛毒1ターン目)</option>
                         <option value="10">1/10 (珠)</option>
-                        <option value="8">1/8 (ステロ/毒/鮫肌/鉄棘/宿木/まきびし/拘束ダメ)</option>
+                        <option value="8">1/8 (ステロ/毒/鮫肌/鉄棘/宿木/ジャポ/まきびし/拘束ダメ)</option>
                         <option value="6">1/6 (ゴツメ/まきびし2回/拘束ダメ強化)</option>
                         <option value="4">1/4 (オボン/みがわり/まきびし3回/のろい/誘爆)</option>
-                        <option value="3">1/3 (再生力/回復実)</option>
+                        <option value="3">1/3 (さいせいりょく/回復実)</option>
                         <option value="2">1/2 (自己再生)</option>
                         <option value="confusion">混乱自傷 (威力40物理)</option>
                     </select>
@@ -1028,18 +1030,8 @@
 
     <!-- 手動補正 説明モーダル -->
     <div id="manual-modifier-modal" class="info-modal-overlay" style="display:none;">
-        <div class="info-modal">
-            <button type="button" class="info-modal-close" id="manual-modifier-modal-close" aria-label="閉じる">×</button>
-            <h3 class="info-modal-title">手動補正について</h3>
-            <p>計算結果に対して追加の倍率補正を手動でかけることができます。</p>
-            <p>以下のような場面での活用を想定しています。</p>
-            <ul>
-                <li><strong>×0.5</strong>: やけど（物理技の火傷補正）など</li>
-                <li><strong>×0.75</strong>: リフレクター / 光の壁 など</li>
-                <li><strong>×1.5</strong>: 急所 など</li>
-                <li><strong>×2.0</strong>: アナライズ / ゆきなだれ / もらいび（ほのお技）など</li>
-            </ul>
-            <p class="info-modal-note">攻撃ボタンを押した後でも変更でき、HP・ダメージ幅・瀕死率がリアルタイムで更新されます。</p>
+        <div class="info-modal" id="manual-modifier-modal-content">
+            <!-- Modal content will be loaded dynamically from manual_modifier_info.json -->
         </div>
     </div>
 
@@ -1062,6 +1054,6 @@
     <script type="module" src="js/calc/damage.js?v=206"></script>
     <script type="module" src="js/models/PokemonModel.js?v=122"></script>
     <script type="module" src="js/AppState.js?v=120"></script>
-    <script type="module" src="js/main.js?v=143"></script>
+    <script type="module" src="js/main.js?v=144"></script>
 </body>
 </html>
