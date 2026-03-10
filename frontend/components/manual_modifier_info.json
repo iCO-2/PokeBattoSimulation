@@ -5,10 +5,14 @@
     "以下のような場面での活用を想定しています。"
   ],
   "items": [
-    { "multiplier": "×0.5", "example": "やけど（物理技の火傷補正）など" },
-    { "multiplier": "×0.75", "example": "リフレクター / 光の壁 など" },
-    { "multiplier": "×1.5", "example": "急所 など" },
-    { "multiplier": "×2.0", "example": "アナライズ / ゆきなだれ / もらいび（ほのお技）など" }
+    { "multiplier": "×0.5", "example": "やけど/半減実" },
+    { "multiplier": "×1.2", "example": "メトロノーム（2回目）" },
+    { "multiplier": "×1.3", "example": "ジュエル" },
+    { "multiplier": "×1.4", "example": "メトロノーム（3回目）" },
+    { "multiplier": "×1.5", "example": "急所" },
+    { "multiplier": "×1.6", "example": "メトロノーム（4回目）" },
+    { "multiplier": "×1.8", "example": "メトロノーム（5回目）" },
+    { "multiplier": "×2.0", "example": "アナライズ/ゆきなだれ/メトロノーム（6回目~）" }
   ],
   "note": "攻撃ボタンを押した後でも変更でき、HP・ダメージ幅・瀕死率がリアルタイムで更新されます。"
 }
