@@ -68,7 +68,7 @@
     <div class="area-section">
         <div class="area-field">
             <select id="area-weather">
-                <option value="none" selected>天候</option>
+                <option value="none" selected>-- 天候 --</option>
                 <option value="sunny">はれ</option>
                 <option value="rain">あめ</option>
                 <option value="snow">ゆき</option>
@@ -78,13 +78,31 @@
         </div>
         <div class="area-field">
             <select id="area-terrain">
-                <option value="none" selected>フィールド</option>
+                <option value="none" selected>-- フィールド --</option>
                 <option value="electric">エレキフィールド</option>
                 <option value="psychic">サイコフィールド</option>
                 <option value="grassy">グラスフィールド</option>
                 <option value="misty">ミストフィールド</option>
             </select>
             <label for="area-terrain">フィールド</label>
+        </div>
+        <div class="area-field">
+            <select id="ally-wall">
+                <option value="none" selected>-- 自分の壁 --</option>
+                <option value="reflect">リフレクター</option>
+                <option value="light">ひかりのかべ</option>
+                <option value="both">両壁</option>
+            </select>
+            <label for="ally-wall">自分の壁</label>
+        </div>
+        <div class="area-field">
+            <select id="enemy-wall">
+                <option value="none" selected>-- 相手の壁 --</option>
+                <option value="reflect">リフレクター</option>
+                <option value="light">ひかりのかべ</option>
+                <option value="both">両壁</option>
+            </select>
+            <label for="enemy-wall">相手の壁</label>
         </div>
     </div>
 
@@ -489,13 +507,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="field-conditions ally-conditions">
-                <h3>フィールド・状態</h3>
-                <label><input type="checkbox" class="condition-check" data-cond="isReflector"> リフレクター</label>
-                <label><input type="checkbox" class="condition-check" data-cond="isMultiTarget"> 複数対象攻撃(3/4倍) [5]</label>
-                <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
             </div>
 
             <div class="damage-history-container">
@@ -1039,13 +1050,6 @@
                 </div>
             </div>
 
-            <div class="field-conditions enemy-conditions">
-                <h3>フィールド・状態</h3>
-                <label><input type="checkbox" class="condition-check" data-cond="isReflector"> リフレクター</label>
-                <label><input type="checkbox" class="condition-check" data-cond="isMultiTarget"> 複数対象攻撃(3/4倍) [5]</label>
-                <label><input type="checkbox" class="condition-check" data-cond="isCrit"> 急所 [6]</label>
-            </div>
-            
             <div class="damage-history-container">
                 <div class="history-header">
                     <h4>被ダメージ履歴</h4>

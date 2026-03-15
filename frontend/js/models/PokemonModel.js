@@ -22,13 +22,6 @@ export class Pokemon {
         this.moves = ["", "", "", ""]; 
         this.activeMoveIndex = 0; // 選択中の技インデックス
         
-        // フィールド・状態
-        this.conditions = {
-            isReflector: false,
-            isMultiTarget: false,
-            isCrit: false
-        };
-
         // HP管理
         this.maxHp = 150; // 初期値
         this.currentHp = 150;

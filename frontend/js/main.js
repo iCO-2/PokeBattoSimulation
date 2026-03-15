@@ -890,24 +890,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Field Conditions
-    document.querySelectorAll('.condition-check').forEach(check => {
-        check.addEventListener('change', (e) => {
-            const isAlly = e.target.closest('.ally');
-            const isEnemy = e.target.closest('.enemy');
-
-            let pokemon = null;
-            if (isAlly) pokemon = appState.getAllyPokemon();
-            if (isEnemy) pokemon = appState.getEnemyPokemon();
-
-            if (pokemon) {
-                const condName = e.target.dataset.cond;
-                if (condName) {
-                    pokemon.conditions[condName] = e.target.checked;
-                }
-            }
-        });
-    });
 
     function handleStatChange(e) {
         const isAlly = e.target.closest('.ally');
@@ -957,7 +939,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const weather = document.getElementById('area-weather')?.value || 'none';
             const terrain = document.getElementById('area-terrain')?.value || 'none';
-            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain });
+            const defenderSideWall = isAllyAttacking ? 'enemy' : 'ally';
+            const wallValue = document.getElementById(`${defenderSideWall}-wall`)?.value || 'none';
+            const wallReflect = wallValue === 'reflect' || wallValue === 'both';
+            const wallLight = wallValue === 'light' || wallValue === 'both';
+            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight });
 
             // ステラボーナスが適用された場合、そのタイプを使用済みに記録
             if (damageResult.stellarBoosted && attacker.stellarUsedTypes) {
@@ -1076,17 +1062,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const areaModifierText = resultContainer.querySelector('.area-modifier');
                 if (areaModifierText) {
+                    let areaParts = [];
                     if (damageResult.areaModifier) {
                         const am = damageResult.areaModifier;
                         if (am.multiplier === null) {
-                            // デルタストリーム: タイプ相性が変更されたことを表示
-                            areaModifierText.textContent = `${am.name} (ヒコウ弱点を等倍補正)`;
+                            areaParts.push(`${am.name} (ヒコウ弱点を等倍補正)`);
                         } else {
-                            areaModifierText.textContent = `${am.name} (×${am.multiplier})`;
+                            areaParts.push(`${am.name} (×${am.multiplier})`);
                         }
-                    } else {
-                        areaModifierText.textContent = '-';
                     }
+                    if (damageResult.weatherDefModifier) {
+                        const wm = damageResult.weatherDefModifier;
+                        areaParts.push(`${wm.name} (防御×${wm.multiplier})`);
+                    }
+                    if (damageResult.wallInfo) {
+                        areaParts.push(`${damageResult.wallInfo.name} (×${damageResult.wallInfo.multiplier})`);
+                    }
+                    areaModifierText.textContent = areaParts.length > 0 ? areaParts.join(' / ') : '-';
                 }
 
                 

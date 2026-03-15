@@ -983,11 +983,11 @@ h2 {
     flex-direction: row;
     align-items: stretch;
     justify-content: center;
-    gap: 16px;
+    gap: 12px 16px;
     background: var(--card-bg);
     border-bottom: 1px solid var(--border-color);
     padding: 10px 16px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -997,6 +997,16 @@ h2 {
     flex: 1;
     min-width: 0;
     max-width: 250px;
+}
+
+@media (max-width: 768px) {
+    .area-section {
+        gap: 8px 12px;
+    }
+    .area-field {
+        flex: 0 0 calc(50% - 6px);
+        max-width: none;
+    }
 }
 
 .area-field select {
@@ -1031,6 +1041,7 @@ h2 {
     pointer-events: none;
     display: none;
 }
+
 
 /* 固定ダメージ/回復セクション */
 .fixed-damage-section {

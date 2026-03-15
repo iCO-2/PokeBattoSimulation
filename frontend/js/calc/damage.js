@@ -405,13 +405,13 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     // 壁(リフレクター/光の壁): 防御側
     // 複数対象補正: 0.75
 
-    // --- 天候・フィールド補正準備 ---
-    // (terrain, areaModifierInfoは威力補正ステップで宣言済み)
-
+    // --- 天候補正準備 (防御補正) ---
+    // areaModifierInfoはフィールド補正で既にセットされている場合があるため上書きせず別途保持
+    let weatherDefModifierInfo = null;
     if (weather === 'snow' && dStr === 'defence' && defenderTypes.includes('こおり')) {
-        areaModifierInfo = { type: 'weather', name: 'ゆき', multiplier: 1.5 };
+        weatherDefModifierInfo = { type: 'weather', name: 'ゆき', multiplier: 1.5 };
     } else if (weather === 'sandstorm' && dStr === 'spDef' && defenderTypes.includes('いわ')) {
-        areaModifierInfo = { type: 'weather', name: 'すなあらし', multiplier: 1.5 };
+        weatherDefModifierInfo = { type: 'weather', name: 'すなあらし', multiplier: 1.5 };
     }
     // --- 攻撃側の持ち物: boost_phase='damage' のダメージ補正（ループ内で適用）---
     let itemDamageBoostApplies = false;
@@ -441,28 +441,23 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         // 1. 乱数 (0.85 .. 1.00) → 切り捨て
         dmg = Math.floor(dmg * i / 100);
 
-        // 2. 急所 → 4096基準補正
-        if (attacker.conditions && attacker.conditions.isCrit) {
-            dmg = applyModifier(dmg, 1.5);
-        }
-
-        // 3. タイプ一致 (STAB) → 4096基準補正
+        // 2. タイプ一致 (STAB) → 4096基準補正
         dmg = applyModifier(dmg, stabMod);
 
-        // 4. タイプ相性 → 切り捨て
+        // 3. タイプ相性 → 切り捨て
         dmg = Math.floor(dmg * typeMod);
 
-        // 5. 攻撃側持ち物: damage_boost → 4096基準補正
+        // 4. 攻撃側持ち物: damage_boost → 4096基準補正
         if (itemDamageBoostApplies) {
             dmg = applyModifier(dmg, attackerItem.multiplier);
         }
 
-        // 6. 防御側特性補正 (defensive) → 4096基準補正
+        // 5. 防御側特性補正 (defensive) → 4096基準補正
         if (abilityDefensiveMod !== 1.0) {
             dmg = applyModifier(dmg, abilityDefensiveMod);
         }
 
-        // 7. 天候補正 → 4096基準補正
+        // 6. 天候補正 → 4096基準補正
         let weatherMod = 1.0;
         if (weather === 'sunny') {
             if (moveType === 'ほのお') weatherMod = 1.5;
@@ -480,10 +475,17 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             }
         }
 
-        // 8. フィールド補正 (威力補正へ移動済み)
+        // 7. 壁補正 → 4096基準補正 (シングル: 0.5倍)
+        const wallReflect = field && field.wallReflect;
+        const wallLight = field && field.wallLight;
+        if (wallReflect && move.category === 'Physical') {
+            dmg = applyModifier(dmg, 0.5);
+        }
+        if (wallLight && move.category === 'Special') {
+            dmg = applyModifier(dmg, 0.5);
+        }
 
-
-        if (dmg < 1) dmg = 1; // 最低1ダメージ (タイプ無効0倍は別途)
+        if (dmg < 1) dmg = 1;
         if (typeMod === 0) dmg = 0;
         // 防御側特性で無効化 (defensive=0)
         if (abilityDefensiveMod === 0) dmg = 0;
@@ -491,6 +493,10 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         rolls.push(dmg);
     }
     
+    const wallApplied = (field && field.wallReflect && move.category === 'Physical') ? 'リフレクター'
+        : (field && field.wallLight && move.category === 'Special') ? 'ひかりのかべ'
+        : null;
+
     return {
         min: rolls[0],
         max: rolls[rolls.length - 1],
@@ -503,6 +509,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         abilityOffensiveInfo: abilityOffensiveInfo,
         abilityDefensiveInfo: abilityDefensiveInfo,
         dezasterInfo: dezasterInfo,
-        areaModifier: areaModifierInfo
+        areaModifier: areaModifierInfo,
+        weatherDefModifier: weatherDefModifierInfo,
+        wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null
     };
 }
