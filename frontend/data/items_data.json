@@ -1,174 +1,343 @@
 {
-  "オボンののみ": {
-    "type": "berry",
-    "healType": "ratio",
-    "threshold": 0.5,
-    "value": 0.25,
-    "message": "オボンののみで回復！"
+  "いのちのたま": {
+    "type": "damage_boost",
+    "effect_target": [
+      "all"
+    ],
+    "multiplier": 1.3,
+    "message": "いのちのたまで威力アップ",
+    "boost_phase": "damage"
   },
-  "回復実": {
-    "type": "berry",
-    "healType": "ratio",
-    "threshold": 0.25,
-    "value": 0.333,
-    "message": "回復実で回復！"
+  "たつじんのおび": {
+    "type": "damage_boost",
+    "effect_target": [
+      "super_effective"
+    ],
+    "multiplier": 1.2,
+    "message": "たつじんのおびで威力アップ",
+    "boost_phase": "damage"
   },
-  "たべのこし": {
-    "type": "passive",
-    "healType": "ratio",
-    "value": 0.0625,
-    "message": "たべのこしで回復"
+  "ちからのハチマキ": {
+    "type": "damage_boost",
+    "effect_target": [
+      "physical_moves"
+    ],
+    "multiplier": 1.1,
+    "message": "ちからのハチマキで物理威力アップ",
+    "boost_phase": "power"
   },
-  "くろいヘドロ": {
-    "type": "passive",
-    "healType": "ratio",
-    "value": 0.0625,
-    "message": "くろいヘドロで回復"
+  "ものしりメガネ": {
+    "type": "damage_boost",
+    "effect_target": [
+      "special_moves"
+    ],
+    "multiplier": 1.1,
+    "message": "ものしりメガネで特殊威力アップ",
+    "boost_phase": "power"
+  },
+  "パンチグローブ": {
+    "type": "damage_boost",
+    "effect_target": [
+      "punch_moves"
+    ],
+    "multiplier": 1.1,
+    "message": "パンチグローブでパンチ技の威力アップ",
+    "boost_phase": "power"
+  },
+  "ノーマルプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "normal_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "ほのおプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "fire_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "みずプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "water_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "でんきプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "electric_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "くさプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "grass_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "こおりプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "ice_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "かくとうプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "fighting_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "どくプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "poison_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "じめんプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "ground_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "ひこうプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "flying_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "エスパープレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "psychic_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "むしプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "bug_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "いわプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "rock_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "ゴーストプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "ghost_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "ドラゴンプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "dragon_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "あくプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "dark_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "はがねプレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "steel_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "フェアリープレート": {
+    "type": "damage_boost",
+    "effect_target": [
+      "fairy_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "タイプ強化アイテムで威力アップ",
+    "boost_phase": "power"
+  },
+  "オーガポンのおめん": {
+    "type": "damage_boost",
+    "effect_target": [
+      "all"
+    ],
+    "multiplier": 1.2,
+    "message": "おめんの効果で威力アップ",
+    "boost_phase": "power"
+  },
+  "こんごう/だいこんごう": {
+    "type": "damage_boost",
+    "effect_target": [
+      "dragon_type_moves",
+      "steel_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "特定の技の威力アップ",
+    "boost_phase": "power"
+  },
+  "しらたま/だいしらたま": {
+    "type": "damage_boost",
+    "effect_target": [
+      "dragon_type_moves",
+      "water_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "特定の技の威力アップ",
+    "boost_phase": "power"
+  },
+  "はっきん/だいはっきん": {
+    "type": "damage_boost",
+    "effect_target": [
+      "dragon_type_moves",
+      "ghost_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "特定の技の威力アップ",
+    "boost_phase": "power"
+  },
+  "こころのしずく": {
+    "type": "damage_boost",
+    "effect_target": [
+      "dragon_type_moves",
+      "psychic_type_moves"
+    ],
+    "multiplier": 1.2,
+    "message": "特定の技の威力アップ",
+    "boost_phase": "power"
   },
   "こだわりメガネ": {
     "type": "stat_modifier",
-    "stat": "spAtk",
+    "effect_target": [
+      "spAtk"
+    ],
     "multiplier": 1.5,
     "message": "こだわりメガネで特攻アップ"
   },
   "こだわりハチマキ": {
     "type": "stat_modifier",
-    "stat": "attack",
+    "effect_target": [
+      "attack"
+    ],
     "multiplier": 1.5,
     "message": "こだわりハチマキで攻撃アップ"
   },
-  "いのちのたま": {
-    "type": "damage_boost",
-    "multiplier": 1.3,
-    "message": "いのちのたまで威力アップ"
-  },
   "ブーストエナジー": {
     "type": "stat_modifier",
-    "stat": "highest",
+    "effect_target": [
+      "highest"
+    ],
     "multiplier": 1.3,
     "message": "ブーストエナジーで能力アップ"
   },
-  "タイプ強化系": {
-    "type": "damage_boost",
-    "multiplier": 1.2,
-    "message": "タイプ強化アイテムで威力アップ"
-  },
-  "たつじんのおび": {
-    "type": "damage_boost",
-    "multiplier": 1.2,
-    "condition": "super_effective",
-    "message": "たつじんのおびで威力アップ"
-  },
-  "ちからのハチマキ": {
-    "type": "damage_boost",
-    "stat": "attack",
-    "multiplier": 1.1,
-    "message": "ちからのハチマキで物理威力アップ"
-  },
-  "ものしりメガネ": {
-    "type": "damage_boost",
-    "stat": "spAtk",
-    "multiplier": 1.1,
-    "message": "ものしりメガネで特殊威力アップ"
-  },
-  "パンチグローブ": {
-    "type": "damage_boost",
-    "multiplier": 1.1,
-    "condition": "punching_moves",
-    "message": "パンチグローブでパンチ技の威力アップ"
-  },
-  "ノーマルジュエル": {
-    "type": "damage_boost",
-    "multiplier": 1.3,
-    "condition": "normal_type",
-    "message": "ノーマルジュエルで威力アップ"
-  },
-  "メトロノーム": {
-    "type": "damage_boost",
-    "multiplier": 1.0,
-    "growth": 0.2,
-    "max": 2.0,
-    "message": "メトロノームで威力アップ"
-  },
-  "ジャポ/レンブのみ": {
-    "type": "counter_berry",
-    "value": 0.125,
-    "message": "きのみの効果で相手にダメージ！"
-  },
-  "プレート": {
-    "type": "damage_boost",
-    "multiplier": 1.2,
-    "message": "プレートの効果で威力アップ"
-  },
-  "オーガポンのおめん": {
-    "type": "damage_boost",
-    "multiplier": 1.2,
-    "message": "おめんの効果で威力アップ"
-  },
   "でんきだま": {
     "type": "stat_modifier",
-    "stat": "both_atk",
+    "effect_target": [
+      "attack",
+      "spAtk"
+    ],
+    "effect_pokemon": [
+      "ピカチュウ"
+    ],
     "multiplier": 2.0,
-    "condition": "pikachu",
-    "message": "でんきだまで攻撃・特攻アップ"
+    "message": "ピカチュウの攻撃・特攻アップ"
   },
-  "こんごう/だいこんごう": {
-    "type": "damage_boost",
-    "multiplier": 1.2,
-    "condition": "specific_pokemon",
-    "message": "特定の技の威力アップ"
-  },
-  "しらたま/だいしらたま": {
-    "type": "damage_boost",
-    "multiplier": 1.2,
-    "condition": "specific_pokemon",
-    "message": "特定の技の威力アップ"
-  },
-  "はっきん/だいはっきん": {
-    "type": "damage_boost",
-    "multiplier": 1.2,
-    "condition": "specific_pokemon",
-    "message": "特定の技の威力アップ"
-  },
-  "くちたけん/くちたたて": {
+  "ふといほね": {
     "type": "stat_modifier",
-    "stat": "specific",
-    "multiplier": 1.0,
-    "message": "フォルムチェンジと能力アップ"
+    "effect_target": [
+      "attack"
+    ],
+    "effect_pokemon": [
+      "ガラガラ",
+      "カラカラ"
+    ],
+    "multiplier": 2.0,
+    "message": "カラカラ・ガラガラで攻撃アップ"
   },
-  "こころのしずく": {
-    "type": "damage_boost",
-    "multiplier": 1.2,
-    "condition": "specific_pokemon",
-    "message": "特定の技の威力アップ"
+  "しんかいのきば": {
+    "type": "stat_modifier",
+    "effect_target": [
+      "spAtk"
+    ],
+    "effect_pokemon": [
+      "パールル"
+    ],
+    "multiplier": 2.0,
+    "message": "パールルで特攻アップ"
   },
   "とつげきチョッキ": {
     "type": "stat_modifier",
-    "stat": "spDef",
+    "effect_target": [
+      "spDef"
+    ],
     "multiplier": 1.5,
     "message": "とつげきチョッキで特防アップ"
   },
   "しんかのきせき": {
     "type": "stat_modifier",
-    "stat": "defensive_stats",
+    "effect_target": [
+      "defence",
+      "spDef"
+    ],
     "multiplier": 1.5,
-    "condition": "not_fully_evolved",
     "message": "しんかのきせきで防御・特防アップ"
   },
-  "半減きのみ": {
-    "type": "berry",
-    "multiplier": 0.5,
-    "condition": "super_effective",
-    "message": "きのみでダメージを半減！"
-  },
-  "ぼうじんゴーグル": {
-    "type": "immunity",
-    "condition": "powder_and_weather",
-    "message": "ぼうじんゴーグルで粉技や砂嵐を無効！"
-  },
-  "ねらいのまと": {
+  "ばんのうがさ": {
     "type": "stat_modifier",
-    "is_special": true,
-    "message": "ねらいのまとで相性が無効化される"
+    "condition": [
+      "sunny",
+      "rain"
+    ],
+    "multiplier": 0.0,
+    "message": "晴れと雨の効果を無視"
   }
 }

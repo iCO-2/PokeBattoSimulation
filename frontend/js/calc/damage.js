@@ -37,26 +37,95 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     
 
     
+    // 天候とタイプの取得（ステータス補正で使用するため前倒し）
+    const weather = (field && field.weather) || 'none';
+    const defenderTera = defender.teraType && defender.teraType !== 'なし' ? defender.teraType : null;
+    const isDefenderStellar = defenderTera === 'ステラ';
+    const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
+
     let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
     let D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
 
-    // 持ち物補正（攻撃/特攻アップ系・ダメージアップ系）
+    // 天候「ゆき」: こおりタイプの防御を1.5倍にする (物理のみ)
+    if (weather === 'snow' && dStr === 'defence' && defenderTypes.includes('こおり')) {
+        D = Math.floor(D * 6144 / 4096);
+    }
+    // 天候「すなあらし」: いわタイプの特防を1.5倍にする (特殊のみ)
+    if (weather === 'sandstorm' && dStr === 'spDef' && defenderTypes.includes('いわ')) {
+        D = Math.floor(D * 6144 / 4096);
+    }
+
+    // 持ち物補正
     const attackerItem = ITEMS_DEX[attacker.item];
-    let itemModifier = null;
-    if (attackerItem && attackerItem.type === 'stat_modifier' && attackerItem.stat === aStr) {
-        A = Math.floor(A * attackerItem.multiplier);
-        itemModifier = {
-            type: 'stat_modifier',
-            name: attacker.item,
-            stat: aStr,
-            multiplier: attackerItem.multiplier
-        };
-    } else if (attackerItem && attackerItem.type === 'damage_boost') {
-        itemModifier = {
-            type: 'damage_boost',
-            name: attacker.item,
-            multiplier: attackerItem.multiplier
-        };
+    const defenderItem = ITEMS_DEX[defender.item];
+    let itemModifierInfo = null;
+    let defenderItemModifierInfo = null;
+
+    // --- 攻撃側の持ち物: stat_modifier → A に適用 ---
+    if (attackerItem && attackerItem.type === 'stat_modifier') {
+        const targets = attackerItem.effect_target || [];
+        const pokemonOk = !attackerItem.effect_pokemon
+            || attackerItem.effect_pokemon.includes((attacker.name || '').trim());
+
+        if (pokemonOk) {
+            let applyStat = null;
+            if (targets.includes(aStr)) {
+                applyStat = aStr;
+            } else if (targets.includes('highest')) {
+                // HP以外の実数値(ランク補正前)で最も高いステータスを特定
+                const rs = attacker.realStats;
+                const statEntries = [
+                    ['attack', rs.attack || 0], ['defence', rs.defence || 0],
+                    ['spAtk', rs.spAtk || 0], ['spDef', rs.spDef || 0],
+                    ['speed', rs.speed || 0]
+                ];
+                const highestEntry = statEntries.reduce((a, b) => b[1] > a[1] ? b : a);
+                if (highestEntry[0] === aStr) {
+                    applyStat = aStr;
+                }
+            }
+
+            if (applyStat) {
+                A = Math.floor(A * attackerItem.multiplier);
+                itemModifierInfo = {
+                    type: 'stat_modifier', name: attacker.item,
+                    stat: applyStat, multiplier: attackerItem.multiplier
+                };
+            }
+        }
+    }
+
+    // --- 防御側の持ち物: stat_modifier → D に適用 ---
+    if (defenderItem && defenderItem.type === 'stat_modifier') {
+        const targets = defenderItem.effect_target || [];
+        const pokemonOk = !defenderItem.effect_pokemon
+            || defenderItem.effect_pokemon.includes((defender.name || '').trim());
+
+        if (pokemonOk) {
+            let applyStat = null;
+            if (targets.includes(dStr)) {
+                applyStat = dStr;
+            } else if (targets.includes('highest')) {
+                const rs = defender.realStats;
+                const statEntries = [
+                    ['attack', rs.attack || 0], ['defence', rs.defence || 0],
+                    ['spAtk', rs.spAtk || 0], ['spDef', rs.spDef || 0],
+                    ['speed', rs.speed || 0]
+                ];
+                const highestEntry = statEntries.reduce((a, b) => b[1] > a[1] ? b : a);
+                if (highestEntry[0] === dStr) {
+                    applyStat = dStr;
+                }
+            }
+
+            if (applyStat) {
+                D = Math.floor(D * defenderItem.multiplier);
+                defenderItemModifierInfo = {
+                    type: 'stat_modifier', name: defender.item,
+                    stat: applyStat, multiplier: defenderItem.multiplier
+                };
+            }
+        }
     }
 
     // 特性補正
@@ -182,18 +251,116 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // --- 持ち物: boost_phase='power' の威力補正（baseDamage計算前に適用）---
+    // 英語タイプ名 → 日本語タイプ名 変換マップ (effect_targetのxxx_type_movesは英語)
+    const TYPE_EN_TO_JP = {
+        'normal': 'ノーマル', 'fire': 'ほのお', 'water': 'みず',
+        'electric': 'でんき', 'grass': 'くさ', 'ice': 'こおり',
+        'fighting': 'かくとう', 'poison': 'どく', 'ground': 'じめん',
+        'flying': 'ひこう', 'psychic': 'エスパー', 'bug': 'むし',
+        'rock': 'いわ', 'ghost': 'ゴースト', 'dragon': 'ドラゴン',
+        'dark': 'あく', 'steel': 'はがね', 'fairy': 'フェアリー'
+    };
+
+    // 五捨五超入: 小数部が0.5以下なら切り捨て、0.5より大きいなら切り上げ
+    const pokeRound = (n) => {
+        const frac = n - Math.floor(n);
+        return frac > 0.5 ? Math.ceil(n) : Math.floor(n);
+    };
+    // 4096基準の補正適用:
+    //  1. 補正値 = Math.round(4096 * multiplier) (四捨五入)
+    //  2. 結果 = pokeRound(value * 補正値 / 4096)  (五捨五超入)
+    const applyModifier = (value, multiplier) => {
+        const mod = Math.round(4096 * multiplier);
+        return pokeRound(value * mod / 4096);
+    };
+
+    // effect_target の条件判定ヘルパー
+    const checkEffectTarget = (targets) => {
+        return targets.some(t => {
+            if (t === 'all') return true;
+            if (t === 'super_effective') return false; // typeModは後で確定するのでここでは判定不可
+            if (t === 'physical_moves') return move.category === 'Physical';
+            if (t === 'special_moves') return move.category === 'Special';
+            if (t === 'punch_moves') return MOVE_TYPE_MOVES['punch'] && MOVE_TYPE_MOVES['punch'].has(moveName);
+            if (t.endsWith('_type_moves')) {
+                const typePart = t.replace('_type_moves', '').toLowerCase();
+                const jpType = TYPE_EN_TO_JP[typePart];
+                return jpType && moveType === jpType;
+            }
+            return false;
+        });
+    };
+
+    let finalPower = power;
+    let itemPowerBoostApplied = false;
+    let areaModifierInfo = null;
+    if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'power') {
+        const targets = attackerItem.effect_target || [];
+        if (checkEffectTarget(targets)) {
+            // 威力補正ステップは四捨五入
+            const itemModNumerator = Math.round(4096 * attackerItem.multiplier);
+            finalPower = Math.round(finalPower * itemModNumerator / 4096);
+            itemPowerBoostApplied = true;
+            itemModifierInfo = {
+                type: 'damage_boost', name: attacker.item,
+                multiplier: attackerItem.multiplier
+            };
+        }
+    }
+
+    // --- フィールド補正 (威力補正) ---
+    const terrain = (field && field.terrain) || 'none';
+    const GRASSY_HALVED_MOVES = ['じしん', 'じならし'];
+    
+    // a. 威力強化補正1 (ワイドフォース / サイコブレイド の固有補正)
+    let hasMoveSpecificBoost = false;
+    if (terrain === 'psychic' && moveName === 'ワイドフォース') {
+        finalPower = Math.round(finalPower * 6144 / 4096);
+        hasMoveSpecificBoost = true;
+    } else if (terrain === 'electric' && moveName === 'サイコブレイド') {
+        finalPower = Math.round(finalPower * 6144 / 4096);
+        hasMoveSpecificBoost = true;
+    }
+
+    // b. 威力強化補正2 (通常のフィールドタイプ強化 / 弱化補正)
+    let terrainModVal = 1.0;
+    if (terrain === 'electric') {
+        if (moveType === 'でんき' || moveName === 'サイコブレイド') terrainModVal = 1.3;
+    } else if (terrain === 'psychic') {
+        if (moveType === 'エスパー') terrainModVal = 1.3;
+    } else if (terrain === 'grassy') {
+        if (moveType === 'くさ') terrainModVal = 1.3;
+        else if (GRASSY_HALVED_MOVES.includes(moveName)) terrainModVal = 0.5;
+    } else if (terrain === 'misty') {
+        if (moveType === 'ドラゴン') terrainModVal = 0.5;
+    }
+
+    if (terrainModVal !== 1.0) {
+        const terrainModNumerator = Math.round(4096 * terrainModVal);
+        finalPower = Math.round(finalPower * terrainModNumerator / 4096);
+        
+        const terrainNames = { electric: 'エレキフィールド', psychic: 'サイコフィールド', grassy: 'グラスフィールド', misty: 'ミストフィールド' };
+        let displayMultiplier = terrainModVal;
+        // ワイドフォース / サイコブレイド の場合は重複をわかりやすく表示
+        if (terrain === 'psychic' && moveName === 'ワイドフォース') displayMultiplier = "1.5×1.3";
+        else if (terrain === 'electric' && moveName === 'サイコブレイド') displayMultiplier = "1.5×1.3";
+
+        areaModifierInfo = { type: 'terrain', name: terrainNames[terrain] || terrain, multiplier: displayMultiplier };
+    } else if (hasMoveSpecificBoost) {
+        // 通常補正(1.3倍)がないが固有補正(1.5倍)がある場合
+        const terrainNames = { electric: 'エレキフィールド', psychic: 'サイコフィールド' };
+        areaModifierInfo = { type: 'terrain', name: terrainNames[terrain] || terrain, multiplier: 1.5 };
+    }
 
     // 1. ダメージ計算の基礎
     // Floor(Floor(Floor(Lv * 2 / 5 + 2) * Power * A / D) / 50) + 2
-    let baseDamage = Math.floor(Math.floor(Math.floor(level * 2 / 5 + 2) * power * A / D) / 50) + 2;
+    let baseDamage = Math.floor(Math.floor(Math.floor(level * 2 / 5 + 2) * finalPower * A / D) / 50) + 2;
 
     // 2. 補正 (簡易実装)
     
     // 天候: なし
-    // 急所: 1.5倍 (リフレクター無視等は未実装)
-    if (attacker.conditions && attacker.conditions.isCrit) {
-        baseDamage = Math.floor(baseDamage * 1.5);
-    }
+    // 急所: ループ内で五捨五超入を適用
     
     // 乱数 (0.85 ~ 1.00) を適用する前の値を保持して、最後にリスト生成する
     
@@ -232,45 +399,93 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         stabMod = isSTAB ? 1.5 : 1.0;
     }
     
-    // タイプ相性: 防御側テラスタル対応
-    const defenderTera = defender.teraType && defender.teraType !== 'なし' ? defender.teraType : null;
-    const isDefenderStellar = defenderTera === 'ステラ';
-    // ステラテラスの防御側は元タイプを維持する
-    const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
     const typeMod = getTypeEffectiveness(moveType, defenderTypes);
     
-
-    
     // 状態異常(やけど): 物理なら0.5 (未実装)
-
     // 壁(リフレクター/光の壁): 防御側
     // 複数対象補正: 0.75
 
+    // --- 天候補正準備 (防御補正) ---
+    // areaModifierInfoはフィールド補正で既にセットされている場合があるため上書きせず別途保持
+    let weatherDefModifierInfo = null;
+    if (weather === 'snow' && dStr === 'defence' && defenderTypes.includes('こおり')) {
+        weatherDefModifierInfo = { type: 'weather', name: 'ゆき', multiplier: 1.5 };
+    } else if (weather === 'sandstorm' && dStr === 'spDef' && defenderTypes.includes('いわ')) {
+        weatherDefModifierInfo = { type: 'weather', name: 'すなあらし', multiplier: 1.5 };
+    }
+    // --- 攻撃側の持ち物: boost_phase='damage' のダメージ補正（ループ内で適用）---
+    let itemDamageBoostApplies = false;
+    if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'damage') {
+        const targets = attackerItem.effect_target || [];
+        // super_effectiveはtypeModが確定した後で判定
+        itemDamageBoostApplies = targets.some(t => {
+            if (t === 'all') return true;
+            if (t === 'super_effective') return typeMod > 1.0;
+            return false;
+        });
+
+        if (itemDamageBoostApplies) {
+            itemModifierInfo = {
+                type: 'damage_boost', name: attacker.item,
+                multiplier: attackerItem.multiplier
+            };
+        }
+    }
+
     // 最終ダメージ算出ループ (16段階乱数)
+
     const rolls = [];
     for (let i = 85; i <= 100; i++) {
         let dmg = baseDamage;
         
-        // 1. 乱数 (0.85 .. 1.00)
+        // 1. 乱数 (0.85 .. 1.00) → 切り捨て
         dmg = Math.floor(dmg * i / 100);
 
-        // 2. タイプ一致 (STAB)
-        dmg = Math.floor(dmg * stabMod);
+        // 2. タイプ一致 (STAB) → 4096基準補正
+        dmg = applyModifier(dmg, stabMod);
 
-        // 3. タイプ相性
+        // 3. タイプ相性 → 切り捨て
         dmg = Math.floor(dmg * typeMod);
 
-        // 4. ダメージ補正（いのちのたま等）
-        if (attackerItem && attackerItem.type === 'damage_boost') {
-            dmg = Math.floor(dmg * attackerItem.multiplier);
+        // 4. 攻撃側持ち物: damage_boost → 4096基準補正
+        if (itemDamageBoostApplies) {
+            dmg = applyModifier(dmg, attackerItem.multiplier);
         }
 
-        // 5. 防御側特性補正 (defensive)
+        // 5. 防御側特性補正 (defensive) → 4096基準補正
         if (abilityDefensiveMod !== 1.0) {
-            dmg = Math.floor(dmg * abilityDefensiveMod);
+            dmg = applyModifier(dmg, abilityDefensiveMod);
+        }
+
+        // 6. 天候補正 → 4096基準補正
+        let weatherMod = 1.0;
+        if (weather === 'sunny') {
+            if (moveType === 'ほのお') weatherMod = 1.5;
+            else if (moveType === 'みず') weatherMod = 0.5;
+        } else if (weather === 'rain') {
+            if (moveType === 'みず') weatherMod = 1.5;
+            else if (moveType === 'ほのお') weatherMod = 0.5;
         }
         
-        if (dmg < 1) dmg = 1; // 最低1ダメージ (タイプ無効0倍は別途)
+        if (weatherMod !== 1.0) {
+            dmg = applyModifier(dmg, weatherMod);
+            if (areaModifierInfo === null) {
+                const weatherNames = { sunny: '晴れ', rain: '雨', snow: 'ゆき', sandstorm: 'すなあらし' };
+                areaModifierInfo = { type: 'weather', name: weatherNames[weather] || weather, multiplier: weatherMod };
+            }
+        }
+
+        // 7. 壁補正 → 4096基準補正 (シングル: 0.5倍)
+        const wallReflect = field && field.wallReflect;
+        const wallLight = field && field.wallLight;
+        if (wallReflect && move.category === 'Physical') {
+            dmg = applyModifier(dmg, 0.5);
+        }
+        if (wallLight && move.category === 'Special') {
+            dmg = applyModifier(dmg, 0.5);
+        }
+
+        if (dmg < 1) dmg = 1;
         if (typeMod === 0) dmg = 0;
         // 防御側特性で無効化 (defensive=0)
         if (abilityDefensiveMod === 0) dmg = 0;
@@ -278,16 +493,24 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         rolls.push(dmg);
     }
     
+    const wallApplied = (field && field.wallReflect && move.category === 'Physical') ? 'リフレクター'
+        : (field && field.wallLight && move.category === 'Special') ? 'ひかりのかべ'
+        : null;
+
     return {
         min: rolls[0],
         max: rolls[rolls.length - 1],
         rolls: rolls,
         typeMod: typeMod,
-        itemModifier: itemModifier,
+        itemModifier: itemModifierInfo,
+        defenderItemModifier: defenderItemModifierInfo,
         stellarBoosted: stellarBoosted,
         moveType: moveType,
         abilityOffensiveInfo: abilityOffensiveInfo,
         abilityDefensiveInfo: abilityDefensiveInfo,
-        dezasterInfo: dezasterInfo
+        dezasterInfo: dezasterInfo,
+        areaModifier: areaModifierInfo,
+        weatherDefModifier: weatherDefModifierInfo,
+        wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null
     };
 }

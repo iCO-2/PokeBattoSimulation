@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, loadAllData } from './data/loader.js?v=4';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=206';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=222';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -17,24 +17,66 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- 手動補正 説明モーダル ---
     const manualModInfoBtn = document.getElementById('manual-modifier-info-btn');
     const manualModModal = document.getElementById('manual-modifier-modal');
-    const manualModModalClose = document.getElementById('manual-modifier-modal-close');
     if (manualModInfoBtn && manualModModal) {
+        // 外部JSONからモーダルの内容を動的に読み込み
+        fetch('./components/manual_modifier_info.json')
+            .then(res => res.json())
+            .then(data => {
+                const contentDiv = document.getElementById('manual-modifier-modal-content');
+                if (contentDiv) {
+                    let itemsHtml = data.items.map(item => `<li><strong>${item.multiplier}</strong>: ${item.example}</li>`).join('');
+                    let descHtml = data.descriptions.map(desc => `<p>${desc}</p>`).join('');
+                    
+                    contentDiv.innerHTML = `
+                        <button type="button" class="info-modal-close" id="manual-modifier-modal-close" aria-label="閉じる">×</button>
+                        <h3 class="info-modal-title">${data.title}</h3>
+                        ${descHtml}
+                        <ul>${itemsHtml}</ul>
+                        <p class="info-modal-note">${data.note}</p>
+                    `;
+                    
+                    // 動的生成された閉じるボタンにイベントを設定
+                    const closeBtn = document.getElementById('manual-modifier-modal-close');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', () => {
+                            manualModModal.style.display = 'none';
+                        });
+                    }
+                }
+            })
+            .catch(err => console.error("Failed to load manual modifier info:", err));
+
         manualModInfoBtn.addEventListener('click', () => {
             manualModModal.style.display = 'flex';
-        });
-        manualModModalClose.addEventListener('click', () => {
-            manualModModal.style.display = 'none';
         });
         manualModModal.addEventListener('click', (e) => {
             if (e.target === manualModModal) manualModModal.style.display = 'none';
         });
     }
 
+    // --- エリアセレクト: フローティングラベル制御 ---
+    document.querySelectorAll('.area-field select').forEach(sel => {
+        const updateLabel = () => {
+            const label = sel.nextElementSibling;
+            if (!label || label.tagName !== 'LABEL') return;
+            if (sel.value === 'none') {
+                label.style.display = 'none';
+                sel.style.color = '#aaa';
+            } else {
+                label.style.display = 'block';
+                sel.style.color = '#333';
+            }
+        };
+        updateLabel();
+        sel.addEventListener('change', updateLabel);
+    });
+
     // --- モバイルヘッダー固定: CSS変数の動的計算 ---
     function updateStickyHeaderOffsets() {
         if (window.innerWidth > 768) return; // モバイルのみ
         const topHeader = document.querySelector('.top-header');
         const headerEl = document.querySelector('header');
+        const areaSectionEl = document.querySelector('.area-section');
         const root = document.documentElement;
         if (topHeader) {
             const topHeaderHeight = topHeader.offsetHeight;
@@ -44,7 +86,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const headerHeight = headerEl.offsetHeight
                     + parseInt(headerStyle.marginTop || 0)
                     + parseInt(headerStyle.marginBottom || 0);
-                root.style.setProperty('--mobile-tab-top', (topHeaderHeight + headerHeight) + 'px');
+                const areaSectionTop = topHeaderHeight + headerHeight;
+                const areaHeight = areaSectionEl ? areaSectionEl.offsetHeight : 0;
+                root.style.setProperty('--area-section-top', areaSectionTop + 'px');
+                root.style.setProperty('--mobile-tab-top', (areaSectionTop + areaHeight) + 'px');
             }
         }
     }
@@ -845,24 +890,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Field Conditions
-    document.querySelectorAll('.condition-check').forEach(check => {
-        check.addEventListener('change', (e) => {
-            const isAlly = e.target.closest('.ally');
-            const isEnemy = e.target.closest('.enemy');
-
-            let pokemon = null;
-            if (isAlly) pokemon = appState.getAllyPokemon();
-            if (isEnemy) pokemon = appState.getEnemyPokemon();
-
-            if (pokemon) {
-                const condName = e.target.dataset.cond;
-                if (condName) {
-                    pokemon.conditions[condName] = e.target.checked;
-                }
-            }
-        });
-    });
 
     function handleStatChange(e) {
         const isAlly = e.target.closest('.ally');
@@ -910,7 +937,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
             move.name = moveName;
 
-            const damageResult = calculateDamage(attacker, defender, move, {});
+            const weather = document.getElementById('area-weather')?.value || 'none';
+            const terrain = document.getElementById('area-terrain')?.value || 'none';
+            const defenderSideWall = isAllyAttacking ? 'enemy' : 'ally';
+            const wallValue = document.getElementById(`${defenderSideWall}-wall`)?.value || 'none';
+            const wallReflect = wallValue === 'reflect' || wallValue === 'both';
+            const wallLight = wallValue === 'light' || wallValue === 'both';
+            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight });
 
             // ステラボーナスが適用された場合、そのタイプを使用済みに記録
             if (damageResult.stellarBoosted && attacker.stellarUsedTypes) {
@@ -980,19 +1013,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const itemModifierText = resultContainer.querySelector('.item-modifier');
                 if (itemModifierText) {
+                    const STAT_LABELS = { attack: '攻撃', spAtk: '特攻', defence: '防御', spDef: '特防', speed: '素早さ' };
+                    let parts = [];
+
+                    // 攻撃側持ち物
                     if (damageResult.itemModifier) {
                         const mod = damageResult.itemModifier;
                         if (mod.type === 'stat_modifier') {
-                            const statLabel = mod.stat === 'attack' ? '攻撃' : (mod.stat === 'spAtk' ? '特攻' : mod.stat);
-                            itemModifierText.textContent = `${mod.name} (${statLabel}×${mod.multiplier})`;
+                            parts.push(`${mod.name} (${STAT_LABELS[mod.stat] || mod.stat}×${mod.multiplier})`);
                         } else if (mod.type === 'damage_boost') {
-                            itemModifierText.textContent = `${mod.name} (ダメージ×${mod.multiplier})`;
-                        } else {
-                            itemModifierText.textContent = '-';
+                            parts.push(`${mod.name} (ダメージ×${mod.multiplier})`);
                         }
-                    } else {
-                        itemModifierText.textContent = '-';
                     }
+                    // 防御側持ち物
+                    if (damageResult.defenderItemModifier) {
+                        const dmod = damageResult.defenderItemModifier;
+                        parts.push(`${dmod.name} (${STAT_LABELS[dmod.stat] || dmod.stat}×${dmod.multiplier})`);
+                    }
+
+                    itemModifierText.textContent = parts.length > 0 ? parts.join(' / ') : '-';
                 }
 
                 const abilityModifierText = resultContainer.querySelector('.ability-modifier');
@@ -1021,7 +1060,28 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 }
 
-                // Update Result Header (Icons & Move)
+                const areaModifierText = resultContainer.querySelector('.area-modifier');
+                if (areaModifierText) {
+                    let areaParts = [];
+                    if (damageResult.areaModifier) {
+                        const am = damageResult.areaModifier;
+                        if (am.multiplier === null) {
+                            areaParts.push(`${am.name} (ヒコウ弱点を等倍補正)`);
+                        } else {
+                            areaParts.push(`${am.name} (×${am.multiplier})`);
+                        }
+                    }
+                    if (damageResult.weatherDefModifier) {
+                        const wm = damageResult.weatherDefModifier;
+                        areaParts.push(`${wm.name} (防御×${wm.multiplier})`);
+                    }
+                    if (damageResult.wallInfo) {
+                        areaParts.push(`${damageResult.wallInfo.name} (×${damageResult.wallInfo.multiplier})`);
+                    }
+                    areaModifierText.textContent = areaParts.length > 0 ? areaParts.join(' / ') : '-';
+                }
+
+                
                 const headerDisplay = document.querySelector('.result-header-display');
                 if (headerDisplay) {
                     headerDisplay.style.display = 'flex';
@@ -1789,8 +1849,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                     if (!isNaN(val) && val > 0) {
                         pokemon.realStats[stat] = val;
                         if (stat === 'hp') {
+                            const oldMax = pokemon.maxHp;
                             pokemon.maxHp = val;
-                            pokemon.currentHp = Math.min(pokemon.currentHp, val);
+                            if (val >= oldMax) {
+                                pokemon.currentHp = val;
+                            } else {
+                                pokemon.currentHp = Math.min(pokemon.currentHp, val);
+                            }
                         }
                         updateFormFromState(side);
                     }
