@@ -43,6 +43,15 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const isDefenderStellar = defenderTera === 'ステラ';
     const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
 
+    // 浮いている判定（フィールド効果の適用可否に使用）
+    // ひこうタイプ（テラスタル後含む）またはふゆう特性を持つポケモンはフィールド効果を受けない
+    const attackerOriginalTypes = attacker.speciesData ? attacker.speciesData.types : [];
+    const attackerTeraType = attacker.teraType && attacker.teraType !== 'なし' ? attacker.teraType : null;
+    const attackerEffectiveTypes = (attackerTeraType && attackerTeraType !== 'ステラ')
+        ? [attackerTeraType] : attackerOriginalTypes;
+    const isAttackerFloating = attackerEffectiveTypes.includes('ひこう') || attacker.ability === 'ふゆう';
+    const isDefenderFloating = defenderTypes.includes('ひこう') || defender.ability === 'ふゆう';
+
     let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
     let D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
 
@@ -314,8 +323,10 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const GRASSY_HALVED_MOVES = ['じしん', 'じならし'];
     
     // a. 威力強化補正1 (ワイドフォース / サイコブレイド の固有補正)
+    // ワイドフォース: 攻撃側が地面にいる場合のみ適用
+    // サイコブレイド: 技固有の特性のため浮き判定対象外
     let hasMoveSpecificBoost = false;
-    if (terrain === 'psychic' && moveName === 'ワイドフォース') {
+    if (terrain === 'psychic' && moveName === 'ワイドフォース' && !isAttackerFloating) {
         finalPower = Math.round(finalPower * 6144 / 4096);
         hasMoveSpecificBoost = true;
     } else if (terrain === 'electric' && moveName === 'サイコブレイド') {
@@ -323,17 +334,20 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         hasMoveSpecificBoost = true;
     }
 
-    // b. 威力強化補正2 (通常のフィールドタイプ強化 / 弱化補正)
+    // b. 威力強化・弱化補正
+    // 強化（×1.3）: 攻撃側が地面にいる場合のみ適用
+    // グラスフィールドの地面技弱化（×0.5）: 地面技は地形の影響を受けるため浮き判定対象外
+    // ミストフィールドのドラゴン弱化（×0.5）: 防御側が地面にいる場合のみ適用
     let terrainModVal = 1.0;
     if (terrain === 'electric') {
-        if (moveType === 'でんき' || moveName === 'サイコブレイド') terrainModVal = 1.3;
+        if (!isAttackerFloating && (moveType === 'でんき' || moveName === 'サイコブレイド')) terrainModVal = 1.3;
     } else if (terrain === 'psychic') {
-        if (moveType === 'エスパー') terrainModVal = 1.3;
+        if (!isAttackerFloating && moveType === 'エスパー') terrainModVal = 1.3;
     } else if (terrain === 'grassy') {
-        if (moveType === 'くさ') terrainModVal = 1.3;
+        if (!isAttackerFloating && moveType === 'くさ') terrainModVal = 1.3;
         else if (GRASSY_HALVED_MOVES.includes(moveName)) terrainModVal = 0.5;
     } else if (terrain === 'misty') {
-        if (moveType === 'ドラゴン') terrainModVal = 0.5;
+        if (!isDefenderFloating && moveType === 'ドラゴン') terrainModVal = 0.5;
     }
 
     if (terrainModVal !== 1.0) {
