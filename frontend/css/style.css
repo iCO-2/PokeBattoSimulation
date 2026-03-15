@@ -731,8 +731,10 @@ h2 {
     border: 1px solid #bdc3c7;
     border-radius: 4px;
     font-size: 0.9em;
-    width: auto;
-    flex-shrink: 0;
+    width: 60%;
+    min-width: 0;
+    flex-shrink: 1;
+    box-sizing: border-box;
     background-color: #fff;
 }
 
@@ -1149,6 +1151,16 @@ h2 {
 
 .heal-btn:hover {
     background-color: #27ae60;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.leech-seed-btn {
+    background-color: #66bb6a;
+}
+
+.leech-seed-btn:hover {
+    background-color: #4caf50;
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

@@ -7,7 +7,6 @@
   "items": [
     { "multiplier": "×0.5", "example": "やけど/半減実" },
     { "multiplier": "×1.2", "example": "メトロノーム（2回目）" },
-    { "multiplier": "×1.3", "example": "ジュエル" },
     { "multiplier": "×1.4", "example": "メトロノーム（3回目）" },
     { "multiplier": "×1.5", "example": "急所" },
     { "multiplier": "×1.6", "example": "メトロノーム（4回目）" },

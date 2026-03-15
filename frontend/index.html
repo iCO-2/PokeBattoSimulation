@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/PlaySphere.png">
-    <link rel="stylesheet" href="css/style.css?v=32">
+    <link rel="stylesheet" href="css/style.css?v=35">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -573,7 +573,7 @@
                     <span class="value ability-modifier"></span>
                 </div>
                 <div class="result-row">
-                    <span class="label">エリア補正:</span>
+                    <span class="label">フィールド補正:</span>
                     <span class="value area-modifier"></span>
                 </div>
                 <div class="result-row">
@@ -583,15 +583,14 @@
                 <div class="result-row">
                     <span class="label">手動補正:<button type="button" class="info-icon-btn" id="manual-modifier-info-btn" aria-label="手動補正の説明"><img src="../backend/data/image/info.svg" alt="!" class="info-icon"></button></span>
                     <select id="battle-manual-modifier" class="random-select">
-                        <option value="0.25">×0.25</option>
-                        <option value="0.5">×0.5</option>
-                        <option value="0.75">×0.75</option>
+                        <option value="0.5">×0.5（やけど/半減実）</option>
                         <option value="1.0" selected>×1.0（補正なし）</option>
-                        <option value="1.1">×1.1</option>
-                        <option value="1.3">×1.3</option>
-                        <option value="1.5">×1.5</option>
-                        <option value="2.0">×2.0</option>
-                        <option value="4.0">×4.0</option>
+                        <option value="1.2">×1.2（メトロノーム2回目）</option>
+                        <option value="1.4">×1.4（メトロノーム3回目）</option>
+                        <option value="1.5">×1.5（急所）</option>
+                        <option value="1.6">×1.6（メトロノーム4回目）</option>
+                        <option value="1.8">×1.8（メトロノーム5回目）</option>
+                        <option value="2.0">×2.0（アナライズ/ゆきなだれ/メトロノーム6回目~）</option>
                     </select>
                 </div>
                 <div class="result-row">
@@ -654,7 +653,7 @@
                         <div class="group-label">自分が使用</div>
                         <div class="button-row">
                             <button type="button" class="fixed-damage-btn leech-seed-btn" data-attacker="ally" data-defender="enemy" title="相手にダメージ＋自分回復">
-                                🌱 発動
+                                ▶ 発動
                             </button>
                         </div>
                     </div>
@@ -662,7 +661,7 @@
                         <div class="group-label">相手が使用</div>
                         <div class="button-row">
                             <button type="button" class="fixed-damage-btn leech-seed-btn" data-attacker="enemy" data-defender="ally" title="自分にダメージ＋相手回復">
-                                🌱 発動
+                                ▶ 発動
                             </button>
                         </div>
                     </div>
