@@ -1679,10 +1679,11 @@ h2 {
     width: 22px;
     height: 22px;
     border: none;
-    background: url('../backend/data/image/batsu.png') no-repeat center center;
-    background-size: contain;
-    font-size: 0;
-    text-indent: -9999px;
+    background: none;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #999;
     padding: 0;
     cursor: pointer;
     display: none;
