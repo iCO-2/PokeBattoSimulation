@@ -757,7 +757,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const pokemon = (target === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
             
             if (!pokemon || !pokemon.name) {
-                alert(`${target === 'ally' ? '自分' : '相手'}のポケモンが設定されていません`);
+                showAlert(`${target === 'ally' ? '自分' : '相手'}のポケモンが設定されていません`);
                 return;
             }
             
@@ -771,7 +771,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (ratioType === 'confusion') {
                 if (action === 'heal') {
-                    alert('混乱自傷はダメージ専用設定です');
+                    showAlert('混乱自傷はダメージ専用設定です');
                     return;
                 }
                 // 混乱自傷ダメージ計算（威力40物理、自分自身のAとBのランク補正を適用）
@@ -861,7 +861,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const defenderPokemon = (defenderSide === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
 
             if (!attackerPokemon || !attackerPokemon.name || !defenderPokemon || !defenderPokemon.name) {
-                alert('自分と相手の両方のポケモンを設定してください');
+                showAlert('自分と相手の両方のポケモンを設定してください');
                 return;
             }
 
@@ -979,7 +979,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // バリデーション: 自分または相手のポケモン名が未入力の場合は警告を出して中断
             if (!attacker.name.trim() || !defender.name.trim()) {
-                alert('自分と相手の両方のポケモン名を入力してください。');
+                showAlert('自分と相手の両方のポケモン名を入力してください。');
                 return;
             }
 
@@ -1480,7 +1480,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateFormFromState('enemy');
         } catch (e) {
             console.error(e);
-            alert('エラーが発生しました: ' + e.message);
+            showAlert('エラーが発生しました: ' + e.message);
         } finally {
             // 自動きのみチェック
             if (attackerSide === 'ally') {
@@ -1551,11 +1551,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // 履歴クリアボタン
-    document.querySelectorAll('.clear-history-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const side = e.target.dataset.side;
+    document.querySelectorAll('.clear-history-btn[data-side]').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const side = e.currentTarget.dataset.side;
             const poke = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            if (poke && confirm(`${side === 'ally' ? '自分' : '相手'}のダメージ履歴をクリアしますか？`)) {
+            if (poke && await showConfirm(`${side === 'ally' ? '自分' : '相手'}のダメージ履歴をクリアしますか？`)) {
                 poke.clearHistory();
                 updateFormFromState(side);
             }
@@ -1565,8 +1567,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 対戦ログ消去ボタン
     const clearBattleLogBtn = document.getElementById('clear-battle-log-btn');
     if (clearBattleLogBtn) {
-        clearBattleLogBtn.addEventListener('click', () => {
-            if (confirm('ログを消去し、全ポケモンのHPと履歴をリセットしますか？')) {
+        clearBattleLogBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (await showConfirm('ログを消去し、全ポケモンのHPと履歴をリセットしますか？')) {
                 appState.resetAllTeams();
                 updateFormFromState('ally');
                 updateFormFromState('enemy');
@@ -1684,9 +1688,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         // クリックイベントの紐付け (行ごとにやり直す)
         logList.querySelectorAll('li').forEach((li, idx) => {
             if (li.classList.contains('log-placeholder')) return;
-            li.addEventListener('click', () => {
+            li.addEventListener('click', async () => {
                 const entry = appState.battleHistory[idx];
-                if (entry && confirm(`ターン #${idx + 1} の時点まで状態を戻しますか？\n（これ以降の記録は消去されます）`)) {
+                if (entry && await showConfirm(`ターン #${idx + 1} の時点まで状態を戻しますか？（これ以降の記録は消去されます）`)) {
                     revertToTurn(idx);
                 }
             });
@@ -2474,6 +2478,58 @@ function updateTeraDisplay(displayEl, value) {
         const displayText = value === 'なし' ? '選択なし' : value;
         textSpan.innerHTML = `${getTeraIconHtml(value, 20)}<span>${displayText}</span>`;
     }
+}
+
+function showAlert(message) {
+    return new Promise((resolve) => {
+        const overlay = document.getElementById('confirm-dialog-overlay');
+        const msgEl = document.getElementById('confirm-dialog-message');
+        const okBtn = document.getElementById('confirm-dialog-ok');
+        const cancelBtn = document.getElementById('confirm-dialog-cancel');
+
+        msgEl.textContent = message;
+        cancelBtn.style.display = 'none';
+        okBtn.textContent = 'OK';
+        overlay.style.display = 'flex';
+
+        const cleanup = () => {
+            overlay.style.display = 'none';
+            cancelBtn.style.display = '';
+            okBtn.removeEventListener('click', onOk);
+            overlay.removeEventListener('click', onOverlay);
+        };
+        const onOk = () => { cleanup(); resolve(); };
+        const onOverlay = (e) => { if (e.target === overlay) { cleanup(); resolve(); } };
+
+        okBtn.addEventListener('click', onOk);
+        overlay.addEventListener('click', onOverlay);
+    });
+}
+
+function showConfirm(message) {
+    return new Promise((resolve) => {
+        const overlay = document.getElementById('confirm-dialog-overlay');
+        const msgEl = document.getElementById('confirm-dialog-message');
+        const okBtn = document.getElementById('confirm-dialog-ok');
+        const cancelBtn = document.getElementById('confirm-dialog-cancel');
+
+        msgEl.textContent = message;
+        overlay.style.display = 'flex';
+
+        const cleanup = () => {
+            overlay.style.display = 'none';
+            okBtn.removeEventListener('click', onOk);
+            cancelBtn.removeEventListener('click', onCancel);
+            overlay.removeEventListener('click', onOverlay);
+        };
+        const onOk = () => { cleanup(); resolve(true); };
+        const onCancel = () => { cleanup(); resolve(false); };
+        const onOverlay = (e) => { if (e.target === overlay) { cleanup(); resolve(false); } };
+
+        okBtn.addEventListener('click', onOk);
+        cancelBtn.addEventListener('click', onCancel);
+        overlay.addEventListener('click', onOverlay);
+    });
 }
 
 function setupClearInputButtons() {

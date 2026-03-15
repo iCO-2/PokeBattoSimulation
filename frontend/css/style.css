@@ -1174,6 +1174,70 @@ h2 {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* 確認ダイアログ */
+.confirm-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-dialog {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    max-width: 340px;
+    width: 85%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.confirm-dialog p {
+    margin: 0 0 20px 0;
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #333;
+}
+
+.confirm-dialog-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.confirm-dialog-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.confirm-dialog-btn.cancel-btn {
+    background: #e0e0e0;
+    color: #555;
+}
+
+.confirm-dialog-btn.cancel-btn:hover {
+    background: #d0d0d0;
+}
+
+.confirm-dialog-btn.ok-btn {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.confirm-dialog-btn.ok-btn:hover {
+    background: #c0392b;
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 1000px) {
     .calc-container {
