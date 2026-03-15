@@ -852,6 +852,57 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
 
+    // やどりぎのタネボタン
+    document.querySelectorAll('.leech-seed-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const attackerSide = e.currentTarget.dataset.attacker; // 'ally' or 'enemy'
+            const defenderSide = e.currentTarget.dataset.defender;
+            const attackerPokemon = (attackerSide === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            const defenderPokemon = (defenderSide === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+
+            if (!attackerPokemon || !attackerPokemon.name || !defenderPokemon || !defenderPokemon.name) {
+                alert('自分と相手の両方のポケモンを設定してください');
+                return;
+            }
+
+            // 相手の最大HPの1/8ダメージ
+            const damage = Math.floor(defenderPokemon.maxHp / 8);
+            const hpBefore = defenderPokemon.currentHp;
+            defenderPokemon.currentHp = Math.max(0, defenderPokemon.currentHp - damage);
+            const actualDamage = hpBefore - defenderPokemon.currentHp;
+
+            // 攻撃側が同量回復
+            const healBefore = attackerPokemon.currentHp;
+            attackerPokemon.currentHp = Math.min(attackerPokemon.maxHp, attackerPokemon.currentHp + actualDamage);
+            const actualHeal = attackerPokemon.currentHp - healBefore;
+
+            // ログに記録
+            globalTurnCounter++;
+            const historyEntry = {
+                type: 'damage',
+                turnId: globalTurnCounter,
+                moveName: `やどりぎのタネ (${defenderPokemon.name}に${actualDamage}ダメージ / ${attackerPokemon.name}が${actualHeal}回復)`,
+                damage: actualDamage,
+                attackerName: attackerPokemon.name,
+                defenderName: defenderPokemon.name,
+                attackerSide: attackerSide,
+                defenderSide: defenderSide,
+                hpBefore: hpBefore,
+                hpAfter: defenderPokemon.currentHp,
+                snapshot: {
+                    allyHps: appState.allyTeam.map(p => p.currentHp),
+                    enemyHps: appState.enemyTeam.map(p => p.currentHp)
+                }
+            };
+            appState.battleHistory.push(historyEntry);
+            defenderPokemon.history.push(historyEntry);
+
+            updateFormFromState('ally');
+            updateFormFromState('enemy');
+            renderBattleLog();
+        });
+    });
+
     // 技選択ボタン
     document.querySelectorAll('.move-grid').forEach(grid => {
         grid.addEventListener('click', (e) => {
@@ -979,6 +1030,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const avgHp = Math.floor((attacker.currentHp + turnStartHp) / 2);
                 attacker.currentHp = Math.min(avgHp, attacker.maxHp);
                 defender.currentHp = Math.min(avgHp, defender.maxHp);
+            }
+
+            // 吸収技: 与えたダメージの一定割合を回復
+            let drainRecovery = 0;
+            if (move.drain_percent && appliedDamage > 0) {
+                const actualDamage = turnStartHp - defender.currentHp;
+                drainRecovery = Math.floor(actualDamage * move.drain_percent / 100);
+                if (drainRecovery > 0) {
+                    attacker.currentHp = Math.min(attacker.maxHp, attacker.currentHp + drainRecovery);
+                }
             }
 
             // 結果表示更新 (Centralized)

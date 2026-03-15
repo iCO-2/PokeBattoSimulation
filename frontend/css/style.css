@@ -1060,6 +1060,12 @@ h2 {
     color: #444;
 }
 
+.leech-seed-desc {
+    margin: 0 0 10px 0;
+    font-size: 0.85em;
+    color: #888;
+}
+
 .fixed-damage-ratio-selector {
     margin-bottom: 10px;
     display: flex;

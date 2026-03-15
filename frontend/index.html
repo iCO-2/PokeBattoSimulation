@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/PlaySphere.png">
-    <link rel="stylesheet" href="css/style.css?v=31">
+    <link rel="stylesheet" href="css/style.css?v=32">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -607,7 +607,7 @@
                         <option value="32">1/32 (ステロ1/4)</option>
                         <option value="16" selected>1/16 (ステロ半減/砂/やけど/猛毒1ターン目/ヘドロ/残飯)</option>
                         <option value="10">1/10 (珠)</option>
-                        <option value="8">1/8 (ステロ/毒/鮫肌/鉄棘/宿木/ジャポ/まきびし/拘束ダメ)</option>
+                        <option value="8">1/8 (ステロ/毒/鮫肌/鉄棘/ジャポ/まきびし/拘束ダメ)</option>
                         <option value="6">1/6 (ゴツメ/まきびし2回/拘束ダメ強化)</option>
                         <option value="4">1/4 (オボン/みがわり/まきびし3回/のろい/誘爆)</option>
                         <option value="3">1/3 (さいせいりょく/回復実)</option>
@@ -635,6 +635,30 @@
                             </button>
                             <button type="button" class="fixed-damage-btn heal-btn" data-target="enemy" data-action="heal" title="相手のHPを回復します">
                                 ✨ 回復
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- やどりぎのタネ -->
+            <div class="fixed-damage-section leech-seed-section">
+                <h3>やどりぎのタネ</h3>
+                <p class="leech-seed-desc">相手の最大HPの1/8ダメージ＋自分が同量回復</p>
+                <div class="fixed-damage-buttons">
+                    <div class="fixed-damage-group">
+                        <div class="group-label">自分が使用</div>
+                        <div class="button-row">
+                            <button type="button" class="fixed-damage-btn leech-seed-btn" data-attacker="ally" data-defender="enemy" title="相手にダメージ＋自分回復">
+                                🌱 発動
+                            </button>
+                        </div>
+                    </div>
+                    <div class="fixed-damage-group">
+                        <div class="group-label">相手が使用</div>
+                        <div class="button-row">
+                            <button type="button" class="fixed-damage-btn leech-seed-btn" data-attacker="enemy" data-defender="ally" title="自分にダメージ＋相手回復">
+                                🌱 発動
                             </button>
                         </div>
                     </div>
@@ -1086,6 +1110,6 @@
     <script type="module" src="js/calc/damage.js?v=225"></script>
     <script type="module" src="js/models/PokemonModel.js?v=124"></script>
     <script type="module" src="js/AppState.js?v=120"></script>
-    <script type="module" src="js/main.js?v=146"></script>
+    <script type="module" src="js/main.js?v=147"></script>
 </body>
 </html>
