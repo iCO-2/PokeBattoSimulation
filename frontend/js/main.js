@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, loadAllData } from './data/loader.js?v=4';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=213';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=222';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -934,7 +934,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
             move.name = moveName;
 
-            const damageResult = calculateDamage(attacker, defender, move, {});
+            const weather = document.getElementById('area-weather')?.value || 'none';
+            const terrain = document.getElementById('area-terrain')?.value || 'none';
+            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain });
 
             // ステラボーナスが適用された場合、そのタイプを使用済みに記録
             if (damageResult.stellarBoosted && attacker.stellarUsedTypes) {
@@ -1051,7 +1053,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 }
 
-                // Update Result Header (Icons & Move)
+                const areaModifierText = resultContainer.querySelector('.area-modifier');
+                if (areaModifierText) {
+                    if (damageResult.areaModifier) {
+                        const am = damageResult.areaModifier;
+                        if (am.multiplier === null) {
+                            // デルタストリーム: タイプ相性が変更されたことを表示
+                            areaModifierText.textContent = `${am.name} (ヒコウ弱点を等倍補正)`;
+                        } else {
+                            areaModifierText.textContent = `${am.name} (×${am.multiplier})`;
+                        }
+                    } else {
+                        areaModifierText.textContent = '-';
+                    }
+                }
+
+                
                 const headerDisplay = document.querySelector('.result-header-display');
                 if (headerDisplay) {
                     headerDisplay.style.display = 'flex';

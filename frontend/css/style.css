@@ -977,6 +977,46 @@ h2 {
     margin-left: 10px;
 }
 
+/* エリア（天候・フィールド）セクション */
+.area-section {
+    background: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.area-section h3 {
+    margin: 0 0 10px 0;
+    font-size: 1em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    color: #444;
+}
+
+.area-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+}
+
+.area-row:last-child {
+    margin-bottom: 0;
+}
+
+.area-row label {
+    color: #7f8c8d;
+    font-weight: bold;
+    white-space: nowrap;
+    min-width: 5.5em;
+}
+
+.area-row select {
+    flex: 1;
+}
+
 /* 固定ダメージ/回復セクション */
 .fixed-damage-section {
     background: #fdfdfd;

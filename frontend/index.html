@@ -504,6 +504,31 @@
             </div>
             </div>
 
+            <!-- エリア設定 -->
+            <div class="area-section">
+                <h3>エリア</h3>
+                <div class="area-row">
+                    <label for="area-weather">天候:</label>
+                    <select id="area-weather" class="random-select">
+                        <option value="none">なし</option>
+                        <option value="sunny">晴れ</option>
+                        <option value="rain">雨</option>
+                        <option value="snow">ゆき</option>
+                        <option value="sandstorm">すなあらし</option>
+                    </select>
+                </div>
+                <div class="area-row">
+                    <label for="area-terrain">フィールド:</label>
+                    <select id="area-terrain" class="random-select">
+                        <option value="none">なし</option>
+                        <option value="electric">エレキフィールド</option>
+                        <option value="psychic">サイコフィールド</option>
+                        <option value="grassy">グラスフィールド</option>
+                        <option value="misty">ミストフィールド</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- Centralized Damage Result -->
             <div class="damage-result-container">
                 <h3>計算結果</h3>
@@ -536,6 +561,10 @@
                 <div class="result-row">
                     <span class="label">特性補正:</span>
                     <span class="value ability-modifier"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">エリア補正:</span>
+                    <span class="value area-modifier"></span>
                 </div>
                 <div class="result-row">
                     <span class="label">手動補正:<button type="button" class="info-icon-btn" id="manual-modifier-info-btn" aria-label="手動補正の説明"><img src="../backend/data/image/info.svg" alt="!" class="info-icon"></button></span>
@@ -1051,7 +1080,7 @@
 
     <script type="module" src="js/data/loader.js?v=4"></script>
     <script type="module" src="js/calc/stats.js?v=118"></script>
-    <script type="module" src="js/calc/damage.js?v=213"></script>
+    <script type="module" src="js/calc/damage.js?v=222"></script>
     <script type="module" src="js/models/PokemonModel.js?v=122"></script>
     <script type="module" src="js/AppState.js?v=120"></script>
     <script type="module" src="js/main.js?v=145"></script>
