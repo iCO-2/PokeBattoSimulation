@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
-import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, loadAllData } from './data/loader.js?v=4';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=222';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=226';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -757,7 +757,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const pokemon = (target === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
             
             if (!pokemon || !pokemon.name) {
-                alert(`${target === 'ally' ? '自分' : '相手'}のポケモンが設定されていません`);
+                showAlert(`${target === 'ally' ? '自分' : '相手'}のポケモンが設定されていません`);
                 return;
             }
             
@@ -771,7 +771,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (ratioType === 'confusion') {
                 if (action === 'heal') {
-                    alert('混乱自傷はダメージ専用設定です');
+                    showAlert('混乱自傷はダメージ専用設定です');
                     return;
                 }
                 // 混乱自傷ダメージ計算（威力40物理、自分自身のAとBのランク補正を適用）
@@ -852,6 +852,57 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
 
+    // やどりぎのタネボタン
+    document.querySelectorAll('.leech-seed-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const attackerSide = e.currentTarget.dataset.attacker; // 'ally' or 'enemy'
+            const defenderSide = e.currentTarget.dataset.defender;
+            const attackerPokemon = (attackerSide === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            const defenderPokemon = (defenderSide === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+
+            if (!attackerPokemon || !attackerPokemon.name || !defenderPokemon || !defenderPokemon.name) {
+                showAlert('自分と相手の両方のポケモンを設定してください');
+                return;
+            }
+
+            // 相手の最大HPの1/8ダメージ
+            const damage = Math.floor(defenderPokemon.maxHp / 8);
+            const hpBefore = defenderPokemon.currentHp;
+            defenderPokemon.currentHp = Math.max(0, defenderPokemon.currentHp - damage);
+            const actualDamage = hpBefore - defenderPokemon.currentHp;
+
+            // 攻撃側が同量回復
+            const healBefore = attackerPokemon.currentHp;
+            attackerPokemon.currentHp = Math.min(attackerPokemon.maxHp, attackerPokemon.currentHp + actualDamage);
+            const actualHeal = attackerPokemon.currentHp - healBefore;
+
+            // ログに記録
+            globalTurnCounter++;
+            const historyEntry = {
+                type: 'damage',
+                turnId: globalTurnCounter,
+                moveName: `やどりぎのタネ (${defenderPokemon.name}に${actualDamage}ダメージ / ${attackerPokemon.name}が${actualHeal}回復)`,
+                damage: actualDamage,
+                attackerName: attackerPokemon.name,
+                defenderName: defenderPokemon.name,
+                attackerSide: attackerSide,
+                defenderSide: defenderSide,
+                hpBefore: hpBefore,
+                hpAfter: defenderPokemon.currentHp,
+                snapshot: {
+                    allyHps: appState.allyTeam.map(p => p.currentHp),
+                    enemyHps: appState.enemyTeam.map(p => p.currentHp)
+                }
+            };
+            appState.battleHistory.push(historyEntry);
+            defenderPokemon.history.push(historyEntry);
+
+            updateFormFromState('ally');
+            updateFormFromState('enemy');
+            renderBattleLog();
+        });
+    });
+
     // 技選択ボタン
     document.querySelectorAll('.move-grid').forEach(grid => {
         grid.addEventListener('click', (e) => {
@@ -928,7 +979,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // バリデーション: 自分または相手のポケモン名が未入力の場合は警告を出して中断
             if (!attacker.name.trim() || !defender.name.trim()) {
-                alert('自分と相手の両方のポケモン名を入力してください。');
+                showAlert('自分と相手の両方のポケモン名を入力してください。');
                 return;
             }
 
@@ -961,11 +1012,33 @@ document.addEventListener('DOMContentLoaded', async () => {
             let appliedDamage = 0;
             let initialRollIndex = 0;
             if (modifiedRolls.length > 0) {
-                initialRollIndex = Math.floor(Math.random() * modifiedRolls.length);
+                initialRollIndex = damageResult.isKnownDamage ? 0 : Math.floor(Math.random() * modifiedRolls.length);
                 appliedDamage = modifiedRolls[initialRollIndex];
                 // HP適用
                 if (turnStartHp > 0) {
                     defender.currentHp = Math.max(0, turnStartHp - appliedDamage);
+                }
+            }
+
+            // いのちがけ: 自分のHPを0にする
+            if (damageResult.isKnownDamage && damageResult.moveName === 'いのちがけ') {
+                attacker.currentHp = 0;
+            }
+
+            // いたみわけ: 自分のHPも平均値に変更
+            if (damageResult.isKnownDamage && damageResult.moveName === 'いたみわけ') {
+                const avgHp = Math.floor((attacker.currentHp + turnStartHp) / 2);
+                attacker.currentHp = Math.min(avgHp, attacker.maxHp);
+                defender.currentHp = Math.min(avgHp, defender.maxHp);
+            }
+
+            // 吸収技: 与えたダメージの一定割合を回復
+            let drainRecovery = 0;
+            if (move.drain_percent && appliedDamage > 0) {
+                const actualDamage = turnStartHp - defender.currentHp;
+                drainRecovery = Math.floor(actualDamage * move.drain_percent / 100);
+                if (drainRecovery > 0) {
+                    attacker.currentHp = Math.min(attacker.maxHp, attacker.currentHp + drainRecovery);
                 }
             }
 
@@ -1057,6 +1130,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                         abilityModifierText.innerHTML = abilityStrs.join('<br>');
                     } else {
                         abilityModifierText.textContent = '-';
+                    }
+                }
+
+                const specificMoveText = resultContainer.querySelector('.specific-move-info');
+                if (specificMoveText) {
+                    if (damageResult.specificMoveInfo) {
+                        specificMoveText.innerHTML = damageResult.specificMoveInfo.details.join('<br>');
+                    } else {
+                        specificMoveText.textContent = '-';
                     }
                 }
 
@@ -1198,15 +1280,24 @@ document.addEventListener('DOMContentLoaded', async () => {
                     newSelect.id = 'battle-random-roll';
 
                     if (modifiedRolls.length > 0) {
-                        modifiedRolls.forEach((val, i) => {
+                        if (damageResult.isKnownDamage) {
+                            // 固定ダメージ技: 1つだけ表示
                             const option = document.createElement('option');
-                            option.value = i;
-                            option.textContent = `${85 + i}%: ${val}ダメージ`;
-                            if (i === initialRollIndex) {
-                                option.selected = true;
-                            }
+                            option.value = 0;
+                            option.textContent = `固定: ${modifiedRolls[0]}ダメージ`;
+                            option.selected = true;
                             newSelect.appendChild(option);
-                        });
+                        } else {
+                            modifiedRolls.forEach((val, i) => {
+                                const option = document.createElement('option');
+                                option.value = i;
+                                option.textContent = `${85 + i}%: ${val}ダメージ`;
+                                if (i === initialRollIndex) {
+                                    option.selected = true;
+                                }
+                                newSelect.appendChild(option);
+                            });
+                        }
 
                         newSelect.addEventListener('change', (e) => {
                             const selectedIndex = parseInt(e.target.value);
@@ -1389,7 +1480,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateFormFromState('enemy');
         } catch (e) {
             console.error(e);
-            alert('エラーが発生しました: ' + e.message);
+            showAlert('エラーが発生しました: ' + e.message);
         } finally {
             // 自動きのみチェック
             if (attackerSide === 'ally') {
@@ -1460,11 +1551,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // 履歴クリアボタン
-    document.querySelectorAll('.clear-history-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const side = e.target.dataset.side;
+    document.querySelectorAll('.clear-history-btn[data-side]').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const side = e.currentTarget.dataset.side;
             const poke = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
-            if (poke && confirm(`${side === 'ally' ? '自分' : '相手'}のダメージ履歴をクリアしますか？`)) {
+            if (poke && await showConfirm(`${side === 'ally' ? '自分' : '相手'}のダメージ履歴をクリアしますか？`)) {
                 poke.clearHistory();
                 updateFormFromState(side);
             }
@@ -1474,8 +1567,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 対戦ログ消去ボタン
     const clearBattleLogBtn = document.getElementById('clear-battle-log-btn');
     if (clearBattleLogBtn) {
-        clearBattleLogBtn.addEventListener('click', () => {
-            if (confirm('ログを消去し、全ポケモンのHPと履歴をリセットしますか？')) {
+        clearBattleLogBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (await showConfirm('ログを消去し、全ポケモンのHPと履歴をリセットしますか？')) {
                 appState.resetAllTeams();
                 updateFormFromState('ally');
                 updateFormFromState('enemy');
@@ -1593,9 +1688,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         // クリックイベントの紐付け (行ごとにやり直す)
         logList.querySelectorAll('li').forEach((li, idx) => {
             if (li.classList.contains('log-placeholder')) return;
-            li.addEventListener('click', () => {
+            li.addEventListener('click', async () => {
                 const entry = appState.battleHistory[idx];
-                if (entry && confirm(`ターン #${idx + 1} の時点まで状態を戻しますか？\n（これ以降の記録は消去されます）`)) {
+                if (entry && await showConfirm(`ターン #${idx + 1} の時点まで状態を戻しますか？（これ以降の記録は消去されます）`)) {
                     revertToTurn(idx);
                 }
             });
@@ -2383,6 +2478,58 @@ function updateTeraDisplay(displayEl, value) {
         const displayText = value === 'なし' ? '選択なし' : value;
         textSpan.innerHTML = `${getTeraIconHtml(value, 20)}<span>${displayText}</span>`;
     }
+}
+
+function showAlert(message) {
+    return new Promise((resolve) => {
+        const overlay = document.getElementById('confirm-dialog-overlay');
+        const msgEl = document.getElementById('confirm-dialog-message');
+        const okBtn = document.getElementById('confirm-dialog-ok');
+        const cancelBtn = document.getElementById('confirm-dialog-cancel');
+
+        msgEl.textContent = message;
+        cancelBtn.style.display = 'none';
+        okBtn.textContent = 'OK';
+        overlay.style.display = 'flex';
+
+        const cleanup = () => {
+            overlay.style.display = 'none';
+            cancelBtn.style.display = '';
+            okBtn.removeEventListener('click', onOk);
+            overlay.removeEventListener('click', onOverlay);
+        };
+        const onOk = () => { cleanup(); resolve(); };
+        const onOverlay = (e) => { if (e.target === overlay) { cleanup(); resolve(); } };
+
+        okBtn.addEventListener('click', onOk);
+        overlay.addEventListener('click', onOverlay);
+    });
+}
+
+function showConfirm(message) {
+    return new Promise((resolve) => {
+        const overlay = document.getElementById('confirm-dialog-overlay');
+        const msgEl = document.getElementById('confirm-dialog-message');
+        const okBtn = document.getElementById('confirm-dialog-ok');
+        const cancelBtn = document.getElementById('confirm-dialog-cancel');
+
+        msgEl.textContent = message;
+        overlay.style.display = 'flex';
+
+        const cleanup = () => {
+            overlay.style.display = 'none';
+            okBtn.removeEventListener('click', onOk);
+            cancelBtn.removeEventListener('click', onCancel);
+            overlay.removeEventListener('click', onOverlay);
+        };
+        const onOk = () => { cleanup(); resolve(true); };
+        const onCancel = () => { cleanup(); resolve(false); };
+        const onOverlay = (e) => { if (e.target === overlay) { cleanup(); resolve(false); } };
+
+        okBtn.addEventListener('click', onOk);
+        cancelBtn.addEventListener('click', onCancel);
+        overlay.addEventListener('click', onOverlay);
+    });
 }
 
 function setupClearInputButtons() {

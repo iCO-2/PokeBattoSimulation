@@ -2,14 +2,22 @@
 
 ## 起動方法
 
-このアプリケーションは静的なWebサイトとして動作します。Python 3がインストールされている環境であれば、ターミナルで以下の手順を実行して起動できます。
+このアプリケーションは静的なWebサイトとして動作します。
 
-1. プロジェクトのルートディレクトリで以下のコマンドを実行し、ローカルサーバーを立ち上げます。
+### 方法1: ライブリロード（推奨）
+
+ファイル変更時に自動でブラウザがリロードされます。
+
+```bash
+npx live-server --port=8000 --open=/frontend/index.html --watch=frontend
+```
+
+ブラウザが自動で開きます: [http://localhost:8000/frontend/index.html](http://localhost:8000/frontend/index.html)
+
+### 方法2: Python HTTPサーバー
 
 ```bash
 python3 -m http.server 8000
 ```
 
-2. ブラウザで以下のURLにアクセスしてください。
-
-[http://localhost:8000/frontend/index.html](http://localhost:8000/frontend/index.html)
+ブラウザで以下のURLにアクセスしてください: [http://localhost:8000/frontend/index.html](http://localhost:8000/frontend/index.html)

@@ -1,5 +1,5 @@
 import { getTypeEffectiveness } from '../data/types.js';
-import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES } from '../data/loader.js?v=4';
+import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES } from '../data/loader.js?v=7';
 
 /**
  * ランク補正倍率を取得
@@ -18,8 +18,53 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     // 0. 基本情報取得
     const level = attacker.level;
+    const moveName = move.name || '';
+
+    // 固定ダメージ技の早期リターン
+    const knownDmg = KNOWN_DAMAGE_MOVES[moveName];
+    if (knownDmg) {
+        let fixedDmg = 0;
+        const dmgType = knownDmg.damage_type;
+
+        if (dmgType === 'fixed_value') {
+            fixedDmg = knownDmg.damage_value;
+        } else if (dmgType === 'ratio_value') {
+            fixedDmg = Math.floor(defender.currentHp * knownDmg.damage_value);
+        } else if (dmgType === 'special_value') {
+            if (moveName === 'がむしゃら') {
+                fixedDmg = Math.max(0, defender.currentHp - attacker.currentHp);
+            } else if (moveName === 'いのちがけ') {
+                fixedDmg = attacker.currentHp;
+            } else if (moveName === 'いたみわけ') {
+                const avgHp = Math.floor((attacker.currentHp + defender.currentHp) / 2);
+                fixedDmg = Math.max(0, defender.currentHp - avgHp);
+            }
+        }
+
+        return {
+            min: fixedDmg,
+            max: fixedDmg,
+            rolls: [fixedDmg],
+            isKnownDamage: true,
+            knownDamageType: dmgType,
+            moveName: moveName,
+            typeMod: null,
+            itemModifier: null,
+            defenderItemModifier: null,
+            stellarBoosted: false,
+            moveType: move.type || 'ノーマル',
+            abilityOffensiveInfo: null,
+            abilityDefensiveInfo: null,
+            dezasterInfo: null,
+            areaModifier: null,
+            weatherDefModifier: null,
+            wallInfo: null
+        };
+    }
+
     const power = move.power || 0;
-    if (power === 0) return { min: 0, max: 0, rolls: [] }; // 変化技など
+    const specificMove = SPECIFIC_MOVES[moveName];
+    if (power === 0 && !specificMove) return { min: 0, max: 0, rolls: [] }; // 変化技など
 
     // 攻撃・防御実数値の決定 (物理/特殊)
     let aStr = 'attack';
@@ -27,33 +72,47 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     if (move.category === 'Special') {
         aStr = 'spAtk';
         dStr = 'spDef';
-    } else if (move.category === 'Physical') {
-        // イカサマなどは考慮せずシンプルに
+    }
+
+    // 特殊技: ステータス参照先・ソースポケモンの決定
+    let aSrc = attacker;   // A計算に使うポケモン
+    let aStat = aStr;      // A計算に使うステータスキー
+    let dSrc = defender;   // D計算に使うポケモン
+    let dStat = dStr;      // D計算に使うステータスキー
+
+    if (specificMove && specificMove.depend_on_other_stats) {
+        const changeStat = specificMove.change_target_stats;
+        const afterTarget = specificMove.change_target_after;
+        const afterStat = specificMove.change_target_stats_after;
+        const afterSource = afterTarget === 'ennemy' ? defender : attacker;
+
+        if (changeStat === aStr) {
+            aSrc = afterSource;
+            aStat = afterStat;
+        }
+        if (changeStat === dStr) {
+            dSrc = afterSource;
+            dStat = afterStat;
+        }
     }
 
     // ステータス実数値にランク補正を適用
-    const attackerRank = attacker.stats[aStr] ? attacker.stats[aStr].rank || 0 : 0;
-    const defenderRank = defender.stats[dStr] ? defender.stats[dStr].rank || 0 : 0;
-    
+    const attackerRank = aSrc.stats[aStat] ? aSrc.stats[aStat].rank || 0 : 0;
+    let defenderRank = dSrc.stats[dStat] ? dSrc.stats[dStat].rank || 0 : 0;
 
-    
+    // 特殊技: 防御側ランク上昇無視
+    if (specificMove && specificMove.ignore_stats_change) {
+        defenderRank = Math.min(0, defenderRank);
+    }
+
     // 天候とタイプの取得（ステータス補正で使用するため前倒し）
     const weather = (field && field.weather) || 'none';
     const defenderTera = defender.teraType && defender.teraType !== 'なし' ? defender.teraType : null;
     const isDefenderStellar = defenderTera === 'ステラ';
     const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
 
-    // 浮いている判定（フィールド効果の適用可否に使用）
-    // ひこうタイプ（テラスタル後含む）またはふゆう特性を持つポケモンはフィールド効果を受けない
-    const attackerOriginalTypes = attacker.speciesData ? attacker.speciesData.types : [];
-    const attackerTeraType = attacker.teraType && attacker.teraType !== 'なし' ? attacker.teraType : null;
-    const attackerEffectiveTypes = (attackerTeraType && attackerTeraType !== 'ステラ')
-        ? [attackerTeraType] : attackerOriginalTypes;
-    const isAttackerFloating = attackerEffectiveTypes.includes('ひこう') || attacker.ability === 'ふゆう';
-    const isDefenderFloating = defenderTypes.includes('ひこう') || defender.ability === 'ふゆう';
-
-    let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
-    let D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
+    let A = Math.floor(aSrc.realStats[aStat] * getRankMultiplier(attackerRank));
+    let D = Math.floor(dSrc.realStats[dStat] * getRankMultiplier(defenderRank));
 
     // 天候「ゆき」: こおりタイプの防御を1.5倍にする (物理のみ)
     if (weather === 'snow' && dStr === 'defence' && defenderTypes.includes('こおり')) {
@@ -138,7 +197,6 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     }
 
     // 特性補正
-    const moveName = move.name || '';
     let moveType = move.type || 'ノーマル';
 
     let abilityOffensiveMod = 1.0;
@@ -302,6 +360,89 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     };
 
     let finalPower = power;
+
+    // 特殊技: 威力変動の処理
+    if (specificMove) {
+        // 相手の体重依存
+        if (specificMove.depend_on_weight) {
+            const w = defender.speciesData ? defender.speciesData.weight_kg : 0;
+            if (w >= 200) finalPower = 120;
+            else if (w >= 100) finalPower = 100;
+            else if (w >= 50) finalPower = 80;
+            else if (w >= 25) finalPower = 60;
+            else if (w >= 10) finalPower = 40;
+            else finalPower = 20;
+        }
+
+        // 体重差依存
+        if (specificMove.depend_on_difference_weight) {
+            const atkW = attacker.speciesData ? attacker.speciesData.weight_kg : 0;
+            const defW = defender.speciesData ? defender.speciesData.weight_kg : 0;
+            if (atkW === 0) {
+                finalPower = 40;
+            } else if (defW * 5 <= atkW) {
+                finalPower = 120;
+            } else if (defW * 4 <= atkW) {
+                finalPower = 100;
+            } else if (defW * 3 <= atkW) {
+                finalPower = 80;
+            } else if (defW * 2 <= atkW) {
+                finalPower = 60;
+            } else {
+                finalPower = 40;
+            }
+        }
+
+        // 素早さ差依存
+        if (specificMove.depend_on_difference_speed) {
+            const atkSpd = Math.floor(attacker.realStats.speed * getRankMultiplier(attacker.stats.speed ? attacker.stats.speed.rank || 0 : 0));
+            const defSpd = Math.floor(defender.realStats.speed * getRankMultiplier(defender.stats.speed ? defender.stats.speed.rank || 0 : 0));
+
+            if (moveName === 'ジャイロボール') {
+                finalPower = atkSpd === 0 ? 1 : Math.min(150, Math.floor(25 * defSpd / atkSpd) + 1);
+            } else if (moveName === 'エレキボール') {
+                if (defSpd === 0) {
+                    finalPower = 150;
+                } else {
+                    const ratio = atkSpd / defSpd;
+                    if (ratio >= 4) finalPower = 150;
+                    else if (ratio >= 3) finalPower = 120;
+                    else if (ratio >= 2) finalPower = 80;
+                    else if (ratio >= 1) finalPower = 60;
+                    else finalPower = 40;
+                }
+            }
+        }
+
+        // HP依存
+        if (specificMove.depend_on_hp) {
+            if (['しおふき', 'ふんか', 'ドラゴンエナジー'].includes(moveName)) {
+                finalPower = Math.max(1, Math.floor(150 * attacker.currentHp / attacker.maxHp));
+            } else if (['じたばた', 'きしかいせい'].includes(moveName)) {
+                const ratio = attacker.currentHp / attacker.maxHp * 48;
+                if (ratio < 2) finalPower = 200;
+                else if (ratio < 5) finalPower = 150;
+                else if (ratio < 10) finalPower = 100;
+                else if (ratio < 17) finalPower = 80;
+                else if (ratio < 33) finalPower = 40;
+                else finalPower = 20;
+            } else if (['にぎりつぶす', 'しぼりとる'].includes(moveName)) {
+                finalPower = Math.max(1, Math.floor(120 * defender.currentHp / defender.maxHp));
+            }
+        }
+
+        // ランク上昇依存
+        if (specificMove.depend_on_ability_rank) {
+            const statKeys = ['attack', 'defence', 'spAtk', 'spDef', 'speed'];
+            let totalPositive = 0;
+            for (const key of statKeys) {
+                const rank = attacker.stats[key] ? attacker.stats[key].rank || 0 : 0;
+                if (rank > 0) totalPositive += rank;
+            }
+            finalPower = Math.min(220, 20 + totalPositive * 20);
+        }
+    }
+
     let itemPowerBoostApplied = false;
     let areaModifierInfo = null;
     if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'power') {
@@ -323,10 +464,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const GRASSY_HALVED_MOVES = ['じしん', 'じならし'];
     
     // a. 威力強化補正1 (ワイドフォース / サイコブレイド の固有補正)
-    // ワイドフォース: 攻撃側が地面にいる場合のみ適用
-    // サイコブレイド: 技固有の特性のため浮き判定対象外
     let hasMoveSpecificBoost = false;
-    if (terrain === 'psychic' && moveName === 'ワイドフォース' && !isAttackerFloating) {
+    if (terrain === 'psychic' && moveName === 'ワイドフォース') {
         finalPower = Math.round(finalPower * 6144 / 4096);
         hasMoveSpecificBoost = true;
     } else if (terrain === 'electric' && moveName === 'サイコブレイド') {
@@ -334,20 +473,17 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         hasMoveSpecificBoost = true;
     }
 
-    // b. 威力強化・弱化補正
-    // 強化（×1.3）: 攻撃側が地面にいる場合のみ適用
-    // グラスフィールドの地面技弱化（×0.5）: 地面技は地形の影響を受けるため浮き判定対象外
-    // ミストフィールドのドラゴン弱化（×0.5）: 防御側が地面にいる場合のみ適用
+    // b. 威力強化補正2 (通常のフィールドタイプ強化 / 弱化補正)
     let terrainModVal = 1.0;
     if (terrain === 'electric') {
-        if (!isAttackerFloating && (moveType === 'でんき' || moveName === 'サイコブレイド')) terrainModVal = 1.3;
+        if (moveType === 'でんき' || moveName === 'サイコブレイド') terrainModVal = 1.3;
     } else if (terrain === 'psychic') {
-        if (!isAttackerFloating && moveType === 'エスパー') terrainModVal = 1.3;
+        if (moveType === 'エスパー') terrainModVal = 1.3;
     } else if (terrain === 'grassy') {
-        if (!isAttackerFloating && moveType === 'くさ') terrainModVal = 1.3;
+        if (moveType === 'くさ') terrainModVal = 1.3;
         else if (GRASSY_HALVED_MOVES.includes(moveName)) terrainModVal = 0.5;
     } else if (terrain === 'misty') {
-        if (!isDefenderFloating && moveType === 'ドラゴン') terrainModVal = 0.5;
+        if (moveType === 'ドラゴン') terrainModVal = 0.5;
     }
 
     if (terrainModVal !== 1.0) {
@@ -511,6 +647,51 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         : (field && field.wallLight && move.category === 'Special') ? 'ひかりのかべ'
         : null;
 
+    // 特殊技情報の構築
+    let specificMoveInfo = null;
+    if (specificMove) {
+        const STAT_LABELS = { attack: '攻撃', defence: '防御', spAtk: '特攻', spDef: '特防', speed: '素早さ' };
+        const details = [];
+
+        if (specificMove.depend_on_other_stats) {
+            const srcLabel = (aSrc === attacker) ? '自分' : '相手';
+            const statLabel = STAT_LABELS[aStat] || aStat;
+            if (specificMove.change_target_stats === aStr) {
+                details.push(`攻撃: ${srcLabel}の${statLabel}で計算`);
+            }
+            if (specificMove.change_target_stats === dStr) {
+                const dSrcLabel = (dSrc === defender) ? '相手' : '自分';
+                const dStatLabel = STAT_LABELS[dStat] || dStat;
+                details.push(`防御: ${dSrcLabel}の${dStatLabel}で計算`);
+            }
+        }
+        if (specificMove.ignore_stats_change) {
+            details.push('相手のランク上昇を無視');
+        }
+        if (specificMove.depend_on_weight) {
+            const w = defender.speciesData ? defender.speciesData.weight_kg : 0;
+            details.push(`相手の体重: ${w}kg → 威力${finalPower}`);
+        }
+        if (specificMove.depend_on_difference_weight) {
+            const atkW = attacker.speciesData ? attacker.speciesData.weight_kg : 0;
+            const defW = defender.speciesData ? defender.speciesData.weight_kg : 0;
+            details.push(`体重差: ${atkW}kg vs ${defW}kg → 威力${finalPower}`);
+        }
+        if (specificMove.depend_on_difference_speed) {
+            details.push(`素早さ差 → 威力${finalPower}`);
+        }
+        if (specificMove.depend_on_hp) {
+            details.push(`HP依存 → 威力${finalPower}`);
+        }
+        if (specificMove.depend_on_ability_rank) {
+            details.push(`ランク上昇合計 → 威力${finalPower}`);
+        }
+
+        if (details.length > 0) {
+            specificMoveInfo = { name: moveName, details: details };
+        }
+    }
+
     return {
         min: rolls[0],
         max: rolls[rolls.length - 1],
@@ -525,6 +706,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         dezasterInfo: dezasterInfo,
         areaModifier: areaModifierInfo,
         weatherDefModifier: weatherDefModifierInfo,
-        wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null
+        wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
+        specificMoveInfo: specificMoveInfo
     };
 }

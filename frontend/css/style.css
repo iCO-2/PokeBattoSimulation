@@ -731,8 +731,10 @@ h2 {
     border: 1px solid #bdc3c7;
     border-radius: 4px;
     font-size: 0.9em;
-    width: auto;
-    flex-shrink: 0;
+    width: 60%;
+    min-width: 0;
+    flex-shrink: 1;
+    box-sizing: border-box;
     background-color: #fff;
 }
 
@@ -1060,6 +1062,12 @@ h2 {
     color: #444;
 }
 
+.leech-seed-desc {
+    margin: 0 0 10px 0;
+    font-size: 0.85em;
+    color: #888;
+}
+
 .fixed-damage-ratio-selector {
     margin-bottom: 10px;
     display: flex;
@@ -1147,6 +1155,16 @@ h2 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+.leech-seed-btn {
+    background-color: #66bb6a;
+}
+
+.leech-seed-btn:hover {
+    background-color: #4caf50;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
 .fixed-damage-btn:active {
     transform: translateY(0);
 }
@@ -1154,6 +1172,70 @@ h2 {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* 確認ダイアログ */
+.confirm-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-dialog {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    max-width: 340px;
+    width: 85%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.confirm-dialog p {
+    margin: 0 0 20px 0;
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #333;
+}
+
+.confirm-dialog-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.confirm-dialog-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.confirm-dialog-btn.cancel-btn {
+    background: #e0e0e0;
+    color: #555;
+}
+
+.confirm-dialog-btn.cancel-btn:hover {
+    background: #d0d0d0;
+}
+
+.confirm-dialog-btn.ok-btn {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.confirm-dialog-btn.ok-btn:hover {
+    background: #c0392b;
 }
 
 /* レスポンシブ対応 */
@@ -1679,10 +1761,11 @@ h2 {
     width: 22px;
     height: 22px;
     border: none;
-    background: url('../backend/data/image/batsu.png') no-repeat center center;
-    background-size: contain;
-    font-size: 0;
-    text-indent: -9999px;
+    background: none;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #999;
     padding: 0;
     cursor: pointer;
     display: none;
