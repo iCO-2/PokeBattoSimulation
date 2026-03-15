@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=225';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=226';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -1130,6 +1130,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                         abilityModifierText.innerHTML = abilityStrs.join('<br>');
                     } else {
                         abilityModifierText.textContent = '-';
+                    }
+                }
+
+                const specificMoveText = resultContainer.querySelector('.specific-move-info');
+                if (specificMoveText) {
+                    if (damageResult.specificMoveInfo) {
+                        specificMoveText.innerHTML = damageResult.specificMoveInfo.details.join('<br>');
+                    } else {
+                        specificMoveText.textContent = '-';
                     }
                 }
 

@@ -647,6 +647,51 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         : (field && field.wallLight && move.category === 'Special') ? 'ひかりのかべ'
         : null;
 
+    // 特殊技情報の構築
+    let specificMoveInfo = null;
+    if (specificMove) {
+        const STAT_LABELS = { attack: '攻撃', defence: '防御', spAtk: '特攻', spDef: '特防', speed: '素早さ' };
+        const details = [];
+
+        if (specificMove.depend_on_other_stats) {
+            const srcLabel = (aSrc === attacker) ? '自分' : '相手';
+            const statLabel = STAT_LABELS[aStat] || aStat;
+            if (specificMove.change_target_stats === aStr) {
+                details.push(`攻撃: ${srcLabel}の${statLabel}で計算`);
+            }
+            if (specificMove.change_target_stats === dStr) {
+                const dSrcLabel = (dSrc === defender) ? '相手' : '自分';
+                const dStatLabel = STAT_LABELS[dStat] || dStat;
+                details.push(`防御: ${dSrcLabel}の${dStatLabel}で計算`);
+            }
+        }
+        if (specificMove.ignore_stats_change) {
+            details.push('相手のランク上昇を無視');
+        }
+        if (specificMove.depend_on_weight) {
+            const w = defender.speciesData ? defender.speciesData.weight_kg : 0;
+            details.push(`相手の体重: ${w}kg → 威力${finalPower}`);
+        }
+        if (specificMove.depend_on_difference_weight) {
+            const atkW = attacker.speciesData ? attacker.speciesData.weight_kg : 0;
+            const defW = defender.speciesData ? defender.speciesData.weight_kg : 0;
+            details.push(`体重差: ${atkW}kg vs ${defW}kg → 威力${finalPower}`);
+        }
+        if (specificMove.depend_on_difference_speed) {
+            details.push(`素早さ差 → 威力${finalPower}`);
+        }
+        if (specificMove.depend_on_hp) {
+            details.push(`HP依存 → 威力${finalPower}`);
+        }
+        if (specificMove.depend_on_ability_rank) {
+            details.push(`ランク上昇合計 → 威力${finalPower}`);
+        }
+
+        if (details.length > 0) {
+            specificMoveInfo = { name: moveName, details: details };
+        }
+    }
+
     return {
         min: rolls[0],
         max: rolls[rolls.length - 1],
@@ -661,6 +706,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         dezasterInfo: dezasterInfo,
         areaModifier: areaModifierInfo,
         weatherDefModifier: weatherDefModifierInfo,
-        wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null
+        wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
+        specificMoveInfo: specificMoveInfo
     };
 }
