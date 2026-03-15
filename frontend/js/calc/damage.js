@@ -1,5 +1,5 @@
 import { getTypeEffectiveness } from '../data/types.js';
-import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES } from '../data/loader.js?v=4';
+import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES } from '../data/loader.js?v=5';
 
 /**
  * ランク補正倍率を取得
@@ -18,6 +18,47 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     // 0. 基本情報取得
     const level = attacker.level;
+    const moveName = move.name || '';
+
+    // 固定ダメージ技の早期リターン
+    const knownDmg = KNOWN_DAMAGE_MOVES[moveName];
+    if (knownDmg) {
+        let fixedDmg = 0;
+        const dmgType = knownDmg.damage_type;
+
+        if (dmgType === 'fixed_value') {
+            fixedDmg = knownDmg.damage_value;
+        } else if (dmgType === 'ratio_value') {
+            fixedDmg = Math.floor(defender.currentHp * knownDmg.damage_value);
+        } else if (dmgType === 'special_value') {
+            if (moveName === 'がむしゃら') {
+                fixedDmg = Math.max(0, defender.currentHp - attacker.currentHp);
+            } else if (moveName === 'いのちがけ') {
+                fixedDmg = attacker.currentHp;
+            }
+        }
+
+        return {
+            min: fixedDmg,
+            max: fixedDmg,
+            rolls: [fixedDmg],
+            isKnownDamage: true,
+            knownDamageType: dmgType,
+            moveName: moveName,
+            typeMod: null,
+            itemModifier: null,
+            defenderItemModifier: null,
+            stellarBoosted: false,
+            moveType: move.type || 'ノーマル',
+            abilityOffensiveInfo: null,
+            abilityDefensiveInfo: null,
+            dezasterInfo: null,
+            areaModifier: null,
+            weatherDefModifier: null,
+            wallInfo: null
+        };
+    }
+
     const power = move.power || 0;
     if (power === 0) return { min: 0, max: 0, rolls: [] }; // 変化技など
 
@@ -42,15 +83,6 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const defenderTera = defender.teraType && defender.teraType !== 'なし' ? defender.teraType : null;
     const isDefenderStellar = defenderTera === 'ステラ';
     const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
-
-    // 浮いている判定（フィールド効果の適用可否に使用）
-    // ひこうタイプ（テラスタル後含む）またはふゆう特性を持つポケモンはフィールド効果を受けない
-    const attackerOriginalTypes = attacker.speciesData ? attacker.speciesData.types : [];
-    const attackerTeraType = attacker.teraType && attacker.teraType !== 'なし' ? attacker.teraType : null;
-    const attackerEffectiveTypes = (attackerTeraType && attackerTeraType !== 'ステラ')
-        ? [attackerTeraType] : attackerOriginalTypes;
-    const isAttackerFloating = attackerEffectiveTypes.includes('ひこう') || attacker.ability === 'ふゆう';
-    const isDefenderFloating = defenderTypes.includes('ひこう') || defender.ability === 'ふゆう';
 
     let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
     let D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
@@ -138,7 +170,6 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     }
 
     // 特性補正
-    const moveName = move.name || '';
     let moveType = move.type || 'ノーマル';
 
     let abilityOffensiveMod = 1.0;
@@ -323,10 +354,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const GRASSY_HALVED_MOVES = ['じしん', 'じならし'];
     
     // a. 威力強化補正1 (ワイドフォース / サイコブレイド の固有補正)
-    // ワイドフォース: 攻撃側が地面にいる場合のみ適用
-    // サイコブレイド: 技固有の特性のため浮き判定対象外
     let hasMoveSpecificBoost = false;
-    if (terrain === 'psychic' && moveName === 'ワイドフォース' && !isAttackerFloating) {
+    if (terrain === 'psychic' && moveName === 'ワイドフォース') {
         finalPower = Math.round(finalPower * 6144 / 4096);
         hasMoveSpecificBoost = true;
     } else if (terrain === 'electric' && moveName === 'サイコブレイド') {
@@ -334,20 +363,17 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         hasMoveSpecificBoost = true;
     }
 
-    // b. 威力強化・弱化補正
-    // 強化（×1.3）: 攻撃側が地面にいる場合のみ適用
-    // グラスフィールドの地面技弱化（×0.5）: 地面技は地形の影響を受けるため浮き判定対象外
-    // ミストフィールドのドラゴン弱化（×0.5）: 防御側が地面にいる場合のみ適用
+    // b. 威力強化補正2 (通常のフィールドタイプ強化 / 弱化補正)
     let terrainModVal = 1.0;
     if (terrain === 'electric') {
-        if (!isAttackerFloating && (moveType === 'でんき' || moveName === 'サイコブレイド')) terrainModVal = 1.3;
+        if (moveType === 'でんき' || moveName === 'サイコブレイド') terrainModVal = 1.3;
     } else if (terrain === 'psychic') {
-        if (!isAttackerFloating && moveType === 'エスパー') terrainModVal = 1.3;
+        if (moveType === 'エスパー') terrainModVal = 1.3;
     } else if (terrain === 'grassy') {
-        if (!isAttackerFloating && moveType === 'くさ') terrainModVal = 1.3;
+        if (moveType === 'くさ') terrainModVal = 1.3;
         else if (GRASSY_HALVED_MOVES.includes(moveName)) terrainModVal = 0.5;
     } else if (terrain === 'misty') {
-        if (!isDefenderFloating && moveType === 'ドラゴン') terrainModVal = 0.5;
+        if (moveType === 'ドラゴン') terrainModVal = 0.5;
     }
 
     if (terrainModVal !== 1.0) {

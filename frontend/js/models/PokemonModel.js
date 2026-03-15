@@ -1,4 +1,4 @@
-import { SPECIES_DEX } from '../data/loader.js?v=4';
+import { SPECIES_DEX } from '../data/loader.js?v=5';
 import { calculateHp, calculateStat } from '../calc/stats.js';
 
 export class Pokemon {

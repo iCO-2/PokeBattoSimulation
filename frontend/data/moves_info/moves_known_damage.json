@@ -1,11 +1,35 @@
 {
   "abilities": [],
-  "moves": [
-    "いかりのまえば",
-    "いのちがけ",
-    "カタストロフィ",
-    "がむしゃら",
-    "ちきゅうなげ",
-    "ナイトヘッド"
-  ]
+  "moves": {
+    "いかりのまえば":{
+      "damage_type": "ratio_value",
+      "damage_value": 0.5
+    },
+    "カタストロフィ":{
+      "damage_type": "ratio_value",
+      "damage_value": 0.5
+    },
+    "いのちがけ":{
+      "damage_type": "special_value"
+    },
+    "がむしゃら":{
+      "damage_type": "special_value"
+    },
+    "ちきゅうなげ":{
+      "damage_type": "fixed_value",
+      "damage_value": 50
+    },
+    "ナイトヘッド":{
+      "damage_type": "fixed_value",
+      "damage_value": 50
+    },
+    "ソニックブーム":{
+      "damage_type": "fixed_value",
+      "damage_value": 20
+    },
+    "りゅうのいかり":{
+      "damage_type": "fixed_value",
+      "damage_value": 40
+    }
+  }
 }

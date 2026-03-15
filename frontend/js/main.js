@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
-import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, loadAllData } from './data/loader.js?v=4';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=222';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, loadAllData } from './data/loader.js?v=5';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=223';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -961,12 +961,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             let appliedDamage = 0;
             let initialRollIndex = 0;
             if (modifiedRolls.length > 0) {
-                initialRollIndex = Math.floor(Math.random() * modifiedRolls.length);
+                initialRollIndex = damageResult.isKnownDamage ? 0 : Math.floor(Math.random() * modifiedRolls.length);
                 appliedDamage = modifiedRolls[initialRollIndex];
                 // HP適用
                 if (turnStartHp > 0) {
                     defender.currentHp = Math.max(0, turnStartHp - appliedDamage);
                 }
+            }
+
+            // いのちがけ: 自分のHPを0にする
+            if (damageResult.isKnownDamage && damageResult.moveName === 'いのちがけ') {
+                attacker.currentHp = 0;
             }
 
             // 結果表示更新 (Centralized)
@@ -1198,15 +1203,24 @@ document.addEventListener('DOMContentLoaded', async () => {
                     newSelect.id = 'battle-random-roll';
 
                     if (modifiedRolls.length > 0) {
-                        modifiedRolls.forEach((val, i) => {
+                        if (damageResult.isKnownDamage) {
+                            // 固定ダメージ技: 1つだけ表示
                             const option = document.createElement('option');
-                            option.value = i;
-                            option.textContent = `${85 + i}%: ${val}ダメージ`;
-                            if (i === initialRollIndex) {
-                                option.selected = true;
-                            }
+                            option.value = 0;
+                            option.textContent = `固定: ${modifiedRolls[0]}ダメージ`;
+                            option.selected = true;
                             newSelect.appendChild(option);
-                        });
+                        } else {
+                            modifiedRolls.forEach((val, i) => {
+                                const option = document.createElement('option');
+                                option.value = i;
+                                option.textContent = `${85 + i}%: ${val}ダメージ`;
+                                if (i === initialRollIndex) {
+                                    option.selected = true;
+                                }
+                                newSelect.appendChild(option);
+                            });
+                        }
 
                         newSelect.addEventListener('change', (e) => {
                             const selectedIndex = parseInt(e.target.value);
