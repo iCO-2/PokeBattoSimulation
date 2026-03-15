@@ -64,6 +64,30 @@
         </div>
     </header>
 
+    <!-- エリア設定 -->
+    <div class="area-section">
+        <div class="area-field">
+            <select id="area-weather">
+                <option value="none" selected>天候</option>
+                <option value="sunny">はれ</option>
+                <option value="rain">あめ</option>
+                <option value="snow">ゆき</option>
+                <option value="sandstorm">すなあらし</option>
+            </select>
+            <label for="area-weather">天候</label>
+        </div>
+        <div class="area-field">
+            <select id="area-terrain">
+                <option value="none" selected>フィールド</option>
+                <option value="electric">エレキフィールド</option>
+                <option value="psychic">サイコフィールド</option>
+                <option value="grassy">グラスフィールド</option>
+                <option value="misty">ミストフィールド</option>
+            </select>
+            <label for="area-terrain">フィールド</label>
+        </div>
+    </div>
+
     <!-- Mobile Tab Navigation -->
     <div class="mobile-tab-nav">
         <button class="tab-btn active" data-tab="ally">自分のチーム</button>
@@ -504,31 +528,6 @@
             </div>
             </div>
 
-            <!-- エリア設定 -->
-            <div class="area-section">
-                <h3>エリア</h3>
-                <div class="area-row">
-                    <label for="area-weather">天候:</label>
-                    <select id="area-weather" class="random-select">
-                        <option value="none">なし</option>
-                        <option value="sunny">晴れ</option>
-                        <option value="rain">雨</option>
-                        <option value="snow">ゆき</option>
-                        <option value="sandstorm">すなあらし</option>
-                    </select>
-                </div>
-                <div class="area-row">
-                    <label for="area-terrain">フィールド:</label>
-                    <select id="area-terrain" class="random-select">
-                        <option value="none">なし</option>
-                        <option value="electric">エレキフィールド</option>
-                        <option value="psychic">サイコフィールド</option>
-                        <option value="grassy">グラスフィールド</option>
-                        <option value="misty">ミストフィールド</option>
-                    </select>
-                </div>
-            </div>
-
             <!-- Centralized Damage Result -->
             <div class="damage-result-container">
                 <h3>計算結果</h3>
@@ -574,7 +573,7 @@
                         <option value="0.75">×0.75</option>
                         <option value="1.0" selected>×1.0（補正なし）</option>
                         <option value="1.1">×1.1</option>
-                        <option value="1.1">×1.3</option>
+                        <option value="1.3">×1.3</option>
                         <option value="1.5">×1.5</option>
                         <option value="2.0">×2.0</option>
                         <option value="4.0">×4.0</option>

@@ -124,7 +124,7 @@ body {
 header {
     text-align: center;
     border-bottom: 2px solid var(--border-color);
-    margin-bottom: 20px;
+    margin-bottom: 0;
     background: var(--card-bg);
     padding: 20px 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -977,44 +977,59 @@ h2 {
     margin-left: 10px;
 }
 
-/* エリア（天候・フィールド）セクション */
+/* エリア（天候・フィールド）バー */
 .area-section {
-    background: #fdfdfd;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
-
-.area-section h3 {
-    margin: 0 0 10px 0;
-    font-size: 1em;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
-    color: #444;
-}
-
-.area-row {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-    font-size: 0.9em;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 16px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 16px;
+    flex-wrap: nowrap;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.area-row:last-child {
-    margin-bottom: 0;
-}
-
-.area-row label {
-    color: #7f8c8d;
-    font-weight: bold;
-    white-space: nowrap;
-    min-width: 5.5em;
-}
-
-.area-row select {
+.area-field {
+    position: relative;
     flex: 1;
+    min-width: 0;
+    max-width: 250px;
+}
+
+.area-field select {
+    width: 100%;
+    padding: 14px 12px 6px;
+    font-size: 0.95em;
+    border: 1.5px solid #ccc;
+    border-radius: 10px;
+    background: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+    color: #333;
+}
+
+.area-field select:focus {
+    border-color: #888;
+    outline: none;
+}
+
+.area-field label {
+    position: absolute;
+    top: -7px;
+    left: 12px;
+    background: #fff;
+    padding: 0 4px;
+    font-size: 0.72em;
+    color: #888;
+    pointer-events: none;
+    display: none;
 }
 
 /* 固定ダメージ/回復セクション */
@@ -1161,6 +1176,13 @@ h2 {
         top: var(--top-header-height, 49px);
         z-index: 999;
         margin-bottom: 0;
+    }
+
+    /* モバイル: エリアセクション固定 */
+    .area-section {
+        position: sticky;
+        top: var(--area-section-top, 0px);
+        z-index: 998;
     }
 
     /* Tab Navigation */

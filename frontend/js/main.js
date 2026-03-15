@@ -54,11 +54,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // --- エリアセレクト: フローティングラベル制御 ---
+    document.querySelectorAll('.area-field select').forEach(sel => {
+        const updateLabel = () => {
+            const label = sel.nextElementSibling;
+            if (!label || label.tagName !== 'LABEL') return;
+            if (sel.value === 'none') {
+                label.style.display = 'none';
+                sel.style.color = '#aaa';
+            } else {
+                label.style.display = 'block';
+                sel.style.color = '#333';
+            }
+        };
+        updateLabel();
+        sel.addEventListener('change', updateLabel);
+    });
+
     // --- モバイルヘッダー固定: CSS変数の動的計算 ---
     function updateStickyHeaderOffsets() {
         if (window.innerWidth > 768) return; // モバイルのみ
         const topHeader = document.querySelector('.top-header');
         const headerEl = document.querySelector('header');
+        const areaSectionEl = document.querySelector('.area-section');
         const root = document.documentElement;
         if (topHeader) {
             const topHeaderHeight = topHeader.offsetHeight;
@@ -68,7 +86,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const headerHeight = headerEl.offsetHeight
                     + parseInt(headerStyle.marginTop || 0)
                     + parseInt(headerStyle.marginBottom || 0);
-                root.style.setProperty('--mobile-tab-top', (topHeaderHeight + headerHeight) + 'px');
+                const areaSectionTop = topHeaderHeight + headerHeight;
+                const areaHeight = areaSectionEl ? areaSectionEl.offsetHeight : 0;
+                root.style.setProperty('--area-section-top', areaSectionTop + 'px');
+                root.style.setProperty('--mobile-tab-top', (areaSectionTop + areaHeight) + 'px');
             }
         }
     }
@@ -1836,8 +1857,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                     if (!isNaN(val) && val > 0) {
                         pokemon.realStats[stat] = val;
                         if (stat === 'hp') {
+                            const oldMax = pokemon.maxHp;
                             pokemon.maxHp = val;
-                            pokemon.currentHp = Math.min(pokemon.currentHp, val);
+                            if (val >= oldMax) {
+                                pokemon.currentHp = val;
+                            } else {
+                                pokemon.currentHp = Math.min(pokemon.currentHp, val);
+                            }
                         }
                         updateFormFromState(side);
                     }
