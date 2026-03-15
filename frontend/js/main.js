@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
-import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, loadAllData } from './data/loader.js?v=5';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=223';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=225';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -972,6 +972,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             // いのちがけ: 自分のHPを0にする
             if (damageResult.isKnownDamage && damageResult.moveName === 'いのちがけ') {
                 attacker.currentHp = 0;
+            }
+
+            // いたみわけ: 自分のHPも平均値に変更
+            if (damageResult.isKnownDamage && damageResult.moveName === 'いたみわけ') {
+                const avgHp = Math.floor((attacker.currentHp + turnStartHp) / 2);
+                attacker.currentHp = Math.min(avgHp, attacker.maxHp);
+                defender.currentHp = Math.min(avgHp, defender.maxHp);
             }
 
             // 結果表示更新 (Centralized)

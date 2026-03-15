@@ -15,6 +15,9 @@
     "がむしゃら":{
       "damage_type": "special_value"
     },
+    "いたみわけ":{
+      "damage_type": "special_value"
+    },
     "ちきゅうなげ":{
       "damage_type": "fixed_value",
       "damage_value": 50

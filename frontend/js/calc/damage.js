@@ -1,5 +1,5 @@
 import { getTypeEffectiveness } from '../data/types.js';
-import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES } from '../data/loader.js?v=5';
+import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES } from '../data/loader.js?v=7';
 
 /**
  * ランク補正倍率を取得
@@ -35,6 +35,9 @@ export function calculateDamage(attacker, defender, move, field = {}) {
                 fixedDmg = Math.max(0, defender.currentHp - attacker.currentHp);
             } else if (moveName === 'いのちがけ') {
                 fixedDmg = attacker.currentHp;
+            } else if (moveName === 'いたみわけ') {
+                const avgHp = Math.floor((attacker.currentHp + defender.currentHp) / 2);
+                fixedDmg = Math.max(0, defender.currentHp - avgHp);
             }
         }
 
@@ -60,7 +63,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     }
 
     const power = move.power || 0;
-    if (power === 0) return { min: 0, max: 0, rolls: [] }; // 変化技など
+    const specificMove = SPECIFIC_MOVES[moveName];
+    if (power === 0 && !specificMove) return { min: 0, max: 0, rolls: [] }; // 変化技など
 
     // 攻撃・防御実数値の決定 (物理/特殊)
     let aStr = 'attack';
@@ -68,24 +72,47 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     if (move.category === 'Special') {
         aStr = 'spAtk';
         dStr = 'spDef';
-    } else if (move.category === 'Physical') {
-        // イカサマなどは考慮せずシンプルに
+    }
+
+    // 特殊技: ステータス参照先・ソースポケモンの決定
+    let aSrc = attacker;   // A計算に使うポケモン
+    let aStat = aStr;      // A計算に使うステータスキー
+    let dSrc = defender;   // D計算に使うポケモン
+    let dStat = dStr;      // D計算に使うステータスキー
+
+    if (specificMove && specificMove.depend_on_other_stats) {
+        const changeStat = specificMove.change_target_stats;
+        const afterTarget = specificMove.change_target_after;
+        const afterStat = specificMove.change_target_stats_after;
+        const afterSource = afterTarget === 'ennemy' ? defender : attacker;
+
+        if (changeStat === aStr) {
+            aSrc = afterSource;
+            aStat = afterStat;
+        }
+        if (changeStat === dStr) {
+            dSrc = afterSource;
+            dStat = afterStat;
+        }
     }
 
     // ステータス実数値にランク補正を適用
-    const attackerRank = attacker.stats[aStr] ? attacker.stats[aStr].rank || 0 : 0;
-    const defenderRank = defender.stats[dStr] ? defender.stats[dStr].rank || 0 : 0;
-    
+    const attackerRank = aSrc.stats[aStat] ? aSrc.stats[aStat].rank || 0 : 0;
+    let defenderRank = dSrc.stats[dStat] ? dSrc.stats[dStat].rank || 0 : 0;
 
-    
+    // 特殊技: 防御側ランク上昇無視
+    if (specificMove && specificMove.ignore_stats_change) {
+        defenderRank = Math.min(0, defenderRank);
+    }
+
     // 天候とタイプの取得（ステータス補正で使用するため前倒し）
     const weather = (field && field.weather) || 'none';
     const defenderTera = defender.teraType && defender.teraType !== 'なし' ? defender.teraType : null;
     const isDefenderStellar = defenderTera === 'ステラ';
     const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
 
-    let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
-    let D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
+    let A = Math.floor(aSrc.realStats[aStat] * getRankMultiplier(attackerRank));
+    let D = Math.floor(dSrc.realStats[dStat] * getRankMultiplier(defenderRank));
 
     // 天候「ゆき」: こおりタイプの防御を1.5倍にする (物理のみ)
     if (weather === 'snow' && dStr === 'defence' && defenderTypes.includes('こおり')) {
@@ -333,6 +360,89 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     };
 
     let finalPower = power;
+
+    // 特殊技: 威力変動の処理
+    if (specificMove) {
+        // 相手の体重依存
+        if (specificMove.depend_on_weight) {
+            const w = defender.speciesData ? defender.speciesData.weight_kg : 0;
+            if (w >= 200) finalPower = 120;
+            else if (w >= 100) finalPower = 100;
+            else if (w >= 50) finalPower = 80;
+            else if (w >= 25) finalPower = 60;
+            else if (w >= 10) finalPower = 40;
+            else finalPower = 20;
+        }
+
+        // 体重差依存
+        if (specificMove.depend_on_difference_weight) {
+            const atkW = attacker.speciesData ? attacker.speciesData.weight_kg : 0;
+            const defW = defender.speciesData ? defender.speciesData.weight_kg : 0;
+            if (atkW === 0) {
+                finalPower = 40;
+            } else if (defW * 5 <= atkW) {
+                finalPower = 120;
+            } else if (defW * 4 <= atkW) {
+                finalPower = 100;
+            } else if (defW * 3 <= atkW) {
+                finalPower = 80;
+            } else if (defW * 2 <= atkW) {
+                finalPower = 60;
+            } else {
+                finalPower = 40;
+            }
+        }
+
+        // 素早さ差依存
+        if (specificMove.depend_on_difference_speed) {
+            const atkSpd = Math.floor(attacker.realStats.speed * getRankMultiplier(attacker.stats.speed ? attacker.stats.speed.rank || 0 : 0));
+            const defSpd = Math.floor(defender.realStats.speed * getRankMultiplier(defender.stats.speed ? defender.stats.speed.rank || 0 : 0));
+
+            if (moveName === 'ジャイロボール') {
+                finalPower = atkSpd === 0 ? 1 : Math.min(150, Math.floor(25 * defSpd / atkSpd) + 1);
+            } else if (moveName === 'エレキボール') {
+                if (defSpd === 0) {
+                    finalPower = 150;
+                } else {
+                    const ratio = atkSpd / defSpd;
+                    if (ratio >= 4) finalPower = 150;
+                    else if (ratio >= 3) finalPower = 120;
+                    else if (ratio >= 2) finalPower = 80;
+                    else if (ratio >= 1) finalPower = 60;
+                    else finalPower = 40;
+                }
+            }
+        }
+
+        // HP依存
+        if (specificMove.depend_on_hp) {
+            if (['しおふき', 'ふんか', 'ドラゴンエナジー'].includes(moveName)) {
+                finalPower = Math.max(1, Math.floor(150 * attacker.currentHp / attacker.maxHp));
+            } else if (['じたばた', 'きしかいせい'].includes(moveName)) {
+                const ratio = attacker.currentHp / attacker.maxHp * 48;
+                if (ratio < 2) finalPower = 200;
+                else if (ratio < 5) finalPower = 150;
+                else if (ratio < 10) finalPower = 100;
+                else if (ratio < 17) finalPower = 80;
+                else if (ratio < 33) finalPower = 40;
+                else finalPower = 20;
+            } else if (['にぎりつぶす', 'しぼりとる'].includes(moveName)) {
+                finalPower = Math.max(1, Math.floor(120 * defender.currentHp / defender.maxHp));
+            }
+        }
+
+        // ランク上昇依存
+        if (specificMove.depend_on_ability_rank) {
+            const statKeys = ['attack', 'defence', 'spAtk', 'spDef', 'speed'];
+            let totalPositive = 0;
+            for (const key of statKeys) {
+                const rank = attacker.stats[key] ? attacker.stats[key].rank || 0 : 0;
+                if (rank > 0) totalPositive += rank;
+            }
+            finalPower = Math.min(220, 20 + totalPositive * 20);
+        }
+    }
+
     let itemPowerBoostApplied = false;
     let areaModifierInfo = null;
     if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'power') {

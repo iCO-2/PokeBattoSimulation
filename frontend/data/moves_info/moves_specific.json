@@ -98,7 +98,7 @@
         "ignore_stats_change": true
     },
     "けたぐり": {
-        "memo": "相手の体重依存で計算する",
+        "memo": "相手の体重依存で計算する。10kg未満は20、25kg未満は40、50kg未満は60、100kg未満は80、200kg未満は100、それ以上は120。",
         "depend_on_other_stats": false,
         "change_target": "",
         "change_target_stats": "",
@@ -112,7 +112,7 @@
         "ignore_stats_change": false
     },
     "くさむすび": {
-        "memo": "相手の体重依存で計算する",
+        "memo": "相手の体重依存で計算する。10kg未満は20、25kg未満は40、50kg未満は60、100kg未満は80、200kg未満は100、それ以上は120。",
         "depend_on_other_stats": false,
         "change_target": "",
         "change_target_stats": "",
@@ -211,34 +211,6 @@
     },
     "きしかいせい": {
         "memo": "自分の残りHPが、2/48未満:200, 5/48未満:150, 10/48未満:100, 17/48未満:80, 33/48未満:40, 33/48以上:20",
-        "depend_on_other_stats": false,
-        "change_target": "",
-        "change_target_stats": "",
-        "change_target_after": "",
-        "change_target_stats_after": "",
-        "depend_on_difference_weight": false,
-        "depend_on_weight": false,
-        "depend_on_difference_speed": false,
-        "depend_on_hp": true,
-        "depend_on_ability_rank": false,
-        "ignore_stats_change": false
-    },
-    "がむしゃら": {
-        "memo": "相手のHPを自分の残HPと同じにする",
-        "depend_on_other_stats": false,
-        "change_target": "",
-        "change_target_stats": "",
-        "change_target_after": "",
-        "change_target_stats_after": "",
-        "depend_on_difference_weight": false,
-        "depend_on_weight": false,
-        "depend_on_difference_speed": false,
-        "depend_on_hp": true,
-        "depend_on_ability_rank": false,
-        "ignore_stats_change": false
-    },
-    "いたみわけ": {
-        "memo": "相手と自分のHPを、相手と自分のHPを合計して2で割った数値にする",
         "depend_on_other_stats": false,
         "change_target": "",
         "change_target_stats": "",

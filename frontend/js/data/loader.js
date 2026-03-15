@@ -5,6 +5,7 @@ export let USAGE_RATE_DATA = [];
 export let ABILITIES_DEX = {};
 export let MOVE_TYPE_MOVES = {};
 export let KNOWN_DAMAGE_MOVES = {};
+export let SPECIFIC_MOVES = {};
 
 export async function loadAllData() {
     try {
@@ -128,24 +129,38 @@ const TYPE_TRANSLATION = {
                 await Promise.all(moveTypePromises);
                 console.log(`Loaded move type data for: ${Object.keys(MOVE_TYPE_MOVES).join(', ')}`);
 
-                // 固定ダメージ技データの読み込み
-                try {
-                    const knownDmgRes = await fetch('./data/moves_info/moves_known_damage.json');
-                    if (knownDmgRes.ok) {
-                        const knownDmgData = await knownDmgRes.json();
-                        KNOWN_DAMAGE_MOVES = knownDmgData.moves || {};
-                        console.log(`Loaded ${Object.keys(KNOWN_DAMAGE_MOVES).length} known damage moves.`);
-                    } else {
-                        console.warn(`Failed to load moves_known_damage.json: ${knownDmgRes.status}`);
-                    }
-                } catch (e) {
-                    console.warn('Failed to load moves_known_damage.json:', e);
-                }
             } else {
                 console.warn(`Failed to load abilities data: ${abilitiesRes.status}`);
             }
         } catch (e) {
             console.warn('Failed to load abilities data:', e);
+        }
+
+        // 固定ダメージ技データの読み込み
+        try {
+            const knownDmgRes = await fetch('./data/moves_info/moves_known_damage.json');
+            if (knownDmgRes.ok) {
+                const knownDmgData = await knownDmgRes.json();
+                KNOWN_DAMAGE_MOVES = knownDmgData.moves || {};
+                console.log(`Loaded ${Object.keys(KNOWN_DAMAGE_MOVES).length} known damage moves.`);
+            } else {
+                console.warn(`Failed to load moves_known_damage.json: ${knownDmgRes.status}`);
+            }
+        } catch (e) {
+            console.warn('Failed to load moves_known_damage.json:', e);
+        }
+
+        // 特殊ダメージ計算技データの読み込み
+        try {
+            const specificRes = await fetch('./data/moves_info/moves_specific.json');
+            if (specificRes.ok) {
+                SPECIFIC_MOVES = await specificRes.json();
+                console.log(`Loaded ${Object.keys(SPECIFIC_MOVES).length} specific moves.`);
+            } else {
+                console.warn(`Failed to load moves_specific.json: ${specificRes.status}`);
+            }
+        } catch (e) {
+            console.warn('Failed to load moves_specific.json:', e);
         }
 
     } catch (error) {
