@@ -40,23 +40,77 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     let A = Math.floor(attacker.realStats[aStr] * getRankMultiplier(attackerRank));
     let D = Math.floor(defender.realStats[dStr] * getRankMultiplier(defenderRank));
 
-    // 持ち物補正（攻撃/特攻アップ系・ダメージアップ系）
+    // 持ち物補正
     const attackerItem = ITEMS_DEX[attacker.item];
-    let itemModifier = null;
-    if (attackerItem && attackerItem.type === 'stat_modifier' && attackerItem.stat === aStr) {
-        A = Math.floor(A * attackerItem.multiplier);
-        itemModifier = {
-            type: 'stat_modifier',
-            name: attacker.item,
-            stat: aStr,
-            multiplier: attackerItem.multiplier
-        };
-    } else if (attackerItem && attackerItem.type === 'damage_boost') {
-        itemModifier = {
-            type: 'damage_boost',
-            name: attacker.item,
-            multiplier: attackerItem.multiplier
-        };
+    const defenderItem = ITEMS_DEX[defender.item];
+    let itemModifierInfo = null;
+    let defenderItemModifierInfo = null;
+
+    // --- 攻撃側の持ち物: stat_modifier → A に適用 ---
+    if (attackerItem && attackerItem.type === 'stat_modifier') {
+        const targets = attackerItem.effect_target || [];
+        const pokemonOk = !attackerItem.effect_pokemon
+            || attackerItem.effect_pokemon.includes((attacker.name || '').trim());
+
+        if (pokemonOk) {
+            let applyStat = null;
+            if (targets.includes(aStr)) {
+                applyStat = aStr;
+            } else if (targets.includes('highest')) {
+                // HP以外の実数値(ランク補正前)で最も高いステータスを特定
+                const rs = attacker.realStats;
+                const statEntries = [
+                    ['attack', rs.attack || 0], ['defence', rs.defence || 0],
+                    ['spAtk', rs.spAtk || 0], ['spDef', rs.spDef || 0],
+                    ['speed', rs.speed || 0]
+                ];
+                const highestEntry = statEntries.reduce((a, b) => b[1] > a[1] ? b : a);
+                if (highestEntry[0] === aStr) {
+                    applyStat = aStr;
+                }
+            }
+
+            if (applyStat) {
+                A = Math.floor(A * attackerItem.multiplier);
+                itemModifierInfo = {
+                    type: 'stat_modifier', name: attacker.item,
+                    stat: applyStat, multiplier: attackerItem.multiplier
+                };
+            }
+        }
+    }
+
+    // --- 防御側の持ち物: stat_modifier → D に適用 ---
+    if (defenderItem && defenderItem.type === 'stat_modifier') {
+        const targets = defenderItem.effect_target || [];
+        const pokemonOk = !defenderItem.effect_pokemon
+            || defenderItem.effect_pokemon.includes((defender.name || '').trim());
+
+        if (pokemonOk) {
+            let applyStat = null;
+            if (targets.includes(dStr)) {
+                applyStat = dStr;
+            } else if (targets.includes('highest')) {
+                const rs = defender.realStats;
+                const statEntries = [
+                    ['attack', rs.attack || 0], ['defence', rs.defence || 0],
+                    ['spAtk', rs.spAtk || 0], ['spDef', rs.spDef || 0],
+                    ['speed', rs.speed || 0]
+                ];
+                const highestEntry = statEntries.reduce((a, b) => b[1] > a[1] ? b : a);
+                if (highestEntry[0] === dStr) {
+                    applyStat = dStr;
+                }
+            }
+
+            if (applyStat) {
+                D = Math.floor(D * defenderItem.multiplier);
+                defenderItemModifierInfo = {
+                    type: 'stat_modifier', name: defender.item,
+                    stat: applyStat, multiplier: defenderItem.multiplier
+                };
+            }
+        }
     }
 
     // 特性補正
@@ -182,18 +236,69 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // --- 持ち物: boost_phase='power' の威力補正（baseDamage計算前に適用）---
+    // 英語タイプ名 → 日本語タイプ名 変換マップ (effect_targetのxxx_type_movesは英語)
+    const TYPE_EN_TO_JP = {
+        'normal': 'ノーマル', 'fire': 'ほのお', 'water': 'みず',
+        'electric': 'でんき', 'grass': 'くさ', 'ice': 'こおり',
+        'fighting': 'かくとう', 'poison': 'どく', 'ground': 'じめん',
+        'flying': 'ひこう', 'psychic': 'エスパー', 'bug': 'むし',
+        'rock': 'いわ', 'ghost': 'ゴースト', 'dragon': 'ドラゴン',
+        'dark': 'あく', 'steel': 'はがね', 'fairy': 'フェアリー'
+    };
+
+    // 五捨五超入: 小数部が0.5以下なら切り捨て、0.5より大きいなら切り上げ
+    const pokeRound = (n) => {
+        const frac = n - Math.floor(n);
+        return frac > 0.5 ? Math.ceil(n) : Math.floor(n);
+    };
+    // 4096基準の補正適用:
+    //  1. 補正値 = Math.round(4096 * multiplier) (四捨五入)
+    //  2. 結果 = pokeRound(value * 補正値 / 4096)  (五捨五超入)
+    const applyModifier = (value, multiplier) => {
+        const mod = Math.round(4096 * multiplier);
+        return pokeRound(value * mod / 4096);
+    };
+
+    // effect_target の条件判定ヘルパー
+    const checkEffectTarget = (targets) => {
+        return targets.some(t => {
+            if (t === 'all') return true;
+            if (t === 'super_effective') return false; // typeModは後で確定するのでここでは判定不可
+            if (t === 'physical_moves') return move.category === 'Physical';
+            if (t === 'special_moves') return move.category === 'Special';
+            if (t === 'punch_moves') return MOVE_TYPE_MOVES['punch'] && MOVE_TYPE_MOVES['punch'].has(moveName);
+            if (t.endsWith('_type_moves')) {
+                const typePart = t.replace('_type_moves', '').toLowerCase();
+                const jpType = TYPE_EN_TO_JP[typePart];
+                return jpType && moveType === jpType;
+            }
+            return false;
+        });
+    };
+
+    let finalPower = power;
+    let itemPowerBoostApplied = false;
+    if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'power') {
+        const targets = attackerItem.effect_target || [];
+        if (checkEffectTarget(targets)) {
+            finalPower = applyModifier(finalPower, attackerItem.multiplier);
+            itemPowerBoostApplied = true;
+            itemModifierInfo = {
+                type: 'damage_boost', name: attacker.item,
+                multiplier: attackerItem.multiplier
+            };
+        }
+    }
 
     // 1. ダメージ計算の基礎
     // Floor(Floor(Floor(Lv * 2 / 5 + 2) * Power * A / D) / 50) + 2
-    let baseDamage = Math.floor(Math.floor(Math.floor(level * 2 / 5 + 2) * power * A / D) / 50) + 2;
+    let baseDamage = Math.floor(Math.floor(Math.floor(level * 2 / 5 + 2) * finalPower * A / D) / 50) + 2;
 
     // 2. 補正 (簡易実装)
     
     // 天候: なし
-    // 急所: 1.5倍 (リフレクター無視等は未実装)
-    if (attacker.conditions && attacker.conditions.isCrit) {
-        baseDamage = Math.floor(baseDamage * 1.5);
-    }
+    // 急所: ループ内で五捨五超入を適用
     
     // 乱数 (0.85 ~ 1.00) を適用する前の値を保持して、最後にリスト生成する
     
@@ -239,35 +344,57 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const defenderTypes = (defenderTera && !isDefenderStellar) ? [defenderTera] : (defender.speciesData ? defender.speciesData.types : []);
     const typeMod = getTypeEffectiveness(moveType, defenderTypes);
     
-
-    
     // 状態異常(やけど): 物理なら0.5 (未実装)
-
     // 壁(リフレクター/光の壁): 防御側
     // 複数対象補正: 0.75
 
+    // --- 攻撃側の持ち物: boost_phase='damage' のダメージ補正（ループ内で適用）---
+    let itemDamageBoostApplies = false;
+    if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'damage') {
+        const targets = attackerItem.effect_target || [];
+        // super_effectiveはtypeModが確定した後で判定
+        itemDamageBoostApplies = targets.some(t => {
+            if (t === 'all') return true;
+            if (t === 'super_effective') return typeMod > 1.0;
+            return false;
+        });
+
+        if (itemDamageBoostApplies) {
+            itemModifierInfo = {
+                type: 'damage_boost', name: attacker.item,
+                multiplier: attackerItem.multiplier
+            };
+        }
+    }
+
     // 最終ダメージ算出ループ (16段階乱数)
+
     const rolls = [];
     for (let i = 85; i <= 100; i++) {
         let dmg = baseDamage;
         
-        // 1. 乱数 (0.85 .. 1.00)
+        // 1. 乱数 (0.85 .. 1.00) → 切り捨て
         dmg = Math.floor(dmg * i / 100);
 
-        // 2. タイプ一致 (STAB)
-        dmg = Math.floor(dmg * stabMod);
-
-        // 3. タイプ相性
-        dmg = Math.floor(dmg * typeMod);
-
-        // 4. ダメージ補正（いのちのたま等）
-        if (attackerItem && attackerItem.type === 'damage_boost') {
-            dmg = Math.floor(dmg * attackerItem.multiplier);
+        // 2. 急所 → 4096基準補正
+        if (attacker.conditions && attacker.conditions.isCrit) {
+            dmg = applyModifier(dmg, 1.5);
         }
 
-        // 5. 防御側特性補正 (defensive)
+        // 3. タイプ一致 (STAB) → 4096基準補正
+        dmg = applyModifier(dmg, stabMod);
+
+        // 4. タイプ相性 → 切り捨て
+        dmg = Math.floor(dmg * typeMod);
+
+        // 5. 攻撃側持ち物: damage_boost → 4096基準補正
+        if (itemDamageBoostApplies) {
+            dmg = applyModifier(dmg, attackerItem.multiplier);
+        }
+
+        // 6. 防御側特性補正 (defensive) → 4096基準補正
         if (abilityDefensiveMod !== 1.0) {
-            dmg = Math.floor(dmg * abilityDefensiveMod);
+            dmg = applyModifier(dmg, abilityDefensiveMod);
         }
         
         if (dmg < 1) dmg = 1; // 最低1ダメージ (タイプ無効0倍は別途)
@@ -283,7 +410,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         max: rolls[rolls.length - 1],
         rolls: rolls,
         typeMod: typeMod,
-        itemModifier: itemModifier,
+        itemModifier: itemModifierInfo,
+        defenderItemModifier: defenderItemModifierInfo,
         stellarBoosted: stellarBoosted,
         moveType: moveType,
         abilityOffensiveInfo: abilityOffensiveInfo,

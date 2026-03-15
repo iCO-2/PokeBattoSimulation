@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, loadAllData } from './data/loader.js?v=4';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=206';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=213';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -1004,19 +1004,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const itemModifierText = resultContainer.querySelector('.item-modifier');
                 if (itemModifierText) {
+                    const STAT_LABELS = { attack: '攻撃', spAtk: '特攻', defence: '防御', spDef: '特防', speed: '素早さ' };
+                    let parts = [];
+
+                    // 攻撃側持ち物
                     if (damageResult.itemModifier) {
                         const mod = damageResult.itemModifier;
                         if (mod.type === 'stat_modifier') {
-                            const statLabel = mod.stat === 'attack' ? '攻撃' : (mod.stat === 'spAtk' ? '特攻' : mod.stat);
-                            itemModifierText.textContent = `${mod.name} (${statLabel}×${mod.multiplier})`;
+                            parts.push(`${mod.name} (${STAT_LABELS[mod.stat] || mod.stat}×${mod.multiplier})`);
                         } else if (mod.type === 'damage_boost') {
-                            itemModifierText.textContent = `${mod.name} (ダメージ×${mod.multiplier})`;
-                        } else {
-                            itemModifierText.textContent = '-';
+                            parts.push(`${mod.name} (ダメージ×${mod.multiplier})`);
                         }
-                    } else {
-                        itemModifierText.textContent = '-';
                     }
+                    // 防御側持ち物
+                    if (damageResult.defenderItemModifier) {
+                        const dmod = damageResult.defenderItemModifier;
+                        parts.push(`${dmod.name} (${STAT_LABELS[dmod.stat] || dmod.stat}×${dmod.multiplier})`);
+                    }
+
+                    itemModifierText.textContent = parts.length > 0 ? parts.join(' / ') : '-';
                 }
 
                 const abilityModifierText = resultContainer.querySelector('.ability-modifier');
