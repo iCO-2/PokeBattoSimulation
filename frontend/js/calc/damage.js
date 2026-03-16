@@ -14,6 +14,20 @@ export function getRankMultiplier(rank) {
     return 1 / (1 + Math.abs(rank) * 0.5);
 }
 
+// 五捨五超入: 小数部が0.5以下なら切り捨て、0.5より大きいなら切り上げ
+export const pokeRound = (n) => {
+    const frac = n - Math.floor(n);
+    return frac > 0.5 ? Math.ceil(n) : Math.floor(n);
+};
+
+// 4096基準の補正適用:
+//  1. 補正値 = Math.round(4096 * multiplier) (四捨五入)
+//  2. 結果 = pokeRound(value * 補正値 / 4096)  (五捨五超入)
+export const applyModifier = (value, multiplier) => {
+    const mod = Math.round(4096 * multiplier);
+    return pokeRound(value * mod / 4096);
+};
+
 export function calculateDamage(attacker, defender, move, field = {}) {
 
     // 0. 基本情報取得
@@ -329,18 +343,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         'dark': 'あく', 'steel': 'はがね', 'fairy': 'フェアリー'
     };
 
-    // 五捨五超入: 小数部が0.5以下なら切り捨て、0.5より大きいなら切り上げ
-    const pokeRound = (n) => {
-        const frac = n - Math.floor(n);
-        return frac > 0.5 ? Math.ceil(n) : Math.floor(n);
-    };
-    // 4096基準の補正適用:
-    //  1. 補正値 = Math.round(4096 * multiplier) (四捨五入)
-    //  2. 結果 = pokeRound(value * 補正値 / 4096)  (五捨五超入)
-    const applyModifier = (value, multiplier) => {
-        const mod = Math.round(4096 * multiplier);
-        return pokeRound(value * mod / 4096);
-    };
+    // pokeRound, applyModifier はモジュールスコープからそのまま使用
 
     // effect_target の条件判定ヘルパー
     const checkEffectTarget = (targets) => {
