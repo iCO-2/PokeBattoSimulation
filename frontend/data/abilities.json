@@ -187,5 +187,23 @@
     "weakken_stats": "spDef",
     "is_special": false,
     "memo": ""
+  },
+  "マルチスケイル": {
+    "type": "fullhp_guard",
+    "offensive": 1.0,
+    "defensive": 0.5,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "残りHPが満タンのとき、受けるダメージを半減"
+  },
+  "ファントムガード": {
+    "type": "fullhp_guard",
+    "offensive": 1.0,
+    "defensive": 0.5,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "残りHPが満タンのとき、受けるダメージを半減"
   }
 }

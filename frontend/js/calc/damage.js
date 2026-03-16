@@ -582,6 +582,15 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // マルチスケイル / ファントムガード判定
+    const FULLHP_GUARD_ABILITIES = ['マルチスケイル', 'ファントムガード'];
+    const fullHpGuardApplies = FULLHP_GUARD_ABILITIES.includes(defender.ability)
+        && defender.currentHp >= defender.maxHp;
+    let fullHpGuardInfo = null;
+    if (fullHpGuardApplies) {
+        fullHpGuardInfo = { name: defender.ability, multiplier: 0.5 };
+    }
+
     // 最終ダメージ算出ループ (16段階乱数)
 
     const rolls = [];
@@ -632,6 +641,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             dmg = applyModifier(dmg, 0.5);
         }
         if (wallLight && move.category === 'Special') {
+            dmg = applyModifier(dmg, 0.5);
+        }
+
+        // 8. マルチスケイル / ファントムガード: HP満タン時ダメージ半減
+        if (fullHpGuardApplies) {
             dmg = applyModifier(dmg, 0.5);
         }
 
@@ -707,6 +721,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         areaModifier: areaModifierInfo,
         weatherDefModifier: weatherDefModifierInfo,
         wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
+        fullHpGuardInfo: fullHpGuardInfo,
         specificMoveInfo: specificMoveInfo
     };
 }
