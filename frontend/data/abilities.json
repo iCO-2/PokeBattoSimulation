@@ -205,5 +205,14 @@
     "weakken_stats": "",
     "is_special": true,
     "memo": "残りHPが満タンのとき、受けるダメージを半減"
+  },
+  "ふゆう": {
+    "type": "levitate",
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "じめんタイプの技を無効化"
   }
 }

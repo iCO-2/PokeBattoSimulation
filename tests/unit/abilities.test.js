@@ -159,6 +159,28 @@ describe('特性補正', () => {
         });
     });
 
+    describe('ふゆう', () => {
+        it('ふゆう + じめん技 → ダメージ=0', () => {
+            const atk = createPokemon();
+            const def = createPokemon({ ability: 'ふゆう' });
+            const move = createMove({ power: 100, type: 'じめん', category: 'Physical' });
+
+            const result = calculateDamage(atk, def, move);
+            expect(result.rolls.every(r => r === 0)).toBe(true);
+        });
+
+        it('ふゆう + 非じめん技 → 通常ダメージ', () => {
+            const atk = createPokemon();
+            const def = createPokemon({ ability: 'ふゆう' });
+            const defNoAbility = createPokemon();
+            const move = createMove({ power: 80, type: 'ほのお', category: 'Special' });
+
+            const result = calculateDamage(atk, def, move);
+            const resultNo = calculateDamage(atk, defNoAbility, move);
+            expect(result.max).toBe(resultNo.max);
+        });
+    });
+
     describe('わざわい系特性', () => {
         it('わざわいのつるぎ (攻撃側) → D×0.75', () => {
             const atk = createPokemon({ ability: 'わざわいのつるぎ' });

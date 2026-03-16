@@ -128,6 +128,10 @@ export const MOCK_ABILITIES_DEX = {
         type: 'dezaster', offensive: 1.0, defensive: 1.0,
         weaken: 0.75, weakken_stats: 'attack', is_special: false
     },
+    'ふゆう': {
+        type: 'levitate', offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
     'マルチスケイル': {
         type: 'fullhp_guard', offensive: 1.0, defensive: 0.5,
         weaken: 1.00, weakken_stats: '', is_special: true
