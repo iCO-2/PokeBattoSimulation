@@ -14,6 +14,20 @@ export function getRankMultiplier(rank) {
     return 1 / (1 + Math.abs(rank) * 0.5);
 }
 
+// 五捨五超入: 小数部が0.5以下なら切り捨て、0.5より大きいなら切り上げ
+export const pokeRound = (n) => {
+    const frac = n - Math.floor(n);
+    return frac > 0.5 ? Math.ceil(n) : Math.floor(n);
+};
+
+// 4096基準の補正適用:
+//  1. 補正値 = Math.round(4096 * multiplier) (四捨五入)
+//  2. 結果 = pokeRound(value * 補正値 / 4096)  (五捨五超入)
+export const applyModifier = (value, multiplier) => {
+    const mod = Math.round(4096 * multiplier);
+    return pokeRound(value * mod / 4096);
+};
+
 export function calculateDamage(attacker, defender, move, field = {}) {
 
     // 0. 基本情報取得
@@ -259,6 +273,16 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const defenderAbilityData = ABILITIES_DEX[defender.ability];
     if (defenderAbilityData && defenderAbilityData.type !== 'dezaster') {
         const defType = defenderAbilityData.type;
+
+        // ふゆう: じめんタイプの技を無効化
+        if (defType === 'levitate' && moveType === 'じめん') {
+            abilityDefensiveMod = 0;
+            abilityDefensiveInfo = {
+                name: defender.ability,
+                multiplier: 0
+            };
+        }
+
         const defMovesSet = MOVE_TYPE_MOVES[defType];
         if (defMovesSet && defMovesSet.has(moveName)) {
             abilityDefensiveMod = defenderAbilityData.defensive;
@@ -329,18 +353,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         'dark': 'あく', 'steel': 'はがね', 'fairy': 'フェアリー'
     };
 
-    // 五捨五超入: 小数部が0.5以下なら切り捨て、0.5より大きいなら切り上げ
-    const pokeRound = (n) => {
-        const frac = n - Math.floor(n);
-        return frac > 0.5 ? Math.ceil(n) : Math.floor(n);
-    };
-    // 4096基準の補正適用:
-    //  1. 補正値 = Math.round(4096 * multiplier) (四捨五入)
-    //  2. 結果 = pokeRound(value * 補正値 / 4096)  (五捨五超入)
-    const applyModifier = (value, multiplier) => {
-        const mod = Math.round(4096 * multiplier);
-        return pokeRound(value * mod / 4096);
-    };
+    // pokeRound, applyModifier はモジュールスコープからそのまま使用
 
     // effect_target の条件判定ヘルパー
     const checkEffectTarget = (targets) => {
@@ -462,28 +475,42 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     // --- フィールド補正 (威力補正) ---
     const terrain = (field && field.terrain) || 'none';
     const GRASSY_HALVED_MOVES = ['じしん', 'じならし'];
-    
+
+    // 接地判定: ひこうタイプまたはふゆう持ちは浮いているためフィールド効果を受けない
+    const isGrounded = (pokemon) => {
+        const types = pokemon.speciesData ? pokemon.speciesData.types : [];
+        if (types.includes('ひこう')) return false;
+        if (pokemon.ability === 'ふゆう') return false;
+        return true;
+    };
+    const attackerGrounded = isGrounded(attacker);
+    const defenderGrounded = isGrounded(defender);
+
     // a. 威力強化補正1 (ワイドフォース / サイコブレイド の固有補正)
+    // 攻撃側が接地している場合のみ適用
     let hasMoveSpecificBoost = false;
-    if (terrain === 'psychic' && moveName === 'ワイドフォース') {
-        finalPower = Math.round(finalPower * 6144 / 4096);
-        hasMoveSpecificBoost = true;
-    } else if (terrain === 'electric' && moveName === 'サイコブレイド') {
-        finalPower = Math.round(finalPower * 6144 / 4096);
-        hasMoveSpecificBoost = true;
+    if (attackerGrounded) {
+        if (terrain === 'psychic' && moveName === 'ワイドフォース') {
+            finalPower = Math.round(finalPower * 6144 / 4096);
+            hasMoveSpecificBoost = true;
+        } else if (terrain === 'electric' && moveName === 'サイコブレイド') {
+            finalPower = Math.round(finalPower * 6144 / 4096);
+            hasMoveSpecificBoost = true;
+        }
     }
 
     // b. 威力強化補正2 (通常のフィールドタイプ強化 / 弱化補正)
+    // 攻撃側の強化は攻撃側が接地、防御側への弱化は防御側が接地している場合のみ
     let terrainModVal = 1.0;
     if (terrain === 'electric') {
-        if (moveType === 'でんき' || moveName === 'サイコブレイド') terrainModVal = 1.3;
+        if (attackerGrounded && (moveType === 'でんき' || moveName === 'サイコブレイド')) terrainModVal = 1.3;
     } else if (terrain === 'psychic') {
-        if (moveType === 'エスパー') terrainModVal = 1.3;
+        if (attackerGrounded && moveType === 'エスパー') terrainModVal = 1.3;
     } else if (terrain === 'grassy') {
-        if (moveType === 'くさ') terrainModVal = 1.3;
-        else if (GRASSY_HALVED_MOVES.includes(moveName)) terrainModVal = 0.5;
+        if (attackerGrounded && moveType === 'くさ') terrainModVal = 1.3;
+        else if (defenderGrounded && GRASSY_HALVED_MOVES.includes(moveName)) terrainModVal = 0.5;
     } else if (terrain === 'misty') {
-        if (moveType === 'ドラゴン') terrainModVal = 0.5;
+        if (defenderGrounded && moveType === 'ドラゴン') terrainModVal = 0.5;
     }
 
     if (terrainModVal !== 1.0) {
@@ -582,6 +609,15 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // マルチスケイル / ファントムガード判定
+    const FULLHP_GUARD_ABILITIES = ['マルチスケイル', 'ファントムガード'];
+    const fullHpGuardApplies = FULLHP_GUARD_ABILITIES.includes(defender.ability)
+        && defender.currentHp >= defender.maxHp;
+    let fullHpGuardInfo = null;
+    if (fullHpGuardApplies) {
+        fullHpGuardInfo = { name: defender.ability, multiplier: 0.5 };
+    }
+
     // 最終ダメージ算出ループ (16段階乱数)
 
     const rolls = [];
@@ -632,6 +668,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             dmg = applyModifier(dmg, 0.5);
         }
         if (wallLight && move.category === 'Special') {
+            dmg = applyModifier(dmg, 0.5);
+        }
+
+        // 8. マルチスケイル / ファントムガード: HP満タン時ダメージ半減
+        if (fullHpGuardApplies) {
             dmg = applyModifier(dmg, 0.5);
         }
 
@@ -707,6 +748,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         areaModifier: areaModifierInfo,
         weatherDefModifier: weatherDefModifierInfo,
         wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
+        fullHpGuardInfo: fullHpGuardInfo,
         specificMoveInfo: specificMoveInfo
     };
 }

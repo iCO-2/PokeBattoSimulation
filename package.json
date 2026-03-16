@@ -1,0 +1,13 @@
+{
+  "name": "pokecalc-sv",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "vitest": "^3.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:verbose": "vitest run --reporter=verbose",
+    "test:watch": "vitest watch"
+  }
+}
