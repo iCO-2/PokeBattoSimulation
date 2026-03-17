@@ -159,6 +159,49 @@ describe('特性補正', () => {
         });
     });
 
+    describe('ちからもち', () => {
+        it('ちからもち + 物理技 → A×2.0 (4096基準補正)', () => {
+            const atk = createPokemon({ ability: 'ちからもち' });
+            const atkNoAbility = createPokemon();
+            const def = createPokemon();
+            const move = createMove({ power: 80, type: 'かくとう', category: 'Physical' });
+
+            const result = calculateDamage(atk, def, move);
+            const resultNo = calculateDamage(atkNoAbility, def, move);
+            expect(result.max).toBeGreaterThan(resultNo.max);
+            expect(result.abilityOffensiveInfo).toEqual({ name: 'ちからもち', multiplier: 2.0 });
+        });
+
+        it('ちからもち + 特殊技 → 効果なし', () => {
+            const atk = createPokemon({ ability: 'ちからもち' });
+            const atkNoAbility = createPokemon();
+            const def = createPokemon();
+            const move = createMove({ power: 80, type: 'エスパー', category: 'Special' });
+
+            const result = calculateDamage(atk, def, move);
+            const resultNo = calculateDamage(atkNoAbility, def, move);
+            expect(result.max).toBe(resultNo.max);
+        });
+
+        it('ちからもち: 4096基準の端数処理が正しい', () => {
+            // A=121 の場合: mod=Math.round(4096*2.0)=8192, pokeRound(121*8192/4096)=pokeRound(242)=242
+            const atk = createPokemon({
+                ability: 'ちからもち',
+                realStats: { attack: 121, defence: 120, spAtk: 120, spDef: 120, speed: 120 }
+            });
+            const atkNoAbility = createPokemon({
+                realStats: { attack: 242, defence: 120, spAtk: 120, spDef: 120, speed: 120 }
+            });
+            const def = createPokemon();
+            const move = createMove({ power: 80, type: 'かくとう', category: 'Physical' });
+
+            // ちからもちA=121→242 と素のA=242 は同じダメージになるはず
+            const result = calculateDamage(atk, def, move);
+            const resultEquiv = calculateDamage(atkNoAbility, def, move);
+            expect(result.max).toBe(resultEquiv.max);
+        });
+    });
+
     describe('ふゆう', () => {
         it('ふゆう + じめん技 → ダメージ=0', () => {
             const atk = createPokemon();

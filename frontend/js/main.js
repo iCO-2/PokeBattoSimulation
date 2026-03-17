@@ -2094,7 +2094,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (nameInput) nameInput.value = pokemon.name;
         if (levelInput) levelInput.value = pokemon.level;
-        if (teraSelect) teraSelect.value = pokemon.teraType;
+        if (teraSelect) {
+            teraSelect.value = pokemon.teraType;
+            // カスタムテラドロップダウンの表示も同期
+            const container = teraSelect.closest('.tera-custom-select');
+            if (container) {
+                const display = container.querySelector('.tera-selected');
+                if (display) updateTeraDisplay(display, pokemon.teraType);
+                // 選択ハイライト更新
+                container.querySelectorAll('.tera-option').forEach(o => {
+                    o.classList.toggle('selected', o.dataset.value === pokemon.teraType);
+                });
+            }
+        }
         if (itemSelect) itemSelect.value = pokemon.item || '';
 
         // 使用率データ表示をポケモンに同期

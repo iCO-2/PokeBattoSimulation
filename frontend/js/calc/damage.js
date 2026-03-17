@@ -314,7 +314,17 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
-    // 攻撃側特性補正を攻撃力に適用
+    // ちからもち: 物理技の攻撃力を2.0倍（4096基準補正: 四捨五入→五捨五超入）
+    if (attackerAbilityData && attackerAbilityData.type === 'power_boost' && move.category === 'Physical') {
+        A = applyModifier(A, attackerAbilityData.offensive);
+        if (A < 1) A = 1;
+        abilityOffensiveInfo = {
+            name: attacker.ability,
+            multiplier: attackerAbilityData.offensive
+        };
+    }
+
+    // 攻撃側特性補正を攻撃力に適用（ちからもち以外の汎用特性）
     if (abilityOffensiveMod !== 1.0) {
         A = Math.floor(A * abilityOffensiveMod);
     }
