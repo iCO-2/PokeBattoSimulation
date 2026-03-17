@@ -171,5 +171,40 @@ describe('フィールド補正', () => {
                 calculateDamage(atk, defGrounded, move, {}).max
             );
         });
+
+        it('ひこうタイプがテラスタルで非ひこうに → フィールド効果を受ける', () => {
+            const atkTeraGround = createPokemon({
+                speciesData: { types: ['でんき', 'ひこう'], weight_kg: 50 },
+                teraType: 'でんき'
+            });
+            const atkFlying = createPokemon({
+                speciesData: { types: ['でんき', 'ひこう'], weight_kg: 50 }
+            });
+            const def = createPokemon();
+            const move = createMove({ power: 80, type: 'でんき', category: 'Special' });
+
+            const resultTera = calculateDamage(atkTeraGround, def, move, { terrain: 'electric' });
+            const resultFlying = calculateDamage(atkFlying, def, move, { terrain: 'electric' });
+            const resultNoTerrain = calculateDamage(atkFlying, def, move, {});
+            // テラスタルで非ひこうになった → フィールド強化を受ける
+            expect(resultTera.max).toBeGreaterThan(resultNoTerrain.max);
+            // テラスなしひこうタイプ → フィールド強化を受けない
+            expect(resultFlying.max).toBe(resultNoTerrain.max);
+        });
+
+        it('ひこうタイプがステラテラス → 元タイプ維持で浮いたまま', () => {
+            const atkStellar = createPokemon({
+                speciesData: { types: ['でんき', 'ひこう'], weight_kg: 50 },
+                teraType: 'ステラ',
+                stellarUsedTypes: new Set()
+            });
+            const def = createPokemon();
+            const move = createMove({ power: 80, type: 'でんき', category: 'Special' });
+
+            const resultStellar = calculateDamage(atkStellar, def, move, { terrain: 'electric' });
+            const resultNoTerrain = calculateDamage(atkStellar, def, move, {});
+            // ステラは元タイプ維持 → ひこうのまま → フィールド効果なし
+            expect(resultStellar.max).toBe(resultNoTerrain.max);
+        });
     });
 });

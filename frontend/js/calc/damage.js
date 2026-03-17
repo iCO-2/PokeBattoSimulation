@@ -477,8 +477,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const GRASSY_HALVED_MOVES = ['じしん', 'じならし'];
 
     // 接地判定: ひこうタイプまたはふゆう持ちは浮いているためフィールド効果を受けない
+    // テラスタル時はテラタイプで判定（ステラは元タイプを維持）
     const isGrounded = (pokemon) => {
-        const types = pokemon.speciesData ? pokemon.speciesData.types : [];
+        const tera = pokemon.teraType && pokemon.teraType !== 'なし' ? pokemon.teraType : null;
+        const isStellar = tera === 'ステラ';
+        const types = (tera && !isStellar) ? [tera] : (pokemon.speciesData ? pokemon.speciesData.types : []);
         if (types.includes('ひこう')) return false;
         if (pokemon.ability === 'ふゆう') return false;
         return true;
