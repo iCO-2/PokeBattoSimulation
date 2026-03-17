@@ -314,7 +314,17 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
-    // 攻撃側特性補正を攻撃力に適用
+    // ちからもち: 物理技の攻撃力を2.0倍（4096基準補正: 四捨五入→五捨五超入）
+    if (attackerAbilityData && attackerAbilityData.type === 'power_boost' && move.category === 'Physical') {
+        A = applyModifier(A, attackerAbilityData.offensive);
+        if (A < 1) A = 1;
+        abilityOffensiveInfo = {
+            name: attacker.ability,
+            multiplier: attackerAbilityData.offensive
+        };
+    }
+
+    // 攻撃側特性補正を攻撃力に適用（ちからもち以外の汎用特性）
     if (abilityOffensiveMod !== 1.0) {
         A = Math.floor(A * abilityOffensiveMod);
     }
@@ -456,6 +466,39 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // テラスタルの威力60引き上げ: テラタイプ一致 & 威力60未満 → 60に
+    // ただし先制技・連続攻撃技は対象外
+    const attackerTeraPre = attacker.teraType && attacker.teraType !== 'なし' && attacker.teraType !== 'ステラ' ? attacker.teraType : null;
+    const preTeraPower = finalPower; // テクニシャン判定用に元の威力を保持
+    const isPriorityMove = (move.priority || 0) > 0;
+    const isMultiHitMove = move.multi_hit && move.multi_hit.is_multi;
+
+    // テクニシャン: 元の威力が60以下の技の威力を1.5倍（4096基準補正、四捨五入）
+    let technicianInfo = null;
+    let technicianBoostedPower = preTeraPower;
+    if (attackerAbilityData && attackerAbilityData.type === 'technician' && preTeraPower <= 60 && preTeraPower > 0) {
+        const techModNumerator = Math.round(4096 * attackerAbilityData.offensive);
+        technicianBoostedPower = Math.round(preTeraPower * techModNumerator / 4096);
+    }
+
+    // テラスタル威力引き上げ条件: テラタイプ一致 & 威力60未満 & 先制技でない & 連続攻撃技でない
+    // & テクニシャンで威力60を超える場合は無効
+    if (attackerTeraPre && moveType === attackerTeraPre && finalPower < 60 && finalPower > 0
+        && !isPriorityMove && !isMultiHitMove) {
+        // テクニシャン持ちの場合: テクニシャン適用後の威力が60を超えるなら引き上げ無効
+        const hasActiveTechnician = attackerAbilityData && attackerAbilityData.type === 'technician' && preTeraPower <= 60;
+        if (!hasActiveTechnician || technicianBoostedPower <= 60) {
+            finalPower = 60;
+        }
+    }
+
+    // テクニシャン補正を実際に適用
+    if (attackerAbilityData && attackerAbilityData.type === 'technician' && preTeraPower <= 60 && preTeraPower > 0) {
+        const techModNumerator = Math.round(4096 * attackerAbilityData.offensive);
+        finalPower = Math.round(finalPower * techModNumerator / 4096);
+        technicianInfo = { name: attacker.ability, multiplier: attackerAbilityData.offensive };
+    }
+
     let itemPowerBoostApplied = false;
     let areaModifierInfo = null;
     if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'power') {
@@ -477,8 +520,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const GRASSY_HALVED_MOVES = ['じしん', 'じならし'];
 
     // 接地判定: ひこうタイプまたはふゆう持ちは浮いているためフィールド効果を受けない
+    // テラスタル時はテラタイプで判定（ステラは元タイプを維持）
     const isGrounded = (pokemon) => {
-        const types = pokemon.speciesData ? pokemon.speciesData.types : [];
+        const tera = pokemon.teraType && pokemon.teraType !== 'なし' ? pokemon.teraType : null;
+        const isStellar = tera === 'ステラ';
+        const types = (tera && !isStellar) ? [tera] : (pokemon.speciesData ? pokemon.speciesData.types : []);
         if (types.includes('ひこう')) return false;
         if (pokemon.ability === 'ふゆう') return false;
         return true;
@@ -742,7 +788,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         defenderItemModifier: defenderItemModifierInfo,
         stellarBoosted: stellarBoosted,
         moveType: moveType,
-        abilityOffensiveInfo: abilityOffensiveInfo,
+        abilityOffensiveInfo: technicianInfo || abilityOffensiveInfo,
         abilityDefensiveInfo: abilityDefensiveInfo,
         dezasterInfo: dezasterInfo,
         areaModifier: areaModifierInfo,
