@@ -159,6 +159,66 @@ describe('特性補正', () => {
         });
     });
 
+    describe('テクニシャン', () => {
+        it('テクニシャン + 威力60以下の技 → 威力×1.5', () => {
+            const atk = createPokemon({ ability: 'テクニシャン' });
+            const atkNoAbility = createPokemon();
+            const def = createPokemon();
+            const move = createMove({ power: 40, type: 'ノーマル', category: 'Physical' });
+
+            const result = calculateDamage(atk, def, move);
+            const resultNo = calculateDamage(atkNoAbility, def, move);
+            expect(result.max).toBeGreaterThan(resultNo.max);
+            expect(result.abilityOffensiveInfo).toEqual({ name: 'テクニシャン', multiplier: 1.5 });
+        });
+
+        it('テクニシャン + 威力60の技 → 威力×1.5（60は対象）', () => {
+            const atk = createPokemon({ ability: 'テクニシャン' });
+            const atkNoAbility = createPokemon();
+            const def = createPokemon();
+            const move = createMove({ power: 60, type: 'ノーマル', category: 'Physical' });
+
+            const result = calculateDamage(atk, def, move);
+            const resultNo = calculateDamage(atkNoAbility, def, move);
+            expect(result.max).toBeGreaterThan(resultNo.max);
+        });
+
+        it('テクニシャン + 威力61以上の技 → 効果なし', () => {
+            const atk = createPokemon({ ability: 'テクニシャン' });
+            const atkNoAbility = createPokemon();
+            const def = createPokemon();
+            const move = createMove({ power: 80, type: 'ノーマル', category: 'Physical' });
+
+            const result = calculateDamage(atk, def, move);
+            const resultNo = calculateDamage(atkNoAbility, def, move);
+            expect(result.max).toBe(resultNo.max);
+        });
+
+        it('テクニシャン + テラスタル威力引き上げ: 元威力40→テラで60→テクニシャン適用', () => {
+            // 元威力40（60以下）なのでテクニシャンが適用される
+            // テラスタルで威力60に引き上げ後、テクニシャンで×1.5 → 威力90相当
+            const atkTera = createPokemon({
+                ability: 'テクニシャン',
+                speciesData: { types: ['ノーマル'], weight_kg: 50 },
+                teraType: 'ノーマル'
+            });
+            const atkNoTera = createPokemon({
+                ability: 'テクニシャン',
+                speciesData: { types: ['ノーマル'], weight_kg: 50 }
+            });
+            const def = createPokemon({
+                speciesData: { types: ['かくとう'], weight_kg: 50 } // ノーマル等倍
+            });
+            const move = createMove({ power: 40, type: 'ノーマル', category: 'Physical' });
+
+            const resultTera = calculateDamage(atkTera, def, move);
+            const resultNoTera = calculateDamage(atkNoTera, def, move);
+            // テラ時: 威力40→60に引き上げ→×1.5=90
+            // 非テラ時: 威力40→×1.5=60
+            expect(resultTera.max).toBeGreaterThan(resultNoTera.max);
+        });
+    });
+
     describe('ちからもち', () => {
         it('ちからもち + 物理技 → A×2.0 (4096基準補正)', () => {
             const atk = createPokemon({ ability: 'ちからもち' });

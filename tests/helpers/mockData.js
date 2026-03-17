@@ -128,6 +128,10 @@ export const MOCK_ABILITIES_DEX = {
         type: 'dezaster', offensive: 1.0, defensive: 1.0,
         weaken: 0.75, weakken_stats: 'attack', is_special: false
     },
+    'テクニシャン': {
+        type: 'technician', offensive: 1.5, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
     'ちからもち': {
         type: 'power_boost', offensive: 2.0, defensive: 1.0,
         weaken: 1.00, weakken_stats: '', is_special: true
