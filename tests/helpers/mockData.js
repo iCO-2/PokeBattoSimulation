@@ -147,6 +147,18 @@ export const MOCK_ABILITIES_DEX = {
     'ファントムガード': {
         type: 'fullhp_guard', offensive: 1.0, defensive: 0.5,
         weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'げきりゅう': {
+        type: 'hp_threshold_boost', offensive: 1.5, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true, boost_type: 'みず'
+    },
+    'もうか': {
+        type: 'hp_threshold_boost', offensive: 1.5, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true, boost_type: 'ほのお'
+    },
+    'しんりょく': {
+        type: 'hp_threshold_boost', offensive: 1.5, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true, boost_type: 'くさ'
     }
 };
 

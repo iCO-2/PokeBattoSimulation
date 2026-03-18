@@ -232,5 +232,35 @@
     "weakken_stats": "",
     "is_special": true,
     "memo": "じめんタイプの技を無効化"
+  },
+  "げきりゅう": {
+    "type": "hp_threshold_boost",
+    "offensive": 1.5,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "boost_type": "みず",
+    "memo": "HP1/3以下でみずタイプの技の攻撃1.5倍"
+  },
+  "もうか": {
+    "type": "hp_threshold_boost",
+    "offensive": 1.5,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "boost_type": "ほのお",
+    "memo": "HP1/3以下でほのおタイプの技の攻撃1.5倍"
+  },
+  "しんりょく": {
+    "type": "hp_threshold_boost",
+    "offensive": 1.5,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "boost_type": "くさ",
+    "memo": "HP1/3以下でくさタイプの技の攻撃1.5倍"
   }
 }

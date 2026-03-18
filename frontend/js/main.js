@@ -1138,8 +1138,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const specificMoveText = resultContainer.querySelector('.specific-move-info');
                 if (specificMoveText) {
+                    let moveEffectParts = [];
                     if (damageResult.specificMoveInfo) {
-                        specificMoveText.innerHTML = damageResult.specificMoveInfo.details.join('<br>');
+                        moveEffectParts.push(damageResult.specificMoveInfo.details.join('<br>'));
+                    }
+                    if (damageResult.knockOffInfo) {
+                        moveEffectParts.push(`${damageResult.knockOffInfo.name} (×${damageResult.knockOffInfo.multiplier})`);
+                    }
+                    if (moveEffectParts.length > 0) {
+                        specificMoveText.innerHTML = moveEffectParts.join('<br>');
                     } else {
                         specificMoveText.textContent = '-';
                     }

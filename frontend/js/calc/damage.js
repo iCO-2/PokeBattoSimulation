@@ -314,6 +314,18 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // げきりゅう/もうか/しんりょく: HP1/3以下で対応タイプの攻撃1.5倍（4096基準補正）
+    if (attackerAbilityData && attackerAbilityData.type === 'hp_threshold_boost'
+        && moveType === attackerAbilityData.boost_type
+        && attacker.currentHp <= Math.floor(attacker.maxHp / 3)) {
+        A = applyModifier(A, attackerAbilityData.offensive);
+        if (A < 1) A = 1;
+        abilityOffensiveInfo = {
+            name: attacker.ability,
+            multiplier: attackerAbilityData.offensive
+        };
+    }
+
     // ちからもち: 物理技の攻撃力を2.0倍（4096基準補正: 四捨五入→五捨五超入）
     if (attackerAbilityData && attackerAbilityData.type === 'power_boost' && move.category === 'Physical') {
         A = applyModifier(A, attackerAbilityData.offensive);
@@ -497,6 +509,14 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         const techModNumerator = Math.round(4096 * attackerAbilityData.offensive);
         finalPower = Math.round(finalPower * techModNumerator / 4096);
         technicianInfo = { name: attacker.ability, multiplier: attackerAbilityData.offensive };
+    }
+
+    // はたきおとす: 相手が持ち物を持っている場合、威力×1.5（4096基準補正、四捨五入）
+    let knockOffInfo = null;
+    if (moveName === 'はたきおとす' && defender.item && defender.item !== '') {
+        const knockOffMod = Math.round(4096 * 1.5);
+        finalPower = Math.round(finalPower * knockOffMod / 4096);
+        knockOffInfo = { name: 'はたきおとす', multiplier: 1.5 };
     }
 
     let itemPowerBoostApplied = false;
@@ -795,6 +815,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         weatherDefModifier: weatherDefModifierInfo,
         wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
         fullHpGuardInfo: fullHpGuardInfo,
-        specificMoveInfo: specificMoveInfo
+        specificMoveInfo: specificMoveInfo,
+        knockOffInfo: knockOffInfo
     };
 }
