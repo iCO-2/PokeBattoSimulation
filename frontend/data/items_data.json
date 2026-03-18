@@ -339,5 +339,11 @@
     ],
     "multiplier": 0.0,
     "message": "晴れと雨の効果を無視"
+  },
+  "ダミー（効果なし）": {
+    "type": "none",
+    "effect_target": [],
+    "multiplier": 1.0,
+    "message": ""
   }
 }
