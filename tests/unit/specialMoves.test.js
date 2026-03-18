@@ -339,4 +339,36 @@ describe('特殊計算技', () => {
             expect(resultBoosted.max).toBeGreaterThan(resultNeutral.max);
         });
     });
+
+    describe('はたきおとす', () => {
+        it('相手が持ち物あり → 威力×1.5', () => {
+            const atk = createPokemon();
+            const defWithItem = createPokemon({ item: 'たべのこし' });
+            const defNoItem = createPokemon({ item: '' });
+            const move = createMove({ name: 'はたきおとす', power: 65, type: 'あく', category: 'Physical' });
+
+            const resultItem = calculateDamage(atk, defWithItem, move);
+            const resultNoItem = calculateDamage(atk, defNoItem, move);
+            expect(resultItem.max).toBeGreaterThan(resultNoItem.max);
+            expect(resultItem.knockOffInfo).toEqual({ name: 'はたきおとす', multiplier: 1.5 });
+        });
+
+        it('相手が持ち物なし → 補正なし', () => {
+            const atk = createPokemon();
+            const def = createPokemon({ item: '' });
+            const move = createMove({ name: 'はたきおとす', power: 65, type: 'あく', category: 'Physical' });
+
+            const result = calculateDamage(atk, def, move);
+            expect(result.knockOffInfo).toBeNull();
+        });
+
+        it('はたきおとす以外の技 → 相手持ち物ありでも補正なし', () => {
+            const atk = createPokemon();
+            const def = createPokemon({ item: 'たべのこし' });
+            const move = createMove({ name: 'かみくだく', power: 80, type: 'あく', category: 'Physical' });
+
+            const result = calculateDamage(atk, def, move);
+            expect(result.knockOffInfo).toBeNull();
+        });
+    });
 });

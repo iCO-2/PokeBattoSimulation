@@ -499,6 +499,14 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         technicianInfo = { name: attacker.ability, multiplier: attackerAbilityData.offensive };
     }
 
+    // はたきおとす: 相手が持ち物を持っている場合、威力×1.5（4096基準補正、四捨五入）
+    let knockOffInfo = null;
+    if (moveName === 'はたきおとす' && defender.item && defender.item !== '') {
+        const knockOffMod = Math.round(4096 * 1.5);
+        finalPower = Math.round(finalPower * knockOffMod / 4096);
+        knockOffInfo = { name: 'はたきおとす', multiplier: 1.5 };
+    }
+
     let itemPowerBoostApplied = false;
     let areaModifierInfo = null;
     if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'power') {
@@ -795,6 +803,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         weatherDefModifier: weatherDefModifierInfo,
         wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
         fullHpGuardInfo: fullHpGuardInfo,
-        specificMoveInfo: specificMoveInfo
+        specificMoveInfo: specificMoveInfo,
+        knockOffInfo: knockOffInfo
     };
 }
