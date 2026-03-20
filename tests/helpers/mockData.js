@@ -171,6 +171,18 @@ export const MOCK_ABILITIES_DEX = {
     'いろめがね': {
         type: 'tinted_lens', offensive: 2.0, defensive: 1.0,
         weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'フィルター': {
+        type: 'filter', offensive: 1.0, defensive: 0.75,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'ハードロック': {
+        type: 'filter', offensive: 1.0, defensive: 0.75,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'プリズムアーマー': {
+        type: 'filter', offensive: 1.0, defensive: 0.75,
+        weaken: 1.00, weakken_stats: '', is_special: false
     }
 };
 

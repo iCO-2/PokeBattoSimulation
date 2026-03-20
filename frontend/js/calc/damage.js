@@ -657,6 +657,10 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const tintedLensApplies = !!(attackerAbilityData && attackerAbilityData.type === 'tinted_lens'
         && typeMod > 0 && typeMod <= 0.5);
 
+    // フィルター / ハードロック / プリズムアーマー: 効果抜群（typeMod > 1.0）のとき被ダメージ0.75倍
+    const filterApplies = !!(defenderAbilityData && defenderAbilityData.type === 'filter'
+        && typeMod > 1.0);
+
     // 状態異常(やけど): 物理なら0.5 (未実装)
     // 壁(リフレクター/光の壁): 防御側
     // 複数対象補正: 0.75
@@ -758,6 +762,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         // 9. いろめがね: 効果いまひとつ以下のとき2倍（× 8192 ÷ 4096）
         if (tintedLensApplies) {
             dmg = applyModifier(dmg, 2.0);
+        }
+
+        // 10. フィルター / ハードロック / プリズムアーマー: 効果抜群のとき0.75倍（× 3072 ÷ 4096）
+        if (filterApplies) {
+            dmg = applyModifier(dmg, 0.75);
         }
 
         if (dmg < 1) dmg = 1;
@@ -869,6 +878,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         knockOffInfo: knockOffInfo,
         recoilInfo: recoilInfo,
         recklessInfo: recklessInfo,
-        tintedLensInfo: tintedLensApplies ? { name: attacker.ability, multiplier: 2.0 } : null
+        tintedLensInfo: tintedLensApplies ? { name: attacker.ability, multiplier: 2.0 } : null,
+        filterInfo: filterApplies ? { name: defender.ability, multiplier: 0.75 } : null
     };
 }

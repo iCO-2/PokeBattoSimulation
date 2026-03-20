@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=229';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=230';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -1155,6 +1155,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                     if (damageResult.tintedLensInfo) {
                         abilityStrs.push(`${damageResult.tintedLensInfo.name} (効果いまひとつ: ×${damageResult.tintedLensInfo.multiplier})`);
+                    }
+                    if (damageResult.filterInfo) {
+                        abilityStrs.push(`${damageResult.filterInfo.name} (効果抜群: ×${damageResult.filterInfo.multiplier})`);
                     }
 
                     if (abilityStrs.length > 0) {

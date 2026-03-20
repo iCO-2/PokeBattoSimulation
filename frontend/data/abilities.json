@@ -289,5 +289,32 @@
     "weakken_stats": "",
     "is_special": false,
     "memo": "効果いまひとつ以下の技のダメージを2倍"
+  },
+  "フィルター": {
+    "type": "filter",
+    "offensive": 1.0,
+    "defensive": 0.75,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "効果抜群の技を受けたとき被ダメージを0.75倍に軽減"
+  },
+  "ハードロック": {
+    "type": "filter",
+    "offensive": 1.0,
+    "defensive": 0.75,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "効果抜群の技を受けたとき被ダメージを0.75倍に軽減"
+  },
+  "プリズムアーマー": {
+    "type": "filter",
+    "offensive": 1.0,
+    "defensive": 0.75,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "効果抜群の技を受けたとき被ダメージを0.75倍に軽減"
   }
 }
