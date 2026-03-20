@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=228';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=229';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -236,6 +236,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Autocomplete Logic ---
 
+    /** ひらがなをカタカナに変換（サジェスト検索の正規化用） */
+    function hiraganaToKatakana(str) {
+        return str.replace(/[\u3041-\u3096]/g, ch => String.fromCharCode(ch.charCodeAt(0) + 0x60));
+    }
+
     function setupAutocomplete(inputElement, listElement, teamType) {
         let currentFocus = -1;
 
@@ -293,8 +298,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
             
-            const matches = allPokemon.filter(name => name.startsWith(filterText));
-            
+            const normalizedFilter = hiraganaToKatakana(filterText);
+            const matches = allPokemon.filter(name => name.startsWith(normalizedFilter));
+
             if (matches.length === 0) {
                 listElement.style.display = 'none';
                 return;
@@ -306,10 +312,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             matches.forEach(name => {
                 if (count >= maxItems) return;
-                
+
                 const item = document.createElement('li');
                 // 前方一致部分を太字に
-                item.innerHTML = `<strong>${name.substr(0, filterText.length)}</strong>${name.substr(filterText.length)}`;
+                item.innerHTML = `<strong>${name.substr(0, normalizedFilter.length)}</strong>${name.substr(normalizedFilter.length)}`;
                 item.addEventListener('click', function() {
                     inputElement.value = name;
                     listElement.innerHTML = '';
@@ -488,11 +494,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ? pokemon.speciesData.moves 
                 : Object.keys(MOVES_DEX);
 
+            // ひらがな入力をカタカナに正規化してフィルタリング
+            const normalizedFilter = hiraganaToKatakana(filterText);
             // Filter commonly used moves
-            const commonMatches = commonlyUsed.filter(m => m.startsWith(filterText));
+            const commonMatches = commonlyUsed.filter(m => m.startsWith(normalizedFilter));
             // Filter regular moves (excluding commonly used)
             const regularMoves = allMoves.filter(m => !commonlyUsed.includes(m));
-            const regularMatches = regularMoves.filter(m => m.startsWith(filterText));
+            const regularMatches = regularMoves.filter(m => m.startsWith(normalizedFilter));
 
             if (commonMatches.length === 0 && regularMatches.length === 0) {
                 listElement.style.display = 'none';
@@ -525,7 +533,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     powerHtml = (moveData.power > 0) ? moveData.power : '-';
                 }
 
-                const nameHtml = `<strong>${moveName.substr(0, filterText.length)}</strong>${moveName.substr(filterText.length)}`;
+                const nameHtml = `<strong>${moveName.substr(0, normalizedFilter.length)}</strong>${moveName.substr(normalizedFilter.length)}`;
 
                 li.innerHTML = `
                     <div class="move-name">${nameHtml}</div>
@@ -1144,6 +1152,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                     if (damageResult.fullHpGuardInfo) {
                         abilityStrs.push(`${damageResult.fullHpGuardInfo.name} (HP満タン: 被ダメージ×${damageResult.fullHpGuardInfo.multiplier})`);
+                    }
+                    if (damageResult.tintedLensInfo) {
+                        abilityStrs.push(`${damageResult.tintedLensInfo.name} (効果いまひとつ: ×${damageResult.tintedLensInfo.multiplier})`);
                     }
 
                     if (abilityStrs.length > 0) {

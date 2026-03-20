@@ -167,6 +167,10 @@ export const MOCK_ABILITIES_DEX = {
     'いしあたま': {
         type: 'rock_head', offensive: 1.0, defensive: 1.0,
         weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'いろめがね': {
+        type: 'tinted_lens', offensive: 2.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
     }
 };
 

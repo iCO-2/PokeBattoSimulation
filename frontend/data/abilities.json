@@ -280,5 +280,14 @@
     "weakken_stats": "",
     "is_special": true,
     "memo": "反動ダメージを無効化"
+  },
+  "いろめがね": {
+    "type": "tinted_lens",
+    "offensive": 2.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "効果いまひとつ以下の技のダメージを2倍"
   }
 }

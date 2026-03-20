@@ -652,7 +652,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     }
     
     const typeMod = getTypeEffectiveness(moveType, defenderTypes);
-    
+
+    // いろめがね: タイプ相性が半減以下（0 < typeMod <= 0.5）のとき、ダメージ補正ステップで2倍
+    const tintedLensApplies = !!(attackerAbilityData && attackerAbilityData.type === 'tinted_lens'
+        && typeMod > 0 && typeMod <= 0.5);
+
     // 状態異常(やけど): 物理なら0.5 (未実装)
     // 壁(リフレクター/光の壁): 防御側
     // 複数対象補正: 0.75
@@ -749,6 +753,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         // 8. マルチスケイル / ファントムガード: HP満タン時ダメージ半減
         if (fullHpGuardApplies) {
             dmg = applyModifier(dmg, 0.5);
+        }
+
+        // 9. いろめがね: 効果いまひとつ以下のとき2倍（× 8192 ÷ 4096）
+        if (tintedLensApplies) {
+            dmg = applyModifier(dmg, 2.0);
         }
 
         if (dmg < 1) dmg = 1;
@@ -859,6 +868,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         specificMoveInfo: specificMoveInfo,
         knockOffInfo: knockOffInfo,
         recoilInfo: recoilInfo,
-        recklessInfo: recklessInfo
+        recklessInfo: recklessInfo,
+        tintedLensInfo: tintedLensApplies ? { name: attacker.ability, multiplier: 2.0 } : null
     };
 }
