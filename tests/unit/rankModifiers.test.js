@@ -6,7 +6,8 @@ vi.mock('../../frontend/js/data/loader.js', () => ({
     ABILITIES_DEX: {},
     MOVE_TYPE_MOVES: {},
     KNOWN_DAMAGE_MOVES: {},
-    SPECIFIC_MOVES: {}
+    SPECIFIC_MOVES: {},
+    RECOIL_MOVES: {}
 }));
 
 import { calculateDamage } from '../../frontend/js/calc/damage.js';

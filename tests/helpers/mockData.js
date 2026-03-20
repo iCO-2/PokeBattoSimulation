@@ -159,6 +159,14 @@ export const MOCK_ABILITIES_DEX = {
     'しんりょく': {
         type: 'hp_threshold_boost', offensive: 1.5, defensive: 1.0,
         weaken: 1.00, weakken_stats: '', is_special: true, boost_type: 'くさ'
+    },
+    'すてみ': {
+        type: 'reckless', offensive: 1.2, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'いしあたま': {
+        type: 'rock_head', offensive: 1.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
     }
 };
 

@@ -6,6 +6,7 @@ export let ABILITIES_DEX = {};
 export let MOVE_TYPE_MOVES = {};
 export let KNOWN_DAMAGE_MOVES = {};
 export let SPECIFIC_MOVES = {};
+export let RECOIL_MOVES = {};
 
 export async function loadAllData() {
     try {
@@ -161,6 +162,19 @@ const TYPE_TRANSLATION = {
             }
         } catch (e) {
             console.warn('Failed to load moves_specific.json:', e);
+        }
+
+        // 反動技データの読み込み
+        try {
+            const recoilRes = await fetch('./data/moves_info/moves_recoil.json');
+            if (recoilRes.ok) {
+                RECOIL_MOVES = await recoilRes.json();
+                console.log(`Loaded ${Object.keys(RECOIL_MOVES).length} recoil moves.`);
+            } else {
+                console.warn(`Failed to load moves_recoil.json: ${recoilRes.status}`);
+            }
+        } catch (e) {
+            console.warn('Failed to load moves_recoil.json:', e);
         }
 
     } catch (error) {

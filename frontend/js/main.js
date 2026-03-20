@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=227';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=228';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -1003,6 +1003,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             // ターン開始時点のHPを記録（乱数選択でここから引く）
             const turnStartHp = defender.currentHp;
+            const attackerStartHp = attacker.currentHp;
 
             // 手動補正を適用したロール配列を生成
             const manualMod = parseFloat(document.getElementById('battle-manual-modifier').value) || 1.0;
@@ -1023,6 +1024,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             // いのちがけ: 自分のHPを0にする
             if (damageResult.isKnownDamage && damageResult.moveName === 'いのちがけ') {
                 attacker.currentHp = 0;
+            }
+
+            // 反動・HP消費: 攻撃側のHP減算
+            if (damageResult.recoilInfo && !damageResult.recoilInfo.nullified) {
+                if (damageResult.recoilInfo.recoilType === 'hp_cost') {
+                    // HP消費型: 最大HPの1/divisor
+                    const hpCost = Math.floor(attacker.maxHp / damageResult.recoilInfo.divisor);
+                    attacker.currentHp = Math.max(0, attacker.currentHp - hpCost);
+                } else if (appliedDamage > 0) {
+                    // ダメージ依存型: 与えたダメージの1/divisor
+                    const actualDamage = turnStartHp - defender.currentHp;
+                    const recoilDamage = Math.floor(actualDamage / damageResult.recoilInfo.divisor);
+                    if (recoilDamage > 0) {
+                        attacker.currentHp = Math.max(0, attacker.currentHp - recoilDamage);
+                    }
+                }
             }
 
             // いたみわけ: 自分のHPも平均値に変更
@@ -1144,6 +1161,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                     if (damageResult.knockOffInfo) {
                         moveEffectParts.push(`${damageResult.knockOffInfo.name} (×${damageResult.knockOffInfo.multiplier})`);
+                    }
+                    if (damageResult.recklessInfo) {
+                        moveEffectParts.push(`${damageResult.recklessInfo.name} (×${damageResult.recklessInfo.multiplier})`);
+                    }
+                    if (damageResult.recoilInfo) {
+                        if (damageResult.recoilInfo.nullified) {
+                            moveEffectParts.push(`反動: いしあたまで無効`);
+                        } else if (damageResult.recoilInfo.recoilType === 'hp_cost') {
+                            moveEffectParts.push(`HP消費: 最大HPの1/${damageResult.recoilInfo.divisor} (${damageResult.recoilInfo.min})`);
+                        } else {
+                            moveEffectParts.push(`反動: 1/${damageResult.recoilInfo.divisor} (${damageResult.recoilInfo.min}~${damageResult.recoilInfo.max})`);
+                        }
                     }
                     if (moveEffectParts.length > 0) {
                         specificMoveText.innerHTML = moveEffectParts.join('<br>');
@@ -1312,10 +1341,25 @@ document.addEventListener('DOMContentLoaded', async () => {
                         newSelect.addEventListener('change', (e) => {
                             const selectedIndex = parseInt(e.target.value);
                             const val = modifiedRolls[selectedIndex];
-                            
+
                             // HP再適用 logic
                             if (turnStartHp > 0) {
                                 defender.currentHp = Math.max(0, turnStartHp - val);
+                            }
+
+                            // 反動・HP消費再計算
+                            attacker.currentHp = attackerStartHp;
+                            if (damageResult.recoilInfo && !damageResult.recoilInfo.nullified) {
+                                if (damageResult.recoilInfo.recoilType === 'hp_cost') {
+                                    const hpCost = Math.floor(attacker.maxHp / damageResult.recoilInfo.divisor);
+                                    attacker.currentHp = Math.max(0, attacker.currentHp - hpCost);
+                                } else if (val > 0) {
+                                    const actualDmg = turnStartHp - defender.currentHp;
+                                    const recoilDmg = Math.floor(actualDmg / damageResult.recoilInfo.divisor);
+                                    if (recoilDmg > 0) {
+                                        attacker.currentHp = Math.max(0, attacker.currentHp - recoilDmg);
+                                    }
+                                }
                             }
 
                             // 履歴更新
@@ -1351,6 +1395,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             
                             // UI更新
                             updateFormFromState(defenderSide);
+                            updateFormFromState(attackerSide);
                             renderBattleLog();
                         });
                     } else {
@@ -1358,7 +1403,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                          option.textContent = "ダメージなし";
                          newSelect.appendChild(option);
                     }
-                    
+
                     oldSelect.parentNode.replaceChild(newSelect, oldSelect);
                 }
 
@@ -1388,6 +1433,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                         const newVal = modifiedRolls[currentIdx] ?? 0;
                         if (turnStartHp > 0) {
                             defender.currentHp = Math.max(0, turnStartHp - newVal);
+                        }
+
+                        // 反動・HP消費再計算
+                        attacker.currentHp = attackerStartHp;
+                        if (damageResult.recoilInfo && !damageResult.recoilInfo.nullified) {
+                            if (damageResult.recoilInfo.recoilType === 'hp_cost') {
+                                const hpCost = Math.floor(attacker.maxHp / damageResult.recoilInfo.divisor);
+                                attacker.currentHp = Math.max(0, attacker.currentHp - hpCost);
+                            } else if (newVal > 0) {
+                                const actualDmg = turnStartHp - defender.currentHp;
+                                const recoilDmg = Math.floor(actualDmg / damageResult.recoilInfo.divisor);
+                                if (recoilDmg > 0) {
+                                    attacker.currentHp = Math.max(0, attacker.currentHp - recoilDmg);
+                                }
+                            }
                         }
 
                         // ダメージ幅・瀕死率表示を更新
@@ -1452,6 +1512,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         }
                         updateBattleLog(historyEntry);
                         updateFormFromState(defenderSide);
+                        updateFormFromState(attackerSide);
                         renderBattleLog();
                     });
                 }

@@ -262,5 +262,23 @@
     "is_special": true,
     "boost_type": "くさ",
     "memo": "HP1/3以下でくさタイプの技の攻撃1.5倍"
+  },
+  "すてみ": {
+    "type": "reckless",
+    "offensive": 1.2,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "反動技の威力を1.2倍（4096基準: ×4915÷4096）"
+  },
+  "いしあたま": {
+    "type": "rock_head",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "反動ダメージを無効化"
   }
 }

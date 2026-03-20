@@ -1,5 +1,5 @@
 import { getTypeEffectiveness } from '../data/types.js';
-import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES } from '../data/loader.js?v=7';
+import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, RECOIL_MOVES } from '../data/loader.js?v=7';
 
 /**
  * ランク補正倍率を取得
@@ -519,6 +519,15 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         knockOffInfo = { name: 'はたきおとす', multiplier: 1.5 };
     }
 
+    // すてみ: ダメージ依存型の反動技の威力を1.2倍（4096基準: ×4915÷4096）
+    const recoilData = RECOIL_MOVES[moveName] || null;
+    let recklessInfo = null;
+    if (attackerAbilityData && attackerAbilityData.type === 'reckless' && recoilData && (recoilData.type || 'damage') === 'damage') {
+        const recklessMod = Math.round(4096 * attackerAbilityData.offensive);
+        finalPower = Math.round(finalPower * recklessMod / 4096);
+        recklessInfo = { name: attacker.ability, multiplier: attackerAbilityData.offensive };
+    }
+
     let itemPowerBoostApplied = false;
     let areaModifierInfo = null;
     if (attackerItem && attackerItem.type === 'damage_boost' && attackerItem.boost_phase === 'power') {
@@ -799,6 +808,38 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // 反動ダメージ計算
+    let recoilInfo = null;
+    if (recoilData) {
+        const isRockHead = !!(attackerAbilityData && attackerAbilityData.type === 'rock_head');
+        const recoilType = recoilData.type || 'damage';
+
+        if (recoilType === 'hp_cost') {
+            // HP消費型: 最大HPの1/divisor を消費（いしあたまで無効化不可）
+            const hpCost = Math.floor(attacker.maxHp / recoilData.divisor);
+            recoilInfo = {
+                name: moveName,
+                recoilType: 'hp_cost',
+                divisor: recoilData.divisor,
+                min: hpCost,
+                max: hpCost,
+                nullified: false
+            };
+        } else {
+            // ダメージ依存型: 与えたダメージの1/divisor（いしあたまで無効化可）
+            const recoilMin = isRockHead ? 0 : Math.floor(rolls[0] / recoilData.divisor);
+            const recoilMax = isRockHead ? 0 : Math.floor(rolls[rolls.length - 1] / recoilData.divisor);
+            recoilInfo = {
+                name: moveName,
+                recoilType: 'damage',
+                divisor: recoilData.divisor,
+                min: recoilMin,
+                max: recoilMax,
+                nullified: isRockHead
+            };
+        }
+    }
+
     return {
         min: rolls[0],
         max: rolls[rolls.length - 1],
@@ -808,7 +849,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         defenderItemModifier: defenderItemModifierInfo,
         stellarBoosted: stellarBoosted,
         moveType: moveType,
-        abilityOffensiveInfo: technicianInfo || abilityOffensiveInfo,
+        abilityOffensiveInfo: technicianInfo || recklessInfo || abilityOffensiveInfo,
         abilityDefensiveInfo: abilityDefensiveInfo,
         dezasterInfo: dezasterInfo,
         areaModifier: areaModifierInfo,
@@ -816,6 +857,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
         fullHpGuardInfo: fullHpGuardInfo,
         specificMoveInfo: specificMoveInfo,
-        knockOffInfo: knockOffInfo
+        knockOffInfo: knockOffInfo,
+        recoilInfo: recoilInfo,
+        recklessInfo: recklessInfo
     };
 }
