@@ -274,8 +274,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     if (defenderAbilityData && defenderAbilityData.type !== 'dezaster') {
         const defType = defenderAbilityData.type;
 
-        // ふゆう: じめんタイプの技を無効化
-        if (defType === 'levitate' && moveType === 'じめん') {
+        // タイプ無効化特性 (ふゆう・ひらいしん・ちょすい等): 特定タイプの技を無効化
+        if (defType === 'type_nullify' && moveType === defenderAbilityData.nullify_type) {
             abilityDefensiveMod = 0;
             abilityDefensiveInfo = {
                 name: defender.ability,
@@ -661,6 +661,13 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     const filterApplies = !!(defenderAbilityData && defenderAbilityData.type === 'filter'
         && typeMod > 1.0);
 
+    // タイプ無効化特性でHP回復が発生する場合の情報（かんそうはだ・ちょすい）
+    const typeNullifyHealInfo = (defenderAbilityData && defenderAbilityData.type === 'type_nullify'
+        && defenderAbilityData.heal_ratio > 0
+        && moveType === defenderAbilityData.nullify_type)
+        ? { name: defender.ability, healAmount: Math.floor(defender.maxHp * defenderAbilityData.heal_ratio) }
+        : null;
+
     // 状態異常(やけど): 物理なら0.5 (未実装)
     // 壁(リフレクター/光の壁): 防御側
     // 複数対象補正: 0.75
@@ -879,6 +886,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         recoilInfo: recoilInfo,
         recklessInfo: recklessInfo,
         tintedLensInfo: tintedLensApplies ? { name: attacker.ability, multiplier: 2.0 } : null,
-        filterInfo: filterApplies ? { name: defender.ability, multiplier: 0.75 } : null
+        filterInfo: filterApplies ? { name: defender.ability, multiplier: 0.75 } : null,
+        typeNullifyHealInfo: typeNullifyHealInfo
     };
 }

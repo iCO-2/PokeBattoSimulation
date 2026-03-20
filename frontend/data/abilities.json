@@ -225,7 +225,9 @@
     "memo": "物理技の攻撃力を2.0倍（4096基準補正）"
   },
   "ふゆう": {
-    "type": "levitate",
+    "type": "type_nullify",
+    "nullify_type": "じめん",
+    "heal_ratio": 0,
     "offensive": 1.0,
     "defensive": 0.0,
     "weaken": 1.00,
@@ -289,6 +291,116 @@
     "weakken_stats": "",
     "is_special": false,
     "memo": "効果いまひとつ以下の技のダメージを2倍"
+  },
+  "かんそうはだ": {
+    "type": "type_nullify",
+    "nullify_type": "みず",
+    "heal_ratio": 0.25,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "みずタイプの技を無効化し最大HPの1/4を回復"
+  },
+  "ちょすい": {
+    "type": "type_nullify",
+    "nullify_type": "みず",
+    "heal_ratio": 0.25,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "みずタイプの技を無効化し最大HPの1/4を回復"
+  },
+  "よびみず": {
+    "type": "type_nullify",
+    "nullify_type": "みず",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "みずタイプの技を無効化"
+  },
+  "こんがりボディ": {
+    "type": "type_nullify",
+    "nullify_type": "ほのお",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "ほのおタイプの技を無効化"
+  },
+  "もらいび": {
+    "type": "type_nullify",
+    "nullify_type": "ほのお",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "ほのおタイプの技を無効化"
+  },
+  "ちくでん": {
+    "type": "type_nullify",
+    "nullify_type": "でんき",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "でんきタイプの技を無効化"
+  },
+  "でんきエンジン": {
+    "type": "type_nullify",
+    "nullify_type": "でんき",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "でんきタイプの技を無効化"
+  },
+  "ひらいしん": {
+    "type": "type_nullify",
+    "nullify_type": "でんき",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "でんきタイプの技を無効化"
+  },
+  "そうしょく": {
+    "type": "type_nullify",
+    "nullify_type": "くさ",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "くさタイプの技を無効化"
+  },
+  "どしょく": {
+    "type": "type_nullify",
+    "nullify_type": "じめん",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "じめんタイプの技を無効化"
   },
   "フィルター": {
     "type": "filter",

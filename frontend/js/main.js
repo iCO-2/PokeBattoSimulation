@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=230';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=231';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -1050,6 +1050,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
 
+            // タイプ無効化HP回復: かんそうはだ・ちょすい等
+            if (damageResult.typeNullifyHealInfo) {
+                defender.currentHp = Math.min(defender.maxHp, defender.currentHp + damageResult.typeNullifyHealInfo.healAmount);
+            }
+
             // いたみわけ: 自分のHPも平均値に変更
             if (damageResult.isKnownDamage && damageResult.moveName === 'いたみわけ') {
                 const avgHp = Math.floor((attacker.currentHp + turnStartHp) / 2);
@@ -1158,6 +1163,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                     if (damageResult.filterInfo) {
                         abilityStrs.push(`${damageResult.filterInfo.name} (効果抜群: ×${damageResult.filterInfo.multiplier})`);
+                    }
+                    if (damageResult.typeNullifyHealInfo) {
+                        const heal = damageResult.typeNullifyHealInfo;
+                        abilityStrs.push(`${heal.name} (無効化: HP+${heal.healAmount}回復)`);
                     }
 
                     if (abilityStrs.length > 0) {
@@ -1375,6 +1384,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                                     }
                                 }
                             }
+                            // タイプ無効化HP回復
+                            if (damageResult.typeNullifyHealInfo) {
+                                defender.currentHp = Math.min(defender.maxHp, defender.currentHp + damageResult.typeNullifyHealInfo.healAmount);
+                            }
 
                             // 履歴更新
                             const rollLabel = `${85 + selectedIndex}%`;
@@ -1462,6 +1475,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                                     attacker.currentHp = Math.max(0, attacker.currentHp - recoilDmg);
                                 }
                             }
+                        }
+                        // タイプ無効化HP回復
+                        if (damageResult.typeNullifyHealInfo) {
+                            defender.currentHp = Math.min(defender.maxHp, defender.currentHp + damageResult.typeNullifyHealInfo.healAmount);
                         }
 
                         // ダメージ幅・瀕死率表示を更新
