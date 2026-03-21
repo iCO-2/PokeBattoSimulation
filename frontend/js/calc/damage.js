@@ -374,6 +374,33 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         };
     }
 
+    // 条件付き特性 (conditional): ステータス補正（攻撃側・防御側）
+    let conditionalAbilityInfos = [];
+    // 攻撃側: こんじょう(攻撃1.5倍), ねつぼうそう(特攻1.5倍)
+    if (field.atkAbilityActive && attackerAbilityData && attackerAbilityData.type === 'conditional') {
+        const effect = attackerAbilityData.conditional_effect;
+        // atk_boost: 実際に使用するステータス(aStat)がboost_statと一致する場合のみ適用
+        // （ボディプレス等でステータス参照先が変わった場合は適用しない）
+        if (effect === 'atk_boost' && attackerAbilityData.boost_stat === aStr && aStat === aStr) {
+            A = applyModifier(A, attackerAbilityData.boost_multiplier);
+            if (A < 1) A = 1;
+            conditionalAbilityInfos.push({ name: attacker.ability, stat: aStr, multiplier: attackerAbilityData.boost_multiplier, side: 'attacker' });
+        } else if (effect === 'speed_boost') {
+            // はやあし: 素早さ補正はジャイロボール等の計算に影響（後段で参照）
+            conditionalAbilityInfos.push({ name: attacker.ability, stat: 'speed', multiplier: attackerAbilityData.boost_multiplier, side: 'attacker' });
+        }
+    }
+    // 防御側: ふしぎなうろこ(防御1.5倍)
+    if (field.defAbilityActive && defenderAbilityData && defenderAbilityData.type === 'conditional') {
+        const effect = defenderAbilityData.conditional_effect;
+        // def_boost: 実際に使用するステータス(dStat)がboost_statと一致する場合のみ適用
+        if (effect === 'def_boost' && defenderAbilityData.boost_stat === dStr && dStat === dStr) {
+            D = applyModifier(D, defenderAbilityData.boost_multiplier);
+            if (D < 1) D = 1;
+            conditionalAbilityInfos.push({ name: defender.ability, stat: dStr, multiplier: defenderAbilityData.boost_multiplier, side: 'defender' });
+        }
+    }
+
     // 攻撃側特性補正を攻撃力に適用（ちからもち以外の汎用特性）
     if (abilityOffensiveMod !== 1.0) {
         A = Math.floor(A * abilityOffensiveMod);
@@ -488,8 +515,18 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
         // 素早さ差依存
         if (specificMove.depend_on_difference_speed) {
-            const atkSpd = Math.floor(attacker.realStats.speed * getRankMultiplier(attacker.stats.speed ? attacker.stats.speed.rank || 0 : 0));
-            const defSpd = Math.floor(defender.realStats.speed * getRankMultiplier(defender.stats.speed ? defender.stats.speed.rank || 0 : 0));
+            let atkSpd = Math.floor(attacker.realStats.speed * getRankMultiplier(attacker.stats.speed ? attacker.stats.speed.rank || 0 : 0));
+            let defSpd = Math.floor(defender.realStats.speed * getRankMultiplier(defender.stats.speed ? defender.stats.speed.rank || 0 : 0));
+            // はやあし: 攻撃側の素早さ1.5倍
+            if (field.atkAbilityActive && attackerAbilityData && attackerAbilityData.type === 'conditional'
+                && attackerAbilityData.conditional_effect === 'speed_boost') {
+                atkSpd = applyModifier(atkSpd, attackerAbilityData.boost_multiplier);
+            }
+            // はやあし: 防御側の素早さ1.5倍
+            if (field.defAbilityActive && defenderAbilityData && defenderAbilityData.type === 'conditional'
+                && defenderAbilityData.conditional_effect === 'speed_boost') {
+                defSpd = applyModifier(defSpd, defenderAbilityData.boost_multiplier);
+            }
 
             if (moveName === 'ジャイロボール') {
                 finalPower = atkSpd === 0 ? 1 : Math.min(150, Math.floor(25 * defSpd / atkSpd) + 1);
@@ -594,6 +631,19 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         const mod = supremeOverlordMods[count];
         finalPower = Math.round(finalPower * mod / 4096);
         supremeOverlordInfo = { name: attacker.ability, count, multiplier: +(mod / 4096).toFixed(2) };
+    }
+
+    // 条件付き特性 (conditional): 威力補正（どくぼうそう・ちからずく）
+    let conditionalPowerInfo = null;
+    if (field.atkAbilityActive && attackerAbilityData && attackerAbilityData.type === 'conditional'
+        && attackerAbilityData.conditional_effect === 'power_boost') {
+        // カテゴリ制限がある場合はチェック（どくぼうそう=Physical のみ、ちからずく=制限なし）
+        const catOk = !attackerAbilityData.boost_category || move.category === attackerAbilityData.boost_category;
+        if (catOk) {
+            const condMod = Math.round(4096 * attackerAbilityData.boost_multiplier);
+            finalPower = Math.round(finalPower * condMod / 4096);
+            conditionalPowerInfo = { name: attacker.ability, multiplier: attackerAbilityData.boost_multiplier };
+        }
     }
 
     // すてみ: ダメージ依存型の反動技の威力を1.2倍（4096基準: ×4915÷4096）
@@ -981,6 +1031,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         typeHalveAttackInfo: typeHalveAttackInfo,
         waterBubbleInfo: waterBubbleInfo,
         supremeOverlordInfo: supremeOverlordInfo,
+        conditionalAbilityInfos: conditionalAbilityInfos,
+        conditionalPowerInfo: conditionalPowerInfo,
         rollsNoGuard: rollsNoGuard
     };
 }

@@ -469,5 +469,80 @@
     "weakken_stats": "",
     "is_special": true,
     "memo": "味方ひんし数に応じて威力補正（1体:1.1倍〜5体:1.5倍）"
+  },
+  "こんじょう": {
+    "type": "conditional",
+    "conditional_effect": "atk_boost",
+    "boost_stat": "attack",
+    "boost_multiplier": 1.5,
+    "boost_category": "Physical",
+    "ignore_burn": true,
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "状態異常のとき攻撃1.5倍、やけどの物理半減無視"
+  },
+  "ふしぎなうろこ": {
+    "type": "conditional",
+    "conditional_effect": "def_boost",
+    "boost_stat": "defence",
+    "boost_multiplier": 1.5,
+    "boost_category": "Physical",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "状態異常のとき防御1.5倍"
+  },
+  "ねつぼうそう": {
+    "type": "conditional",
+    "conditional_effect": "atk_boost",
+    "boost_stat": "spAtk",
+    "boost_multiplier": 1.5,
+    "boost_category": "Special",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "やけど状態のとき特攻1.5倍"
+  },
+  "どくぼうそう": {
+    "type": "conditional",
+    "conditional_effect": "power_boost",
+    "boost_multiplier": 1.5,
+    "boost_category": "Physical",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "どく・もうどく状態のとき物理技の威力1.5倍"
+  },
+  "はやあし": {
+    "type": "conditional",
+    "conditional_effect": "speed_boost",
+    "boost_stat": "speed",
+    "boost_multiplier": 1.5,
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "状態異常のとき素早さ1.5倍"
+  },
+  "ちからずく": {
+    "type": "conditional",
+    "conditional_effect": "power_boost",
+    "boost_multiplier": 1.3,
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "追加効果がある技の威力1.3倍（追加効果は発動しない）"
   }
 }

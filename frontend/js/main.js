@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=121';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=9';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=231';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=232';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -184,11 +184,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             appState.getAllyPokemon().item = e.target.value;
         });
     }
-    // そうだいしょう: 特性セレクトの下に味方ひんし数セレクタを表示/非表示
-    function updateSupremeOverlordSelector(abilitySelect, abilityValue) {
+    // 特性に応じたサブセレクタ（そうだいしょう / 条件付き特性）を表示/非表示
+    const CONDITIONAL_ABILITIES = new Set([
+        'こんじょう', 'ふしぎなうろこ', 'ねつぼうそう', 'どくぼうそう', 'はやあし', 'ちからずく'
+    ]);
+
+    function updateAbilitySubSelector(abilitySelect, abilityValue) {
         const parentLabel = abilitySelect.closest('label') || abilitySelect.parentElement;
-        const oldContainer = parentLabel.parentElement.querySelector('.supreme-overlord-container');
-        if (oldContainer) oldContainer.remove();
+        const parent = parentLabel.parentElement;
+        // 既存のサブセレクタをクリア
+        const oldSO = parent.querySelector('.supreme-overlord-container');
+        if (oldSO) oldSO.remove();
+        const oldCond = parent.querySelector('.conditional-ability-container');
+        if (oldCond) oldCond.remove();
 
         if (abilityValue === 'そうだいしょう') {
             const container = document.createElement('div');
@@ -209,13 +217,32 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             container.appendChild(select);
             parentLabel.after(container);
+        } else if (CONDITIONAL_ABILITIES.has(abilityValue)) {
+            const container = document.createElement('div');
+            container.className = 'conditional-ability-container multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = '発動:';
+            container.appendChild(label);
+            const select = document.createElement('select');
+            select.className = 'conditional-ability-select';
+            const optOff = document.createElement('option');
+            optOff.value = '0';
+            optOff.textContent = 'なし';
+            select.appendChild(optOff);
+            const optOn = document.createElement('option');
+            optOn.value = '1';
+            optOn.textContent = 'あり';
+            select.appendChild(optOn);
+            container.appendChild(select);
+            parentLabel.after(container);
         }
     }
 
     if (allyAbilitySelect) {
         allyAbilitySelect.addEventListener('change', (e) => {
             appState.getAllyPokemon().ability = e.target.value;
-            updateSupremeOverlordSelector(allyAbilitySelect, e.target.value);
+            updateAbilitySubSelector(allyAbilitySelect, e.target.value);
         });
     }
 
@@ -243,7 +270,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (enemyAbilitySelect) {
         enemyAbilitySelect.addEventListener('change', (e) => {
             appState.getEnemyPokemon().ability = e.target.value;
-            updateSupremeOverlordSelector(enemyAbilitySelect, e.target.value);
+            updateAbilitySubSelector(enemyAbilitySelect, e.target.value);
         });
     }
     if (enemyTeraSelect) {
@@ -1125,10 +1152,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             const wallLight = wallValue === 'light' || wallValue === 'both';
 
             // そうだいしょう: 味方ひんし数を取得
-            const supremeOverlordEl = document.querySelector(`#${attackerPrefix}-ability-select`)?.closest('label')?.parentElement?.querySelector('.supreme-overlord-select');
+            const defenderPrefix = isAllyAttacking ? 'enemy' : 'ally';
+            const atkAbilityParent = document.querySelector(`#${attackerPrefix}-ability-select`)?.closest('label')?.parentElement;
+            const defAbilityParent = document.querySelector(`#${defenderPrefix}-ability-select`)?.closest('label')?.parentElement;
+            const supremeOverlordEl = atkAbilityParent?.querySelector('.supreme-overlord-select');
             const supremeOverlordCount = supremeOverlordEl ? parseInt(supremeOverlordEl.value) || 0 : 0;
 
-            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight, supremeOverlordCount });
+            // 条件付き特性: 攻撃側・防御側の発動状態を取得
+            const atkConditionalEl = atkAbilityParent?.querySelector('.conditional-ability-select');
+            const defConditionalEl = defAbilityParent?.querySelector('.conditional-ability-select');
+            const atkAbilityActive = atkConditionalEl ? parseInt(atkConditionalEl.value) === 1 : false;
+            const defAbilityActive = defConditionalEl ? parseInt(defConditionalEl.value) === 1 : false;
+
+            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight, supremeOverlordCount, atkAbilityActive, defAbilityActive });
 
             // 連続技のヒット回数を取得
             const hitSelectEl = moveInput?.closest('.move-row')?.querySelector('.multi-hit-select');
@@ -1313,6 +1349,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                     if (damageResult.waterBubbleInfo) {
                         abilityStrs.push(`${damageResult.waterBubbleInfo.name} (${damageResult.waterBubbleInfo.name === 'すいほう' ? 'みず技威力' : '威力'}×${damageResult.waterBubbleInfo.multiplier})`);
+                    }
+                    if (damageResult.supremeOverlordInfo) {
+                        const so = damageResult.supremeOverlordInfo;
+                        abilityStrs.push(`${so.name} (ひんし${so.count}体: 威力×${so.multiplier})`);
+                    }
+                    if (damageResult.conditionalAbilityInfos && damageResult.conditionalAbilityInfos.length > 0) {
+                        const statNameMap = { 'attack': '攻撃', 'defence': '防御', 'spAtk': '特攻', 'spDef': '特防', 'speed': '素早さ' };
+                        damageResult.conditionalAbilityInfos.forEach(ca => {
+                            const statJP = statNameMap[ca.stat] || ca.stat;
+                            abilityStrs.push(`${ca.name} (${statJP}×${ca.multiplier})`);
+                        });
+                    }
+                    if (damageResult.conditionalPowerInfo) {
+                        const cp = damageResult.conditionalPowerInfo;
+                        abilityStrs.push(`${cp.name} (威力×${cp.multiplier})`);
                     }
 
                     if (abilityStrs.length > 0) {
@@ -2412,8 +2463,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // ポケモン未設定スロット: 「未設定」のみ表示
                 abilitySelect.value = '';
             }
-            // そうだいしょうセレクタの同期
-            updateSupremeOverlordSelector(abilitySelect, abilitySelect.value);
+            // そうだいしょう・条件特性セレクタの同期（既存の値を保持）
+            const parentForSub = (abilitySelect.closest('label') || abilitySelect.parentElement).parentElement;
+            const oldSOSelect = parentForSub.querySelector('.supreme-overlord-select');
+            const oldCondSelect = parentForSub.querySelector('.conditional-ability-select');
+            const prevSOValue = oldSOSelect ? oldSOSelect.value : null;
+            const prevCondValue = oldCondSelect ? oldCondSelect.value : null;
+            updateAbilitySubSelector(abilitySelect, abilitySelect.value);
+            // 再生成後に以前の値を復元
+            if (prevSOValue !== null) {
+                const newSOSelect = parentForSub.querySelector('.supreme-overlord-select');
+                if (newSOSelect) newSOSelect.value = prevSOValue;
+            }
+            if (prevCondValue !== null) {
+                const newCondSelect = parentForSub.querySelector('.conditional-ability-select');
+                if (newCondSelect) newCondSelect.value = prevCondValue;
+            }
         }
 
         // Stats Update (Inputs & Real Values)
