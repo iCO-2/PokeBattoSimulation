@@ -14,43 +14,34 @@ let globalTurnCounter = 0;
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllData();
 
-    // --- 手動補正 説明モーダル ---
-    const manualModInfoBtn = document.getElementById('manual-modifier-info-btn');
-    const manualModModal = document.getElementById('manual-modifier-modal');
-    if (manualModInfoBtn && manualModModal) {
-        // 外部JSONからモーダルの内容を動的に読み込み
-        fetch('./components/manual_modifier_info.json')
-            .then(res => res.json())
-            .then(data => {
-                const contentDiv = document.getElementById('manual-modifier-modal-content');
-                if (contentDiv) {
-                    let itemsHtml = data.items.map(item => `<li><strong>${item.multiplier}</strong>: ${item.example}</li>`).join('');
-                    let descHtml = data.descriptions.map(desc => `<p>${desc}</p>`).join('');
-                    
-                    contentDiv.innerHTML = `
-                        <button type="button" class="info-modal-close" id="manual-modifier-modal-close" aria-label="閉じる">×</button>
-                        <h3 class="info-modal-title">${data.title}</h3>
-                        ${descHtml}
-                        <ul>${itemsHtml}</ul>
-                        <p class="info-modal-note">${data.note}</p>
-                    `;
-                    
-                    // 動的生成された閉じるボタンにイベントを設定
-                    const closeBtn = document.getElementById('manual-modifier-modal-close');
-                    if (closeBtn) {
-                        closeBtn.addEventListener('click', () => {
-                            manualModModal.style.display = 'none';
-                        });
-                    }
-                }
-            })
-            .catch(err => console.error("Failed to load manual modifier info:", err));
-
-        manualModInfoBtn.addEventListener('click', () => {
-            manualModModal.style.display = 'flex';
+    // --- 手動補正チェックボックス: 値取得ヘルパー & PC/モバイル同期 ---
+    function getManualModValue() {
+        const container = document.getElementById('battle-manual-modifier');
+        if (!container) return 1.0;
+        let mod = 1.0;
+        container.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+            mod *= parseFloat(cb.value) || 1.0;
         });
-        manualModModal.addEventListener('click', (e) => {
-            if (e.target === manualModModal) manualModModal.style.display = 'none';
+        return mod;
+    }
+
+    function syncManualModChecks(source, target) {
+        if (!source || !target) return;
+        const srcChecks = source.querySelectorAll('input[type="checkbox"]');
+        const tgtChecks = target.querySelectorAll('input[type="checkbox"]');
+        srcChecks.forEach((cb, i) => {
+            if (tgtChecks[i]) tgtChecks[i].checked = cb.checked;
+        });
+    }
+
+    const pcManualMod = document.getElementById('battle-manual-modifier');
+    const mobileManualMod = document.getElementById('mobile-battle-manual-modifier');
+    if (pcManualMod && mobileManualMod) {
+        pcManualMod.addEventListener('change', () => {
+            syncManualModChecks(pcManualMod, mobileManualMod);
+        });
+        mobileManualMod.addEventListener('change', () => {
+            syncManualModChecks(mobileManualMod, pcManualMod);
         });
     }
 
@@ -179,9 +170,39 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+    // 持ち物に応じたサブセレクタ（メトロノーム回数選択）を表示/非表示
+    function updateItemSubSelector(itemSelect, itemValue) {
+        const parentLabel = itemSelect.closest('label') || itemSelect.parentElement;
+        const parent = parentLabel.parentElement;
+        const oldContainer = parent.querySelector('.metronome-container');
+        if (oldContainer) oldContainer.remove();
+
+        if (itemValue === 'メトロノーム') {
+            const container = document.createElement('div');
+            container.className = 'metronome-container multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = '連続回数:';
+            container.appendChild(label);
+            const select = document.createElement('select');
+            select.className = 'metronome-count-select';
+            const labels = ['1回目（×1.0）', '2回目（×1.2）', '3回目（×1.4）', '4回目（×1.6）', '5回目（×1.8）', '6回目以降（×2.0）'];
+            for (let i = 0; i < labels.length; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = labels[i];
+                if (i === 0) opt.selected = true;
+                select.appendChild(opt);
+            }
+            container.appendChild(select);
+            parentLabel.after(container);
+        }
+    }
+
     if (allyItemSelect) {
         allyItemSelect.addEventListener('change', (e) => {
             appState.getAllyPokemon().item = e.target.value;
+            updateItemSubSelector(allyItemSelect, e.target.value);
         });
     }
     // 特性に応じたサブセレクタ（そうだいしょう / 条件付き特性）を表示/非表示
@@ -265,6 +286,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (enemyItemSelect) {
         enemyItemSelect.addEventListener('change', (e) => {
             appState.getEnemyPokemon().item = e.target.value;
+            updateItemSubSelector(enemyItemSelect, e.target.value);
         });
     }
     if (enemyAbilitySelect) {
@@ -1164,7 +1186,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             const atkAbilityActive = atkConditionalEl ? parseInt(atkConditionalEl.value) === 1 : false;
             const defAbilityActive = defConditionalEl ? parseInt(defConditionalEl.value) === 1 : false;
 
-            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight, supremeOverlordCount, atkAbilityActive, defAbilityActive });
+            // メトロノーム: 攻撃側の持ち物サブセレクタから回数を取得
+            const atkItemParent = document.querySelector(`#${attackerPrefix}-item-select`)?.closest('label')?.parentElement;
+            const metronomeEl = atkItemParent?.querySelector('.metronome-count-select');
+            const metronomeCount = metronomeEl ? parseInt(metronomeEl.value) || 0 : 0;
+
+            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight, supremeOverlordCount, atkAbilityActive, defAbilityActive, metronomeCount });
 
             // 連続技のヒット回数を取得
             const hitSelectEl = moveInput?.closest('.move-row')?.querySelector('.multi-hit-select');
@@ -1180,7 +1207,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const attackerStartHp = attacker.currentHp;
 
             // 手動補正を適用したロール配列を生成
-            const manualMod = parseFloat(document.getElementById('battle-manual-modifier').value) || 1.0;
+            const manualMod = getManualModValue();
             let modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * manualMod)));
             // 連続技: ヒット回数分を乗算
             if (hitCount > 1) {
@@ -1643,14 +1670,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                     oldSelect.parentNode.replaceChild(newSelect, oldSelect);
                 }
 
-                // 手動補正セレクト: 攻撃ごとにリスナーを付け替えて前回分をクリア
-                const oldManualModSelect = document.getElementById('battle-manual-modifier');
-                if (oldManualModSelect && oldManualModSelect.parentNode) {
-                    const newManualModSelect = oldManualModSelect.cloneNode(true);
-                    oldManualModSelect.parentNode.replaceChild(newManualModSelect, oldManualModSelect);
+                // 手動補正チェックボックス: 攻撃ごとにリスナーを付け替えて前回分をクリア
+                const pcModContainer = document.getElementById('battle-manual-modifier');
+                const mobileModContainer = document.getElementById('mobile-battle-manual-modifier');
 
-                    newManualModSelect.addEventListener('change', () => {
-                        const newMod = parseFloat(newManualModSelect.value) || 1.0;
+                if (pcModContainer) {
+                    // 既存リスナーをクリア（cloneNode方式）
+                    const newPcMod = pcModContainer.cloneNode(true);
+                    pcModContainer.parentNode.replaceChild(newPcMod, pcModContainer);
+                    let newMobileMod = mobileModContainer;
+                    if (mobileModContainer) {
+                        newMobileMod = mobileModContainer.cloneNode(true);
+                        mobileModContainer.parentNode.replaceChild(newMobileMod, mobileModContainer);
+                    }
+
+                    const handleManualModChange = () => {
+                        const newMod = getManualModValue();
                         modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * newMod)));
                         // 連続技: ヒット回数分を乗算
                         if (hitCount > 1) {
@@ -1763,7 +1798,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                         updateFormFromState(defenderSide);
                         updateFormFromState(attackerSide);
                         renderBattleLog();
+                    };
+
+                    newPcMod.addEventListener('change', () => {
+                        if (newMobileMod) syncManualModChecks(newPcMod, newMobileMod);
+                        handleManualModChange();
                     });
+                    if (newMobileMod) {
+                        newMobileMod.addEventListener('change', () => {
+                            syncManualModChecks(newMobileMod, newPcMod);
+                            handleManualModChange();
+                        });
+                    }
                 }
             }
 
@@ -2424,7 +2470,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             }
         }
-        if (itemSelect) itemSelect.value = pokemon.item || '';
+        if (itemSelect) {
+            itemSelect.value = pokemon.item || '';
+            // メトロノームサブセレクタの同期（既存の値を保持）
+            const itemParent = (itemSelect.closest('label') || itemSelect.parentElement).parentElement;
+            const oldMetroSelect = itemParent.querySelector('.metronome-count-select');
+            const prevMetroValue = oldMetroSelect ? oldMetroSelect.value : null;
+            updateItemSubSelector(itemSelect, itemSelect.value);
+            if (prevMetroValue !== null) {
+                const newMetroSelect = itemParent.querySelector('.metronome-count-select');
+                if (newMetroSelect) newMetroSelect.value = prevMetroValue;
+            }
+        }
 
         // 使用率データ表示をポケモンに同期
         updateUsageRateDisplay(teamType, pokemon.name);

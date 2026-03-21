@@ -882,6 +882,19 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // --- メトロノーム: 連続使用回数に応じたダメージ補正 ---
+    let metronomeMod = 1.0;
+    if (attackerItem && attackerItem.type === 'metronome') {
+        const count = Math.min(field.metronomeCount || 0, attackerItem.multipliers.length - 1);
+        metronomeMod = attackerItem.multipliers[count];
+        if (metronomeMod > 1.0) {
+            itemModifierInfo = {
+                type: 'metronome', name: 'メトロノーム',
+                multiplier: metronomeMod
+            };
+        }
+    }
+
     // マルチスケイル / ファントムガード判定
     const FULLHP_GUARD_ABILITIES = ['マルチスケイル', 'ファントムガード'];
     const fullHpGuardApplies = FULLHP_GUARD_ABILITIES.includes(defender.ability)
@@ -910,6 +923,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         // 4. 攻撃側持ち物: damage_boost → 4096基準補正
         if (itemDamageBoostApplies) {
             dmg = applyModifier(dmg, attackerItem.multiplier);
+        }
+
+        // 4b. メトロノーム補正 → 4096基準補正
+        if (metronomeMod > 1.0) {
+            dmg = applyModifier(dmg, metronomeMod);
         }
 
         // 5. 防御側特性補正 (defensive) → 4096基準補正
