@@ -1,0 +1,14 @@
+{
+  "もろはのずつき": { "type": "damage", "divisor": 2 },
+  "ウェーブタックル": { "type": "damage", "divisor": 3 },
+  "ウッドハンマー": { "type": "damage", "divisor": 3 },
+  "すてみタックル": { "type": "damage", "divisor": 3 },
+  "フレアドライブ": { "type": "damage", "divisor": 3 },
+  "ブレイブバード": { "type": "damage", "divisor": 3 },
+  "ボルテッカー": { "type": "damage", "divisor": 3 },
+  "とっしん": { "type": "damage", "divisor": 4 },
+  "ワイルドボルト": { "type": "damage", "divisor": 4 },
+  "てっていこうせん": { "type": "hp_cost", "divisor": 2 },
+  "ビックリヘッド": { "type": "hp_cost", "divisor": 2 },
+  "クロロブラスト": { "type": "hp_cost", "divisor": 2 }
+}

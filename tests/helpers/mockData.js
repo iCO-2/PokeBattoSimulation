@@ -137,8 +137,59 @@ export const MOCK_ABILITIES_DEX = {
         weaken: 1.00, weakken_stats: '', is_special: true
     },
     'ふゆう': {
-        type: 'levitate', offensive: 1.0, defensive: 0.0,
+        type: 'type_nullify', nullify_type: 'じめん', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
         weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'かんそうはだ': {
+        type: 'type_nullify', nullify_type: 'みず', heal_ratio: 0.25,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'ちょすい': {
+        type: 'type_nullify', nullify_type: 'みず', heal_ratio: 0.25,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'よびみず': {
+        type: 'type_nullify', nullify_type: 'みず', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'こんがりボディ': {
+        type: 'type_nullify', nullify_type: 'ほのお', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'もらいび': {
+        type: 'type_nullify', nullify_type: 'ほのお', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'ちくでん': {
+        type: 'type_nullify', nullify_type: 'でんき', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'でんきエンジン': {
+        type: 'type_nullify', nullify_type: 'でんき', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'ひらいしん': {
+        type: 'type_nullify', nullify_type: 'でんき', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'そうしょく': {
+        type: 'type_nullify', nullify_type: 'くさ', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'どしょく': {
+        type: 'type_nullify', nullify_type: 'じめん', heal_ratio: 0,
+        offensive: 1.0, defensive: 0.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
     },
     'マルチスケイル': {
         type: 'fullhp_guard', offensive: 1.0, defensive: 0.5,
@@ -159,6 +210,46 @@ export const MOCK_ABILITIES_DEX = {
     'しんりょく': {
         type: 'hp_threshold_boost', offensive: 1.5, defensive: 1.0,
         weaken: 1.00, weakken_stats: '', is_special: true, boost_type: 'くさ'
+    },
+    'すてみ': {
+        type: 'reckless', offensive: 1.2, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'いしあたま': {
+        type: 'rock_head', offensive: 1.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'いろめがね': {
+        type: 'tinted_lens', offensive: 2.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'フィルター': {
+        type: 'filter', offensive: 1.0, defensive: 0.75,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'ハードロック': {
+        type: 'filter', offensive: 1.0, defensive: 0.75,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'プリズムアーマー': {
+        type: 'filter', offensive: 1.0, defensive: 0.75,
+        weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'あついしぼう': {
+        type: 'type_halve_attack', resist_types: ['ほのお', 'こおり'],
+        offensive: 1.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'たいねつ': {
+        type: 'type_halve_attack', resist_types: ['ほのお'],
+        offensive: 1.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'すいほう': {
+        type: 'type_halve_attack', resist_types: ['ほのお'],
+        boost_type: 'みず', boost_power: 2.0,
+        offensive: 1.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
     }
 };
 

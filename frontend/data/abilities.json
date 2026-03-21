@@ -225,7 +225,9 @@
     "memo": "物理技の攻撃力を2.0倍（4096基準補正）"
   },
   "ふゆう": {
-    "type": "levitate",
+    "type": "type_nullify",
+    "nullify_type": "じめん",
+    "heal_ratio": 0,
     "offensive": 1.0,
     "defensive": 0.0,
     "weaken": 1.00,
@@ -262,5 +264,313 @@
     "is_special": true,
     "boost_type": "くさ",
     "memo": "HP1/3以下でくさタイプの技の攻撃1.5倍"
+  },
+  "むしのしらせ": {
+    "type": "hp_threshold_boost",
+    "offensive": 1.5,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "boost_type": "むし",
+    "memo": "HP1/3以下でむしタイプの技の攻撃1.5倍"
+  },
+  "よわき": {
+    "type": "hp_threshold_debuff",
+    "multiplier": 0.5,
+    "threshold": 0.5,
+    "memo": "HP1/2以下で攻撃・特攻が0.5倍"
+  },
+  "もふもふ": {
+    "type": "fluffy",
+    "memo": "直接攻撃のダメージ半減、ほのおタイプの技のダメージ2倍"
+  },
+  "ファーコート": {
+    "type": "fur_coat",
+    "memo": "物理技のダメージ半減（防御2倍）"
+  },
+  "こおりのりんぷん": {
+    "type": "ice_scales",
+    "memo": "特殊技のダメージ半減"
+  },
+  "すてみ": {
+    "type": "reckless",
+    "offensive": 1.2,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "反動技の威力を1.2倍（4096基準: ×4915÷4096）"
+  },
+  "いしあたま": {
+    "type": "rock_head",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "反動ダメージを無効化"
+  },
+  "いろめがね": {
+    "type": "tinted_lens",
+    "offensive": 2.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "効果いまひとつ以下の技のダメージを2倍"
+  },
+  "かんそうはだ": {
+    "type": "type_nullify",
+    "nullify_type": "みず",
+    "heal_ratio": 0.25,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "みずタイプの技を無効化し最大HPの1/4を回復"
+  },
+  "ちょすい": {
+    "type": "type_nullify",
+    "nullify_type": "みず",
+    "heal_ratio": 0.25,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "みずタイプの技を無効化し最大HPの1/4を回復"
+  },
+  "よびみず": {
+    "type": "type_nullify",
+    "nullify_type": "みず",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "みずタイプの技を無効化"
+  },
+  "こんがりボディ": {
+    "type": "type_nullify",
+    "nullify_type": "ほのお",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "ほのおタイプの技を無効化"
+  },
+  "もらいび": {
+    "type": "type_nullify",
+    "nullify_type": "ほのお",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "ほのおタイプの技を無効化"
+  },
+  "ちくでん": {
+    "type": "type_nullify",
+    "nullify_type": "でんき",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "でんきタイプの技を無効化"
+  },
+  "でんきエンジン": {
+    "type": "type_nullify",
+    "nullify_type": "でんき",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "でんきタイプの技を無効化"
+  },
+  "ひらいしん": {
+    "type": "type_nullify",
+    "nullify_type": "でんき",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "でんきタイプの技を無効化"
+  },
+  "そうしょく": {
+    "type": "type_nullify",
+    "nullify_type": "くさ",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "くさタイプの技を無効化"
+  },
+  "どしょく": {
+    "type": "type_nullify",
+    "nullify_type": "じめん",
+    "heal_ratio": 0,
+    "offensive": 1.0,
+    "defensive": 0.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "じめんタイプの技を無効化"
+  },
+  "フィルター": {
+    "type": "filter",
+    "offensive": 1.0,
+    "defensive": 0.75,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "効果抜群の技を受けたとき被ダメージを0.75倍に軽減"
+  },
+  "ハードロック": {
+    "type": "filter",
+    "offensive": 1.0,
+    "defensive": 0.75,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "効果抜群の技を受けたとき被ダメージを0.75倍に軽減"
+  },
+  "プリズムアーマー": {
+    "type": "filter",
+    "offensive": 1.0,
+    "defensive": 0.75,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": false,
+    "memo": "効果抜群の技を受けたとき被ダメージを0.75倍に軽減"
+  },
+  "あついしぼう": {
+    "type": "type_halve_attack",
+    "resist_types": ["ほのお", "こおり"],
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ほのお・こおりタイプの技を受けた際、攻撃側の攻撃（特攻）を半減"
+  },
+  "たいねつ": {
+    "type": "type_halve_attack",
+    "resist_types": ["ほのお"],
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ほのおタイプの技を受けた際、攻撃側の攻撃（特攻）を半減"
+  },
+  "すいほう": {
+    "type": "type_halve_attack",
+    "resist_types": ["ほのお"],
+    "boost_type": "みず",
+    "boost_power": 2.0,
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ほのおタイプの技の攻撃を半減。みずタイプの技の威力2倍"
+  },
+  "そうだいしょう": {
+    "type": "supreme_overlord",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "味方ひんし数に応じて威力補正（1体:1.1倍〜5体:1.5倍）"
+  },
+  "こんじょう": {
+    "type": "conditional",
+    "conditional_effect": "atk_boost",
+    "boost_stat": "attack",
+    "boost_multiplier": 1.5,
+    "boost_category": "Physical",
+    "ignore_burn": true,
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "状態異常のとき攻撃1.5倍、やけどの物理半減無視"
+  },
+  "ふしぎなうろこ": {
+    "type": "conditional",
+    "conditional_effect": "def_boost",
+    "boost_stat": "defence",
+    "boost_multiplier": 1.5,
+    "boost_category": "Physical",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "状態異常のとき防御1.5倍"
+  },
+  "ねつぼうそう": {
+    "type": "conditional",
+    "conditional_effect": "atk_boost",
+    "boost_stat": "spAtk",
+    "boost_multiplier": 1.5,
+    "boost_category": "Special",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "やけど状態のとき特攻1.5倍"
+  },
+  "どくぼうそう": {
+    "type": "conditional",
+    "conditional_effect": "power_boost",
+    "boost_multiplier": 1.5,
+    "boost_category": "Physical",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "どく・もうどく状態のとき物理技の威力1.5倍"
+  },
+  "はやあし": {
+    "type": "conditional",
+    "conditional_effect": "speed_boost",
+    "boost_stat": "speed",
+    "boost_multiplier": 1.5,
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "状態異常のとき素早さ1.5倍"
+  },
+  "ちからずく": {
+    "type": "conditional",
+    "conditional_effect": "power_boost",
+    "boost_multiplier": 1.3,
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "追加効果がある技の威力1.3倍（追加効果は発動しない）"
   }
 }

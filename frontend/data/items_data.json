@@ -340,6 +340,11 @@
     "multiplier": 0.0,
     "message": "晴れと雨の効果を無視"
   },
+  "メトロノーム": {
+    "type": "metronome",
+    "multipliers": [1.0, 1.2, 1.4, 1.6, 1.8, 2.0],
+    "message": "メトロノームで威力アップ"
+  },
   "ダミー（効果なし）": {
     "type": "none",
     "effect_target": [],

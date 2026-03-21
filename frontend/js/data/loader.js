@@ -6,6 +6,7 @@ export let ABILITIES_DEX = {};
 export let MOVE_TYPE_MOVES = {};
 export let KNOWN_DAMAGE_MOVES = {};
 export let SPECIFIC_MOVES = {};
+export let RECOIL_MOVES = {};
 
 export async function loadAllData() {
     try {
@@ -110,7 +111,14 @@ const TYPE_TRANSLATION = {
                 console.log(`Loaded ${Object.keys(ABILITIES_DEX).length} abilities.`);
 
                 // 一意のtypeリストを取得し、対応するmoves_{type}.jsonをロード（dezaster, skinはJSONなし）
-                const types = [...new Set(Object.values(ABILITIES_DEX).map(a => a.type))].filter(t => t !== 'dezaster' && t !== 'skin');
+                // 技リストJSONが存在するtypeのみロード（技分類に紐づくもの）
+                const typesWithoutMoveList = new Set([
+                    'dezaster', 'skin', 'filter', 'fullhp_guard', 'hp_threshold_boost', 'hp_threshold_debuff',
+                    'power_boost', 'reckless', 'rock_head', 'technician', 'tinted_lens',
+                    'type_halve_attack', 'type_nullify', 'supreme_overlord', 'conditional',
+                    'fluffy', 'fur_coat', 'ice_scales'
+                ]);
+                const types = [...new Set(Object.values(ABILITIES_DEX).map(a => a.type))].filter(t => !typesWithoutMoveList.has(t));
                 const moveTypePromises = types.map(async (type) => {
                     try {
                         const res = await fetch(`./data/moves_info/moves_${type}.json`);
@@ -161,6 +169,19 @@ const TYPE_TRANSLATION = {
             }
         } catch (e) {
             console.warn('Failed to load moves_specific.json:', e);
+        }
+
+        // 反動技データの読み込み
+        try {
+            const recoilRes = await fetch('./data/moves_info/moves_recoil.json');
+            if (recoilRes.ok) {
+                RECOIL_MOVES = await recoilRes.json();
+                console.log(`Loaded ${Object.keys(RECOIL_MOVES).length} recoil moves.`);
+            } else {
+                console.warn(`Failed to load moves_recoil.json: ${recoilRes.status}`);
+            }
+        } catch (e) {
+            console.warn('Failed to load moves_recoil.json:', e);
         }
 
     } catch (error) {

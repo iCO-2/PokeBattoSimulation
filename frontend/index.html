@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/Pokegloss.png">
-    <link rel="stylesheet" href="css/style.css?v=36">
+    <link rel="stylesheet" href="css/style.css?v=47">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -451,10 +451,10 @@
             </div>
 
             <div class="options">
-                <label><span class="option-label">特性:</span><select id="ally-ability-select"><option>未設定</option></select></label>
+                <label><span class="option-label">特性:</span><select id="ally-ability-select"><option>--未設定--</option></select></label>
                 <label><span class="option-label">持ち物:</span>
                     <select id="ally-item-select">
-                        <option value="">未設定</option>
+                        <option value="">--未設定--</option>
                     </select>
                 </label>
             </div>
@@ -536,6 +536,15 @@
                     </button>
                  </div>
 
+                 <!-- 手動補正（攻撃ボタン下） -->
+                 <div class="manual-modifier-row">
+                    <div id="battle-manual-modifier" class="manual-modifier-checks">
+                        <label class="manual-mod-check manual-mod-reduce"><input type="checkbox" value="0.5"><span>×0.5（やけど補正/半減実）</span></label>
+                        <label class="manual-mod-check"><input type="checkbox" id="battle-critical-hit"><span>急所（×1.5）</span></label>
+                        <label class="manual-mod-check"><input type="checkbox" value="2.0"><span>×2.0（アナライズ/ゆきなだれ/たたりめ）</span></label>
+                    </div>
+                 </div>
+
             </div>
             </div>
 
@@ -579,19 +588,6 @@
                 <div class="result-row">
                     <span class="label">技効果:</span>
                     <span class="value specific-move-info"></span>
-                </div>
-                <div class="result-row">
-                    <span class="label">手動補正:<button type="button" class="info-icon-btn" id="manual-modifier-info-btn" aria-label="手動補正の説明"><img src="../backend/data/image/info.svg" alt="!" class="info-icon"></button></span>
-                    <select id="battle-manual-modifier" class="random-select">
-                        <option value="0.5">×0.5（やけど/半減実）</option>
-                        <option value="1.0" selected>×1.0（補正なし）</option>
-                        <option value="1.2">×1.2（メトロノーム2回目）</option>
-                        <option value="1.4">×1.4（メトロノーム3回目）</option>
-                        <option value="1.5">×1.5（急所）</option>
-                        <option value="1.6">×1.6（メトロノーム4回目）</option>
-                        <option value="1.8">×1.8（メトロノーム5回目）</option>
-                        <option value="2.0">×2.0（アナライズ/ゆきなだれ/メトロノーム6回目~/たたりめ補正など）</option>
-                    </select>
                 </div>
                 <div class="result-row">
                     <span class="label">採用乱数:</span>
@@ -1019,10 +1015,10 @@
             </div>
 
             <div class="options">
-                <label><span class="option-label">特性:</span><select id="enemy-ability-select"><option>未設定</option></select></label>
+                <label><span class="option-label">特性:</span><select id="enemy-ability-select"><option>--未設定--</option></select></label>
                 <label><span class="option-label">持ち物:</span>
                     <select id="enemy-item-select">
-                        <option value="">未設定</option>
+                        <option value="">--未設定--</option>
                     </select>
                 </label>
             </div>
@@ -1098,15 +1094,15 @@
         </div>
     </div>
 
-    <!-- 手動補正 説明モーダル -->
-    <div id="manual-modifier-modal" class="info-modal-overlay" style="display:none;">
-        <div class="info-modal" id="manual-modifier-modal-content">
-            <!-- Modal content will be loaded dynamically from manual_modifier_info.json -->
+    <div class="mobile-sticky-footer">
+    <div class="mobile-sticky-footer">
+        <div class="mobile-manual-modifier-row">
+            <div id="mobile-battle-manual-modifier" class="manual-modifier-checks mobile-manual-modifier-checks">
+                <label class="manual-mod-check manual-mod-reduce"><input type="checkbox" value="0.5"><span>やけど補正/半減実（×0.5）</span></label>
+                <label class="manual-mod-check"><input type="checkbox" id="mobile-battle-critical-hit"><span>急所（×1.5）</span></label>
+                <label class="manual-mod-check"><input type="checkbox" value="2.0"><span>アナライズ/ゆきなだれ/たたりめ（×2.0）</span></label>
+            </div>
         </div>
-    </div>
-
-    <div class="mobile-sticky-footer">
-    <div class="mobile-sticky-footer">
         <div class="mobile-action-buttons">
             <button id="mobile-attack-ally" class="mobile-action-btn ally-attack">
                 <img src="../backend/data/image/trainer_ally.png" alt="Ally" class="mobile-trainer-icon">
@@ -1119,11 +1115,11 @@
         </div>
     </div>
 
-    <script type="module" src="js/data/loader.js?v=7"></script>
+    <script type="module" src="js/data/loader.js?v=9"></script>
     <script type="module" src="js/calc/stats.js?v=118"></script>
-    <script type="module" src="js/calc/damage.js?v=227"></script>
-    <script type="module" src="js/models/PokemonModel.js?v=124"></script>
-    <script type="module" src="js/AppState.js?v=120"></script>
-    <script type="module" src="js/main.js?v=151"></script>
+    <script type="module" src="js/calc/damage.js?v=236"></script>
+    <script type="module" src="js/models/PokemonModel.js?v=126"></script>
+    <script type="module" src="js/AppState.js?v=121"></script>
+    <script type="module" src="js/main.js?v=169"></script>
 </body>
 </html>

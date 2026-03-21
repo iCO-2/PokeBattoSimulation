@@ -1,5 +1,5 @@
 import { getTypeEffectiveness } from '../data/types.js';
-import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES } from '../data/loader.js?v=7';
+import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, RECOIL_MOVES } from '../data/loader.js?v=9';
 
 /**
  * ランク補正倍率を取得
@@ -88,6 +88,30 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         dStr = 'spDef';
     }
 
+    // テラバースト: テラスタル（通常・ステラ両方）使用時はランク補正込みの攻撃 vs 特攻で物理/特殊を判定
+    const attackerTeraActive = (attacker.teraType && attacker.teraType !== 'なし' && attacker.teraType !== 'ステラ')
+        ? attacker.teraType : null;
+    const isAttackerStellar = attacker.teraType === 'ステラ';
+    let teraBlastInfo = null;
+    if (moveName === 'テラバースト' && (attackerTeraActive || isAttackerStellar)) {
+        const atkRank = attacker.stats.attack ? attacker.stats.attack.rank || 0 : 0;
+        const spAtkRank = attacker.stats.spAtk ? attacker.stats.spAtk.rank || 0 : 0;
+        const rankedAtk = Math.floor((attacker.realStats.attack || 0) * getRankMultiplier(atkRank));
+        const rankedSpAtk = Math.floor((attacker.realStats.spAtk || 0) * getRankMultiplier(spAtkRank));
+        if (rankedAtk > rankedSpAtk) {
+            aStr = 'attack';
+            dStr = 'defence';
+        } else {
+            aStr = 'spAtk';
+            dStr = 'spDef';
+        }
+        teraBlastInfo = {
+            moveType: attackerTeraActive || 'ステラ',
+            category: (aStr === 'attack') ? 'Physical' : 'Special',
+            isStellar: isAttackerStellar
+        };
+    }
+
     // 特殊技: ステータス参照先・ソースポケモンの決定
     let aSrc = attacker;   // A計算に使うポケモン
     let aStat = aStr;      // A計算に使うステータスキー
@@ -111,8 +135,15 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     }
 
     // ステータス実数値にランク補正を適用
-    const attackerRank = aSrc.stats[aStat] ? aSrc.stats[aStat].rank || 0 : 0;
+    const isCritical = !!(field && field.isCritical);
+    let attackerRank = aSrc.stats[aStat] ? aSrc.stats[aStat].rank || 0 : 0;
     let defenderRank = dSrc.stats[dStat] ? dSrc.stats[dStat].rank || 0 : 0;
+
+    // 急所: 攻撃側のマイナスランクを無視、防御側のプラスランクを無視
+    if (isCritical) {
+        attackerRank = Math.max(0, attackerRank);
+        defenderRank = Math.min(0, defenderRank);
+    }
 
     // 特殊技: 防御側ランク上昇無視
     if (specificMove && specificMove.ignore_stats_change) {
@@ -213,6 +244,20 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     // 特性補正
     let moveType = move.type || 'ノーマル';
 
+    // テラバースト: テラスタル使用時はテラタイプに変化
+    if (moveName === 'テラバースト' && attackerTeraActive) {
+        moveType = attackerTeraActive;
+    }
+
+    // ツタこんぼう: 使用ポケモンによりタイプが変化
+    if (moveName === 'ツタこんぼう') {
+        const attackerName = (attacker.name || '').trim();
+        if (attackerName === 'オーガポン（いどのめん）') moveType = 'みず';
+        else if (attackerName === 'オーガポン（かまどのめん）') moveType = 'ほのお';
+        else if (attackerName === 'オーガポン（いしずえのめん）') moveType = 'いわ';
+        // デフォルト（オーガポン素）: くさのまま
+    }
+
     let abilityOffensiveMod = 1.0;
     let abilityDefensiveMod = 1.0;
     let abilityOffensiveInfo = null;
@@ -274,8 +319,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     if (defenderAbilityData && defenderAbilityData.type !== 'dezaster') {
         const defType = defenderAbilityData.type;
 
-        // ふゆう: じめんタイプの技を無効化
-        if (defType === 'levitate' && moveType === 'じめん') {
+        // タイプ無効化特性 (ふゆう・ひらいしん・ちょすい等): 特定タイプの技を無効化
+        if (defType === 'type_nullify' && moveType === defenderAbilityData.nullify_type) {
             abilityDefensiveMod = 0;
             abilityDefensiveInfo = {
                 name: defender.ability,
@@ -293,6 +338,47 @@ export function calculateDamage(attacker, defender, move, field = {}) {
                     multiplier: abilityDefensiveMod
                 };
             }
+        }
+
+        // もふもふ: 直接攻撃(接触技)のダメージ半減、ほのおタイプの技のダメージ2倍
+        // ほのお接触技の場合: 半減×2倍 = 等倍
+        if (defType === 'fluffy') {
+            const isContact = MOVE_TYPE_MOVES['contact'] && MOVE_TYPE_MOVES['contact'].has(moveName);
+            const isFire = moveType === 'ほのお';
+            if (isContact && isFire) {
+                // 半減×2倍 = 等倍（相殺）
+            } else if (isFire) {
+                abilityDefensiveMod = 2.0;
+                abilityDefensiveInfo = {
+                    name: defender.ability,
+                    multiplier: 2.0
+                };
+            } else if (isContact) {
+                abilityDefensiveMod = 0.5;
+                abilityDefensiveInfo = {
+                    name: defender.ability,
+                    multiplier: 0.5
+                };
+            }
+        }
+
+        // ファーコート: 物理技のダメージ半減（防御2倍として計算）
+        if (defType === 'fur_coat' && move.category === 'Physical') {
+            D = applyModifier(D, 2.0);
+            abilityDefensiveInfo = {
+                name: defender.ability,
+                multiplier: 0.5,
+                memo: '防御×2.0'
+            };
+        }
+
+        // こおりのりんぷん: 特殊技のダメージ半減
+        if (defType === 'ice_scales' && move.category === 'Special') {
+            abilityDefensiveMod = 0.5;
+            abilityDefensiveInfo = {
+                name: defender.ability,
+                multiplier: 0.5
+            };
         }
 
         // is_special: true 特性の追加処理（枠組み）
@@ -326,6 +412,17 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         };
     }
 
+    // よわき: HP1/2以下で攻撃・特攻が0.5倍（4096基準補正）
+    if (attackerAbilityData && attackerAbilityData.type === 'hp_threshold_debuff'
+        && attacker.currentHp <= Math.floor(attacker.maxHp * attackerAbilityData.threshold)) {
+        A = applyModifier(A, attackerAbilityData.multiplier);
+        if (A < 1) A = 1;
+        abilityOffensiveInfo = {
+            name: attacker.ability,
+            multiplier: attackerAbilityData.multiplier
+        };
+    }
+
     // ちからもち: 物理技の攻撃力を2.0倍（4096基準補正: 四捨五入→五捨五超入）
     if (attackerAbilityData && attackerAbilityData.type === 'power_boost' && move.category === 'Physical') {
         A = applyModifier(A, attackerAbilityData.offensive);
@@ -334,6 +431,33 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             name: attacker.ability,
             multiplier: attackerAbilityData.offensive
         };
+    }
+
+    // 条件付き特性 (conditional): ステータス補正（攻撃側・防御側）
+    let conditionalAbilityInfos = [];
+    // 攻撃側: こんじょう(攻撃1.5倍), ねつぼうそう(特攻1.5倍)
+    if (field.atkAbilityActive && attackerAbilityData && attackerAbilityData.type === 'conditional') {
+        const effect = attackerAbilityData.conditional_effect;
+        // atk_boost: 実際に使用するステータス(aStat)がboost_statと一致する場合のみ適用
+        // （ボディプレス等でステータス参照先が変わった場合は適用しない）
+        if (effect === 'atk_boost' && attackerAbilityData.boost_stat === aStr && aStat === aStr) {
+            A = applyModifier(A, attackerAbilityData.boost_multiplier);
+            if (A < 1) A = 1;
+            conditionalAbilityInfos.push({ name: attacker.ability, stat: aStr, multiplier: attackerAbilityData.boost_multiplier, side: 'attacker' });
+        } else if (effect === 'speed_boost') {
+            // はやあし: 素早さ補正はジャイロボール等の計算に影響（後段で参照）
+            conditionalAbilityInfos.push({ name: attacker.ability, stat: 'speed', multiplier: attackerAbilityData.boost_multiplier, side: 'attacker' });
+        }
+    }
+    // 防御側: ふしぎなうろこ(防御1.5倍)
+    if (field.defAbilityActive && defenderAbilityData && defenderAbilityData.type === 'conditional') {
+        const effect = defenderAbilityData.conditional_effect;
+        // def_boost: 実際に使用するステータス(dStat)がboost_statと一致する場合のみ適用
+        if (effect === 'def_boost' && defenderAbilityData.boost_stat === dStr && dStat === dStr) {
+            D = applyModifier(D, defenderAbilityData.boost_multiplier);
+            if (D < 1) D = 1;
+            conditionalAbilityInfos.push({ name: defender.ability, stat: dStr, multiplier: defenderAbilityData.boost_multiplier, side: 'defender' });
+        }
     }
 
     // 攻撃側特性補正を攻撃力に適用（ちからもち以外の汎用特性）
@@ -361,6 +485,21 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         if (defenderAbilityData.weakken_stats === aStr) {
             A = Math.floor(A * defenderAbilityData.weaken);
             dezasterInfo = { name: defender.ability, stat: aStr, multiplier: defenderAbilityData.weaken, side: 'defender' };
+        }
+    }
+
+    // グループ1: タイプ半減特性（攻撃ステータスを半減）
+    // あついしぼう・たいねつ・すいほう: 特定タイプの技を受けた際、攻撃側のA（攻撃/特攻）を半減
+    let typeHalveAttackInfo = null;
+    if (defenderAbilityData && defenderAbilityData.type === 'type_halve_attack') {
+        if (defenderAbilityData.resist_types && defenderAbilityData.resist_types.includes(moveType)) {
+            A = applyModifier(A, 0.5);
+            if (A < 1) A = 1;
+            typeHalveAttackInfo = {
+                name: defender.ability,
+                multiplier: 0.5,
+                resistType: moveType
+            };
         }
     }
 
@@ -396,6 +535,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     let finalPower = power;
 
+    // テラバースト・ステラ: 威力 80 → 100
+    if (moveName === 'テラバースト' && isAttackerStellar) {
+        finalPower = 100;
+    }
+
     // 特殊技: 威力変動の処理
     if (specificMove) {
         // 相手の体重依存
@@ -430,8 +574,18 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
         // 素早さ差依存
         if (specificMove.depend_on_difference_speed) {
-            const atkSpd = Math.floor(attacker.realStats.speed * getRankMultiplier(attacker.stats.speed ? attacker.stats.speed.rank || 0 : 0));
-            const defSpd = Math.floor(defender.realStats.speed * getRankMultiplier(defender.stats.speed ? defender.stats.speed.rank || 0 : 0));
+            let atkSpd = Math.floor(attacker.realStats.speed * getRankMultiplier(attacker.stats.speed ? attacker.stats.speed.rank || 0 : 0));
+            let defSpd = Math.floor(defender.realStats.speed * getRankMultiplier(defender.stats.speed ? defender.stats.speed.rank || 0 : 0));
+            // はやあし: 攻撃側の素早さ1.5倍
+            if (field.atkAbilityActive && attackerAbilityData && attackerAbilityData.type === 'conditional'
+                && attackerAbilityData.conditional_effect === 'speed_boost') {
+                atkSpd = applyModifier(atkSpd, attackerAbilityData.boost_multiplier);
+            }
+            // はやあし: 防御側の素早さ1.5倍
+            if (field.defAbilityActive && defenderAbilityData && defenderAbilityData.type === 'conditional'
+                && defenderAbilityData.conditional_effect === 'speed_boost') {
+                defSpd = applyModifier(defSpd, defenderAbilityData.boost_multiplier);
+            }
 
             if (moveName === 'ジャイロボール') {
                 finalPower = atkSpd === 0 ? 1 : Math.min(150, Math.floor(25 * defSpd / atkSpd) + 1);
@@ -478,6 +632,15 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // すいほう: みずタイプの技の威力を2.0倍
+    let waterBubbleInfo = null;
+    if (attackerAbilityData && attackerAbilityData.type === 'type_halve_attack'
+        && attackerAbilityData.boost_type && moveType === attackerAbilityData.boost_type) {
+        const boostMod = Math.round(4096 * attackerAbilityData.boost_power);
+        finalPower = Math.round(finalPower * boostMod / 4096);
+        waterBubbleInfo = { name: attacker.ability, multiplier: attackerAbilityData.boost_power };
+    }
+
     // テラスタルの威力60引き上げ: テラタイプ一致 & 威力60未満 → 60に
     // ただし先制技・連続攻撃技は対象外
     const attackerTeraPre = attacker.teraType && attacker.teraType !== 'なし' && attacker.teraType !== 'ステラ' ? attacker.teraType : null;
@@ -517,6 +680,38 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         const knockOffMod = Math.round(4096 * 1.5);
         finalPower = Math.round(finalPower * knockOffMod / 4096);
         knockOffInfo = { name: 'はたきおとす', multiplier: 1.5 };
+    }
+
+    // そうだいしょう: 味方ひんし数に応じた威力補正（4096基準、四捨五入）
+    let supremeOverlordInfo = null;
+    const supremeOverlordMods = [0, 4506, 4915, 5325, 5734, 6144]; // 1~5体
+    if (attackerAbilityData && attackerAbilityData.type === 'supreme_overlord' && field.supremeOverlordCount > 0) {
+        const count = Math.min(field.supremeOverlordCount, 5);
+        const mod = supremeOverlordMods[count];
+        finalPower = Math.round(finalPower * mod / 4096);
+        supremeOverlordInfo = { name: attacker.ability, count, multiplier: +(mod / 4096).toFixed(2) };
+    }
+
+    // 条件付き特性 (conditional): 威力補正（どくぼうそう・ちからずく）
+    let conditionalPowerInfo = null;
+    if (field.atkAbilityActive && attackerAbilityData && attackerAbilityData.type === 'conditional'
+        && attackerAbilityData.conditional_effect === 'power_boost') {
+        // カテゴリ制限がある場合はチェック（どくぼうそう=Physical のみ、ちからずく=制限なし）
+        const catOk = !attackerAbilityData.boost_category || move.category === attackerAbilityData.boost_category;
+        if (catOk) {
+            const condMod = Math.round(4096 * attackerAbilityData.boost_multiplier);
+            finalPower = Math.round(finalPower * condMod / 4096);
+            conditionalPowerInfo = { name: attacker.ability, multiplier: attackerAbilityData.boost_multiplier };
+        }
+    }
+
+    // すてみ: ダメージ依存型の反動技の威力を1.2倍（4096基準: ×4915÷4096）
+    const recoilData = RECOIL_MOVES[moveName] || null;
+    let recklessInfo = null;
+    if (attackerAbilityData && attackerAbilityData.type === 'reckless' && recoilData && (recoilData.type || 'damage') === 'damage') {
+        const recklessMod = Math.round(4096 * attackerAbilityData.offensive);
+        finalPower = Math.round(finalPower * recklessMod / 4096);
+        recklessInfo = { name: attacker.ability, multiplier: attackerAbilityData.offensive };
     }
 
     let itemPowerBoostApplied = false;
@@ -610,8 +805,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     // タイプ一致 (STAB): テラスタル対応
     const originalTypes = attacker.speciesData ? attacker.speciesData.types : [];
     const attackerTera = attacker.teraType && attacker.teraType !== 'なし' ? attacker.teraType : null;
-    const isAttackerStellar = attackerTera === 'ステラ';
-    
+
     let stabMod = 1.0;
     let stellarBoosted = false; // ステラボーナスが適用されたかどうか
     
@@ -642,8 +836,28 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         stabMod = isSTAB ? 1.5 : 1.0;
     }
     
-    const typeMod = getTypeEffectiveness(moveType, defenderTypes);
-    
+    let typeMod = getTypeEffectiveness(moveType, defenderTypes);
+
+    // テラバースト・ステラ: 相手がテラスタル中なら必ず効果抜群（2倍）
+    if (moveName === 'テラバースト' && isAttackerStellar && defenderTera) {
+        typeMod = 2;
+    }
+
+    // いろめがね: タイプ相性が半減以下（0 < typeMod <= 0.5）のとき、ダメージ補正ステップで2倍
+    const tintedLensApplies = !!(attackerAbilityData && attackerAbilityData.type === 'tinted_lens'
+        && typeMod > 0 && typeMod <= 0.5);
+
+    // フィルター / ハードロック / プリズムアーマー: 効果抜群（typeMod > 1.0）のとき被ダメージ0.75倍
+    const filterApplies = !!(defenderAbilityData && defenderAbilityData.type === 'filter'
+        && typeMod > 1.0);
+
+    // タイプ無効化特性でHP回復が発生する場合の情報（かんそうはだ・ちょすい）
+    const typeNullifyHealInfo = (defenderAbilityData && defenderAbilityData.type === 'type_nullify'
+        && defenderAbilityData.heal_ratio > 0
+        && moveType === defenderAbilityData.nullify_type)
+        ? { name: defender.ability, healAmount: Math.floor(defender.maxHp * defenderAbilityData.heal_ratio) }
+        : null;
+
     // 状態異常(やけど): 物理なら0.5 (未実装)
     // 壁(リフレクター/光の壁): 防御側
     // 複数対象補正: 0.75
@@ -675,6 +889,19 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // --- メトロノーム: 連続使用回数に応じたダメージ補正 ---
+    let metronomeMod = 1.0;
+    if (attackerItem && attackerItem.type === 'metronome') {
+        const count = Math.min(field.metronomeCount || 0, attackerItem.multipliers.length - 1);
+        metronomeMod = attackerItem.multipliers[count];
+        if (metronomeMod > 1.0) {
+            itemModifierInfo = {
+                type: 'metronome', name: 'メトロノーム',
+                multiplier: metronomeMod
+            };
+        }
+    }
+
     // マルチスケイル / ファントムガード判定
     const FULLHP_GUARD_ABILITIES = ['マルチスケイル', 'ファントムガード'];
     const fullHpGuardApplies = FULLHP_GUARD_ABILITIES.includes(defender.ability)
@@ -687,9 +914,10 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     // 最終ダメージ算出ループ (16段階乱数)
 
     const rolls = [];
+    const rollsNoGuard = fullHpGuardApplies ? [] : null; // マルチスケイルなし版（連続技2発目以降用）
     for (let i = 85; i <= 100; i++) {
         let dmg = baseDamage;
-        
+
         // 1. 乱数 (0.85 .. 1.00) → 切り捨て
         dmg = Math.floor(dmg * i / 100);
 
@@ -702,6 +930,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         // 4. 攻撃側持ち物: damage_boost → 4096基準補正
         if (itemDamageBoostApplies) {
             dmg = applyModifier(dmg, attackerItem.multiplier);
+        }
+
+        // 4b. メトロノーム補正 → 4096基準補正
+        if (metronomeMod > 1.0) {
+            dmg = applyModifier(dmg, metronomeMod);
         }
 
         // 5. 防御側特性補正 (defensive) → 4096基準補正
@@ -718,7 +951,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             if (moveType === 'みず') weatherMod = 1.5;
             else if (moveType === 'ほのお') weatherMod = 0.5;
         }
-        
+
         if (weatherMod !== 1.0) {
             dmg = applyModifier(dmg, weatherMod);
             if (areaModifierInfo === null) {
@@ -727,31 +960,55 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             }
         }
 
-        // 7. 壁補正 → 4096基準補正 (シングル: 0.5倍)
+        // 7. 壁補正 → 4096基準補正 (シングル: 0.5倍) ※急所時は無視
         const wallReflect = field && field.wallReflect;
         const wallLight = field && field.wallLight;
-        if (wallReflect && move.category === 'Physical') {
-            dmg = applyModifier(dmg, 0.5);
+        if (!isCritical) {
+            if (wallReflect && move.category === 'Physical') {
+                dmg = applyModifier(dmg, 0.5);
+            }
+            if (wallLight && move.category === 'Special') {
+                dmg = applyModifier(dmg, 0.5);
+            }
         }
-        if (wallLight && move.category === 'Special') {
-            dmg = applyModifier(dmg, 0.5);
+
+        // 7b. 急所補正 → 4096基準補正 (×1.5)
+        if (isCritical) {
+            dmg = applyModifier(dmg, 1.5);
         }
+
+        // マルチスケイル適用前のダメージを保持（連続技2発目以降用）
+        let dmgNoGuard = dmg;
 
         // 8. マルチスケイル / ファントムガード: HP満タン時ダメージ半減
         if (fullHpGuardApplies) {
             dmg = applyModifier(dmg, 0.5);
         }
 
+        // 9. いろめがね: 効果いまひとつ以下のとき2倍（× 8192 ÷ 4096）
+        if (tintedLensApplies) {
+            dmg = applyModifier(dmg, 2.0);
+            dmgNoGuard = applyModifier(dmgNoGuard, 2.0);
+        }
+
+        // 10. フィルター / ハードロック / プリズムアーマー: 効果抜群のとき0.75倍（× 3072 ÷ 4096）
+        if (filterApplies) {
+            dmg = applyModifier(dmg, 0.75);
+            dmgNoGuard = applyModifier(dmgNoGuard, 0.75);
+        }
+
         if (dmg < 1) dmg = 1;
-        if (typeMod === 0) dmg = 0;
+        if (dmgNoGuard < 1) dmgNoGuard = 1;
+        if (typeMod === 0) { dmg = 0; dmgNoGuard = 0; }
         // 防御側特性で無効化 (defensive=0)
-        if (abilityDefensiveMod === 0) dmg = 0;
+        if (abilityDefensiveMod === 0) { dmg = 0; dmgNoGuard = 0; }
 
         rolls.push(dmg);
+        if (rollsNoGuard) rollsNoGuard.push(dmgNoGuard);
     }
     
-    const wallApplied = (field && field.wallReflect && move.category === 'Physical') ? 'リフレクター'
-        : (field && field.wallLight && move.category === 'Special') ? 'ひかりのかべ'
+    const wallApplied = (!isCritical && field && field.wallReflect && move.category === 'Physical') ? 'リフレクター'
+        : (!isCritical && field && field.wallLight && move.category === 'Special') ? 'ひかりのかべ'
         : null;
 
     // 特殊技情報の構築
@@ -799,6 +1056,38 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // 反動ダメージ計算
+    let recoilInfo = null;
+    if (recoilData) {
+        const isRockHead = !!(attackerAbilityData && attackerAbilityData.type === 'rock_head');
+        const recoilType = recoilData.type || 'damage';
+
+        if (recoilType === 'hp_cost') {
+            // HP消費型: 最大HPの1/divisor を消費（いしあたまで無効化不可）
+            const hpCost = Math.floor(attacker.maxHp / recoilData.divisor);
+            recoilInfo = {
+                name: moveName,
+                recoilType: 'hp_cost',
+                divisor: recoilData.divisor,
+                min: hpCost,
+                max: hpCost,
+                nullified: false
+            };
+        } else {
+            // ダメージ依存型: 与えたダメージの1/divisor（いしあたまで無効化可）
+            const recoilMin = isRockHead ? 0 : Math.floor(rolls[0] / recoilData.divisor);
+            const recoilMax = isRockHead ? 0 : Math.floor(rolls[rolls.length - 1] / recoilData.divisor);
+            recoilInfo = {
+                name: moveName,
+                recoilType: 'damage',
+                divisor: recoilData.divisor,
+                min: recoilMin,
+                max: recoilMax,
+                nullified: isRockHead
+            };
+        }
+    }
+
     return {
         min: rolls[0],
         max: rolls[rolls.length - 1],
@@ -808,14 +1097,27 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         defenderItemModifier: defenderItemModifierInfo,
         stellarBoosted: stellarBoosted,
         moveType: moveType,
-        abilityOffensiveInfo: technicianInfo || abilityOffensiveInfo,
+        abilityOffensiveInfo: technicianInfo || recklessInfo || abilityOffensiveInfo,
         abilityDefensiveInfo: abilityDefensiveInfo,
         dezasterInfo: dezasterInfo,
         areaModifier: areaModifierInfo,
         weatherDefModifier: weatherDefModifierInfo,
         wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
+        criticalInfo: isCritical ? { multiplier: 1.5 } : null,
         fullHpGuardInfo: fullHpGuardInfo,
         specificMoveInfo: specificMoveInfo,
-        knockOffInfo: knockOffInfo
+        knockOffInfo: knockOffInfo,
+        recoilInfo: recoilInfo,
+        recklessInfo: recklessInfo,
+        tintedLensInfo: tintedLensApplies ? { name: attacker.ability, multiplier: 2.0 } : null,
+        filterInfo: filterApplies ? { name: defender.ability, multiplier: 0.75 } : null,
+        typeNullifyHealInfo: typeNullifyHealInfo,
+        teraBlastInfo: teraBlastInfo,
+        typeHalveAttackInfo: typeHalveAttackInfo,
+        waterBubbleInfo: waterBubbleInfo,
+        supremeOverlordInfo: supremeOverlordInfo,
+        conditionalAbilityInfos: conditionalAbilityInfos,
+        conditionalPowerInfo: conditionalPowerInfo,
+        rollsNoGuard: rollsNoGuard
     };
 }

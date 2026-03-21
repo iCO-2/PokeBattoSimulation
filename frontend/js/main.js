@@ -1,6 +1,6 @@
-import { AppState } from './AppState.js?v=120';
-import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=227';
+import { AppState } from './AppState.js?v=121';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=9';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=234';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -14,43 +14,50 @@ let globalTurnCounter = 0;
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllData();
 
-    // --- 手動補正 説明モーダル ---
-    const manualModInfoBtn = document.getElementById('manual-modifier-info-btn');
-    const manualModModal = document.getElementById('manual-modifier-modal');
-    if (manualModInfoBtn && manualModModal) {
-        // 外部JSONからモーダルの内容を動的に読み込み
-        fetch('./components/manual_modifier_info.json')
-            .then(res => res.json())
-            .then(data => {
-                const contentDiv = document.getElementById('manual-modifier-modal-content');
-                if (contentDiv) {
-                    let itemsHtml = data.items.map(item => `<li><strong>${item.multiplier}</strong>: ${item.example}</li>`).join('');
-                    let descHtml = data.descriptions.map(desc => `<p>${desc}</p>`).join('');
-                    
-                    contentDiv.innerHTML = `
-                        <button type="button" class="info-modal-close" id="manual-modifier-modal-close" aria-label="閉じる">×</button>
-                        <h3 class="info-modal-title">${data.title}</h3>
-                        ${descHtml}
-                        <ul>${itemsHtml}</ul>
-                        <p class="info-modal-note">${data.note}</p>
-                    `;
-                    
-                    // 動的生成された閉じるボタンにイベントを設定
-                    const closeBtn = document.getElementById('manual-modifier-modal-close');
-                    if (closeBtn) {
-                        closeBtn.addEventListener('click', () => {
-                            manualModModal.style.display = 'none';
-                        });
-                    }
-                }
-            })
-            .catch(err => console.error("Failed to load manual modifier info:", err));
+    // --- 特性・持ち物セレクトの未設定時グレー表示 ---
+    function updateSelectUnsetStyle(select) {
+        if (!select) return;
+        select.classList.toggle('unset', !select.value);
+    }
+    document.querySelectorAll('.options select').forEach(sel => {
+        updateSelectUnsetStyle(sel);
+        sel.addEventListener('change', () => updateSelectUnsetStyle(sel));
+    });
 
-        manualModInfoBtn.addEventListener('click', () => {
-            manualModModal.style.display = 'flex';
+    // --- 急所チェックボックス取得ヘルパー ---
+    function isCriticalHit() {
+        const cb = document.getElementById('battle-critical-hit');
+        return cb ? cb.checked : false;
+    }
+
+    // --- 手動補正チェックボックス: 値取得ヘルパー & PC/モバイル同期 ---
+    function getManualModValue() {
+        const container = document.getElementById('battle-manual-modifier');
+        if (!container) return 1.0;
+        let mod = 1.0;
+        container.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+            mod *= parseFloat(cb.value) || 1.0;
         });
-        manualModModal.addEventListener('click', (e) => {
-            if (e.target === manualModModal) manualModModal.style.display = 'none';
+        return mod;
+    }
+
+    function syncManualModChecks(source, target) {
+        if (!source || !target) return;
+        const srcChecks = source.querySelectorAll('input[type="checkbox"]');
+        const tgtChecks = target.querySelectorAll('input[type="checkbox"]');
+        srcChecks.forEach((cb, i) => {
+            if (tgtChecks[i]) tgtChecks[i].checked = cb.checked;
+        });
+    }
+
+    const pcManualMod = document.getElementById('battle-manual-modifier');
+    const mobileManualMod = document.getElementById('mobile-battle-manual-modifier');
+    if (pcManualMod && mobileManualMod) {
+        pcManualMod.addEventListener('change', () => {
+            syncManualModChecks(pcManualMod, mobileManualMod);
+        });
+        mobileManualMod.addEventListener('change', () => {
+            syncManualModChecks(mobileManualMod, pcManualMod);
         });
     }
 
@@ -179,14 +186,100 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+    // 持ち物に応じたサブセレクタ（メトロノーム回数選択）を表示/非表示
+    function updateItemSubSelector(itemSelect, itemValue) {
+        const parentLabel = itemSelect.closest('label') || itemSelect.parentElement;
+        const parent = parentLabel.parentElement;
+        const oldContainer = parent.querySelector('.metronome-container');
+        if (oldContainer) oldContainer.remove();
+
+        if (itemValue === 'メトロノーム') {
+            const container = document.createElement('div');
+            container.className = 'metronome-container multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = '連続回数:';
+            container.appendChild(label);
+            const select = document.createElement('select');
+            select.className = 'metronome-count-select';
+            const labels = ['1回目（×1.0）', '2回目（×1.2）', '3回目（×1.4）', '4回目（×1.6）', '5回目（×1.8）', '6回目以降（×2.0）'];
+            for (let i = 0; i < labels.length; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = labels[i];
+                if (i === 0) opt.selected = true;
+                select.appendChild(opt);
+            }
+            container.appendChild(select);
+            parentLabel.after(container);
+        }
+    }
+
     if (allyItemSelect) {
         allyItemSelect.addEventListener('change', (e) => {
             appState.getAllyPokemon().item = e.target.value;
+            updateItemSubSelector(allyItemSelect, e.target.value);
         });
     }
+    // 特性に応じたサブセレクタ（そうだいしょう / 条件付き特性）を表示/非表示
+    const CONDITIONAL_ABILITIES = new Set([
+        'こんじょう', 'ふしぎなうろこ', 'ねつぼうそう', 'どくぼうそう', 'はやあし', 'ちからずく'
+    ]);
+
+    function updateAbilitySubSelector(abilitySelect, abilityValue) {
+        const parentLabel = abilitySelect.closest('label') || abilitySelect.parentElement;
+        const parent = parentLabel.parentElement;
+        // 既存のサブセレクタをクリア
+        const oldSO = parent.querySelector('.supreme-overlord-container');
+        if (oldSO) oldSO.remove();
+        const oldCond = parent.querySelector('.conditional-ability-container');
+        if (oldCond) oldCond.remove();
+
+        if (abilityValue === 'そうだいしょう') {
+            const container = document.createElement('div');
+            container.className = 'supreme-overlord-container multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = '味方ひんし数:';
+            container.appendChild(label);
+            const select = document.createElement('select');
+            select.className = 'supreme-overlord-select';
+            for (let h = 0; h <= 5; h++) {
+                const opt = document.createElement('option');
+                opt.value = h;
+                const mults = ['−', '1.1', '1.2', '1.3', '1.4', '1.5'];
+                opt.textContent = `${h}体` + (h > 0 ? ` (×${mults[h]})` : '');
+                if (h === 0) opt.selected = true;
+                select.appendChild(opt);
+            }
+            container.appendChild(select);
+            parentLabel.after(container);
+        } else if (CONDITIONAL_ABILITIES.has(abilityValue)) {
+            const container = document.createElement('div');
+            container.className = 'conditional-ability-container multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = '発動:';
+            container.appendChild(label);
+            const select = document.createElement('select');
+            select.className = 'conditional-ability-select';
+            const optOff = document.createElement('option');
+            optOff.value = '0';
+            optOff.textContent = 'なし';
+            select.appendChild(optOff);
+            const optOn = document.createElement('option');
+            optOn.value = '1';
+            optOn.textContent = 'あり';
+            select.appendChild(optOn);
+            container.appendChild(select);
+            parentLabel.after(container);
+        }
+    }
+
     if (allyAbilitySelect) {
         allyAbilitySelect.addEventListener('change', (e) => {
             appState.getAllyPokemon().ability = e.target.value;
+            updateAbilitySubSelector(allyAbilitySelect, e.target.value);
         });
     }
 
@@ -209,11 +302,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (enemyItemSelect) {
         enemyItemSelect.addEventListener('change', (e) => {
             appState.getEnemyPokemon().item = e.target.value;
+            updateItemSubSelector(enemyItemSelect, e.target.value);
         });
     }
     if (enemyAbilitySelect) {
         enemyAbilitySelect.addEventListener('change', (e) => {
             appState.getEnemyPokemon().ability = e.target.value;
+            updateAbilitySubSelector(enemyAbilitySelect, e.target.value);
         });
     }
     if (enemyTeraSelect) {
@@ -235,6 +330,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // --- Autocomplete Logic ---
+
+    /** ひらがなをカタカナに変換（サジェスト検索の正規化用） */
+    function hiraganaToKatakana(str) {
+        return str.replace(/[\u3041-\u3096]/g, ch => String.fromCharCode(ch.charCodeAt(0) + 0x60));
+    }
 
     function setupAutocomplete(inputElement, listElement, teamType) {
         let currentFocus = -1;
@@ -293,8 +393,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
             
-            const matches = allPokemon.filter(name => name.startsWith(filterText));
-            
+            const normalizedFilter = hiraganaToKatakana(filterText);
+            const matches = allPokemon.filter(name => name.startsWith(normalizedFilter));
+
             if (matches.length === 0) {
                 listElement.style.display = 'none';
                 return;
@@ -306,10 +407,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             matches.forEach(name => {
                 if (count >= maxItems) return;
-                
+
                 const item = document.createElement('li');
                 // 前方一致部分を太字に
-                item.innerHTML = `<strong>${name.substr(0, filterText.length)}</strong>${name.substr(filterText.length)}`;
+                item.innerHTML = `<strong>${name.substr(0, normalizedFilter.length)}</strong>${name.substr(normalizedFilter.length)}`;
                 item.addEventListener('click', function() {
                     inputElement.value = name;
                     listElement.innerHTML = '';
@@ -412,14 +513,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!display) return;
         
         display.innerHTML = ''; // Clear
-        
+        // 連続技セレクタもクリア（move-row に配置）
+        const moveRow = wrapper.closest('.move-row');
+        const oldHitContainer = moveRow ? moveRow.querySelector('.multi-hit-container') : null;
+        if (oldHitContainer) oldHitContainer.remove();
+
         if (!moveName) return;
-        
+
         const moveData = MOVES_DEX[moveName];
         if (!moveData) return;
-        
-        const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
-        const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
+
+        // ツタこんぼう: 使用ポケモンに応じて表示タイプを変更
+        let displayType = moveData.type;
+        if (moveName === 'ツタこんぼう') {
+            const side = (inputElement.id || '').startsWith('ally-') ? 'ally' : 'enemy';
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            const attackerName = ((pokemon && pokemon.name) || '').trim();
+            if (attackerName === 'オーガポン（いどのめん）') displayType = 'Water';
+            else if (attackerName === 'オーガポン（かまどのめん）') displayType = 'Fire';
+            else if (attackerName === 'オーガポン（いしずえのめん）') displayType = 'Rock';
+        }
+
+        const typeClass = TYPE_CLASSES[displayType] || 'normal';
+        const typeName = TYPE_NAMES_JP[displayType] || displayType;
         const powerText = (moveData.power > 0) ? `${moveData.power}` : '-';
 
         // Create Type Badge
@@ -449,6 +565,56 @@ document.addEventListener('DOMContentLoaded', async () => {
         display.appendChild(badge);
         display.appendChild(categorySpan);
         display.appendChild(powerSpan);
+
+        // ふんどのこぶし / おはかまいり: 回数に応じた威力変動セレクタ → move-row に配置
+        const powerBoostMoves = {
+            'ふんどのこぶし': { label: '被弾回数:', max: 6, className: 'rage-fist-select' },
+            'おはかまいり': { label: '味方ひんし数:', max: 5, className: 'last-respects-select' }
+        };
+        const boostConfig = powerBoostMoves[moveName];
+        if (moveRow && boostConfig) {
+            const basePower = moveData.power || 50;
+            const container = document.createElement('div');
+            container.className = 'multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = boostConfig.label;
+            container.appendChild(label);
+            const hitSelect = document.createElement('select');
+            hitSelect.className = boostConfig.className;
+            for (let h = 0; h <= boostConfig.max; h++) {
+                const opt = document.createElement('option');
+                opt.value = h;
+                opt.textContent = `${h}回 (威力${basePower + basePower * h})`;
+                if (h === 0) opt.selected = true;
+                hitSelect.appendChild(opt);
+            }
+            container.appendChild(hitSelect);
+            moveRow.appendChild(container);
+        }
+
+        // 連続技: ヒット回数セレクタ（デフォルト=最大回数）→ move-row に配置
+        if (moveRow && moveData.multi_hit && moveData.multi_hit.is_multi) {
+            const container = document.createElement('div');
+            container.className = 'multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = 'ヒット数:';
+            container.appendChild(label);
+            const hitSelect = document.createElement('select');
+            hitSelect.className = 'multi-hit-select';
+            const minCount = moveData.multi_hit.min_count || 1;
+            const maxCount = moveData.multi_hit.max_count || 1;
+            for (let h = minCount; h <= maxCount; h++) {
+                const opt = document.createElement('option');
+                opt.value = h;
+                opt.textContent = `${h}回`;
+                if (h === maxCount) opt.selected = true;
+                hitSelect.appendChild(opt);
+            }
+            container.appendChild(hitSelect);
+            moveRow.appendChild(container);
+        }
     }
 
     function setupMoveAutocomplete(inputElement, listElement, side, index) {
@@ -488,11 +654,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ? pokemon.speciesData.moves 
                 : Object.keys(MOVES_DEX);
 
+            // ひらがな入力をカタカナに正規化してフィルタリング
+            const normalizedFilter = hiraganaToKatakana(filterText);
             // Filter commonly used moves
-            const commonMatches = commonlyUsed.filter(m => m.startsWith(filterText));
+            const commonMatches = commonlyUsed.filter(m => m.startsWith(normalizedFilter));
             // Filter regular moves (excluding commonly used)
             const regularMoves = allMoves.filter(m => !commonlyUsed.includes(m));
-            const regularMatches = regularMoves.filter(m => m.startsWith(filterText));
+            const regularMatches = regularMoves.filter(m => m.startsWith(normalizedFilter));
 
             if (commonMatches.length === 0 && regularMatches.length === 0) {
                 listElement.style.display = 'none';
@@ -509,8 +677,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                 let powerHtml = '-';
                 
                 if (moveData) {
-                    const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
-                    const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
+                    // ツタこんぼう: 使用ポケモンに応じて表示タイプを変更
+                    let displayType = moveData.type;
+                    if (moveName === 'ツタこんぼう') {
+                        const currentPokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                        const attackerName = ((currentPokemon && currentPokemon.name) || '').trim();
+                        if (attackerName === 'オーガポン（いどのめん）') displayType = 'Water';
+                        else if (attackerName === 'オーガポン（かまどのめん）') displayType = 'Fire';
+                        else if (attackerName === 'オーガポン（いしずえのめん）') displayType = 'Rock';
+                    }
+                    const typeClass = TYPE_CLASSES[displayType] || 'normal';
+                    const typeName = TYPE_NAMES_JP[displayType] || displayType;
                     typeHtml = `<span class="type-badge ${typeClass}">${typeName}</span>`;
                     
                     // Category display
@@ -525,7 +702,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     powerHtml = (moveData.power > 0) ? moveData.power : '-';
                 }
 
-                const nameHtml = `<strong>${moveName.substr(0, filterText.length)}</strong>${moveName.substr(filterText.length)}`;
+                const nameHtml = `<strong>${moveName.substr(0, normalizedFilter.length)}</strong>${moveName.substr(normalizedFilter.length)}`;
 
                 li.innerHTML = `
                     <div class="move-name">${nameHtml}</div>
@@ -704,7 +881,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     itemSelects.forEach(select => {
         if (!select) return;
         // 既存のオプションをクリア（"なし"以外）
-        select.innerHTML = '<option value="">未設定</option>';
+        select.innerHTML = '<option value="">--未設定--</option>';
         
         Object.keys(ITEMS_DEX).forEach(itemName => {
             const option = document.createElement('option');
@@ -985,8 +1162,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // ダメージ計算
             const moveName = attacker.moves[attacker.activeMoveIndex];
-            const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
-            move.name = moveName;
+            const moveOriginal = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
+            const move = { ...moveOriginal, name: moveName };
+
+            // ふんどのこぶし / おはかまいり: 回数に応じて威力を変更
+            const attackerPrefix = isAllyAttacking ? 'ally' : 'enemy';
+            const moveInput = document.getElementById(`${attackerPrefix}-move-${attacker.activeMoveIndex}`);
+            const powerBoostSelectors = [
+                { selector: '.rage-fist-select', move: 'ふんどのこぶし' },
+                { selector: '.last-respects-select', move: 'おはかまいり' }
+            ];
+            for (const pbs of powerBoostSelectors) {
+                if (moveName !== pbs.move) continue;
+                const el = moveInput?.closest('.move-row')?.querySelector(pbs.selector);
+                if (el) {
+                    const count = parseInt(el.value) || 0;
+                    const basePower = moveOriginal.power || 50;
+                    move.power = basePower + basePower * count;
+                }
+            }
 
             const weather = document.getElementById('area-weather')?.value || 'none';
             const terrain = document.getElementById('area-terrain')?.value || 'none';
@@ -994,7 +1188,31 @@ document.addEventListener('DOMContentLoaded', async () => {
             const wallValue = document.getElementById(`${defenderSideWall}-wall`)?.value || 'none';
             const wallReflect = wallValue === 'reflect' || wallValue === 'both';
             const wallLight = wallValue === 'light' || wallValue === 'both';
-            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight });
+
+            // そうだいしょう: 味方ひんし数を取得
+            const defenderPrefix = isAllyAttacking ? 'enemy' : 'ally';
+            const atkAbilityParent = document.querySelector(`#${attackerPrefix}-ability-select`)?.closest('label')?.parentElement;
+            const defAbilityParent = document.querySelector(`#${defenderPrefix}-ability-select`)?.closest('label')?.parentElement;
+            const supremeOverlordEl = atkAbilityParent?.querySelector('.supreme-overlord-select');
+            const supremeOverlordCount = supremeOverlordEl ? parseInt(supremeOverlordEl.value) || 0 : 0;
+
+            // 条件付き特性: 攻撃側・防御側の発動状態を取得
+            const atkConditionalEl = atkAbilityParent?.querySelector('.conditional-ability-select');
+            const defConditionalEl = defAbilityParent?.querySelector('.conditional-ability-select');
+            const atkAbilityActive = atkConditionalEl ? parseInt(atkConditionalEl.value) === 1 : false;
+            const defAbilityActive = defConditionalEl ? parseInt(defConditionalEl.value) === 1 : false;
+
+            // メトロノーム: 攻撃側の持ち物サブセレクタから回数を取得
+            const atkItemParent = document.querySelector(`#${attackerPrefix}-item-select`)?.closest('label')?.parentElement;
+            const metronomeEl = atkItemParent?.querySelector('.metronome-count-select');
+            const metronomeCount = metronomeEl ? parseInt(metronomeEl.value) || 0 : 0;
+
+            const isCritical = isCriticalHit();
+            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight, supremeOverlordCount, atkAbilityActive, defAbilityActive, metronomeCount, isCritical });
+
+            // 連続技のヒット回数を取得
+            const hitSelectEl = moveInput?.closest('.move-row')?.querySelector('.multi-hit-select');
+            const hitCount = hitSelectEl ? parseInt(hitSelectEl.value) : 1;
 
             // ステラボーナスが適用された場合、そのタイプを使用済みに記録
             if (damageResult.stellarBoosted && attacker.stellarUsedTypes) {
@@ -1003,10 +1221,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             // ターン開始時点のHPを記録（乱数選択でここから引く）
             const turnStartHp = defender.currentHp;
+            const attackerStartHp = attacker.currentHp;
 
             // 手動補正を適用したロール配列を生成
-            const manualMod = parseFloat(document.getElementById('battle-manual-modifier').value) || 1.0;
+            const manualMod = getManualModValue();
             let modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * manualMod)));
+            // 連続技: ヒット回数分を乗算
+            if (hitCount > 1) {
+                if (damageResult.rollsNoGuard) {
+                    // マルチスケイル/ファントムガード: 1発目のみ半減、2発目以降は通常ダメージ
+                    const noGuardRolls = damageResult.rollsNoGuard.map(r => Math.max(0, Math.floor(r * manualMod)));
+                    modifiedRolls = modifiedRolls.map((g, i) => g + noGuardRolls[i] * (hitCount - 1));
+                } else {
+                    modifiedRolls = modifiedRolls.map(r => r * hitCount);
+                }
+            }
 
             // デフォルト: ランダムに1つ採用して適用
             let appliedDamage = 0;
@@ -1023,6 +1252,27 @@ document.addEventListener('DOMContentLoaded', async () => {
             // いのちがけ: 自分のHPを0にする
             if (damageResult.isKnownDamage && damageResult.moveName === 'いのちがけ') {
                 attacker.currentHp = 0;
+            }
+
+            // 反動・HP消費: 攻撃側のHP減算
+            if (damageResult.recoilInfo && !damageResult.recoilInfo.nullified) {
+                if (damageResult.recoilInfo.recoilType === 'hp_cost') {
+                    // HP消費型: 最大HPの1/divisor
+                    const hpCost = Math.floor(attacker.maxHp / damageResult.recoilInfo.divisor);
+                    attacker.currentHp = Math.max(0, attacker.currentHp - hpCost);
+                } else if (appliedDamage > 0) {
+                    // ダメージ依存型: 与えたダメージの1/divisor
+                    const actualDamage = turnStartHp - defender.currentHp;
+                    const recoilDamage = Math.floor(actualDamage / damageResult.recoilInfo.divisor);
+                    if (recoilDamage > 0) {
+                        attacker.currentHp = Math.max(0, attacker.currentHp - recoilDamage);
+                    }
+                }
+            }
+
+            // タイプ無効化HP回復: かんそうはだ・ちょすい等
+            if (damageResult.typeNullifyHealInfo) {
+                defender.currentHp = Math.min(defender.maxHp, defender.currentHp + damageResult.typeNullifyHealInfo.healAmount);
             }
 
             // いたみわけ: 自分のHPも平均値に変更
@@ -1128,6 +1378,37 @@ document.addEventListener('DOMContentLoaded', async () => {
                     if (damageResult.fullHpGuardInfo) {
                         abilityStrs.push(`${damageResult.fullHpGuardInfo.name} (HP満タン: 被ダメージ×${damageResult.fullHpGuardInfo.multiplier})`);
                     }
+                    if (damageResult.tintedLensInfo) {
+                        abilityStrs.push(`${damageResult.tintedLensInfo.name} (効果いまひとつ: ×${damageResult.tintedLensInfo.multiplier})`);
+                    }
+                    if (damageResult.filterInfo) {
+                        abilityStrs.push(`${damageResult.filterInfo.name} (効果抜群: ×${damageResult.filterInfo.multiplier})`);
+                    }
+                    if (damageResult.typeNullifyHealInfo) {
+                        const heal = damageResult.typeNullifyHealInfo;
+                        abilityStrs.push(`${heal.name} (無効化: HP+${heal.healAmount}回復)`);
+                    }
+                    if (damageResult.typeHalveAttackInfo) {
+                        abilityStrs.push(`${damageResult.typeHalveAttackInfo.name} (${damageResult.typeHalveAttackInfo.resistType}技: 攻撃×${damageResult.typeHalveAttackInfo.multiplier})`);
+                    }
+                    if (damageResult.waterBubbleInfo) {
+                        abilityStrs.push(`${damageResult.waterBubbleInfo.name} (${damageResult.waterBubbleInfo.name === 'すいほう' ? 'みず技威力' : '威力'}×${damageResult.waterBubbleInfo.multiplier})`);
+                    }
+                    if (damageResult.supremeOverlordInfo) {
+                        const so = damageResult.supremeOverlordInfo;
+                        abilityStrs.push(`${so.name} (ひんし${so.count}体: 威力×${so.multiplier})`);
+                    }
+                    if (damageResult.conditionalAbilityInfos && damageResult.conditionalAbilityInfos.length > 0) {
+                        const statNameMap = { 'attack': '攻撃', 'defence': '防御', 'spAtk': '特攻', 'spDef': '特防', 'speed': '素早さ' };
+                        damageResult.conditionalAbilityInfos.forEach(ca => {
+                            const statJP = statNameMap[ca.stat] || ca.stat;
+                            abilityStrs.push(`${ca.name} (${statJP}×${ca.multiplier})`);
+                        });
+                    }
+                    if (damageResult.conditionalPowerInfo) {
+                        const cp = damageResult.conditionalPowerInfo;
+                        abilityStrs.push(`${cp.name} (威力×${cp.multiplier})`);
+                    }
 
                     if (abilityStrs.length > 0) {
                         abilityModifierText.innerHTML = abilityStrs.join('<br>');
@@ -1142,8 +1423,32 @@ document.addEventListener('DOMContentLoaded', async () => {
                     if (damageResult.specificMoveInfo) {
                         moveEffectParts.push(damageResult.specificMoveInfo.details.join('<br>'));
                     }
+                    if (damageResult.teraBlastInfo) {
+                        const tb = damageResult.teraBlastInfo;
+                        const catLabel = tb.category === 'Physical' ? '物理' : '特殊';
+                        if (tb.isStellar) {
+                            moveEffectParts.push(`テラバースト（ステラ）: 威力100・${catLabel}技として計算`);
+                        } else {
+                            moveEffectParts.push(`テラバースト: ${tb.moveType}タイプ・${catLabel}技として計算`);
+                        }
+                    }
                     if (damageResult.knockOffInfo) {
                         moveEffectParts.push(`${damageResult.knockOffInfo.name} (×${damageResult.knockOffInfo.multiplier})`);
+                    }
+                    if (damageResult.recklessInfo) {
+                        moveEffectParts.push(`${damageResult.recklessInfo.name} (×${damageResult.recklessInfo.multiplier})`);
+                    }
+                    if (damageResult.recoilInfo) {
+                        if (damageResult.recoilInfo.nullified) {
+                            moveEffectParts.push(`反動: いしあたまで無効`);
+                        } else if (damageResult.recoilInfo.recoilType === 'hp_cost') {
+                            moveEffectParts.push(`HP消費: 最大HPの1/${damageResult.recoilInfo.divisor} (${damageResult.recoilInfo.min})`);
+                        } else {
+                            moveEffectParts.push(`反動: 1/${damageResult.recoilInfo.divisor} (${damageResult.recoilInfo.min}~${damageResult.recoilInfo.max})`);
+                        }
+                    }
+                    if (hitCount > 1) {
+                        moveEffectParts.push(`連続技: ${hitCount}回ヒット`);
                     }
                     if (moveEffectParts.length > 0) {
                         specificMoveText.innerHTML = moveEffectParts.join('<br>');
@@ -1312,10 +1617,29 @@ document.addEventListener('DOMContentLoaded', async () => {
                         newSelect.addEventListener('change', (e) => {
                             const selectedIndex = parseInt(e.target.value);
                             const val = modifiedRolls[selectedIndex];
-                            
+
                             // HP再適用 logic
                             if (turnStartHp > 0) {
                                 defender.currentHp = Math.max(0, turnStartHp - val);
+                            }
+
+                            // 反動・HP消費再計算
+                            attacker.currentHp = attackerStartHp;
+                            if (damageResult.recoilInfo && !damageResult.recoilInfo.nullified) {
+                                if (damageResult.recoilInfo.recoilType === 'hp_cost') {
+                                    const hpCost = Math.floor(attacker.maxHp / damageResult.recoilInfo.divisor);
+                                    attacker.currentHp = Math.max(0, attacker.currentHp - hpCost);
+                                } else if (val > 0) {
+                                    const actualDmg = turnStartHp - defender.currentHp;
+                                    const recoilDmg = Math.floor(actualDmg / damageResult.recoilInfo.divisor);
+                                    if (recoilDmg > 0) {
+                                        attacker.currentHp = Math.max(0, attacker.currentHp - recoilDmg);
+                                    }
+                                }
+                            }
+                            // タイプ無効化HP回復
+                            if (damageResult.typeNullifyHealInfo) {
+                                defender.currentHp = Math.min(defender.maxHp, defender.currentHp + damageResult.typeNullifyHealInfo.healAmount);
                             }
 
                             // 履歴更新
@@ -1351,6 +1675,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             
                             // UI更新
                             updateFormFromState(defenderSide);
+                            updateFormFromState(attackerSide);
                             renderBattleLog();
                         });
                     } else {
@@ -1358,103 +1683,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                          option.textContent = "ダメージなし";
                          newSelect.appendChild(option);
                     }
-                    
+
                     oldSelect.parentNode.replaceChild(newSelect, oldSelect);
                 }
 
-                // 手動補正セレクト: 攻撃ごとにリスナーを付け替えて前回分をクリア
-                const oldManualModSelect = document.getElementById('battle-manual-modifier');
-                if (oldManualModSelect && oldManualModSelect.parentNode) {
-                    const newManualModSelect = oldManualModSelect.cloneNode(true);
-                    oldManualModSelect.parentNode.replaceChild(newManualModSelect, oldManualModSelect);
-
-                    newManualModSelect.addEventListener('change', () => {
-                        const newMod = parseFloat(newManualModSelect.value) || 1.0;
-                        modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * newMod)));
-
-                        // 乱数セレクトのオプションテキストを更新
-                        const rollSelect = document.getElementById('battle-random-roll');
-                        let currentIdx = 0;
-                        if (rollSelect && rollSelect.options.length > 0) {
-                            currentIdx = parseInt(rollSelect.value) || 0;
-                            modifiedRolls.forEach((val, i) => {
-                                if (rollSelect.options[i]) {
-                                    rollSelect.options[i].textContent = `${85 + i}%: ${val}ダメージ`;
-                                }
-                            });
-                        }
-
-                        // HPを再適用
-                        const newVal = modifiedRolls[currentIdx] ?? 0;
-                        if (turnStartHp > 0) {
-                            defender.currentHp = Math.max(0, turnStartHp - newVal);
-                        }
-
-                        // ダメージ幅・瀕死率表示を更新
-                        const rContainer = document.querySelector('.damage-result-container');
-                        if (rContainer) {
-                            const rangeText = rContainer.querySelector('.damage-range');
-                            if (rangeText) {
-                                const min = modifiedRolls.length > 0 ? modifiedRolls[0] : 0;
-                                const max = modifiedRolls.length > 0 ? modifiedRolls[modifiedRolls.length - 1] : 0;
-                                const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
-                                const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
-                                rangeText.innerHTML = `${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)`;
-                            }
-                            const killChanceText = rContainer.querySelector('.kill-chance');
-                            if (killChanceText && defender.maxHp > 0) {
-                                const modMin = modifiedRolls.length > 0 ? modifiedRolls[0] : 0;
-                                const modMax = modifiedRolls.length > 0 ? modifiedRolls[modifiedRolls.length - 1] : 0;
-                                if (modMax === 0) {
-                                    killChanceText.textContent = 'ダメージなし';
-                                } else {
-                                    const maxHits = Math.ceil(defender.maxHp / modMin);
-                                    const minHits = Math.ceil(defender.maxHp / modMax);
-                                    if (minHits === maxHits) {
-                                        killChanceText.textContent = `確定${minHits}発`;
-                                    } else {
-                                        if (minHits === 1) {
-                                            const koCount = modifiedRolls.filter(r => r >= defender.maxHp).length;
-                                            const percentage = (koCount / 16 * 100).toFixed(1);
-                                            killChanceText.textContent = `乱数1発 (${percentage}%)`;
-                                        } else {
-                                            killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        // 履歴と対戦ログを更新
-                        const rollLabel = `${85 + currentIdx}%`;
-                        const historyEntry = {
-                            type: 'attack',
-                            turnId: currentTurnId,
-                            moveName: moveName,
-                            damage: newVal,
-                            attackerName: atkName,
-                            defenderName: defender.name.trim() || (isAllyAttacking ? "相手" : "自分"),
-                            attackerSide: attackerSide,
-                            rollLabel: rollLabel,
-                            hpBefore: turnStartHp,
-                            hpAfter: defender.currentHp,
-                            stellarBoosted: damageResult.stellarBoosted || false,
-                            snapshot: {
-                                allyHps: appState.allyTeam.map(p => p.currentHp),
-                                enemyHps: appState.enemyTeam.map(p => p.currentHp)
-                            }
-                        };
-                        if (defender.lastTurnId === currentTurnId) {
-                            defender.history[defender.history.length - 1] = historyEntry;
-                        } else {
-                            defender.history.push(historyEntry);
-                            defender.lastTurnId = currentTurnId;
-                        }
-                        updateBattleLog(historyEntry);
-                        updateFormFromState(defenderSide);
-                        renderBattleLog();
-                    });
-                }
             }
 
             // 初回計算時にも履歴に追加（デフォルト選択分）
@@ -2114,7 +2346,19 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             }
         }
-        if (itemSelect) itemSelect.value = pokemon.item || '';
+        if (itemSelect) {
+            itemSelect.value = pokemon.item || '';
+            updateSelectUnsetStyle(itemSelect);
+            // メトロノームサブセレクタの同期（既存の値を保持）
+            const itemParent = (itemSelect.closest('label') || itemSelect.parentElement).parentElement;
+            const oldMetroSelect = itemParent.querySelector('.metronome-count-select');
+            const prevMetroValue = oldMetroSelect ? oldMetroSelect.value : null;
+            updateItemSubSelector(itemSelect, itemSelect.value);
+            if (prevMetroValue !== null) {
+                const newMetroSelect = itemParent.querySelector('.metronome-count-select');
+                if (newMetroSelect) newMetroSelect.value = prevMetroValue;
+            }
+        }
 
         // 使用率データ表示をポケモンに同期
         updateUsageRateDisplay(teamType, pokemon.name);
@@ -2123,32 +2367,53 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateMoveSelectionUI(teamType);
 
         // Ability syncing
-        if (abilitySelect && pokemon.speciesData) {
-            const currentVal = pokemon.ability || '';
+        if (abilitySelect) {
             abilitySelect.innerHTML = '';
-            
-            // 「未設定」オプションを追加
+            // 「未設定」オプションを常に先頭に追加
             const unsetOpt = document.createElement('option');
             unsetOpt.value = '';
-            unsetOpt.textContent = '未設定';
+            unsetOpt.textContent = '--未設定--';
             abilitySelect.appendChild(unsetOpt);
-            
-            if (pokemon.speciesData.abilities) {
-                pokemon.speciesData.abilities.forEach(ab => {
-                   const opt = document.createElement('option');
-                   opt.value = ab.name;
-                   opt.textContent = ab.name + (ab.is_hidden ? ' (夢)' : '');
-                   abilitySelect.appendChild(opt);
-                });
+
+            if (pokemon.speciesData) {
+                const currentVal = pokemon.ability || '';
+                if (pokemon.speciesData.abilities) {
+                    pokemon.speciesData.abilities.forEach(ab => {
+                        const opt = document.createElement('option');
+                        opt.value = ab.name;
+                        opt.textContent = ab.name + (ab.is_hidden ? ' (夢)' : '');
+                        abilitySelect.appendChild(opt);
+                    });
+                }
+                const hasCurrent = currentVal && Array.from(abilitySelect.options).some(opt => opt.value === currentVal);
+                if (hasCurrent) {
+                    abilitySelect.value = currentVal;
+                } else if (pokemon.speciesData.abilities && pokemon.speciesData.abilities.length > 0) {
+                    // デフォルトはabilitiesの先頭
+                    abilitySelect.value = pokemon.speciesData.abilities[0].name;
+                    pokemon.ability = pokemon.speciesData.abilities[0].name;
+                }
+            } else {
+                // ポケモン未設定スロット: 「未設定」のみ表示
+                abilitySelect.value = '';
             }
-            const hasCurrent = currentVal && Array.from(abilitySelect.options).some(opt => opt.value === currentVal);
-            if (hasCurrent) {
-                abilitySelect.value = currentVal;
-            } else if (pokemon.speciesData.abilities && pokemon.speciesData.abilities.length > 0) {
-                // デフォルトはabilitiesの先頭
-                abilitySelect.value = pokemon.speciesData.abilities[0].name;
-                pokemon.ability = pokemon.speciesData.abilities[0].name;
+            // そうだいしょう・条件特性セレクタの同期（既存の値を保持）
+            const parentForSub = (abilitySelect.closest('label') || abilitySelect.parentElement).parentElement;
+            const oldSOSelect = parentForSub.querySelector('.supreme-overlord-select');
+            const oldCondSelect = parentForSub.querySelector('.conditional-ability-select');
+            const prevSOValue = oldSOSelect ? oldSOSelect.value : null;
+            const prevCondValue = oldCondSelect ? oldCondSelect.value : null;
+            updateAbilitySubSelector(abilitySelect, abilitySelect.value);
+            // 再生成後に以前の値を復元
+            if (prevSOValue !== null) {
+                const newSOSelect = parentForSub.querySelector('.supreme-overlord-select');
+                if (newSOSelect) newSOSelect.value = prevSOValue;
             }
+            if (prevCondValue !== null) {
+                const newCondSelect = parentForSub.querySelector('.conditional-ability-select');
+                if (newCondSelect) newCondSelect.value = prevCondValue;
+            }
+            updateSelectUnsetStyle(abilitySelect);
         }
 
         // Stats Update (Inputs & Real Values)
