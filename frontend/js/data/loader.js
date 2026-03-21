@@ -111,7 +111,13 @@ const TYPE_TRANSLATION = {
                 console.log(`Loaded ${Object.keys(ABILITIES_DEX).length} abilities.`);
 
                 // 一意のtypeリストを取得し、対応するmoves_{type}.jsonをロード（dezaster, skinはJSONなし）
-                const types = [...new Set(Object.values(ABILITIES_DEX).map(a => a.type))].filter(t => t !== 'dezaster' && t !== 'skin');
+                // 技リストJSONが存在するtypeのみロード（技分類に紐づくもの）
+                const typesWithoutMoveList = new Set([
+                    'dezaster', 'skin', 'filter', 'fullhp_guard', 'hp_threshold_boost',
+                    'power_boost', 'reckless', 'rock_head', 'technician', 'tinted_lens',
+                    'type_halve_attack', 'type_nullify'
+                ]);
+                const types = [...new Set(Object.values(ABILITIES_DEX).map(a => a.type))].filter(t => !typesWithoutMoveList.has(t));
                 const moveTypePromises = types.map(async (type) => {
                     try {
                         const res = await fetch(`./data/moves_info/moves_${type}.json`);
