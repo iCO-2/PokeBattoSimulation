@@ -1,4 +1,10 @@
 {
+  "きあいのタスキ": {
+    "type": "none",
+    "effect_target": [],
+    "multiplier": 1.0,
+    "message": ""
+  },
   "いのちのたま": {
     "type": "damage_boost",
     "effect_target": [
