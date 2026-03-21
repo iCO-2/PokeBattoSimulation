@@ -1319,6 +1319,8 @@ h2 {
     .tab-content.active {
         display: block !important;
         animation: fadeIn 0.3s;
+        position: relative;
+        z-index: 1; /* sticky/fixedヘッダー(999-1000)の下に配置 */
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
@@ -1784,7 +1786,7 @@ h2 {
     border: 1px solid #ccc;
     border-top: none;
     border-radius: 0 0 4px 4px;
-    z-index: 1000;
+    z-index: 500;
     max-height: 200px;
     overflow-y: auto;
     list-style: none;
@@ -1885,7 +1887,7 @@ h2 {
     top: 100%;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 500;
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 0 0 8px 8px;

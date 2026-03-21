@@ -372,4 +372,43 @@ describe('特殊計算技', () => {
             expect(result.knockOffInfo).toBeNull();
         });
     });
+
+    describe('ツタこんぼう（オーガポンフォルムによるタイプ変化）', () => {
+        const def = createPokemon({ speciesData: { types: ['ノーマル'], weight_kg: 50 } });
+
+        it('オーガポン（素） → くさタイプ', () => {
+            const atk = createPokemon({ name: 'オーガポン', speciesData: { types: ['くさ'], weight_kg: 39.8 } });
+            const move = createMove({ name: 'ツタこんぼう', power: 100, type: 'くさ', category: 'Physical' });
+            const result = calculateDamage(atk, def, move);
+            expect(result.moveType).toBe('くさ');
+        });
+
+        it('オーガポン（いどのめん） → みずタイプ', () => {
+            const atk = createPokemon({ name: 'オーガポン（いどのめん）', speciesData: { types: ['くさ', 'みず'], weight_kg: 39.8 } });
+            const move = createMove({ name: 'ツタこんぼう', power: 100, type: 'くさ', category: 'Physical' });
+            const result = calculateDamage(atk, def, move);
+            expect(result.moveType).toBe('みず');
+        });
+
+        it('オーガポン（かまどのめん） → ほのおタイプ', () => {
+            const atk = createPokemon({ name: 'オーガポン（かまどのめん）', speciesData: { types: ['くさ', 'ほのお'], weight_kg: 39.8 } });
+            const move = createMove({ name: 'ツタこんぼう', power: 100, type: 'くさ', category: 'Physical' });
+            const result = calculateDamage(atk, def, move);
+            expect(result.moveType).toBe('ほのお');
+        });
+
+        it('オーガポン（いしずえのめん） → いわタイプ', () => {
+            const atk = createPokemon({ name: 'オーガポン（いしずえのめん）', speciesData: { types: ['くさ', 'いわ'], weight_kg: 39.8 } });
+            const move = createMove({ name: 'ツタこんぼう', power: 100, type: 'くさ', category: 'Physical' });
+            const result = calculateDamage(atk, def, move);
+            expect(result.moveType).toBe('いわ');
+        });
+
+        it('他のポケモンが使用 → くさタイプのまま', () => {
+            const atk = createPokemon({ name: 'フシギバナ', speciesData: { types: ['くさ', 'どく'], weight_kg: 100 } });
+            const move = createMove({ name: 'ツタこんぼう', power: 100, type: 'くさ', category: 'Physical' });
+            const result = calculateDamage(atk, def, move);
+            expect(result.moveType).toBe('くさ');
+        });
+    });
 });

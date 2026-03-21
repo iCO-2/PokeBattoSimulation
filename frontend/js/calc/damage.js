@@ -88,6 +88,30 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         dStr = 'spDef';
     }
 
+    // テラバースト: テラスタル（通常・ステラ両方）使用時はランク補正込みの攻撃 vs 特攻で物理/特殊を判定
+    const attackerTeraActive = (attacker.teraType && attacker.teraType !== 'なし' && attacker.teraType !== 'ステラ')
+        ? attacker.teraType : null;
+    const isAttackerStellar = attacker.teraType === 'ステラ';
+    let teraBlastInfo = null;
+    if (moveName === 'テラバースト' && (attackerTeraActive || isAttackerStellar)) {
+        const atkRank = attacker.stats.attack ? attacker.stats.attack.rank || 0 : 0;
+        const spAtkRank = attacker.stats.spAtk ? attacker.stats.spAtk.rank || 0 : 0;
+        const rankedAtk = Math.floor((attacker.realStats.attack || 0) * getRankMultiplier(atkRank));
+        const rankedSpAtk = Math.floor((attacker.realStats.spAtk || 0) * getRankMultiplier(spAtkRank));
+        if (rankedAtk > rankedSpAtk) {
+            aStr = 'attack';
+            dStr = 'defence';
+        } else {
+            aStr = 'spAtk';
+            dStr = 'spDef';
+        }
+        teraBlastInfo = {
+            moveType: attackerTeraActive || 'ステラ',
+            category: (aStr === 'attack') ? 'Physical' : 'Special',
+            isStellar: isAttackerStellar
+        };
+    }
+
     // 特殊技: ステータス参照先・ソースポケモンの決定
     let aSrc = attacker;   // A計算に使うポケモン
     let aStat = aStr;      // A計算に使うステータスキー
@@ -212,6 +236,20 @@ export function calculateDamage(attacker, defender, move, field = {}) {
 
     // 特性補正
     let moveType = move.type || 'ノーマル';
+
+    // テラバースト: テラスタル使用時はテラタイプに変化
+    if (moveName === 'テラバースト' && attackerTeraActive) {
+        moveType = attackerTeraActive;
+    }
+
+    // ツタこんぼう: 使用ポケモンによりタイプが変化
+    if (moveName === 'ツタこんぼう') {
+        const attackerName = (attacker.name || '').trim();
+        if (attackerName === 'オーガポン（いどのめん）') moveType = 'みず';
+        else if (attackerName === 'オーガポン（かまどのめん）') moveType = 'ほのお';
+        else if (attackerName === 'オーガポン（いしずえのめん）') moveType = 'いわ';
+        // デフォルト（オーガポン素）: くさのまま
+    }
 
     let abilityOffensiveMod = 1.0;
     let abilityDefensiveMod = 1.0;
@@ -395,6 +433,11 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     };
 
     let finalPower = power;
+
+    // テラバースト・ステラ: 威力 80 → 100
+    if (moveName === 'テラバースト' && isAttackerStellar) {
+        finalPower = 100;
+    }
 
     // 特殊技: 威力変動の処理
     if (specificMove) {
@@ -619,8 +662,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     // タイプ一致 (STAB): テラスタル対応
     const originalTypes = attacker.speciesData ? attacker.speciesData.types : [];
     const attackerTera = attacker.teraType && attacker.teraType !== 'なし' ? attacker.teraType : null;
-    const isAttackerStellar = attackerTera === 'ステラ';
-    
+
     let stabMod = 1.0;
     let stellarBoosted = false; // ステラボーナスが適用されたかどうか
     
@@ -651,7 +693,12 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         stabMod = isSTAB ? 1.5 : 1.0;
     }
     
-    const typeMod = getTypeEffectiveness(moveType, defenderTypes);
+    let typeMod = getTypeEffectiveness(moveType, defenderTypes);
+
+    // テラバースト・ステラ: 相手がテラスタル中なら必ず効果抜群（2倍）
+    if (moveName === 'テラバースト' && isAttackerStellar && defenderTera) {
+        typeMod = 2;
+    }
 
     // いろめがね: タイプ相性が半減以下（0 < typeMod <= 0.5）のとき、ダメージ補正ステップで2倍
     const tintedLensApplies = !!(attackerAbilityData && attackerAbilityData.type === 'tinted_lens'
@@ -887,6 +934,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         recklessInfo: recklessInfo,
         tintedLensInfo: tintedLensApplies ? { name: attacker.ability, multiplier: 2.0 } : null,
         filterInfo: filterApplies ? { name: defender.ability, multiplier: 0.75 } : null,
-        typeNullifyHealInfo: typeNullifyHealInfo
+        typeNullifyHealInfo: typeNullifyHealInfo,
+        teraBlastInfo: teraBlastInfo
     };
 }

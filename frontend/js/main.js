@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=231';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=233';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -423,9 +423,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const moveData = MOVES_DEX[moveName];
         if (!moveData) return;
-        
-        const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
-        const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
+
+        // ツタこんぼう: 使用ポケモンに応じて表示タイプを変更
+        let displayType = moveData.type;
+        if (moveName === 'ツタこんぼう') {
+            const side = (inputElement.id || '').startsWith('ally-') ? 'ally' : 'enemy';
+            const pokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+            const attackerName = ((pokemon && pokemon.name) || '').trim();
+            if (attackerName === 'オーガポン（いどのめん）') displayType = 'Water';
+            else if (attackerName === 'オーガポン（かまどのめん）') displayType = 'Fire';
+            else if (attackerName === 'オーガポン（いしずえのめん）') displayType = 'Rock';
+        }
+
+        const typeClass = TYPE_CLASSES[displayType] || 'normal';
+        const typeName = TYPE_NAMES_JP[displayType] || displayType;
         const powerText = (moveData.power > 0) ? `${moveData.power}` : '-';
 
         // Create Type Badge
@@ -517,8 +528,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                 let powerHtml = '-';
                 
                 if (moveData) {
-                    const typeClass = TYPE_CLASSES[moveData.type] || 'normal';
-                    const typeName = TYPE_NAMES_JP[moveData.type] || moveData.type;
+                    // ツタこんぼう: 使用ポケモンに応じて表示タイプを変更
+                    let displayType = moveData.type;
+                    if (moveName === 'ツタこんぼう') {
+                        const currentPokemon = (side === 'ally') ? appState.getAllyPokemon() : appState.getEnemyPokemon();
+                        const attackerName = ((currentPokemon && currentPokemon.name) || '').trim();
+                        if (attackerName === 'オーガポン（いどのめん）') displayType = 'Water';
+                        else if (attackerName === 'オーガポン（かまどのめん）') displayType = 'Fire';
+                        else if (attackerName === 'オーガポン（いしずえのめん）') displayType = 'Rock';
+                    }
+                    const typeClass = TYPE_CLASSES[displayType] || 'normal';
+                    const typeName = TYPE_NAMES_JP[displayType] || displayType;
                     typeHtml = `<span class="type-badge ${typeClass}">${typeName}</span>`;
                     
                     // Category display
@@ -1181,6 +1201,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                     let moveEffectParts = [];
                     if (damageResult.specificMoveInfo) {
                         moveEffectParts.push(damageResult.specificMoveInfo.details.join('<br>'));
+                    }
+                    if (damageResult.teraBlastInfo) {
+                        const tb = damageResult.teraBlastInfo;
+                        const catLabel = tb.category === 'Physical' ? '物理' : '特殊';
+                        if (tb.isStellar) {
+                            moveEffectParts.push(`テラバースト（ステラ）: 威力100・${catLabel}技として計算`);
+                        } else {
+                            moveEffectParts.push(`テラバースト: ${tb.moveType}タイプ・${catLabel}技として計算`);
+                        }
                     }
                     if (damageResult.knockOffInfo) {
                         moveEffectParts.push(`${damageResult.knockOffInfo.name} (×${damageResult.knockOffInfo.multiplier})`);
