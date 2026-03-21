@@ -135,7 +135,9 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     }
 
     // ステータス実数値にランク補正を適用
-    const isCritical = !!(field && field.isCritical);
+    // 急所判定: カブトアーマー / シェルアーマーは急所無効
+    const ANTI_CRITICAL_ABILITIES = ['カブトアーマー', 'シェルアーマー'];
+    const isCritical = !!(field && field.isCritical) && !ANTI_CRITICAL_ABILITIES.includes(defender.ability);
     let attackerRank = aSrc.stats[aStat] ? aSrc.stats[aStat].rank || 0 : 0;
     let defenderRank = dSrc.stats[dStat] ? dSrc.stats[dStat].rank || 0 : 0;
 
@@ -1103,7 +1105,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         areaModifier: areaModifierInfo,
         weatherDefModifier: weatherDefModifierInfo,
         wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
-        criticalInfo: isCritical ? { multiplier: 1.5 } : null,
+        criticalInfo: isCritical ? { multiplier: 1.5 }
+            : (field && field.isCritical && !isCritical) ? { blocked: true, blocker: defender.ability } : null,
         fullHpGuardInfo: fullHpGuardInfo,
         specificMoveInfo: specificMoveInfo,
         knockOffInfo: knockOffInfo,
