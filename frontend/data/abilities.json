@@ -428,5 +428,37 @@
     "weakken_stats": "",
     "is_special": false,
     "memo": "効果抜群の技を受けたとき被ダメージを0.75倍に軽減"
+  },
+  "あついしぼう": {
+    "type": "type_halve_attack",
+    "resist_types": ["ほのお", "こおり"],
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ほのお・こおりタイプの技を受けた際、攻撃側の攻撃（特攻）を半減"
+  },
+  "たいねつ": {
+    "type": "type_halve_attack",
+    "resist_types": ["ほのお"],
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ほのおタイプの技を受けた際、攻撃側の攻撃（特攻）を半減"
+  },
+  "すいほう": {
+    "type": "type_halve_attack",
+    "resist_types": ["ほのお"],
+    "boost_type": "みず",
+    "boost_power": 2.0,
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "ほのおタイプの技の攻撃を半減。みずタイプの技の威力2倍"
   }
 }

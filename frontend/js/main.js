@@ -1188,6 +1188,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                         const heal = damageResult.typeNullifyHealInfo;
                         abilityStrs.push(`${heal.name} (無効化: HP+${heal.healAmount}回復)`);
                     }
+                    if (damageResult.typeHalveAttackInfo) {
+                        abilityStrs.push(`${damageResult.typeHalveAttackInfo.name} (${damageResult.typeHalveAttackInfo.resistType}技: 攻撃×${damageResult.typeHalveAttackInfo.multiplier})`);
+                    }
+                    if (damageResult.waterBubbleInfo) {
+                        abilityStrs.push(`${damageResult.waterBubbleInfo.name} (${damageResult.waterBubbleInfo.name === 'すいほう' ? 'みず技威力' : '威力'}×${damageResult.waterBubbleInfo.multiplier})`);
+                    }
 
                     if (abilityStrs.length > 0) {
                         abilityModifierText.innerHTML = abilityStrs.join('<br>');

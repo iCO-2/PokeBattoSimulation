@@ -234,6 +234,22 @@ export const MOCK_ABILITIES_DEX = {
     'プリズムアーマー': {
         type: 'filter', offensive: 1.0, defensive: 0.75,
         weaken: 1.00, weakken_stats: '', is_special: false
+    },
+    'あついしぼう': {
+        type: 'type_halve_attack', resist_types: ['ほのお', 'こおり'],
+        offensive: 1.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'たいねつ': {
+        type: 'type_halve_attack', resist_types: ['ほのお'],
+        offensive: 1.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
+    },
+    'すいほう': {
+        type: 'type_halve_attack', resist_types: ['ほのお'],
+        boost_type: 'みず', boost_power: 2.0,
+        offensive: 1.0, defensive: 1.0,
+        weaken: 1.00, weakken_stats: '', is_special: true
     }
 };
 

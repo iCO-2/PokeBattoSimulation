@@ -402,6 +402,21 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         }
     }
 
+    // グループ1: タイプ半減特性（攻撃ステータスを半減）
+    // あついしぼう・たいねつ・すいほう: 特定タイプの技を受けた際、攻撃側のA（攻撃/特攻）を半減
+    let typeHalveAttackInfo = null;
+    if (defenderAbilityData && defenderAbilityData.type === 'type_halve_attack') {
+        if (defenderAbilityData.resist_types && defenderAbilityData.resist_types.includes(moveType)) {
+            A = applyModifier(A, 0.5);
+            if (A < 1) A = 1;
+            typeHalveAttackInfo = {
+                name: defender.ability,
+                multiplier: 0.5,
+                resistType: moveType
+            };
+        }
+    }
+
     // --- 持ち物: boost_phase='power' の威力補正（baseDamage計算前に適用）---
     // 英語タイプ名 → 日本語タイプ名 変換マップ (effect_targetのxxx_type_movesは英語)
     const TYPE_EN_TO_JP = {
@@ -519,6 +534,15 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             }
             finalPower = Math.min(220, 20 + totalPositive * 20);
         }
+    }
+
+    // すいほう: みずタイプの技の威力を2.0倍
+    let waterBubbleInfo = null;
+    if (attackerAbilityData && attackerAbilityData.type === 'type_halve_attack'
+        && attackerAbilityData.boost_type && moveType === attackerAbilityData.boost_type) {
+        const boostMod = Math.round(4096 * attackerAbilityData.boost_power);
+        finalPower = Math.round(finalPower * boostMod / 4096);
+        waterBubbleInfo = { name: attacker.ability, multiplier: attackerAbilityData.boost_power };
     }
 
     // テラスタルの威力60引き上げ: テラタイプ一致 & 威力60未満 → 60に
@@ -935,6 +959,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         tintedLensInfo: tintedLensApplies ? { name: attacker.ability, multiplier: 2.0 } : null,
         filterInfo: filterApplies ? { name: defender.ability, multiplier: 0.75 } : null,
         typeNullifyHealInfo: typeNullifyHealInfo,
-        teraBlastInfo: teraBlastInfo
+        teraBlastInfo: teraBlastInfo,
+        typeHalveAttackInfo: typeHalveAttackInfo,
+        waterBubbleInfo: waterBubbleInfo
     };
 }
