@@ -471,20 +471,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         display.appendChild(categorySpan);
         display.appendChild(powerSpan);
 
-        // ふんどのこぶし: 被弾回数セレクタ（デフォルト=1回）→ move-row に配置
-        if (moveRow && moveName === 'ふんどのこぶし') {
+        // ふんどのこぶし / おはかまいり: 回数に応じた威力変動セレクタ → move-row に配置
+        const powerBoostMoves = {
+            'ふんどのこぶし': { label: '被弾回数:', max: 6, className: 'rage-fist-select' },
+            'おはかまいり': { label: '味方ひんし数:', max: 5, className: 'last-respects-select' }
+        };
+        const boostConfig = powerBoostMoves[moveName];
+        if (moveRow && boostConfig) {
+            const basePower = moveData.power || 50;
             const container = document.createElement('div');
             container.className = 'multi-hit-container';
             const label = document.createElement('span');
             label.className = 'multi-hit-label';
-            label.textContent = '被弾回数:';
+            label.textContent = boostConfig.label;
             container.appendChild(label);
             const hitSelect = document.createElement('select');
-            hitSelect.className = 'rage-fist-select';
-            for (let h = 0; h <= 6; h++) {
+            hitSelect.className = boostConfig.className;
+            for (let h = 0; h <= boostConfig.max; h++) {
                 const opt = document.createElement('option');
                 opt.value = h;
-                opt.textContent = `${h}回 (威力${50 + 50 * h})`;
+                opt.textContent = `${h}回 (威力${basePower + basePower * h})`;
                 if (h === 0) opt.selected = true;
                 hitSelect.appendChild(opt);
             }
@@ -1064,13 +1070,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             const moveOriginal = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
             const move = { ...moveOriginal, name: moveName };
 
-            // ふんどのこぶし: 被弾回数に応じて威力を変更
+            // ふんどのこぶし / おはかまいり: 回数に応じて威力を変更
             const attackerPrefix = isAllyAttacking ? 'ally' : 'enemy';
             const moveInput = document.getElementById(`${attackerPrefix}-move-${attacker.activeMoveIndex}`);
-            const rageFistEl = moveInput?.closest('.move-row')?.querySelector('.rage-fist-select');
-            if (rageFistEl && moveName === 'ふんどのこぶし') {
-                const rageFistCount = parseInt(rageFistEl.value) || 0;
-                move.power = 50 + 50 * rageFistCount;
+            const powerBoostSelectors = [
+                { selector: '.rage-fist-select', move: 'ふんどのこぶし' },
+                { selector: '.last-respects-select', move: 'おはかまいり' }
+            ];
+            for (const pbs of powerBoostSelectors) {
+                if (moveName !== pbs.move) continue;
+                const el = moveInput?.closest('.move-row')?.querySelector(pbs.selector);
+                if (el) {
+                    const count = parseInt(el.value) || 0;
+                    const basePower = moveOriginal.power || 50;
+                    move.power = basePower + basePower * count;
+                }
             }
 
             const weather = document.getElementById('area-weather')?.value || 'none';
