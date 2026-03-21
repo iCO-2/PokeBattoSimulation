@@ -135,8 +135,15 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     }
 
     // ステータス実数値にランク補正を適用
-    const attackerRank = aSrc.stats[aStat] ? aSrc.stats[aStat].rank || 0 : 0;
+    const isCritical = !!(field && field.isCritical);
+    let attackerRank = aSrc.stats[aStat] ? aSrc.stats[aStat].rank || 0 : 0;
     let defenderRank = dSrc.stats[dStat] ? dSrc.stats[dStat].rank || 0 : 0;
+
+    // 急所: 攻撃側のマイナスランクを無視、防御側のプラスランクを無視
+    if (isCritical) {
+        attackerRank = Math.max(0, attackerRank);
+        defenderRank = Math.min(0, defenderRank);
+    }
 
     // 特殊技: 防御側ランク上昇無視
     if (specificMove && specificMove.ignore_stats_change) {
@@ -953,14 +960,21 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             }
         }
 
-        // 7. 壁補正 → 4096基準補正 (シングル: 0.5倍)
+        // 7. 壁補正 → 4096基準補正 (シングル: 0.5倍) ※急所時は無視
         const wallReflect = field && field.wallReflect;
         const wallLight = field && field.wallLight;
-        if (wallReflect && move.category === 'Physical') {
-            dmg = applyModifier(dmg, 0.5);
+        if (!isCritical) {
+            if (wallReflect && move.category === 'Physical') {
+                dmg = applyModifier(dmg, 0.5);
+            }
+            if (wallLight && move.category === 'Special') {
+                dmg = applyModifier(dmg, 0.5);
+            }
         }
-        if (wallLight && move.category === 'Special') {
-            dmg = applyModifier(dmg, 0.5);
+
+        // 7b. 急所補正 → 4096基準補正 (×1.5)
+        if (isCritical) {
+            dmg = applyModifier(dmg, 1.5);
         }
 
         // マルチスケイル適用前のダメージを保持（連続技2発目以降用）
@@ -993,8 +1007,8 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         if (rollsNoGuard) rollsNoGuard.push(dmgNoGuard);
     }
     
-    const wallApplied = (field && field.wallReflect && move.category === 'Physical') ? 'リフレクター'
-        : (field && field.wallLight && move.category === 'Special') ? 'ひかりのかべ'
+    const wallApplied = (!isCritical && field && field.wallReflect && move.category === 'Physical') ? 'リフレクター'
+        : (!isCritical && field && field.wallLight && move.category === 'Special') ? 'ひかりのかべ'
         : null;
 
     // 特殊技情報の構築
@@ -1089,6 +1103,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         areaModifier: areaModifierInfo,
         weatherDefModifier: weatherDefModifierInfo,
         wallInfo: wallApplied ? { name: wallApplied, multiplier: 0.5 } : null,
+        criticalInfo: isCritical ? { multiplier: 1.5 } : null,
         fullHpGuardInfo: fullHpGuardInfo,
         specificMoveInfo: specificMoveInfo,
         knockOffInfo: knockOffInfo,

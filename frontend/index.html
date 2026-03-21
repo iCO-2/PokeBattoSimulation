@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeCalc SV - 3v3 Simulation</title>
     <link rel="icon" href="../backend/data/image/Pokegloss.png">
-    <link rel="stylesheet" href="css/style.css?v=46">
+    <link rel="stylesheet" href="css/style.css?v=47">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -539,8 +539,8 @@
                  <!-- 手動補正（攻撃ボタン下） -->
                  <div class="manual-modifier-row">
                     <div id="battle-manual-modifier" class="manual-modifier-checks">
-                        <label class="manual-mod-check"><input type="checkbox" value="0.5"><span>×0.5（やけど補正/半減実）</span></label>
-                        <label class="manual-mod-check"><input type="checkbox" value="1.5"><span>×1.5（急所）</span></label>
+                        <label class="manual-mod-check manual-mod-reduce"><input type="checkbox" value="0.5"><span>×0.5（やけど補正/半減実）</span></label>
+                        <label class="manual-mod-check"><input type="checkbox" id="battle-critical-hit"><span>急所（×1.5）</span></label>
                         <label class="manual-mod-check"><input type="checkbox" value="2.0"><span>×2.0（アナライズ/ゆきなだれ/たたりめ）</span></label>
                     </div>
                  </div>
@@ -1098,8 +1098,8 @@
     <div class="mobile-sticky-footer">
         <div class="mobile-manual-modifier-row">
             <div id="mobile-battle-manual-modifier" class="manual-modifier-checks mobile-manual-modifier-checks">
-                <label class="manual-mod-check"><input type="checkbox" value="0.5"><span>やけど補正/半減実（×0.5）</span></label>
-                <label class="manual-mod-check"><input type="checkbox" value="1.5"><span>急所（×1.5）</span></label>
+                <label class="manual-mod-check manual-mod-reduce"><input type="checkbox" value="0.5"><span>やけど補正/半減実（×0.5）</span></label>
+                <label class="manual-mod-check"><input type="checkbox" id="mobile-battle-critical-hit"><span>急所（×1.5）</span></label>
                 <label class="manual-mod-check"><input type="checkbox" value="2.0"><span>アナライズ/ゆきなだれ/たたりめ（×2.0）</span></label>
             </div>
         </div>
@@ -1117,9 +1117,9 @@
 
     <script type="module" src="js/data/loader.js?v=9"></script>
     <script type="module" src="js/calc/stats.js?v=118"></script>
-    <script type="module" src="js/calc/damage.js?v=235"></script>
+    <script type="module" src="js/calc/damage.js?v=236"></script>
     <script type="module" src="js/models/PokemonModel.js?v=126"></script>
     <script type="module" src="js/AppState.js?v=121"></script>
-    <script type="module" src="js/main.js?v=168"></script>
+    <script type="module" src="js/main.js?v=169"></script>
 </body>
 </html>

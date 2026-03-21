@@ -2308,6 +2308,11 @@ h2 {
 }
 
 .manual-mod-check:has(input:checked) {
+    background: #fff3e0;
+    border-color: #e65100;
+}
+
+.manual-mod-check.manual-mod-reduce:has(input:checked) {
     background: #e3f2fd;
     border-color: #1976d2;
 }

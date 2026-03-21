@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         sel.addEventListener('change', () => updateSelectUnsetStyle(sel));
     });
 
+    // --- 急所チェックボックス取得ヘルパー ---
+    function isCriticalHit() {
+        const cb = document.getElementById('battle-critical-hit');
+        return cb ? cb.checked : false;
+    }
+
     // --- 手動補正チェックボックス: 値取得ヘルパー & PC/モバイル同期 ---
     function getManualModValue() {
         const container = document.getElementById('battle-manual-modifier');
@@ -1201,7 +1207,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const metronomeEl = atkItemParent?.querySelector('.metronome-count-select');
             const metronomeCount = metronomeEl ? parseInt(metronomeEl.value) || 0 : 0;
 
-            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight, supremeOverlordCount, atkAbilityActive, defAbilityActive, metronomeCount });
+            const isCritical = isCriticalHit();
+            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight, supremeOverlordCount, atkAbilityActive, defAbilityActive, metronomeCount, isCritical });
 
             // 連続技のヒット回数を取得
             const hitSelectEl = moveInput?.closest('.move-row')?.querySelector('.multi-hit-select');
@@ -1680,147 +1687,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     oldSelect.parentNode.replaceChild(newSelect, oldSelect);
                 }
 
-                // 手動補正チェックボックス: 攻撃ごとにリスナーを付け替えて前回分をクリア
-                const pcModContainer = document.getElementById('battle-manual-modifier');
-                const mobileModContainer = document.getElementById('mobile-battle-manual-modifier');
-
-                if (pcModContainer) {
-                    // 既存リスナーをクリア（cloneNode方式）
-                    const newPcMod = pcModContainer.cloneNode(true);
-                    pcModContainer.parentNode.replaceChild(newPcMod, pcModContainer);
-                    let newMobileMod = mobileModContainer;
-                    if (mobileModContainer) {
-                        newMobileMod = mobileModContainer.cloneNode(true);
-                        mobileModContainer.parentNode.replaceChild(newMobileMod, mobileModContainer);
-                    }
-
-                    const handleManualModChange = () => {
-                        const newMod = getManualModValue();
-                        modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * newMod)));
-                        // 連続技: ヒット回数分を乗算
-                        if (hitCount > 1) {
-                            if (damageResult.rollsNoGuard) {
-                                const noGuardRolls = damageResult.rollsNoGuard.map(r => Math.max(0, Math.floor(r * newMod)));
-                                modifiedRolls = modifiedRolls.map((g, i) => g + noGuardRolls[i] * (hitCount - 1));
-                            } else {
-                                modifiedRolls = modifiedRolls.map(r => r * hitCount);
-                            }
-                        }
-
-                        // 乱数セレクトのオプションテキストを更新
-                        const rollSelect = document.getElementById('battle-random-roll');
-                        let currentIdx = 0;
-                        if (rollSelect && rollSelect.options.length > 0) {
-                            currentIdx = parseInt(rollSelect.value) || 0;
-                            modifiedRolls.forEach((val, i) => {
-                                if (rollSelect.options[i]) {
-                                    rollSelect.options[i].textContent = `${85 + i}%: ${val}ダメージ`;
-                                }
-                            });
-                        }
-
-                        // HPを再適用
-                        const newVal = modifiedRolls[currentIdx] ?? 0;
-                        if (turnStartHp > 0) {
-                            defender.currentHp = Math.max(0, turnStartHp - newVal);
-                        }
-
-                        // 反動・HP消費再計算
-                        attacker.currentHp = attackerStartHp;
-                        if (damageResult.recoilInfo && !damageResult.recoilInfo.nullified) {
-                            if (damageResult.recoilInfo.recoilType === 'hp_cost') {
-                                const hpCost = Math.floor(attacker.maxHp / damageResult.recoilInfo.divisor);
-                                attacker.currentHp = Math.max(0, attacker.currentHp - hpCost);
-                            } else if (newVal > 0) {
-                                const actualDmg = turnStartHp - defender.currentHp;
-                                const recoilDmg = Math.floor(actualDmg / damageResult.recoilInfo.divisor);
-                                if (recoilDmg > 0) {
-                                    attacker.currentHp = Math.max(0, attacker.currentHp - recoilDmg);
-                                }
-                            }
-                        }
-                        // タイプ無効化HP回復
-                        if (damageResult.typeNullifyHealInfo) {
-                            defender.currentHp = Math.min(defender.maxHp, defender.currentHp + damageResult.typeNullifyHealInfo.healAmount);
-                        }
-
-                        // ダメージ幅・瀕死率表示を更新
-                        const rContainer = document.querySelector('.damage-result-container');
-                        if (rContainer) {
-                            const rangeText = rContainer.querySelector('.damage-range');
-                            if (rangeText) {
-                                const min = modifiedRolls.length > 0 ? modifiedRolls[0] : 0;
-                                const max = modifiedRolls.length > 0 ? modifiedRolls[modifiedRolls.length - 1] : 0;
-                                const minPerc = (defender.maxHp > 0) ? (min / defender.maxHp * 100).toFixed(1) : 0;
-                                const maxPerc = (defender.maxHp > 0) ? (max / defender.maxHp * 100).toFixed(1) : 0;
-                                rangeText.innerHTML = `${min} 〜 ${max} (${minPerc}% 〜 ${maxPerc}%)`;
-                            }
-                            const killChanceText = rContainer.querySelector('.kill-chance');
-                            if (killChanceText && defender.maxHp > 0) {
-                                const modMin = modifiedRolls.length > 0 ? modifiedRolls[0] : 0;
-                                const modMax = modifiedRolls.length > 0 ? modifiedRolls[modifiedRolls.length - 1] : 0;
-                                if (modMax === 0) {
-                                    killChanceText.textContent = 'ダメージなし';
-                                } else {
-                                    const maxHits = Math.ceil(defender.maxHp / modMin);
-                                    const minHits = Math.ceil(defender.maxHp / modMax);
-                                    if (minHits === maxHits) {
-                                        killChanceText.textContent = `確定${minHits}発`;
-                                    } else {
-                                        if (minHits === 1) {
-                                            const koCount = modifiedRolls.filter(r => r >= defender.maxHp).length;
-                                            const percentage = (koCount / 16 * 100).toFixed(1);
-                                            killChanceText.textContent = `乱数1発 (${percentage}%)`;
-                                        } else {
-                                            killChanceText.textContent = `乱数${minHits}発 〜 確定${maxHits}発`;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        // 履歴と対戦ログを更新
-                        const rollLabel = `${85 + currentIdx}%`;
-                        const historyEntry = {
-                            type: 'attack',
-                            turnId: currentTurnId,
-                            moveName: moveName,
-                            damage: newVal,
-                            attackerName: atkName,
-                            defenderName: defender.name.trim() || (isAllyAttacking ? "相手" : "自分"),
-                            attackerSide: attackerSide,
-                            rollLabel: rollLabel,
-                            hpBefore: turnStartHp,
-                            hpAfter: defender.currentHp,
-                            stellarBoosted: damageResult.stellarBoosted || false,
-                            snapshot: {
-                                allyHps: appState.allyTeam.map(p => p.currentHp),
-                                enemyHps: appState.enemyTeam.map(p => p.currentHp)
-                            }
-                        };
-                        if (defender.lastTurnId === currentTurnId) {
-                            defender.history[defender.history.length - 1] = historyEntry;
-                        } else {
-                            defender.history.push(historyEntry);
-                            defender.lastTurnId = currentTurnId;
-                        }
-                        updateBattleLog(historyEntry);
-                        updateFormFromState(defenderSide);
-                        updateFormFromState(attackerSide);
-                        renderBattleLog();
-                    };
-
-                    newPcMod.addEventListener('change', () => {
-                        if (newMobileMod) syncManualModChecks(newPcMod, newMobileMod);
-                        handleManualModChange();
-                    });
-                    if (newMobileMod) {
-                        newMobileMod.addEventListener('change', () => {
-                            syncManualModChecks(newMobileMod, newPcMod);
-                            handleManualModChange();
-                        });
-                    }
-                }
             }
 
             // 初回計算時にも履歴に追加（デフォルト選択分）
