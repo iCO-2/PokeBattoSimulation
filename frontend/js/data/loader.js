@@ -115,7 +115,8 @@ const TYPE_TRANSLATION = {
                 const typesWithoutMoveList = new Set([
                     'dezaster', 'skin', 'filter', 'fullhp_guard', 'hp_threshold_boost', 'hp_threshold_debuff',
                     'power_boost', 'reckless', 'rock_head', 'technician', 'tinted_lens',
-                    'type_halve_attack', 'type_nullify', 'supreme_overlord', 'conditional'
+                    'type_halve_attack', 'type_nullify', 'supreme_overlord', 'conditional',
+                    'fluffy', 'fur_coat', 'ice_scales'
                 ]);
                 const types = [...new Set(Object.values(ABILITIES_DEX).map(a => a.type))].filter(t => !typesWithoutMoveList.has(t));
                 const moveTypePromises = types.map(async (type) => {

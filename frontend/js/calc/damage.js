@@ -333,6 +333,47 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             }
         }
 
+        // もふもふ: 直接攻撃(接触技)のダメージ半減、ほのおタイプの技のダメージ2倍
+        // ほのお接触技の場合: 半減×2倍 = 等倍
+        if (defType === 'fluffy') {
+            const isContact = MOVE_TYPE_MOVES['contact'] && MOVE_TYPE_MOVES['contact'].has(moveName);
+            const isFire = moveType === 'ほのお';
+            if (isContact && isFire) {
+                // 半減×2倍 = 等倍（相殺）
+            } else if (isFire) {
+                abilityDefensiveMod = 2.0;
+                abilityDefensiveInfo = {
+                    name: defender.ability,
+                    multiplier: 2.0
+                };
+            } else if (isContact) {
+                abilityDefensiveMod = 0.5;
+                abilityDefensiveInfo = {
+                    name: defender.ability,
+                    multiplier: 0.5
+                };
+            }
+        }
+
+        // ファーコート: 物理技のダメージ半減（防御2倍として計算）
+        if (defType === 'fur_coat' && move.category === 'Physical') {
+            D = applyModifier(D, 2.0);
+            abilityDefensiveInfo = {
+                name: defender.ability,
+                multiplier: 0.5,
+                memo: '防御×2.0'
+            };
+        }
+
+        // こおりのりんぷん: 特殊技のダメージ半減
+        if (defType === 'ice_scales' && move.category === 'Special') {
+            abilityDefensiveMod = 0.5;
+            abilityDefensiveInfo = {
+                name: defender.ability,
+                multiplier: 0.5
+            };
+        }
+
         // is_special: true 特性の追加処理（枠組み）
         if (defenderAbilityData.is_special) {
             switch (defender.ability) {
