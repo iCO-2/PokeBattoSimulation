@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=121';
-import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=8';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=230';
+import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=9';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=231';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -184,9 +184,38 @@ document.addEventListener('DOMContentLoaded', async () => {
             appState.getAllyPokemon().item = e.target.value;
         });
     }
+    // そうだいしょう: 特性セレクトの下に味方ひんし数セレクタを表示/非表示
+    function updateSupremeOverlordSelector(abilitySelect, abilityValue) {
+        const parentLabel = abilitySelect.closest('label') || abilitySelect.parentElement;
+        const oldContainer = parentLabel.parentElement.querySelector('.supreme-overlord-container');
+        if (oldContainer) oldContainer.remove();
+
+        if (abilityValue === 'そうだいしょう') {
+            const container = document.createElement('div');
+            container.className = 'supreme-overlord-container multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = '味方ひんし数:';
+            container.appendChild(label);
+            const select = document.createElement('select');
+            select.className = 'supreme-overlord-select';
+            for (let h = 0; h <= 5; h++) {
+                const opt = document.createElement('option');
+                opt.value = h;
+                const mults = ['−', '1.1', '1.2', '1.3', '1.4', '1.5'];
+                opt.textContent = `${h}体` + (h > 0 ? ` (×${mults[h]})` : '');
+                if (h === 0) opt.selected = true;
+                select.appendChild(opt);
+            }
+            container.appendChild(select);
+            parentLabel.after(container);
+        }
+    }
+
     if (allyAbilitySelect) {
         allyAbilitySelect.addEventListener('change', (e) => {
             appState.getAllyPokemon().ability = e.target.value;
+            updateSupremeOverlordSelector(allyAbilitySelect, e.target.value);
         });
     }
 
@@ -214,6 +243,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (enemyAbilitySelect) {
         enemyAbilitySelect.addEventListener('change', (e) => {
             appState.getEnemyPokemon().ability = e.target.value;
+            updateSupremeOverlordSelector(enemyAbilitySelect, e.target.value);
         });
     }
     if (enemyTeraSelect) {
@@ -1093,7 +1123,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             const wallValue = document.getElementById(`${defenderSideWall}-wall`)?.value || 'none';
             const wallReflect = wallValue === 'reflect' || wallValue === 'both';
             const wallLight = wallValue === 'light' || wallValue === 'both';
-            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight });
+
+            // そうだいしょう: 味方ひんし数を取得
+            const supremeOverlordEl = document.querySelector(`#${attackerPrefix}-ability-select`)?.closest('label')?.parentElement?.querySelector('.supreme-overlord-select');
+            const supremeOverlordCount = supremeOverlordEl ? parseInt(supremeOverlordEl.value) || 0 : 0;
+
+            const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight, supremeOverlordCount });
 
             // 連続技のヒット回数を取得
             const hitSelectEl = moveInput?.closest('.move-row')?.querySelector('.multi-hit-select');
@@ -2377,6 +2412,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // ポケモン未設定スロット: 「未設定」のみ表示
                 abilitySelect.value = '';
             }
+            // そうだいしょうセレクタの同期
+            updateSupremeOverlordSelector(abilitySelect, abilitySelect.value);
         }
 
         // Stats Update (Inputs & Real Values)

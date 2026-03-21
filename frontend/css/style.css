@@ -1894,7 +1894,10 @@ h2 {
     margin-right: 4px;
 }
 
-.multi-hit-select {
+.multi-hit-select,
+.supreme-overlord-select,
+.rage-fist-select,
+.last-respects-select {
     padding: 2px 6px;
     font-size: 0.85em;
     border: 1px solid #ccc;
@@ -1902,6 +1905,12 @@ h2 {
     background: #fff;
     color: #333;
     cursor: pointer;
+}
+
+.supreme-overlord-container {
+    padding-left: 0;
+    margin-top: 2px;
+    margin-bottom: 4px;
 }
 
 /* Custom Autocomplete List */

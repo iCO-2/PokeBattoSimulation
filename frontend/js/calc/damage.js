@@ -1,5 +1,5 @@
 import { getTypeEffectiveness } from '../data/types.js';
-import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, RECOIL_MOVES } from '../data/loader.js?v=8';
+import { ITEMS_DEX, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, RECOIL_MOVES } from '../data/loader.js?v=9';
 
 /**
  * ランク補正倍率を取得
@@ -586,6 +586,16 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         knockOffInfo = { name: 'はたきおとす', multiplier: 1.5 };
     }
 
+    // そうだいしょう: 味方ひんし数に応じた威力補正（4096基準、四捨五入）
+    let supremeOverlordInfo = null;
+    const supremeOverlordMods = [0, 4506, 4915, 5325, 5734, 6144]; // 1~5体
+    if (attackerAbilityData && attackerAbilityData.type === 'supreme_overlord' && field.supremeOverlordCount > 0) {
+        const count = Math.min(field.supremeOverlordCount, 5);
+        const mod = supremeOverlordMods[count];
+        finalPower = Math.round(finalPower * mod / 4096);
+        supremeOverlordInfo = { name: attacker.ability, count, multiplier: +(mod / 4096).toFixed(2) };
+    }
+
     // すてみ: ダメージ依存型の反動技の威力を1.2倍（4096基準: ×4915÷4096）
     const recoilData = RECOIL_MOVES[moveName] || null;
     let recklessInfo = null;
@@ -970,6 +980,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         teraBlastInfo: teraBlastInfo,
         typeHalveAttackInfo: typeHalveAttackInfo,
         waterBubbleInfo: waterBubbleInfo,
+        supremeOverlordInfo: supremeOverlordInfo,
         rollsNoGuard: rollsNoGuard
     };
 }

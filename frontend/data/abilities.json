@@ -460,5 +460,14 @@
     "weakken_stats": "",
     "is_special": true,
     "memo": "ほのおタイプの技の攻撃を半減。みずタイプの技の威力2倍"
+  },
+  "そうだいしょう": {
+    "type": "supreme_overlord",
+    "offensive": 1.0,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "memo": "味方ひんし数に応じて威力補正（1体:1.1倍〜5体:1.5倍）"
   }
 }
