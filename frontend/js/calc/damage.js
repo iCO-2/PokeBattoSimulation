@@ -782,9 +782,10 @@ export function calculateDamage(attacker, defender, move, field = {}) {
     // 最終ダメージ算出ループ (16段階乱数)
 
     const rolls = [];
+    const rollsNoGuard = fullHpGuardApplies ? [] : null; // マルチスケイルなし版（連続技2発目以降用）
     for (let i = 85; i <= 100; i++) {
         let dmg = baseDamage;
-        
+
         // 1. 乱数 (0.85 .. 1.00) → 切り捨て
         dmg = Math.floor(dmg * i / 100);
 
@@ -813,7 +814,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             if (moveType === 'みず') weatherMod = 1.5;
             else if (moveType === 'ほのお') weatherMod = 0.5;
         }
-        
+
         if (weatherMod !== 1.0) {
             dmg = applyModifier(dmg, weatherMod);
             if (areaModifierInfo === null) {
@@ -832,6 +833,9 @@ export function calculateDamage(attacker, defender, move, field = {}) {
             dmg = applyModifier(dmg, 0.5);
         }
 
+        // マルチスケイル適用前のダメージを保持（連続技2発目以降用）
+        let dmgNoGuard = dmg;
+
         // 8. マルチスケイル / ファントムガード: HP満タン時ダメージ半減
         if (fullHpGuardApplies) {
             dmg = applyModifier(dmg, 0.5);
@@ -840,19 +844,23 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         // 9. いろめがね: 効果いまひとつ以下のとき2倍（× 8192 ÷ 4096）
         if (tintedLensApplies) {
             dmg = applyModifier(dmg, 2.0);
+            dmgNoGuard = applyModifier(dmgNoGuard, 2.0);
         }
 
         // 10. フィルター / ハードロック / プリズムアーマー: 効果抜群のとき0.75倍（× 3072 ÷ 4096）
         if (filterApplies) {
             dmg = applyModifier(dmg, 0.75);
+            dmgNoGuard = applyModifier(dmgNoGuard, 0.75);
         }
 
         if (dmg < 1) dmg = 1;
-        if (typeMod === 0) dmg = 0;
+        if (dmgNoGuard < 1) dmgNoGuard = 1;
+        if (typeMod === 0) { dmg = 0; dmgNoGuard = 0; }
         // 防御側特性で無効化 (defensive=0)
-        if (abilityDefensiveMod === 0) dmg = 0;
+        if (abilityDefensiveMod === 0) { dmg = 0; dmgNoGuard = 0; }
 
         rolls.push(dmg);
+        if (rollsNoGuard) rollsNoGuard.push(dmgNoGuard);
     }
     
     const wallApplied = (field && field.wallReflect && move.category === 'Physical') ? 'リフレクター'
@@ -961,6 +969,7 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         typeNullifyHealInfo: typeNullifyHealInfo,
         teraBlastInfo: teraBlastInfo,
         typeHalveAttackInfo: typeHalveAttackInfo,
-        waterBubbleInfo: waterBubbleInfo
+        waterBubbleInfo: waterBubbleInfo,
+        rollsNoGuard: rollsNoGuard
     };
 }

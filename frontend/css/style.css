@@ -1881,6 +1881,29 @@ h2 {
     white-space: nowrap;
 }
 
+.multi-hit-container {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 24px; /* ラジオボタン幅+gap分で入力フィールドの下に揃える */
+}
+
+.multi-hit-container .multi-hit-label {
+    font-size: 0.8em;
+    color: #666;
+    margin-right: 4px;
+}
+
+.multi-hit-select {
+    padding: 2px 6px;
+    font-size: 0.85em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
 /* Custom Autocomplete List */
 .custom-autocomplete-list {
     position: absolute;
@@ -2034,6 +2057,16 @@ h2 {
     align-items: center;
     gap: 8px;
     width: 100%;
+    flex-wrap: wrap;
+}
+
+.move-row > .move-select-radio {
+    flex-shrink: 0;
+}
+
+.move-row > .move-input-wrapper {
+    flex: 1;
+    min-width: 0;
 }
 
 .move-select-radio {
@@ -2047,10 +2080,7 @@ h2 {
     display: none !important;
 }
 
-/* Ensure the input wrapper takes remaining width */
-.move-input-wrapper {
-    flex: 1;
-}
+/* flex: 1 は .move-row > .move-input-wrapper で設定済み */
 /* Stats Container Layout */
 .stats-container {
     display: flex;

@@ -1,6 +1,6 @@
 import { AppState } from './AppState.js?v=120';
 import { SPECIES_DEX, MOVES_DEX, ITEMS_DEX, USAGE_RATE_DATA, ABILITIES_DEX, MOVE_TYPE_MOVES, KNOWN_DAMAGE_MOVES, SPECIFIC_MOVES, loadAllData } from './data/loader.js?v=7';
-import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=233';
+import { calculateDamage, getRankMultiplier } from './calc/damage.js?v=235';
 import { calculateHp, calculateStat } from './calc/stats.js?v=3';
 
 const appState = new AppState();
@@ -418,9 +418,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!display) return;
         
         display.innerHTML = ''; // Clear
-        
+        // 連続技セレクタもクリア（move-row に配置）
+        const moveRow = wrapper.closest('.move-row');
+        const oldHitContainer = moveRow ? moveRow.querySelector('.multi-hit-container') : null;
+        if (oldHitContainer) oldHitContainer.remove();
+
         if (!moveName) return;
-        
+
         const moveData = MOVES_DEX[moveName];
         if (!moveData) return;
 
@@ -466,6 +470,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         display.appendChild(badge);
         display.appendChild(categorySpan);
         display.appendChild(powerSpan);
+
+        // 連続技: ヒット回数セレクタ（デフォルト=最大回数）→ move-row に配置
+        if (moveRow && moveData.multi_hit && moveData.multi_hit.is_multi) {
+            const container = document.createElement('div');
+            container.className = 'multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = 'ヒット数:';
+            container.appendChild(label);
+            const hitSelect = document.createElement('select');
+            hitSelect.className = 'multi-hit-select';
+            const minCount = moveData.multi_hit.min_count || 1;
+            const maxCount = moveData.multi_hit.max_count || 1;
+            for (let h = minCount; h <= maxCount; h++) {
+                const opt = document.createElement('option');
+                opt.value = h;
+                opt.textContent = `${h}回`;
+                if (h === maxCount) opt.selected = true;
+                hitSelect.appendChild(opt);
+            }
+            container.appendChild(hitSelect);
+            moveRow.appendChild(container);
+        }
     }
 
     function setupMoveAutocomplete(inputElement, listElement, side, index) {
@@ -1024,6 +1051,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             const wallLight = wallValue === 'light' || wallValue === 'both';
             const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight });
 
+            // 連続技のヒット回数を取得
+            const attackerPrefix = isAllyAttacking ? 'ally' : 'enemy';
+            const moveInput = document.getElementById(`${attackerPrefix}-move-${attacker.activeMoveIndex}`);
+            const hitSelectEl = moveInput?.closest('.move-row')?.querySelector('.multi-hit-select');
+            const hitCount = hitSelectEl ? parseInt(hitSelectEl.value) : 1;
+
             // ステラボーナスが適用された場合、そのタイプを使用済みに記録
             if (damageResult.stellarBoosted && attacker.stellarUsedTypes) {
                 attacker.stellarUsedTypes.add(damageResult.moveType);
@@ -1036,6 +1069,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             // 手動補正を適用したロール配列を生成
             const manualMod = parseFloat(document.getElementById('battle-manual-modifier').value) || 1.0;
             let modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * manualMod)));
+            // 連続技: ヒット回数分を乗算
+            if (hitCount > 1) {
+                if (damageResult.rollsNoGuard) {
+                    // マルチスケイル/ファントムガード: 1発目のみ半減、2発目以降は通常ダメージ
+                    const noGuardRolls = damageResult.rollsNoGuard.map(r => Math.max(0, Math.floor(r * manualMod)));
+                    modifiedRolls = modifiedRolls.map((g, i) => g + noGuardRolls[i] * (hitCount - 1));
+                } else {
+                    modifiedRolls = modifiedRolls.map(r => r * hitCount);
+                }
+            }
 
             // デフォルト: ランダムに1つ採用して適用
             let appliedDamage = 0;
@@ -1231,6 +1274,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                         } else {
                             moveEffectParts.push(`反動: 1/${damageResult.recoilInfo.divisor} (${damageResult.recoilInfo.min}~${damageResult.recoilInfo.max})`);
                         }
+                    }
+                    if (hitCount > 1) {
+                        moveEffectParts.push(`連続技: ${hitCount}回ヒット`);
                     }
                     if (moveEffectParts.length > 0) {
                         specificMoveText.innerHTML = moveEffectParts.join('<br>');
@@ -1478,6 +1524,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                     newManualModSelect.addEventListener('change', () => {
                         const newMod = parseFloat(newManualModSelect.value) || 1.0;
                         modifiedRolls = damageResult.rolls.map(r => Math.max(0, Math.floor(r * newMod)));
+                        // 連続技: ヒット回数分を乗算
+                        if (hitCount > 1) {
+                            if (damageResult.rollsNoGuard) {
+                                const noGuardRolls = damageResult.rollsNoGuard.map(r => Math.max(0, Math.floor(r * newMod)));
+                                modifiedRolls = modifiedRolls.map((g, i) => g + noGuardRolls[i] * (hitCount - 1));
+                            } else {
+                                modifiedRolls = modifiedRolls.map(r => r * hitCount);
+                            }
+                        }
 
                         // 乱数セレクトのオプションテキストを更新
                         const rollSelect = document.getElementById('battle-random-roll');
