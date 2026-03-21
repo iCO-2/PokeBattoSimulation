@@ -265,6 +265,16 @@
     "boost_type": "くさ",
     "memo": "HP1/3以下でくさタイプの技の攻撃1.5倍"
   },
+  "むしのしらせ": {
+    "type": "hp_threshold_boost",
+    "offensive": 1.5,
+    "defensive": 1.0,
+    "weaken": 1.00,
+    "weakken_stats": "",
+    "is_special": true,
+    "boost_type": "むし",
+    "memo": "HP1/3以下でむしタイプの技の攻撃1.5倍"
+  },
   "すてみ": {
     "type": "reckless",
     "offensive": 1.2,
