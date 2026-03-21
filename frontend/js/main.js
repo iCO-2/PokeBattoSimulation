@@ -471,6 +471,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         display.appendChild(categorySpan);
         display.appendChild(powerSpan);
 
+        // ふんどのこぶし: 被弾回数セレクタ（デフォルト=1回）→ move-row に配置
+        if (moveRow && moveName === 'ふんどのこぶし') {
+            const container = document.createElement('div');
+            container.className = 'multi-hit-container';
+            const label = document.createElement('span');
+            label.className = 'multi-hit-label';
+            label.textContent = '被弾回数:';
+            container.appendChild(label);
+            const hitSelect = document.createElement('select');
+            hitSelect.className = 'rage-fist-select';
+            for (let h = 0; h <= 6; h++) {
+                const opt = document.createElement('option');
+                opt.value = h;
+                opt.textContent = `${h}回 (威力${50 + 50 * h})`;
+                if (h === 0) opt.selected = true;
+                hitSelect.appendChild(opt);
+            }
+            container.appendChild(hitSelect);
+            moveRow.appendChild(container);
+        }
+
         // 連続技: ヒット回数セレクタ（デフォルト=最大回数）→ move-row に配置
         if (moveRow && moveData.multi_hit && moveData.multi_hit.is_multi) {
             const container = document.createElement('div');
@@ -1040,8 +1061,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // ダメージ計算
             const moveName = attacker.moves[attacker.activeMoveIndex];
-            const move = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
-            move.name = moveName;
+            const moveOriginal = MOVES_DEX[moveName] || { power: 0, type: 'Normal', category: 'Physical' };
+            const move = { ...moveOriginal, name: moveName };
+
+            // ふんどのこぶし: 被弾回数に応じて威力を変更
+            const attackerPrefix = isAllyAttacking ? 'ally' : 'enemy';
+            const moveInput = document.getElementById(`${attackerPrefix}-move-${attacker.activeMoveIndex}`);
+            const rageFistEl = moveInput?.closest('.move-row')?.querySelector('.rage-fist-select');
+            if (rageFistEl && moveName === 'ふんどのこぶし') {
+                const rageFistCount = parseInt(rageFistEl.value) || 0;
+                move.power = 50 + 50 * rageFistCount;
+            }
 
             const weather = document.getElementById('area-weather')?.value || 'none';
             const terrain = document.getElementById('area-terrain')?.value || 'none';
@@ -1052,8 +1082,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const damageResult = calculateDamage(attacker, defender, move, { weather, terrain, wallReflect, wallLight });
 
             // 連続技のヒット回数を取得
-            const attackerPrefix = isAllyAttacking ? 'ally' : 'enemy';
-            const moveInput = document.getElementById(`${attackerPrefix}-move-${attacker.activeMoveIndex}`);
             const hitSelectEl = moveInput?.closest('.move-row')?.querySelector('.multi-hit-select');
             const hitCount = hitSelectEl ? parseInt(hitSelectEl.value) : 1;
 
