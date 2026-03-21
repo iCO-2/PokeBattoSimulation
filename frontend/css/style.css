@@ -404,6 +404,10 @@ h2 {
     min-width: 180px;
 }
 
+.options select.unset {
+    color: var(--primary-gray);
+}
+
 .move-config-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

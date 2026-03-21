@@ -14,6 +14,16 @@ let globalTurnCounter = 0;
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllData();
 
+    // --- 特性・持ち物セレクトの未設定時グレー表示 ---
+    function updateSelectUnsetStyle(select) {
+        if (!select) return;
+        select.classList.toggle('unset', !select.value);
+    }
+    document.querySelectorAll('.options select').forEach(sel => {
+        updateSelectUnsetStyle(sel);
+        sel.addEventListener('change', () => updateSelectUnsetStyle(sel));
+    });
+
     // --- 手動補正チェックボックス: 値取得ヘルパー & PC/モバイル同期 ---
     function getManualModValue() {
         const container = document.getElementById('battle-manual-modifier');
@@ -865,7 +875,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     itemSelects.forEach(select => {
         if (!select) return;
         // 既存のオプションをクリア（"なし"以外）
-        select.innerHTML = '<option value="">未設定</option>';
+        select.innerHTML = '<option value="">--未設定--</option>';
         
         Object.keys(ITEMS_DEX).forEach(itemName => {
             const option = document.createElement('option');
@@ -2472,6 +2482,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         if (itemSelect) {
             itemSelect.value = pokemon.item || '';
+            updateSelectUnsetStyle(itemSelect);
             // メトロノームサブセレクタの同期（既存の値を保持）
             const itemParent = (itemSelect.closest('label') || itemSelect.parentElement).parentElement;
             const oldMetroSelect = itemParent.querySelector('.metronome-count-select');
@@ -2495,7 +2506,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // 「未設定」オプションを常に先頭に追加
             const unsetOpt = document.createElement('option');
             unsetOpt.value = '';
-            unsetOpt.textContent = '未設定';
+            unsetOpt.textContent = '--未設定--';
             abilitySelect.appendChild(unsetOpt);
 
             if (pokemon.speciesData) {
@@ -2536,6 +2547,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const newCondSelect = parentForSub.querySelector('.conditional-ability-select');
                 if (newCondSelect) newCondSelect.value = prevCondValue;
             }
+            updateSelectUnsetStyle(abilitySelect);
         }
 
         // Stats Update (Inputs & Real Values)
