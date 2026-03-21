@@ -1240,12 +1240,23 @@ document.addEventListener('DOMContentLoaded', async () => {
             // デフォルト: ランダムに1つ採用して適用
             let appliedDamage = 0;
             let initialRollIndex = 0;
+            let sturdyActivated = false;
             if (modifiedRolls.length > 0) {
                 initialRollIndex = damageResult.isKnownDamage ? 0 : Math.floor(Math.random() * modifiedRolls.length);
                 appliedDamage = modifiedRolls[initialRollIndex];
                 // HP適用
                 if (turnStartHp > 0) {
                     defender.currentHp = Math.max(0, turnStartHp - appliedDamage);
+                }
+                // がんじょう/きあいのタスキ: HP満タンから一撃でひんしになる場合、HP1で耐える
+                if (defender.currentHp === 0 && turnStartHp >= defender.maxHp) {
+                    if (defender.ability === 'がんじょう') {
+                        defender.currentHp = 1;
+                        sturdyActivated = 'がんじょう';
+                    } else if (defender.item === 'きあいのタスキ') {
+                        defender.currentHp = 1;
+                        sturdyActivated = 'きあいのタスキ';
+                    }
                 }
             }
 
@@ -1409,11 +1420,25 @@ document.addEventListener('DOMContentLoaded', async () => {
                         const cp = damageResult.conditionalPowerInfo;
                         abilityStrs.push(`${cp.name} (威力×${cp.multiplier})`);
                     }
+                    if (sturdyActivated === 'がんじょう') {
+                        abilityStrs.push('がんじょう (HP1で耐えた)');
+                    }
 
                     if (abilityStrs.length > 0) {
                         abilityModifierText.innerHTML = abilityStrs.join('<br>');
                     } else {
                         abilityModifierText.textContent = '-';
+                    }
+                }
+
+                // きあいのタスキ発動を持ち物補正に表示
+                if (sturdyActivated === 'きあいのタスキ' && itemModifierText) {
+                    const currentText = itemModifierText.textContent;
+                    const sashText = 'きあいのタスキ (HP1で耐えた)';
+                    if (currentText === '-') {
+                        itemModifierText.textContent = sashText;
+                    } else {
+                        itemModifierText.textContent = currentText + ' / ' + sashText;
                     }
                 }
 
@@ -1621,6 +1646,51 @@ document.addEventListener('DOMContentLoaded', async () => {
                             // HP再適用 logic
                             if (turnStartHp > 0) {
                                 defender.currentHp = Math.max(0, turnStartHp - val);
+                            }
+                            // がんじょう/きあいのタスキ: HP満タンから一撃でひんしになる場合、HP1で耐える
+                            let rollSturdyActivated = false;
+                            if (defender.currentHp === 0 && turnStartHp >= defender.maxHp) {
+                                if (defender.ability === 'がんじょう') {
+                                    defender.currentHp = 1;
+                                    rollSturdyActivated = 'がんじょう';
+                                } else if (defender.item === 'きあいのタスキ') {
+                                    defender.currentHp = 1;
+                                    rollSturdyActivated = 'きあいのタスキ';
+                                }
+                            }
+
+                            // 特性補正のがんじょう表示を更新
+                            const abilityModEl = resultContainer.querySelector('.ability-modifier');
+                            if (abilityModEl) {
+                                const sturdyText = 'がんじょう (HP1で耐えた)';
+                                let currentHtml = abilityModEl.innerHTML;
+                                currentHtml = currentHtml.replace(new RegExp(`(<br>)?${sturdyText.replace(/[()]/g, '\\$&')}`), '');
+                                currentHtml = currentHtml.replace(new RegExp(`${sturdyText.replace(/[()]/g, '\\$&')}(<br>)?`), '');
+                                if (rollSturdyActivated === 'がんじょう') {
+                                    if (currentHtml === '-') {
+                                        currentHtml = sturdyText;
+                                    } else {
+                                        currentHtml += `<br>${sturdyText}`;
+                                    }
+                                }
+                                abilityModEl.innerHTML = currentHtml || '-';
+                            }
+
+                            // 持ち物補正のきあいのタスキ表示を更新
+                            const itemModEl = resultContainer.querySelector('.item-modifier');
+                            if (itemModEl) {
+                                const sashText = 'きあいのタスキ (HP1で耐えた)';
+                                let currentItemHtml = itemModEl.textContent;
+                                currentItemHtml = currentItemHtml.replace(new RegExp(`( / )?${sashText.replace(/[()]/g, '\\$&')}`), '');
+                                currentItemHtml = currentItemHtml.replace(new RegExp(`${sashText.replace(/[()]/g, '\\$&')}( / )?`), '');
+                                if (rollSturdyActivated === 'きあいのタスキ') {
+                                    if (!currentItemHtml || currentItemHtml === '-') {
+                                        currentItemHtml = sashText;
+                                    } else {
+                                        currentItemHtml += ' / ' + sashText;
+                                    }
+                                }
+                                itemModEl.textContent = currentItemHtml || '-';
                             }
 
                             // 反動・HP消費再計算
@@ -2590,13 +2660,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                     img.style.display = '';
                     nameSpan.style.display = 'none';
                 } else {
-                    // No valid data yet (partial match or invalid), hide image
+                    // No valid data yet (partial match or invalid), show default number
                     img.style.display = 'none';
-                    img.src = ''; // Clear to be safe
-                    nameSpan.textContent = name;
+                    img.src = '';
+                    nameSpan.textContent = index + 1;
                     nameSpan.style.display = 'inline';
                     slotBtn.classList.remove('has-image');
-                    return; // Skip the rest
+                    // HPバーも非表示
+                    const existingHpBar = slotBtn.querySelector('.mini-hp-bar');
+                    if (existingHpBar) existingHpBar.style.display = 'none';
+                    return;
                 }
                 
                 img.onerror = () => {
@@ -2620,26 +2693,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
 
                     img.style.display = 'none';
-                    nameSpan.textContent = name;
+                    nameSpan.textContent = index + 1;
                     nameSpan.style.display = 'inline';
                     slotBtn.classList.remove('has-image');
+                    const hpBar = slotBtn.querySelector('.mini-hp-bar');
+                    if (hpBar) hpBar.style.display = 'none';
                 };
-                
+
                 img.onload = () => {
                     img.style.display = '';
                     nameSpan.style.display = 'none';
                     slotBtn.classList.add('has-image');
                 };
             }
-            
+
+            // 有効なポケモンかどうか
+            const isValidPokemon = !!SPECIES_DEX[name];
+
             // Re-apply current state if not loading
             if (img.style.display === 'none') {
-                 nameSpan.textContent = name;
+                 nameSpan.textContent = index + 1;
                  nameSpan.style.display = 'inline';
             } else {
                  nameSpan.style.display = 'none';
             }
-            
+
+            // 有効でないポケモンの場合はHPバーを非表示にして終了
+            if (!isValidPokemon) {
+                const existingBar = slotBtn.querySelector('.mini-hp-bar');
+                if (existingBar) existingBar.style.display = 'none';
+                return;
+            }
+
             // 3. Mini HP Bar
             let miniHpContainer = slotBtn.querySelector('.mini-hp-bar');
             if (!miniHpContainer) {
@@ -2650,12 +2735,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 miniHpContainer.appendChild(fill);
                 slotBtn.appendChild(miniHpContainer);
             }
-            
+            miniHpContainer.style.display = '';
+
             const fill = miniHpContainer.querySelector('.mini-hp-bar-fill');
             if (fill) {
                 const hpRatio = pokemon.maxHp > 0 ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
                 fill.style.width = `${hpRatio}%`;
-                
+
                 fill.style.backgroundColor = '';
                 if (hpRatio >= 50) fill.style.backgroundColor = 'var(--primary-green)';
                 else if (hpRatio >= 25) fill.style.backgroundColor = 'var(--accent-orange)';
