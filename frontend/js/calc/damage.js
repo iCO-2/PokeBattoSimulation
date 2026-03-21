@@ -364,6 +364,17 @@ export function calculateDamage(attacker, defender, move, field = {}) {
         };
     }
 
+    // よわき: HP1/2以下で攻撃・特攻が0.5倍（4096基準補正）
+    if (attackerAbilityData && attackerAbilityData.type === 'hp_threshold_debuff'
+        && attacker.currentHp <= Math.floor(attacker.maxHp * attackerAbilityData.threshold)) {
+        A = applyModifier(A, attackerAbilityData.multiplier);
+        if (A < 1) A = 1;
+        abilityOffensiveInfo = {
+            name: attacker.ability,
+            multiplier: attackerAbilityData.multiplier
+        };
+    }
+
     // ちからもち: 物理技の攻撃力を2.0倍（4096基準補正: 四捨五入→五捨五超入）
     if (attackerAbilityData && attackerAbilityData.type === 'power_boost' && move.category === 'Physical') {
         A = applyModifier(A, attackerAbilityData.offensive);

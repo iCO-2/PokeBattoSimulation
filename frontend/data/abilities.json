@@ -275,6 +275,12 @@
     "boost_type": "むし",
     "memo": "HP1/3以下でむしタイプの技の攻撃1.5倍"
   },
+  "よわき": {
+    "type": "hp_threshold_debuff",
+    "multiplier": 0.5,
+    "threshold": 0.5,
+    "memo": "HP1/2以下で攻撃・特攻が0.5倍"
+  },
   "すてみ": {
     "type": "reckless",
     "offensive": 1.2,

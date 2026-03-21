@@ -113,7 +113,7 @@ const TYPE_TRANSLATION = {
                 // 一意のtypeリストを取得し、対応するmoves_{type}.jsonをロード（dezaster, skinはJSONなし）
                 // 技リストJSONが存在するtypeのみロード（技分類に紐づくもの）
                 const typesWithoutMoveList = new Set([
-                    'dezaster', 'skin', 'filter', 'fullhp_guard', 'hp_threshold_boost',
+                    'dezaster', 'skin', 'filter', 'fullhp_guard', 'hp_threshold_boost', 'hp_threshold_debuff',
                     'power_boost', 'reckless', 'rock_head', 'technician', 'tinted_lens',
                     'type_halve_attack', 'type_nullify', 'supreme_overlord', 'conditional'
                 ]);
