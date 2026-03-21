@@ -2215,31 +2215,35 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateMoveSelectionUI(teamType);
 
         // Ability syncing
-        if (abilitySelect && pokemon.speciesData) {
-            const currentVal = pokemon.ability || '';
+        if (abilitySelect) {
             abilitySelect.innerHTML = '';
-            
-            // 「未設定」オプションを追加
+            // 「未設定」オプションを常に先頭に追加
             const unsetOpt = document.createElement('option');
             unsetOpt.value = '';
             unsetOpt.textContent = '未設定';
             abilitySelect.appendChild(unsetOpt);
-            
-            if (pokemon.speciesData.abilities) {
-                pokemon.speciesData.abilities.forEach(ab => {
-                   const opt = document.createElement('option');
-                   opt.value = ab.name;
-                   opt.textContent = ab.name + (ab.is_hidden ? ' (夢)' : '');
-                   abilitySelect.appendChild(opt);
-                });
-            }
-            const hasCurrent = currentVal && Array.from(abilitySelect.options).some(opt => opt.value === currentVal);
-            if (hasCurrent) {
-                abilitySelect.value = currentVal;
-            } else if (pokemon.speciesData.abilities && pokemon.speciesData.abilities.length > 0) {
-                // デフォルトはabilitiesの先頭
-                abilitySelect.value = pokemon.speciesData.abilities[0].name;
-                pokemon.ability = pokemon.speciesData.abilities[0].name;
+
+            if (pokemon.speciesData) {
+                const currentVal = pokemon.ability || '';
+                if (pokemon.speciesData.abilities) {
+                    pokemon.speciesData.abilities.forEach(ab => {
+                        const opt = document.createElement('option');
+                        opt.value = ab.name;
+                        opt.textContent = ab.name + (ab.is_hidden ? ' (夢)' : '');
+                        abilitySelect.appendChild(opt);
+                    });
+                }
+                const hasCurrent = currentVal && Array.from(abilitySelect.options).some(opt => opt.value === currentVal);
+                if (hasCurrent) {
+                    abilitySelect.value = currentVal;
+                } else if (pokemon.speciesData.abilities && pokemon.speciesData.abilities.length > 0) {
+                    // デフォルトはabilitiesの先頭
+                    abilitySelect.value = pokemon.speciesData.abilities[0].name;
+                    pokemon.ability = pokemon.speciesData.abilities[0].name;
+                }
+            } else {
+                // ポケモン未設定スロット: 「未設定」のみ表示
+                abilitySelect.value = '';
             }
         }
 
