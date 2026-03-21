@@ -2660,13 +2660,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                     img.style.display = '';
                     nameSpan.style.display = 'none';
                 } else {
-                    // No valid data yet (partial match or invalid), hide image
+                    // No valid data yet (partial match or invalid), show default number
                     img.style.display = 'none';
-                    img.src = ''; // Clear to be safe
-                    nameSpan.textContent = name;
+                    img.src = '';
+                    nameSpan.textContent = index + 1;
                     nameSpan.style.display = 'inline';
                     slotBtn.classList.remove('has-image');
-                    return; // Skip the rest
+                    // HPバーも非表示
+                    const existingHpBar = slotBtn.querySelector('.mini-hp-bar');
+                    if (existingHpBar) existingHpBar.style.display = 'none';
+                    return;
                 }
                 
                 img.onerror = () => {
@@ -2690,26 +2693,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
 
                     img.style.display = 'none';
-                    nameSpan.textContent = name;
+                    nameSpan.textContent = index + 1;
                     nameSpan.style.display = 'inline';
                     slotBtn.classList.remove('has-image');
+                    const hpBar = slotBtn.querySelector('.mini-hp-bar');
+                    if (hpBar) hpBar.style.display = 'none';
                 };
-                
+
                 img.onload = () => {
                     img.style.display = '';
                     nameSpan.style.display = 'none';
                     slotBtn.classList.add('has-image');
                 };
             }
-            
+
+            // 有効なポケモンかどうか
+            const isValidPokemon = !!SPECIES_DEX[name];
+
             // Re-apply current state if not loading
             if (img.style.display === 'none') {
-                 nameSpan.textContent = name;
+                 nameSpan.textContent = index + 1;
                  nameSpan.style.display = 'inline';
             } else {
                  nameSpan.style.display = 'none';
             }
-            
+
+            // 有効でないポケモンの場合はHPバーを非表示にして終了
+            if (!isValidPokemon) {
+                const existingBar = slotBtn.querySelector('.mini-hp-bar');
+                if (existingBar) existingBar.style.display = 'none';
+                return;
+            }
+
             // 3. Mini HP Bar
             let miniHpContainer = slotBtn.querySelector('.mini-hp-bar');
             if (!miniHpContainer) {
@@ -2720,12 +2735,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 miniHpContainer.appendChild(fill);
                 slotBtn.appendChild(miniHpContainer);
             }
-            
+            miniHpContainer.style.display = '';
+
             const fill = miniHpContainer.querySelector('.mini-hp-bar-fill');
             if (fill) {
                 const hpRatio = pokemon.maxHp > 0 ? (pokemon.currentHp / pokemon.maxHp) * 100 : 0;
                 fill.style.width = `${hpRatio}%`;
-                
+
                 fill.style.backgroundColor = '';
                 if (hpRatio >= 50) fill.style.backgroundColor = 'var(--primary-green)';
                 else if (hpRatio >= 25) fill.style.backgroundColor = 'var(--accent-orange)';
